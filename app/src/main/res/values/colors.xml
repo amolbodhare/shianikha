@@ -5,6 +5,16 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="green">#0C3F1F</color>
     <color name="transWhite">#99ffffff</color>
+    <color name="purplebtnback">#3b266b</color>
+    <color name="bluebtnback">#5D5CFF</color>
+    <color name="orangebtnback">#FF4E56</color>
+
+    <color name="textpurle">#311B63</color>
+    <color name="textlightgray">#959595</color>
+    <color name="textdarkgray">#515151</color>
+
+
 </resources>

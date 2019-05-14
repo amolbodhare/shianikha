@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    tools:context=".activities.RegSecondPageActivity">
+
+
+    <Spinner
+        android:id="@+id/city_of_residence_spinner"
+        android:layout_marginTop="100dp"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"/>
+    <Spinner
+        android:id="@+id/state_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/city_of_residence_spinner"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"/>
+    <Spinner
+        android:id="@+id/country_of_residence_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/state_spinner"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"/>
+    <Spinner
+        android:id="@+id/country_of_citizenship"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/country_of_residence_spinner"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"/>
+    <EditText
+        android:id="@+id/ed_dob"
+        android:layout_marginTop="20dp"
+        android:hint="Date of Birth"
+        android:layout_below="@id/country_of_citizenship"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/height_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/ed_dob"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:text="NEXT"
+        android:layout_below="@+id/height_spinner"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/blue_button_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/have_account_tv"
+        android:layout_below="@id/btn_next"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
+        android:text="Already have an account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/login_here"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:layout_below="@id/have_account_tv"
+        android:text="Login Here."
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
