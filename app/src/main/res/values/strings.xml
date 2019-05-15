@@ -4,5 +4,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="spinner_title">profile for</string>
-
+    <string name="practice_of_religion"> Please describe the level of the religion practice; also include the
+    religion expectation(required): PLEASE DO NOT PUT YOUR EMAIL,MAILING ADDRESS , PHONE NUMBER, URL BELOW </string>
+    <string name="preference">Preferences or quantity you are seeking</string>
+    <string name="terms_conditions">Check this box to attest by the sanctity of the Holy Quran that (1) all information that you have provided in this form is true to your
+    best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age</string>
 </resources>
