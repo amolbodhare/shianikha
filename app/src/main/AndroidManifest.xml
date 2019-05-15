@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OtpVerification"></activity>
+        <activity android:name=".activities.OTPVereificationActivty"></activity>
+        <activity android:name=".activities.RegSixthPageActivity" />
+        <activity android:name=".activities.RegFifthPageActivity" />
+        <activity android:name=".OtpVerification" />
         <activity android:name=".Registration" />
         <activity android:name=".AddYourProfile" />
         <activity android:name=".activities.RegFourthPageActivity" />

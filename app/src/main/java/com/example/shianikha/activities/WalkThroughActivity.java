@@ -29,7 +29,7 @@ public class WalkThroughActivity extends AppCompatActivity {
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_reg=(Button)findViewById(R.id.btn_reg);
 
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layoutt);
         tabLayout.setupWithViewPager(slideViewPager, true);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +43,8 @@ public class WalkThroughActivity extends AppCompatActivity {
 
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
                 Intent i=new Intent(WalkThroughActivity.this,RegisterationActivity.class);
                 startActivity(i);
             }

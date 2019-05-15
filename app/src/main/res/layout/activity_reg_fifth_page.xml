@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".AddYourProfile">
+    tools:context=".activities.RegFifthPageActivity">
 
     <ScrollView
         android:layout_width="match_parent"

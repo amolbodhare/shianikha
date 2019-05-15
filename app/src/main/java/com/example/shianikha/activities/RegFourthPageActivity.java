@@ -1,19 +1,24 @@
 package com.example.shianikha.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.shianikha.AddYourProfile;
 import com.example.shianikha.R;
+import com.example.shianikha.Registration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegFourthPageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
+    Button btn_next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,17 @@ public class RegFourthPageActivity extends AppCompatActivity implements AdapterV
 
         Spinner lang_spinner = (Spinner) findViewById(R.id.lang_spinner);
         Spinner habbit_spinner = (Spinner) findViewById(R.id.habbit_spinner);
+
+        btn_next=(Button)findViewById(R.id.btn_next);
+
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
+                startActivity(i);
+            }
+        });
 
         lang_spinner.setOnItemSelectedListener(this);
         habbit_spinner.setOnItemSelectedListener(this);
