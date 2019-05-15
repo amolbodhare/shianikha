@@ -46,9 +46,11 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
 
         btn_next=findViewById(R.id.btn_next);
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
+
                 /*Fragment fragment=new RegisterationScreenSecond();
 
                 getFragmentManager()
@@ -135,7 +137,8 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
 */    }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 

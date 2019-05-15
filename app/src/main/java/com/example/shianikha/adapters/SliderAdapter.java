@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class SliderAdapter extends PagerAdapter
         this.context=context;
 
     }
-    public int[] slide_images={R.drawable.intro1,R.drawable.intro3,R.drawable.intro3};
+    public int[] slide_images={R.drawable.intro1,R.drawable.intro2,R.drawable.intro3};
     public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
     public String[] slide_descs={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"};
     @Override
