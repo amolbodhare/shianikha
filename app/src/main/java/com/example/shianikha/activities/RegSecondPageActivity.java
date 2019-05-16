@@ -41,7 +41,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements AdapterV
         height_spinner.setOnItemSelectedListener(this);
 
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 

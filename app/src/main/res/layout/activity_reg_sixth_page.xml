@@ -48,13 +48,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-
                 <View
                     android:layout_width="7dp"
                     android:layout_height="4dp"
                     android:layout_marginLeft="3dp"
                     android:background="@color/colorAccent"
-
                     android:paddingTop="9dp" />
 
             </LinearLayout>

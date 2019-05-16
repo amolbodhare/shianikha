@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.shianikha.OtpVerification;
 import com.example.shianikha.R;
-import com.example.shianikha.Registration;
 
 public class RegSixthPageActivity extends AppCompatActivity {
 

@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.shianikha.AddYourProfile;
 import com.example.shianikha.R;
-import com.example.shianikha.Registration;
 
 import java.util.ArrayList;
 import java.util.List;
