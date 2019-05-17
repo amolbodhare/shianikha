@@ -45,15 +45,22 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:layout_marginLeft="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <View
+                    android:id="@+id/und_view"
+                    android:background="@color/colorAccent"
+                    android:layout_width="40dp"
+                    android:layout_height="3dp"/>
 
                 <View
-                    android:layout_width="7dp"
-                    android:layout_height="4dp"
-                    android:layout_marginLeft="3dp"
                     android:background="@color/colorAccent"
-                    android:paddingTop="9dp" />
+                    android:layout_below="@id/title"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="5dp"
+                    android:layout_height="3dp"/>
+
 
             </LinearLayout>
 
@@ -74,6 +81,8 @@
                 android:weightSum="10">
 
                 <Spinner
+                    android:id="@+id/min_age_spinner"
+                    android:alpha="0.5"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_weight="4"
@@ -85,6 +94,8 @@
                     android:layout_weight="2"
                     android:layout_marginTop="45dp"/>
                 <Spinner
+                    android:id="@+id/max_age_spinner"
+                    android:alpha="0.5"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_weight="4"
@@ -94,7 +105,8 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/seeking_marriage"
+                android:id="@+id/pref_match_status_spinner"
+                android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="25dp"
@@ -102,14 +114,17 @@
                 android:layout_marginRight="25dp" />
 
             <Spinner
-                android:id="@+id/ethnicity"
+                android:id="@+id/pref_match_ethnicity_spinner"
+                android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="25dp" />
+
             <Spinner
-                android:id="@+id/education"
+                android:id="@+id/pref_match_min_education_spinner"
+                android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="25dp"
@@ -173,8 +188,6 @@
                 android:clickable="true"
                 android:text="Login Here"
                 android:textStyle="bold" />
-
-
 
         </LinearLayout>
 

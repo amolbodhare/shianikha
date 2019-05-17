@@ -49,7 +49,8 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
         btn_next.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 /*Fragment fragment=new RegisterationScreenSecond();
 
@@ -62,7 +63,7 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
 */
 
                 Intent i=new Intent(RegisterationActivity.this,RegSecondPageActivity.class);
-                //overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 startActivity(i);
             }
         });

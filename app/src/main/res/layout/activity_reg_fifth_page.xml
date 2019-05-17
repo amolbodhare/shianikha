@@ -34,12 +34,15 @@
                 <Spinner
                     android:id="@+id/seeking_marriage"
                     android:layout_width="match_parent"
+                    android:alpha="0.5"
                     android:layout_height="55dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp" />
 
                 <Spinner
+                    android:id="@+id/interested_in"
                     android:layout_width="match_parent"
+                    android:alpha="0.5"
                     android:layout_height="55dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="45dp"

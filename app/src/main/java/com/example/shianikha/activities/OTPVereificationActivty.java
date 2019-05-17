@@ -10,6 +10,6 @@ public class OTPVereificationActivty extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otpvereification_activty);
+        setContentView(R.layout.activity_otp_verification);
     }
 }
