@@ -7,12 +7,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shianikha.R;
@@ -24,8 +29,9 @@ import java.util.List;
 
 //public class RegisterationActivity extends AppCompatActivity implements RegisterationScreenFirst.OnFragmentInteractionListener, RegisterationScreenSecond.OnFragmentInteractionListener
 
-public class RegisterationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+public class RegisterationActivity extends AppCompatActivity
 {
+    private ArrayAdapter<String> arrayAdapter;
     //public  static FragmentManager fragmentManager;
     Button btn_next;
 
@@ -42,7 +48,7 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
         setContentView(R.layout.activity_registeration);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        //Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
         btn_next=findViewById(R.id.btn_next);
 
@@ -68,27 +74,30 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
             }
         });
 
+        setUpEditTextClickListner();
+        //setUpTextWatcher();
+
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
+        /*List<String> categories = new ArrayList<String>();
         categories.add("Profile For");
         categories.add("MySelf");
         categories.add("Daughter");
         categories.add("Son");
         categories.add("Sister");
-        categories.add("Brother");
+        categories.add("Brother");*/
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        //ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
 
         // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+        //spinner.setAdapter(dataAdapter);
 
 
         /*fragmentManager=getSupportFragmentManager();
@@ -137,14 +146,98 @@ public class RegisterationActivity extends AppCompatActivity implements AdapterV
         }
 */    }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+
+    private void setUpEditTextClickListner()
     {
 
+        EditText editText = findViewById(R.id.city);
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+
+        /*editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });*/
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    private void setUpTextWatcher()
+    {
+        ((EditText)findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
+
+    private void setUpCustomSpinner(final View view)
+    {
+        ListView listView = findViewById(R.id.listView);
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
+        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        if (view.getId()==R.id.city)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Search City");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            listView.setAdapter(arrayAdapter);
+        }
+       /* else if (view.getId() == R.id.state)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Search State");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            listView.setAdapter(arrayAdapter);
+        }*/
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                TextView textView = v.findViewById(R.id.textView);
+                if (textView!=null)
+                {
+                    Log.e("selectedIs",textView.getText().toString());
+                    ((EditText)view).setText(textView.getText().toString());
+
+                }
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void hideCustomSpinnerLayout() {
+        int i = findViewById(R.id.includeContainer).getWidth();
+        findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
+        findViewById(R.id.view).setVisibility(View.GONE);
+    }
+
 }

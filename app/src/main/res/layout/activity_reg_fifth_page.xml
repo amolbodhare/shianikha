@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".activities.RegFifthPageActivity">
 
     <ScrollView
@@ -12,18 +12,10 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="left"
-                android:padding="5dp"
-                android:src="@drawable/ic_keyboard_backspace_black_24dp"
-                android:tint="@color/grey" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,15 +23,38 @@
                 android:layout_marginTop="50dp"
                 android:orientation="vertical">
 
-                <Spinner
+                <!--<Spinner
                     android:id="@+id/seeking_marriage"
                     android:layout_width="match_parent"
                     android:alpha="0.5"
                     android:layout_height="55dp"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />
+                    android:layout_marginRight="25dp" />-->
+                <RelativeLayout
+                    android:id="@+id/seeking_marriage_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
 
-                <Spinner
+                    <EditText
+                        android:id="@+id/seeking_marriage_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Select languages"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="11dp"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
+            <!--    <Spinner
                     android:id="@+id/interested_in"
                     android:layout_width="match_parent"
                     android:alpha="0.5"
@@ -47,12 +62,40 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="45dp"
                     android:layout_marginRight="25dp" />
+-->
+
+                <RelativeLayout
+                    android:id="@+id/interesterd_in_layout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="38dp"
+                    android:layout_height="56dp">
+
+                    <EditText
+                        android:id="@+id/interesterd_in_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Select languages"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="11dp"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/practice_of_religion"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="37dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"/>
 
@@ -66,10 +109,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/preference"
-                    android:layout_marginTop="45dp"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="25dp"
+                    android:text="@string/preference" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -82,6 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="More about you"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginTop="45dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"/>
@@ -101,32 +148,64 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:text="Add Your Profile"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/white"
                     android:background="@drawable/blue_button_back"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Already have an Account"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
 
                 <TextView
-                    android:id="@+id/login_here"
+                    android:id="@+id/have_account_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login Here"
-                    android:clickable="true"
-                    android:textStyle="bold"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="23dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Already have an account"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/login_here"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Login Here."
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
 
-        </LinearLayout>
-
+        </RelativeLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone"/>
+
+
+
+</RelativeLayout>

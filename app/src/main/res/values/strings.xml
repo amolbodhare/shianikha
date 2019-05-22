@@ -1,6 +1,80 @@
 <resources>
     <string name="app_name">ShiaNikha</string>
 
+
+    <string-array name="city">
+
+
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Hyderabad</item>
+        <item>Chennai</item>
+        <item>Benguluru</item>
+        <item>Pune</item>
+        <item>Amritsar</item>
+        <item>Jaypur</item>
+        <item>Surat</item>
+
+    </string-array>
+    <string-array name="state">
+
+
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Hyderabad</item>
+        <item>Chennai</item>
+        <item>Benguluru</item>
+        <item>Pune</item>
+        <item>Amritsar</item>
+        <item>Jaypur</item>
+        <item>Surat</item>
+
+    </string-array>
+    <string-array name="CountryofResidence">
+
+
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Hyderabad</item>
+        <item>Chennai</item>
+        <item>Benguluru</item>
+        <item>Pune</item>
+        <item>Amritsar</item>
+        <item>Jaypur</item>
+        <item>Surat</item>
+
+    </string-array>
+
+    <string-array name="CountryofCitizenship">
+
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Hyderabad</item>
+        <item>Chennai</item>
+        <item>Benguluru</item>
+        <item>Pune</item>
+        <item>Amritsar</item>
+        <item>Jaypur</item>
+        <item>Surat</item>
+
+    </string-array>
+
+    <string-array name="Height">
+
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Hyderabad</item>
+        <item>Chennai</item>
+        <item>Benguluru</item>
+        <item>Pune</item>
+        <item>Amritsar</item>
+        <item>Jaypur</item>
+        <item>Surat</item>
+
+    </string-array>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="spinner_title">profile for</string>

@@ -11,14 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="left"
-            android:padding="5dp"
-            android:src="@drawable/ic_keyboard_backspace_black_24dp"
-            android:tint="@color/grey" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,20 +20,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="12dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="Perfect Match"
-                android:textSize="20dp"
+                android:text="Perfered Match"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="28dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:text="Preferred Match"
                 android:textColor="@color/textpurle"
-                android:textSize="35dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -68,12 +62,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="45dp"
                 android:layout_marginRight="25dp"
                 android:gravity="center"
                 android:text="Preferred Match Age should be minimum "
-                android:textSize="15sp" />
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,6 +130,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email me request for every one"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15dp"
                 android:buttonTint="@color/bluebtnback"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
@@ -143,6 +140,8 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15dp"
                 android:text="Email me requests form Preferred Matches ONLY"
                 android:checked="true"
                 android:buttonTint="@color/bluebtnback"
@@ -153,6 +152,8 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14dp"
                 android:text="@string/terms_conditions"
                 android:buttonTint="@color/bluebtnback"
                 android:layout_marginLeft="25dp"
@@ -167,27 +168,36 @@
                 android:layout_marginTop="45dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="REGISTER"
+                android:text="Register"
+                android:textSize="20dp"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:background="@drawable/blue_button_back"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="45dp"
-                android:layout_marginRight="25dp"
-                android:text="Already have an Account" />
 
             <TextView
-                android:id="@+id/login_here"
+                android:id="@+id/have_account_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:clickable="true"
-                android:text="Login Here"
-                android:textStyle="bold" />
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Already have an account"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/login_here"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Login Here."
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 

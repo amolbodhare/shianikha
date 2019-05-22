@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#f5f5f5"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:hint="Search Religion"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:imeOptions="actionDone"
+            android:paddingRight="?actionBarSize"
+            android:background="@drawable/edit_text_bg"/>
+
+        <ImageView
+            android:id="@+id/searchImageView"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:src="@drawable/ic_search_black_24dp"
+            android:padding="13dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:tint="#00b050"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fafafa"/>
+
+</LinearLayout>

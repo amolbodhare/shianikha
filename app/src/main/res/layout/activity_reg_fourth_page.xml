@@ -5,38 +5,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
     tools:context=".activities.RegFourthPageActivity">
-    <Spinner
+    <!--<Spinner
         android:id="@+id/lang_spinner"
         android:layout_marginTop="60dp"
         android:layout_width="fill_parent"
         android:alpha="0.5"
         android:layout_height="wrap_content"
-        android:prompt="@string/spinner_title"/>
-    <Spinner
+        android:prompt="@string/spinner_title"/>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+
+    <RelativeLayout
+        android:id="@+id/lang_spinner_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="70dp"
+        android:layout_height="56dp">
+
+        <EditText
+            android:id="@+id/lang_ed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Select languages"
+            android:gravity="center"
+            android:focusable="false"
+            android:paddingRight="56dp" />
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="11dp"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:tint="#bdbdbd" />
+    </RelativeLayout>
+   <!-- <Spinner
         android:id="@+id/habbit_spinner"
         android:layout_marginTop="15dp"
         android:layout_below="@id/lang_spinner"
         android:layout_width="fill_parent"
         android:alpha="0.5"
         android:layout_height="wrap_content"
-        android:prompt="@string/spinner_title"/>
+        android:prompt="@string/spinner_title"/>-->
+    <RelativeLayout
+        android:id="@+id/habbit_spinner_layout"
+        android:layout_width="match_parent"
+        android:layout_below="@id/lang_spinner_layout"
+        android:layout_marginTop="35dp"
+        android:layout_height="56dp">
+
+        <EditText
+            android:id="@+id/habbit_ed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="Smoking"
+            android:paddingRight="56dp" />
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="11dp"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:tint="#bdbdbd" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/other_details_occu_til"
-        android:layout_below="@id/habbit_spinner"
+        android:layout_below="@id/habbit_spinner_layout"
         android:layout_width="match_parent"
         android:alpha="0.5"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/other_details_occu_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16dp"
+            android:fontFamily="@font/poppins_regular"
             android:typeface="monospace"
             android:textColor="#000000"
             android:singleLine="true"
@@ -47,8 +109,10 @@
     <TextView
         android:id="@+id/islam_convert_tv"
         android:text="Did you convert to Islam?"
+        android:textSize="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:layout_below="@id/other_details_occu_til"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -78,6 +142,8 @@
     <TextView
         android:id="@+id/syed_tv"
         android:text="Are you a Syed?"
+        android:textSize="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:layout_below="@id/islam_convert_rdg"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -109,6 +175,8 @@
     <TextView
         android:id="@+id/handicap_tv"
         android:text="Are you handicap/major disabilities?"
+        android:textSize="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:layout_below="@id/Syed_rdg"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -140,6 +208,8 @@
     <TextView
         android:id="@+id/children_tv"
         android:text="Do you have children?"
+        android:textSize="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:layout_below="@id/handicap_rdg"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -170,33 +240,62 @@
 
     <Button
         android:id="@+id/btn_next"
-        android:text="NEXT"
-        android:layout_below="@+id/children_rdg"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:background="@drawable/blue_button_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp"
+        android:layout_below="@id/children_rdg"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/blue_button_back"
+        android:fontFamily="@font/poppins_regular"
+        android:text="NEXT"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/have_account_tv"
-        android:layout_below="@id/btn_next"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:text="Already have an account"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_next"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Already have an account"
+        android:textSize="18dp" />
     <TextView
         android:id="@+id/login_here"
         android:layout_marginTop="5dp"
-        android:textSize="15dp"
+        android:textSize="18dp"
         android:layout_below="@id/have_account_tv"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Login Here."
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>
