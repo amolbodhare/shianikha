@@ -8,13 +8,13 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:background="#f5f5f5"
         android:padding="20dp">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
+            android:layout_marginTop="100dp"
             android:layout_height="54dp"
             android:hint="Search Religion"
             android:inputType="textPersonName"
@@ -27,6 +27,7 @@
             android:id="@+id/searchImageView"
             android:layout_width="54dp"
             android:layout_height="54dp"
+            android:layout_marginTop="100dp"
             android:src="@drawable/ic_search_black_24dp"
             android:padding="13dp"
             android:layout_alignParentRight="true"

@@ -99,32 +99,109 @@
 
             </LinearLayout>
 
-            <Spinner
+           <!-- <Spinner
                 android:id="@+id/pref_match_status_spinner"
-                android:alpha="0.5"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="59dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp" />
+                android:layout_marginRight="25dp"
+                android:alpha="0.5" />
+-->
+            <RelativeLayout
+                android:id="@+id/pref_match_status_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_height="56dp">
 
-            <Spinner
+                <EditText
+                    android:id="@+id/pref_match_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Select languages"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:paddingRight="56dp" />
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+            </RelativeLayout>
+
+
+            <!--<Spinner
                 android:id="@+id/pref_match_ethnicity_spinner"
                 android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp" />
+                android:layout_marginRight="25dp" />-->
+            <RelativeLayout
+                android:id="@+id/pref_match_ethnicity_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_height="56dp">
 
-            <Spinner
+                <EditText
+                    android:id="@+id/pref_match_ethnicity_spinner_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Select languages"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:paddingRight="56dp" />
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+            </RelativeLayout>
+
+            <!--<Spinner
                 android:id="@+id/pref_match_min_education_spinner"
                 android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp" />
+                android:layout_marginRight="25dp" />-->
+            <RelativeLayout
+                android:id="@+id/pref_match_min_education_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_height="56dp">
+
+                <EditText
+                    android:id="@+id/pref_match_min_education_spinner_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Select languages"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:paddingRight="56dp" />
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+            </RelativeLayout>
 
             <RadioButton
                 android:layout_width="wrap_content"

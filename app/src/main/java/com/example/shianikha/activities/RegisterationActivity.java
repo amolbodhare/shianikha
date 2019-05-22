@@ -75,7 +75,7 @@ public class RegisterationActivity extends AppCompatActivity
         });
 
         setUpEditTextClickListner();
-        //setUpTextWatcher();
+        setUpTextWatcher();
 
         // Spinner click listener
         //spinner.setOnItemSelectedListener(this);

@@ -24,7 +24,7 @@ public class RegSixthPageActivity extends AppCompatActivity {
         btn_register=findViewById(R.id.btn_register);
 
 
-        Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
+      /*  Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
         Spinner max_age_spinner = (Spinner) findViewById(R.id.max_age_spinner);
         Spinner pref_match_status_spinner = (Spinner) findViewById(R.id.pref_match_status_spinner);
         Spinner pref_match_ethinicity = (Spinner) findViewById(R.id.pref_match_ethnicity_spinner);
@@ -103,10 +103,10 @@ public class RegSixthPageActivity extends AppCompatActivity {
         setSpinner(max_age_spinner,states);
         setSpinner(pref_match_status_spinner,country_res);
         setSpinner(pref_match_ethinicity,country_citi);
-        setSpinner(pref_match_min_edu_spinner,height);
+        setSpinner(pref_match_min_edu_spinner,height);*/
     }
 
-    public  void setSpinner(Spinner spinner, List<String> categories)
+    /*public  void setSpinner(Spinner spinner, List<String> categories)
     {
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
@@ -116,5 +116,5 @@ public class RegSixthPageActivity extends AppCompatActivity {
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-    }
+    }*/
 }
