@@ -3,10 +3,17 @@ package com.example.shianikha.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.shianikha.R;
 
@@ -16,6 +23,7 @@ import java.util.List;
 public class RegSixthPageActivity extends AppCompatActivity {
 
     Button btn_register;
+    private ArrayAdapter<String> arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,6 +31,14 @@ public class RegSixthPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reg_sixth_page);
         btn_register=findViewById(R.id.btn_register);
 
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(RegSixthPageActivity.this, OTPVereificationActivty.class);
+                startActivity(i);
+            }
+        });
 
       /*  Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
         Spinner max_age_spinner = (Spinner) findViewById(R.id.max_age_spinner);
@@ -104,17 +120,152 @@ public class RegSixthPageActivity extends AppCompatActivity {
         setSpinner(pref_match_status_spinner,country_res);
         setSpinner(pref_match_ethinicity,country_citi);
         setSpinner(pref_match_min_edu_spinner,height);*/
+      setUpEditTextClickListner();
+      setUpTextWatcher();
     }
 
-    /*public  void setSpinner(Spinner spinner, List<String> categories)
+    private void setUpEditTextClickListner()
     {
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        EditText ed_pref_match_ed = findViewById(R.id.pref_match_ed);
+        EditText ed_pref_match_ethinicity_ed = findViewById(R.id.pref_match_ethnicity_spinner_ed);
+        EditText ed_min_edu = findViewById(R.id.pref_match_min_education_spinner_ed);
+        EditText ed_min_age = findViewById(R.id.min_age_spinner_ed);
+        EditText ed_max_age = findViewById(R.id.max_age_spinner_ed);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-    }*/
+        ed_pref_match_ed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+        ed_pref_match_ethinicity_ed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+        ed_min_edu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+        ed_min_age.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+        ed_max_age.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setUpCustomSpinner(v);
+            }
+        });
+
+    }
+
+    private void setUpTextWatcher()
+    {
+        ((EditText)findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void setUpCustomSpinner(final View view)
+    {
+        ListView listView = findViewById(R.id.listView);
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
+        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        if (view.getId()==R.id.pref_match_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Select Pref match");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            listView.setAdapter(arrayAdapter);
+        }
+        else if (view.getId() == R.id.pref_match_ethnicity_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Select Ethinicity");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            listView.setAdapter(arrayAdapter);
+        }
+        else if (view.getId() == R.id.pref_match_min_education_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Select Minimum Education");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            listView.setAdapter(arrayAdapter);
+        }
+        else if (view.getId() == R.id.min_age_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Select Min age");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            listView.setAdapter(arrayAdapter);
+        }
+        else if (view.getId() == R.id.max_age_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Select Max age");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            listView.setAdapter(arrayAdapter);
+        }
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                TextView textView = v.findViewById(R.id.textView);
+                if (textView!=null)
+                {
+                    Log.e("selectedIs",textView.getText().toString());
+                    ((EditText)view).setText(textView.getText().toString());
+
+                }
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void hideCustomSpinnerLayout() {
+        int i = findViewById(R.id.includeContainer).getWidth();
+        findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
+        findViewById(R.id.view).setVisibility(View.GONE);
+    }
 }

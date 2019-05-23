@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     tools:context=".activities.RegSixthPageActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
 
@@ -75,27 +75,72 @@
                 android:layout_height="wrap_content"
                 android:weightSum="10">
 
-                <Spinner
-                    android:id="@+id/min_age_spinner"
-                    android:alpha="0.5"
+                <RelativeLayout
+                    android:id="@+id/min_age_spinner_layout"
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:layout_weight="4"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="4.5"
+                    android:layout_marginLeft="25dp"
+                    android:layout_height="56dp">
+
+                    <EditText
+                        android:id="@+id/min_age_spinner_ed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:hint="ethinicity"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="11dp"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:layout_marginTop="45dp"/>
-                <Spinner
+                <!--<Spinner
                     android:id="@+id/max_age_spinner"
                     android:alpha="0.5"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_weight="4"
                     android:layout_marginTop="45dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_marginRight="25dp"/>-->
+                <RelativeLayout
+                    android:id="@+id/max_age__spinner_layout"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="4.5"
+                    android:layout_marginLeft="25dp"
+                    android:layout_height="56dp">
+
+                    <EditText
+                        android:id="@+id/max_age_spinner_ed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:hint="ethinicity"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="11dp"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -119,7 +164,7 @@
                     android:id="@+id/pref_match_ed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Select languages"
+                    android:hint="Prefered match Marital status"
                     android:gravity="center"
                     android:focusable="false"
                     android:paddingRight="56dp" />
@@ -154,7 +199,7 @@
                     android:id="@+id/pref_match_ethnicity_spinner_ed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Select languages"
+                    android:hint="ethinicity"
                     android:gravity="center"
                     android:focusable="false"
                     android:paddingRight="56dp" />
@@ -188,7 +233,7 @@
                     android:id="@+id/pref_match_min_education_spinner_ed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Select languages"
+                    android:hint="Minimum education"
                     android:gravity="center"
                     android:focusable="false"
                     android:paddingRight="56dp" />
@@ -203,40 +248,43 @@
                     android:tint="#bdbdbd" />
             </RelativeLayout>
 
-            <RadioButton
+            <RadioGroup
+                android:id="@+id/islam_convert_rdg"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email me request for every one"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="15dp"
-                android:buttonTint="@color/bluebtnback"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"/>
+                android:layout_height="wrap_content" >
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="15dp"
-                android:text="Email me requests form Preferred Matches ONLY"
-                android:checked="true"
-                android:buttonTint="@color/bluebtnback"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"/>
+                <RadioButton
+                    android:id="@+id/rb_email_everyone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Email me request for every one"
+                    android:checked="true" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="14dp"
-                android:text="@string/terms_conditions"
-                android:buttonTint="@color/bluebtnback"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"/>
+                <RadioButton
+                    android:id="@+id/rb_email_me_from_pref_match_only"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Email me request from Preferred Matches ONLY" />
 
+                <RadioButton
+                    android:id="@+id/rb_check_for_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="check this box to attest by the sanctity of the Holy Quran that(1) all information that you have provided in this form is ttrue to your best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age " />
+
+            </RadioGroup>
 
             <Button
                 android:id="@+id/btn_register"
@@ -278,7 +326,28 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        </ScrollView>
 
+        <LinearLayout
+            android:id="@+id/includeContainer"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:elevation="7dp"
+            android:translationX="300dp">
 
-</ScrollView>
+            <include
+                layout="@layout/custom_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#60000000"
+            android:visibility="gone"/>
+
+</RelativeLayout>
