@@ -163,6 +163,7 @@
         android:id="@+id/ed_dob"
         android:layout_marginTop="20dp"
         android:hint="Date of Birth"
+        android:gravity="center"
         android:layout_below="@id/country_of_citizenship_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

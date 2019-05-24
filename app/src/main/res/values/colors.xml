@@ -13,6 +13,8 @@
     <color name="orangebtnback">#FF4E56</color>
     <color name="walkscreenback">#3A2669</color>
 
+    <color name="pure_white">#FFFFFF</color>
+
     <color name="textpurle">#311B63</color>
     <color name="textlightgray">#959595</color>
     <color name="textdarkgray">#515151</color>

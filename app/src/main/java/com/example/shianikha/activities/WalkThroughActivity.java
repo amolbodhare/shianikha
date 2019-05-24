@@ -22,7 +22,7 @@ public class WalkThroughActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_through);
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager=(ViewPager)findViewById(R.id.slideViewPager);
         sliderAdapter=new SliderAdapter(this);
         slideViewPager.setAdapter(sliderAdapter);

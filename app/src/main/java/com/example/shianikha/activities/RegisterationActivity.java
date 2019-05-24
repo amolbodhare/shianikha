@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,10 @@ public class RegisterationActivity extends AppCompatActivity
     private ArrayAdapter<String> arrayAdapter;
     //public  static FragmentManager fragmentManager;
     Button btn_next;
+    TextView login_here_tv;
+    ImageView gender_male_imv;
+    ImageView gender_female_imv;
+
 
     /*@Override
     public void onFragmentInteraction(Uri uri) {
@@ -46,11 +51,44 @@ public class RegisterationActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
         btn_next=findViewById(R.id.btn_next);
+
+        login_here_tv=findViewById(R.id.login_here);
+        gender_male_imv=findViewById(R.id.genderr_male_imv);
+        gender_female_imv=findViewById(R.id.genderr_female_imv);
+
+        gender_male_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
+                gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
+
+            }
+        });
+
+        gender_female_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
+                gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
+            }
+        });
+
+
+        login_here_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(RegisterationActivity.this,LoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         btn_next.setOnClickListener(new View.OnClickListener()
         {
