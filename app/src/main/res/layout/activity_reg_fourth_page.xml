@@ -29,7 +29,7 @@
     <RelativeLayout
         android:id="@+id/lang_spinner_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_height="56dp">
 
         <EditText
@@ -62,7 +62,7 @@
         android:id="@+id/habbit_spinner_layout"
         android:layout_width="match_parent"
         android:layout_below="@id/lang_spinner_layout"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -90,7 +90,7 @@
         android:layout_below="@id/habbit_spinner_layout"
         android:layout_width="match_parent"
         android:alpha="0.5"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
         <android.support.design.widget.TextInputEditText
@@ -112,7 +112,7 @@
         android:textSize="16dp"
         android:fontFamily="@font/poppins_regular"
         android:layout_below="@id/other_details_occu_til"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -243,7 +243,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/children_rdg"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/blue_button_back"
         android:fontFamily="@font/poppins_regular"
         android:text="NEXT"
@@ -255,7 +255,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_next"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="27dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Already have an account"
         android:textSize="18dp" />

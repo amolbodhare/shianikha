@@ -19,9 +19,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
 
@@ -29,16 +31,16 @@
     <RelativeLayout
         android:id="@+id/city_of_residence_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_height="56dp">
 
         <EditText
             android:id="@+id/city_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="City of Residence"
-            android:gravity="center"
             android:focusable="false"
+            android:gravity="center"
+            android:hint="City of Residence"
             android:paddingRight="56dp" />
 
         <ImageView
@@ -158,11 +160,13 @@
     </RelativeLayout>
 
 
-
     <EditText
         android:id="@+id/ed_dob"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="17dp"
         android:hint="Date of Birth"
+        android:clickable="true"
+        android:editable="false"
+        android:focusable="false"
         android:gravity="center"
         android:layout_below="@id/country_of_citizenship_layout"
         android:layout_width="match_parent"
@@ -209,7 +213,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/height_spinner_layout"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="55dp"
             android:background="@drawable/blue_button_back"
             android:fontFamily="@font/poppins_regular"
             android:text="NEXT"

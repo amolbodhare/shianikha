@@ -28,7 +28,7 @@
     <RelativeLayout
         android:id="@+id/religion_spinner_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_height="56dp">
 
         <EditText
@@ -63,7 +63,7 @@
         android:id="@+id/Ethincity_spinner_layout"
         android:layout_width="match_parent"
         android:layout_below="@id/religion_spinner_layout"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -98,7 +98,7 @@
         android:id="@+id/fathers_city_spinner_layout"
         android:layout_width="match_parent"
         android:layout_below="@id/Ethincity_spinner_layout"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -133,7 +133,7 @@
         android:id="@+id/mothers_city_spinner_layout"
         android:layout_below="@id/fathers_city_spinner_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -170,7 +170,7 @@
         android:id="@+id/current_occupation_layout"
         android:layout_below="@id/mothers_city_spinner_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -201,7 +201,7 @@
         android:layout_below="@id/current_occupation_layout"
         android:layout_width="match_parent"
         android:alpha="0.5"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
         <android.support.design.widget.TextInputEditText
@@ -228,7 +228,7 @@
         android:id="@+id/higest_level_edu_layout"
         android:layout_below="@id/other_details_occu_til"
         android:layout_width="match_parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="17dp"
         android:layout_height="56dp">
 
         <EditText
@@ -257,7 +257,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/higest_level_edu_layout"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/blue_button_back"
         android:fontFamily="@font/poppins_regular"
         android:text="NEXT"
@@ -269,7 +269,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_next"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Already have an account"
         android:textSize="18dp" />

@@ -35,7 +35,8 @@ public class RegFourthPageActivity extends AppCompatActivity
 
         btn_next=(Button)findViewById(R.id.btn_next);
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 

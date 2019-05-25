@@ -49,14 +49,15 @@
         android:layout_marginTop="10dp"
         android:inputType="phone"
         android:layout_height="wrap_content" />
+
     <Button
-        android:text="LOGIN"
-        android:textSize="20dp"
-        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="@drawable/blue_button_back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="LOGIN"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
     <TextView
         android:text="Don't have an account ?"
         android:layout_marginTop="50dp"

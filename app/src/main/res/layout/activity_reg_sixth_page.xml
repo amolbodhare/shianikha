@@ -11,13 +11,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/pref_match_tv_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
@@ -28,10 +29,13 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/pref_match_tv_big"
+                android:layout_below="@id/pref_match_tv_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="28dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:text="Preferred Match"
@@ -39,6 +43,8 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/und_layout"
+                android:layout_below="@id/pref_match_tv_big"
                 android:layout_marginLeft="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -55,22 +61,25 @@
                     android:layout_width="5dp"
                     android:layout_height="3dp"/>
 
-
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/pref_match_age_tv"
+                android:layout_below="@id/und_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginRight="25dp"
                 android:gravity="center"
                 android:text="Preferred Match Age should be minimum "
                 android:textSize="16dp" />
 
             <LinearLayout
+                android:id="@+id/age_layout"
+                android:layout_below="@id/pref_match_age_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="10">
@@ -156,7 +165,7 @@
             <RelativeLayout
                 android:id="@+id/pref_match_status_spinner_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
@@ -191,7 +200,7 @@
             <RelativeLayout
                 android:id="@+id/pref_match_ethnicity_spinner_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
@@ -225,7 +234,7 @@
             <RelativeLayout
                 android:id="@+id/pref_match_min_education_spinner_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
@@ -250,7 +259,7 @@
 
             <RadioGroup
                 android:id="@+id/islam_convert_rdg"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="33dp"
                 android:orientation="vertical"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
@@ -270,7 +279,7 @@
                     android:id="@+id/rb_email_me_from_pref_match_only"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="30dp"
                     android:textSize="15dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Email me request from Preferred Matches ONLY" />
@@ -279,7 +288,7 @@
                     android:id="@+id/rb_check_for_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="30dp"
                     android:textSize="15dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="check this box to attest by the sanctity of the Holy Quran that(1) all information that you have provided in this form is ttrue to your best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age " />
@@ -290,10 +299,10 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:text="Register"
+                android:text="SUBMIT"
                 android:textSize="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
@@ -306,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="14dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Already have an account"
                 android:textSize="18dp" />
@@ -324,7 +333,7 @@
                 android:layout_height="wrap_content" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
         </ScrollView>
 
