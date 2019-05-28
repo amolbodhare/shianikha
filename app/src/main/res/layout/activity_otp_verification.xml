@@ -91,8 +91,28 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/ot_first_digit"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
+                        android:background="@drawable/square"
+                        android:imeOptions="actionNext"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:layout_marginRight="10dp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/ot_seecond_digit"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:gravity="center"
                         android:background="@drawable/square"
                         android:imeOptions="actionNext"
                         android:inputType="number"
@@ -107,25 +127,11 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/ot_third_digit"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:background="@drawable/square"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
+                        android:gravity="center"
                         android:imeOptions="actionNext"
                         android:maxLength="1"
                         android:inputType="number"
@@ -139,9 +145,11 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/ot_fourth_digit"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:background="@drawable/square"
+                        android:gravity="center"
                         android:imeOptions="actionNext"
                         android:maxLength="1"
                         android:inputType="number"
@@ -155,9 +163,11 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/ot_fifth_digit"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:background="@drawable/square"
+                        android:gravity="center"
                         android:maxLength="1"
                         android:imeOptions="actionNext"
                         android:inputType="number"
@@ -171,9 +181,11 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/ot_sixth_digit"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:background="@drawable/square"
+                        android:gravity="center"
                         android:imeOptions="actionNext"
                         android:maxLength="1"
                         android:inputType="number"
@@ -209,9 +221,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="20dp"
                 android:background="@drawable/blue_button_back"

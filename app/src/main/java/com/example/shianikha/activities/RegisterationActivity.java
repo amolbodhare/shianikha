@@ -1,7 +1,9 @@
 package com.example.shianikha.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +41,8 @@ public class RegisterationActivity extends AppCompatActivity
     ImageView gender_male_imv;
     ImageView gender_female_imv;
 
+    EditText city_ed;
+
 
     /*@Override
     public void onFragmentInteraction(Uri uri) {
@@ -60,6 +64,8 @@ public class RegisterationActivity extends AppCompatActivity
         login_here_tv=findViewById(R.id.login_here);
         gender_male_imv=findViewById(R.id.genderr_male_imv);
         gender_female_imv=findViewById(R.id.genderr_female_imv);
+
+        city_ed=findViewById(R.id.city_ed);
 
         gender_male_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +111,22 @@ public class RegisterationActivity extends AppCompatActivity
                         .commit();
 
 */
-
                 Intent i=new Intent(RegisterationActivity.this,RegSecondPageActivity.class);
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(i);
+
+
+
+                /*new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+
+                        startActivity(new Intent(RegisterationActivity.this,RegSecondPageActivity.class));
+                        //finish();
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                }, 1000);*/
             }
         });
 

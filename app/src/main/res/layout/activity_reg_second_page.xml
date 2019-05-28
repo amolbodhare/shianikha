@@ -16,6 +16,13 @@
         android:prompt="@string/spinner_title"/>-->
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aaaaaa"/>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,8 +45,9 @@
             android:id="@+id/city_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
-            android:gravity="center"
             android:hint="City of Residence"
             android:paddingRight="56dp" />
 
@@ -74,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="State/Provinance/Country"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -101,7 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Country of residence"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -144,7 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Country of Citizenship"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -167,7 +178,8 @@
         android:clickable="true"
         android:editable="false"
         android:focusable="false"
-        android:gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="16dp"
         android:layout_below="@id/country_of_citizenship_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -192,7 +204,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Height"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 

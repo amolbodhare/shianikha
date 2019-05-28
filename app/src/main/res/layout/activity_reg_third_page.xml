@@ -14,6 +14,13 @@
         android:layout_height="wrap_content"
         android:prompt="@string/spinner_title"/>-->
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aaaaaa"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Select Religion"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -71,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Ethinicity"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -106,7 +115,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Father's city/country of origin"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -141,7 +151,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Mother's city/country of origin"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -178,7 +189,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Current Occupation"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -200,7 +212,6 @@
         android:id="@+id/other_details_occu_til"
         android:layout_below="@id/current_occupation_layout"
         android:layout_width="match_parent"
-        android:alpha="0.5"
         android:layout_marginTop="17dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
@@ -208,7 +219,8 @@
             android:id="@+id/other_details_occu_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:typeface="monospace"
             android:textColor="#000000"
             android:singleLine="true"
@@ -236,7 +248,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Highest level of Education"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 

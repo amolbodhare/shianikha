@@ -14,6 +14,12 @@
         android:layout_height="wrap_content"
         android:prompt="@string/spinner_title"/>-->
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aaaaaa"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Select languages"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -70,7 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="false"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:hint="Smoking"
             android:paddingRight="56dp" />
 
@@ -89,7 +97,6 @@
         android:id="@+id/other_details_occu_til"
         android:layout_below="@id/habbit_spinner_layout"
         android:layout_width="match_parent"
-        android:alpha="0.5"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">

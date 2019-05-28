@@ -40,6 +40,7 @@ public class RegSixthPageActivity extends AppCompatActivity {
             }
         });
 
+
       /*  Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
         Spinner max_age_spinner = (Spinner) findViewById(R.id.max_age_spinner);
         Spinner pref_match_status_spinner = (Spinner) findViewById(R.id.pref_match_status_spinner);

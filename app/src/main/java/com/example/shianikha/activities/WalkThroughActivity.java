@@ -45,6 +45,7 @@ public class WalkThroughActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+
                 Intent i=new Intent(WalkThroughActivity.this,RegisterationActivity.class);
                 startActivity(i);
             }

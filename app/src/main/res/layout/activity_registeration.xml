@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.RegisterationActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aaaaaa"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Profile For"
-            android:gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
             android:focusable="false"
             android:paddingRight="56dp" />
 
@@ -115,6 +122,9 @@
      android:layout_below="@id/full_name_til"
      android:layout_width="match_parent"
      android:layout_marginTop="10dp"
+     android:textSize="16dp"
+     android:fontFamily="@font/poppins_regular"
+     android:textColor="#000000"
      android:alpha="0.5"
      android:layout_height="wrap_content"
      android:layout_marginBottom="0dp">
@@ -123,9 +133,10 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
-      android:textSize="18sp"
-      android:typeface="monospace"
+      android:textSize="16dp"
+      android:fontFamily="@font/poppins_regular"
       android:textColor="#000000"
+      android:typeface="monospace"
       android:singleLine="true"
       android:imeOptions="actionNext"
       android:hint="Email address"/>
@@ -144,11 +155,12 @@
       android:id="@+id/mobile_no"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="18sp"
+      android:textSize="16dp"
+      android:fontFamily="@font/poppins_regular"
+      android:textColor="#000000"
       android:inputType="number"
       android:maxLength="10"
       android:typeface="monospace"
-      android:textColor="#000000"
       android:singleLine="true"
       android:imeOptions="actionNext"
       android:hint="Mobile No"/>
