@@ -23,12 +23,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.fragments.RegisterationScreenFirst;
 import com.example.shianikha.fragments.RegisterationScreenSecond;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.os.Build.VERSION_CODES.P;
 
 //public class RegisterationActivity extends AppCompatActivity implements RegisterationScreenFirst.OnFragmentInteractionListener, RegisterationScreenSecond.OnFragmentInteractionListener
 
@@ -40,6 +47,7 @@ public class RegisterationActivity extends AppCompatActivity
     TextView login_here_tv;
     ImageView gender_male_imv;
     ImageView gender_female_imv;
+
 
     EditText city_ed;
 
@@ -66,6 +74,7 @@ public class RegisterationActivity extends AppCompatActivity
         gender_female_imv=findViewById(R.id.genderr_female_imv);
 
         city_ed=findViewById(R.id.city_ed);
+
 
         gender_male_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,5 +304,6 @@ public class RegisterationActivity extends AppCompatActivity
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         findViewById(R.id.view).setVisibility(View.GONE);
     }
+
 
 }

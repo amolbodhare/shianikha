@@ -228,7 +228,6 @@
                 android:text="Submit"
                 android:textColor="@color/white" />
 
-
         </LinearLayout>
 
     </ScrollView>
