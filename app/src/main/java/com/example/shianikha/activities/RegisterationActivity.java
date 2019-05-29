@@ -26,12 +26,16 @@ import android.widget.Toast;
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.fragments.RegisterationScreenFirst;
 import com.example.shianikha.fragments.RegisterationScreenSecond;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +53,8 @@ public class RegisterationActivity extends AppCompatActivity
     ImageView gender_female_imv;
 
 
-    EditText city_ed;
+    EditText profile_for_ed;
+    ArrayList<String> profile_for_array;
 
 
     /*@Override
@@ -73,8 +78,31 @@ public class RegisterationActivity extends AppCompatActivity
         gender_male_imv=findViewById(R.id.genderr_male_imv);
         gender_female_imv=findViewById(R.id.genderr_female_imv);
 
-        city_ed=findViewById(R.id.city_ed);
+        profile_for_ed=findViewById(R.id.profile_for_ed);
+        profile_for_array=new ArrayList<>();
 
+
+
+        try
+        {
+            String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+            JSONArray jsonArray=json.getJsonArray("profile_for");
+
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                profile_for_array.add(jsonArray.getJSONObject(i).getString("name"));
+
+            }
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         gender_male_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +243,7 @@ public class RegisterationActivity extends AppCompatActivity
     private void setUpEditTextClickListner()
     {
 
-        EditText editText = findViewById(R.id.city);
+        EditText editText = findViewById(R.id.profile_for_ed);
 
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,10 +296,10 @@ public class RegisterationActivity extends AppCompatActivity
             }
         });
 
-        if (view.getId()==R.id.city)
+        if (view.getId()==R.id.profile_for_ed)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Search City");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            ((EditText)findViewById(R.id.editText)).setHint("Profile for");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,profile_for_array);
             listView.setAdapter(arrayAdapter);
         }
        /* else if (view.getId() == R.id.state)
