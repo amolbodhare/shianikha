@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +29,19 @@ public class RegSixthPageActivity extends AppCompatActivity {
 
     Button btn_register;
     private ArrayAdapter<String> arrayAdapter;
+
+    Context context;
+    ArrayList<String> pref_match_marital_status_arrayList;
+    ArrayList<String> ethinicity_arrayList;
+    ArrayList<String> min_education_arrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_sixth_page);
         btn_register=findViewById(R.id.btn_register);
+        context=RegSixthPageActivity.this;
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +51,55 @@ public class RegSixthPageActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        pref_match_marital_status_arrayList=new ArrayList<>();
+        ethinicity_arrayList=new ArrayList<>();
+        min_education_arrayList=new ArrayList<>();
+
+        try
+        {
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+            //System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+            JSONArray jsonArray_marital_status=json.getJsonArray("marital_status");
+            JSONArray jsonArray_ethinicity=json.getJsonArray("ethnicity");
+            JSONArray jsonArray_min_education=json.getJsonArray("education");
+
+
+
+            for(int i=0;i<jsonArray_marital_status.length();i++)
+            {
+                pref_match_marital_status_arrayList.add(jsonArray_marital_status.getJSONObject(i).getString("val"));
+            }
+
+            for(int i=0;i<jsonArray_ethinicity.length();i++)
+            {
+                ethinicity_arrayList.add(jsonArray_ethinicity.getJSONObject(i).getString("name"));
+            }
+
+
+            for(int i=0;i<jsonArray_min_education.length();i++)
+            {
+                min_education_arrayList.add(jsonArray_min_education.getJSONObject(i).getString("name"));
+            }
+
+           /* for(int i=0;i<jsonArray_height.length();i++)
+            {
+                height_arrayList.add("Hello");
+            }*/
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
 
 
       /*  Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
@@ -217,19 +278,19 @@ public class RegSixthPageActivity extends AppCompatActivity {
         if (view.getId()==R.id.pref_match_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Select Pref match");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,pref_match_marital_status_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.pref_match_ethnicity_spinner_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Select Ethinicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethinicity_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.pref_match_min_education_spinner_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Select Minimum Education");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,min_education_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.min_age_spinner_ed)

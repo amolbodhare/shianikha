@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +30,20 @@ public class RegThirdPageActivity extends AppCompatActivity
     Button btn_next;
     private ArrayAdapter<String> arrayAdapter;
 
+    ArrayList<String> religion_arraylist;
+    ArrayList<String> ethinicity_arraylist;
+    ArrayList<String> country_arrayList;
+    ArrayList<String> current_occupation_arraylist;
+    ArrayList<String> highest_level_ediucation_arraylist;
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_third_page);
         btn_next=(Button)findViewById(R.id.btn_next);
+        context=RegThirdPageActivity.this;
 
         /*Spinner religion_spinner = (Spinner) findViewById(R.id.religion_spinner);
         Spinner ethinicity = (Spinner) findViewById(R.id.Ethincity_spinner);
@@ -50,6 +63,61 @@ public class RegThirdPageActivity extends AppCompatActivity
 
         setUpEditTextClickListner();
         setUpTextWatcher();
+
+        religion_arraylist=new ArrayList<>();
+        ethinicity_arraylist=new ArrayList<>();
+        country_arrayList=new ArrayList<>();
+        current_occupation_arraylist=new ArrayList<>();
+        highest_level_ediucation_arraylist=new ArrayList<>();
+
+        try
+        {
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+            //System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+            JSONArray jsonArray_religion=json.getJsonArray("religion");
+            JSONArray jsonArray_ethnicity=json.getJsonArray("ethnicity");
+            JSONArray jsonArray_country=json.getJsonArray("country");
+            JSONArray jsonArray_occupation=json.getJsonArray("occupation");
+            JSONArray jsonArray_education=json.getJsonArray("education");
+
+
+
+            for(int i=0;i<jsonArray_religion.length();i++)
+            {
+                religion_arraylist.add(jsonArray_religion.getJSONObject(i).getString("name"));
+            }
+
+            for(int i=0;i<jsonArray_ethnicity.length();i++)
+            {
+                ethinicity_arraylist.add(jsonArray_ethnicity.getJSONObject(i).getString("name"));
+            }
+
+            for(int i=0;i<jsonArray_country.length();i++)
+            {
+                country_arrayList.add(jsonArray_country.getJSONObject(i).getString("name"));
+            }
+
+            for(int i=0;i<jsonArray_occupation.length();i++)
+            {
+                current_occupation_arraylist.add(jsonArray_occupation.getJSONObject(i).getString("name"));
+            }
+
+            for(int i=0;i<jsonArray_education.length();i++)
+            {
+                highest_level_ediucation_arraylist.add(jsonArray_education.getJSONObject(i).getString("name"));;
+            }
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         /*religion_spinner.setOnItemSelectedListener(this);
         ethinicity.setOnItemSelectedListener(this);
@@ -234,37 +302,37 @@ public class RegThirdPageActivity extends AppCompatActivity
         if (view.getId()==R.id.religion_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Select Religion");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,religion_arraylist);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.ethinicity_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Ethinicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethinicity_arraylist);
             listView.setAdapter(arrayAdapter);
         }
         if (view.getId()==R.id.fathers_city_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Father's city/country of origin");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.CountryofResidence));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.mothers_city_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Mother's city/country of origin");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.CountryofCitizenship));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.current_occupation_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Current Occupation");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.CountryofCitizenship));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,current_occupation_arraylist);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.higest_level_edu_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Highest level of education");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.Height));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,highest_level_ediucation_arraylist);
             listView.setAdapter(arrayAdapter);
         }
 

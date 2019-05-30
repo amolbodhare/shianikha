@@ -1,6 +1,7 @@
 package com.example.shianikha.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+
+import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,21 +34,74 @@ import java.util.Locale;
 public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener
 {
     Button btn_next;
-
-
     private ArrayAdapter<String> arrayAdapter;
     EditText editText_dob;
     final Calendar myCalendar = Calendar.getInstance();
+    Context context;
+    ArrayList<String> city_of_residence_arrayList;
+    ArrayList<String> state_arrayList;
+    ArrayList<String> country_arrayList;
+    ArrayList<String> height_arrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_second_page);
+        context=RegSecondPageActivity.this;
 
         btn_next=(Button)findViewById(R.id.btn_next);
         editText_dob=(EditText)findViewById(R.id.ed_dob);
         editText_dob.setOnClickListener(this);
+
+        city_of_residence_arrayList=new ArrayList<>();
+        state_arrayList=new ArrayList<>();
+        country_arrayList=new ArrayList<>();
+
+        try
+        {
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+            //System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+            JSONArray jsonArray_city=json.getJsonArray("city");
+            JSONArray jsonArray_state=json.getJsonArray("state");
+            JSONArray jsonArray_country=json.getJsonArray("country");
+            JSONArray jsonArray_height=json.getJsonArray("height");
+
+            System.out.print(jsonArray_height);
+
+            for(int i=0;i<jsonArray_city.length();i++)
+            {
+                city_of_residence_arrayList.add(jsonArray_city.getJSONObject(i).getString("city_name"));
+            }
+
+            for(int i=0;i<jsonArray_state.length();i++)
+            {
+                state_arrayList.add(jsonArray_state.getJSONObject(i).getString("state_name"));
+            }
+
+
+            for(int i=0;i<jsonArray_country.length();i++)
+            {
+                country_arrayList.add(jsonArray_country.getJSONObject(i).getString("name"));
+            }
+
+           /* for(int i=0;i<jsonArray_height.length();i++)
+            {
+                height_arrayList.add("Hello");
+            }*/
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
 
         /*Spinner city_of_residence_spinner = (Spinner) findViewById(R.id.city_of_residence_spinner);
@@ -236,31 +294,31 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         if (view.getId()==R.id.city_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search City");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,city_of_residence_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.state_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search State");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,state_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         if (view.getId()==R.id.country_of_residence_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search Country residence");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.CountryofResidence));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.country_of_citizenship_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search Country Citizenship");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.CountryofCitizenship));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.height_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search height");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.Height));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
             listView.setAdapter(arrayAdapter);
         }
 

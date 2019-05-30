@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +30,16 @@ public class RegFourthPageActivity extends AppCompatActivity
     Button btn_next;
     private ArrayAdapter<String> arrayAdapter;
 
+    ArrayList<String> language_arraylist;
+    ArrayList<String> smoking_arraylist;
+
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_fourth_page);
+        context=RegFourthPageActivity.this;
 
         /*Spinner lang_spinner = (Spinner) findViewById(R.id.lang_spinner);
         Spinner habbit_spinner = (Spinner) findViewById(R.id.habbit_spinner);*/
@@ -47,6 +58,42 @@ public class RegFourthPageActivity extends AppCompatActivity
 
         setUpEditTextClickListner();
         setUpTextWatcher();
+
+        language_arraylist=new ArrayList<>();
+        smoking_arraylist=new ArrayList<>();
+
+        try
+            {
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+         //System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+            JSONArray jsonArray_language=json.getJsonArray("mothertongue");
+            JSONArray jsonArray_smoking=json.getJsonArray("smoking");
+
+
+
+            for(int i=0;i<jsonArray_language.length();i++)
+            {
+                language_arraylist.add(jsonArray_language.getJSONObject(i).getString("name"));
+            }
+
+            for(int i=0;i<jsonArray_smoking.length();i++)
+            {
+                smoking_arraylist.add(jsonArray_smoking.getJSONObject(i).getString("val"));
+            }
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
 
         /*lang_spinner.setOnItemSelectedListener(this);
         habbit_spinner.setOnItemSelectedListener(this);*/
@@ -154,13 +201,13 @@ public class RegFourthPageActivity extends AppCompatActivity
         if (view.getId()==R.id.lang_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Select Religion");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,language_arraylist);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.habbit_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Ethinicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,smoking_arraylist);
             listView.setAdapter(arrayAdapter);
         }
 

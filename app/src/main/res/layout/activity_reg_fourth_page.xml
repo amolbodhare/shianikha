@@ -42,18 +42,17 @@
             android:id="@+id/lang_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Select languages"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="16dp"
             android:focusable="false"
-            android:paddingRight="56dp" />
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Select languages"
+            android:paddingRight="56dp"
+            android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="11dp"
             android:src="@drawable/ic_arrow_drop_down_black_24dp"
             android:tint="#bdbdbd" />
     </RelativeLayout>
@@ -83,11 +82,10 @@
             android:paddingRight="56dp" />
 
         <ImageView
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="11dp"
             android:src="@drawable/ic_arrow_drop_down_black_24dp"
             android:tint="#bdbdbd" />
 

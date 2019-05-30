@@ -16,11 +16,14 @@
 
         <ScrollView
             android:layout_width="match_parent"
+            android:scrollbars="none"
             android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="60dp"
             android:orientation="vertical">
 
@@ -30,8 +33,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="12dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:text="Perferred Match"
                 android:textStyle="bold" />
 
@@ -43,8 +44,6 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="28dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:text="Preferred Match"
                 android:textColor="@color/textpurle"
                 android:textStyle="bold" />
@@ -52,7 +51,6 @@
             <LinearLayout
                 android:id="@+id/und_layout"
                 android:layout_below="@id/pref_match_tv_big"
-                android:layout_marginLeft="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <View
@@ -77,9 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:layout_marginLeft="25dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginRight="25dp"
                 android:gravity="center"
                 android:text="Preferred Match Age"
                 android:textSize="16dp" />
@@ -94,7 +90,6 @@
                     android:text="Min Age"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16dp"
-                    android:paddingLeft="30dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -102,7 +97,7 @@
                     android:text="Max Age"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16dp"
-                    android:paddingLeft="40dp"
+                    android:paddingLeft="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -121,7 +116,6 @@
                     android:layout_width="0dp"
                     android:layout_marginTop="25dp"
                     android:layout_weight="4.5"
-                    android:layout_marginLeft="25dp"
                     android:layout_height="56dp">
 
                     <EditText
@@ -134,11 +128,10 @@
                         android:paddingRight="56dp" />
 
                     <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="11dp"
                         android:src="@drawable/ic_arrow_drop_down_black_24dp"
                         android:tint="#bdbdbd" />
                 </RelativeLayout>
@@ -161,7 +154,6 @@
                     android:layout_width="0dp"
                     android:layout_marginTop="25dp"
                     android:layout_weight="4.5"
-                    android:layout_marginLeft="25dp"
                     android:layout_height="56dp">
 
                     <EditText
@@ -174,11 +166,10 @@
                         android:paddingRight="56dp" />
 
                     <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="11dp"
                         android:src="@drawable/ic_arrow_drop_down_black_24dp"
                         android:tint="#bdbdbd" />
                 </RelativeLayout>
@@ -198,7 +189,6 @@
                 android:id="@+id/pref_match_marital_status_spinner_layout"
                 android:layout_below="@id/age_layout"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
                 <EditText
@@ -212,11 +202,10 @@
                     android:paddingRight="56dp" />
 
                 <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="11dp"
                     android:src="@drawable/ic_arrow_drop_down_black_24dp"
                     android:tint="#bdbdbd" />
             </RelativeLayout>
@@ -235,7 +224,6 @@
                 android:layout_below="@id/pref_match_marital_status_spinner_layout"
                 android:layout_width="match_parent"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
                 <EditText
@@ -249,11 +237,10 @@
                     android:paddingRight="56dp" />
 
                 <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="11dp"
                     android:src="@drawable/ic_arrow_drop_down_black_24dp"
                     android:tint="#bdbdbd" />
             </RelativeLayout>
@@ -271,7 +258,6 @@
                 android:layout_below="@id/pref_match_ethnicity_spinner_layout"
                 android:layout_width="match_parent"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="25dp"
                 android:layout_height="56dp">
 
                 <EditText
@@ -285,11 +271,10 @@
                     android:paddingRight="56dp" />
 
                 <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="11dp"
                     android:src="@drawable/ic_arrow_drop_down_black_24dp"
                     android:tint="#bdbdbd" />
             </RelativeLayout>
@@ -299,8 +284,6 @@
                 android:layout_below="@id/pref_match_min_education_spinner_layout"
                 android:layout_marginTop="33dp"
                 android:orientation="vertical"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -339,8 +322,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:text="SUBMIT"
                 android:textSize="20dp"
                 android:fontFamily="@font/poppins_regular"
@@ -353,8 +334,6 @@
                 android:layout_below="@id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="14dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Already have an account"
@@ -364,8 +343,6 @@
                 android:id="@+id/login_here"
                 android:layout_below="@id/have_account_tv"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:textSize="18dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Login Here."

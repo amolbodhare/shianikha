@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -33,6 +34,8 @@ import com.example.shianikha.R;
 import com.example.shianikha.fragments.RegisterationScreenFirst;
 import com.example.shianikha.fragments.RegisterationScreenSecond;
 
+import com.example.shianikha.commen.P;
+
 import org.json.JSONArray;
 
 import java.lang.reflect.Array;
@@ -51,10 +54,10 @@ public class RegisterationActivity extends AppCompatActivity
     TextView login_here_tv;
     ImageView gender_male_imv;
     ImageView gender_female_imv;
-
-
     EditText profile_for_ed;
-    ArrayList<String> profile_for_array;
+    ArrayList<String> profile_for_arrayList;
+    String masterdatajsonstring;
+    Context context;
 
 
     /*@Override
@@ -68,6 +71,7 @@ public class RegisterationActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration);
+        context=RegisterationActivity.this;
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -79,21 +83,22 @@ public class RegisterationActivity extends AppCompatActivity
         gender_female_imv=findViewById(R.id.genderr_female_imv);
 
         profile_for_ed=findViewById(R.id.profile_for_ed);
-        profile_for_array=new ArrayList<>();
-
-
+        profile_for_arrayList=new ArrayList<>();
 
         try
         {
-            String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-            System.out.print(masterdatajsonstring);
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+            //System.out.print(masterdatajsonstring);
             Json json=new Json(masterdatajsonstring);
 
             JSONArray jsonArray=json.getJsonArray("profile_for");
 
             for(int i=0;i<jsonArray.length();i++)
             {
-                profile_for_array.add(jsonArray.getJSONObject(i).getString("name"));
+                profile_for_arrayList.add(jsonArray.getJSONObject(i).getString("name"));
 
             }
 
@@ -149,6 +154,7 @@ public class RegisterationActivity extends AppCompatActivity
 
 */
                 Intent i=new Intent(RegisterationActivity.this,RegSecondPageActivity.class);
+                i.putExtra("masterDataString",masterdatajsonstring);
                 //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(i);
 
@@ -299,7 +305,7 @@ public class RegisterationActivity extends AppCompatActivity
         if (view.getId()==R.id.profile_for_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Profile for");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,profile_for_array);
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,profile_for_arrayList);
             listView.setAdapter(arrayAdapter);
         }
        /* else if (view.getId() == R.id.state)

@@ -20,6 +20,8 @@ public class P {
     public static String otp = "otp";
     public static String fcm_value = "fcm_value";
 
+    public static String masterDataString = "masterDataString";
+
     public static String tokenData = "tokenData";
     public static String token = "token";
     public static String profile_url = "profile_url";

@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +31,14 @@ public class RegFifthPageActivity extends AppCompatActivity
 
     Button btn_next;
     private ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> seeking_marriage_arrayList;
+    ArrayList<String> interested_in_arraylist;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_fifth_page);
+        context=RegFifthPageActivity.this;
 
        /* Spinner spinner_seeking_marriage = (Spinner) findViewById(R.id.seeking_marriage);
         Spinner spinner_interested_in = (Spinner) findViewById(R.id.interested_in);
@@ -84,6 +93,45 @@ public class RegFifthPageActivity extends AppCompatActivity
 
         setUpEditTextClickListner();
         setUpTextWatcher();
+
+        seeking_marriage_arrayList=new ArrayList<>();
+        interested_in_arraylist=new ArrayList<>();
+
+        try
+        {
+
+            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
+            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
+            //System.out.print(masterdatajsonstring);
+            Json json=new Json(masterdatajsonstring);
+
+
+            JSONArray jsonArray_seeking_marriage=json.getJsonArray("seeking_marriage");
+
+            JSONArray jsonArray_intreasted_in=json.getJsonArray("intreasted_in");
+
+
+
+            for(int i=0;i<jsonArray_seeking_marriage.length();i++)
+            {
+                seeking_marriage_arrayList.add(jsonArray_seeking_marriage.getJSONObject(i).getString("val"));
+            }
+
+
+            for(int i=0;i<jsonArray_intreasted_in.length();i++)
+            {
+                interested_in_arraylist.add(jsonArray_intreasted_in.getJSONObject(i).getString("name"));
+            }
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -147,14 +195,14 @@ public class RegFifthPageActivity extends AppCompatActivity
 
         if (view.getId()==R.id.seeking_marriage_ed)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Religion");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.city));
+            ((EditText)findViewById(R.id.editText)).setHint("Select value");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,seeking_marriage_arrayList);
             listView.setAdapter(arrayAdapter);
         }
         else if (view.getId() == R.id.interesterd_in_ed)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Ethinicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
+            ((EditText)findViewById(R.id.editText)).setHint("Interested In");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,interested_in_arraylist);
             listView.setAdapter(arrayAdapter);
         }
 

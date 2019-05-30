@@ -1,5 +1,6 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.adapters.SliderAdapter;
 import com.example.shianikha.commen.C;
@@ -28,16 +30,20 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
     private SliderAdapter sliderAdapter;
     Button btn_login,btn_reg;
     private LoadingDialog loadingDialog;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_through);
+        context=WalkThroughActivity.this;
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager=(ViewPager)findViewById(R.id.slideViewPager);
         sliderAdapter=new SliderAdapter(this);
         slideViewPager.setAdapter(sliderAdapter);
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_reg=(Button)findViewById(R.id.btn_reg);
+
+
 
         loadingDialog = new LoadingDialog(this);
 
@@ -103,10 +109,8 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                         if (json.getInt(P.status) == 1)
                         {
                             json = json.getJson(P.data);
-                            //extractJsonList(json);
-                            //Toast.makeText(WalkThroughActivity.this, ""+json.toString(), Toast.LENGTH_SHORT).show();
+                            new Session(context).addString("masterDataString",json.toString());
                             Intent i=new Intent(WalkThroughActivity.this,RegisterationActivity.class);
-                            i.putExtra("masterDataString",json.toString());
                             startActivity(i);
                         } else
                             H.showMessage(WalkThroughActivity.this, json.getString(P.msg));
