@@ -291,6 +291,7 @@
                     android:id="@+id/rb_email_everyone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:textSize="15dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Email me request for every one"
@@ -300,6 +301,7 @@
                     android:id="@+id/rb_email_me_from_pref_match_only"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:layout_marginTop="30dp"
                     android:textSize="15dp"
                     android:fontFamily="@font/poppins_regular"
@@ -310,6 +312,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:gravity="start"
                     android:textSize="15dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="check this box to attest by the sanctity of the Holy Quran that(1) all information that you have provided in this form is ttrue to your best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age " />

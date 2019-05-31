@@ -34,6 +34,7 @@ public class RegFourthPageActivity extends AppCompatActivity
     ArrayList<String> smoking_arraylist;
 
     Context context;
+    private long l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

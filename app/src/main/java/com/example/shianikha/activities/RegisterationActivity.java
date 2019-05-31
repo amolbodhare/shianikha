@@ -15,6 +15,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,6 +60,7 @@ public class RegisterationActivity extends AppCompatActivity
     ArrayList<String> profile_for_arrayList;
     String masterdatajsonstring;
     Context context;
+    MyBounceInterpolator interpolator;
 
 
     /*@Override
@@ -84,6 +87,10 @@ public class RegisterationActivity extends AppCompatActivity
 
         profile_for_ed=findViewById(R.id.profile_for_ed);
         profile_for_arrayList=new ArrayList<>();
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        interpolator = new MyBounceInterpolator(0.2, 20);
 
         try
         {
@@ -116,6 +123,10 @@ public class RegisterationActivity extends AppCompatActivity
                 gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
                 gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
 
+                myAnim.setInterpolator(interpolator);
+                gender_male_imv.startAnimation(myAnim);
+                gender_female_imv.clearAnimation();
+
             }
         });
 
@@ -125,6 +136,10 @@ public class RegisterationActivity extends AppCompatActivity
 
                 gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
                 gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
+
+                myAnim.setInterpolator(interpolator);
+                gender_female_imv.startAnimation(myAnim);
+                gender_male_imv.clearAnimation();
             }
         });
 
@@ -339,5 +354,19 @@ public class RegisterationActivity extends AppCompatActivity
         findViewById(R.id.view).setVisibility(View.GONE);
     }
 
+    class MyBounceInterpolator implements android.view.animation.Interpolator {
+        private double mAmplitude = 1;
+        private double mFrequency = 10;
+
+        MyBounceInterpolator(double amplitude, double frequency) {
+            mAmplitude = amplitude;
+            mFrequency = frequency;
+        }
+
+        public float getInterpolation(float time) {
+            return (float) (-1 * Math.pow(Math.E, -time/ mAmplitude) *
+                    Math.cos(mFrequency * time) + 1);
+        }
+    }
 
 }

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">ShiaNikha</string>
 
+    <string name="MyShia">My Shia</string>
+    <string name="MyMatches">My Matches</string>
+    <string name="search">Search</string>
+    <string name="Myprofile">My Profile</string>
+
+
 
     <string-array name="city">
 
@@ -72,7 +78,6 @@
         <item>Surat</item>
 
     </string-array>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
