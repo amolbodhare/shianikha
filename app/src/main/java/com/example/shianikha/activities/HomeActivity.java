@@ -17,7 +17,8 @@ import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.SearchFragment;
 
-public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,MyMatchesFragment.OnFragmentInteractionListener,
+        SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener
 {
 
     HomeFragment homeFragment;
@@ -30,7 +31,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        homeFragment = HomeFragment.newInstance();
+        homeFragment = HomeFragment.newInstance("Amol","amit");
         fragmentLoader(homeFragment, getString(R.string.MyShia));
     }
 
@@ -45,7 +46,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     public void onFragmentChange(View view)
     {
-        if (view.getId() == R.id.homeButton) {
+        if (view.getId() == R.id.homeButton)
+        {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
             //controlBackButtonVisibility(false);
         }
@@ -55,7 +57,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             //controlBackButtonVisibility(true);
         }
-        else if (view.getId() == R.id.searchButton) {
+        else if (view.getId() == R.id.searchButton)
+        {
             if (searchFragment == null)
                 searchFragment = SearchFragment.newInstance("hi","hello");
             fragmentLoader(searchFragment, getString(R.string.search));
@@ -120,7 +123,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         FragmentManager fm = HomeActivity.this.getSupportFragmentManager();
 
         int count=fm.getBackStackEntryCount();
