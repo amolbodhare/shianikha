@@ -112,12 +112,12 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         layoutParams = new LinearLayout.LayoutParams(scale,scale);*/
 
         imageView = (ImageView) childLayout.getChildAt(0);
-        imageView.setColorFilter(getResources().getColor(R.color.green));
+        imageView.setColorFilter(getResources().getColor(R.color.bluebtnback));
 
         //imageView.setLayoutParams(layoutParams);
 
         textView = (TextView) childLayout.getChildAt(1);
-        textView.setTextColor(getResources().getColor(R.color.green));
+        textView.setTextColor(getResources().getColor(R.color.bluebtnback));
         textView.setTextSize(9.4f);
     }
 

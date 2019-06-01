@@ -16,9 +16,17 @@
     <color name="pure_white">#FFFFFF</color>
 
     <color name="textpurle">#311B63</color>
+    <color name="textpurle2">#6A00BB</color>
     <color name="textlightgray">#959595</color>
     <color name="textdarkgray">#515151</color>
     <color name="grey">#A9A9A9</color>
+
+    <color name="dash_card_back">#B700D9</color>
+
+    <color name="semiTrans">#60000000</color>
+    <color name="grey5">#BDBDBD</color>
+
+
 
 
 </resources>

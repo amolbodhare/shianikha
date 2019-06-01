@@ -28,6 +28,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
 
@@ -35,7 +36,6 @@
     <RelativeLayout
         android:id="@+id/religion_spinner_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_height="56dp">
 
         <EditText
