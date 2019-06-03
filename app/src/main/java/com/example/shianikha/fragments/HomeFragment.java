@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shianikha.R;
+import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.adapters.RecentlyJoinAdapter;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,13 +33,21 @@ public class HomeFragment extends Fragment
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static String TAG = HomeActivity.class.getSimpleName();
+    CircleImageView ivUserProfilePic;
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    private ArrayList<String> recently_join_Names = new ArrayList<>();
+    private ArrayList<String> recently_join_ImageUrls = new ArrayList<>();
+    View v;
+
+
     private OnFragmentInteractionListener mListener;
+
 
     public HomeFragment()
     {
@@ -73,7 +90,11 @@ public class HomeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        v= inflater.inflate(R.layout.fragment_home, container, false);
+        ivUserProfilePic = (CircleImageView) v.findViewById(R.id.image_profile_pic);
+        getRecentlyJoinList();
+        getRecentlyVisitedList();
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -113,5 +134,210 @@ public class HomeFragment extends Fragment
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private void getRecentlyJoinList()
+    {
+        Log.d(TAG, "getSpecialOfferList: preparing bitmaps.");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        ////////////
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        /////////
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = v.findViewById(R.id.rec_join_recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), recently_join_Names, recently_join_ImageUrls);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void getRecentlyVisitedList()
+    {
+        Log.d(TAG, "getSpecialOfferList: preparing bitmaps.");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        ////////////
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        /////////
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+        recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
+        recently_join_Names.add("Kangna Ranout");
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = v.findViewById(R.id.recent_visitors_recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), recently_join_Names, recently_join_ImageUrls);
+        recyclerView.setAdapter(adapter);
     }
 }
