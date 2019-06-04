@@ -1,14 +1,27 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shianikha.R;
+import com.example.shianikha.adapters.MatchesAdapter;
+import com.example.shianikha.adapters.RecentlyJoinAdapter;
+import com.example.shianikha.entities.MatchesEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +37,10 @@ public class MyMatchesFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    View view;
+    private RecyclerView recyclerView;
+    private MatchesAdapter adapter;
+    private List<MatchesEntity> matchesList;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -69,7 +86,32 @@ public class MyMatchesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_matches, container, false);
+        view=inflater.inflate(R.layout.fragment_my_matches, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
+        matchesList = new ArrayList<>();
+        adapter = new MatchesAdapter(getActivity(), matchesList);
+
+        /*RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);*/
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(8), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        /*LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(layoutManager);
+        MatchesAdapter adapter = new MatchesAdapter(getActivity(), matchesList);
+        recyclerView.setAdapter(adapter);*/
+
+        prepareAlbums();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -94,6 +136,97 @@ public class MyMatchesFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration
+    {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+
+    private void prepareAlbums()
+    {
+        int[] covers = new int[]{
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna,
+                R.drawable.kangna};
+
+        MatchesEntity a = new MatchesEntity("True Romance", 13, covers[0]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Panzanella ", 8, covers[1]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Bruschetta", 11, covers[2]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Focaccia Bread", 12, covers[3]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Pasta Carbonara", 14, covers[4]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Margherita Pizza", 1, covers[5]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Mushroom Risotto", 11, covers[6]);
+        matchesList.add(a);
+
+        a = new MatchesEntity(" Pasta Con Pomodoro E Basilico", 14, covers[7]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Lasagna", 11, covers[8]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Pistachio Panna Cotta", 17, covers[9]);
+        matchesList.add(a);
+
+        adapter.notifyDataSetChanged();
     }
 
     /**

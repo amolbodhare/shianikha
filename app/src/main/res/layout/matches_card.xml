@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:scaleType="centerCrop" />
+            <ImageView
+                android:layout_width="10dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="138dp"
+                android:layout_height="9dp" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/thumbnail"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <ImageView
+                android:id="@+id/Rs_imv"
+                android:layout_width="4dp"
+                android:layout_height="7dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_marginLeft="54dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/title"
+                android:layout_below="@id/thumbnail"/>
+
+            <TextView
+                android:id="@+id/Rs_value_tv"
+                android:layout_width="15dp"
+                android:text="90"
+                android:layout_height="19dp"
+                android:layout_below="@id/thumbnail"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/Rs_imv"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/dish_properties_tv"
+                android:layout_width="105dp"
+                android:layout_height="19dp"
+                android:layout_marginLeft="5dp"
+                android:text="Low carb,Mexican,American"
+                android:layout_below="@id/title"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/bluebtnback"
+                android:textSize="8dp" />
+
+            <ImageView
+                android:id="@+id/imv_adjust_saftey"
+                android:layout_width="7dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_below="@id/dish_properties_tv"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_height="7dp" />
+            <ImageView
+                android:id="@+id/timer_imv"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/imv_adjust_saftey"
+                android:layout_width="6dp"
+                android:layout_below="@id/dish_properties_tv"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_height="6dp" />
+
+            <TextView
+                android:id="@+id/time_value_tv"
+                android:layout_width="24dp"
+                android:layout_height="11dp"
+                android:layout_below="@id/dish_properties_tv"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toRightOf="@id/timer_imv"
+                android:fontFamily="@font/poppins_regular"
+                android:text="30 min"
+                android:textSize="8dp" />
+            <ImageView
+                android:id="@+id/star_imv"
+                android:layout_toRightOf="@id/time_value_tv"
+                android:layout_width="6dp"
+                android:layout_below="@id/dish_properties_tv"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_height="6dp" />
+            <TextView
+                android:id="@+id/star_value"
+                android:text="5.0"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="8dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toRightOf="@id/star_imv"
+                android:layout_alignBaseline="@id/star_imv"
+                android:layout_below="@id/dish_properties_tv"
+                android:layout_width="11dp"
+                android:layout_height="11dp" />
+            <ImageButton
+                android:id="@+id/img_add"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:background="@drawable/card_back_design"
+                android:layout_below="@id/Rs_value_tv"
+                android:layout_toRightOf="@id/star_value"
+                android:layout_width="26dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_height="17dp" />
+
+
+            <!-- <ImageView
+                 android:id="@+id/overflow"
+                 android:layout_width="20dp"
+                 android:layout_height="30dp"
+                 android:layout_alignParentRight="true"
+                 android:layout_below="@id/thumbnail"
+                 android:layout_marginTop="10dp"
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/applogo2mp" />-->
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -22,6 +22,8 @@
     <color name="textgreycolor">#747474</color>
     <color name="black_opacity_back">#D6D6D6</color>
     <color name="add_profilr_btn_back">#00C9F2</color>
+    <color name="dashboard_card_back_color">#6E0187</color>
+    <color name="profile_card_back_color">#680083</color>
 
 
     <color name="title_back_trans">#73000000</color>

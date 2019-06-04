@@ -37,8 +37,8 @@
         </android.support.v7.widget.CardView>-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@color/purplebtnback"
             android:layout_alignParentTop="true"
+            android:background="@drawable/main_card_back_design"
             android:layout_height="280dp">
 
             <ImageView
@@ -588,7 +588,7 @@
 
             <TextView
                 android:id="@+id/helpandsupport_tv"
-                android:text="Notifications"
+                android:text="Help and Support"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="12dp"
                 android:textColor="@color/text_back_grey"
