@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.HomeActivity"
+            android:theme="@style/CustomTheme"/>
         <activity android:name=".activities.OTPVereificationActivty" />
         <activity android:name=".activities.RegSixthPageActivity" />
         <activity android:name=".activities.RegFifthPageActivity" />
