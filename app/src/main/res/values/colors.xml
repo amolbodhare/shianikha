@@ -27,12 +27,18 @@
 
 
     <color name="title_back_trans">#73000000</color>
-
+    <color name="textview_back_color">#F1F1F1</color>
 
 
     <color name="grey">#A9A9A9</color>
+    <color name="textview_grey_color">#585858</color>
     <color name="text_back_grey">#A4A4A4</color>
     <color name="border_grey">#EBEBEB</color>
+    <color name="notification_color">#321A60</color>
+    <color name="text_neon_color">#009898</color>
+
+
+    <color name="black_opacity_36">#59000000</color>
 
     <color name="dash_card_back">#B700D9</color>
 
@@ -42,6 +48,9 @@
     <color name="darkGreen">#04a18a</color>
     <color name="yellow">#FEB100</color>
     <color name="orange">#EF6000</color>
+    <color name="tab_back">#8B00B4</color>
+
+
 
 
 

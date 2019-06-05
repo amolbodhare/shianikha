@@ -236,6 +236,7 @@ public class HomeFragment extends Fragment
         recyclerView.setLayoutManager(layoutManager);
         RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), recently_join_Names, recently_join_ImageUrls);
         recyclerView.setAdapter(adapter);
+
     }
 
     private void getRecentlyVisitedList()

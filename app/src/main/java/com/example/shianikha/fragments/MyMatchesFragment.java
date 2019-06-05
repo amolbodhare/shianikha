@@ -1,10 +1,13 @@
 package com.example.shianikha.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,10 +17,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.shianikha.R;
+import com.example.shianikha.SplashActivity;
+import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.adapters.MatchesAdapter;
-import com.example.shianikha.adapters.RecentlyJoinAdapter;
 import com.example.shianikha.entities.MatchesEntity;
 
 import java.util.ArrayList;
@@ -31,7 +36,8 @@ import java.util.List;
  * Use the {@link MyMatchesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyMatchesFragment extends Fragment {
+public class MyMatchesFragment extends Fragment implements View.OnClickListener
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +51,11 @@ public class MyMatchesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView top_matches_tv,i_am_looking_for_tv,looking_for_me_tv;
+
     private OnFragmentInteractionListener mListener;
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private ProgressDialog dialog;
 
     public MyMatchesFragment() {
         // Required empty public constructor
@@ -87,10 +97,18 @@ public class MyMatchesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_my_matches, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.matchees_recyclerview);
+
+        top_matches_tv=view.findViewById(R.id.top_matches_tv);
+        i_am_looking_for_tv=view.findViewById(R.id.i_am_looking_for_tv);
+        looking_for_me_tv=view.findViewById(R.id.looking_for_me_tv);
+
+        dialog = new ProgressDialog(getActivity());
+
 
         matchesList = new ArrayList<>();
         adapter = new MatchesAdapter(getActivity(), matchesList);
+
 
         /*RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -100,9 +118,18 @@ public class MyMatchesFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(8), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(28), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        //recyclerView.removeAllViews();
+        //recyclerView.setAdapter(null);
+
+
+        recyclerView.setOnClickListener(this);
+        top_matches_tv.setOnClickListener(this);
+        i_am_looking_for_tv.setOnClickListener(this);
+        looking_for_me_tv.setOnClickListener(this);
+
 
         /*LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -110,7 +137,7 @@ public class MyMatchesFragment extends Fragment {
         MatchesAdapter adapter = new MatchesAdapter(getActivity(), matchesList);
         recyclerView.setAdapter(adapter);*/
 
-        prepareAlbums();
+        topmatches();
         return view;
     }
 
@@ -137,6 +164,66 @@ public class MyMatchesFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId()==R.id.matchees_recyclerview)
+        {
+
+        }
+        else if(v.getId()==R.id.top_matches_tv)
+        {
+            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));
+            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
+            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
+
+            dialog.setMessage("please wait...");
+            dialog.show();
+            new Handler().postDelayed(new Runnable(){
+                @Override
+                public void run() {
+                    /* Create an Intent that will start the Menu-Activity. */
+                    topmatches();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+        }
+        else if(v.getId()==R.id.i_am_looking_for_tv)
+        {
+            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
+            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));;
+            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
+            dialog.setMessage("please wait.");
+            dialog.show();
+            new Handler().postDelayed(new Runnable(){
+                @Override
+                public void run() {
+                    /* Create an Intent that will start the Menu-Activity. */
+                    iAmLookingFor();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+
+
+        }
+
+        else if(v.getId()==R.id.looking_for_me_tv)
+        {
+            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
+            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));;
+            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));
+            dialog.setMessage("please wait.");
+            dialog.show();
+            new Handler().postDelayed(new Runnable(){
+                @Override
+                public void run() {
+                    /* Create an Intent that will start the Menu-Activity. */
+                    LookingForMe();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+
+        }
+    }
+
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration
     {
 
@@ -181,53 +268,173 @@ public class MyMatchesFragment extends Fragment {
     }
 
 
-    private void prepareAlbums()
+    private void topmatches()
     {
-        int[] covers = new int[]{
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna,
-                R.drawable.kangna};
+        int[] covers = new int[]
+                {
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+        };
 
-        MatchesEntity a = new MatchesEntity("True Romance", 13, covers[0]);
+        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Panzanella ", 8, covers[1]);
+        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Bruschetta", 11, covers[2]);
+        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Focaccia Bread", 12, covers[3]);
+        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Pasta Carbonara", 14, covers[4]);
+        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Margherita Pizza", 1, covers[5]);
+        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Mushroom Risotto", 11, covers[6]);
+        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
         matchesList.add(a);
 
-        a = new MatchesEntity(" Pasta Con Pomodoro E Basilico", 14, covers[7]);
+        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Lasagna", 11, covers[8]);
+        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
         matchesList.add(a);
 
-        a = new MatchesEntity("Pistachio Panna Cotta", 17, covers[9]);
+        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
         matchesList.add(a);
 
         adapter.notifyDataSetChanged();
+
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        //recyclerView.setAdapter(null);
+        //recyclerView.removeAllViews();
     }
+    private void iAmLookingFor()
+    {
+        int[] covers = new int[]
+                {
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                        R.drawable.kangna,
+                };
+
+        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
+        matchesList.add(a);
+
+        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
+        matchesList.add(a);
+
+        adapter.notifyDataSetChanged();
+
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        //recyclerView.setAdapter(null);
+        //recyclerView.removeAllViews();
+    }
+    private void LookingForMe()
+    {
+        int[] covers = new int[]
+                {
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                        R.drawable.kangna_second,
+                };
+
+        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
+        matchesList.add(a);
+
+        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
+        matchesList.add(a);
+
+        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
+        matchesList.add(a);
+
+        adapter.notifyDataSetChanged();
+
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        //recyclerView.setAdapter(null);
+        //recyclerView.removeAllViews();
+    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
