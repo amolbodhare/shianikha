@@ -180,7 +180,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
 
             dialog.setMessage("please wait...");
             dialog.show();
-            new Handler().postDelayed(new Runnable(){
+            new Handler().postDelayed(new Runnable()
+            {
                 @Override
                 public void run() {
                     /* Create an Intent that will start the Menu-Activity. */
