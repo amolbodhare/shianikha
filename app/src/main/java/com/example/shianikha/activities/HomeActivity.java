@@ -20,7 +20,6 @@ import com.example.shianikha.fragments.SearchFragment;
 public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,MyMatchesFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener
 {
-
     HomeFragment homeFragment;
     MyMatchesFragment myMatchesFragment;
     SearchFragment searchFragment;
@@ -60,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         else if (view.getId() == R.id.searchButton)
         {
             if (searchFragment == null)
-                searchFragment = SearchFragment.newInstance("hi","hello");
+                searchFragment = SearchFragment.newInstance();
             fragmentLoader(searchFragment, getString(R.string.search));
             //controlBackButtonVisibility(true);
         }
