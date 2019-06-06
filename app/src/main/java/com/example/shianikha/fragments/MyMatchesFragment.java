@@ -86,7 +86,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -180,7 +181,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
 
             dialog.setMessage("please wait...");
             dialog.show();
-            new Handler().postDelayed(new Runnable(){
+            new Handler().postDelayed(new Runnable()
+            {
                 @Override
                 public void run() {
                     /* Create an Intent that will start the Menu-Activity. */
