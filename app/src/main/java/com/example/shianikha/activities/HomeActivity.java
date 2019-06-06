@@ -1,13 +1,16 @@
 package com.example.shianikha.activities;
 
+import android.graphics.Rect;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +34,21 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         homeFragment = HomeFragment.newInstance("Amol","amit");
+        setStatusBarBackground(getColor(R.color.textpurle2));
         fragmentLoader(homeFragment, getString(R.string.MyShia));
+    }
+
+    public void setStatusBarBackground(int i)
+    {
+        Rect rectangle = new Rect();
+        Window window = getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
+        int statusBarHeight = rectangle.top;
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.height = statusBarHeight;
+        findViewById(R.id.view).setLayoutParams(layoutParams);
+        findViewById(R.id.view).setBackgroundColor(i);
     }
 
     public void fragmentLoader(Fragment fragment, String title)

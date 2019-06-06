@@ -11,13 +11,13 @@
     <!--Title bar -->
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="?actionBarSize">
+       android:layout_height="50dp">
        
        <ImageView
-           android:layout_width="?actionBarSize"
+           android:layout_width="50dp"
            android:layout_height="match_parent"
            android:src="@drawable/ic_keyboard_backspace_black_24dp"
-           android:padding="13dp"
+           android:padding="16dp"
            android:tint="@color/tab_back"/>
 
        <TextView
@@ -30,22 +30,22 @@
            android:textAllCaps="true"/>
 
        <RelativeLayout
-           android:layout_width="?actionBarSize"
+           android:layout_width="50dp"
            android:layout_height="match_parent"
            android:layout_alignParentRight="true">
 
            <ImageView
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:padding="15dp"
+               android:padding="13dp"
                android:src="@drawable/matches_notification"
                android:layout_centerInParent="true"/>
 
            <TextView
-               android:layout_width="20dp"
-               android:layout_height="20dp"
+               android:layout_width="19dp"
+               android:layout_height="19dp"
                android:text="99"
-               android:textSize="12sp"
+               android:textSize="11sp"
                android:layout_alignParentTop="true"
                android:layout_alignParentRight="true"
                android:layout_marginTop="3dp"
@@ -59,9 +59,11 @@
        
    </RelativeLayout>
 
+    <!-- three buttons-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="true"
         android:weightSum="3">
 
         <LinearLayout
@@ -76,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:gravity="center"
                 android:clickable="true"
                 android:background="@color/textpurle2"
@@ -89,7 +91,6 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="-15dp"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:elevation="7dp"
                 android:tint="@color/textpurle2"/>
 
         </LinearLayout>
@@ -109,7 +110,7 @@
                 android:background="@color/textview_back_color"
                 android:textColor="@color/textview_grey_color"
                 android:clickable="true"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Advance Search"/>
 
@@ -139,7 +140,7 @@
                 android:textColor="@color/textview_grey_color"
                 android:clickable="true"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:text="Search By Profile Id"/>
 
             <ImageView
@@ -153,5 +154,10 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

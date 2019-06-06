@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment
         ivUserProfilePic = (CircleImageView) v.findViewById(R.id.image_profile_pic);
         getRecentlyJoinList();
         getRecentlyVisitedList();
+        ((HomeActivity)getContext()).setStatusBarBackground(getContext().getColor(R.color.textpurle2));
         return v;
     }
 

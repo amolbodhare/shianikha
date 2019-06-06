@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".subfragments.SearchOptionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="19dp">
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <TextView
+               android:id="@+id/age"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Age"
+               android:textColor="#aaaaaa"
+               android:textSize="13sp"
+               android:fontFamily="@font/poppins_regular"/>
+
+           <TextView
+               android:id="@+id/minAge"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@id/age"
+               android:text="Min 20 yrs"
+               android:fontFamily="@font/poppins_regular"/>
+
+           <TextView
+               android:id="@+id/maxAge"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_below="@id/age"
+               android:text="Max 30 yrs"
+               android:fontFamily="@font/poppins_regular"/>
+
+       </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
