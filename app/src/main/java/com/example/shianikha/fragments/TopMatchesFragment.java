@@ -2,7 +2,6 @@ package com.example.shianikha.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -11,20 +10,14 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shianikha.R;
-import com.example.shianikha.SplashActivity;
-import com.example.shianikha.activities.FilterActivity;
-import com.example.shianikha.activities.RegisterationActivity;
-import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.adapters.MatchesAdapter;
 import com.example.shianikha.entities.MatchesEntity;
 
@@ -34,12 +27,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MyMatchesFragment.OnFragmentInteractionListener} interface
+ * {@link TopMatchesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MyMatchesFragment#newInstance} factory method to
+ * Use the {@link TopMatchesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyMatchesFragment extends Fragment implements View.OnClickListener
+public class TopMatchesFragment extends Fragment implements View.OnClickListener
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,14 +47,15 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
     private String mParam1;
     private String mParam2;
 
+    TextView textView;
+
     TextView top_matches_tv,i_am_looking_for_tv,looking_for_me_tv;
 
     private OnFragmentInteractionListener mListener;
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     private ProgressDialog dialog;
-    ImageView refine_imv;
 
-    public MyMatchesFragment() {
+    public TopMatchesFragment() {
         // Required empty public constructor
     }
 
@@ -74,46 +68,48 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
      * @return A new instance of fragment MyMatchesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyMatchesFragment newInstance(String param1, String param2) {
-        MyMatchesFragment fragment = new MyMatchesFragment();
+    public static TopMatchesFragment newInstance(String param1, String param2) {
+        TopMatchesFragment fragment = new TopMatchesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public static MyMatchesFragment newInstance() {
-        MyMatchesFragment fragment = new MyMatchesFragment();
+    public static TopMatchesFragment newInstance() {
+        TopMatchesFragment fragment = new TopMatchesFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
+        /*if (getArguments() != null)
         {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_my_matches, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.matchees_recyclerview);
+        view=inflater.inflate(R.layout.top_my_matches, container, false);
+        //textView=view.findViewById(R.id.sample_tv);
+        //textView.setText(getArguments().getString("Amol"));
+        return view;
+        /*recyclerView = (RecyclerView) view.findViewById(R.id.matchees_recyclerview);
 
         top_matches_tv=view.findViewById(R.id.top_matches_tv);
         i_am_looking_for_tv=view.findViewById(R.id.i_am_looking_for_tv);
-        looking_for_me_tv=view.findViewById(R.id.looking_for_me_tv);
-        refine_imv=view.findViewById(R.id.refine_imv);
+        looking_for_me_tv=view.findViewById(R.id.looking_for_me_tv);*/
 
-        dialog = new ProgressDialog(getActivity());
+        /*dialog = new ProgressDialog(getActivity());
 
 
         matchesList = new ArrayList<>();
-        adapter = new MatchesAdapter(getActivity(), matchesList);
+        adapter = new MatchesAdapter(getActivity(), matchesList);*/
 
 
         /*RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -122,7 +118,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);*/
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
+       /* RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(28), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -134,8 +130,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
         recyclerView.setOnClickListener(this);
         top_matches_tv.setOnClickListener(this);
         i_am_looking_for_tv.setOnClickListener(this);
-        looking_for_me_tv.setOnClickListener(this);
-        refine_imv.setOnClickListener(this);
+        looking_for_me_tv.setOnClickListener(this);*/
 
 
         /*LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -144,8 +139,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
         MatchesAdapter adapter = new MatchesAdapter(getActivity(), matchesList);
         recyclerView.setAdapter(adapter);*/
 
-        topmatches();
-        return view;
+        //topmatches();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -174,16 +168,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-
+/*
         if(v.getId()==R.id.matchees_recyclerview)
         {
 
-        }
-        else if(v.getId()==R.id.refine_imv)
-        {
-            Intent i=new Intent(getActivity(), FilterActivity.class);
-            startActivity(i);
-            getActivity().overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         }
         else if(v.getId()==R.id.top_matches_tv)
         {
@@ -197,7 +185,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
             {
                 @Override
                 public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
+                    *//* Create an Intent that will start the Menu-Activity. *//*
                     topmatches();
                 }
             }, SPLASH_DISPLAY_LENGTH);
@@ -212,7 +200,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
             new Handler().postDelayed(new Runnable(){
                 @Override
                 public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
+                    *//* Create an Intent that will start the Menu-Activity. *//*
                     iAmLookingFor();
                 }
             }, SPLASH_DISPLAY_LENGTH);
@@ -230,15 +218,15 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
             new Handler().postDelayed(new Runnable(){
                 @Override
                 public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
+                    *//* Create an Intent that will start the Menu-Activity. *//*
                     LookingForMe();
                 }
             }, SPLASH_DISPLAY_LENGTH);
 
-        }
+        }*/
     }
 
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration
+   /* public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration
     {
 
         private int spanCount;
@@ -273,31 +261,31 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
             }
         }
     }
-    /**
+    *//**
      * Converting dp to pixel
-     */
+     *//*
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
+    }*/
 
 
-    private void topmatches()
+ /*   private void topmatches()
     {
         int[] covers = new int[]
                 {
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                };
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+                R.drawable.kangana_ranaut,
+        };
 
         MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
         matchesList.add(a);
@@ -447,7 +435,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
         //recyclerView.setAdapter(null);
         //recyclerView.removeAllViews();
     }
-
+*/
 
 
     /**

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FilterActivity">
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/back_navigation_icon"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_keyboard_backspace_black_24dp"
+            android:padding="16dp"
+            android:tint="@color/tab_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Refine search"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="15dp"
+            android:textAllCaps="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/active_members_link_layout"
+        android:layout_below="@id/top_layout"
+
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/active_members_link_tv"
+            android:text="Active Members"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/active_members_link_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/annual_income_link_layout"
+        android:layout_below="@id/active_members_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/annual_income_link_tv"
+            android:text="Annual Income"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/annual_income_link_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/marital_status_link_layout"
+        android:layout_below="@id/annual_income_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/marital_status_tv"
+            android:text="Marital Status"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/marital_status_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/religion_link_layout"
+        android:layout_below="@id/marital_status_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/religion_tv"
+            android:text="Religion"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/religion_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mother_tongue_link_layout"
+        android:layout_below="@id/religion_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mother_tongue_tv"
+            android:text="Mother Tongue"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/mother_tongue_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/country_living_in_layout"
+        android:layout_below="@id/mother_tongue_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/country_living_tv"
+            android:text="Country Living in"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/country_living_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/State_living_layout"
+        android:layout_below="@id/country_living_in_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/state_living_tv"
+            android:text="State Living In"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/state_living_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/education_link_layout"
+        android:layout_below="@id/State_living_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/account_settings_tv"
+            android:text="Education"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/account_settings_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/working_with_layout"
+        android:layout_below="@id/education_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/working_with_tv"
+            android:text="Working With"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/working_with_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/professional_area_link_layout"
+        android:layout_below="@id/working_with_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/profession_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Profession Area"
+            android:textColor="@color/text_back_grey"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/profession_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profile_created_by_link_layout"
+        android:layout_below="@id/professional_area_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/profile_created_by_tv"
+            android:text="Profile Created By"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/profile_created_by_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/smoking_link_layout"
+        android:layout_below="@id/profile_created_by_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/smoking_tv"
+            android:text="Smoking"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/smoking_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drinking_link_layout"
+        android:layout_below="@id/smoking_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/drinking_tv"
+            android:text="Drinking"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/drinking_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/eating_habits_layout"
+        android:layout_below="@id/drinking_link_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/eating_habit_tv"
+            android:text="Eating Habits"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/eating_habit_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/community_layout"
+        android:layout_below="@id/eating_habits_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/community_tv"
+            android:text="Community"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12dp"
+            android:textColor="@color/text_back_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_navigational"
+            android:tint="@color/grey"/>
+
+        <View
+            android:background="@color/border_grey"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/community_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

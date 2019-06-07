@@ -27,7 +27,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private LoadingDialog loadingDialog;
     private View fragMentView;
 
-    public SearchFragment() {
+    public SearchFragment()
+    {
         // Required empty public constructor
     }
 
@@ -38,7 +39,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         context = getContext();
         ((HomeActivity) context).setStatusBarBackground(context.getColor(R.color.white));

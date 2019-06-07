@@ -49,6 +49,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/aaaaaa" />
 
+<!--
             <RelativeLayout
                 android:id="@+id/top_sublayout"
                 android:layout_width="match_parent"
@@ -97,6 +98,63 @@
 
 
             </RelativeLayout>
+-->
+
+            <RelativeLayout
+                android:id="@+id/top_sublayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/my_matches_left_arrow"
+                    android:layout_marginLeft="17dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/dash_tv"
+                    android:text="MY MATCHES"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:id="@+id/noti_layout"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/matches_notification"
+                        android:clickable="true"
+                        android:src="@drawable/ic_notifications_none_black_24dp" />
+
+                    <TextView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:text="01"
+                        android:maxLength="2"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="10sp"
+                        android:gravity="end"
+                        android:backgroundTint="@color/bluebtnback"
+                        android:background="@drawable/clickable_grey_circle"/>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
 
             <!--<RelativeLayout
                 android:layout_width="match_parent"
@@ -109,15 +167,15 @@
                     android:layout_below="@id/top_sublayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/image_profile_pic"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:src="@drawable/kangna"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="5dp" />
 
                 </FrameLayout>
@@ -132,40 +190,27 @@
                     />
             </android.support.design.widget.FloatingActionButton>
 -->
-            <FrameLayout
-                android:id="@+id/cir_imv_btn_frame_layout"
-                android:layout_below="@id/top_sublayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/add_profile_pic_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:padding="2dp"
-                    app:civ_circle_background_color="@color/add_profilr_btn_back"
-                    android:src="@drawable/add_profile_icon"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="5dp" />
-
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_marginTop="123dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/add_profile_circle_button_back"
+                android:padding="8dp"
+                android:src="@drawable/add_profile_icon" />
 
             <TextView
                 android:id="@+id/name_tv"
-                android:text="John Doe"
-                android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:layout_below="@+id/cir_imv_btn_frame_layout"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:layout_below="@+id/cir_imv_frame_layout"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_horizontal"
+                android:text="John Doe"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/profile_id_tv"
@@ -220,14 +265,18 @@
         
         <LinearLayout
             android:id="@+id/design_buttons_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:weightSum="3"
             android:elevation="3dp"
             android:layout_marginTop="250dp"
             android:orientation="horizontal">
+
             <LinearLayout
-                android:layout_width="100dp"
-                android:layout_marginLeft="17dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:background="@drawable/card_back_design"
                 android:orientation="vertical"
                 android:layout_height="70dp">
@@ -252,7 +301,8 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_marginLeft="12dp"
                 android:background="@drawable/card_back_design"
                 android:orientation="vertical"
@@ -278,7 +328,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_marginLeft="12dp"
                 android:background="@drawable/card_back_design"
                 android:orientation="vertical"
