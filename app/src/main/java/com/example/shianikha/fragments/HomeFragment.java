@@ -1,6 +1,7 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.adapters.RecentlyJoinAdapter;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -91,7 +93,16 @@ public class HomeFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_home, container, false);
-        ivUserProfilePic = (CircleImageView) v.findViewById(R.id.image_profile_pic);
+        //ivUserProfilePic = (CircleImageView) v.findViewById(R.id.image_profile_pic);
+        CircularImageView circularImageView = (CircularImageView)v.findViewById(R.id.cir_imv);
+// Set Border
+       /* circularImageView.setBorderColor(getResources().getColor(R.color.grey));
+        circularImageView.setBorderWidth(10);
+// Add Shadow with default param
+        circularImageView.addShadow();
+// or with custom param
+        circularImageView.setShadowRadius(15);
+        circularImageView.setShadowColor(Color.RED);*/
         getRecentlyJoinList();
         getRecentlyVisitedList();
         ((HomeActivity)getContext()).setStatusBarBackground(getContext().getColor(R.color.textpurle2));
