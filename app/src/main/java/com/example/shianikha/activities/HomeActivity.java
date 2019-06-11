@@ -1,9 +1,12 @@
 package com.example.shianikha.activities;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +17,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shianikha.ContactUsFragment;
 import com.example.shianikha.R;
 import com.example.shianikha.fragments.HomeFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.SearchFragment;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,MyMatchesFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener
@@ -27,6 +33,11 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     MyMatchesFragment myMatchesFragment;
     SearchFragment searchFragment;
     MyProfileFragment myProfileFragment;
+    private DrawerLayout.LayoutParams layoutParams;
+    private RelativeLayout relativeLayout;
+    private DrawerLayout drawerLayout;
+    ContactUsFragment contactUsFragment;
+    private ArrayList<Fragment> fragmentList = new ArrayList<>();
 
     private long l;
     @Override
@@ -34,9 +45,16 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         homeFragment = HomeFragment.newInstance("Amol","amit");
+        contactUsFragment=ContactUsFragment.newInstance();
         setStatusBarBackground(getColor(R.color.textpurle2));
+        relativeLayout=findViewById(R.id.relativeLayout);
+        drawerLayout=findViewById(R.id.drawerLayout);
+        layoutParams=(DrawerLayout.LayoutParams)relativeLayout.getLayoutParams();
         fragmentLoader(homeFragment, getString(R.string.MyShia));
+
     }
+
+
 
     public void setStatusBarBackground(int i)
     {
@@ -87,6 +105,12 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 myProfileFragment = MyProfileFragment.newInstance("hi","hello");
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
             //controlBackButtonVisibility(true);
+        }
+        else if(view.getId() == R.id.contactUs)
+        {
+            if (contactUsFragment == null)
+                contactUsFragment = ContactUsFragment.newInstance();
+            fragmentLoader(contactUsFragment, getString(R.string.contactUs));
         }
 
         setSelection(view);
@@ -172,5 +196,11 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public void OnDrawerMenuClick(View view) {
+        if (contactUsFragment == null)
+            contactUsFragment = ContactUsFragment.newInstance();
+        fragmentLoader(contactUsFragment, getString(R.string.contactUs));
     }
 }

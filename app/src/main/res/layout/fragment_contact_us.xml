@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ContactUsFragment">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/blurImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.3"
+            android:background="@drawable/kangana_ranaut"
+            android:scaleType="fitXY"
+            android:src="@color/semiTrans" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reachus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#90000000"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Getting in touch is easy!!!"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#90000000"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="You can reach out to us at any of the location below"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+       >
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:backgroundTint="@color/green2"
+            android:src="@drawable/ic_support"
+            android:padding="19dp"
+            android:background="@drawable/ic_green_dot"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="India: 1860-266-3456"
+            android:textSize="21sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:layout_marginLeft="7dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(10am - 7pm) Available only in India"
+                android:textColor="@color/black"
+                android:layout_marginLeft="7dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:backgroundTint="@color/blue3"
+            android:src="@drawable/ic_telephone"
+            android:padding="19dp"
+            android:background="@drawable/ic_green_dot"
+            android:layout_marginLeft="7dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Phone:"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:layout_marginLeft="7dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="022 43517007"
+                android:layout_marginLeft="7dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:backgroundTint="@color/darkblue"
+            android:src="@drawable/ic_facebook_places"
+            android:padding="19dp"
+            android:background="@drawable/ic_green_dot"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="21sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:layout_marginLeft="7dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2B(2) || Ground floor,Film center building,68 Tardeo Road, Mumbai - 400 034 , India"
+                android:textColor="@color/black"
+                android:layout_marginLeft="7dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
