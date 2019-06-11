@@ -38,6 +38,7 @@
     <color name="border_grey">#EBEBEB</color>
     <color name="notification_color">#321A60</color>
     <color name="text_neon_color">#009898</color>
+    <color name="profile_details_grey">#EEEEEE</color>
 
 
     <color name="black_opacity_36">#59000000</color>

@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.shianikha.R;
+import com.example.shianikha.subfragments.EditProfileFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +30,8 @@ public class MyProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView edt_btn_imv;
+    View view;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +70,29 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_profile, container, false);
+        view= inflater.inflate(R.layout.fragment_my_profile, container, false);
+        edt_btn_imv=view.findViewById(R.id.edit_btn);
+
+        edt_btn_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                EditProfileFragment editProfileFragment = EditProfileFragment.newInstance();
+
+                try
+                {
+                    fragmentLoader(editProfileFragment);
+                }
+
+                catch (Exception e)
+                {
+
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -103,6 +130,14 @@ public class MyProfileFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
+    private void fragmentLoader(Fragment fragment)
+    {
+        getChildFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
+                .replace(R.id.frameLayout, fragment).commit();
+    }
+
     public interface OnFragmentInteractionListener
     {
         // TODO: Update argument type and name
