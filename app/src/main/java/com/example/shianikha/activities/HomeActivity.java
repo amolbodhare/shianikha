@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         }
         else if (view.getId() == R.id.searchButton)
         {
-            if (searchFragment == null)
+            //if (searchFragment == null)
                 searchFragment = SearchFragment.newInstance();
             fragmentLoader(searchFragment, getString(R.string.search));
             //controlBackButtonVisibility(true);

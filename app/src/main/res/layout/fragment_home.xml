@@ -421,7 +421,6 @@
         <TextView
 
             android:layout_marginLeft="17dp"
-
             android:layout_centerVertical="true"
             android:text="Options and Settings"
             android:fontFamily="@font/poppins_regular"
@@ -461,7 +460,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                    android:src="@drawable/right_arrow_navigational"
                     android:tint="@color/grey"/>
 
             </RelativeLayout>
@@ -491,7 +490,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -525,7 +524,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -560,7 +559,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -594,7 +593,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -628,7 +627,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -662,7 +661,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -697,7 +696,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View
@@ -732,7 +731,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/right_arrow_navigational"
                 android:tint="@color/grey"/>
 
             <View

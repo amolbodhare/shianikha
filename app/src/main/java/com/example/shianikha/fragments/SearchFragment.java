@@ -44,7 +44,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         context = getContext();
         ((HomeActivity) context).setStatusBarBackground(context.getColor(R.color.white));
-        if (fragMentView == null) {
+        if (fragMentView == null)
+        {
             fragMentView = inflater.inflate(R.layout.fragment_search, container, false);
             fragMentView.findViewById(R.id.searchByProfileId).setOnClickListener(this);
             fragMentView.findViewById(R.id.advanceSearch).setOnClickListener(this);

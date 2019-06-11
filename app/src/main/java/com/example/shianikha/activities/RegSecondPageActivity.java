@@ -291,13 +291,13 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        if (view.getId()==R.id.city_ed)
+        if (view.getId()==R.id.city_living_in_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search City");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,city_of_residence_arrayList);
             listView.setAdapter(arrayAdapter);
         }
-        else if (view.getId() == R.id.state_ed)
+        else if (view.getId() == R.id.state_living_in_ed)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Search State");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,state_arrayList);

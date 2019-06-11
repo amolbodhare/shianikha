@@ -25,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i=new Intent(LoginActivity.this,HomeActivity.class);
                 startActivity(i);
             }
@@ -34,7 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         reg_here.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i=new Intent(LoginActivity.this,RegisterationActivity.class);
                 startActivity(i);
             }
