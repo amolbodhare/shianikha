@@ -39,6 +39,12 @@ public class MyProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    public static MyProfileFragment newInstance() {
+        MyProfileFragment fragment = new MyProfileFragment();
+        return fragment;
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

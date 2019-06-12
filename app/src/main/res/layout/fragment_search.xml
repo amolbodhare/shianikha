@@ -9,6 +9,7 @@
     android:background="@color/white">
 
     <!--Title bar -->
+<!--
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="50dp">
@@ -58,6 +59,7 @@
        </RelativeLayout>
        
    </RelativeLayout>
+-->
 
     <!-- three buttons-->
     <LinearLayout

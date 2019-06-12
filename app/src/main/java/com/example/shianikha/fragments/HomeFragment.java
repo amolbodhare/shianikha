@@ -66,7 +66,8 @@ public class HomeFragment extends Fragment
      */
     // TODO: Rename and change types and number of parameters
 
-    public static HomeFragment newInstance(String param1, String param2) {
+    public static HomeFragment newInstance(String param1, String param2)
+    {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -105,7 +106,7 @@ public class HomeFragment extends Fragment
         circularImageView.setShadowColor(Color.RED);*/
         getRecentlyJoinList();
         getRecentlyVisitedList();
-        ((HomeActivity)getContext()).setStatusBarBackground(getContext().getColor(R.color.textpurle2));
+        //((HomeActivity)getContext()).setStatusBarBackground(getContext().getColor(R.color.textpurle2));
         return v;
     }
 

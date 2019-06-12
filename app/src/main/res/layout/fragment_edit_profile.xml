@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
-    tools:context=".subfragments.SearchByProfileIdFragment">
+    tools:context=".subfragments.EditProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

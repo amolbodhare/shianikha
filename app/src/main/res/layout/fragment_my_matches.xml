@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MyMatchesFragment">
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         </RelativeLayout>
 
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <LinearLayout
         android:id="@+id/top_second_layout"

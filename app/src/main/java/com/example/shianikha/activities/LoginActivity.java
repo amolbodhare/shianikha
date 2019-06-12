@@ -17,10 +17,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        btn_login=(Button)findViewById(R.id.btn_login);
-        reg_here=findViewById(R.id.reg_tv);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_login);
+        btn_login=findViewById(R.id.btn_login);
+        reg_here=findViewById(R.id.reg_tv);
+
 
         btn_login.setOnClickListener(new View.OnClickListener()
         {
