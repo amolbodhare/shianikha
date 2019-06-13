@@ -78,10 +78,10 @@
             android:id="@+id/profile_for_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Profile For"
+            android:focusable="false"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="16dp"
-            android:focusable="false" />
+            android:hint="Profile For"
+            android:textSize="16dp" />
 
         <ImageView
             android:layout_width="wrap_content"

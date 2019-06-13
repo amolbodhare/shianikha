@@ -6,6 +6,7 @@
     <string name="search">Search</string>
     <string name="Myprofile">My Profile</string>
     <string name="contactUs">Contact Us</string>
+    <string name="notification">Notification</string>
 
 
     <string-array name="city">
@@ -88,4 +89,7 @@
     <string name="preference">Preferences or quantity you are seeking</string>
     <string name="terms_conditions">Check this box to attest by the sanctity of the Holy Quran that (1) all information that you have provided in this form is true to your
     best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age</string>
+    <string name="content_founder">Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
+To make your document lookWord remembers where you left off - even on another device.</string>
+    <string name="content_mini">Video provides a powerful way to help you prove your point.</string>
 </resources>

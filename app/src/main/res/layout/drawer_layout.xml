@@ -175,10 +175,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/drawerNoti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="21dp"
+            android:clickable="true"
+            android:onClick="OnDrawerMenuClick"
             android:gravity="center">
 
             <ImageView
