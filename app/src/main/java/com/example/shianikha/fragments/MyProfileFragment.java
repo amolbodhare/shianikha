@@ -77,7 +77,7 @@ public class MyProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_my_profile, container, false);
-        edt_btn_imv=view.findViewById(R.id.edit_btn);
+       /* edt_btn_imv=view.findViewById(R.id.edit_btn);
 
         edt_btn_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +97,7 @@ public class MyProfileFragment extends Fragment {
                 }
 
             }
-        });
+        });*/
         return view;
     }
 
