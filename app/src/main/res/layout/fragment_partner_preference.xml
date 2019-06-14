@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".PartnerPreference">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingTop="25dp"
+        android:text="AGE"
+        android:textSize="15sp" />
+
+    <!-- <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         rsb:absoluteMinValue="21"
+         rsb:absoluteMaxValue="35"/>-->
+    <RelativeLayout
+        android:id="@+id/maritalStatus"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="17dp">
+
+        <EditText
+            android:id="@+id/match_ethnicity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Preferred Match marital status"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:tint="#bdbdbd" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/minEducation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="17dp">
+
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Preferred Match ethnicity"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:tint="#bdbdbd" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cityLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="17dp">
+
+        <EditText
+            android:id="@+id/profile_for_ed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Minimum Education"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            android:tint="#bdbdbd" />
+
+    </RelativeLayout>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/textpurle"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:text="Email me request from anyone" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/textpurle"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Email me request from Preferred Matches Only"
+        android:textSize="12sp"/>
+
+    <RadioButton
+        android:id="@+id/terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/textpurle"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:text="Check this box to assest by sanctity of the Holy Quran that (1) all information that you have provided in this form is true to best of my Knowlwdge.(2) you are atleast 21 years of age (3) You agree to our " />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms of Use"
+        android:textColor="@color/textpurle"
+        android:layout_marginLeft="45dp"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/image_ll"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/blue_button_back"
+        android:fontFamily="@font/poppins_regular"
+        android:text="SAVE"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+</LinearLayout>
+</ScrollView>
