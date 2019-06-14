@@ -18,6 +18,11 @@ public class HelpAndSupport extends Fragment {
         // Required empty public constructor
     }
 
+    public static HelpAndSupport newInstance() {
+        HelpAndSupport fragment = new HelpAndSupport();
+
+        return fragment;
+    }
 
     // TODO: Rename and change types and number of parameters
     public static HelpAndSupport newInstance(String param1, String param2) {

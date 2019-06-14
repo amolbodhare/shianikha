@@ -34,6 +34,10 @@ public class ProfileDetailsFragments extends Fragment
     public ProfileDetailsFragments() {
         // Required empty public constructor
     }
+    /*public static ProfileDetailsFragments newInstance() {
+        ProfileDetailsFragments fragment = new ProfileDetailsFragments();
+        return fragment;
+    }*/
 
     /**
      * Use this factory method to create a new instance of

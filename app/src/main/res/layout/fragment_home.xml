@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_alignParentTop="true"
             android:background="@drawable/main_card_back_design"
-            android:layout_height="280dp">
+            android:layout_height="250dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -188,8 +188,8 @@
                 android:id="@+id/cir_imv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:layout_width="94dp"
-                android:layout_height="94dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:src="@drawable/kangna"
                 />
 
@@ -205,7 +205,7 @@
 -->
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_marginTop="90dp"
+                android:layout_marginTop="122dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -218,7 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cir_imv"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center_horizontal"
                 android:text="John Doe"
@@ -284,7 +284,7 @@
             android:layout_marginRight="17dp"
             android:weightSum="3"
             android:elevation="3dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="220dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -417,7 +417,7 @@
             android:layout_marginTop="25dp"
             android:layout_below="@id/recent_visitors_recyclerView"
             android:layout_width="match_parent"
-            android:background="@color/title_back_trans"
+            android:background="@color/profile_details_grey"
             android:layout_height="40dp">
 
         <TextView

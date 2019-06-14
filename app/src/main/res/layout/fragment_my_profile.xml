@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/profile_card_back_color"
                 android:layout_alignParentTop="true"
-                android:layout_height="280dp">
+                android:layout_height="250dp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/aaaaaa" />
 
-                <RelativeLayout
+               <!-- <RelativeLayout
                     android:id="@+id/top_sublayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content" />
 
 
-                </RelativeLayout>
+                </RelativeLayout>-->
 
                 <!--<RelativeLayout
                     android:layout_width="match_parent"
@@ -96,15 +96,15 @@
 
                 <FrameLayout
                     android:id="@+id/cir_imv_frame_layout"
-                    android:layout_below="@id/top_sublayout"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/image_profile_pic"
-                        android:layout_width="80dp"
-                        android:layout_height="93dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="5dp"
@@ -123,7 +123,7 @@
                 </android.support.design.widget.FloatingActionButton>
     --> <ImageView
                 android:id="@+id/imageView"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="125dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -137,7 +137,7 @@
                     android:gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:layout_below="@+id/imageView"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="15dp"
                     android:layout_width="match_parent"
@@ -639,6 +639,7 @@
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -658,9 +659,7 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
-
 
         </RelativeLayout>
 

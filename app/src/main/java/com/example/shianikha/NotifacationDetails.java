@@ -20,8 +20,14 @@ public class NotifacationDetails extends Fragment {
         // Required empty public constructor
     }
 
+    public static NotifacationDetails newInstance() {
+        NotifacationDetails fragment = new NotifacationDetails();
 
-    public static NotifacationDetails newInstance(String param1, String param2) {
+        return fragment;
+    }
+
+    public static NotifacationDetails newInstance(String param1, String param2)
+    {
         NotifacationDetails fragment = new NotifacationDetails();
 
         return fragment;
@@ -38,11 +44,9 @@ public class NotifacationDetails extends Fragment {
 
 
 
-
-
-
     public interface OnFragmentInteractionListener {
 
         void onFragmentInteraction(Uri uri);
     }
+
 }

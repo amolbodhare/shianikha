@@ -23,12 +23,14 @@ public class ContactUsFragment extends Fragment {
     View fragmentView;
     LoadingDialog loadingDialog;
 
-    public ContactUsFragment() {
+    public ContactUsFragment()
+    {
         // Required empty public constructor
     }
 
 
-    public static ContactUsFragment newInstance() {
+    public static ContactUsFragment newInstance()
+    {
         ContactUsFragment fragment = new ContactUsFragment();
 
         return fragment;

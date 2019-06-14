@@ -60,7 +60,6 @@
 
     <LinearLayout
         android:id="@+id/top_second_layout"
-        android:layout_below="@id/top_layout"
         android:layout_marginTop="27dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

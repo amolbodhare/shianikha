@@ -3,6 +3,9 @@ package com.example.shianikha.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
+import com.example.shianikha.fragments.ProfileDetailsFragments;
 
 import java.util.ArrayList;
 
@@ -56,6 +60,19 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
             public void onClick(View view) {
                 //Log.d(TAG, "onClick: clicked on an image: " + mNames.get(position));
                 //Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+                ProfileDetailsFragments ProfiledetailsFragment = ProfileDetailsFragments.newInstance("pro1","pro2");
+
+                try
+                {
+                    fragmentLoader(ProfiledetailsFragment);
+                }
+
+                catch (Exception e)
+                {
+
+                    e.printStackTrace();
+                }
+
             }
         });
     }
@@ -78,5 +95,14 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             //overflow = (ImageView) view.findViewById(R.id.overflow);
         }
+    }
+
+    private void fragmentLoader(Fragment fragment)
+    {
+        FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+
+                 manager.beginTransaction()
+                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
+                .replace(R.id.frameLayout, fragment).commit();
     }
 }

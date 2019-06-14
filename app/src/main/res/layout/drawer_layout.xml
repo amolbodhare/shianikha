@@ -227,8 +227,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/help_and_support_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="OnDrawerMenuClick"
+            android:clickable="true"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="21dp"
             android:gravity="center">
