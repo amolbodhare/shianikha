@@ -18,12 +18,14 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:background="@color/dashboard_card_back_color"
         android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/aaaaaa">
 
             <ImageView
                 android:id="@+id/drawerMenu"
@@ -45,6 +47,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:tag=""
                 android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:gravity="center"
                 android:singleLine="true"
                 android:letterSpacing="0.1"

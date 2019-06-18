@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.shianikha.R;
@@ -27,6 +28,9 @@ import com.example.shianikha.activities.RegisterationActivity;
 import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.adapters.MatchesAdapter;
 import com.example.shianikha.entities.MatchesEntity;
+import com.example.shianikha.subfragments.IAmLookingForFragment;
+import com.example.shianikha.subfragments.LookingForMeFragment;
+import com.example.shianikha.subfragments.TopMatchesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +63,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
     private OnFragmentInteractionListener mListener;
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     private ProgressDialog dialog;
-    ImageView refine_imv;
+
+
+    private View fragMentView;
+    Context context;
 
     public MyMatchesFragment() {
         // Required empty public constructor
@@ -101,51 +108,21 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_my_matches, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.matchees_recyclerview);
+        context = getContext();
+        //((HomeActivity) context).setStatusBarBackground(context.getColor(R.color.white));
+        if (fragMentView == null)
+        {
+            fragMentView = inflater.inflate(R.layout.fragment_my_matches, container, false);
+            fragMentView.findViewById(R.id.top_matches).setOnClickListener(this);
+            fragMentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
+            fragMentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
 
-        top_matches_tv=view.findViewById(R.id.top_matches_tv);
-        i_am_looking_for_tv=view.findViewById(R.id.i_am_looking_for_tv);
-        looking_for_me_tv=view.findViewById(R.id.looking_for_me_tv);
-        refine_imv=view.findViewById(R.id.refine_imv);
+            fragMentView.findViewById(R.id.refine_imv).setOnClickListener(this);
 
-        dialog = new ProgressDialog(getActivity());
-
-
-        matchesList = new ArrayList<>();
-        adapter = new MatchesAdapter(getActivity(), matchesList);
-
-
-        /*RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);*/
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(28), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        //recyclerView.removeAllViews();
-        //recyclerView.setAdapter(null);
-
-
-        recyclerView.setOnClickListener(this);
-        top_matches_tv.setOnClickListener(this);
-        i_am_looking_for_tv.setOnClickListener(this);
-        looking_for_me_tv.setOnClickListener(this);
-        refine_imv.setOnClickListener(this);
-
-
-        /*LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(layoutManager);
-        MatchesAdapter adapter = new MatchesAdapter(getActivity(), matchesList);
-        recyclerView.setAdapter(adapter);*/
-
-        topmatches();
-        return view;
+            TopMatchesFragment topMatchesFragment = TopMatchesFragment.newInstance();
+            fragmentLoader(topMatchesFragment);
+        }
+        return fragMentView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -175,279 +152,38 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
-        if(v.getId()==R.id.matchees_recyclerview)
-        {
+        if (v.getId() == R.id.top_matches || v.getId() == R.id.i_am_looking_for || v.getId() == R.id.looking_for_me) {
+            LinearLayout linearLayout = (LinearLayout) v.getParent();
+            linearLayout = (LinearLayout) linearLayout.getParent();
+            LinearLayout ll;
+            TextView textView;
 
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                ll = (LinearLayout) linearLayout.getChildAt(i);
+                textView = (TextView) ll.getChildAt(0);
+                textView.setTextColor(getContext().getColor(R.color.textview_grey_color));
+                textView.setBackgroundColor(getContext().getColor(R.color.textview_back_color));
+                textView.setElevation(0f);
+
+                ll.getChildAt(1).setVisibility(View.INVISIBLE);
+            }
+
+            linearLayout = (LinearLayout) v.getParent();
+            textView = (TextView) linearLayout.getChildAt(0);
+            textView.setTextColor(getContext().getColor(R.color.white));
+            textView.setBackgroundColor(getContext().getColor(R.color.textpurle2));
+            textView.setElevation(7f);
+            linearLayout.getChildAt(1).setVisibility(View.VISIBLE);
+
+            loadSubFragment(v);
         }
-        else if(v.getId()==R.id.refine_imv)
+        if(v.getId()==R.id.refine_imv)
         {
             Intent i=new Intent(getActivity(), FilterActivity.class);
             startActivity(i);
             getActivity().overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         }
-        else if(v.getId()==R.id.top_matches_tv)
-        {
-            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));
-            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
-            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
-
-            dialog.setMessage("please wait...");
-            dialog.show();
-            new Handler().postDelayed(new Runnable()
-            {
-                @Override
-                public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
-                    topmatches();
-                }
-            }, SPLASH_DISPLAY_LENGTH);
-        }
-        else if(v.getId()==R.id.i_am_looking_for_tv)
-        {
-            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
-            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));;
-            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
-            dialog.setMessage("please wait.");
-            dialog.show();
-            new Handler().postDelayed(new Runnable(){
-                @Override
-                public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
-                    iAmLookingFor();
-                }
-            }, SPLASH_DISPLAY_LENGTH);
-
-
-        }
-
-        else if(v.getId()==R.id.looking_for_me_tv)
-        {
-            top_matches_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));
-            i_am_looking_for_tv.setBackgroundColor(getResources().getColor(R.color.textview_back_color));;
-            looking_for_me_tv.setBackgroundColor(getResources().getColor(R.color.tab_back));
-            dialog.setMessage("please wait.");
-            dialog.show();
-            new Handler().postDelayed(new Runnable(){
-                @Override
-                public void run() {
-                    /* Create an Intent that will start the Menu-Activity. */
-                    LookingForMe();
-                }
-            }, SPLASH_DISPLAY_LENGTH);
-
-        }
     }
-
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration
-    {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
-
-    private void topmatches()
-    {
-        int[] covers = new int[]
-                {
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                        R.drawable.kangana_ranaut,
-                };
-
-        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
-        matchesList.add(a);
-
-        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
-        matchesList.add(a);
-
-        adapter.notifyDataSetChanged();
-
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
-        //recyclerView.setAdapter(null);
-        //recyclerView.removeAllViews();
-    }
-    private void iAmLookingFor()
-    {
-        int[] covers = new int[]
-                {
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                        R.drawable.kangna,
-                };
-
-        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
-        matchesList.add(a);
-
-        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
-        matchesList.add(a);
-
-        adapter.notifyDataSetChanged();
-
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
-        //recyclerView.setAdapter(null);
-        //recyclerView.removeAllViews();
-    }
-    private void LookingForMe()
-    {
-        int[] covers = new int[]
-                {
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                        R.drawable.kangna_second,
-                };
-
-        MatchesEntity a = new MatchesEntity("Kangna Ranout", 13, covers[0]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout ", 8, covers[1]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[2]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 12, covers[3]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 14, covers[4]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 1, covers[5]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[6]);
-        matchesList.add(a);
-
-        a = new MatchesEntity(" Kangna Ranout", 14, covers[7]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 11, covers[8]);
-        matchesList.add(a);
-
-        a = new MatchesEntity("Kangna Ranout", 17, covers[9]);
-        matchesList.add(a);
-
-        adapter.notifyDataSetChanged();
-
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
-        //recyclerView.setAdapter(null);
-        //recyclerView.removeAllViews();
-    }
-
 
 
     /**
@@ -460,8 +196,37 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    private void loadSubFragment(View v)
+    {
+        if (v.getId() == R.id.top_matches)
+        {
+            TopMatchesFragment topMathcesFragment = TopMatchesFragment.newInstance();
+            fragmentLoader(topMathcesFragment);
+        }
+        else if (v.getId() == R.id.i_am_looking_for)
+        {
+            IAmLookingForFragment iAMLookingForFragment = IAmLookingForFragment.newInstance();
+            fragmentLoader(iAMLookingForFragment);
+        }
+        else if (v.getId() == R.id.looking_for_me)
+        {
+            LookingForMeFragment lookingForMeFragment = LookingForMeFragment.newInstance();
+            fragmentLoader(lookingForMeFragment);
+        }
+    }
+
+    private void fragmentLoader(Fragment fragment)
+    {
+        getChildFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
+                .replace(R.id.frameLayout, fragment).commit();
+    }
+
+
 }

@@ -38,7 +38,7 @@
             <RelativeLayout
                 android:id="@+id/main_layout"
                 android:layout_width="match_parent"
-                android:background="@color/profile_card_back_color"
+                android:background="@color/dashboard_card_back_color"
                 android:layout_alignParentTop="true"
                 android:layout_height="250dp">
 

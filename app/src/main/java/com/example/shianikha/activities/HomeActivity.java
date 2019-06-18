@@ -1,11 +1,14 @@
 package com.example.shianikha.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,12 +63,14 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     public LinearLayout homeButtonLayout, myMatchesButtonLayout, searchButtonLayout, myProfileButtonLayout;
 
     private long l;
+    TextView toolbar_title_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         homeFragment = HomeFragment.newInstance();
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         textView = findViewById(R.id.titleName);
         textView.setSelected(true);
@@ -80,6 +85,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         relativeLayout=findViewById(R.id.relativeLayout);
         drawerLayout=findViewById(R.id.drawerLayout);
         cardView_layout=findViewById(R.id.titleBar);
+
+
         //cardView.setCardBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
         layoutParams=(DrawerLayout.LayoutParams)relativeLayout.getLayoutParams();
         fragmentLoader(homeFragment, getString(R.string.MyShia));
@@ -123,20 +130,38 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         if (fragment == homeFragment)
         {
             ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_black_24dp));
+            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
 
             findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-
+            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.VISIBLE);
+            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
+            //H.log("iM","triggered");
             //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
             textView.setText("DashBoard");
         }
-        /*else if(fragment==myProfileFragment)
+        else if(fragment==myProfileFragment)
         {
-            ( findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
-        }*/
+            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
+            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
 
 
-        else
+
+            //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
+            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
+            findViewById(R.id.noti_layout).setTag(null);
+            //H.log("iM","triggered");
+            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
+            //textView.setText("DashBoard");
+        }
+
+
+        else {
+            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.VISIBLE);
             ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
+            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
+            changeToolbarColor(getColor(R.color.white),getColor(R.color.textview_grey_color));
+            H.log("iM","notTriggered");
+        }
             //cardView_layout.setBackgroundColor(getResources().getColor(R.color.white));
 
 
@@ -473,5 +498,17 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         }
     }
 
+    private  void changeToolbarColor(int i,int textcolor)
+    {
+
+        findViewById(R.id.titleBar).setBackgroundColor(i);
+        findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
+
+        ((TextView)findViewById(R.id.titleName)).setTextColor(textcolor);
+
+        ((ImageView)findViewById(R.id.drawerMenu)).setColorFilter(textcolor);
+        ((ImageView)findViewById(R.id.imv_noti)).setColorFilter(textcolor);
+
+    }
 
 }

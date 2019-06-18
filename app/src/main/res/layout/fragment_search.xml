@@ -9,57 +9,6 @@
     android:background="@color/white">
 
     <!--Title bar -->
-<!--
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="50dp">
-       
-       <ImageView
-           android:layout_width="50dp"
-           android:layout_height="match_parent"
-           android:src="@drawable/ic_keyboard_backspace_black_24dp"
-           android:padding="16dp"
-           android:tint="@color/tab_back"/>
-
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_centerInParent="true"
-           android:text="search"
-           android:fontFamily="@font/poppins_medium"
-           android:textSize="15sp"
-           android:textAllCaps="true"/>
-
-       <RelativeLayout
-           android:layout_width="50dp"
-           android:layout_height="match_parent"
-           android:layout_alignParentRight="true">
-
-           <ImageView
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:padding="13dp"
-               android:src="@drawable/matches_notification"
-               android:layout_centerInParent="true"/>
-
-           <TextView
-               android:layout_width="19dp"
-               android:layout_height="19dp"
-               android:text="99"
-               android:textSize="11sp"
-               android:layout_alignParentTop="true"
-               android:layout_alignParentRight="true"
-               android:layout_marginTop="3dp"
-               android:layout_marginRight="7dp"
-               android:gravity="center"
-               android:textColor="@color/white"
-               android:backgroundTint="@color/textpurle"
-               android:background="@drawable/clickable_grey_circle"/>
-
-       </RelativeLayout>
-       
-   </RelativeLayout>
--->
 
     <!-- three buttons-->
     <LinearLayout

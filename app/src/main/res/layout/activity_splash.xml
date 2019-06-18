@@ -12,12 +12,9 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/splash_background" />
-    <TextView
-        android:text="Shia Nikah"
+    <ImageView
+        android:src="@drawable/shianikahtitlelogo"
         android:layout_width="wrap_content"
-        android:fontFamily="@font/montserrat_bold_italic"
-        android:textSize="50sp"
-        android:textColor="@color/white"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content" />
 
