@@ -9,7 +9,9 @@
     <string name="partpref">Partner Prefereces</string>
     <string name="helpandsupport">Help and Support</string>
     <string name="aboutapp">About app</string>
-    <string name="notification">Notification</string>
+    <string name="notificationn">Notification</string>
+    <string name="accountsettings">Account and Settings</string>
+    <string name="myactivity">My Activity</string>
 
 
     <string-array name="city">

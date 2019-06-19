@@ -16,6 +16,7 @@ import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,7 +31,9 @@ import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.NotificationFragment;
 import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
+import com.example.shianikha.fragments.AccountSettingsFragment;
 import com.example.shianikha.fragments.HomeFragment;
+import com.example.shianikha.fragments.MyActivityFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
@@ -40,13 +43,17 @@ import com.example.shianikha.subfragments.EditProfileFragment;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,MyMatchesFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener, ProfileDetailsFragments.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener, NotifacationDetails.OnFragmentInteractionListener
+        SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener,
+        ProfileDetailsFragments.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,
+        NotifacationDetails.OnFragmentInteractionListener,AccountSettingsFragment.OnFragmentInteractionListener,
+        MyActivityFragment.OnFragmentInteractionListener
 {
     HomeFragment homeFragment;
     MyMatchesFragment myMatchesFragment;
     SearchFragment searchFragment;
     MyProfileFragment myProfileFragment;
     NotificationFragment notificationFragment;
+    AccountSettingsFragment accountSettingsFragment;
     PartnerPreference partnerPreference;
     HelpAndSupport helpAndSupport;
     AboutApp aboutApp;
@@ -55,6 +62,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     private RelativeLayout relativeLayout;
     private DrawerLayout drawerLayout;
     ContactUsFragment contactUsFragment;
+    MyActivityFragment myActivityFragment;
     public EditProfileFragment editProfileFragment;
     private ArrayList<Fragment> fragmentList = new ArrayList<>();
     private ArrayList<String> titleList = new ArrayList<>();
@@ -64,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     private long l;
     TextView toolbar_title_tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -72,15 +81,20 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         homeFragment = HomeFragment.newInstance();
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // for deactivating screen shot
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         textView = findViewById(R.id.titleName);
         textView.setSelected(true);
 
 
         contactUsFragment=ContactUsFragment.newInstance();
+        myActivityFragment=MyActivityFragment.newInstance();
         notificationFragment=NotificationFragment.newInstance();
         partnerPreference=PartnerPreference.newInstance();
         helpAndSupport=HelpAndSupport.newInstance();
         aboutApp=AboutApp.newInstance();
+        accountSettingsFragment=AccountSettingsFragment.newInstance();
        // setStatusBarBackground(getColor(R.color.textpurle2));
         relativeLayout=findViewById(R.id.relativeLayout);
         drawerLayout=findViewById(R.id.drawerLayout);
@@ -155,7 +169,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         }
 
 
-        else {
+        else
+            {
             ((TextView) findViewById(R.id.noti_text)).setVisibility(View.VISIBLE);
             ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
             ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
@@ -325,32 +340,60 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 contactUsFragment = ContactUsFragment.newInstance();
             fragmentLoader(contactUsFragment, getString(R.string.contactUs));
             drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
+        }
+
+        if(view.getId()==R.id.my_activity_drawer_layout)
+        {
+            if (myActivityFragment == null)
+                myActivityFragment = MyActivityFragment.newInstance();
+            fragmentLoader(myActivityFragment, getString(R.string.myactivity));
+            drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
+        }
+
+        else if(view.getId()==R.id.drawerNoti)
+        {
+            if (notificationFragment == null)
+                notificationFragment = NotificationFragment.newInstance();
+            fragmentLoader(notificationFragment, getString(R.string.notificationn));
+            drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
+
+        }
+        else if(view.getId()==R.id.drawer_account_settings_layout)
+        {
+            if ( accountSettingsFragment== null)
+                accountSettingsFragment = AccountSettingsFragment.newInstance();
+            fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
+            drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
 
         }
 
-
-        else if(view.getId()==R.id.drawerNoti)
+        /*else if(view.getId()==R.id.drawerNoti)
         {
             if (notificationFragment == null)
                 notificationFragment = NotificationFragment.newInstance();
             fragmentLoader(notificationFragment, getString(R.string.notification));
             drawerLayout.closeDrawer(Gravity.START);
 
-        }
-        else if(view.getId()==R.id.drawerNoti)
+        }*/
+        /*else if(view.getId()==R.id.drawerNoti)
         {
             if (notificationFragment == null)
                 notificationFragment = NotificationFragment.newInstance();
             fragmentLoader(notificationFragment, getString(R.string.notification));
             drawerLayout.closeDrawer(Gravity.START);
 
-        }
+        }*/
         else if(view.getId()==R.id.partnerPreference)
         {
             if (partnerPreference == null)
                 partnerPreference = PartnerPreference.newInstance();
             fragmentLoader(partnerPreference, getString(R.string.partpref));
             drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
 
         }
         else if(view.getId()==R.id.help_and_support_layout)
@@ -359,6 +402,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 helpAndSupport = HelpAndSupport.newInstance();
             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
             drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
 
         }
         else if(view.getId()==R.id.drawerAboutApp)
@@ -367,6 +411,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 aboutApp = AboutApp.newInstance();
             fragmentLoader(aboutApp, getString(R.string.about_app));
             drawerLayout.closeDrawer(Gravity.START);
+            findViewById(R.id.drawerMenu).setTag(null);
 
         }
 

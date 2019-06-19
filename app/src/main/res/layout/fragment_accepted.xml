@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".subfragments.SearchByProfileIdFragment">
+    tools:context=".subfragments.AcceptedFragment">
+
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/top_matches_recyclerview"
+        android:id="@+id/accepted_recyclerview"
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

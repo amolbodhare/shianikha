@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/cir_imv_frame_layout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/kangna" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/cir_imv_frame_layout"
+                android:layout_centerHorizontal="true"
+                android:text="Kangna Ranout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/profile_id"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/title"
+                android:text="SN461358"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/age_height_cast_religion_details"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/profile_id"
+                android:text="21 yrs,5'1' Shia Muslim"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/age_height_cast_religion_details">
+                <ImageView
+                    android:id="@+id/imv_call"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/my_activity_card_circle_button_back"
+                    android:padding="8dp"
+                    android:tint="@color/grey"
+                    android:src="@drawable/ic_telephone" />
+                <ImageView
+                    android:id="@+id/imv_mail"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/my_activity_card_circle_button_back"
+                    android:padding="8dp"
+                    android:tint="@color/grey"
+                    android:src="@drawable/ic_mail_outline_black_24dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
