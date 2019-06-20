@@ -1,16 +1,21 @@
 package com.example.shianikha.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.shianikha.R;
 
-public class OTPVereificationActivty extends AppCompatActivity {
+public class OTPVereificationActivty extends AppCompatActivity implements View.OnClickListener
+{
 
     EditText otp_first,otp_second,otp_third,otp_fourth,otp_fifth,otp_sixth;
+    Button btn_submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,9 @@ public class OTPVereificationActivty extends AppCompatActivity {
         otp_fourth=findViewById(R.id.ot_fourth_digit);
         otp_fifth=findViewById(R.id.ot_fifth_digit);
         otp_sixth=findViewById(R.id.ot_sixth_digit);
+        btn_submit=findViewById(R.id.btn_submit);
+        btn_submit.setOnClickListener(this);
+
         otp_first.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,5 +115,16 @@ public class OTPVereificationActivty extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if(v.getId()==R.id.btn_submit)
+        {
+            Intent i=new Intent(OTPVereificationActivty.this,RegSecondPageActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 }

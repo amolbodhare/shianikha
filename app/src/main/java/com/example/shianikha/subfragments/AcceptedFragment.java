@@ -52,15 +52,15 @@ public class AcceptedFragment extends Fragment {
         recyclerview = (RecyclerView) view.findViewById(R.id.accepted_recyclerview);
 
         albumList = new ArrayList<>();
+
         adapter = new AcceptedAdapter(getActivity(), albumList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerview.setLayoutManager(mLayoutManager);
-        recyclerview.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
+        recyclerview.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(15), true));
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setAdapter(adapter);
         acceptedList();
-
         return view;
 
 

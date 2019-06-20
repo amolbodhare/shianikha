@@ -42,6 +42,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     ArrayList<String> state_arrayList;
     ArrayList<String> country_arrayList;
     ArrayList<String> height_arrayList;
+    EditText city_ed,state_ed,country_of_residence_ed,country_of_citizenship_ed,height_ed;
 
 
     @Override
@@ -53,9 +54,18 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
         btn_next=(Button)findViewById(R.id.btn_next);
         editText_dob=(EditText)findViewById(R.id.ed_dob);
+
         editText_dob.setOnClickListener(this);
 
+        city_ed=(EditText)findViewById(R.id.city_ed);
+        state_ed=(EditText)findViewById(R.id.state_ed);
+        country_of_residence_ed=(EditText)findViewById(R.id.country_of_residence_ed);
+        country_of_citizenship_ed=(EditText)findViewById(R.id.country_of_citizenship_ed);
+
+        height_ed=(EditText)findViewById(R.id.height_ed);
+
         city_of_residence_arrayList=new ArrayList<>();
+
         state_arrayList=new ArrayList<>();
         country_arrayList=new ArrayList<>();
 
@@ -124,7 +134,25 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             public void onClick(View v) {
 
                 Intent i=new Intent(RegSecondPageActivity.this,RegThirdPageActivity.class);
+
+                city_ed.getTag();
+                state_ed.getTag();
+                country_of_residence_ed.getTag();
+                country_of_citizenship_ed.getTag();
+                height_ed.getTag();
+
+
+                Json json=new Json();
+                json.addString("city",city_ed.getTag().toString());
+                json.addString("state",state_ed.getTag().toString());
+                json.addString("country_res",country_of_residence_ed.getTag().toString());
+                json.addString("country_citizen",country_of_citizenship_ed.getTag().toString());
+                new Session(context).addString("reg_data",json.toString());
+
+                Toast.makeText(context, ""+city_ed.getTag(), Toast.LENGTH_SHORT).show();
+
                 startActivity(i);
+                finish();
             }
         });
 
@@ -331,6 +359,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
                 {
                     Log.e("selectedIs",textView.getText().toString());
                     ((EditText)view).setText(textView.getText().toString());
+                    ((EditText)view).setTag(position);
+                    //Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
 
                 }
                 hideCustomSpinnerLayout();

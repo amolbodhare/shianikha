@@ -88,6 +88,7 @@ public class RegFifthPageActivity extends AppCompatActivity
 
                 Intent i=new Intent(RegFifthPageActivity.this, RegSixthPageActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 

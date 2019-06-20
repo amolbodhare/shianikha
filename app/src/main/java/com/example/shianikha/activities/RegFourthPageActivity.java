@@ -54,6 +54,7 @@ public class RegFourthPageActivity extends AppCompatActivity
 
                 Intent i=new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -231,7 +232,8 @@ public class RegFourthPageActivity extends AppCompatActivity
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
     }
 
-    private void hideCustomSpinnerLayout() {
+    private void hideCustomSpinnerLayout()
+    {
         int i = findViewById(R.id.includeContainer).getWidth();
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         findViewById(R.id.view).setVisibility(View.GONE);

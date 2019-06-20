@@ -130,6 +130,7 @@ public class RegisterationActivity extends AppCompatActivity
             {
                 Intent i=new Intent(RegisterationActivity.this,LoginActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -148,10 +149,11 @@ public class RegisterationActivity extends AppCompatActivity
                         .commit();
 
 */
-                Intent i=new Intent(RegisterationActivity.this,RegSecondPageActivity.class);
+                Intent i=new Intent(RegisterationActivity.this,OTPVereificationActivty.class);
                 i.putExtra("masterDataString",masterdatajsonstring);
                 //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(i);
+                finish();
 
 
 

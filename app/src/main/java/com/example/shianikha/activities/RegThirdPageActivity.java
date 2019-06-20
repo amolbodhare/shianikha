@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
@@ -36,6 +37,7 @@ public class RegThirdPageActivity extends AppCompatActivity
     ArrayList<String> current_occupation_arraylist;
     ArrayList<String> highest_level_ediucation_arraylist;
     Context context;
+    Json reg_json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,7 +59,12 @@ public class RegThirdPageActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(RegThirdPageActivity.this,RegFourthPageActivity.class);
+                String city=reg_json.getString("city");
+                String state=reg_json.getString("state");
+                Toast.makeText(context, state, Toast.LENGTH_SHORT).show();
+
                 startActivity(i);
+                finish();
             }
         });
 
@@ -75,16 +82,17 @@ public class RegThirdPageActivity extends AppCompatActivity
 
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+            String regdatajsonstring = new Session(context).getString("reg_data");
 
             //System.out.print(masterdatajsonstring);
-            Json json=new Json(masterdatajsonstring);
+            Json master_json=new Json(masterdatajsonstring);
+            reg_json=new Json(regdatajsonstring);
 
-            JSONArray jsonArray_religion=json.getJsonArray("religion");
-            JSONArray jsonArray_ethnicity=json.getJsonArray("ethnicity");
-            JSONArray jsonArray_country=json.getJsonArray("country");
-            JSONArray jsonArray_occupation=json.getJsonArray("occupation");
-            JSONArray jsonArray_education=json.getJsonArray("education");
-
+            JSONArray jsonArray_religion=master_json.getJsonArray("religion");
+            JSONArray jsonArray_ethnicity=master_json.getJsonArray("ethnicity");
+            JSONArray jsonArray_country=master_json.getJsonArray("country");
+            JSONArray jsonArray_occupation=master_json.getJsonArray("occupation");
+            JSONArray jsonArray_education=master_json.getJsonArray("education");
 
 
             for(int i=0;i<jsonArray_religion.length();i++)

@@ -79,6 +79,7 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         {
             Intent i=new Intent(WalkThroughActivity.this,LoginActivity.class);
             startActivity(i);
+            finish();
         }
 
         else if(v.getId()==R.id.btn_reg)
@@ -112,6 +113,7 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                             new Session(context).addString("masterDataString",json.toString());
                             Intent i=new Intent(WalkThroughActivity.this,RegisterationActivity.class);
                             startActivity(i);
+                            finish();
                         } else
                             H.showMessage(WalkThroughActivity.this, json.getString(P.msg));
                     }

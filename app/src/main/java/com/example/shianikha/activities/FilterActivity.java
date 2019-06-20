@@ -74,6 +74,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             Intent i=new Intent(FilterActivity.this,RefineSearchItemActivity.class);
             i.putExtra("filter_title","Active Members");
             startActivity(i);
+            finish();
         }
     }
 }

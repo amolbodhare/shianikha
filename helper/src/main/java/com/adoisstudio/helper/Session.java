@@ -85,7 +85,8 @@ public class Session {
         return new Json();
     }
 
-    public void addJson(String name, Json json) {
+    public void addJson(String name, Json json)
+    {
         addString(name, json.toString());
     }
 

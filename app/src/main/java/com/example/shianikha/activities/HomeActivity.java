@@ -1,5 +1,7 @@
 package com.example.shianikha.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.AboutApp;
 import com.example.shianikha.ContactUsFragment;
 import com.example.shianikha.HelpAndSupport;
@@ -31,6 +35,7 @@ import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.NotificationFragment;
 import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 import com.example.shianikha.fragments.AccountSettingsFragment;
 import com.example.shianikha.fragments.HomeFragment;
 import com.example.shianikha.fragments.MyActivityFragment;
@@ -71,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     public LinearLayout homeButtonLayout, myMatchesButtonLayout, searchButtonLayout, myProfileButtonLayout;
 
     private long l;
+    Context context;
     TextView toolbar_title_tv;
 
     @Override
@@ -78,6 +84,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        context=HomeActivity.this;
         homeFragment = HomeFragment.newInstance();
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -412,6 +419,25 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             fragmentLoader(aboutApp, getString(R.string.about_app));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
+
+        }
+        else if(view.getId()==R.id.drawer_logout_layout)
+        {
+            AlertDialog.Builder adb = new AlertDialog.Builder(context);
+            adb.setMessage("Do you really want to exit?");
+            adb.setPositiveButton("yes", new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    new Session(context).addString(P.tokenData,"");
+                    startActivity(new Intent(context, LoginActivity.class));
+                    ((HomeActivity)context).finish();
+                }
+            });
+            adb.setNegativeButton("no",null);
+            adb.show();
+            drawerLayout.closeDrawer(Gravity.START);
 
         }
 
