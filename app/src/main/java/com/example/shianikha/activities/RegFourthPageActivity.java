@@ -2,6 +2,7 @@ package com.example.shianikha.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,12 +30,17 @@ public class RegFourthPageActivity extends AppCompatActivity
 {
     Button btn_next;
     private ArrayAdapter<String> arrayAdapter;
+    Json reg_json;
 
     ArrayList<String> language_arraylist;
     ArrayList<String> smoking_arraylist;
 
     Context context;
     private long l;
+    EditText ed_lang;
+    EditText ed_habbit;
+    TextInputEditText  willing_to_relocate_ed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class RegFourthPageActivity extends AppCompatActivity
         Spinner habbit_spinner = (Spinner) findViewById(R.id.habbit_spinner);*/
 
         btn_next=(Button)findViewById(R.id.btn_next);
+        willing_to_relocate_ed=findViewById(R.id.willing_to_relocate_tiet);
 
         btn_next.setOnClickListener(new View.OnClickListener()
         {
@@ -53,6 +60,16 @@ public class RegFourthPageActivity extends AppCompatActivity
             public void onClick(View v) {
 
                 Intent i=new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
+
+                reg_json.addString("language", ed_lang.getTag().toString());
+                reg_json.addString("smoke_id", ed_habbit.getTag().toString());
+                //reg_json.addString("relocate_id",willing_to_relocate_ed.getTag().toString() );
+                reg_json.addString("relocate_id","4" );
+                reg_json.addString("cvt_islam","2");
+                reg_json.addString("syed","3");
+                reg_json.addString("handicap","2");
+                reg_json.addString("children","2");
+
                 startActivity(i);
                 finish();
             }
@@ -69,13 +86,14 @@ public class RegFourthPageActivity extends AppCompatActivity
 
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+            String regdatajsonstring = new Session(context).getString("reg_data");
 
-         //System.out.print(masterdatajsonstring);
+           //System.out.print(masterdatajsonstring);
             Json json=new Json(masterdatajsonstring);
+            reg_json=new Json(regdatajsonstring);
 
             JSONArray jsonArray_language=json.getJsonArray("mothertongue");
             JSONArray jsonArray_smoking=json.getJsonArray("smoking");
-
 
 
             for(int i=0;i<jsonArray_language.length();i++)
@@ -144,8 +162,8 @@ public class RegFourthPageActivity extends AppCompatActivity
     }*/
    private void setUpEditTextClickListner()
    {
-       EditText ed_lang = findViewById(R.id.lang_ed);
-       EditText ed_habbit = findViewById(R.id.habbit_ed);
+        ed_lang = findViewById(R.id.lang_ed);
+        ed_habbit = findViewById(R.id.habbit_ed);
 
        ed_lang.setOnClickListener(new View.OnClickListener()
        {

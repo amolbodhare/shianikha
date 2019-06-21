@@ -92,14 +92,14 @@
     </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/other_details_occu_til"
+        android:id="@+id/willing_to_relocate_til"
         android:layout_below="@id/habbit_spinner_layout"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/other_details_occu_tiet"
+            android:id="@+id/willing_to_relocate_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -116,7 +116,7 @@
         android:text="Did you convert to Islam?"
         android:textSize="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:layout_below="@id/other_details_occu_til"
+        android:layout_below="@id/willing_to_relocate_til"
         android:layout_marginTop="17dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

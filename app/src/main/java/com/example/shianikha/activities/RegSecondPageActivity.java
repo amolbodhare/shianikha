@@ -35,14 +35,15 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 {
     Button btn_next;
     private ArrayAdapter<String> arrayAdapter;
-    EditText editText_dob;
+
     final Calendar myCalendar = Calendar.getInstance();
     Context context;
     ArrayList<String> city_of_residence_arrayList;
     ArrayList<String> state_arrayList;
     ArrayList<String> country_arrayList;
     ArrayList<String> height_arrayList;
-    EditText city_ed,state_ed,country_of_residence_ed,country_of_citizenship_ed,height_ed;
+    EditText city_ed,state_ed,country_of_residence_ed,country_of_citizenship_ed,dob_ed,height_ed;
+    Json reg_json;
 
 
     @Override
@@ -53,17 +54,16 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         context=RegSecondPageActivity.this;
 
         btn_next=(Button)findViewById(R.id.btn_next);
-        editText_dob=(EditText)findViewById(R.id.ed_dob);
-
-        editText_dob.setOnClickListener(this);
 
         city_ed=(EditText)findViewById(R.id.city_ed);
         state_ed=(EditText)findViewById(R.id.state_ed);
         country_of_residence_ed=(EditText)findViewById(R.id.country_of_residence_ed);
         country_of_citizenship_ed=(EditText)findViewById(R.id.country_of_citizenship_ed);
-
+        dob_ed=(EditText)findViewById(R.id.ed_dob);
         height_ed=(EditText)findViewById(R.id.height_ed);
 
+
+        dob_ed.setOnClickListener(this);
         city_of_residence_arrayList=new ArrayList<>();
 
         state_arrayList=new ArrayList<>();
@@ -74,9 +74,12 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+            String regdatajsonstring = new Session(context).getString("reg_data");
 
             //System.out.print(masterdatajsonstring);
             Json json=new Json(masterdatajsonstring);
+            reg_json=new Json(regdatajsonstring);
+
 
             JSONArray jsonArray_city=json.getJsonArray("city");
             JSONArray jsonArray_state=json.getJsonArray("state");
@@ -142,14 +145,20 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
                 height_ed.getTag();
 
 
-                Json json=new Json();
-                json.addString("city",city_ed.getTag().toString());
-                json.addString("state",state_ed.getTag().toString());
-                json.addString("country_res",country_of_residence_ed.getTag().toString());
-                json.addString("country_citizen",country_of_citizenship_ed.getTag().toString());
-                new Session(context).addString("reg_data",json.toString());
+                //Json json=new Json();
 
-                Toast.makeText(context, ""+city_ed.getTag(), Toast.LENGTH_SHORT).show();
+                reg_json.addString("city",city_ed.getTag().toString());
+                reg_json.addString("state",state_ed.getTag().toString());
+                reg_json.addString("country_res",country_of_residence_ed.getTag().toString());
+                reg_json.addString("country_citizen",country_of_citizenship_ed.getTag().toString());
+                reg_json.addString("dob",dob_ed.getText().toString());
+                reg_json.addString("height",height_ed.getTag().toString());
+
+
+
+                new Session(context).addString("reg_data",reg_json.toString());
+
+                //Toast.makeText(context, ""+city_ed.getTag(), Toast.LENGTH_SHORT).show();
 
                 startActivity(i);
                 finish();
@@ -408,6 +417,6 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        editText_dob.setText(sdf.format(myCalendar.getTime()));
+        dob_ed.setText(sdf.format(myCalendar.getTime()));
     }
 }

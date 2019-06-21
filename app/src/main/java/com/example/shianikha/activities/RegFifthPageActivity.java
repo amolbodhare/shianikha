@@ -16,9 +16,16 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 import org.json.JSONArray;
 
@@ -34,11 +41,14 @@ public class RegFifthPageActivity extends AppCompatActivity
     ArrayList<String> seeking_marriage_arrayList;
     ArrayList<String> interested_in_arraylist;
     Context context;
+    Json reg_json;
+    private  LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_fifth_page);
         context=RegFifthPageActivity.this;
+        loadingDialog=new LoadingDialog(this);
 
        /* Spinner spinner_seeking_marriage = (Spinner) findViewById(R.id.seeking_marriage);
         Spinner spinner_interested_in = (Spinner) findViewById(R.id.interested_in);
@@ -87,6 +97,21 @@ public class RegFifthPageActivity extends AppCompatActivity
             {
 
                 Intent i=new Intent(RegFifthPageActivity.this, RegSixthPageActivity.class);
+
+                reg_json.addString("seeking_marriage", "1");
+                reg_json.addString("interested_in", "28");
+                //reg_json.addString("relocate_id",willing_to_relocate_ed.getTag().toString() );
+                reg_json.addString("religion_expectations","doesn't matter" );
+                reg_json.addString("cvt_islam","2");
+                reg_json.addString("syed","3");
+                reg_json.addString("handicap","2");
+                reg_json.addString("children","2");
+
+                /*if(validation())
+                {
+                    hitRegisterApi();
+                }*/
+
                 startActivity(i);
                 finish();
             }
@@ -103,9 +128,13 @@ public class RegFifthPageActivity extends AppCompatActivity
 
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
-
+            String regdatajsonstring = new Session(context).getString("reg_data");
             //System.out.print(masterdatajsonstring);
             Json json=new Json(masterdatajsonstring);
+            reg_json=new Json(regdatajsonstring);
+
+            //System.out.print(masterdatajsonstring);
+
 
 
             JSONArray jsonArray_seeking_marriage=json.getJsonArray("seeking_marriage");
@@ -131,8 +160,6 @@ public class RegFifthPageActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
-
-
 
     }
 
@@ -230,5 +257,55 @@ public class RegFifthPageActivity extends AppCompatActivity
         int i = findViewById(R.id.includeContainer).getWidth();
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         findViewById(R.id.view).setVisibility(View.GONE);
+    }
+    private void hitRegisterApi()
+    {
+        Json json = new Json();
+        json.addString("email","mailtobodhare@gmail.com");
+        json.addString("password","123");
+        json.addString("fcm_token","sdjgdsjhgdjdg");
+
+        RequestModel requestModel = RequestModel.newRequestModel("login");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(RegFifthPageActivity.this, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener()
+                {
+                    @Override
+                    public void onSuccess(Json json)
+                    {
+                        if (json.getInt(P.status) == 1)
+                        {
+                            JsonList jsonList=json.getJsonList("data");
+                            Json logged_in_json=jsonList.get(0);
+                            new Session(context).addString("loggedinjsonstring",logged_in_json.toString());
+                            Intent i=new Intent(RegFifthPageActivity.this,HomeActivity.class);
+                            startActivity(i);
+                            finish();
+                        } else
+                            H.showMessage(RegFifthPageActivity.this, json.getString(P.msg));
+                    }
+                }).onLoading(new Api.OnLoadingListener() {
+            @Override
+            public void onLoading(boolean isLoading)
+            {
+                if (isLoading)
+                    loadingDialog.show("Please wait...");
+                else
+                    loadingDialog.dismiss();
+            }
+        })
+                .run("hitLoginApi");
+    }
+    public  boolean validation()
+    {
+        return true;
     }
 }

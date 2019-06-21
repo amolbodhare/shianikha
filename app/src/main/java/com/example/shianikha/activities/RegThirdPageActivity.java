@@ -39,6 +39,14 @@ public class RegThirdPageActivity extends AppCompatActivity
     Context context;
     Json reg_json;
 
+    EditText ed_religion;
+    EditText ed_ethinicity;
+    EditText ed_fathers_city;
+    EditText ed_mothers_city;
+    EditText ed_current_occupation;
+    EditText ed_highest_level_edu;
+    EditText ed_other_detaiils_occupation ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,6 +55,7 @@ public class RegThirdPageActivity extends AppCompatActivity
         btn_next=(Button)findViewById(R.id.btn_next);
         context=RegThirdPageActivity.this;
 
+        ed_other_detaiils_occupation = findViewById(R.id.other_details_occu_tiet);
         /*Spinner religion_spinner = (Spinner) findViewById(R.id.religion_spinner);
         Spinner ethinicity = (Spinner) findViewById(R.id.Ethincity_spinner);
         Spinner fathers_city_spinner = (Spinner) findViewById(R.id.fathers_city_spinner);
@@ -55,16 +64,33 @@ public class RegThirdPageActivity extends AppCompatActivity
         Spinner height_level_edu_spinnner = (Spinner) findViewById(R.id.higest_level_edu_spinner);
 */
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i=new Intent(RegThirdPageActivity.this,RegFourthPageActivity.class);
-                String city=reg_json.getString("city");
-                String state=reg_json.getString("state");
-                Toast.makeText(context, state, Toast.LENGTH_SHORT).show();
 
-                startActivity(i);
-                finish();
+                if(validation())
+                {
+                    reg_json.addString("religion", ed_religion.getTag().toString());
+                    reg_json.addString("ethnicity", ed_ethinicity.getTag().toString());
+                    reg_json.addString("father_city",ed_fathers_city.getTag().toString() );
+                    reg_json.addString("mother_city",ed_mothers_city.getTag().toString() );
+                    reg_json.addString("occupation_id",ed_current_occupation.getTag().toString());
+                    reg_json.addString("about_occupation",ed_other_detaiils_occupation.getText().toString());
+                    reg_json.addString("edulevel_id",ed_highest_level_edu.getTag().toString());
+
+
+                    //String city=reg_json.getString("city");
+                    //String state=reg_json.getString("state");
+
+                    Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
+
+                    new Session(context).addString("reg_data",reg_json.toString());
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -82,6 +108,7 @@ public class RegThirdPageActivity extends AppCompatActivity
 
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
+
             String regdatajsonstring = new Session(context).getString("reg_data");
 
             //System.out.print(masterdatajsonstring);
@@ -221,13 +248,15 @@ public class RegThirdPageActivity extends AppCompatActivity
 
     private void setUpEditTextClickListner()
     {
-        EditText ed_religion = findViewById(R.id.religion_ed);
-        EditText ed_ethinicity = findViewById(R.id.ethinicity_ed);
-        EditText ed_fathers_city = findViewById(R.id.fathers_city_ed);
-        EditText ed_mothers_city = findViewById(R.id.mothers_city_ed);
-        EditText ed_current_occupation = findViewById(R.id.current_occupation_ed);
-        EditText ed_highest_level_edu = findViewById(R.id.higest_level_edu_ed);
-        ed_religion.setOnClickListener(new View.OnClickListener()
+         ed_religion = findViewById(R.id.religion_ed);
+         ed_ethinicity = findViewById(R.id.ethinicity_ed);
+         ed_fathers_city = findViewById(R.id.fathers_city_ed);
+         ed_mothers_city = findViewById(R.id.mothers_city_ed);
+         ed_current_occupation = findViewById(R.id.current_occupation_ed);
+
+
+         ed_highest_level_edu = findViewById(R.id.higest_level_edu_ed);
+         ed_religion.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -353,6 +382,7 @@ public class RegThirdPageActivity extends AppCompatActivity
                 {
                     Log.e("selectedIs",textView.getText().toString());
                     ((EditText)view).setText(textView.getText().toString());
+                    ((EditText)view).setTag(position);
 
                 }
                 hideCustomSpinnerLayout();
@@ -366,5 +396,10 @@ public class RegThirdPageActivity extends AppCompatActivity
         int i = findViewById(R.id.includeContainer).getWidth();
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         findViewById(R.id.view).setVisibility(View.GONE);
+    }
+    public  boolean validation()
+    {
+
+        return true;
     }
 }

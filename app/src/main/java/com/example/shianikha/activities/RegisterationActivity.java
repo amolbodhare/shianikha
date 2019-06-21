@@ -2,6 +2,7 @@ package com.example.shianikha.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
@@ -41,6 +43,11 @@ public class RegisterationActivity extends AppCompatActivity
     String masterdatajsonstring;
     Context context;
     MyBounceInterpolator interpolator;
+    TextInputEditText full_name_tie;
+    TextInputEditText email_tie;
+    TextInputEditText mobile_number_tie;
+    String gender="";
+
 
 
     /*@Override
@@ -64,6 +71,11 @@ public class RegisterationActivity extends AppCompatActivity
         login_here_tv=findViewById(R.id.login_here);
         gender_male_imv=findViewById(R.id.genderr_male_imv);
         gender_female_imv=findViewById(R.id.genderr_female_imv);
+
+        full_name_tie=findViewById(R.id.full_name);
+        email_tie=findViewById(R.id.email);
+        mobile_number_tie=findViewById(R.id.mobile_no);
+
 
         profile_for_ed=findViewById(R.id.profile_for_ed);
         profile_for_arrayList=new ArrayList<>();
@@ -102,7 +114,7 @@ public class RegisterationActivity extends AppCompatActivity
 
                 gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
                 gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
-
+                gender="male";
                 myAnim.setInterpolator(interpolator);
                 gender_male_imv.startAnimation(myAnim);
                 gender_female_imv.clearAnimation();
@@ -116,7 +128,7 @@ public class RegisterationActivity extends AppCompatActivity
 
                 gender_female_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg_selected));
                 gender_male_imv.setBackground(getResources().getDrawable(R.drawable.reg_img_bg));
-
+                gender="female";
                 myAnim.setInterpolator(interpolator);
                 gender_female_imv.startAnimation(myAnim);
                 gender_male_imv.clearAnimation();
@@ -151,9 +163,27 @@ public class RegisterationActivity extends AppCompatActivity
 */
                 Intent i=new Intent(RegisterationActivity.this,OTPVereificationActivty.class);
                 i.putExtra("masterDataString",masterdatajsonstring);
-                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                startActivity(i);
-                finish();
+
+
+
+                if(validation())
+                {
+
+
+                    profile_for_ed.getTag();
+
+                    Json json = new Json();
+                    json.addString("profile_for", profile_for_ed.getTag().toString());
+                    json.addString("name",full_name_tie.getText().toString());
+                    json.addString("email", email_tie.getText().toString());
+                    json.addString("ph_number",mobile_number_tie.getText().toString() );
+                    json.addString("gender", gender);
+
+                    new Session(context).addString("reg_data", json.toString());
+
+                    startActivity(i);
+                    finish();
+                }
 
 
 
@@ -321,6 +351,7 @@ public class RegisterationActivity extends AppCompatActivity
                 {
                     Log.e("selectedIs",textView.getText().toString());
                     ((EditText)view).setText(textView.getText().toString());
+                    ((EditText)view).setTag(position);
 
                 }
                 hideCustomSpinnerLayout();
@@ -349,6 +380,11 @@ public class RegisterationActivity extends AppCompatActivity
             return (float) (-1 * Math.pow(Math.E, -time/ mAmplitude) *
                     Math.cos(mFrequency * time) + 1);
         }
+    }
+
+    public boolean validation()
+    {
+        return true;
     }
 
 }
