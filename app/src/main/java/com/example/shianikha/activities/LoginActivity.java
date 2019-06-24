@@ -39,14 +39,16 @@ public class LoginActivity extends AppCompatActivity
         loadingDialog=new LoadingDialog(this);
         context=LoginActivity.this;
 
-        btn_login.setOnClickListener(new View.OnClickListener()
+        btn_login.setOnClickListener(
+                new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                hitLoginApi();
-                /*Intent i=new Intent(LoginActivity.this,HomeActivity.class);
-                startActivity(i);*/
+                //hitLoginApi();
+                Intent i=new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 

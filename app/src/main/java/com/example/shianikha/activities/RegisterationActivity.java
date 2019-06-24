@@ -27,6 +27,8 @@ import com.example.shianikha.R;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //public class RegisterationActivity extends AppCompatActivity implements RegisterationScreenFirst.OnFragmentInteractionListener, RegisterationScreenSecond.OnFragmentInteractionListener
 
@@ -47,7 +49,6 @@ public class RegisterationActivity extends AppCompatActivity
     TextInputEditText email_tie;
     TextInputEditText mobile_number_tie;
     String gender="";
-
 
 
     /*@Override
@@ -108,7 +109,8 @@ public class RegisterationActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        gender_male_imv.setOnClickListener(new View.OnClickListener() {
+        gender_male_imv.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 
@@ -142,7 +144,7 @@ public class RegisterationActivity extends AppCompatActivity
             {
                 Intent i=new Intent(RegisterationActivity.this,LoginActivity.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -161,14 +163,12 @@ public class RegisterationActivity extends AppCompatActivity
                         .commit();
 
 */
-                Intent i=new Intent(RegisterationActivity.this,OTPVereificationActivty.class);
-                i.putExtra("masterDataString",masterdatajsonstring);
+
 
 
 
                 if(validation())
                 {
-
 
                     profile_for_ed.getTag();
 
@@ -180,9 +180,10 @@ public class RegisterationActivity extends AppCompatActivity
                     json.addString("gender", gender);
 
                     new Session(context).addString("reg_data", json.toString());
+                    Intent i=new Intent(RegisterationActivity.this,OTPVereificationActivty.class);
+                    i.putExtra("masterDataString",masterdatajsonstring);
 
                     startActivity(i);
-                    finish();
                 }
 
 
@@ -382,9 +383,57 @@ public class RegisterationActivity extends AppCompatActivity
         }
     }
 
-    public boolean validation()
+    public  boolean validation()
     {
-        return true;
+        if(profile_for_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            profile_for_ed.setError("Select Profile for");
+
+            return false;
+        }
+
+        else if(full_name_tie.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            full_name_tie.setError("Enter full name");
+            return false;
+        }
+        else if(email_tie.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            email_tie.setError("Enter the email");
+            return false;
+        }
+        else if(!isEmailValid(email_tie.getText().toString().trim()))
+        {
+            email_tie.setError("Enter the valid email");
+            return false;
+        }
+        else if(mobile_number_tie.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            mobile_number_tie.setError("Enter mobile number one");
+            return false;
+        }
+        else if(gender.trim().equalsIgnoreCase(""))
+        {
+            Toast.makeText(context, "Select the  Gender please", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return  true;
+    }
+
+
+    public static boolean isEmailValid(String email) {
+        boolean isValid = false;
+
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
     }
 
 }

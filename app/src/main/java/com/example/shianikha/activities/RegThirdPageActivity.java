@@ -85,11 +85,11 @@ public class RegThirdPageActivity extends AppCompatActivity
                     //String city=reg_json.getString("city");
                     //String state=reg_json.getString("state");
 
-                    Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
 
                     new Session(context).addString("reg_data",reg_json.toString());
                     startActivity(i);
-                    finish();
+                    //finish();
                 }
             }
         });
@@ -399,7 +399,44 @@ public class RegThirdPageActivity extends AppCompatActivity
     }
     public  boolean validation()
     {
+        if(ed_religion.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_religion.setError("Select the City");
 
-        return true;
+            return false;
+        }
+
+        else if(ed_ethinicity.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_ethinicity.setError("Select the ethincity");
+            return false;
+        }
+        else if(ed_fathers_city.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_fathers_city.setError("Select the father's city");
+            return false;
+        }
+        else if(ed_mothers_city.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_mothers_city.setError("Select the mothers city");
+            return false;
+        }
+        else if(ed_current_occupation.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_current_occupation.setError("Select the country of citizenship");
+            return false;
+        }
+        else if(ed_other_detaiils_occupation.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_other_detaiils_occupation.setError("Enter the occupation");
+            return false;
+        }
+        else if(ed_highest_level_edu.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_highest_level_edu.setError("Enter the occupation");
+            return false;
+        }
+
+        return  true;
     }
 }

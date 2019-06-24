@@ -219,7 +219,7 @@
             android:textColor="#000000"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            android:hint="Other detaisl about your occupation"/>
+            android:hint="Other details about your occupation"/>
     </android.support.design.widget.TextInputLayout>
     <!--<Spinner
         android:id="@+id/higest_level_edu_spinner"
@@ -268,27 +268,6 @@
         android:text="NEXT"
         android:textColor="@color/white"
         android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/have_account_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_next"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Already have an account"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/login_here"
-        android:layout_marginTop="5dp"
-        android:textSize="18dp"
-        android:layout_below="@id/have_account_tv"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Login Here."
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
     </RelativeLayout>

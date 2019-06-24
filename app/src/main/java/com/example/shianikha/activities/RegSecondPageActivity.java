@@ -136,32 +136,35 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(RegSecondPageActivity.this,RegThirdPageActivity.class);
-
-                city_ed.getTag();
-                state_ed.getTag();
-                country_of_residence_ed.getTag();
-                country_of_citizenship_ed.getTag();
-                height_ed.getTag();
+                if(validation()) {
 
 
-                //Json json=new Json();
+                    Intent i = new Intent(RegSecondPageActivity.this, RegThirdPageActivity.class);
 
-                reg_json.addString("city",city_ed.getTag().toString());
-                reg_json.addString("state",state_ed.getTag().toString());
-                reg_json.addString("country_res",country_of_residence_ed.getTag().toString());
-                reg_json.addString("country_citizen",country_of_citizenship_ed.getTag().toString());
-                reg_json.addString("dob",dob_ed.getText().toString());
-                reg_json.addString("height",height_ed.getTag().toString());
-
+                    //city_ed.getTag();
+                    //state_ed.getTag();
+                    //country_of_residence_ed.getTag();
+                    //country_of_citizenship_ed.getTag();
+                    //height_ed.getTag();
 
 
-                new Session(context).addString("reg_data",reg_json.toString());
+                    //Json json=new Json();
 
-                //Toast.makeText(context, ""+city_ed.getTag(), Toast.LENGTH_SHORT).show();
+                    reg_json.addString("city", city_ed.getTag().toString());
+                    reg_json.addString("state", state_ed.getTag().toString());
+                    reg_json.addString("country_res", country_of_residence_ed.getTag().toString());
+                    reg_json.addString("country_citizen", country_of_citizenship_ed.getTag().toString());
+                    reg_json.addString("dob", dob_ed.getText().toString());
+                    reg_json.addString("height", height_ed.getTag().toString());
 
-                startActivity(i);
-                finish();
+
+                    new Session(context).addString("reg_data", reg_json.toString());
+
+                    //Toast.makeText(context, ""+city_ed.getTag(), Toast.LENGTH_SHORT).show();
+
+                    startActivity(i);
+                    //finish();
+                }
             }
         });
 
@@ -418,5 +421,43 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dob_ed.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    public  boolean validation()
+    {
+        if(city_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            city_ed.setError("Select the City");
+
+            return false;
+        }
+
+        else if(state_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            state_ed.setError("Select the state");
+            return false;
+        }
+        else if(country_of_residence_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            country_of_residence_ed.setError("Select the country of residence");
+            return false;
+        }
+        else if(country_of_citizenship_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            country_of_citizenship_ed.setError("Select the country of citizenship");
+            return false;
+        }
+        else if(dob_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            Toast.makeText(context, "Select the dob", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(height_ed.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            Toast.makeText(context, "Select the  height", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return  true;
     }
 }

@@ -319,42 +319,6 @@
 
             </RadioGroup>
 
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_below="@id/islam_convert_rdg"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="17dp"
-                android:text="SUBMIT"
-                android:textSize="20dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/white"
-                android:background="@drawable/blue_button_back"/>
-
-
-            <TextView
-                android:id="@+id/have_account_tv"
-                android:layout_below="@id/btn_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Already have an account"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/login_here"
-                android:layout_below="@id/have_account_tv"
-                android:layout_marginTop="5dp"
-                android:textSize="18dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Login Here."
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
         </RelativeLayout>
 
         </ScrollView>

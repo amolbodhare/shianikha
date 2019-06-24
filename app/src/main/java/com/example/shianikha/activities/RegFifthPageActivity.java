@@ -43,6 +43,13 @@ public class RegFifthPageActivity extends AppCompatActivity
     Context context;
     Json reg_json;
     private  LoadingDialog loadingDialog;
+    EditText ed_seeking_marriage;
+    EditText ed_interesterd_in;
+    EditText ed_religion_exception;
+    EditText ed_about_one;
+    EditText ed_about_two;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,30 +97,27 @@ public class RegFifthPageActivity extends AppCompatActivity
 
         btn_next=(Button)findViewById(R.id.btn_next);
 
+        ed_religion_exception=findViewById(R.id.religious_exception_ed);
+        ed_about_one=findViewById(R.id.about_one_ed);
+        ed_about_two=findViewById(R.id.about_two_ed);
+
+
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
 
-                Intent i=new Intent(RegFifthPageActivity.this, RegSixthPageActivity.class);
-
-                reg_json.addString("seeking_marriage", "1");
-                reg_json.addString("interested_in", "28");
-                //reg_json.addString("relocate_id",willing_to_relocate_ed.getTag().toString() );
-                reg_json.addString("religion_expectations","doesn't matter" );
-                reg_json.addString("cvt_islam","2");
-                reg_json.addString("syed","3");
-                reg_json.addString("handicap","2");
-                reg_json.addString("children","2");
-
-                /*if(validation())
-                {
-                    hitRegisterApi();
-                }*/
-
+                /*Intent i=new Intent(RegFifthPageActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
+*/
+                if(validation())
+                {
+                    hitRegisterApi();
+                }
+
+
             }
         });
 
@@ -165,8 +169,8 @@ public class RegFifthPageActivity extends AppCompatActivity
 
     private void setUpEditTextClickListner()
     {
-        EditText ed_seeking_marriage = findViewById(R.id.seeking_marriage_ed);
-        EditText ed_interesterd_in = findViewById(R.id.interesterd_in_ed);
+         ed_seeking_marriage = findViewById(R.id.seeking_marriage_ed);
+         ed_interesterd_in = findViewById(R.id.interesterd_in_ed);
 
         ed_seeking_marriage.setOnClickListener(new View.OnClickListener()
         {
@@ -204,7 +208,8 @@ public class RegFifthPageActivity extends AppCompatActivity
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable s)
+            {
 
             }
         });
@@ -244,6 +249,7 @@ public class RegFifthPageActivity extends AppCompatActivity
                 {
                     Log.e("selectedIs",textView.getText().toString());
                     ((EditText)view).setText(textView.getText().toString());
+                    ((EditText)view).setTag(position);
 
                 }
                 hideCustomSpinnerLayout();
@@ -260,13 +266,22 @@ public class RegFifthPageActivity extends AppCompatActivity
     }
     private void hitRegisterApi()
     {
-        Json json = new Json();
-        json.addString("email","mailtobodhare@gmail.com");
-        json.addString("password","123");
-        json.addString("fcm_token","sdjgdsjhgdjdg");
 
-        RequestModel requestModel = RequestModel.newRequestModel("login");
-        requestModel.addJSON(P.data, json);
+        reg_json.addString("seeking_marriage",ed_seeking_marriage.getTag().toString());
+        reg_json.addString("intreasted_in",ed_interesterd_in.getTag().toString());
+        reg_json.addString("religion_expectations",ed_religion_exception.getText().toString());
+        reg_json.addString("about_1",ed_about_one.getText().toString());
+        reg_json.addString("about_2",ed_about_two.getText().toString());
+
+        //added but not taken from the user
+
+        reg_json.addString("password","password@123");
+        reg_json.addString("fcm_token","FCMToken");
+
+
+
+        RequestModel requestModel = RequestModel.newRequestModel("register");
+        requestModel.addJSON(P.data, reg_json);
 
         Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
@@ -283,12 +298,17 @@ public class RegFifthPageActivity extends AppCompatActivity
                     {
                         if (json.getInt(P.status) == 1)
                         {
-                            JsonList jsonList=json.getJsonList("data");
-                            Json logged_in_json=jsonList.get(0);
-                            new Session(context).addString("loggedinjsonstring",logged_in_json.toString());
+                            //JsonList jsonList=json.getJsonList("data");
+                            //Json logged_in_json=jsonList.get(0);
+                           // new Session(context).addString("loggedinjsonstring",logged_in_json.toString());
                             Intent i=new Intent(RegFifthPageActivity.this,HomeActivity.class);
+                            H.showMessage(RegFifthPageActivity.this, json.getString(P.msg));
+                            //i.putExtra("email",reg_json.getString("email"));
+                            //i.putExtra("pass",reg_json.getString("password"));
+                            //i.putExtra("registered","1");
+
                             startActivity(i);
-                            finish();
+                            //finish();
                         } else
                             H.showMessage(RegFifthPageActivity.this, json.getString(P.msg));
                     }
@@ -306,6 +326,34 @@ public class RegFifthPageActivity extends AppCompatActivity
     }
     public  boolean validation()
     {
-        return true;
+        if(ed_seeking_marriage.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_seeking_marriage.setError("Select the Seeking marriage");
+
+            return false;
+        }
+
+        else if(ed_interesterd_in.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_interesterd_in.setError("Select the interested in");
+            return false;
+        }
+        else if(ed_religion_exception.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_religion_exception.setError("Enter the religious exception");
+            return false;
+        }
+        else if(ed_about_one.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_about_one.setError("Enter about one");
+            return false;
+        }
+        else if(ed_about_two.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            ed_about_two.setError("Enter about two");
+            return false;
+        }
+
+        return  true;
     }
 }

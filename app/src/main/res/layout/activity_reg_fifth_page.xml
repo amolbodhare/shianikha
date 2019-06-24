@@ -106,6 +106,7 @@
                     android:layout_marginRight="25dp"/>
 
                 <EditText
+                    android:id="@+id/religious_exception_ed"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="45dp"
@@ -123,6 +124,7 @@
                     android:text="@string/preference" />
 
                 <EditText
+                    android:id="@+id/about_one_ed"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="45dp"
@@ -140,6 +142,7 @@
                     android:layout_marginRight="25dp"/>
 
                 <EditText
+                    android:id="@+id/about_two_ed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
@@ -158,30 +161,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/white"
                     android:background="@drawable/blue_button_back"/>
-
-
-                <TextView
-                    android:id="@+id/have_account_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="27dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Already have an account"
-                    android:textSize="18dp" />
-                <TextView
-                    android:id="@+id/login_here"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:textSize="18dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Login Here."
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -211,7 +190,5 @@
         android:layout_height="match_parent"
         android:background="#60000000"
         android:visibility="gone"/>
-
-
 
 </RelativeLayout>

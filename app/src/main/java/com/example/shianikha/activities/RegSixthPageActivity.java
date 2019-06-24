@@ -40,18 +40,8 @@ public class RegSixthPageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_sixth_page);
-        btn_register=findViewById(R.id.btn_register);
         context=RegSixthPageActivity.this;
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent i=new Intent(RegSixthPageActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
 
         pref_match_marital_status_arrayList=new ArrayList<>();

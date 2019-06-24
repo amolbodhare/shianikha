@@ -44,7 +44,6 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         btn_reg=(Button)findViewById(R.id.btn_reg);
 
 
-
         loadingDialog = new LoadingDialog(this);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layoutt);
@@ -103,7 +102,8 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                         H.showMessage(WalkThroughActivity.this, "Something went wrong.");
                     }
                 })
-                .onSuccess(new Api.OnSuccessListener() {
+                .onSuccess(new Api.OnSuccessListener()
+                {
                     @Override
                     public void onSuccess(Json json)
                     {

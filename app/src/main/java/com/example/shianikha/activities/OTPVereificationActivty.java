@@ -124,7 +124,7 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
         {
             Intent i=new Intent(OTPVereificationActivty.this,RegSecondPageActivity.class);
             startActivity(i);
-            finish();
+            //finish();
         }
     }
 }

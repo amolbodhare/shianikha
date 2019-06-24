@@ -91,32 +91,39 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/willing_to_relocate_til"
-        android:layout_below="@id/habbit_spinner_layout"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/willing_to_relocate_tiet"
+        <RelativeLayout
+            android:id="@+id/relocate_spinner_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:typeface="monospace"
-            android:textColor="#000000"
-            android:singleLine="true"
-            android:imeOptions="actionNext"
-            android:hint="Willing To relocate"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_below="@id/habbit_spinner_layout"
+            android:layout_marginTop="17dp"
+            android:layout_height="56dp">
+
+            <EditText
+                android:id="@+id/relocate_ed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16dp"
+                android:hint="willing to relocate"
+                android:paddingRight="56dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:tint="#bdbdbd" />
+
+        </RelativeLayout>
 
     <TextView
         android:id="@+id/islam_convert_tv"
         android:text="Did you convert to Islam?"
         android:textSize="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:layout_below="@id/willing_to_relocate_til"
+        android:layout_below="@id/relocate_spinner_layout"
         android:layout_marginTop="17dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -131,10 +138,10 @@
 
         <RadioButton
             android:id="@+id/islam_yes"
+            android:onClick="radioButtonClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:checked="true" />
+            android:text="Yes"/>
 
         <RadioButton
             android:id="@+id/islamm_no"
@@ -166,14 +173,19 @@
             android:id="@+id/syed_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:checked="true" />
+            android:text="Yes" />
 
         <RadioButton
             android:id="@+id/syed_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No" />
+        <RadioButton
+            android:id="@+id/syed_dont_know"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No" />
+
 
     </RadioGroup>
 
@@ -199,11 +211,15 @@
             android:id="@+id/handicap_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:checked="true" />
+            android:text="Yes" />
 
         <RadioButton
             android:id="@+id/handicap_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No" />
+        <RadioButton
+            android:id="@+id/handicap_dont_know"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No" />
@@ -232,8 +248,7 @@
             android:id="@+id/children_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:checked="true" />
+            android:text="Yes" />
 
         <RadioButton
             android:id="@+id/children_no"
@@ -254,27 +269,6 @@
         android:text="NEXT"
         android:textColor="@color/white"
         android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/have_account_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_next"
-        android:layout_marginTop="27dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Already have an account"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/login_here"
-        android:layout_marginTop="5dp"
-        android:textSize="18dp"
-        android:layout_below="@id/have_account_tv"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Login Here."
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
