@@ -17,48 +17,19 @@ public class P {
     public static String mobile = "mobile";
     public static String email = "email";
     public static String city = "city";
-    public static String otp = "otp";
-    public static String fcm_value = "fcm_value";
 
     public static String masterDataString = "masterDataString";
 
     public static String tokenData = "tokenData";
-    public static String token = "token";
-    public static String profile_url = "profile_url";
-    public static String weblink = "weblink";
     public static String view = "view";
-    public static String cityNameList = "cityNameList";
-    public static String cityCodeList = "cityCodeList";
-    public static String image = "image";
-    public static String profile_image = "profile_image";
-    public static String bundleString = "bundleString";
-    public static String serchname = "serchname";
-    public static String tagname = "tagname";
+
     public static String list = "list";
     public static String id = "id";
-    public static String show_load_more = "show_load_more";
-    public static String limit = "limit";
-    public static String categoryId = "categoryId";
-    public static String category_id = "category_id";
-    public static String show_details_status = "show_details_status";
-    public static String show_details_msg = "show_details_msg";
-    public static String company_name = "company_name";
-    public static String add_1 = "add_1";
-    public static String phone_1 = "phone_1";
-    public static String mobile_1 = "mobile_1";
-    public static String email_id = "email_id";
-    public static String website = "website";
-    public static String fcmToken = "msg_token_fmt";
-    public static String userdata = "userdata";
-    public static String slider = "slider";
-    public static String url = "url";
-    public static String clickUrl = "clickUrl";
-    public static String plandata = "plandata";
+
     public static String title = "title";
-    public static String price_title = "price title";
 
-    public static String action = "action";
-
-    public static String action_data = "action_data";
-    public static String description = "description";
+    public static String profile_for = "profile_for";
+    public static String statusBarHeight = "statusBarHeight";
+    public static String country_code  = "country_code";
+    public static String country = "country";
 }//class

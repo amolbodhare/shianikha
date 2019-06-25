@@ -3,36 +3,24 @@ package com.example.shianikha.fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.shianikha.R;
-import com.example.shianikha.SplashActivity;
 import com.example.shianikha.activities.FilterActivity;
-import com.example.shianikha.activities.RegisterationActivity;
-import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.adapters.MatchesAdapter;
 import com.example.shianikha.entities.MatchesEntity;
 import com.example.shianikha.subfragments.IAmLookingForFragment;
 import com.example.shianikha.subfragments.LookingForMeFragment;
 import com.example.shianikha.subfragments.TopMatchesFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

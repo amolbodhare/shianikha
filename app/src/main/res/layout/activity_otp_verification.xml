@@ -209,13 +209,15 @@
                     android:text="don't get the code " />
 
                 <TextView
+                    android:id="@+id/resendText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:text="RESEND !"
+                    android:text=" RESEND !"
                     android:clickable="true"
                     android:textStyle="bold"
-                    android:textSize="7sp" />
+                    android:textSize="17sp" />
+
             </LinearLayout>
 
             <Button
