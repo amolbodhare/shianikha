@@ -20,8 +20,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splash);
+
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
@@ -42,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
                 int statusBarHeight = rectangle.top;
                 new Session(SplashActivity.this).addInt(P.statusBarHeight,statusBarHeight);
             }
-        },999);
+        },987);
 
     }
 }

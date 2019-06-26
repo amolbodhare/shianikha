@@ -32,4 +32,9 @@ public class P {
     public static String statusBarHeight = "statusBarHeight";
     public static String country_code  = "country_code";
     public static String country = "country";
+    public static String ph_number = "ph_number";
+    public static String gender = "gender";
+
+    public static String registrationJson = "registrationJson";
+    public static String otp = "otp";
 }//class

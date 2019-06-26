@@ -13,25 +13,29 @@
     <TextView
         android:id="@+id/title_tv"
         android:text="Heading"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:layout_below="@id/slider_image"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/desc_tv"
         android:layout_below="@id/title_tv"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginTop="14dp"
         android:textAlignment="center"
         android:textColor="@color/white"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="description kjnfdsfb jsdfmnvsdmn sd bdfm,bvmsdfbbmb"
         android:layout_width="match_parent"
-        android:layout_height="110dp" />
+        android:layout_height="wrap_content" />
     
 </RelativeLayout>
