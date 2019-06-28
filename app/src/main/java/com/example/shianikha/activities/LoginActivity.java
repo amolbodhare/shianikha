@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Map<String,String> countryList = new TreeMap<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -103,7 +104,64 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void makeJson()
     {
+        Json json = new Json();
+        String string=((EditText)findViewById(R.id.mobile_no)).getText().toString();
+        if(string.isEmpty())
+        {
+            H.showMessage(this,"please enter your Mobile Number");
+            return;
+        }
+        json.addString(P.ph_number,string);
 
+        string = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this,"Please enter country code!");
+            return;
+        }
+        json.addString(P.country_code,string);
+        
+        hitLoginApi(json);
+    }
+
+    private void hitLoginApi(Json json) {
+        final Json j = json;
+        final LoadingDialog loadingDialog = new LoadingDialog(this);
+
+        RequestModel requestModel = RequestModel.newRequestModel("login");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener()
+                {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(LoginActivity.this, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                        {
+                            Intent intent = new Intent(LoginActivity.this, OTPVereificationActivty.class);
+                            intent.putExtra(P.registrationJson,j.toString());//same parameter is required in everyscreen
+                            startActivity(intent);
+                        } else
+                            H.showMessage(LoginActivity.this, json.getString(P.msg));
+                    }
+                })
+                .run("hitLoginApi");
     }
 
     class CountryCodeListAdapter extends BaseAdapter

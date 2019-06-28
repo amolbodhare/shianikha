@@ -26,6 +26,7 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
     private EditText otp_first, otp_second, otp_third, otp_fourth, otp_fifth, otp_sixth;
     private Json json = new Json();
     private LoadingDialog loadingDialog;
+    private int from;//if from =2 hai tho login se if 6 hai tho registration se hai
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
             try
             {
                 json = new Json(string);
+                H.log("json length is ",json.length()+"");
                 String s1 = json.getString(P.country_code);
                 String s2 = json.getString(P.ph_number);
                 string = s1+"-"+s2;
@@ -190,7 +192,9 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
 
         json.addString(P.otp, string);
 
-        RequestModel requestModel = RequestModel.newRequestModel("validate_otp");
+        string= from==2?"validate_login_otp": "validate_otp";
+
+        RequestModel requestModel = RequestModel.newRequestModel(string);
         requestModel.addJSON(P.data, json);
 
         Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
