@@ -3,7 +3,6 @@ package com.example.shianikha.activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,16 +15,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -39,9 +35,6 @@ import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -365,7 +358,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                         if (json.getInt(P.status) == 1)
                         {
-                            Intent intent = new Intent(RegistrationActivity.this, OTPVereificationActivty.class);
+                            Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());
                             startActivity(intent);
                         } else

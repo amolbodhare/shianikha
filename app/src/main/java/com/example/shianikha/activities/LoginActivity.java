@@ -1,7 +1,6 @@
 package com.example.shianikha.activities;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -154,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         if (json.getInt(P.status) == 1)
                         {
-                            Intent intent = new Intent(LoginActivity.this, OTPVereificationActivty.class);
+                            Intent intent = new Intent(LoginActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());//same parameter is required in everyscreen
                             startActivity(intent);
                         } else

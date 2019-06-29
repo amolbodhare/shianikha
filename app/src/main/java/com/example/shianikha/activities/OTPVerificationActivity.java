@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,7 +21,7 @@ import com.example.shianikha.commen.RequestModel;
 
 import org.json.JSONException;
 
-public class OTPVereificationActivty extends AppCompatActivity implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener {
+public class OTPVerificationActivity extends AppCompatActivity implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener, TextView.OnEditorActionListener {
 
     private EditText otp_first, otp_second, otp_third, otp_fourth, otp_fifth, otp_sixth;
     private Json json = new Json();
@@ -42,6 +42,8 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
         otp_fifth = findViewById(R.id.ot_fifth_digit);
         otp_sixth = findViewById(R.id.ot_sixth_digit);
 
+        setOnEditorActionListener();
+
         //previous json for resend otp
         String string = getIntent().getStringExtra(P.registrationJson);
         if (string!=null)
@@ -51,9 +53,17 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
                 json = new Json(string);
                 H.log("json length is ",json.length()+"");
                 String s1 = json.getString(P.country_code);
-                String s2 = json.getString(P.ph_number);
-                string = s1+"-"+s2;
-                ((TextView)findViewById(R.id.mobile_no)).setText(string);
+                if (s1.equals("+91")) {
+                    String s2 = json.getString(P.ph_number);
+                    string = s1 + "-" + s2;
+                    ((TextView) findViewById(R.id.mobile_no)).setText("OTP sent to " + string);
+                }
+                else
+                {
+                    s1 = json.getString(P.email);
+                    ((TextView) findViewById(R.id.mobile_no)).setText("OTP sent to " + s1);
+                    ((TextView)findViewById(R.id.textView)).setText("Email Id Verification");
+                }
 
                 findViewById(R.id.btn_submit).setOnClickListener(this);
                 findViewById(R.id.resendText).setOnClickListener(this);
@@ -65,6 +75,16 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
                 e.printStackTrace();
             }
         }
+    }
+
+    private void setOnEditorActionListener()
+    {
+        //otp_first.setOnEditorActionListener(this);
+        otp_second.setOnEditorActionListener(this);
+        otp_third.setOnEditorActionListener(this);
+        otp_fourth.setOnEditorActionListener(this);
+        otp_fifth.setOnEditorActionListener(this);
+        otp_sixth.setOnEditorActionListener(this);
     }
 
     private void handle6EditText()
@@ -90,7 +110,7 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {  }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -206,11 +226,11 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
 
                         if (json.getInt(P.status) == 1)
                         {
-                            Intent i = new Intent(OTPVereificationActivty.this, RegSecondPageActivity.class);
+                            Intent i = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
                             startActivity(i);
                             finish();
                         } else
-                            H.showMessage(OTPVereificationActivty.this, json.getString(P.msg));
+                            H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
                 })
                 .run("hitOtpVerificationApi");
@@ -230,9 +250,9 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
 
                         if (json.getInt(P.status) == 1)
                         {
-                            H.showMessage(OTPVereificationActivty.this,"OTP sent successfully, please wait for some time...");
+                            H.showMessage(OTPVerificationActivity.this,"OTP sent successfully, please wait for some time...");
                         } else
-                            H.showMessage(OTPVereificationActivty.this, json.getString(P.msg));
+                            H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
                 })
                 .run("hitRegisterApi");
@@ -248,6 +268,36 @@ public class OTPVereificationActivty extends AppCompatActivity implements View.O
 
     @Override
     public void onError() {
-        H.showMessage(OTPVereificationActivty.this, "Something went wrong.");
+        H.showMessage(OTPVerificationActivity.this, "Something went wrong.");
     }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+    {
+
+
+        return false;
+    }
+
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_CLEAR)
+        {
+            H.log("iAm","Fired");
+            if (otp_sixth.isFocused())
+                otp_fifth.requestFocus();
+            else if (otp_fifth.isFocused())
+                otp_fourth.requestFocus();
+            else if (otp_fourth.isFocused())
+                otp_third.requestFocus();
+            else if (otp_third.isFocused())
+                otp_second.requestFocus();
+            else if (otp_second.isFocused())
+                otp_first.requestFocus();
+
+            //return  true;
+        }
+        return false; //super.onKeyDown(keyCode, event);
+    }*/
 }

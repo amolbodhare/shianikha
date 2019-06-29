@@ -21,7 +21,7 @@
         <activity android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activities.OTPVereificationActivty"
+        <activity android:name=".activities.OTPVerificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme"/>
 

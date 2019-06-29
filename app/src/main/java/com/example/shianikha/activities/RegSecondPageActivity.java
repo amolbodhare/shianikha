@@ -62,7 +62,6 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         dob_ed=(EditText)findViewById(R.id.ed_dob);
         height_ed=(EditText)findViewById(R.id.height_ed);
 
-
         dob_ed.setOnClickListener(this);
         city_of_residence_arrayList=new ArrayList<>();
 
@@ -71,7 +70,6 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
         try
         {
-
             //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
             String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
             String regdatajsonstring = new Session(context).getString("reg_data");

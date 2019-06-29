@@ -104,7 +104,7 @@ public class RegSixthPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(RegSixthPageActivity.this, OTPVereificationActivty.class);
+                Intent i=new Intent(RegSixthPageActivity.this, OTPVerificationActivity.class);
                 startActivity(i);
             }
         });
