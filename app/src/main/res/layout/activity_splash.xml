@@ -12,6 +12,12 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/splash_background" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#75311C63"/>
+
     <ImageView
         android:src="@drawable/shianikahtitlelogo"
         android:layout_width="wrap_content"

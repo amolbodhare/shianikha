@@ -1,238 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.OTPVereificationActivty">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Mobile Number Verification"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="OTP"
+            android:textColor="@color/textpurle"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="12dp"
-                android:layout_marginTop="80dp"
-                android:text="Mobile Number Verification"
+            <View
+                android:layout_width="35dp"
+                android:layout_height="3dp"
+                android:background="@color/colorAccent"
+                android:paddingTop="9dp" />
 
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OTP"
-                android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/textpurle"
-                android:textSize="28dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="35dp"
-                    android:layout_height="3dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="9dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="43dp"
-                android:text="Please Enter"
-                android:textColor="@color/textpurle"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="The Validation code That\nGet the SMS."
-                android:textSize="14dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="35dp"
-                    android:layout_height="3dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="9dp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="35dp"
-                android:layout_weight="7">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_first_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
-                        android:imeOptions="actionNext"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_seecond_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:gravity="center"
-                        android:background="@drawable/square"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_third_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
-                        android:gravity="center"
-                        android:imeOptions="actionNext"
-                        android:maxLength="1"
-                        android:inputType="number"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_fourth_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
-                        android:gravity="center"
-                        android:imeOptions="actionNext"
-                        android:maxLength="1"
-                        android:inputType="number"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_fifth_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
-                        android:gravity="center"
-                        android:maxLength="1"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/ot_sixth_digit"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:background="@drawable/square"
-                        android:gravity="center"
-                        android:imeOptions="actionNext"
-                        android:maxLength="1"
-                        android:inputType="number"
-                        android:layout_marginRight="10dp" />
-
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="14dp"
-
-                    android:layout_height="wrap_content"
-                    android:text="don't get the code " />
-
-                <TextView
-                    android:id="@+id/resendText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text=" RESEND !"
-                    android:clickable="true"
-                    android:textStyle="bold"
-                    android:textSize="17sp" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="20dp"
-                android:background="@drawable/blue_button_back"
-                android:text="Submit"
-                android:textColor="@color/white" />
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_marginLeft="3dp"
+                android:background="@color/basecolor" />
 
         </LinearLayout>
 
-    </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Please Enter"
+            android:textColor="@color/textpurle"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="The Validation code That\nGet the SMS."
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/mobile_no"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fdsfdsf"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_weight="7">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_first_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_seecond_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_third_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_fourth_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_fifth_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ot_sixth_digit"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="don't get the code "
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/resendText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text=" RESEND !"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/blue_button_back"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</ScrollView>

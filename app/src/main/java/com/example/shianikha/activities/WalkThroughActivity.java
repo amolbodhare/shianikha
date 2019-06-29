@@ -36,38 +36,19 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_walk_through);
         context = WalkThroughActivity.this;
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        slideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
+        slideViewPager =  findViewById(R.id.slideViewPager);
         sliderAdapter = new SliderAdapter(this);
         slideViewPager.setAdapter(sliderAdapter);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        btn_reg = (Button) findViewById(R.id.btn_reg);
+        btn_login =  findViewById(R.id.btn_login);
+        btn_reg =  findViewById(R.id.btn_reg);
 
 
         loadingDialog = new LoadingDialog(this);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layoutt);
+        TabLayout tabLayout =  findViewById(R.id.tab_layoutt);
         tabLayout.setupWithViewPager(slideViewPager, true);
         btn_login.setOnClickListener(this);
         btn_reg.setOnClickListener(this);
-
-        /*btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                *//*Intent i=new Intent(WalkThroughActivity.this,LoginActivity.class);
-                startActivity(i);*//*
-            }
-        });
-
-        btn_reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                *//*Intent i=new Intent(WalkThroughActivity.this,RegistrationActivity.class);
-                startActivity(i);*//*
-            }
-        });*/
-
     }
 
     @Override
@@ -75,11 +56,9 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         if (v.getId() == R.id.btn_login) {
             Intent i = new Intent(WalkThroughActivity.this, LoginActivity.class);
             startActivity(i);
-            finish();
         } else if (v.getId() == R.id.btn_reg) {
             hitMastersApi();
         }
-
     }
 
     private void hitMastersApi() {
@@ -105,7 +84,6 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                             makeSeperateJsonList(json);
                             Intent i = new Intent(WalkThroughActivity.this, RegistrationActivity.class);
                             startActivity(i);
-                            finish();
                         } else
                             H.showMessage(WalkThroughActivity.this, json.getString(P.msg));
                     }
