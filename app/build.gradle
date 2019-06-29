@@ -37,4 +37,5 @@ dependencies {
     implementation project(path: ':helper')
     implementation 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
     implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
 }

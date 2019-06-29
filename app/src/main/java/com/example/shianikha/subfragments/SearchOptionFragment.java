@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.shianikha.R;
 
 import org.json.JSONArray;
@@ -60,23 +63,53 @@ public class SearchOptionFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_search_option, container, false);
         context=getActivity();
-        seekBar_age=(SeekBar)view.findViewById(R.id.seekBar_age);
-        seekBar_age.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                Toast.makeText(getActivity(),"seekbar progress: "+progress, Toast.LENGTH_SHORT).show();
-            }
+        final CrystalRangeSeekbar age_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.age_rangeSeekbar);
+        final CrystalRangeSeekbar height_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.height_rangeSeekbar);
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getActivity(),"seekbar touch started!", Toast.LENGTH_SHORT).show();
-            }
+        // get min and max text view
+        final TextView tvMinAge = (TextView) view.findViewById(R.id.textMinAge);
+        final TextView tvMaxAge = (TextView) view.findViewById(R.id.textMaxAge);
 
+        final TextView tvMinHeight = (TextView) view.findViewById(R.id.textMinHeight);
+        final TextView tvMaxHeight = (TextView) view.findViewById(R.id.textMaxHeight);
+
+// set listener
+        age_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getActivity(),"seekbar touch stopped!", Toast.LENGTH_SHORT).show();
+            public void valueChanged(Number minValue, Number maxValue) {
+
+                tvMinAge.setText("Min "+String.valueOf(minValue)+" years");
+
+                tvMaxAge.setText("Max "+String.valueOf(maxValue)+" years");
+
+            }
+        });
+
+// set final value listener
+        age_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+            @Override
+            public void finalValue(Number minValue, Number maxValue)
+            {
+                Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+            }
+        });
+
+
+        // set listener
+        height_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+                tvMinHeight.setText("Min "+String.valueOf(minValue));
+                tvMaxHeight.setText("Max "+String.valueOf(maxValue));
+            }
+        });
+
+// set final value listener
+        height_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+            @Override
+            public void finalValue(Number minValue, Number maxValue)
+            {
+                Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
             }
         });
 
