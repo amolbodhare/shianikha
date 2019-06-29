@@ -5,13 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.shianikha.R;
 import com.github.aakira.expandablelayout.ExpandableLayout;
 import com.github.aakira.expandablelayout.ExpandableLayoutListener;
@@ -32,7 +37,7 @@ public class AdvanceSearchFragment extends Fragment {
     ExpandableRelativeLayout education_and_pro_exp_layout;
     ExpandableRelativeLayout lifestyle_and_appearence_exp_layout;
     ExpandableRelativeLayout search_using_keywords_exp_layout;
-
+    Context context;
 
 
     public AdvanceSearchFragment()
@@ -51,7 +56,55 @@ public class AdvanceSearchFragment extends Fragment {
         // Inflate the layout for this fragment
 
        view= inflater.inflate(R.layout.fragment_advance_search, container, false);
+       context=getActivity();
 
+        final CrystalRangeSeekbar age_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.age_rangeSeekbar);
+        final CrystalRangeSeekbar height_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.height_rangeSeekbar);
+
+        // get min and max text view
+        final TextView tvMinAge = (TextView) view.findViewById(R.id.textMinAge);
+        final TextView tvMaxAge = (TextView) view.findViewById(R.id.textMaxAge);
+
+        final TextView tvMinHeight = (TextView) view.findViewById(R.id.textMinHeight);
+        final TextView tvMaxHeight = (TextView) view.findViewById(R.id.textMaxHeight);
+
+// set listener
+        age_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+                tvMinAge.setText("Min "+String.valueOf(minValue)+" years");
+                tvMaxAge.setText("Max "+String.valueOf(maxValue)+" years");
+            }
+        });
+
+// set final value listener
+        age_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+            @Override
+            public void finalValue(Number minValue, Number maxValue)
+            {
+                Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+            }
+        });
+
+
+        // set listener
+        height_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+                tvMinHeight.setText("Min "+String.valueOf(minValue));
+                tvMaxHeight.setText("Max "+String.valueOf(maxValue));
+
+            }
+        });
+
+// set final value listener
+        height_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+            @Override
+            public void finalValue(Number minValue, Number maxValue)
+            {
+                Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+            }
+        });
 
         location_grew_up_exp_card_layout=view.findViewById(R.id.loc_grew_up_details_card_layout);
         education_pro_details_card_layout=view.findViewById(R.id.edu_pro_details_card_layout);

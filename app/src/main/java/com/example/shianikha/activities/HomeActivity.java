@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     MyMatchesFragment myMatchesFragment;
     SearchFragment searchFragment;
     MyProfileFragment myProfileFragment;
+    public EditProfileFragment editProfileFragment;
     NotificationFragment notificationFragment;
     AccountSettingsFragment accountSettingsFragment;
     PartnerPreference partnerPreference;
@@ -68,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     private DrawerLayout drawerLayout;
     ContactUsFragment contactUsFragment;
     MyActivityFragment myActivityFragment;
-    public EditProfileFragment editProfileFragment;
+
     private ArrayList<Fragment> fragmentList = new ArrayList<>();
     private ArrayList<String> titleList = new ArrayList<>();
     RelativeLayout cardView_layout;
@@ -174,6 +175,20 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
             //textView.setText("DashBoard");
         }
+        /*else if(fragment==editProfileFragment)
+        {
+            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
+            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
+
+
+
+            //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
+            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
+            findViewById(R.id.noti_layout).setTag(null);
+            //H.log("iM","triggered");
+            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
+            //textView.setText("DashBoard");
+        }*/
 
 
         else
@@ -532,6 +547,16 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
            RelativeLayout relativeLayout = (RelativeLayout) view;
            //relativeLayout.getChildAt(1).setVisibility(View.GONE);
            relativeLayout.setVisibility(View.INVISIBLE);
+
+           ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
+           ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
+
+
+
+           //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
+           changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
+           findViewById(R.id.noti_layout).setTag(null);
+
 
        }
 

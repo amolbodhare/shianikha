@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     tools:context=".subfragments.SearchOptionFragment">
     <ScrollView
@@ -16,81 +17,81 @@
         android:orientation="vertical"
         android:padding="19dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="AGE"
+            android:textSize="15sp" />
+
         <RelativeLayout
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
-                android:id="@+id/age"
+                android:id="@+id/textMinAge"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age"
-                android:textColor="#aaaaaa"
-                android:textSize="13sp"
-                android:fontFamily="@font/poppins_regular"/>
-
+                android:layout_gravity="start"/>
             <TextView
-                android:id="@+id/minAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/age"
-                android:text="Min 20 yrs"
-                android:fontFamily="@font/poppins_regular"/>
-
-            <TextView
-                android:id="@+id/maxAge"
+                android:id="@+id/textMaxAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/age"
-                android:text="Max 30 yrs"
-                android:fontFamily="@font/poppins_regular"/>
-
+                />
         </RelativeLayout>
 
-        <SeekBar
-            android:id="@+id/seekBar_age"
-            android:layout_marginTop="7dp"
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/age_rangeSeekbar"
+            android:layout_marginTop="15dp"
+            app:bar_highlight_color="@color/seekbar_color"
+            app:left_thumb_color="@color/seekbar_color"
+            app:right_thumb_color="@color/seekbar_color"
+            app:min_value="18"
+            app:min_start_value="20"
+            app:max_value="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Height"
+            android:textSize="15sp" />
+
         <RelativeLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
-                android:id="@+id/height"
+                android:id="@+id/textMinHeight"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age"
-                android:textColor="#aaaaaa"
-                android:textSize="13sp"
-                android:fontFamily="@font/poppins_regular"/>
-
+                android:layout_gravity="start"/>
             <TextView
-                android:id="@+id/minHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/height"
-                android:text="Min 5'1"
-                android:fontFamily="@font/poppins_regular"/>
-
-            <TextView
-                android:id="@+id/maxheight"
+                android:id="@+id/textMaxHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/height"
-                android:text="Max 5'8"
-                android:fontFamily="@font/poppins_regular"/>
-
+                />
         </RelativeLayout>
 
-        <SeekBar
-            android:id="@+id/seekBar_height"
-            android:layout_marginTop="7dp"
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/height_rangeSeekbar"
+            android:layout_marginTop="15dp"
+            app:bar_highlight_color="@color/seekbar_color"
+            app:left_thumb_color="@color/seekbar_color"
+            app:right_thumb_color="@color/seekbar_color"
+            app:min_value="4.5"
+            app:min_start_value="5.0"
+            app:max_value="6.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
 
         <TextView
             android:text="Marital Status"

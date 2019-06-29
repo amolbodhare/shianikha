@@ -52,9 +52,98 @@ tools:context=".subfragments.AdvanceSearchFragment">
 
         </RadioGroup>
 
+        <LinearLayout
+            android:id="@+id/spinner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:orientation="vertical"
+            android:layout_below="@id/looking_for_rdg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="AGE"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/textMinAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="start" />
+
+                <TextView
+                    android:id="@+id/textMaxAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/age_rangeSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:bar_highlight_color="@color/seekbar_color"
+                app:left_thumb_color="@color/seekbar_color"
+                app:max_value="30"
+                app:min_start_value="20"
+                app:min_value="18"
+                app:right_thumb_color="@color/seekbar_color" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Height"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/textMinHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="start" />
+
+                <TextView
+                    android:id="@+id/textMaxHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/height_rangeSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:bar_highlight_color="@color/seekbar_color"
+                app:left_thumb_color="@color/seekbar_color"
+                app:max_value="30"
+                app:min_start_value="20"
+                app:min_value="3"
+                app:right_thumb_color="@color/seekbar_color" />
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/marital_status_tv"
-            android:layout_below="@id/looking_for_rdg"
+            android:layout_below="@id/spinner_layout"
             android:layout_marginTop="17dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
