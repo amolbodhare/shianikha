@@ -14,6 +14,7 @@ import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
@@ -21,7 +22,7 @@ import com.example.shianikha.commen.RequestModel;
 
 import org.json.JSONException;
 
-public class OTPVerificationActivity extends AppCompatActivity implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener, TextView.OnEditorActionListener {
+public class OTPVerificationActivity extends AppCompatActivity implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener {
 
     private EditText otp_first, otp_second, otp_third, otp_fourth, otp_fifth, otp_sixth;
     private Json json = new Json();
@@ -42,59 +43,129 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_fifth = findViewById(R.id.ot_fifth_digit);
         otp_sixth = findViewById(R.id.ot_sixth_digit);
 
-        setOnEditorActionListener();
-
         //previous json for resend otp
         String string = getIntent().getStringExtra(P.registrationJson);
-        if (string!=null)
-        {
-            try
-            {
+        if (string != null) {
+            try {
                 json = new Json(string);
-                H.log("json length is ",json.length()+"");
+                from = json.length();
+                H.log("json length is ", json.length() + "");
                 String s1 = json.getString(P.country_code);
                 if (s1.equals("+91")) {
                     String s2 = json.getString(P.ph_number);
                     string = s1 + "-" + s2;
                     ((TextView) findViewById(R.id.mobile_no)).setText("OTP sent to " + string);
-                }
-                else
-                {
+                    ((TextView)findViewById(R.id.message)).setText("The Validation Code That\n Get From SMS");
+                } else {
                     s1 = json.getString(P.email);
                     ((TextView) findViewById(R.id.mobile_no)).setText("OTP sent to " + s1);
-                    ((TextView)findViewById(R.id.textView)).setText("Email Id Verification");
+                    ((TextView) findViewById(R.id.textView)).setText("Email Id Verification");
+                    ((TextView)findViewById(R.id.message)).setText("The Validation Code That\n Get On Email");
                 }
 
                 findViewById(R.id.btn_submit).setOnClickListener(this);
                 findViewById(R.id.resendText).setOnClickListener(this);
 
-                handle6EditText();
-            }
-            catch (JSONException e)
-            {
+                addTextWatcherOnAllEditText();
+                //setOnKeyListnerOnAllEditText();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void setOnEditorActionListener()
+    private void setOnKeyListnerOnAllEditText()
     {
-        //otp_first.setOnEditorActionListener(this);
-        otp_second.setOnEditorActionListener(this);
-        otp_third.setOnEditorActionListener(this);
-        otp_fourth.setOnEditorActionListener(this);
-        otp_fifth.setOnEditorActionListener(this);
-        otp_sixth.setOnEditorActionListener(this);
+        otp_first.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (isValidKey(keyCode))
+                    otp_second.requestFocus();
+                H.log("keyCodeIs",keyCode+"");
+                return false;
+            }
+        });
+
+        otp_second.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (isValidKey(keyCode))
+                    otp_third.requestFocus();
+                else if (keyCode== 67)
+                    otp_first.requestFocus();
+
+                return false;
+            }
+        });
+
+        otp_third.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (isValidKey(keyCode))
+                    otp_fourth.requestFocus();
+                else if (keyCode== 67)
+                    otp_second.requestFocus();
+                return false;
+            }
+        });
+
+        otp_fourth.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (isValidKey(keyCode))
+                    otp_fifth.requestFocus();
+                else if (keyCode== 67)
+                    otp_third.requestFocus();
+                return false;
+            }
+        });
+
+        otp_fifth.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (isValidKey(keyCode))
+                    otp_sixth.requestFocus();
+                else if (keyCode== 67)
+                    otp_fourth.requestFocus();
+                return false;
+            }
+        });
+
+        otp_sixth.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (keyCode== 67)
+                    otp_fifth.requestFocus();
+                return false;
+            }
+        });
     }
 
-    private void handle6EditText()
+    private boolean isValidKey(int keyCode)
     {
+        for (int i=7; i<17; i++)
+        {
+            if (i==keyCode)
+                return true;
+        }
+        return false;
+    }
+
+    private void addTextWatcherOnAllEditText() {
         otp_first.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            { }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -110,7 +181,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {  }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -123,10 +194,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         otp_third.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -139,10 +212,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         otp_fourth.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -155,10 +230,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         otp_fifth.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -171,10 +248,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         otp_sixth.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -187,8 +266,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         if (v.getId() == R.id.btn_submit)
             hitOtpVerificationApi();
 
@@ -196,23 +274,21 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
             hitRegisterApi();
     }
 
-    private void hitOtpVerificationApi()
-    {
+    private void hitOtpVerificationApi() {
         String string = otp_first.getText().toString() + otp_second.getText().toString() + otp_third.getText().toString() +
                 otp_fourth.getText().toString() + otp_fifth.getText().toString() + otp_sixth.getText().toString();
-        string = string.replace(" ","");
-        if (string.length()<6)
-        {
-            H.showMessage(this,"Please enter valid otp");
+        string = string.replace(" ", "");
+        if (string.length() < 6) {
+            H.showMessage(this, "Please enter valid otp");
             return;
         }
 
-        if (json==null)
+        if (json == null)
             return;
 
         json.addString(P.otp, string);
 
-        string= from==2?"validate_login_otp": "validate_otp";
+        string = from == 2 ? "validate_login_otp" : "validate_otp";
 
         RequestModel requestModel = RequestModel.newRequestModel(string);
         requestModel.addJSON(P.data, json);
@@ -224,10 +300,16 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
-                            Intent i = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
-                            startActivity(i);
+                        if (json.getInt(P.status) == 1) {
+                            String str = json.getString(P.tokenData);
+                            if (str != null)
+                                new Session(OTPVerificationActivity.this).addString(P.tokenData, str);
+
+                            int i = json.getInt(P.full_register);
+                            new Session(OTPVerificationActivity.this).addInt(P.full_register, i);
+
+                            Intent intent = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
+                            startActivity(intent);
                             finish();
                         } else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
@@ -236,8 +318,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                 .run("hitOtpVerificationApi");
     }
 
-    private void hitRegisterApi()
-    {
+    private void hitRegisterApi() {
         RequestModel requestModel = RequestModel.newRequestModel("register");
         requestModel.addJSON(P.data, json);
 
@@ -248,9 +329,8 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
-                            H.showMessage(OTPVerificationActivity.this,"OTP sent successfully, please wait for some time...");
+                        if (json.getInt(P.status) == 1) {
+                            H.showMessage(OTPVerificationActivity.this, "OTP sent successfully, please wait for some time...");
                         } else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
@@ -271,33 +351,4 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         H.showMessage(OTPVerificationActivity.this, "Something went wrong.");
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-    {
-
-
-        return false;
-    }
-
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_CLEAR)
-        {
-            H.log("iAm","Fired");
-            if (otp_sixth.isFocused())
-                otp_fifth.requestFocus();
-            else if (otp_fifth.isFocused())
-                otp_fourth.requestFocus();
-            else if (otp_fourth.isFocused())
-                otp_third.requestFocus();
-            else if (otp_third.isFocused())
-                otp_second.requestFocus();
-            else if (otp_second.isFocused())
-                otp_first.requestFocus();
-
-            //return  true;
-        }
-        return false; //super.onKeyDown(keyCode, event);
-    }*/
 }

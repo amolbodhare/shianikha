@@ -37,4 +37,6 @@ public class P {
 
     public static String registrationJson = "registrationJson";
     public static String otp = "otp";
+    public static String full_register = "full_register";
+    public static String isMasterDataPresent = "isMasterDataPresent";
 }//class
