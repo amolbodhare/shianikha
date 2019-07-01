@@ -51,6 +51,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
             try
             {
                 json = new Json(string);
+                from=json.length();
                 H.log("json length is ",json.length()+"");
                 String s1 = json.getString(P.country_code);
                 if (s1.equals("+91")) {

@@ -70,30 +70,30 @@ public class RegThirdPageActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent i=new Intent(RegThirdPageActivity.this,RegFourthPageActivity.class);
+                startActivity(i);
 
-                if(validation())
-                {
-                    reg_json.addString("religion", ed_religion.getTag().toString());
-                    reg_json.addString("ethnicity", ed_ethinicity.getTag().toString());
-                    reg_json.addString("father_city",ed_fathers_city.getTag().toString() );
-                    reg_json.addString("mother_city",ed_mothers_city.getTag().toString() );
-                    reg_json.addString("occupation_id",ed_current_occupation.getTag().toString());
-                    reg_json.addString("about_occupation",ed_other_detaiils_occupation.getText().toString());
-                    reg_json.addString("edulevel_id",ed_highest_level_edu.getTag().toString());
+      /*  if(validation())
+        {
+            reg_json.addString("religion", ed_religion.getTag().toString());
+            reg_json.addString("ethnicity", ed_ethinicity.getTag().toString());
+            reg_json.addString("father_city",ed_fathers_city.getTag().toString() );
+            reg_json.addString("mother_city",ed_mothers_city.getTag().toString() );
+            reg_json.addString("occupation_id",ed_current_occupation.getTag().toString());
+            reg_json.addString("about_occupation",ed_other_detaiils_occupation.getText().toString());
+            reg_json.addString("edulevel_id",ed_highest_level_edu.getTag().toString());
 
 
-                    //String city=reg_json.getString("city");
-                    //String state=reg_json.getString("state");
+            //String city=reg_json.getString("city");
+            //String state=reg_json.getString("state");
 
-                    //Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
 
-                    new Session(context).addString("reg_data",reg_json.toString());
-                    startActivity(i);
-                    //finish();
-                }
-            }
-        });
-
+            new Session(context).addString("reg_data",reg_json.toString());
+            startActivity(i);
+            //finish();
+        }*/
+    }
+});
         setUpEditTextClickListner();
         setUpTextWatcher();
 
@@ -397,7 +397,7 @@ public class RegThirdPageActivity extends AppCompatActivity
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         findViewById(R.id.view).setVisibility(View.GONE);
     }
-    public  boolean validation()
+   /* public  boolean validation()
     {
         if(ed_religion.getText().toString().trim().equalsIgnoreCase(""))
         {
@@ -438,5 +438,5 @@ public class RegThirdPageActivity extends AppCompatActivity
         }
 
         return  true;
-    }
+    }*/
 }
