@@ -60,10 +60,12 @@ public class RegFourthPageActivity extends AppCompatActivity
         {
             @Override
             public void onClick(View v) {
-                if(validation()) {
+                Intent i = new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
+                startActivity(i);
+              /*  if(validation()) {
 
 
-                    Intent i = new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
+
 
                     reg_json.addString("language", ed_lang.getTag().toString());
                     reg_json.addString("smoke_id", ed_habbit.getTag().toString());
@@ -78,7 +80,7 @@ public class RegFourthPageActivity extends AppCompatActivity
 
                     startActivity(i);
                     //finish();
-                }
+                }*/
             }
         });
 
@@ -291,7 +293,7 @@ public class RegFourthPageActivity extends AppCompatActivity
         findViewById(R.id.view).setVisibility(View.GONE);
     }
 
-    public  boolean validation()
+   /* public  boolean validation()
     {
         if(ed_lang.getText().toString().trim().equalsIgnoreCase(""))
         {
@@ -312,7 +314,7 @@ public class RegFourthPageActivity extends AppCompatActivity
         }
 
         return  true;
-    }
+    }*/
 
     public  void radioButtonClick(View view)
     {

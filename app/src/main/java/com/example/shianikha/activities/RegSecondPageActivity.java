@@ -133,8 +133,10 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(RegSecondPageActivity.this, RegThirdPageActivity.class);
+                startActivity(i);
 
-                if(validation()) {
+               /* if(validation()) {
 
 
                     Intent i = new Intent(RegSecondPageActivity.this, RegThirdPageActivity.class);
@@ -162,7 +164,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
                     startActivity(i);
                     //finish();
-                }
+                }*/
             }
         });
 
@@ -421,7 +423,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         dob_ed.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public  boolean validation()
+    /*public  boolean validation()
     {
         if(city_ed.getText().toString().trim().equalsIgnoreCase(""))
         {
@@ -457,5 +459,5 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         }
 
         return  true;
-    }
+    }*/
 }

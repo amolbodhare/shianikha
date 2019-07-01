@@ -112,10 +112,11 @@ public class RegFifthPageActivity extends AppCompatActivity
                 startActivity(i);
                 finish();
 */
-                if(validation())
+                hitRegisterApi();
+               /* if(validation())
                 {
                     hitRegisterApi();
-                }
+                }*/
 
 
             }
@@ -324,7 +325,7 @@ public class RegFifthPageActivity extends AppCompatActivity
         })
                 .run("hitLoginApi");
     }
-    public  boolean validation()
+   /* public  boolean validation()
     {
         if(ed_seeking_marriage.getText().toString().trim().equalsIgnoreCase(""))
         {
@@ -355,5 +356,5 @@ public class RegFifthPageActivity extends AppCompatActivity
         }
 
         return  true;
-    }
+    }*/
 }
