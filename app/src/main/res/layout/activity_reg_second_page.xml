@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,9 +30,10 @@
                 android:layout_marginTop="50dp">
 
                 <EditText
-                    android:id="@+id/city_ed"
+                    android:id="@+id/cityEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="City of Residence"
@@ -56,9 +58,10 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/state_ed"
+                    android:id="@+id/stateEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="State/Provinance/Country"
@@ -83,10 +86,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/country_of_residence_ed"
+                    android:id="@+id/countryEditText1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Country of residence"
                     android:paddingRight="56dp"
@@ -110,10 +114,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/country_of_citizenship_ed"
+                    android:id="@+id/countryEditText2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Country of Citizenship"
                     android:paddingRight="56dp"
@@ -130,7 +135,7 @@
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/ed_dob"
+                android:id="@+id/dateOfBirthEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/country_of_citizenship_layout"
@@ -145,14 +150,15 @@
                 android:id="@+id/height_spinner_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/ed_dob"
+                android:layout_below="@id/dateOfBirthEditText"
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/height_ed"
+                    android:id="@+id/heightEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Height"
                     android:paddingRight="56dp"
@@ -170,7 +176,7 @@
 
 
             <Button
-                android:id="@+id/btn_next"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/height_spinner_layout"

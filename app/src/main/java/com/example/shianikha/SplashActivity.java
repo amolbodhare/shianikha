@@ -24,6 +24,8 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
+import org.json.JSONArray;
+
 public class SplashActivity extends AppCompatActivity {
 
     /**
@@ -92,13 +94,33 @@ public class SplashActivity extends AppCompatActivity {
         if (json == null)
             return;
 
-        JsonList profileForList = json.getJsonList(P.profile_for);
-        if (profileForList != null)
-            session.addString(P.profile_for, profileForList.toString());
+        JsonList jsonList = json.getJsonList(P.profile_for);//for whom
+        if (jsonList != null)
+            session.addString(P.profile_for, jsonList.toString());
 
-        JsonList countryPinCodeList = json.getJsonList(P.country_code);
-        if (countryPinCodeList != null)
-            session.addString(P.country_code, countryPinCodeList.toString());
+        jsonList = json.getJsonList(P.country_code);// country name and phone code
+        if (jsonList != null)
+            session.addString(P.country_code, jsonList.toString());
+
+        jsonList = json.getJsonList(P.city);// city name and code
+        if (jsonList != null)
+            session.addString(P.city, jsonList.toString());
+
+        jsonList = json.getJsonList(P.state);// state name and code
+        if (jsonList != null)
+            session.addString(P.state, jsonList.toString());
+
+        jsonList = json.getJsonList(P.state);// state name and code
+        if (jsonList != null)
+            session.addString(P.state, jsonList.toString());
+
+        jsonList = json.getJsonList(P.country);// country name and code
+        if (jsonList != null)
+            session.addString(P.country, jsonList.toString());
+
+        JSONArray jsonArray = json.getJsonArray(P.height);// height array
+        if (jsonArray != null)
+            session.addString(P.height, jsonArray.toString());
 
         startNewActivity();
     }
@@ -110,12 +132,12 @@ public class SplashActivity extends AppCompatActivity {
                 /* Create an Intent that will start the Menu-Activity. */
                 Intent intent;
                 String string = session.getString(P.tokenData);
-                //if (string == null)
+                if (string == null)
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
-                /*else if (session.getInt(P.full_register)==0)
+                else if (session.getInt(P.full_register)==0)
                     intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
                 else
-                    intent = new Intent(SplashActivity.this, HomeActivity.class);*/
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
 
                 startActivity(intent);
                 finish();

@@ -39,4 +39,14 @@ public class P {
     public static String otp = "otp";
     public static String full_register = "full_register";
     public static String isMasterDataPresent = "isMasterDataPresent";
+    public static String state = "state";
+    public static String height = "height";
+    public static String city_name = "city_name";
+    public static String city_id = "city_id";
+    public static String state_name = "state_name";
+    public static String state_id = "state_id";
+    public static String country_res = "country_res";
+    public static String country_citizen = "country_citizen";
+    public static String dob = "dob";
+    public static String token_id = "token_id";
 }//class

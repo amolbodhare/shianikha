@@ -188,4 +188,12 @@ public class H {
         if (imm!=null)
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    public static void showKeyBoard(Context context, View view)
+    {
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        view.requestFocus();
+        if (imm!=null)
+            imm.showSoftInput(view, 0);
+    }
 }
