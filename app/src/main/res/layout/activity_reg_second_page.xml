@@ -191,7 +191,6 @@
 
     </ScrollView>
 
-
     <LinearLayout
         android:id="@+id/includeContainer"
         android:layout_width="300dp"

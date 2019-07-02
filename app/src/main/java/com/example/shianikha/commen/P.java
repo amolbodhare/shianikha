@@ -49,4 +49,13 @@ public class P {
     public static String country_citizen = "country_citizen";
     public static String dob = "dob";
     public static String token_id = "token_id";
+    public static String religion = "religion";
+    public static String ethnicity = "ethnicity";
+    public static String occupation = "occupation";
+    public static String education = "education";
+    public static String father_city = "father_city";
+    public static String occupation_id = "occupation_id";
+    public static String mother_city = "mother_city";
+    public static String about_occupation = "about_occupation";
+    public static String edulevel_id = "edulevel_id";
 }//class

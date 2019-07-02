@@ -1,6 +1,7 @@
 package com.example.shianikha.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,7 +115,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             try {
                 JSONArray jsonArray = new JSONArray(string);
                 heightList = new ArrayList<>();
-                for (int i = 1; i < jsonArray.length(); i++) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     string = jsonArray.getString(i);
                     heightList.add(string);
                 }
@@ -192,7 +193,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         View view = findViewById(R.id.view);
         view.setVisibility(View.GONE);
-        H.hideKeyBoard(RegSecondPageActivity.this, view);
+        H.hideKeyBoard(this, view);
     }
 
     @Override
@@ -265,6 +266,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         }
         App.masterJson.addString(P.height, string);
         H.log("masterJsonIs",App.masterJson.toString());
+        startActivity(new Intent(this,RegThirdPageActivity.class));
     }
 
     private void handleDatePicker() {

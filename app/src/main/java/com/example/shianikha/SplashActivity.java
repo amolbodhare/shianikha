@@ -122,6 +122,22 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonArray != null)
             session.addString(P.height, jsonArray.toString());
 
+        jsonList = json.getJsonList(P.religion);// religion name and code
+        if (jsonList != null)
+            session.addString(P.religion, jsonList.toString());
+
+        jsonList = json.getJsonList(P.ethnicity);// ethnicity name and code
+        if (jsonList != null)
+            session.addString(P.ethnicity, jsonList.toString());
+
+        jsonList = json.getJsonList(P.occupation);// occupation name and code
+        if (jsonList != null)
+            session.addString(P.occupation, jsonList.toString());
+
+        jsonList = json.getJsonList(P.education);// education name and code
+        if (jsonList != null)
+            session.addString(P.education, jsonList.toString());
+
         startNewActivity();
     }
 

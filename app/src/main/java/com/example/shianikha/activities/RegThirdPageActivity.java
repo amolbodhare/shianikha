@@ -12,378 +12,187 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
+import com.example.App;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegThirdPageActivity extends AppCompatActivity
-{
-    Button btn_next;
+public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
-
-    ArrayList<String> religion_arraylist;
-    ArrayList<String> ethinicity_arraylist;
-    ArrayList<String> country_arrayList;
-    ArrayList<String> current_occupation_arraylist;
-    ArrayList<String> highest_level_ediucation_arraylist;
-    Context context;
-    Json reg_json;
-
-    EditText ed_religion;
-    EditText ed_ethinicity;
-    EditText ed_fathers_city;
-    EditText ed_mothers_city;
-    EditText ed_current_occupation;
-    EditText ed_highest_level_edu;
-    EditText ed_other_detaiils_occupation ;
+    private ArrayList<String> religionNameList, religionCodeList, ethinicityNameList, ethinicityCodeList, cityNameList, cityCodeList;
+    private ArrayList<String> occupationNameList, occupationCodeList, educationNameList, educationCodeList;
+    private Session session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_third_page);
-        btn_next=(Button)findViewById(R.id.btn_next);
-        context=RegThirdPageActivity.this;
 
-        ed_other_detaiils_occupation = findViewById(R.id.other_details_occu_tiet);
-        /*Spinner religion_spinner = (Spinner) findViewById(R.id.religion_spinner);
-        Spinner ethinicity = (Spinner) findViewById(R.id.Ethincity_spinner);
-        Spinner fathers_city_spinner = (Spinner) findViewById(R.id.fathers_city_spinner);
-        Spinner mothers_city_spinner = (Spinner) findViewById(R.id.mothers_city_spinner);
-        Spinner current_occupation_spinner = (Spinner) findViewById(R.id.current_occupation);
-        Spinner height_level_edu_spinnner = (Spinner) findViewById(R.id.higest_level_edu_spinner);
-*/
+        session = new Session(this);
 
-        btn_next.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent i=new Intent(RegThirdPageActivity.this,RegFourthPageActivity.class);
-                startActivity(i);
+        findViewById(R.id.religionEditText).setOnClickListener(this);
+        findViewById(R.id.ethnicityEditText).setOnClickListener(this);
+        findViewById(R.id.motherCityEditText).setOnClickListener(this);
+        findViewById(R.id.fatherCityEditText).setOnClickListener(this);
+        findViewById(R.id.occupationEditText).setOnClickListener(this);
+        findViewById(R.id.educationEditText).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.view).setOnClickListener(this);
 
-      /*  if(validation())
-        {
-            reg_json.addString("religion", ed_religion.getTag().toString());
-            reg_json.addString("ethnicity", ed_ethinicity.getTag().toString());
-            reg_json.addString("father_city",ed_fathers_city.getTag().toString() );
-            reg_json.addString("mother_city",ed_mothers_city.getTag().toString() );
-            reg_json.addString("occupation_id",ed_current_occupation.getTag().toString());
-            reg_json.addString("about_occupation",ed_other_detaiils_occupation.getText().toString());
-            reg_json.addString("edulevel_id",ed_highest_level_edu.getTag().toString());
-
-
-            //String city=reg_json.getString("city");
-            //String state=reg_json.getString("state");
-
-            //Toast.makeText(context, reg_json.getString("religion"), Toast.LENGTH_SHORT).show();
-
-            new Session(context).addString("reg_data",reg_json.toString());
-            startActivity(i);
-            //finish();
-        }*/
+        setMarginTopOfCustomSpinner();
+        extractRequireList();
     }
-});
-        setUpEditTextClickListner();
+
+    private void extractRequireList() {
+        JsonList jsonList;
+
+        //for religion
+        String string = session.getString(P.religion);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            religionNameList = new ArrayList<>();
+            religionCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                religionNameList.add(string);
+
+                string = j.getString(P.id);
+                religionCodeList.add(string);
+            }
+        }
+
+        //for ethnicity
+        string = session.getString(P.ethnicity);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            ethinicityCodeList = new ArrayList<>();
+            ethinicityNameList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                ethinicityNameList.add(string);
+
+                string = j.getString(P.id);
+                ethinicityCodeList.add(string);
+            }
+        }
+
+        //for city
+        string = session.getString(P.city);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            cityNameList = new ArrayList<>();
+            cityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.city_name);
+                cityNameList.add(string);
+
+                string = j.getString(P.city_id);
+                cityCodeList.add(string);
+            }
+        }
+
+        //for city
+        string = session.getString(P.occupation);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            occupationNameList = new ArrayList<>();
+            occupationCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                occupationNameList.add(string);
+
+                string = j.getString(P.id);
+                occupationCodeList.add(string);
+            }
+        }
+
+        //for education
+        string = session.getString(P.education);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            educationCodeList = new ArrayList<>();
+            educationNameList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                educationNameList.add(string);
+
+                string = j.getString(P.id);
+                educationCodeList.add(string);
+            }
+        }
         setUpTextWatcher();
-
-        religion_arraylist=new ArrayList<>();
-        ethinicity_arraylist=new ArrayList<>();
-        country_arrayList=new ArrayList<>();
-        current_occupation_arraylist=new ArrayList<>();
-        highest_level_ediucation_arraylist=new ArrayList<>();
-
-        try
-        {
-
-            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
-
-            String regdatajsonstring = new Session(context).getString("reg_data");
-
-            //System.out.print(masterdatajsonstring);
-            Json master_json=new Json(masterdatajsonstring);
-            reg_json=new Json(regdatajsonstring);
-
-            JSONArray jsonArray_religion=master_json.getJsonArray("religion");
-            JSONArray jsonArray_ethnicity=master_json.getJsonArray("ethnicity");
-            JSONArray jsonArray_country=master_json.getJsonArray("country");
-            JSONArray jsonArray_occupation=master_json.getJsonArray("occupation");
-            JSONArray jsonArray_education=master_json.getJsonArray("education");
-
-
-            for(int i=0;i<jsonArray_religion.length();i++)
-            {
-                religion_arraylist.add(jsonArray_religion.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_ethnicity.length();i++)
-            {
-                ethinicity_arraylist.add(jsonArray_ethnicity.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_country.length();i++)
-            {
-                country_arrayList.add(jsonArray_country.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_occupation.length();i++)
-            {
-                current_occupation_arraylist.add(jsonArray_occupation.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_education.length();i++)
-            {
-                highest_level_ediucation_arraylist.add(jsonArray_education.getJSONObject(i).getString("name"));;
-            }
-
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        /*religion_spinner.setOnItemSelectedListener(this);
-        ethinicity.setOnItemSelectedListener(this);
-        fathers_city_spinner.setOnItemSelectedListener(this);
-        mothers_city_spinner.setOnItemSelectedListener(this);
-        current_occupation_spinner.setOnItemSelectedListener(this);
-        height_level_edu_spinnner.setOnItemSelectedListener(this);
-
-
-        // Spinner Drop down elements
-        List<String> cities = new ArrayList<String>();
-        List<String> states = new ArrayList<String>();
-        List<String> country_res = new ArrayList<String>();
-        List<String> country_citi = new ArrayList<String>();
-        List<String> height = new ArrayList<String>();
-        List<String> highest_level_edu = new ArrayList<String>();
-
-        cities.add("Select Relegion");
-        cities.add("Mumbai");
-        cities.add("Pune");
-        cities.add("Goa");
-        cities.add("Banglore");
-        cities.add("Delhi");
-
-        states.add("Ethnicity");
-        states.add("Cazlifornia");
-        states.add("Los Angelis");
-        states.add("Indiana");
-        states.add("New York");
-        states.add("Texas");
-        states.add("Florida");
-        states.add("Alaska");
-
-        country_res.add("Father's City/Country of origin");
-        country_res.add("Brazil");
-        country_res.add("South Africa");
-        country_res.add("India");
-        country_res.add("America");
-        country_res.add("Singapur");
-        country_res.add("UAE");
-        country_res.add("Pakistan");
-
-        country_citi.add("Mother's City/Country of origin");
-        country_citi.add("Austin");
-        country_citi.add("Austin");
-        country_citi.add("Dallas");
-        country_citi.add("Denver");
-        country_citi.add("Phoenix");
-
-        height.add("current occupation");
-        height.add("5.2'");
-        height.add("5.3'");
-        height.add("5.4'");
-        height.add("5.5'");
-
-        highest_level_edu.add("Highest level Of education");
-        highest_level_edu.add("5.2'");
-        highest_level_edu.add("5.3'");
-        highest_level_edu.add("5.4'");
-        highest_level_edu.add("5.5'");
-
-        setSpinner(religion_spinner,cities);
-        setSpinner(ethinicity,states);
-        setSpinner(fathers_city_spinner,country_res);
-        setSpinner(mothers_city_spinner,country_citi);
-        setSpinner(current_occupation_spinner,height);
-        setSpinner(height_level_edu_spinnner,height);
-*/
     }
 
-    /*@Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public  void setSpinner(Spinner spinner,List<String> categories)
-    {
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-
-    }*/
-
-    private void setUpEditTextClickListner()
-    {
-         ed_religion = findViewById(R.id.religion_ed);
-         ed_ethinicity = findViewById(R.id.ethinicity_ed);
-         ed_fathers_city = findViewById(R.id.fathers_city_ed);
-         ed_mothers_city = findViewById(R.id.mothers_city_ed);
-         ed_current_occupation = findViewById(R.id.current_occupation_ed);
-
-
-         ed_highest_level_edu = findViewById(R.id.higest_level_edu_ed);
-         ed_religion.setOnClickListener(new View.OnClickListener()
-        {
+    private void setUpTextWatcher() {
+        ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (arrayAdapter != null)
+                    arrayAdapter.getFilter().filter(s);
+            }
 
-        ed_ethinicity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-        ed_fathers_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-        ed_mothers_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-        ed_current_occupation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-        ed_highest_level_edu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
+            public void afterTextChanged(Editable s) { }
         });
     }
 
-    private void setUpTextWatcher()
-    {
-        ((EditText)findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                arrayAdapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-    private void setUpCustomSpinner(final View view)
-    {
+    private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
-        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideCustomSpinnerLayout();
-            }
-        });
 
-        if (view.getId()==R.id.religion_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Religion");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,religion_arraylist);
-            listView.setAdapter(arrayAdapter);
+        if (view.getId() == R.id.religionEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search Religion");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, religionNameList);
+        } else if (view.getId() == R.id.ethnicityEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Ethnicity");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ethinicityNameList);
         }
-        else if (view.getId() == R.id.ethinicity_ed)
+        if (view.getId() == R.id.fatherCityEditText)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Ethinicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethinicity_arraylist);
-            listView.setAdapter(arrayAdapter);
-        }
-        if (view.getId()==R.id.fathers_city_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Father's city/country of origin");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.mothers_city_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Mother's city/country of origin");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,country_arrayList);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.current_occupation_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Current Occupation");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,current_occupation_arraylist);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.higest_level_edu_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Highest level of education");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,highest_level_ediucation_arraylist);
-            listView.setAdapter(arrayAdapter);
+            ((EditText) findViewById(R.id.editText)).setHint("Search Father's City");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
+        } else if (view.getId() == R.id.motherCityEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search Mother's city");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
+        } else if (view.getId() == R.id.occupationEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
+        } else if (view.getId() == R.id.educationEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search education");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
         }
 
+        if (arrayAdapter == null)
+            return;
+
+        H.showKeyBoard(this, findViewById(R.id.editText));
+
+        listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView!=null)
-                {
-                    Log.e("selectedIs",textView.getText().toString());
-                    ((EditText)view).setText(textView.getText().toString());
-                    ((EditText)view).setTag(position);
-
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
                 }
                 hideCustomSpinnerLayout();
             }
@@ -394,49 +203,102 @@ public class RegThirdPageActivity extends AppCompatActivity
 
     private void hideCustomSpinnerLayout() {
         int i = findViewById(R.id.includeContainer).getWidth();
+        ((EditText) findViewById(R.id.editText)).setText("");
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
-        findViewById(R.id.view).setVisibility(View.GONE);
+        View view = findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(this, view);
     }
-   /* public  boolean validation()
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button)
+            makeJson();
+        else if (v.getId() == R.id.view)
+            hideCustomSpinnerLayout();
+        else
+            setUpCustomSpinner(v);
+    }
+
+    private void makeJson()
     {
-        if(ed_religion.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_religion.setError("Select the City");
+        EditText editText = findViewById(R.id.religionEditText);
+        String string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select religion name");
+            return;
+        }
+        int i = religionNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.religion, religionCodeList.get(i));
 
-            return false;
+        editText = findViewById(R.id.ethnicityEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select ethnicity name");
+            return;
         }
+        i = ethinicityNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.ethnicity, ethinicityCodeList.get(i));
 
-        else if(ed_ethinicity.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_ethinicity.setError("Select the ethincity");
-            return false;
+        editText = findViewById(R.id.fatherCityEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select father's city");
+            return;
         }
-        else if(ed_fathers_city.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_fathers_city.setError("Select the father's city");
-            return false;
-        }
-        else if(ed_mothers_city.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_mothers_city.setError("Select the mothers city");
-            return false;
-        }
-        else if(ed_current_occupation.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_current_occupation.setError("Select the country of citizenship");
-            return false;
-        }
-        else if(ed_other_detaiils_occupation.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_other_detaiils_occupation.setError("Enter the occupation");
-            return false;
-        }
-        else if(ed_highest_level_edu.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_highest_level_edu.setError("Enter the occupation");
-            return false;
-        }
+        i = cityNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.father_city, cityCodeList.get(i));
 
-        return  true;
-    }*/
+        editText = findViewById(R.id.motherCityEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select mother's city");
+            return;
+        }
+        i = cityNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.mother_city, cityCodeList.get(i));
+
+        editText = findViewById(R.id.occupationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select occupation");
+            return;
+        }
+        i = occupationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
+
+        string = ((EditText) findViewById(R.id.occupationDetailsEditText)).getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please specify occupation details");
+            return;
+        }
+        App.masterJson.addString(P.about_occupation, string);
+
+        editText = findViewById(R.id.educationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select higher education");
+            return;
+        }
+        i = educationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
+
+        H.log("masterJsonIs",App.masterJson.toString());
+        //startActivity(new Intent(this,RegThirdPageActivity.class));
+    }
+
+    private void setMarginTopOfCustomSpinner() {
+        LinearLayout linearLayout = findViewById(R.id.includeContainer);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
+        int i = new Session(this).getInt(P.statusBarHeight);
+        layoutParams.topMargin = i;
+        H.log("heightIs", i + "");
+        linearLayout.setLayoutParams(layoutParams);
+    }
 }

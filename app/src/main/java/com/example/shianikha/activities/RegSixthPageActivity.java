@@ -274,7 +274,7 @@ public class RegSixthPageActivity extends AppCompatActivity {
         }
         else if (view.getId() == R.id.pref_match_ethnicity_spinner_ed)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Ethinicity");
+            ((EditText)findViewById(R.id.editText)).setHint("Select Ethnicity");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethinicity_arrayList);
             listView.setAdapter(arrayAdapter);
         }
