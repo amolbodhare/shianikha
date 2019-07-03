@@ -11,303 +11,172 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.example.App;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegSixthPageActivity extends AppCompatActivity {
 
-    Button btn_register;
+public class RegSixthPageActivity extends AppCompatActivity implements View.OnClickListener {
+
     private ArrayAdapter<String> arrayAdapter;
-
-    Context context;
-    ArrayList<String> pref_match_marital_status_arrayList;
-    ArrayList<String> ethinicity_arrayList;
-    ArrayList<String> min_education_arrayList;
+    private Session session;
+    private ArrayList<String> ageList, maritalStatusNameList, maritalStatusCodeList, ethnicityNameList, ethincityCodeList;
+    private ArrayList<String> educationNameList, educationCodeList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_sixth_page);
-        context=RegSixthPageActivity.this;
 
+        session = new Session(this);
+        findViewById(R.id.minAgeEditText).setOnClickListener(this);
+        findViewById(R.id.maxAgeEditText).setOnClickListener(this);
+        findViewById(R.id.maritalStatusEditText).setOnClickListener(this);
+        findViewById(R.id.ethnicityEditText).setOnClickListener(this);
+        findViewById(R.id.educationEditText).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.view).setOnClickListener(this);
 
+        setMarginTopOfCustomSpinner();
+        extractRequireList();
+    }
 
-        pref_match_marital_status_arrayList=new ArrayList<>();
-        ethinicity_arrayList=new ArrayList<>();
-        min_education_arrayList=new ArrayList<>();
+    private void extractRequireList() {
+        JsonList jsonList;
 
-        try
-        {
-
-            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
-
-            //System.out.print(masterdatajsonstring);
-            Json json=new Json(masterdatajsonstring);
-
-            JSONArray jsonArray_marital_status=json.getJsonArray("marital_status");
-            JSONArray jsonArray_ethinicity=json.getJsonArray("ethnicity");
-            JSONArray jsonArray_min_education=json.getJsonArray("education");
-
-
-
-            for(int i=0;i<jsonArray_marital_status.length();i++)
-            {
-                pref_match_marital_status_arrayList.add(jsonArray_marital_status.getJSONObject(i).getString("val"));
+        //for age
+        String string = session.getString(P.age);
+        try {
+            JSONArray jsonArray = new JSONArray(string);
+            ageList = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                string = jsonArray.getString(i);
+                ageList.add(string);
             }
-
-            for(int i=0;i<jsonArray_ethinicity.length();i++)
-            {
-                ethinicity_arrayList.add(jsonArray_ethinicity.getJSONObject(i).getString("name"));
-            }
-
-
-            for(int i=0;i<jsonArray_min_education.length();i++)
-            {
-                min_education_arrayList.add(jsonArray_min_education.getJSONObject(i).getString("name"));
-            }
-
-           /* for(int i=0;i<jsonArray_height.length();i++)
-            {
-                height_arrayList.add("Hello");
-            }*/
-
-        }
-
-        catch (Exception e)
-        {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        //for marital status
+        string = session.getString(P.marital_status);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            maritalStatusNameList = new ArrayList<>();
+            maritalStatusCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                maritalStatusNameList.add(string);
 
-
-      /*  Spinner min_age_spinner = (Spinner) findViewById(R.id.min_age_spinner);
-        Spinner max_age_spinner = (Spinner) findViewById(R.id.max_age_spinner);
-        Spinner pref_match_status_spinner = (Spinner) findViewById(R.id.pref_match_status_spinner);
-        Spinner pref_match_ethinicity = (Spinner) findViewById(R.id.pref_match_ethnicity_spinner);
-        Spinner pref_match_min_edu_spinner = (Spinner) findViewById(R.id.pref_match_min_education_spinner);
-
-
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent i=new Intent(RegSixthPageActivity.this, OTPVerificationActivity.class);
-                startActivity(i);
+                string = j.getString(P.id);
+                maritalStatusCodeList.add(string);
             }
-        });
+        }
 
-        // Spinner Drop down elements
-        List<String> cities = new ArrayList<String>();
-        List<String> states = new ArrayList<String>();
-        List<String> country_res = new ArrayList<String>();
-        List<String> country_citi = new ArrayList<String>();
-        List<String> height = new ArrayList<String>();
+        //for ethnicity
+        string = session.getString(P.ethnicity);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            ethnicityNameList = new ArrayList<>();
+            ethincityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                ethnicityNameList.add(string);
 
-        cities.add("18");
-        cities.add("19");
-        cities.add("20");
-        cities.add("21");
-        cities.add("22");
-        cities.add("23");
-        cities.add("24");
-        cities.add("25");
-        cities.add("26");
-        cities.add("27");
-        cities.add("28");
-        cities.add("29");
-        cities.add("30");
-        cities.add("31");
+                string = j.getString(P.id);
+                ethincityCodeList.add(string);
+            }
+        }
 
+        //for education
+        string = session.getString(P.education);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            educationNameList = new ArrayList<>();
+            educationCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                educationNameList.add(string);
 
-        states.add("18");
-        states.add("19");
-        states.add("20");
-        states.add("21");
-        states.add("22");
-        states.add("23");
-        states.add("24");
-        states.add("25");
-        states.add("26");
-        states.add("27");
-        states.add("28");
-        states.add("29");
-        states.add("30");
-        states.add("31");
-
-
-        country_res.add("pref match martial status");
-        country_res.add("South Africa");
-        country_res.add("India");
-        country_res.add("America");
-        country_res.add("Singapur");
-        country_res.add("UAE");
-        country_res.add("Pakistan");
-
-        country_citi.add("pref match ethinicity");
-        country_citi.add("Austin");
-        country_citi.add("Dallas");
-        country_citi.add("Denver");
-        country_citi.add("Phoenix");
-
-        height.add("minimum education");
-        height.add("B.E.");
-        height.add("Doctor");
-        height.add("IT");
-        height.add("5.5'");
-
-        setSpinner(min_age_spinner,cities);
-        setSpinner(max_age_spinner,states);
-        setSpinner(pref_match_status_spinner,country_res);
-        setSpinner(pref_match_ethinicity,country_citi);
-        setSpinner(pref_match_min_edu_spinner,height);*/
-      setUpEditTextClickListner();
-      setUpTextWatcher();
+                string = j.getString(P.id);
+                educationCodeList.add(string);
+            }
+        }
+        setUpTextWatcher();
     }
 
-    private void setUpEditTextClickListner()
-    {
-        EditText ed_pref_match_ed = findViewById(R.id.pref_match_ed);
-        EditText ed_pref_match_ethinicity_ed = findViewById(R.id.pref_match_ethnicity_spinner_ed);
-        EditText ed_min_edu = findViewById(R.id.pref_match_min_education_spinner_ed);
-        EditText ed_min_age = findViewById(R.id.min_age_spinner_ed);
-        EditText ed_max_age = findViewById(R.id.max_age_spinner_ed);
-
-
-        ed_pref_match_ed.setOnClickListener(new View.OnClickListener()
-        {
+    private void setUpTextWatcher() {
+        ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-
-        ed_pref_match_ethinicity_ed.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-
-        ed_min_edu.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-
-        ed_min_age.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-
-        ed_max_age.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v);
-            }
-        });
-
-    }
-
-    private void setUpTextWatcher()
-    {
-        ((EditText)findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                arrayAdapter.getFilter().filter(s);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (arrayAdapter != null)
+                    arrayAdapter.getFilter().filter(s);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
     }
 
-    private void setUpCustomSpinner(final View view)
-    {
+    private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
-        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideCustomSpinnerLayout();
-            }
-        });
 
-        if (view.getId()==R.id.pref_match_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Pref match");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,pref_match_marital_status_arrayList);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.pref_match_ethnicity_spinner_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Ethnicity");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethinicity_arrayList);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.pref_match_min_education_spinner_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Minimum Education");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,min_education_arrayList);
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.min_age_spinner_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Min age");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
-            listView.setAdapter(arrayAdapter);
-        }
-        else if (view.getId() == R.id.max_age_spinner_ed)
-        {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Max age");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,getResources().getStringArray(R.array.state));
-            listView.setAdapter(arrayAdapter);
+        if (view.getId() == R.id.minAgeEditText || view.getId() == R.id.maxAgeEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search age");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ageList);
+        } else if (view.getId() == R.id.maritalStatusEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search marital status");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, maritalStatusNameList);
+        } else if (view.getId() == R.id.ethnicityEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search ethnicity");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ethnicityNameList);
+        } else if (view.getId() == R.id.educationEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search edit text");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
         }
 
+        if (arrayAdapter == null)
+            return;
 
+        H.showKeyBoard(this, findViewById(R.id.editText));
+
+        listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView!=null)
-                {
-                    Log.e("selectedIs",textView.getText().toString());
-                    ((EditText)view).setText(textView.getText().toString());
-
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
                 }
                 hideCustomSpinnerLayout();
             }
@@ -318,7 +187,141 @@ public class RegSixthPageActivity extends AppCompatActivity {
 
     private void hideCustomSpinnerLayout() {
         int i = findViewById(R.id.includeContainer).getWidth();
+        ((EditText) findViewById(R.id.editText)).setText("");
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
-        findViewById(R.id.view).setVisibility(View.GONE);
+        View view = findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(this, view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.view)
+            hideCustomSpinnerLayout();
+        else if (v.getId() == R.id.button)
+            makeJson();
+        else
+            setUpCustomSpinner(v);
+    }
+
+    private void makeJson()
+    {
+        Json json = new Json();
+        json.addString(P.token_id,session.getString(P.tokenData));
+
+        EditText editText = findViewById(R.id.minAgeEditText);
+        String string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select minimum age");
+            return;
+        }
+        int i = H.getInt(string);
+
+        editText = findViewById(R.id.maxAgeEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this,"Please select maximum age");
+            return;
+        }
+        int j = H.getInt(string);
+
+        if (j-i<1)
+        {
+            H.showMessage(this,"Maximum age must be greater than minimum age");
+            return;
+        }
+        json.addString(P.min_age,i+"");
+        json.addString(P.max_age,j+"");
+
+        editText = findViewById(R.id.maritalStatusEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select marital status");
+            return;
+        }
+        i = maritalStatusNameList.indexOf(string);
+        if (i != -1)
+           json.addString(P.marital_status_id, maritalStatusCodeList.get(i));
+
+        editText = findViewById(R.id.ethnicityEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select ethnicity");
+            return;
+        }
+        i = ethnicityNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.ethnicitys_id, ethincityCodeList.get(i));
+
+        editText = findViewById(R.id.educationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select education");
+            return;
+        }
+        i = educationNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.education_id, educationCodeList.get(i));
+
+        string = ((CheckBox)findViewById(R.id.checkBox1)).isChecked() ? "1" : "0";
+        json.addString(P.request_from_anyone,string);
+
+        string = ((CheckBox)findViewById(R.id.checkBox2)).isChecked() ? "1" : "0";
+        json.addString(P.request_from_preferred_match,string);
+
+        string = ((CheckBox)findViewById(R.id.checkBox3)).isChecked() ? "1" : "0";
+        json.addString(P.sancity_of_the_holy_quran,string);
+
+        hitPerfectMatchApi(json);
+    }
+
+    private void hitPerfectMatchApi(Json json)
+    {
+        final LoadingDialog loadingDialog = new LoadingDialog(this);
+
+        RequestModel requestModel = RequestModel.newRequestModel("perfect_match");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener()
+                {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(RegSixthPageActivity.this, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                        {
+                            new Session(RegSixthPageActivity.this).addInt(P.full_register, 1);
+                            Intent intent = new Intent(RegSixthPageActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else
+                            H.showMessage(RegSixthPageActivity.this, json.getString(P.msg));
+                    }
+                })
+                .run("hitPerfectMatchApi");
+    }
+
+    private void setMarginTopOfCustomSpinner() {
+        LinearLayout linearLayout = findViewById(R.id.includeContainer);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
+        int i = new Session(this).getInt(P.statusBarHeight);
+        layoutParams.topMargin = i;
+        H.log("heightIs", i + "");
+        linearLayout.setLayoutParams(layoutParams);
     }
 }
