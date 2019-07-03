@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,161 +10,160 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/aaaaaa"/>
-
+        android:src="@drawable/aaaaaa" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="17dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="70dp"
-                android:orientation="vertical">
-
-                <!--<Spinner
-                    android:id="@+id/seeking_marriage"
-                    android:layout_width="match_parent"
-                    android:alpha="0.5"
-                    android:layout_height="55dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />-->
-                <RelativeLayout
-                    android:id="@+id/seeking_marriage_layout"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_height="56dp">
-
-                    <EditText
-                        android:id="@+id/seeking_marriage_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="you are seeking marriage"
-                        android:focusable="false"
-                        android:paddingRight="56dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-                </RelativeLayout>
-
-            <!--    <Spinner
-                    android:id="@+id/interested_in"
-                    android:layout_width="match_parent"
-                    android:alpha="0.5"
-                    android:layout_height="55dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginRight="25dp" />
--->
-
-                <RelativeLayout
-                    android:id="@+id/interesterd_in_layout"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_height="56dp">
-
-                    <EditText
-                        android:id="@+id/interesterd_in_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Interested in"
-                        android:focusable="false"
-                        android:paddingRight="56dp" />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/practice_of_religion"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                android:layout_height="56dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp">
 
                 <EditText
-                    android:id="@+id/religious_exception_ed"
+                    android:id="@+id/marriageEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:hint="you are seeking marriage"
+                    android:paddingRight="56dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginRight="25dp"
-                    android:text="@string/preference" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="25dp">
 
                 <EditText
-                    android:id="@+id/about_one_ed"
+                    android:id="@+id/interestedInEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:hint="Interested in"
+                    android:paddingRight="56dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="More about you"
-                    android:textSize="14dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/practice_of_religion"
+                android:textSize="14dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/about_two_ed"
+                    android:id="@+id/descriptionOneEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"/>
-
-                <Button
-                    android:id="@+id/btn_next"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="45dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
-                    android:text="Submit"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/white"
-                    android:background="@drawable/blue_button_back"/>
+                    android:gravity="top"
+                    android:lines="3" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/preference"
+                android:textSize="14dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/descriptionTwoEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="top"
+                    android:lines="3" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="More about you"
+                android:textSize="14dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/descriptionThreeEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="top"
+                    android:lines="3" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/blue_button_back"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
 
-            </LinearLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 
@@ -189,6 +187,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#60000000"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

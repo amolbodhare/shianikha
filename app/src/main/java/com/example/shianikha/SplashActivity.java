@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         session = new Session(this);
         hitMastersApi();
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, 31);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
 
         //to get height of status bar
         new Handler().postDelayed(new Runnable() {
@@ -60,7 +60,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void hitMastersApi() {
-        final LoadingDialog loadingDialog = new LoadingDialog(this);
         Json json = new Json();
 
         RequestModel requestModel = RequestModel.newRequestModel("masters");
@@ -138,6 +137,30 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null)
             session.addString(P.education, jsonList.toString());
 
+        jsonList = json.getJsonList(P.mothertongue);// language name and code
+        if (jsonList != null)
+            session.addString(P.language, jsonList.toString());
+
+        jsonList = json.getJsonList(P.smoking);// smoking name and code
+        if (jsonList != null)
+            session.addString(P.smoking, jsonList.toString());
+
+        jsonList = json.getJsonList(P.relocate);// relocate name and code
+        if (jsonList != null)
+            session.addString(P.relocate, jsonList.toString());
+
+        jsonList = json.getJsonList(P.relocate);// relocate name and code
+        if (jsonList != null)
+            session.addString(P.relocate, jsonList.toString());
+
+        jsonList = json.getJsonList(P.seeking_marriage);// marriage name and code
+        if (jsonList != null)
+            session.addString(P.seeking_marriage, jsonList.toString());
+
+        jsonList = json.getJsonList(P.intreasted_in);// interrest name and code
+        if (jsonList != null)
+            session.addString(P.intreasted_in, jsonList.toString());
+
         startNewActivity();
     }
 
@@ -148,6 +171,7 @@ public class SplashActivity extends AppCompatActivity {
                 /* Create an Intent that will start the Menu-Activity. */
                 Intent intent;
                 String string = session.getString(P.tokenData);
+                H.log("tokenIs",string);
                 if (string == null)
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register)==0)

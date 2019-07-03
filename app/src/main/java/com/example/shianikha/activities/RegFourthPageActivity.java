@@ -13,225 +13,112 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
+import com.example.App;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegFourthPageActivity extends AppCompatActivity
-{
-    Button btn_next;
+public class RegFourthPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
-    Json reg_json;
-
-    ArrayList<String> language_arraylist;
-    ArrayList<String> smoking_arraylist;
-    ArrayList<String> relocation_arraylist;
-
-    Context context;
-    private long l;
-    EditText ed_lang;
-    EditText ed_habbit;
-    EditText ed_relocate;
-
-
+    private ArrayList<String> languageNameList, languageCodeList, smokingNameList, smokingCodeList, relocateNameList, relocateCodeList;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_fourth_page);
-        context=RegFourthPageActivity.this;
 
-        /*Spinner lang_spinner = (Spinner) findViewById(R.id.lang_spinner);
-        Spinner habbit_spinner = (Spinner) findViewById(R.id.habbit_spinner);*/
+        session = new Session(this);
 
-        btn_next=(Button)findViewById(R.id.btn_next);
+        findViewById(R.id.languageEditText).setOnClickListener(this);
+        findViewById(R.id.smokingEditText).setOnClickListener(this);
+        findViewById(R.id.relocateEditText).setOnClickListener(this);
+        findViewById(R.id.view).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
 
-        btn_next.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(RegFourthPageActivity.this, RegFifthPageActivity.class);
-                startActivity(i);
-              /*  if(validation()) {
+        setMarginTopOfCustomSpinner();
+        extractRequireList();
+    }
 
+    private void extractRequireList() {
+        JsonList jsonList;
 
+        //for language
+        String string = session.getString(P.language);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            languageNameList = new ArrayList<>();
+            languageCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                languageNameList.add(string);
 
-
-                    reg_json.addString("language", ed_lang.getTag().toString());
-                    reg_json.addString("smoke_id", ed_habbit.getTag().toString());
-                    reg_json.addString("relocate_id", ed_relocate.getTag().toString());
-                    reg_json.addString("relocate_id", "4");
-                    reg_json.addString("cvt_islam", "2");
-                    reg_json.addString("syed", "3");
-                    reg_json.addString("handicap", "2");
-                    reg_json.addString("children", "2");
-
-                    new Session(context).addString("reg_data", reg_json.toString());
-
-                    startActivity(i);
-                    //finish();
-                }*/
+                string = j.getString(P.id);
+                languageCodeList.add(string);
             }
-        });
+        }
 
-        setUpEditTextClickListner();
+        //for smoking
+        string = session.getString(P.smoking);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            smokingNameList = new ArrayList<>();
+            smokingCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                smokingNameList.add(string);
+
+                string = j.getString(P.id);
+                smokingCodeList.add(string);
+            }
+        }
+
+        //for relocate
+        string = session.getString(P.relocate);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            relocateNameList = new ArrayList<>();
+            relocateCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                relocateNameList.add(string);
+
+                string = j.getString(P.id);
+                relocateCodeList.add(string);
+            }
+        }
         setUpTextWatcher();
-
-        language_arraylist=new ArrayList<>();
-        smoking_arraylist=new ArrayList<>();
-        relocation_arraylist=new ArrayList<>();
-
-        try
-            {
-
-            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-            String masterdatajsonstring = new Session(context).getString(com.example.shianikha.commen.P.masterDataString);
-            String regdatajsonstring = new Session(context).getString("reg_data");
-
-           //System.out.print(masterdatajsonstring);
-            Json json=new Json(masterdatajsonstring);
-            reg_json=new Json(regdatajsonstring);
-
-            JSONArray jsonArray_language=json.getJsonArray("mothertongue");
-            JSONArray jsonArray_smoking=json.getJsonArray("smoking");
-            JSONArray jsonArray_relocation=json.getJsonArray("relocate");
-
-
-            for(int i=0;i<jsonArray_language.length();i++)
-            {
-                language_arraylist.add(jsonArray_language.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_smoking.length();i++)
-            {
-                smoking_arraylist.add(jsonArray_smoking.getJSONObject(i).getString("val"));
-            }
-
-                for(int i=0;i<jsonArray_relocation.length();i++)
-                {
-                    relocation_arraylist.add(jsonArray_relocation.getJSONObject(i).getString("val"));
-                }
-
-
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-
-
-        /*lang_spinner.setOnItemSelectedListener(this);
-        habbit_spinner.setOnItemSelectedListener(this);*/
-
-
-
-        /*// Spinner Drop down elements
-        List<String> cities = new ArrayList<String>();
-        List<String> states = new ArrayList<String>();
-
-
-        cities.add("Select languages");
-        cities.add("English");
-
-
-        states.add("Smoking");
-        states.add("Drinking");
-
-
-        setSpinner(lang_spinner,cities);
-        setSpinner(habbit_spinner,states);*/
-
     }
 
-   /* @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public  void setSpinner(Spinner spinner,List<String> categories)
-    {
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-
-    }*/
-   private void setUpEditTextClickListner()
-   {
-        ed_lang = findViewById(R.id.lang_ed);
-        ed_habbit = findViewById(R.id.habbit_ed);
-        ed_relocate = findViewById(R.id.relocate_ed);
-
-
-       ed_lang.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               setUpCustomSpinner(v);
-           }
-       });
-
-       ed_habbit.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               setUpCustomSpinner(v);
-           }
-       });
-
-       ed_relocate.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               setUpCustomSpinner(v);
-           }
-       });
-
-   }
-
-    private void setUpTextWatcher()
-    {
-        ((EditText)findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
+    private void setUpTextWatcher() {
+        ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (arrayAdapter != null)
+                    arrayAdapter.getFilter().filter(s);
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                arrayAdapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) { }
         });
     }
 
@@ -239,45 +126,37 @@ public class RegFourthPageActivity extends AppCompatActivity
     {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
-        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideCustomSpinnerLayout();
-            }
-        });
 
-        if (view.getId()==R.id.lang_ed)
+        if (view.getId()==R.id.languageEditText)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Select language");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,language_arraylist);
-            listView.setAdapter(arrayAdapter);
+            ((EditText)findViewById(R.id.editText)).setHint("Search language");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,languageNameList);
         }
-        else if (view.getId() == R.id.habbit_ed)
+        else if (view.getId() == R.id.smokingEditText)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Select smoking");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,smoking_arraylist);
-            listView.setAdapter(arrayAdapter);
+            ((EditText)findViewById(R.id.editText)).setHint("Smoking status");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,smokingNameList);
         }
 
-        else if (view.getId() == R.id.relocate_ed)
+        else if (view.getId() == R.id.relocateEditText)
         {
-            ((EditText)findViewById(R.id.editText)).setHint("Select Relocation");
-            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,relocation_arraylist);
-            listView.setAdapter(arrayAdapter);
+            ((EditText)findViewById(R.id.editText)).setHint("Relocation opinion");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,relocateNameList);
         }
 
+        if (arrayAdapter == null)
+            return;
 
+        H.showKeyBoard(this, findViewById(R.id.editText));
+
+        listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView!=null)
-                {
-                    //Log.e("selectedIs",textView.getText().toString());
-                    ((EditText)view).setText(textView.getText().toString());
-                    ((EditText)view).setTag(position);
-
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
                 }
                 hideCustomSpinnerLayout();
             }
@@ -286,42 +165,101 @@ public class RegFourthPageActivity extends AppCompatActivity
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
     }
 
-    private void hideCustomSpinnerLayout()
-    {
+    private void hideCustomSpinnerLayout() {
         int i = findViewById(R.id.includeContainer).getWidth();
+        ((EditText) findViewById(R.id.editText)).setText("");
         findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
-        findViewById(R.id.view).setVisibility(View.GONE);
+        View view = findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(this, view);
     }
 
-   /* public  boolean validation()
+    @Override
+    public void onClick(View v)
     {
-        if(ed_lang.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_lang.setError("Select the language");
+        if (v.getId() == R.id.view)
+            hideCustomSpinnerLayout();
+        else if (v.getId() == R.id.button)
+            makeJson();
+        else
+            setUpCustomSpinner(v);
+    }
 
-            return false;
-        }
-
-        else if(ed_habbit.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_habbit.setError("Select the smoking");
-            return false;
-        }
-        else if(ed_relocate.getText().toString().trim().equalsIgnoreCase(""))
-        {
-            ed_relocate.setError("Select the relocating");
-            return false;
-        }
-
-        return  true;
-    }*/
-
-    public  void radioButtonClick(View view)
+    private void makeJson()
     {
-        if((view.getRootView().getId())==(R.id.islam_convert_rdg))
-        {
-            Toast.makeText(context, "heyyyyy", Toast.LENGTH_SHORT).show();
+        EditText editText = findViewById(R.id.languageEditText);
+        String string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your language");
+            return;
         }
+        int i = languageNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.language, languageCodeList.get(i));
+
+        editText = findViewById(R.id.smokingEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select smoking status");
+            return;
+        }
+        i = smokingNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.smoke_id, smokingCodeList.get(i));
+
+        editText = findViewById(R.id.relocateEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select relocation status");
+            return;
+        }
+        i = relocateNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.relocate_id, relocateCodeList.get(i));
+
+        i = ((RadioGroup)findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId();
+        if (i == R.id.yesConverted)
+            string = "1";
+        else if (i == R.id.notConverted)
+            string = "0";
+        App.masterJson.addString(P.cvt_islam, string);
+
+        i = ((RadioGroup)findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId();
+        if (i == R.id.yesSyed)
+            string = "1";
+        else if (i == R.id.notSyed)
+            string = "0";
+        else if (i == R.id.donnKnowSyed)
+            string = "2";
+        App.masterJson.addString(P.syed, string);
+
+        i = ((RadioGroup)findViewById(R.id.handicapRadioGroup)).getCheckedRadioButtonId();
+        if (i == R.id.yesHandicap)
+            string = "1";
+        else if (i == R.id.notHandicap)
+            string = "0";
+        else if (i == R.id.donnKnowHandicap)
+            string = "2";
+        App.masterJson.addString(P.handicap, string);
+
+        i = ((RadioGroup)findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId();
+        if (i == R.id.yesChildren)
+            string = "1";
+        else if (i == R.id.notChildren)
+            string = "0";
+        App.masterJson.addString(P.children, string);
+
+        H.log("masterJsonIs",App.masterJson.toString());
+        startActivity(new Intent(this,RegFifthPageActivity.class));
+    }
+
+    private void setMarginTopOfCustomSpinner() {
+        LinearLayout linearLayout = findViewById(R.id.includeContainer);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
+        int i = new Session(this).getInt(P.statusBarHeight);
+        layoutParams.topMargin = i;
+        H.log("heightIs", i + "");
+        linearLayout.setLayoutParams(layoutParams);
     }
 }
 

@@ -58,4 +58,21 @@ public class P {
     public static String mother_city = "mother_city";
     public static String about_occupation = "about_occupation";
     public static String edulevel_id = "edulevel_id";
+    public static String smoking = "smoking";
+    public static String mothertongue = "mothertongue";
+    public static String language = "language";
+    public static String relocate = "relocate";
+    public static String seeking_marriage = "seeking_marriage";
+    public static String intreasted_in = "intreasted_in";
+    public static String val = "val";
+    public static String smoke_id = "smoke_id";
+    public static String relocate_id = "relocate_id";
+    public static String cvt_islam = "cvt_islam";
+    public static String syed = "syed";
+    public static String handicap = "handicap";
+    public static String children = "children";
+    public static String religion_expectations = "religion_expectations";
+    public static String about_2 = "about_2";
+    public static String lat = "lat";
+    public static String lng = "lng";
 }//class

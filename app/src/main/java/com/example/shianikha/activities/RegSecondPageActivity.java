@@ -211,6 +211,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
     private void makeJson() {
         App.masterJson.addString(P.token_id, session.getString(P.tokenData));
+        H.log("tokenIs",session.getString(P.tokenData));
 
         EditText editText = findViewById(R.id.cityEditText);
         String string = editText.getText().toString();

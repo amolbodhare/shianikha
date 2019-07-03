@@ -290,7 +290,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
 
         H.log("masterJsonIs",App.masterJson.toString());
-        //startActivity(new Intent(this,RegThirdPageActivity.class));
+        startActivity(new Intent(this,RegFourthPageActivity.class));
     }
 
     private void setMarginTopOfCustomSpinner() {
