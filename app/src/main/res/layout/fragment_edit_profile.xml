@@ -969,4 +969,25 @@
 
       </RelativeLayout>
   </ScrollView>
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone" />
 </RelativeLayout>

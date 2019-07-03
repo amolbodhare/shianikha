@@ -25,6 +25,7 @@ public class P {
 
     public static String list = "list";
     public static String id = "id";
+    public static String val = "val";
 
     public static String title = "title";
 
@@ -52,19 +53,19 @@ public class P {
     public static String religion = "religion";
     public static String ethnicity = "ethnicity";
     public static String occupation = "occupation";
+    public static String relocate = "relocate";
+    public static String seeking_marriage = "seeking_marriage";
+    public static String intrested_in = "intreasted_in";
+    public static String smoking = "smoking";
     public static String education = "education";
+    public static String edulevel_id = "edulevel_id";
     public static String father_city = "father_city";
     public static String occupation_id = "occupation_id";
     public static String mother_city = "mother_city";
-    public static String about_occupation = "about_occupation";
-    public static String edulevel_id = "edulevel_id";
-    public static String smoking = "smoking";
-    public static String mothertongue = "mothertongue";
     public static String language = "language";
-    public static String relocate = "relocate";
-    public static String seeking_marriage = "seeking_marriage";
+    public static String about_occupation = "about_occupation";
+    public static String mothertongue = "mothertongue";
     public static String intreasted_in = "intreasted_in";
-    public static String val = "val";
     public static String smoke_id = "smoke_id";
     public static String relocate_id = "relocate_id";
     public static String cvt_islam = "cvt_islam";
