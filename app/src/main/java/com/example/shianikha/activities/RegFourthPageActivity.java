@@ -209,7 +209,9 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
 
         editText = findViewById(R.id.relocateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+
+        if (string.isEmpty())
+        {
             H.showMessage(this, "Please select relocation status");
             return;
         }
