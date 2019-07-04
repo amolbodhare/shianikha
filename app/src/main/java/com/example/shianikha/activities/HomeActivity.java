@@ -197,7 +197,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
             ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
             changeToolbarColor(getColor(R.color.white),getColor(R.color.textview_grey_color));
-            H.log("iM","notTriggered");
+            //H.log("iM","notTriggered");
         }
             //cardView_layout.setBackgroundColor(getResources().getColor(R.color.white));
 
