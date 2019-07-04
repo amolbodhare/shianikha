@@ -29,7 +29,8 @@
             android:theme="@style/CustomTheme"/>
 
         <activity android:name=".activities.RegSixthPageActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomTheme"/>
 
         <activity android:name=".activities.RegFifthPageActivity"
             android:screenOrientation="portrait"

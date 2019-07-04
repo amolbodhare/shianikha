@@ -18,7 +18,9 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.activities.RegFifthPageActivity;
 import com.example.shianikha.activities.RegSecondPageActivity;
+import com.example.shianikha.activities.RegSixthPageActivity;
 import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
@@ -161,6 +163,14 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null)
             session.addString(P.intreasted_in, jsonList.toString());
 
+        jsonArray = json.getJsonArray(P.min_age);// age array, note: min and max array have same values so keeping only one
+        if (jsonArray != null)
+            session.addString(P.age, jsonArray.toString());
+
+        jsonList = json.getJsonList(P.marital_status);// marital status name and code
+        if (jsonList != null)
+            session.addString(P.marital_status, jsonList.toString());
+
         startNewActivity();
     }
 
@@ -172,7 +182,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent;
                 String string = session.getString(P.tokenData);
                 H.log("tokenIs",string);
-                if (string == null)
+                if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register)==0)
                     //intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);

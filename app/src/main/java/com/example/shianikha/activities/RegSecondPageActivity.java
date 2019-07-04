@@ -32,6 +32,7 @@ import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -253,14 +254,16 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         if (i != -1)
             App.masterJson.addString(P.country_citizen, countryCodeList.get(i));
 
-        string = ((EditText) findViewById(R.id.dateOfBirthEditText)).getText().toString();
+        editText = findViewById(R.id.dateOfBirthEditText);
+        string = editText.getTag().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select date of birth");
             return;
         }
         App.masterJson.addString(P.dob, string);
 
-        string = ((EditText) findViewById(R.id.heightEditText)).getText().toString();
+        editText = findViewById(R.id.heightEditText);
+        string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select height");
             return;
@@ -286,16 +289,22 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
         };
 
-        new DatePickerDialog(RegSecondPageActivity.this, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        DatePickerDialog datePickerDialog =  new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setInverseBackgroundForced(false);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
     }
 
     private void updateLabel(Calendar calendar) {
-        String myFormat = "MM/dd/yy";
+        String myFormat = "dd MMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        ((EditText) findViewById(R.id.dateOfBirthEditText)).setText(sdf.format(calendar.getTime()));
+        EditText editText = findViewById(R.id.dateOfBirthEditText);
+        editText.setText(sdf.format(calendar.getTime()));
+
+        myFormat = "yyyy-MM-dd";
+        sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editText.setTag(sdf.format(calendar.getTime()));
     }
 
     private void setMarginTopOfCustomSpinner() {

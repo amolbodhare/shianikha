@@ -76,4 +76,14 @@ public class P {
     public static String about_2 = "about_2";
     public static String lat = "lat";
     public static String lng = "lng";
+    public static String min_age = "min_age";
+    public static String age = "age";
+    public static String marital_status = "marital_status";
+    public static String max_age = "max_age";
+    public static String marital_status_id = "marital_status_id";
+    public static String ethnicitys_id = "ethnicitys_id";
+    public static String education_id = "education_id";
+    public static String request_from_anyone = "request_from_anyone";
+    public static String request_from_preferred_match = "request_from_preferred_match";
+    public static String sancity_of_the_holy_quran = "sancity_of_the_holy_quran";
 }//class

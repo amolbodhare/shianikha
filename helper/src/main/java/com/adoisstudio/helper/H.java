@@ -196,4 +196,17 @@ public class H {
         if (imm!=null)
             imm.showSoftInput(view, 0);
     }
+
+    public static int getInt(String string)
+    {
+        int i = -1;
+        try {
+            i = Integer.parseInt(string);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return i;
+    }
 }

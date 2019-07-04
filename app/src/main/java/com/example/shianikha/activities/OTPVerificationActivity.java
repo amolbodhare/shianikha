@@ -305,12 +305,18 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                             if (str != null)
                                 new Session(OTPVerificationActivity.this).addString(P.tokenData, str);
 
-                            int i = json.getInt(P.full_register);
-                            new Session(OTPVerificationActivity.this).addInt(P.full_register, i);
+                            json = json.getJson(P.data);
+                            str = json.getString(P.full_register);
+                            new Session(OTPVerificationActivity.this).addInt(P.full_register, H.getInt(str));
+                            Intent intent;
+                            if(str.equals("1"))
+                                intent = new Intent(OTPVerificationActivity.this, HomeActivity.class);
+                            else
+                                intent = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
 
-                            Intent intent = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
                             startActivity(intent);
                             finish();
+
                         } else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }

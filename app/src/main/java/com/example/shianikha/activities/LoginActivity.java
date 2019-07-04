@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (v.getId() == R.id.reg_tv)
         {
             startActivity(new Intent(this,RegistrationActivity.class));
-            finish();
         }
         else if (v.getId() == R.id.countryCodeEditText)
         {
