@@ -182,7 +182,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent;
                 String string = session.getString(P.tokenData);
                 H.log("tokenIs",string);
-                if (string == null)
+                if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register)==0)
                     intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);

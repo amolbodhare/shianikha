@@ -446,8 +446,10 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 public void onClick(DialogInterface dialog, int which)
                 {
                     new Session(context).addString(P.tokenData,"");
-                    startActivity(new Intent(context, LoginActivity.class));
-                    ((HomeActivity)context).finish();
+                    Intent intent = new Intent(context,LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    //((HomeActivity)context).finish();
                 }
             });
             adb.setNegativeButton("no",null);
