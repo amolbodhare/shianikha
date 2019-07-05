@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
@@ -127,7 +128,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
         if (v.getId() == R.id.ed_dob)
             handleDatePicker();
-        if (v.getId() == R.id.btn_save)
+        else if (v.getId() == R.id.btn_save)
             makeJson(view);
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout(view);
@@ -139,13 +140,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public  void radioButtonClick(View view)
-    {
-        if((view.getRootView().getId())==(R.id.islam_convert_rdg))
-        {
-            Toast.makeText(context, "heyyyyy", Toast.LENGTH_SHORT).show();
-        }
-    }
+
     class MyBounceInterpolator implements android.view.animation.Interpolator {
         private double mAmplitude = 1;
         private double mFrequency = 10;
@@ -177,15 +172,19 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             submit_json.addString(P.profile_for, profileForCodeList.get(i));
 
 
-        /*if ((App.device_id).isEmpty())
+
+        //token id is settled  here
+        String check_token_id=session.getString(P.tokenData);
+
+        if ((session.getString(P.tokenData)).isEmpty())
         {
-            H.showMessage(getActivity(), "Device id not met");
+            H.showMessage(getActivity(), "token id not found");
             return;
         }
-        submit_json.addString(P.token_id, App.device_id);*/
+        submit_json.addString(P.token_id, session.getString(P.tokenData));
 
 
-        string = ((EditText) view.findViewById(R.id.full_name_til)).getText().toString();
+        string = ((TextInputEditText) view.findViewById(R.id.full_name_edt)).getText().toString();
         if (string.isEmpty()) {
             H.showMessage(context, "Please specify Full Name");
             return;
@@ -193,7 +192,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         submit_json.addString(P.name, string);
 
 
-        string = ((EditText)view.findViewById(R.id.email_til)).getText().toString();
+        string = ((TextInputEditText)view.findViewById(R.id.email_tie)).getText().toString();
         if (string.isEmpty())
         {
             H.showMessage(context,"Please enter email!");
@@ -271,8 +270,9 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             submit_json.addString(P.country_citizen, countryOfCitizenshipCodeList.get(i));
 
 
-        string = ((EditText) view.findViewById(R.id.dateOfBirthEditText)).getText().toString();
-        if (string.isEmpty()) {
+        string = ((EditText) view.findViewById(R.id.ed_dob)).getText().toString();
+        if (string.isEmpty())
+        {
             H.showMessage(context, "Please select date of birth");
             return;
         }
@@ -337,15 +337,16 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             submit_json.addString(P.occupation_id, currentOccupationCodeList.get(i));
 
 
-        string = ((EditText) view.findViewById(R.id.other_details_occu_til)).getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(context, "Please specify occupation details");
+        string = ((TextInputEditText)view.findViewById(R.id.other_details_occu_tiet)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter about few lines about current occupation!");
             return;
         }
-        submit_json.addString(P.about_occupation, string);
+        submit_json.addString(P.about_occupation,string);
 
 
-        editText = view.findViewById(R.id.education_ed);
+        editText = view.findViewById(R.id.higest_level_edu_ed);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(context, "Please select highest education");
@@ -448,6 +449,35 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         if (i != -1)
             submit_json.addString(P.intrested_in, intrestedInCodeList.get(i));
 
+
+        editText = view.findViewById(R.id.religious_exception_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter religious exception");
+            return;
+        }
+        App.masterJson.addString(P.religion_expectations, string);
+
+        editText = view.findViewById(R.id.qualities_seeking_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter qualities you are seeking");
+            return;
+        }
+        App.masterJson.addString(P.qualities_seeking, string);
+
+        editText = view.findViewById(R.id.more_about_you_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter more about you");
+            return;
+        }
+        App.masterJson.addString(P.more_about_you, string);
+
+
         H.log("submittedjson",submit_json.toString());
         hitEditProfileApi(submit_json);
         //startActivity(new Intent(this,RegThirdPageActivity.class));
@@ -517,7 +547,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             ((EditText)  mainView.findViewById(R.id.editText)).setHint("Search current occupation");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, currentOccupationList);
         }
-        else if (view.getId() == R.id.education_ed) {
+        else if (view.getId() == R.id.higest_level_edu_ed) {
             ((EditText) mainView.findViewById(R.id.editText)).setHint("Search highest level of education");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, highestLevelOfEducationList);
         }
@@ -571,6 +601,8 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         vieww.setVisibility(View.GONE);
         H.hideKeyBoard(context, view);
     }
+
+
     private void extractRequireList() {
         JsonList jsonList;
 
@@ -602,7 +634,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 string = j.getString(P.name);
                 countryNameList.add(string);
 
-                string = j.getString(P.id);
+                string = j.getString(P.country_code);
                 countryCodeList.add(string);
             }
         }
@@ -829,10 +861,10 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             seekingMarriageList = new ArrayList<>();
             seekingMarriageCodeList = new ArrayList<>();
             for (Json j : jsonList) {
-                string = j.getString(P.id);
+                string = j.getString(P.val);
                 seekingMarriageList.add(string);
 
-                string = j.getString(P.val);
+                string = j.getString(P.id);
                 seekingMarriageCodeList.add(string);
             }
         }

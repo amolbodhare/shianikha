@@ -185,7 +185,6 @@ public class SplashActivity extends AppCompatActivity {
                 if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register)==0)
-                    //intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
                 intent = new Intent(SplashActivity.this, HomeActivity.class);
                 else
                     intent = new Intent(SplashActivity.this, HomeActivity.class);

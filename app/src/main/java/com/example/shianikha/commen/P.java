@@ -73,6 +73,8 @@ public class P {
     public static String handicap = "handicap";
     public static String children = "children";
     public static String religion_expectations = "religion_expectations";
+    public static String qualities_seeking = "qualities_seeking";
+    public static String more_about_you = "more_about_you";
     public static String about_2 = "about_2";
     public static String lat = "lat";
     public static String lng = "lng";
