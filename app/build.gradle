@@ -33,6 +33,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'jp.wasabeef:blurry:3.0.0'
     implementation project(path: ':helper')
     implementation 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'

@@ -1,16 +1,22 @@
 package com.example.shianikha.subfragments;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,24 +48,35 @@ import com.example.shianikha.activities.RegistrationActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class EditProfileFragment extends Fragment implements View.OnClickListener {
 
     ImageView gender_male_imv;
     ImageView gender_female_imv;
+    private Bitmap bitmap;
+    private String base64String = "";
+    private LoadingDialog loadingDialog;
     View view;
     private OnFragmentInteractionListener mListener;
     Context context;
     MyBounceInterpolator interpolator;
     String gender="";
+    String imageId="";
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> profileForList, cityOfResidenceList, stateList, countryOfResidenceList, countryOfCitizenshipList, heightList;
     private ArrayList<String> religionList, ethincityList, fathersCityList, mothersCityList,currentOccupationList,highestLevelOfEducationList;
@@ -88,10 +105,14 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
+
+        loadingDialog = new LoadingDialog(context);
+
         view=inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         session = new Session(getActivity());
 
+        view.findViewById(R.id.add_img_imv).setOnClickListener(this);
         view.findViewById(R.id.profile_for_ed).setOnClickListener(this);
         view.findViewById(R.id.countryCodeEditText).setOnClickListener(this);
         view.findViewById(R.id.city_ed).setOnClickListener(this);
@@ -128,6 +149,22 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
         if (v.getId() == R.id.ed_dob)
             handleDatePicker();
+
+        else if (v.getId() == R.id.add_img_imv)
+        {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+            {
+                callImageCropper();
+                return;
+            }
+            else
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                callImageCropper();
+                return;
+            }
+            ActivityCompat.requestPermissions( getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, 47);
+        }
+
         else if (v.getId() == R.id.btn_save)
             makeJson(view);
         else if (v.getId() == R.id.view)
@@ -1006,5 +1043,87 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                     }
                 })
                 .run("hitRegisterApi");
+    }
+
+    private void callImageCropper() {
+        CropImage.activity()
+                //.setCropShape(CropImageView.CropShape.RECTANGLE)//method is deprecated for P and causes crash
+                .setAllowCounterRotation(false)
+                .setAllowFlipping(true)
+                .setAllowRotation(true)
+                .setAspectRatio(1, 1)
+                .start(context, this);
+    }
+    private String getStringImage(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                Log.d("resultUriIs", "" + resultUri);
+
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), resultUri);
+                    Bitmap.createScaledBitmap(bitmap, 300, 300, false);
+                    base64String = getStringImage(bitmap);
+                    hitImageUploadApi(base64String);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+    }
+
+    private void hitImageUploadApi(String base64String) {
+        Json json = new Json();
+        //json.addString(P.token, new Session(context).getString(P.tokenData));
+        json.addString(P.image, base64String);
+
+        RequestModel requestModel = RequestModel.newRequestModel("upload_profile_pic");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Connection failed.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            ((CircleImageView) view.findViewById(R.id.image_profile_pic)).setImageBitmap(bitmap);
+                            json = json.getJson(P.data);
+                            String string = json.getString("file_name");
+                            if (string != null)
+                                imageId = string;
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+
+                    }
+                })
+                .run("uploadImage");
     }
 }

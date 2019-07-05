@@ -45,7 +45,7 @@
 
 
           <ImageView
-          android:id="@+id/imageView"
+          android:id="@+id/add_img_imv"
           android:layout_marginTop="120dp"
           android:layout_width="25dp"
           android:layout_height="25dp"
