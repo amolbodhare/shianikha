@@ -1,214 +1,249 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView android:elevation="3dp"
+    android:id="@+id/card_view"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    card_view:cardCornerRadius="10dp"
+    card_view:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="3dp"
-        card_view:cardCornerRadius="10dp">
+    <RelativeLayout
+        android:background="@color/grey5"
+        android:layout_height="456dp"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:background="@drawable/kangana_ranaut"
+            android:clickable="true"
+            android:id="@+id/thumbnail"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY" />
+
+        <!--when image is not visible-->
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:id="@+id/linearLayout"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:background="@color/white"
+                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:padding="10dp"
+                android:src="@drawable/user"
+                android:tint="#E3E3E3" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:text="No Photo Added" />
+
+            <Button
+                android:background="@drawable/blue_button_back"
+                android:backgroundTint="#00E2BC"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:text="Request Photo"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:clickable="true"
-                android:scaleType="centerCrop"/>
+            android:background="@color/black_opacity_36"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:id="@+id/first_lay"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/black_opacity_36">
-                <RelativeLayout
-                    android:id="@+id/first_lay"
-                    android:layout_marginLeft="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Kangna Ranout"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/time"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="1 Day Ago"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/Profile_id_tv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="SN481358"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/third_lay"
+                android:layout_below="@id/first_lay"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="11dp"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/age_tv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="21 Yrs,"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/height_tv"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/age_tv"
+                    android:layout_width="wrap_content"
+                    android:text="5'1"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/profession_tv"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="UI Designer"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fourth_lay"
+                android:layout_below="@id/third_lay"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/caste_tv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Shia"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/religion_tv"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/caste_tv"
+                    android:layout_width="wrap_content"
+                    android:text="Muslim"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/city_tv"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_toLeftOf="@id/country_tv"
+                    android:layout_width="wrap_content"
+                    android:text="Mumbai,"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/country_tv"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="India"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fifth_lay"
+                android:layout_below="@id/third_lay"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/like_tv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:text="Like this profile"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:fontFamily="@font/poppins_medium"
+                    android:id="@+id/connect_tv"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/title"
-                        android:text="Kangna Ranout"
-                        android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@id/imageView"
+                    android:layout_width="wrap_content"
+                    android:text="Connect Now"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
 
-                    <TextView
-                        android:id="@+id/time"
-                        android:text="1 Day Ago"
-                        android:textColor="@color/white"
-                        android:textSize="10dp"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/second_lay"
-                    android:layout_below="@id/first_lay"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/Profile_id_tv"
-                        android:text="SN481358"
-                        android:textColor="@color/white"
-                        android:textSize="10dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/third_lay"
-                    android:layout_below="@id/second_lay"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/age_tv"
-                        android:text="21 Yrs,"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/height_tv"
-                        android:text="5'1"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@id/age_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/profession_tv"
-                        android:text="UI Designer"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/fourth_lay"
-                    android:layout_below="@id/third_lay"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/caste_tv"
-                        android:text="Shia"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/religion_tv"
-                        android:text="Muslim"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@id/caste_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/city_tv"
-                        android:text="Mumbai,"
-                        android:layout_toLeftOf="@id/country_tv"
-                        android:layout_marginRight="3dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/country_tv"
-                        android:text="India"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/fifth_lay"
-                    android:layout_marginTop="30dp"
-                    android:layout_below="@id/third_lay"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/like_tv"
-                        android:text="Like this profile"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10dp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/white"
-                        android:layout_alignParentLeft="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/connect_tv"
-                        android:text="Connect Now"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:layout_toLeftOf="@id/imageView"
-                        android:layout_marginRight="12dp"
-                        android:textSize="10dp"
-                        android:textColor="@color/white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:clickable="true"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/green_circle_button"
-                        android:padding="6dp"
-                        android:src="@drawable/ic_check_black_24dp"
-                        android:tint="#00a991" />
-                </RelativeLayout>
-
-
+                <ImageView
+                    android:background="@drawable/green_circle_button"
+                    android:clickable="true"
+                    android:id="@+id/imageView"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:padding="6dp" />
 
             </RelativeLayout>
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
-</LinearLayout>
+</android.support.v7.widget.CardView>
+

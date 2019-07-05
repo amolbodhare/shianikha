@@ -9,453 +9,280 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-       <!-- <android.support.v7.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            app:cardCornerRadius="25dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:background="@color/dash_card_back"/>
-            <ImageView
-                android:src="@drawable/aaaaaa"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="280dp" />
-
-
-        </android.support.v7.widget.CardView>-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/main_card_back_design"
-            android:layout_height="250dp">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/aaaaaa" />
-
-<!--
             <RelativeLayout
-                android:id="@+id/top_sublayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/main_card_back_design">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/aaaaaa" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/cir_imv"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/kangna" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-15dp"
+                    android:layout_below="@id/cir_imv"
+                    android:background="@drawable/add_profile_circle_button_back"
+                    android:padding="9dp"
+                    android:src="@drawable/add_profile_icon" />
 
                 <TextView
-                    android:id="@+id/dash_tv"
-                    android:text="DASHBOARD"
-                    android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="18dp"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RelativeLayout
-                    android:id="@+id/noti_layout"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/dash_tv"
-                    android:layout_alignParentRight="true">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/notification"
-                        android:clickable="true"
-                        android:src="@drawable/ic_notifications_none_black_24dp" />
-
-                    <TextView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:text="01"
-                        android:maxLength="2"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10sp"
-                        android:gravity="end"
-                        android:backgroundTint="@color/green"
-                        android:background="@drawable/clickable_grey_circle"/>
-
-                </RelativeLayout>
-
-
-            </RelativeLayout>
--->
-
-<!--
-            <RelativeLayout
-                android:id="@+id/top_sublayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
-
-               &lt;!&ndash; <ImageView
-                    android:layout_alignParentLeft="true"
-                    android:src="@drawable/my_matches_left_arrow"
-                    android:layout_marginLeft="17dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />&ndash;&gt;
-
-                <TextView
-                    android:id="@+id/dash_tv"
-                    android:text="MY MATCHES"
-                    android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textSize="15dp"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RelativeLayout
-                    android:id="@+id/noti_layout"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/matches_notification"
-                        android:clickable="true"
-                        android:src="@drawable/ic_notifications_none_black_24dp" />
-
-                    <TextView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:text="01"
-                        android:maxLength="2"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="10sp"
-                        android:gravity="end"
-                        android:backgroundTint="@color/bluebtnback"
-                        android:background="@drawable/clickable_grey_circle"/>
-
-                </RelativeLayout>
-
-
-            </RelativeLayout>
--->
-
-
-
-            <!--<RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:layout_below="@id/top_sublayout">-->
-<!--
-
-                <FrameLayout
-                    android:id="@+id/cir_imv_frame_layout"
-                    android:layout_below="@id/top_sublayout"
+                    android:id="@+id/name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/cir_imv"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_horizontal"
+                    android:text="John Doe"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/profile_id_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name_tv"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_horizontal"
+                    android:text="John Doe"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/account_type_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_id_tv"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/image_profile_pic"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:src="@drawable/kangna"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name_tv"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_horizontal"
+                        android:text="Account Type"
+                        android:textColor="@color/white"
+                        android:textSize="10dp" />
 
-                </FrameLayout>
--->
+                    <TextView
+                        android:id="@+id/account_type_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name_tv"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_horizontal"
+                        android:text="Free"
+                        android:textColor="@color/white"
+                        android:textSize="10dp" />
+                </LinearLayout>
 
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/cir_imv"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:src="@drawable/kangna"
-                />
+            </RelativeLayout>
 
-            <!--<android.support.design.widget.FloatingActionButton
-                android:layout_width="5dp"
-                android:layout_height="5dp" >
-                <ImageView
-                    android:src="@drawable/add_profile_icon"
-                    android:maxWidth="5dp"
-                    android:maxHeight="5dp"
-                    />
-            </android.support.design.widget.FloatingActionButton>
--->
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_marginTop="122dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/add_profile_circle_button_back"
-                android:padding="8dp"
-                android:src="@drawable/add_profile_icon" />
 
-            <TextView
-                android:id="@+id/name_tv"
+            <LinearLayout
+                android:id="@+id/design_buttons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cir_imv"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center_horizontal"
-                android:text="John Doe"
-                android:textColor="@color/white"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="220dp"
+                android:layout_marginRight="17dp"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/card_back_design"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="102"
+                        android:textColor="@color/textpurle2"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="My Matches"
+                        android:textSize="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/card_back_design"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="50"
+                        android:textColor="@color/textpurle2"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Profile Visitors"
+                        android:textSize="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/card_back_design"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="30"
+                        android:textColor="@color/textpurle2"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Express Interest"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/recently_join_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/design_buttons_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Recently Join"
+                android:textColor="@color/textgreycolor"
                 android:textSize="15dp" />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rec_join_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recently_join_tv"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
             <TextView
-                android:id="@+id/profile_id_tv"
-                android:text="John Doe"
+                android:id="@+id/recent_visitors_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:layout_below="@+id/name_tv"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="10dp"/>
+                android:layout_below="@id/rec_join_recyclerView"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Recent Visitors"
+                android:textColor="@color/textgreycolor"
+                android:textSize="15dp" />
 
-            <LinearLayout
-                android:id="@+id/account_type_lay"
-                android:layout_below="@id/profile_id_tv"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recent_visitors_recyclerView"
                 android:layout_width="match_parent"
-                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:text="Account Type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/name_tv"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="10dp"/>
-                <TextView
-                    android:id="@+id/account_type_tv"
-                    android:text="Free"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/name_tv"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="10dp"/>
-            </LinearLayout>
-
-
-
-            <!--</RelativeLayout>-->
-
-
-        </RelativeLayout>
-
-        
-        <LinearLayout
-            android:id="@+id/design_buttons_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:weightSum="3"
-            android:elevation="3dp"
-            android:layout_marginTop="220dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:background="@drawable/card_back_design"
-                android:orientation="vertical"
-                android:layout_height="70dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="102"
-                    android:textColor="@color/textpurle2"
-                    android:textSize="21dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="My Matches"
-                    android:textSize="8dp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/card_back_design"
-                android:orientation="vertical"
-                android:layout_height="70dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="50"
-                    android:textColor="@color/textpurle2"
-                    android:textSize="21dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Profile Visitors"
-                    android:textSize="8dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/card_back_design"
-                android:orientation="vertical"
-                android:layout_height="70dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="30"
-                    android:textColor="@color/textpurle2"
-                    android:textSize="21dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Express Interest"
-                    android:textSize="8dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/recently_join_tv"
-            android:layout_below="@id/design_buttons_layout"
-            android:text="Recently Join"
-            android:layout_marginTop="27dp"
-            android:layout_marginLeft="17dp"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="15dp"
-            android:textColor="@color/textgreycolor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec_join_recyclerView"
-            android:layout_marginLeft="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/recently_join_tv"
-            android:orientation="horizontal">
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/recent_visitors_tv"
-            android:layout_marginLeft="17dp"
-            android:layout_below="@id/rec_join_recyclerView"
-            android:text="Recent Visitors"
-            android:layout_marginTop="22dp"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="15dp"
-            android:textColor="@color/textgreycolor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recent_visitors_recyclerView"
-            android:layout_marginLeft="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/recent_visitors_tv"
-            android:orientation="horizontal">
-        </android.support.v7.widget.RecyclerView>
-
-        <RelativeLayout
-            android:id="@+id/oandstv_layout"
-            android:layout_marginTop="25dp"
-            android:layout_below="@id/recent_visitors_recyclerView"
-            android:layout_width="match_parent"
-            android:background="@color/profile_details_grey"
-            android:layout_height="40dp">
-
-        <TextView
-
-            android:layout_marginLeft="17dp"
-            android:layout_centerVertical="true"
-            android:text="Options and Settings"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <!--<android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="2dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="9dp"
-            android:layout_marginTop="10dp">
+                android:layout_below="@id/recent_visitors_tv"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
 
             <RelativeLayout
-                android:id="@+id/subscriptionButton"
+                android:id="@+id/oandstv_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="@drawable/clickable_trans_bg">
+                android:layout_height="40dp"
+                android:layout_below="@id/recent_visitors_recyclerView"
+                android:layout_marginTop="25dp"
+                android:background="@color/profile_details_grey">
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="11dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Subscription" />
+                    android:text="Options and Settings"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/partner_preferences_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/oandstv_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/partner_preferences_link_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Partner Preferences"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -463,290 +290,263 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/right_arrow_navigational"
-                    android:tint="@color/grey"/>
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/partner_preferences_link_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>-->
-
-        <RelativeLayout
-            android:id="@+id/partner_preferences_link_layout"
-            android:layout_below="@id/oandstv_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/partner_preferences_link_tv"
-                android:text="Partner Preferences"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/partner_preferences_link_tv"
+            <RelativeLayout
+                android:id="@+id/subscription_plan_link_layout"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/partner_preferences_link_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/subscription_plan_link_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Subscription Plan"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/subscription_plan_link_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/my_activity_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subscription_plan_link_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/my_activity_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="My Activity"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/my_activity_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/account_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_activity_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/account_settings_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Account Settings"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/account_settings_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/notifications_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/account_settings_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/notifications_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Notifications"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/notifications_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/help_suport_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/notifications_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/helpandsupport_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Help and Support"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/helpandsupport_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/about_app_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/help_suport_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/about_app_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="About App"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/about_app_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contact_us_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/about_app_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="17dp">
+
+                <TextView
+                    android:id="@+id/contact_us_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Contact Us"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/contact_us_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/subscription_plan_link_layout"
-            android:layout_below="@id/partner_preferences_link_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/subscription_plan_link_tv"
-                android:text="Subscription Plan"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/subscription_plan_link_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/my_activity_layout"
-            android:layout_below="@id/subscription_plan_link_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/my_activity_tv"
-                android:text="My Activity"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/my_activity_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/account_settings_layout"
-            android:layout_below="@id/my_activity_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/account_settings_tv"
-                android:text="Account Settings"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/account_settings_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/notifications_layout"
-            android:layout_below="@id/account_settings_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/notifications_tv"
-                android:text="Notifications"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/notifications_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/help_suport_layout"
-            android:layout_below="@id/notifications_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/helpandsupport_tv"
-                android:text="Help and Support"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/helpandsupport_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/about_app_layout"
-            android:layout_below="@id/help_suport_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/about_app_tv"
-                android:text="About App"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/about_app_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/contact_us_layout"
-            android:layout_below="@id/about_app_layout"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/contact_us_tv"
-                android:text="Contact Us"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12dp"
-                android:textColor="@color/text_back_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_navigational"
-                android:tint="@color/grey"/>
-
-            <View
-                android:background="@color/border_grey"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/contact_us_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
 
     </ScrollView>
 

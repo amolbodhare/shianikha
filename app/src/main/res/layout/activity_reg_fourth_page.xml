@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Select languages"
+                    android:hint="Select language"
                     android:paddingRight="56dp"
                     android:textSize="16sp" />
 
@@ -88,7 +88,7 @@
                     android:layout_height="match_parent"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="willing to relocate"
+                    android:hint="Willing to Relocate"
                     android:paddingRight="56dp"
                     android:textSize="16sp" />
 

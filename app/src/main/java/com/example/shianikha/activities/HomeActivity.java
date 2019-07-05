@@ -1,37 +1,25 @@
 package com.example.shianikha.activities;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.AboutApp;
 import com.example.shianikha.ContactUsFragment;
 import com.example.shianikha.HelpAndSupport;
-import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.NotificationFragment;
 import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
@@ -41,242 +29,158 @@ import com.example.shianikha.fragments.HomeFragment;
 import com.example.shianikha.fragments.MyActivityFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
-import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
 import com.example.shianikha.subfragments.EditProfileFragment;
 
-import java.util.ArrayList;
-
-public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,MyMatchesFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener,MyProfileFragment.OnFragmentInteractionListener,
-        ProfileDetailsFragments.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,
-        NotifacationDetails.OnFragmentInteractionListener,AccountSettingsFragment.OnFragmentInteractionListener,
-        MyActivityFragment.OnFragmentInteractionListener
-{
-    HomeFragment homeFragment;
-    MyMatchesFragment myMatchesFragment;
-    SearchFragment searchFragment;
-    MyProfileFragment myProfileFragment;
+public class HomeActivity extends AppCompatActivity {
+    private HomeFragment homeFragment;
+    private MyMatchesFragment myMatchesFragment;
+    private SearchFragment searchFragment;
+    private MyProfileFragment myProfileFragment;
     public EditProfileFragment editProfileFragment;
-    NotificationFragment notificationFragment;
-    AccountSettingsFragment accountSettingsFragment;
-    PartnerPreference partnerPreference;
-    HelpAndSupport helpAndSupport;
-    AboutApp aboutApp;
+    private NotificationFragment notificationFragment;
+    private AccountSettingsFragment accountSettingsFragment;
+    private PartnerPreference partnerPreference;
+    private HelpAndSupport helpAndSupport;
+    private AboutApp aboutApp;
 
     private DrawerLayout.LayoutParams layoutParams;
     private RelativeLayout relativeLayout;
     private DrawerLayout drawerLayout;
-    ContactUsFragment contactUsFragment;
-    MyActivityFragment myActivityFragment;
+    private ContactUsFragment contactUsFragment;
+    private MyActivityFragment myActivityFragment;
 
-    private ArrayList<Fragment> fragmentList = new ArrayList<>();
-    private ArrayList<String> titleList = new ArrayList<>();
-    RelativeLayout cardView_layout;
-    public TextView textView;
+    private RelativeLayout cardView_layout;
     public LinearLayout homeButtonLayout, myMatchesButtonLayout, searchButtonLayout, myProfileButtonLayout;
 
-    private long l;
-    Context context;
-    TextView toolbar_title_tv;
+    public static Fragment currentFragment;
+    public static String currentFragmentName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        context=HomeActivity.this;
+
         homeFragment = HomeFragment.newInstance();
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        currentFragment = homeFragment;
+        currentFragmentName = getString(R.string.dashboard);
+        fragmentLoader(homeFragment, "dashboard");
 
-        // for deactivating screen shot
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
-        textView = findViewById(R.id.titleName);
+        TextView textView = findViewById(R.id.titleName);
         textView.setSelected(true);
 
+        relativeLayout = findViewById(R.id.relativeLayout);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        cardView_layout = findViewById(R.id.titleBar);
 
-        contactUsFragment=ContactUsFragment.newInstance();
-        myActivityFragment=MyActivityFragment.newInstance();
-        notificationFragment=NotificationFragment.newInstance();
-        partnerPreference=PartnerPreference.newInstance();
-        helpAndSupport=HelpAndSupport.newInstance();
-        aboutApp=AboutApp.newInstance();
-        accountSettingsFragment=AccountSettingsFragment.newInstance();
-       // setStatusBarBackground(getColor(R.color.textpurle2));
-        relativeLayout=findViewById(R.id.relativeLayout);
-        drawerLayout=findViewById(R.id.drawerLayout);
-        cardView_layout=findViewById(R.id.titleBar);
-
-
-        //cardView.setCardBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
-        layoutParams=(DrawerLayout.LayoutParams)relativeLayout.getLayoutParams();
-        fragmentLoader(homeFragment, getString(R.string.MyShia));
+        layoutParams = (DrawerLayout.LayoutParams) relativeLayout.getLayoutParams();
 
         homeButtonLayout = findViewById(R.id.homeButton_layout);
         myMatchesButtonLayout = findViewById(R.id.mymatchesButton_layout);
         searchButtonLayout = findViewById(R.id.searchButton_layout);
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
 
+        setMarginTopOfDrawer();
     }
 
-
-   /* public void setStatusBarBackground(int i)
-    {
-        Rect rectangle = new Rect();
-        Window window = getWindow();
-        window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
-        int statusBarHeight = rectangle.top;
-
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.height = statusBarHeight;
-        findViewById(R.id.view).setLayoutParams(layoutParams);
-        findViewById(R.id.view).setBackgroundColor(i);
+    private void setMarginTopOfDrawer() {
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        DrawerLayout.LayoutParams layoutParams = (DrawerLayout.LayoutParams) scrollView.getLayoutParams();
+        int i = new Session(this).getInt(P.statusBarHeight);
+        layoutParams.topMargin = i;
+        H.log("heightIs", i + "");
+        scrollView.setLayoutParams(layoutParams);
     }
-*/
+
+    public void makeStatusBarColorBlue(boolean bool) {
+        View view = findViewById(R.id.view);
+        if (bool) {
+            int statusBarHeight = new Session(this).getInt(P.statusBarHeight);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.height = statusBarHeight;
+            view.setLayoutParams(layoutParams);
+            view.setBackgroundColor(getColor(R.color.dashboard_card_back_color));
+
+            findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.dashboard_card_back_color));
+            //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
+
+            ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.white));
+
+            ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.white));
+            ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.white));
+
+            return;
+        }
+
+        view.setBackgroundColor(getColor(R.color.white));
+        findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.white));
+        //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
+
+        ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.profile_card_back_color));
+
+        ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.profile_card_back_color));
+        ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.profile_card_back_color));
+
+    }
+
     public void fragmentLoader(Fragment fragment, String title)
     {
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).addToBackStack(title).commit();
-
-
-        if (fragmentList.size() > 0 && fragmentList.get(fragmentList.size() - 1) != fragment) {
-            fragmentList.add(fragment);
-            titleList.add(title);
-        }
-
-        title = title.replace("\n"," ");
-        textView.setText(title);
-        
         if (fragment == homeFragment)
         {
-            ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_black_24dp));
-            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
-
-            findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.VISIBLE);
-            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
-            //H.log("iM","triggered");
-            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
-            textView.setText("DashBoard");
+            showBackButton(false);
+            makeStatusBarColorBlue(true);////change color except dashboard
         }
-        else if(fragment==myProfileFragment)
+        else if (fragment == myProfileFragment)
         {
-            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
-            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
-
-
-
-            //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
-            findViewById(R.id.noti_layout).setTag(null);
-            //H.log("iM","triggered");
-            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
-            //textView.setText("DashBoard");
+            showBackButton(true);
+            makeStatusBarColorBlue(true);
         }
-        /*else if(fragment==editProfileFragment)
-        {
-            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
-            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
-
-
-
-            //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-            changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
-            findViewById(R.id.noti_layout).setTag(null);
-            //H.log("iM","triggered");
-            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.dashboard_card_back_color));
-            //textView.setText("DashBoard");
-        }*/
-
-
         else
-            {
-            ((TextView) findViewById(R.id.noti_text)).setVisibility(View.VISIBLE);
-            ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
-            ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.notification));
-            changeToolbarColor(getColor(R.color.white),getColor(R.color.textview_grey_color));
-            H.log("iM","notTriggered");
+        {
+            showBackButton(true);
+            makeStatusBarColorBlue(false);
         }
-            //cardView_layout.setBackgroundColor(getResources().getColor(R.color.white));
 
+        currentFragment = fragment;
+        currentFragmentName = title;
 
-        //((TextView) findViewById(R.id.titleName)).setText(title);
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
+                .replace(R.id.frameLayout, fragment).commit();
+
+        ((TextView) findViewById(R.id.titleName)).setText(title);
     }
 
-    public void onFragmentChange(View view)
-    {
+    public void bottomFourFragmentClick(View view) {
         if (view.getId() == R.id.homeButton_layout)
         {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
-            findViewById(R.id.noti_layout).setTag(null);
-            findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-            findViewById(R.id.noti_layout).setVisibility(View.VISIBLE);
-            //findViewById(R.id.drawerMenu).setTag(null);
-            //controlBackButtonVisibility(true);
+
         }
-        else if (view.getId() == R.id.mymatchesButton_layout) {
-            //if (myMatchesFragment == null)
-                myMatchesFragment = MyMatchesFragment.newInstance("hi","hello");
+        else if (view.getId() == R.id.mymatchesButton_layout)
+        {
+            myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
-            findViewById(R.id.noti_layout).setTag(null);
-            findViewById(R.id.drawerMenu).setTag(null);
-            findViewById(R.id.noti_layout).setVisibility(View.VISIBLE);
-            //findViewById(R.id.drawerMenu).setTag(null);
-            //controlBackButtonVisibility(true);
         }
         else if (view.getId() == R.id.searchButton_layout)
         {
-            //if (searchFragment == null)
-                searchFragment = SearchFragment.newInstance();
+            searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
-            findViewById(R.id.noti_layout).setTag(null);
-            findViewById(R.id.drawerMenu).setTag(null);
-            findViewById(R.id.noti_layout).setVisibility(View.VISIBLE);
-            //findViewById(R.id.drawerMenu).setTag(null);
-            //controlBackButtonVisibility(true);
         }
-
         else if (view.getId() == R.id.myprofileButton_layout)
         {
-            //if (myProfileFragment == null)
-                myProfileFragment = MyProfileFragment.newInstance("hi","hello");
+            myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
-            findViewById(R.id.noti_layout).setTag("edit");
-            findViewById(R.id.drawerMenu).setTag(null);
-            findViewById(R.id.noti_layout).setVisibility(View.VISIBLE);
-
-            //controlBackButtonVisibility(true);
         }
-        /*else if(view.getId() == R.id.contactUs)
-        {
-            if (contactUsFragment == null)
-                contactUsFragment = ContactUsFragment.newInstance();
-            fragmentLoader(contactUsFragment, getString(R.string.contactUs));
-            findViewById(R.id.noti_layout).setTag(null);
-            findViewById(R.id.drawerMenu).setTag(null);
-            //findViewById(R.id.drawerMenu).setTag(null);
-        }*/
-        /*else if(view.getId() == R.id.draw)
-        {
-            if (contactUsFragment == null)
-                contactUsFragment = ContactUsFragment.newInstance();
-            fragmentLoader(contactUsFragment, getString(R.string.contactUs));
-            findViewById(R.id.noti_layout).setTag(null);
-            findViewById(R.id.drawerMenu).setTag(null);
-            //findViewById(R.id.drawerMenu).setTag(null);
-        }*/
 
         setSelection(view);
     }
 
-    public void controlBackButtonVisibility(boolean b)
-    {
-        if (b)
-            findViewById(R.id.drawerMenu).setVisibility(View.VISIBLE);
+    public void showBackButton(boolean bool) {
+        if (bool)
+            ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getDrawable(R.drawable.ic_arrow_back_black_24dp));
         else
-            findViewById(R.id.drawerMenu).setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.drawerMenu)).setImageDrawable(getDrawable(R.drawable.ic_menu_black_24dp));
     }
 
     private void setSelection(View view) {
@@ -285,34 +189,25 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         ImageView imageView;
         TextView textView;
 
-        /*int scale = getResources().getDisplayMetrics().densityDpi;
-        scale = (int)(24*scale+0.5f);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scale,scale);*/
 
-        for (int i = 0; i < parentLayout.getChildCount(); i++)
-        {
+        for (int i = 0; i < parentLayout.getChildCount(); i++) {
             childLayout = ((LinearLayout) parentLayout.getChildAt(i));
 
             imageView = (ImageView) childLayout.getChildAt(0);
-            imageView.setColorFilter(getResources().getColor(R.color.grey));
+            imageView.setColorFilter(getColor(R.color.grey));
             //imageView.setLayoutParams(layoutParams);
 
             textView = (TextView) childLayout.getChildAt(1);
-            textView.setTextColor(getResources().getColor(R.color.grey));
+            textView.setTextColor(getColor(R.color.grey));
             textView.setTextSize(9f);
         }
         childLayout = (LinearLayout) view;
 
-        /*scale = (int)(26*scale+0.5f);
-        layoutParams = new LinearLayout.LayoutParams(scale,scale);*/
-
         imageView = (ImageView) childLayout.getChildAt(0);
-        imageView.setColorFilter(getResources().getColor(R.color.bluebtnback));
-
-        //imageView.setLayoutParams(layoutParams);
+        imageView.setColorFilter(getColor(R.color.bluebtnback));
 
         textView = (TextView) childLayout.getChildAt(1);
-        textView.setTextColor(getResources().getColor(R.color.bluebtnback));
+        textView.setTextColor(getColor(R.color.bluebtnback));
         textView.setTextSize(9.4f);
     }
 
@@ -320,44 +215,10 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     public void onBackPressed() {
         //super.onBackPressed();
         onBack(new View(this));
-        /*FragmentManager fm = HomeActivity.this.getSupportFragmentManager();
-
-        int count=fm.getBackStackEntryCount();
-
-        //Toast.makeText(this, ""+count, Toast.LENGTH_SHORT).show();
-
-        if(fm.getBackStackEntryCount()==1)
-        {
-            if (System.currentTimeMillis() - l < 1000)
-                finish();
-            else
-                {
-                l = System.currentTimeMillis();
-                //H.showMessage(this, "Press again to exit");
-                Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else
-        {
-            for(int i = 0; i < fm.getBackStackEntryCount()-1; ++i)
-            {
-                fm.popBackStack();
-            }
-
-            setSelection(findViewById(R.id.homeButton));
-        }*/
-
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    public void OnDrawerMenuClick(View view)
-    {
-        if(view.getId()==R.id.contactUs)
-        {
+    public void OnDrawerMenuClick(View view) {
+        if (view.getId() == R.id.contactUs) {
             if (contactUsFragment == null)
                 contactUsFragment = ContactUsFragment.newInstance();
             fragmentLoader(contactUsFragment, getString(R.string.contactUs));
@@ -365,248 +226,118 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             findViewById(R.id.drawerMenu).setTag(null);
         }
 
-        if(view.getId()==R.id.my_activity_drawer_layout)
-        {
+        if (view.getId() == R.id.my_activity_drawer_layout) {
             if (myActivityFragment == null)
                 myActivityFragment = MyActivityFragment.newInstance();
             fragmentLoader(myActivityFragment, getString(R.string.myactivity));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
-        }
-
-        else if(view.getId()==R.id.drawerNoti)
-        {
+        } else if (view.getId() == R.id.drawerNoti) {
             if (notificationFragment == null)
                 notificationFragment = NotificationFragment.newInstance();
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        }
-        else if(view.getId()==R.id.drawer_account_settings_layout)
-        {
-            if ( accountSettingsFragment== null)
+        } else if (view.getId() == R.id.drawer_account_settings_layout) {
+            if (accountSettingsFragment == null)
                 accountSettingsFragment = AccountSettingsFragment.newInstance();
             fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        }
-
-        /*else if(view.getId()==R.id.drawerNoti)
-        {
-            if (notificationFragment == null)
-                notificationFragment = NotificationFragment.newInstance();
-            fragmentLoader(notificationFragment, getString(R.string.notification));
-            drawerLayout.closeDrawer(Gravity.START);
-
-        }*/
-        /*else if(view.getId()==R.id.drawerNoti)
-        {
-            if (notificationFragment == null)
-                notificationFragment = NotificationFragment.newInstance();
-            fragmentLoader(notificationFragment, getString(R.string.notification));
-            drawerLayout.closeDrawer(Gravity.START);
-
-        }*/
-        else if(view.getId()==R.id.partnerPreference)
-        {
+        } else if (view.getId() == R.id.partnerPreference) {
             if (partnerPreference == null)
                 partnerPreference = PartnerPreference.newInstance();
             fragmentLoader(partnerPreference, getString(R.string.partpref));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        }
-        else if(view.getId()==R.id.help_and_support_layout)
-        {
+        } else if (view.getId() == R.id.help_and_support_layout) {
             if (helpAndSupport == null)
                 helpAndSupport = HelpAndSupport.newInstance();
             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        }
-        else if(view.getId()==R.id.drawerAboutApp)
-        {
+        } else if (view.getId() == R.id.drawerAboutApp) {
             if (aboutApp == null)
                 aboutApp = AboutApp.newInstance();
             fragmentLoader(aboutApp, getString(R.string.about_app));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        }
-        else if(view.getId()==R.id.drawer_logout_layout)
-        {
-            AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        } else if (view.getId() == R.id.drawer_logout_layout) {
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage("Do you really want to exit?");
-            adb.setPositiveButton("yes", new DialogInterface.OnClickListener()
-            {
+            adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which)
-                {
-                    new Session(context).addString(P.tokenData,"");
-                    Intent intent = new Intent(context,LoginActivity.class);
+                public void onClick(DialogInterface dialog, int which) {
+                    new Session(HomeActivity.this).addString(P.tokenData, "");
+                    Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     //((HomeActivity)context).finish();
                 }
             });
-            adb.setNegativeButton("no",null);
+            adb.setNegativeButton("no", null);
             adb.show();
             drawerLayout.closeDrawer(Gravity.START);
 
         }
 
     }
-    public void OnDrawerNavIconClick(View view)
-    {
-       /* if (contactUsFragment == null)
-            contactUsFragment = ContactUsFragment.newInstance();
-        fragmentLoader(contactUsFragment, getString(R.string.contactUs));*/
-    }
-
-
-   /* public void controlBackButtonVisibility(boolean b) {
-        if (b)
-            findViewById(R.id.backButton).setVisibility(View.VISIBLE);
-        else
-            findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
-    }*/
-   public void onBack(View view)
-   {
-       if (homeFragment!=null && !homeFragment.isVisible())
-       {
-           homeFragment = HomeFragment.newInstance();
-           //fragmentLoader(homeFragment, getString(R.string.home));
-           fragmentLoader(homeFragment, "HomeFragment");
-           setSelection(homeButtonLayout);
-           findViewById(R.id.noti_layout).setTag(null);
-           findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-           findViewById(R.id.noti_layout).setVisibility(View.VISIBLE);
-           //controlBackButtonVisibility(true);
-       }
-
-       else if (myMatchesFragment != null && myMatchesFragment.isVisible())
-       {
-           //myMatchesFragment = MyMatchesFragment.newInstance();
-           //fragmentLoader(homeFragment, getString(R.string.home));
-           //fragmentLoader(homeFragment, "MyMatchesFragment");
-           //setSelection(myMatchesButtonLayout);
-           //controlBackButtonVisibility(false);
-           //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-       }
-
-       else if (searchFragment != null && searchFragment.isVisible())
-       {
-           //searchFragment = SearchFragment.newInstance();
-           //fragmentLoader(homeFragment, getString(R.string.home));
-           //fragmentLoader(searchFragment, "SearchFragment");
-           //setSelection(searchButtonLayout);
-           //controlBackButtonVisibility(false);
-           //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-
-       }
-
-       else if (myProfileFragment != null && !myProfileFragment.isVisible())
-       {
-           //myProfileFragment = MyProfileFragment.newInstance();
-           //fragmentLoader(homeFragment, getString(R.string.home));
-           //fragmentLoader(myProfileFragment, "MyProfileFragment");
-           //setSelection(myProfileButtonLayout);
-           //controlBackButtonVisibility(false);
-           findViewById(R.id.noti_layout).setTag(null);
-           //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-       }
-
-       else
-           {
-           if (System.currentTimeMillis() - l < 1000)
-               finish();
-           else
-               {
-               l = System.currentTimeMillis();
-               H.showMessage(this, "Press again to exit");
-           }
-       }
-   }
 
     public void onNotificationIconClick(View view) {
 
-       String getTag=(String) view.getTag();
-       System.out.print(getTag);
-
-       if(view.getTag()==null)
-       {
-
-       }
-
-       else
-       {
-           EditProfileFragment editFragment = EditProfileFragment.newInstance();
-           fragmentLoader(editFragment, "Edit Profile");
-           controlBackButtonVisibility(true);
-           RelativeLayout relativeLayout = (RelativeLayout) view;
-           //relativeLayout.getChildAt(1).setVisibility(View.GONE);
-           relativeLayout.setVisibility(View.INVISIBLE);
-
-           ((ImageView) findViewById(R.id.imv_noti)).setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
-           ((TextView) findViewById(R.id.noti_text)).setVisibility(View.GONE);
+        showBackButton(true);
+        RelativeLayout relativeLayout = (RelativeLayout) view;
 
 
-
-           //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-           changeToolbarColor(getColor(R.color.dashboard_card_back_color),getColor(R.color.white));
-           findViewById(R.id.noti_layout).setTag(null);
-
-
-       }
-
-
+        //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
+        findViewById(R.id.noti_layout).setTag(null);
     }
 
-    public void onDrawerMenuClick(View view) {
-
-        String getTag=(String) view.getTag();
-        System.out.print(getTag);
-
-        /*if (view.getId() == R.id.drawerMenu) {
-            if ((homeFragment != null && homeFragment.isVisible()))
-                drawerLayout.openDrawer(Gravity.START);
-            else
-                onBackClick();
-        }*/
-
-        if(view.getTag()==null)
-        {
-            onBack(view);
-
-        }
-
-        else
-        {
-            /*EditProfileFragment editFragment = EditProfileFragment.newInstance();
-            fragmentLoader(editFragment, "EditProfileFragment");
-            controlBackButtonVisibility(true);*/
-
-            //show drawer
-            //Toast.makeText(getApplicationContext(), "Show Drawer", Toast.LENGTH_SHORT).show();
-            drawerLayout.openDrawer(Gravity.START);
-
-        }
-    }
-
-    private  void changeToolbarColor(int i,int textcolor)
+    public void onBack(View view)
     {
+        Fragment fragment;
+        String string;
 
-        findViewById(R.id.titleBar).setBackgroundColor(i);
-        findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
+        if (myMatchesFragment != null && myMatchesFragment.isVisible())
+        {
+            fragment = MyMatchesFragment.previousFragment;
+            string = MyMatchesFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (searchFragment != null && searchFragment.isVisible())
+        {
+            fragment = SearchFragment.previousFragment;
+            string = SearchFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (myProfileFragment != null && myProfileFragment.isVisible())
+        {
+            fragment = MyProfileFragment.previousFragment;
+            string = MyProfileFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else
+            drawerLayout.openDrawer(Gravity.START);
+    }
 
-        ((TextView)findViewById(R.id.titleName)).setTextColor(textcolor);
-
-        ((ImageView)findViewById(R.id.drawerMenu)).setColorFilter(textcolor);
-        ((ImageView)findViewById(R.id.imv_noti)).setColorFilter(textcolor);
-
+    private void decideBottomSelection(String string)
+    {
+        if (string.equals(getString(R.string.dashboard)))
+            setSelection(homeButtonLayout);
     }
 
 }

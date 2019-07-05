@@ -261,7 +261,7 @@
                   android:id="@+id/state_ed"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:hint="State/Provinance/Country"
+                  android:hint="State/Provenance/Country"
                   android:fontFamily="@font/poppins_regular"
                   android:textSize="16dp"
                   android:focusable="false"
@@ -288,7 +288,7 @@
                   android:id="@+id/country_of_residence_ed"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:hint="Country of residence"
+                  android:hint="Country of Residence"
                   android:fontFamily="@font/poppins_regular"
                   android:textSize="16dp"
                   android:focusable="false"
@@ -630,7 +630,7 @@
                   android:layout_height="match_parent"
                   android:focusable="false"
                   android:fontFamily="@font/poppins_regular"
-                  android:hint="Select languages"
+                  android:hint="Select language"
                   android:paddingRight="56dp"
                   android:textSize="16dp" />
 
@@ -691,7 +691,7 @@
                   android:focusable="false"
                   android:fontFamily="@font/poppins_regular"
                   android:textSize="16dp"
-                  android:hint="willing to relocate"
+                  android:hint="Willing to Relocate"
                   android:paddingRight="56dp" />
 
               <ImageView

@@ -388,8 +388,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp">
+
                     <TextView
-                        android:text="Countery of residence : "
+                        android:text="Country of Residence : "
                         android:textSize="12dp"
                         android:fontFamily="@font/poppins_regular"
                         android:layout_width="wrap_content"
@@ -593,7 +594,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp">
                     <TextView
-                        android:text="Willing to relocate : "
+                        android:text="Willing to Relocate : "
                         android:textSize="12dp"
                         android:fontFamily="@font/poppins_regular"
                         android:layout_width="wrap_content"

@@ -8,10 +8,7 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <!--Title bar -->
-
-    <!-- three buttons-->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/top_second_layout"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
@@ -23,6 +20,7 @@
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/poppins_regular"
             android:textSize="10dp"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -32,6 +30,8 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/text_neon_color"
             android:fontFamily="@font/poppins_regular"
+            android:clickable="true"
+            android:layout_toRightOf="@id/matches_text"
             android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -43,6 +43,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textSize="10dp"
             android:textColor="@color/text_neon_color"
+            android:layout_toLeftOf="@id/refine_imv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -50,13 +51,15 @@
             android:id="@+id/refine_imv"
             android:layout_gravity="end"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/funnel"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-
+    <!-- three buttons-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -153,9 +156,13 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:dividerHeight="0dp"/>
 
 </LinearLayout>

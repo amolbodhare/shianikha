@@ -2,7 +2,6 @@ package com.example.shianikha.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,13 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.shianikha.R;
-import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.adapters.MatchesAdapter;
 import com.example.shianikha.entities.MatchesEntity;
 import com.example.shianikha.subfragments.AcceptedFragment;
-import com.example.shianikha.subfragments.IAmLookingForFragment;
-import com.example.shianikha.subfragments.LookingForMeFragment;
-import com.example.shianikha.subfragments.TopMatchesFragment;
 
 import java.util.List;
 
@@ -98,7 +93,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
-        //((HomeActivity) context).setStatusBarBackground(context.getColor(R.color.white));
+        //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
         if (fragMentView == null)
         {
             fragMentView = inflater.inflate(R.layout.fragment_my_activity, container, false);

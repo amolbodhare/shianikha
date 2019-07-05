@@ -27,14 +27,19 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private LoadingDialog loadingDialog;
     private View fragMentView;
 
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
+
     public SearchFragment()
     {
         // Required empty public constructor
     }
 
-    public static SearchFragment newInstance() {
-        SearchFragment fragment = new SearchFragment();
-        return fragment;
+    public static SearchFragment newInstance(Fragment fragment, String string) {
+        SearchFragment searchFragment = new SearchFragment();
+        previousFragment = fragment;
+        previousFragmentName = string;
+        return searchFragment;
     }
 
     @Override
@@ -43,7 +48,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     {
         // Inflate the layout for this fragment
         context = getContext();
-        //((HomeActivity) context).setStatusBarBackground(context.getColor(R.color.white));
+        //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
         if (fragMentView == null)
         {
             fragMentView = inflater.inflate(R.layout.fragment_search, container, false);
