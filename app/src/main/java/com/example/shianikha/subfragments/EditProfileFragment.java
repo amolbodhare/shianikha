@@ -601,7 +601,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, relocateList);
         }
         else if (view.getId() == R.id.seeking_marriage_ed) {
-            ((EditText) mainView.findViewById(R.id.editText)).setHint("Search smoking habbit");
+            ((EditText) mainView.findViewById(R.id.editText)).setHint("Search seeking marriage");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, seekingMarriageList);
         }
         else if (view.getId() == R.id.interesterd_in_ed) {

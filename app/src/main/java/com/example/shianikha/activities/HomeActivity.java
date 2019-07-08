@@ -226,48 +226,55 @@ public class HomeActivity extends AppCompatActivity {
             findViewById(R.id.drawerMenu).setTag(null);
         }
 
-        if (view.getId() == R.id.my_activity_drawer_layout) {
+        else if (view.getId() == R.id.my_activity_drawer_layout) {
             if (myActivityFragment == null)
                 myActivityFragment = MyActivityFragment.newInstance();
             fragmentLoader(myActivityFragment, getString(R.string.myactivity));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
-        } else if (view.getId() == R.id.drawerNoti) {
+        }
+        else if (view.getId() == R.id.drawerNoti) {
             if (notificationFragment == null)
                 notificationFragment = NotificationFragment.newInstance();
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        } else if (view.getId() == R.id.drawer_account_settings_layout) {
+        }
+        else if (view.getId() == R.id.drawer_account_settings_layout) {
             if (accountSettingsFragment == null)
                 accountSettingsFragment = AccountSettingsFragment.newInstance();
             fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        } else if (view.getId() == R.id.partnerPreference) {
+        }
+
+        else if (view.getId() == R.id.partnerPreference) {
             if (partnerPreference == null)
                 partnerPreference = PartnerPreference.newInstance();
             fragmentLoader(partnerPreference, getString(R.string.partpref));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        } else if (view.getId() == R.id.help_and_support_layout) {
+        }
+        else if (view.getId() == R.id.help_and_support_layout) {
             if (helpAndSupport == null)
                 helpAndSupport = HelpAndSupport.newInstance();
             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        } else if (view.getId() == R.id.drawerAboutApp) {
+        }
+        else if (view.getId() == R.id.drawerAboutApp) {
             if (aboutApp == null)
                 aboutApp = AboutApp.newInstance();
             fragmentLoader(aboutApp, getString(R.string.about_app));
             drawerLayout.closeDrawer(Gravity.START);
             findViewById(R.id.drawerMenu).setTag(null);
 
-        } else if (view.getId() == R.id.drawer_logout_layout) {
+        }
+        else if (view.getId() == R.id.drawer_logout_layout) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage("Do you really want to exit?");
             adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {

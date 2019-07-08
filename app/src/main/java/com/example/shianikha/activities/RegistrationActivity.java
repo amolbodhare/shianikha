@@ -58,11 +58,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private Map<String, String> countryList = new TreeMap<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration);
-        context = RegistrationActivity.this;
 
+        context = RegistrationActivity.this;
 
         profile_for_ed = findViewById(R.id.profile_for_ed);
 
@@ -231,7 +232,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
                 TextView textView = v.findViewById(R.id.textView);
                 if (textView != null) {
                     Log.e("selectedIs", textView.getText().toString());
@@ -361,7 +363,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());
                             startActivity(intent);
-                        } else
+                        }
+                        else
                             H.showMessage(RegistrationActivity.this, json.getString(P.msg));
                     }
                 })

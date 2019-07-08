@@ -94,17 +94,21 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         context = getContext();
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
-        if (fragMentView == null)
-        {
+        //if (fragMentView == null)
+        //{
             fragMentView = inflater.inflate(R.layout.fragment_my_activity, container, false);
             fragMentView.findViewById(R.id.accepted).setOnClickListener(this);
             fragMentView.findViewById(R.id.accepted_me).setOnClickListener(this);
             fragMentView.findViewById(R.id.contacted_me).setOnClickListener(this);
 
+            fragMentView.findViewById(R.id.i_have_contacted).setOnClickListener(this);
+            fragMentView.findViewById(R.id.who_visited_my_profile).setOnClickListener(this);
+            fragMentView.findViewById(R.id.profiles_viewed_by_me).setOnClickListener(this);
+
 
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
-        }
+        //}
         return fragMentView;
     }
 
@@ -115,27 +119,13 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me) {
+        if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me||
+             v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me)
+        {
             LinearLayout linearLayout = (LinearLayout) v.getParent();
             linearLayout = (LinearLayout) linearLayout.getParent();
             LinearLayout ll;
@@ -160,12 +150,6 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
             loadSubFragment(v);
         }
-        /*if(v.getId()==R.id.refine_imv)
-        {
-            Intent i=new Intent(getActivity(), FilterActivity.class);
-            startActivity(i);
-            getActivity().overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        }*/
     }
 
 
@@ -202,6 +186,22 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
         }
+        else if (v.getId() == R.id.i_have_contacted)
+        {
+            AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
+            fragmentLoader(acceptedFragment);
+        }
+        else if (v.getId() == R.id.who_visited_my_profile)
+        {
+            AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
+            fragmentLoader(acceptedFragment);
+        }
+        else if (v.getId() == R.id.profiles_viewed_by_me)
+        {
+            AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
+            fragmentLoader(acceptedFragment);
+        }
+
     }
 
     private void fragmentLoader(Fragment fragment)

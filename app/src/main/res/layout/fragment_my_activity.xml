@@ -9,103 +9,203 @@
     android:background="@color/white">
     <!-- three buttons-->
 
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:baselineAligned="true"
-        android:weightSum="3">
-
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:baselineAligned="true">
 
-            <TextView
-                android:id="@+id/accepted"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="@color/textpurle2"
-                android:fontFamily="@font/poppins_regular"
-                android:elevation="7dp"
-                android:text="Accepted"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="-15dp"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
+                <TextView
+                    android:id="@+id/accepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:background="@color/textpurle2"
+                    android:fontFamily="@font/poppins_regular"
+                    android:elevation="7dp"
+                    android:text="Accepted"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/accepted_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:clickable="true"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Accepted Me"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/contacted_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:text="Contacted Me"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/i_have_contacted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:text="I Have Contacted"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/who_visited_my_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:text="Who Visited My Profile"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/profiles_viewed_by_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:text="Profiles Viewed By Me"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+    </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/accepted_me"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:background="@color/textview_back_color"
-                android:textColor="@color/textview_grey_color"
-                android:clickable="true"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Accepted Me"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="-15dp"
-                android:visibility="gone"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/contacted_me"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:background="@color/textview_back_color"
-                android:textColor="@color/textview_grey_color"
-                android:clickable="true"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="12sp"
-                android:text="Contacted Me"/>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="-15dp"
-                android:visibility="gone"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <FrameLayout
+         <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
