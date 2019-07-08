@@ -19,6 +19,7 @@
 
         <activity android:name=".activities.RefineSearchItemActivity"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
@@ -72,6 +73,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
