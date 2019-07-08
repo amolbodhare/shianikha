@@ -22,21 +22,20 @@ public class NotificationFragment extends Fragment {
     Context context;
     LoadingDialog loadingDialog;
     ListAdapter listAdapter;
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
 
     private OnFragmentInteractionListener mListener;
 
-    public NotificationFragment() {
-
-    }
-
-
     // TODO: Rename and change types and number of parameters
 
-    public static NotificationFragment newInstance()
+    public static NotificationFragment newInstance(Fragment fragment, String string)
     {
-        NotificationFragment fragment = new NotificationFragment();
+        NotificationFragment notificationFragment = new NotificationFragment();
+        previousFragment = fragment;
+        previousFragmentName = string;
 
-        return fragment;
+        return notificationFragment;
     }
 
 
@@ -61,15 +60,7 @@ public class NotificationFragment extends Fragment {
 
                     NotifacationDetails editProfileFragment = NotifacationDetails.newInstance("frgfg","fgf");
 
-                    try
-                    {
-                        fragmentLoader(editProfileFragment);
-                    }
 
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
 
                 }
             });
@@ -110,22 +101,4 @@ public class NotificationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    private void fragmentLoader(Fragment fragment)
-    {
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).commit();
-    }
-
-
-    private void fragmentLoaderSec(Fragment fragment)
-    {
-        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
-
-        manager.beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).commit();
-    }
-
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.adapters.RecentlyJoinAdapter;
@@ -18,7 +19,7 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<String> recently_join_Names = new ArrayList<>();
     private ArrayList<String> recently_join_ImageUrls = new ArrayList<>();
@@ -40,7 +41,15 @@ public class HomeFragment extends Fragment {
         if (fragmentView == null)
         {
             fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
-            CircularImageView circularImageView = fragmentView.findViewById(R.id.cir_imv);
+
+            fragmentView.findViewById(R.id.partner_preferences_link_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.subscription_plan_link_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.my_activity_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.account_settings_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.notifications_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.help_suport_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.about_app_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.contact_us_layout).setOnClickListener(this);
 
             getRecentlyJoinList();
             getRecentlyVisitedList();
@@ -260,6 +269,44 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), recently_join_Names, recently_join_ImageUrls);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.partner_preferences_link_layout)
+        {
+            ((HomeActivity)context).partnerPreference = PartnerPreference.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
+            ((HomeActivity)context).fragmentLoader(((HomeActivity)context).partnerPreference,getString(R.string.partnerPreference));
+        }
+        else if (v.getId() == R.id.subscription_plan_link_layout)
+        {
+
+        }
+        else if (v.getId() == R.id.my_activity_layout)
+        {
+
+        }
+        else if (v.getId() == R.id.account_settings_layout)
+        {
+
+        }
+        else if (v.getId() == R.id.notifications_layout)
+        {
+
+        }
+        else if (v.getId() == R.id.help_suport_layout)
+        {
+
+        }
+        else if (v.getId() ==  R.id.about_app_layout)
+        {
+
+        }
+        else if (v.getId() == R.id.contact_us_layout)
+        {
+
+        }
     }
 
     public interface OnFragmentInteractionListener {

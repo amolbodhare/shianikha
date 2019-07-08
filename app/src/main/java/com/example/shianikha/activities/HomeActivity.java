@@ -37,20 +37,17 @@ public class HomeActivity extends AppCompatActivity {
     private MyMatchesFragment myMatchesFragment;
     private SearchFragment searchFragment;
     private MyProfileFragment myProfileFragment;
-    public EditProfileFragment editProfileFragment;
+    private EditProfileFragment editProfileFragment;
     private NotificationFragment notificationFragment;
     private AccountSettingsFragment accountSettingsFragment;
-    private PartnerPreference partnerPreference;
+    public PartnerPreference partnerPreference;
     private HelpAndSupport helpAndSupport;
     private AboutApp aboutApp;
 
-    private DrawerLayout.LayoutParams layoutParams;
-    private RelativeLayout relativeLayout;
     private DrawerLayout drawerLayout;
     private ContactUsFragment contactUsFragment;
     private MyActivityFragment myActivityFragment;
 
-    private RelativeLayout cardView_layout;
     public LinearLayout homeButtonLayout, myMatchesButtonLayout, searchButtonLayout, myProfileButtonLayout;
 
     public static Fragment currentFragment;
@@ -69,11 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.titleName);
         textView.setSelected(true);
 
-        relativeLayout = findViewById(R.id.relativeLayout);
         drawerLayout = findViewById(R.id.drawerLayout);
-        cardView_layout = findViewById(R.id.titleBar);
-
-        layoutParams = (DrawerLayout.LayoutParams) relativeLayout.getLayoutParams();
 
         homeButtonLayout = findViewById(R.id.homeButton_layout);
         myMatchesButtonLayout = findViewById(R.id.mymatchesButton_layout);
@@ -116,10 +109,10 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.white));
         //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
 
-        ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.profile_card_back_color));
+        ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.grey));
 
-        ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.profile_card_back_color));
-        ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.profile_card_back_color));
+        ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.grey));
+        ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.grey));
 
     }
 
@@ -214,60 +207,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        onBack(new View(this));
+        onBack(null);
     }
 
-    public void OnDrawerMenuClick(View view) {
-        if (view.getId() == R.id.contactUs) {
-            if (contactUsFragment == null)
-                contactUsFragment = ContactUsFragment.newInstance();
-            fragmentLoader(contactUsFragment, getString(R.string.contactUs));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-        }
-
-        if (view.getId() == R.id.my_activity_drawer_layout) {
-            if (myActivityFragment == null)
-                myActivityFragment = MyActivityFragment.newInstance();
-            fragmentLoader(myActivityFragment, getString(R.string.myactivity));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-        } else if (view.getId() == R.id.drawerNoti) {
-            if (notificationFragment == null)
-                notificationFragment = NotificationFragment.newInstance();
-            fragmentLoader(notificationFragment, getString(R.string.notificationn));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-
-        } else if (view.getId() == R.id.drawer_account_settings_layout) {
-            if (accountSettingsFragment == null)
-                accountSettingsFragment = AccountSettingsFragment.newInstance();
-            fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-
-        } else if (view.getId() == R.id.partnerPreference) {
-            if (partnerPreference == null)
-                partnerPreference = PartnerPreference.newInstance();
-            fragmentLoader(partnerPreference, getString(R.string.partpref));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-
-        } else if (view.getId() == R.id.help_and_support_layout) {
-            if (helpAndSupport == null)
-                helpAndSupport = HelpAndSupport.newInstance();
-            fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-
-        } else if (view.getId() == R.id.drawerAboutApp) {
-            if (aboutApp == null)
-                aboutApp = AboutApp.newInstance();
-            fragmentLoader(aboutApp, getString(R.string.about_app));
-            drawerLayout.closeDrawer(Gravity.START);
-            findViewById(R.id.drawerMenu).setTag(null);
-
-        } else if (view.getId() == R.id.drawer_logout_layout) {
+    public void OnDrawerMenuClick(View view)
+    {
+         if (view.getId() == R.id.drawer_logout_layout) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage("Do you really want to exit?");
             adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -277,6 +222,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                     //((HomeActivity)context).finish();
                 }
             });
@@ -288,14 +234,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void onNotificationIconClick(View view) {
-
-        showBackButton(true);
-        RelativeLayout relativeLayout = (RelativeLayout) view;
-
-
-        //findViewById(R.id.drawerMenu).setTag("HomeDrawer");
-        findViewById(R.id.noti_layout).setTag(null);
+    public void onNotificationIconClick(View view)
+    {
+        notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(notificationFragment, getString(R.string.notificationn));
     }
 
     public void onBack(View view)
@@ -330,14 +272,45 @@ public class HomeActivity extends AppCompatActivity {
                 decideBottomSelection(string);
             }
         }
-        else
+        else if (notificationFragment != null && notificationFragment.isVisible())
+        {
+            fragment = NotificationFragment.previousFragment;
+            string = NotificationFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (partnerPreference != null && partnerPreference.isVisible())
+        {
+            fragment = PartnerPreference.previousFragment;
+            string = PartnerPreference.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (view == null)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            finish();
+        }
+        else if (view!=null)
             drawerLayout.openDrawer(Gravity.START);
+
     }
 
     private void decideBottomSelection(String string)
     {
         if (string.equals(getString(R.string.dashboard)))
             setSelection(homeButtonLayout);
+        else if (string.equals(getString(R.string.MyMatches)))
+            setSelection(myMatchesButtonLayout);
+        else if (string.equals(getString(R.string.search)))
+            setSelection(searchButtonLayout);
+        else if (string.equals(getString(R.string.Myprofile)))
+            setSelection(myProfileButtonLayout);
     }
-
 }
