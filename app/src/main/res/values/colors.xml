@@ -27,6 +27,11 @@
     <color name="drawer">#29003D</color>
     <color name="profile_drawer">#D800E8</color>
     <color name="basecolor">#e6e5004b</color>
+    <color name="subplanback">#380054</color>
+
+    <color name="subplanbackSubmitBtn">#CC0059</color>
+
+
 
 
     <color name="title_back_trans">#73000000</color>

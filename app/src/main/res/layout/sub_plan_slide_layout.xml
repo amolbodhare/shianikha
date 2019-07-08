@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/offer_with_price_title_layout"
+        android:layout_width="match_parent"
+        android:layout_weight="2.5"
+        android:background="@color/drawer"
+        android:gravity="center"
+        android:layout_height="0dp">
+
+    <TextView
+        android:id="@+id/offer_with_price_title_tv"
+        android:text="70 % off Rs. 5,850"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/subplanback"
+        android:gravity="center_horizontal"
+        android:layout_weight="7.5"
+        android:layout_below="@id/offer_with_price_title_layout"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sub_plan_tv"
+        android:textSize="13sp"
+        android:layout_marginTop="17dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:text="Gold Plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/sub_plan_price_tv"
+            android:fontFamily="@font/poppins_regular"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="Rs.1,755"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/sub_plan_duration_tv"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="3 Month-Rs.586 per month"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="17dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="send unlimited message"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="view 150 contact numbers"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="get highleted to your matches"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"/>
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+
+            android:background="@drawable/blue_button_back"
+            android:backgroundTint="@color/subplanbackSubmitBtn"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+
+
+    
+</LinearLayout>

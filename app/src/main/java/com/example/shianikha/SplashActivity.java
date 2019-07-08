@@ -54,6 +54,8 @@ public class SplashActivity extends AppCompatActivity {
                 Window window = getWindow();
                 window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
                 int statusBarHeight = rectangle.top;
+                if (statusBarHeight == 0)
+                    statusBarHeight = 62;
                 new Session(SplashActivity.this).addInt(P.statusBarHeight, statusBarHeight);
             }
         }, 987);

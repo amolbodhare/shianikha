@@ -30,6 +30,7 @@ import com.example.shianikha.fragments.MyActivityFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.SearchFragment;
+import com.example.shianikha.fragments.SubscriptionPlanFragment;
 import com.example.shianikha.subfragments.EditProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private MyProfileFragment myProfileFragment;
     private EditProfileFragment editProfileFragment;
     private NotificationFragment notificationFragment;
+    private SubscriptionPlanFragment subscriptionFragment;
     private AccountSettingsFragment accountSettingsFragment;
     public PartnerPreference partnerPreference;
     private HelpAndSupport helpAndSupport;
@@ -213,6 +215,7 @@ public class HomeActivity extends AppCompatActivity {
     public void OnDrawerMenuClick(View view)
     {
          if (view.getId() == R.id.drawer_logout_layout) {
+
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage("Do you really want to exit?");
             adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -231,6 +234,12 @@ public class HomeActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(Gravity.START);
 
         }
+         else if(view.getId()==R.id.drawer_subscription_layout)
+         {
+             subscriptionFragment = new SubscriptionPlanFragment();
+             fragmentLoader(subscriptionFragment, getString(R.string.subscription));
+             drawerLayout.closeDrawer(Gravity.START);
+         }
 
     }
 

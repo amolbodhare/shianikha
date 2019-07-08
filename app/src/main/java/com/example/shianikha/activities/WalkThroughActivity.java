@@ -53,12 +53,14 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         if (v.getId() == R.id.btn_login)
         {
             Intent i = new Intent(WalkThroughActivity.this, LoginActivity.class);
             startActivity(i);
-        } else if (v.getId() == R.id.btn_reg)
+        }
+        else if (v.getId() == R.id.btn_reg)
         {
             Intent i = new Intent(WalkThroughActivity.this, RegistrationActivity.class);
             startActivity(i);
