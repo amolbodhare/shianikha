@@ -236,8 +236,14 @@ public class HomeActivity extends AppCompatActivity {
         }
          else if(view.getId()==R.id.drawer_subscription_layout)
          {
-             subscriptionFragment = new SubscriptionPlanFragment();
-             fragmentLoader(subscriptionFragment, getString(R.string.subscription));
+             Intent i=new Intent(HomeActivity.this,SubscriptionActivity.class);
+             startActivity(i);
+             drawerLayout.closeDrawer(Gravity.START);
+         }
+         else if(view.getId()==R.id.my_activity_drawer_layout)
+         {
+             Intent i=new Intent(HomeActivity.this,MyActivity.class);
+             startActivity(i);
              drawerLayout.closeDrawer(Gravity.START);
          }
 
@@ -285,7 +291,8 @@ public class HomeActivity extends AppCompatActivity {
         {
             fragment = NotificationFragment.previousFragment;
             string = NotificationFragment.previousFragmentName;
-            if (fragment != null && string != null) {
+            if (fragment != null && string != null)
+            {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }

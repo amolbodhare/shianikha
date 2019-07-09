@@ -124,7 +124,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
 
         if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me||
-             v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me)
+                v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me)
         {
             LinearLayout linearLayout = (LinearLayout) v.getParent();
             linearLayout = (LinearLayout) linearLayout.getParent();
