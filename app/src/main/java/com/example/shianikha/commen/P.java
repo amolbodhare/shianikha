@@ -8,7 +8,7 @@ public class P {
     public static String data = "data";
 
 
-    public static String baseUrl = "https://dev.digiinterface.com/2019/shia_nikah/web_services/Webservices";
+    public static String baseUrl = "https://dev.digiinterface.com/2019/shia_nikah/web_services/webservices";
     public static String status = "status";
     public static String min_ver = "min_ver";
     public static String curr_ver = "curr_ver";
@@ -89,4 +89,12 @@ public class P {
     public static String request_from_anyone = "request_from_anyone";
     public static String request_from_preferred_match = "request_from_preferred_match";
     public static String sancity_of_the_holy_quran = "sancity_of_the_holy_quran";
+    public static String profile_details="profile_details";
+    public static String profile_pic="profile_pic";
+    public static String full_name="full_name";
+    public static String profile_id="profile_id";
+    public static String my_matches="my_matches";
+    public static String profile_visitors="profile_visitors";
+    public static String express_interest="express_interest";
+    public static String recently_join="recently_join";
 }//class
