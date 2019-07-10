@@ -27,7 +27,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
-    public static MyMatchesFragment newInstance(Fragment fragment, String string) {
+    public static MyMatchesFragment newInstance(Fragment fragment, String string)
+    {
         MyMatchesFragment myMatchesFragment = new MyMatchesFragment();
         previousFragment = fragment;
         previousFragmentName = string;
@@ -42,6 +43,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_matches, container, false);
+
             fragmentView.findViewById(R.id.top_matches).setOnClickListener(this);
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             fragmentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
@@ -52,7 +54,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
 
             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte());
-
 
         }
         return fragmentView;
