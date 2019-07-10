@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
+import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
 
 import java.util.ArrayList;
@@ -58,21 +59,9 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
         viewHolder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.d(TAG, "onClick: clicked on an image: " + mNames.get(position));
-                //Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
-                ProfileDetailsFragments ProfiledetailsFragment = ProfileDetailsFragments.newInstance("pro1","pro2");
 
-                try
-                {
-                    fragmentLoader(ProfiledetailsFragment);
-                }
-
-                catch (Exception e)
-                {
-
-                    e.printStackTrace();
-                }
-
+                ((HomeActivity)mContext).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
+                ((HomeActivity)mContext).fragmentLoader(((HomeActivity)mContext).profileDetailsFragments,mContext.getString(R.string.profileDetails));
             }
         });
     }
@@ -94,7 +83,16 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             //overflow = (ImageView) view.findViewById(R.id.overflow);
+
+            thumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
+
+
     }
 
     private void fragmentLoader(Fragment fragment)

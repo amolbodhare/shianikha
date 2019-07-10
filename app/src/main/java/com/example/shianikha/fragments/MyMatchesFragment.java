@@ -23,6 +23,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
     private View fragmentView;
     private Context context;
+
     public static Fragment previousFragment;
     public static String previousFragmentName;
 

@@ -29,6 +29,7 @@ import com.example.shianikha.fragments.HomeFragment;
 import com.example.shianikha.fragments.MyActivityFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
+import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
 import com.example.shianikha.fragments.SubscriptionPlanFragment;
 import com.example.shianikha.subfragments.EditProfileFragment;
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     public PartnerPreference partnerPreference;
     private HelpAndSupport helpAndSupport;
     private AboutApp aboutApp;
+    public ProfileDetailsFragments profileDetailsFragments;
 
     private DrawerLayout drawerLayout;
     private ContactUsFragment contactUsFragment;
@@ -301,6 +303,15 @@ public class HomeActivity extends AppCompatActivity {
         {
             fragment = PartnerPreference.previousFragment;
             string = PartnerPreference.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (profileDetailsFragments != null && profileDetailsFragments.isVisible())
+        {
+            fragment = ProfileDetailsFragments.previousFragment;
+            string = ProfileDetailsFragments.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
