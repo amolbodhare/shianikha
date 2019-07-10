@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 public class AboutApp extends Fragment {
 
 
-
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -22,10 +23,12 @@ public class AboutApp extends Fragment {
     }
 
 
-    public static AboutApp newInstance() {
-        AboutApp fragment = new AboutApp();
+    public static AboutApp newInstance(Fragment fragment, String string) {
+        AboutApp aboutAppFragment = new AboutApp();
+        previousFragment = fragment;
+        previousFragmentName = string;
 
-        return fragment;
+        return aboutAppFragment;
     }
 
     @Override

@@ -37,6 +37,10 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     EditText change_password_edt;
    /* LoadingDialog loadingDialog;
     ListAdapter listAdapter;*/
+   public static Fragment previousFragment;
+    public static String previousFragmentName;
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -47,13 +51,13 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     // TODO: Rename and change types and number of parameters
 
-    public static AccountSettingsFragment newInstance()
-    {
-        AccountSettingsFragment fragment = new AccountSettingsFragment();
+    public static AccountSettingsFragment newInstance(Fragment fragment, String string) {
+        AccountSettingsFragment accountSettingsFragment = new AccountSettingsFragment();
+        previousFragment = fragment;
+        previousFragmentName = string;
 
-        return fragment;
+        return accountSettingsFragment;
     }
-
 
 
     @Override
