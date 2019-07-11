@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 
 public class NotifacationDetails extends Fragment {
 
-
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -22,15 +23,15 @@ public class NotifacationDetails extends Fragment {
 
     public static NotifacationDetails newInstance() {
         NotifacationDetails fragment = new NotifacationDetails();
-
         return fragment;
     }
 
-    public static NotifacationDetails newInstance(String param1, String param2)
-    {
-        NotifacationDetails fragment = new NotifacationDetails();
+    public static NotifacationDetails newInstance(Fragment fragment, String string) {
+        NotifacationDetails notificationDetailsFragment = new NotifacationDetails();
+        previousFragment = fragment;
+        previousFragmentName = string;
 
-        return fragment;
+        return notificationDetailsFragment;
     }
 
 

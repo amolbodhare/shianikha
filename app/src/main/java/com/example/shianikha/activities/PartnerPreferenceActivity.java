@@ -1,0 +1,15 @@
+package com.example.shianikha.activities;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.example.shianikha.R;
+
+public class PartnerPreferenceActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_partner_preference);
+    }
+}

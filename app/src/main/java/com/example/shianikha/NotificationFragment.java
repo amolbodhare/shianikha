@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.adoisstudio.helper.LoadingDialog;
+import com.example.shianikha.activities.HomeActivity;
 
 
 public class NotificationFragment extends Fragment {
@@ -58,9 +59,8 @@ public class NotificationFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
 
-                    NotifacationDetails editProfileFragment = NotifacationDetails.newInstance("frgfg","fgf");
-
-
+                    ((HomeActivity)context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
+                    ((HomeActivity)context).fragmentLoader(((HomeActivity)context).notifacationDetails,context.getString(R.string.notificationdetails));
 
                 }
             });
@@ -69,7 +69,8 @@ public class NotificationFragment extends Fragment {
     }
 
 
-    private class ListAdapter extends BaseAdapter{
+    private class ListAdapter extends BaseAdapter
+    {
 
         @Override
         public int getCount() {

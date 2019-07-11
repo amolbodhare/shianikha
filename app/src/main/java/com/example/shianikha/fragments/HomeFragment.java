@@ -142,8 +142,6 @@ public class HomeFragment extends Fragment {
             if(parentJson!=null)
                 ((TextView)fragmentView.findViewById(R.id.expressInterest)).setText(string);
 
-
-
     }
 
 

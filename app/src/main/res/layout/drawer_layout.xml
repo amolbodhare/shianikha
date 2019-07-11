@@ -161,8 +161,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/inbox_activity_drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="OnDrawerMenuClick"
+            android:clickable="true"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="21dp"
             android:gravity="center">
@@ -184,7 +187,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/drawerNoti"
+            android:id="@+id/drawer_noti_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -210,8 +213,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/drawer_favourites_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="OnDrawerMenuClick"
+            android:clickable="true"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="21dp"
             android:gravity="center">
@@ -233,7 +239,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/help_and_support_layout"
+            android:id="@+id/drawer_help_and_support_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="OnDrawerMenuClick"
@@ -259,7 +265,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/drawerAboutApp"
+            android:id="@+id/drawer_aboutapp_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -311,7 +317,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contactUs"
+            android:id="@+id/drawer_contactus_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"

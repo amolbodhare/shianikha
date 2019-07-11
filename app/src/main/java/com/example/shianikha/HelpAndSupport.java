@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 
 public class HelpAndSupport extends Fragment {
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -25,12 +27,14 @@ public class HelpAndSupport extends Fragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static HelpAndSupport newInstance(String param1, String param2) {
-        HelpAndSupport fragment = new HelpAndSupport();
 
-        return fragment;
+    public static HelpAndSupport newInstance(Fragment fragment, String string) {
+        HelpAndSupport helpAndSupportFragment = new HelpAndSupport();
+        previousFragment = fragment;
+        previousFragmentName = string;
+
+        return helpAndSupportFragment;
     }
-
 
 
     @Override

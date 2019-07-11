@@ -23,20 +23,27 @@ public class ContactUsFragment extends Fragment {
     View fragmentView;
     LoadingDialog loadingDialog;
 
-    public ContactUsFragment()
-    {
-        // Required empty public constructor
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
+
+
+
+    private OnFragmentInteractionListener mListener;
+
+    public ContactUsFragment() {
+
     }
 
 
-    public static ContactUsFragment newInstance()
-    {
-        ContactUsFragment fragment = new ContactUsFragment();
+    // TODO: Rename and change types and number of parameters
 
-        return fragment;
+    public static ContactUsFragment newInstance(Fragment fragment, String string) {
+        ContactUsFragment contactUsFragment = new ContactUsFragment();
+        previousFragment = fragment;
+        previousFragmentName = string;
+
+        return contactUsFragment;
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

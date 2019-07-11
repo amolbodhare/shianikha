@@ -20,6 +20,7 @@ import com.adoisstudio.helper.Session;
 import com.example.shianikha.AboutApp;
 import com.example.shianikha.ContactUsFragment;
 import com.example.shianikha.HelpAndSupport;
+import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.NotificationFragment;
 import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     private MyProfileFragment myProfileFragment;
     private EditProfileFragment editProfileFragment;
     private NotificationFragment notificationFragment;
+    public NotifacationDetails notifacationDetails;
     private SubscriptionPlanFragment subscriptionFragment;
     private AccountSettingsFragment accountSettingsFragment;
     public PartnerPreference partnerPreference;
@@ -248,6 +250,70 @@ public class HomeActivity extends AppCompatActivity {
              startActivity(i);
              drawerLayout.closeDrawer(Gravity.START);
          }
+         else if(view.getId()==R.id.inbox_activity_drawer_layout)
+         {
+             Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);
+             drawerLayout.closeDrawer(Gravity.START);
+         }
+         else if(view.getId()==R.id.drawer_noti_layout)
+         {
+             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);*/
+
+             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+             fragmentLoader(notificationFragment, getString(R.string.notificationn));
+             drawerLayout.closeDrawer(Gravity.START);
+         }
+
+         else if(view.getId()==R.id.drawer_favourites_layout)
+         {
+
+             Intent i=new Intent(HomeActivity.this,FavouritesActivity.class);
+             startActivity(i);
+             drawerLayout.closeDrawer(Gravity.START);
+
+         }
+         else if(view.getId()==R.id.drawer_help_and_support_layout)
+         {
+             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);*/
+
+             helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
+             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
+             drawerLayout.closeDrawer(Gravity.START);
+         }
+
+         else if(view.getId()==R.id.drawer_aboutapp_layout)
+         {
+             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);*/
+
+             aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
+             fragmentLoader(aboutApp, getString(R.string.aboutapp));
+             drawerLayout.closeDrawer(Gravity.START);
+
+         }
+         else if(view.getId()==R.id.drawer_account_settings_layout)
+         {
+             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);*/
+
+             accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
+             fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
+             drawerLayout.closeDrawer(Gravity.START);
+
+         }
+         else if(view.getId()==R.id.drawer_contactus_layout)
+         {
+             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
+             startActivity(i);*/
+
+             contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
+             fragmentLoader(contactUsFragment, getString(R.string.contactUs));
+             drawerLayout.closeDrawer(Gravity.START);
+
+         }
 
     }
 
@@ -312,6 +378,51 @@ public class HomeActivity extends AppCompatActivity {
         {
             fragment = ProfileDetailsFragments.previousFragment;
             string = ProfileDetailsFragments.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (notifacationDetails != null && notifacationDetails.isVisible())
+        {
+            fragment = NotifacationDetails.previousFragment;
+            string = NotifacationDetails.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (helpAndSupport != null && helpAndSupport.isVisible())
+        {
+            fragment = HelpAndSupport.previousFragment;
+            string = HelpAndSupport.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (aboutApp != null && aboutApp.isVisible())
+        {
+            fragment = AboutApp.previousFragment;
+            string = AboutApp.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (accountSettingsFragment != null && accountSettingsFragment.isVisible())
+        {
+            fragment = AccountSettingsFragment.previousFragment;
+            string = AccountSettingsFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (contactUsFragment != null && contactUsFragment.isVisible())
+        {
+            fragment = ContactUsFragment.previousFragment;
+            string = ContactUsFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
