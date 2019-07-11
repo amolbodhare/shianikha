@@ -15,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.JsonList;
 import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.commen.P;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
 
 import java.util.ArrayList;
@@ -27,14 +29,12 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
     private static final String TAG = "RecentlyJoinAdapter";
 
     //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
-    private Context mContext;
+    private Context context;
+    JsonList jsonList;
 
-    public RecentlyJoinAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
-        mNames = names;
-        mImageUrls = imageUrls;
-        mContext = context;
+    public RecentlyJoinAdapter(Context context, JsonList jsonList) {
+        this.jsonList = jsonList;
+        this.context = context;
     }
 
     @NonNull
@@ -48,20 +48,20 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        Glide.with(mContext)
+        Glide.with(context)
                 .asBitmap()
-                //.load(mImageUrls.get(position))
-                .load(R.drawable.kangna)
+                .load(jsonList.get(position).getString(P.profile_pic))
+                //.load(R.drawable.kangna)
                 .into(viewHolder.thumbnail);
 
-        viewHolder.title.setText(mNames.get(position));
+        viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
 
         viewHolder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ((HomeActivity)mContext).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
-                ((HomeActivity)mContext).fragmentLoader(((HomeActivity)mContext).profileDetailsFragments,mContext.getString(R.string.profileDetails));
+                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position));
+                ((HomeActivity)context).fragmentLoader(((HomeActivity)context).profileDetailsFragments,P.profile_details);
             }
         });
     }
@@ -69,7 +69,7 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
 
     @Override
     public int getItemCount() {
-        return mImageUrls.size();
+        return jsonList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -97,7 +97,7 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
 
     private void fragmentLoader(Fragment fragment)
     {
-        FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
 
                  manager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)

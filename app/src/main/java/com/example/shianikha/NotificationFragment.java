@@ -60,7 +60,7 @@ public class NotificationFragment extends Fragment {
                 {
 
                     ((HomeActivity)context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
-                    ((HomeActivity)context).fragmentLoader(((HomeActivity)context).notifacationDetails,context.getString(R.string.notificationdetails1));
+                    ((HomeActivity)context).fragmentLoader(((HomeActivity)context).notifacationDetails,context.getString(R.string.notificationdetails));
 
                 }
             });

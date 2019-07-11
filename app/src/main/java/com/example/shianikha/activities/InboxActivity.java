@@ -34,8 +34,7 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
             findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             findViewById(R.id.looking_for_me).setOnClickListener(this);
 
-            ((ListView) findViewById(R.id.listView)).setAdapter(new CustomListAdapte());
-
+            ((ListView) findViewById(R.id.listView)).setAdapter(new ListAdapter());
 
         }
 
@@ -53,11 +52,12 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    class CustomListAdapte extends BaseAdapter implements View.OnClickListener {
+    private class ListAdapter extends BaseAdapter
+    {
 
         @Override
         public int getCount() {
-            return 7;
+            return 10;
         }
 
         @Override
@@ -72,30 +72,11 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null)
-                convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
+            if(convertView==null) {
 
-            convertView.findViewById(R.id.imageView).setOnClickListener(this);
-
-            if (position == 1) {
-                convertView.findViewById(R.id.thumbnail).setVisibility(View.GONE);
-                convertView.findViewById(R.id.linearLayout).setVisibility(View.VISIBLE);
+                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item,null,false);
             }
-
             return convertView;
-        }
-
-        @Override
-        public void onClick(View v)
-        {
-            if (v.getId() == R.id.imageView)
-            {
-                ImageView imageView = (ImageView)v;
-                if (imageView.getDrawable() == null)
-                    imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                else
-                    imageView.setImageDrawable(null);
-            }
         }
     }
 

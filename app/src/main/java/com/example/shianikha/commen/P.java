@@ -97,4 +97,5 @@ public class P {
     public static String profile_visitors="profile_visitors";
     public static String express_interest="express_interest";
     public static String recently_join="recently_join";
+    public static String recently_visitors="recently_visitors";
 }//class

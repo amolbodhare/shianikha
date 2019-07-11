@@ -20,9 +20,9 @@
 
             <ImageView
                 android:id="@+id/imagesView"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/kangna"
                 android:clickable="true"/>
 
             <LinearLayout
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="21 yrs 5'3'"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/whichMuslim"
@@ -297,6 +297,7 @@
                     android:textSize="12sp" />
 
                 <ImageView
+                    android:id="@+id/about_profile"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
                     android:src="@drawable/ic_lock_black_24dp"
@@ -370,6 +371,7 @@ To add both image and text in android button, you should use button property and
                         android:text="+91 889854XXXX" />
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/phoneNum"
@@ -379,6 +381,7 @@ To add both image and text in android button, you should use button property and
                         android:textColor="@color/bluebtnback" />
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/phoneNum"
@@ -425,6 +428,7 @@ To add both image and text in android button, you should use button property and
                             android:src="@drawable/user" />
 
                         <TextView
+                            android:id="@+id/age_and_height_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="21Yrs 5'3'" />
@@ -481,6 +485,7 @@ To add both image and text in android button, you should use button property and
                             android:tint="@color/darkGreen" />
 
                         <TextView
+                            android:id="@+id/designation_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="UI Designer" />
@@ -564,6 +569,7 @@ To add both image and text in android button, you should use button property and
                 app:cardElevation="3dp">
 
                 <TextView
+                    android:id="@+id/religion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -579,31 +585,6 @@ To add both image and text in android button, you should use button property and
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Her Family"
-                android:textColor="@color/textpurle2"
-                android:textSize="12sp" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardElevation="3dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:padding="7dp"
-                    android:text="Button with image and text in Android fdjflkdjfdjfandroid project" />
-
-            </android.support.v7.widget.CardView>
-
-            <!--background-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Background"
                 android:textColor="@color/textpurle2"
                 android:textSize="12sp" />
 

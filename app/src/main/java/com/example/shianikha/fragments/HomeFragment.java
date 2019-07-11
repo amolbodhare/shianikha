@@ -37,6 +37,9 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import static com.example.shianikha.commen.P.recently_join;
+import static com.example.shianikha.commen.P.recently_visitors;
+
 public class HomeFragment extends Fragment {
 
     private ArrayList<String> recently_join_Names = new ArrayList<>();
@@ -65,8 +68,7 @@ public class HomeFragment extends Fragment {
             CircularImageView circularImageView = fragmentView.findViewById(R.id.cir_imv);
 
             hitDashboardApi();
-            getRecentlyJoinList();
-            getRecentlyVisitedList();
+
             ((HomeActivity)context).makeStatusBarColorBlue(true);
         }
         return fragmentView;
@@ -102,7 +104,9 @@ public class HomeFragment extends Fragment {
                     public void onSuccess(Json json) {
 
                         if (json.getInt(P.status) == 1) {
-                            setDashboardData(json);
+                            setProfileData(json);
+                            setRecentlyJoinData(json);
+                            setRecentVisitorsData(json);
 
                         } else
                             H.showMessage(context, json.getString(P.msg));
@@ -111,15 +115,14 @@ public class HomeFragment extends Fragment {
                 .run("hitDashoardApi");
     }
 
-    private void setDashboardData(Json parentJson) {
+    private void setProfileData(Json parentJson) {
           Json  json = parentJson.getJson(P.profile_details);
         String string = json.getString(P.profile_pic);
           if(json!=null)
           {
-
-            try{
+            try
+            {
                 Picasso.get().load(string).into((CircularImageView)fragmentView.findViewById(R.id.cir_imv));
-
             }
             catch (Exception e)
             {
@@ -145,7 +148,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void getRecentlyJoinList() {
+    /*private void getRecentlyJoinList() {
         //Log.d(TAG, "getSpecialOfferList: preparing bitmaps.");
 
         recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
@@ -253,9 +256,9 @@ public class HomeFragment extends Fragment {
         });
 
 
-    }
+    }*/
 
-    private void getRecentlyVisitedList() {
+  /*  private void getRecentlyVisitedList() {
        // Log.d(TAG, "getSpecialOfferList: preparing bitmaps.");
 
         recently_join_ImageUrls.add("https://ibb.co/3YVQxfY");
@@ -353,12 +356,50 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = fragmentView.findViewById(R.id.recent_visitors_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), recently_join_Names, recently_join_ImageUrls);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), );
         recyclerView.setAdapter(adapter);
-    }
+    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void setRecentlyJoinData(Json json)
+    {
+        JsonList jsonList=json.getJsonList(recently_join);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.rec_join_recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
+        recyclerView.setAdapter(adapter);
+
+        /*recyclerView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "clicked",
+                 Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+    }
+
+    private void setRecentVisitorsData(Json json)
+    {
+        JsonList jsonList=json.getJsonList(recently_visitors);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.recent_visitors_recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
+        recyclerView.setAdapter(adapter);
+        /*recyclerView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
     }
 }
