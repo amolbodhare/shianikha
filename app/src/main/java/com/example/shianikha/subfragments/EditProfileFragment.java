@@ -42,6 +42,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.App;
+import com.example.shianikha.NotificationFragment;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.RegSecondPageActivity;
 import com.example.shianikha.activities.RegistrationActivity;
@@ -66,14 +67,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class EditProfileFragment extends Fragment implements View.OnClickListener {
 
+    View fragmentView;
+    Context context;
+    LoadingDialog loadingDialog;
+
+    public static Fragment previousFragment;
+    public static String previousFragmentName;
+
     ImageView gender_male_imv;
     ImageView gender_female_imv;
     private Bitmap bitmap;
     private String base64String = "";
-    private LoadingDialog loadingDialog;
     View view;
     private OnFragmentInteractionListener mListener;
-    Context context;
     MyBounceInterpolator interpolator;
     String gender="";
     String imageId="";
@@ -93,11 +99,14 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
     public EditProfileFragment() {
         // Required empty public constructor
+
     }
 
-    public static EditProfileFragment newInstance() {
-        EditProfileFragment fragment = new EditProfileFragment();
-        return fragment;
+    public static EditProfileFragment newInstance(Fragment fragment, String string) {
+        EditProfileFragment editProfileFragment = new EditProfileFragment();
+        previousFragment = fragment;
+        previousFragmentName = string;
+        return editProfileFragment;
     }
 
     @Override

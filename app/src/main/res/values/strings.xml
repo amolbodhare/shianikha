@@ -10,13 +10,15 @@
     <string name="helpandsupport">Help and Support</string>
     <string name="aboutapp">About app</string>
     <string name="notificationn">Notification</string>
-    <string name="notificationdetails">Notification Details</string>
+    <string name="notificationdetails1">Notification Details</string>
     <string name="accountsettings">Account and Settings</string>
     <string name="myactivity">My Activity</string>
     <string name="dashboard">dashboard</string>
     <string name="partnerPreference">partner preference</string>
     <string name="subscription">Subscription Plan</string>
     <string name="profileDetails">Profile Details</string>
+
+    <string name="editprofile">Edit Profile</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
