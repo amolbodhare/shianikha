@@ -393,13 +393,14 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
         recyclerView.setAdapter(adapter);
-        /*recyclerView.setOnClickListener(new View.OnClickListener()
+
+        recyclerView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
     }
 }

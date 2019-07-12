@@ -14,6 +14,7 @@
     <color name="walkscreenback">#3A2669</color>
 
     <color name="pure_white">#FFFFFF</color>
+    <color name="delete_btn_back">#FF0000</color>
 
     <color name="textpurle">#311B63</color>
     <color name="textpurle2">#6A00BB</color>
@@ -28,6 +29,7 @@
     <color name="profile_drawer">#D800E8</color>
     <color name="basecolor">#e6e5004b</color>
     <color name="subplanback">#380054</color>
+    <color name="replybtnback">#FFCC00</color>
 
     <color name="subplanbackSubmitBtn">#CC0059</color>
 

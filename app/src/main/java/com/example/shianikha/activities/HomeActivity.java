@@ -150,8 +150,10 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.titleName)).setText(title);
     }
 
-    public void bottomFourFragmentClick(View view) {
-        if (view.getId() == R.id.homeButton_layout) {
+    public void bottomFourFragmentClick(View view)
+    {
+        if (view.getId() == R.id.homeButton_layout)
+        {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
             changeNotificationicon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
@@ -224,6 +226,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
                     finish();
                     //((HomeActivity)context).finish();
                 }
@@ -235,14 +238,17 @@ public class HomeActivity extends AppCompatActivity {
         } else if (view.getId() == R.id.drawer_subscription_layout) {
             Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
             startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
             drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.my_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, MyActivity.class);
             startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
             drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, InboxActivity.class);
             startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
             drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.drawer_noti_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
@@ -255,6 +261,7 @@ public class HomeActivity extends AppCompatActivity {
 
             Intent i = new Intent(HomeActivity.this, FavouritesActivity.class);
             startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
             drawerLayout.closeDrawer(Gravity.START);
 
         } else if (view.getId() == R.id.drawer_help_and_support_layout) {

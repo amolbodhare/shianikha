@@ -112,7 +112,7 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/top_matches"
+                android:id="@+id/inbox"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="@color/white"
@@ -122,7 +122,7 @@
                 android:background="@color/textpurle2"
                 android:fontFamily="@font/poppins_regular"
                 android:elevation="7dp"
-                android:text="Top Matches"/>
+                android:text="Inbox"/>
 
             <ImageView
                 android:layout_width="30dp"
@@ -141,7 +141,7 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/i_am_looking_for"
+                android:id="@+id/sent_message"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center"
@@ -150,7 +150,7 @@
                 android:clickable="true"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="I am Looking For"/>
+                android:text="Sent Message"/>
 
             <ImageView
                 android:layout_width="30dp"
@@ -170,7 +170,7 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/looking_for_me"
+                android:id="@+id/receive_list"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center"
@@ -179,12 +179,12 @@
                 android:clickable="true"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="12sp"
-                android:text="Looking For Me"/>
+                android:text="Receive List"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="-15dp"
+                android:layout_marginTop="15dp"
                 android:visibility="gone"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp"
                 android:tint="@color/textpurle2"/>

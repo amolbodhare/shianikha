@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/notiCircle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/kangana_ranaut" />
+
+        <RelativeLayout
+            android:id="@+id/linearLayout"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/notiCircle">
+
+            <TextView
+                android:id="@+id/founder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Letter from Founder"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1 June 2019 10PM"
+                android:layout_marginLeft="30dp"
+                android:textSize="6sp"
+                android:gravity="bottom"
+                android:layout_alignBaseline="@id/founder"
+                android:layout_toRightOf="@+id/founder"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/founder"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/content_mini"
+                android:textColor="@color/black"
+                android:textSize="7sp" />
+
+            <ImageView
+                android:src="@drawable/ic_rubbish_bin"
+                android:layout_alignParentRight="true"
+                android:baselineAlignBottom="true"
+                android:tint="@color/delete_btn_back"
+                android:padding="10dp"
+                android:layout_width="32dp"
+                android:layout_height="35dp" />
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

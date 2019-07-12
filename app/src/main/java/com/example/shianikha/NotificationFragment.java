@@ -58,10 +58,8 @@ public class NotificationFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
                     ((HomeActivity)context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
                     ((HomeActivity)context).fragmentLoader(((HomeActivity)context).notifacationDetails,context.getString(R.string.notificationdetails));
-
                 }
             });
         }

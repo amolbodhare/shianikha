@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.InboxMessageActivity">
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/profile_card_back_color">
+
+        <RelativeLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/aaaaaa">
+
+            <ImageView
+                android:id="@+id/sub_drawerMenu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/clickable_trans_bg"
+                android:clickable="true"
+                android:onClick="onMethodClick"
+                android:padding="13dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:backgroundTint="@color/white"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:tag=""
+                android:text="INBOX"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/noti_layout"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                android:paddingTop="2dp">
+
+                <ImageView
+                    android:id="@+id/imv_noti"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/notification"
+                    android:text="hello"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/noti_text"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/circlenoti"
+                    android:backgroundTint="@color/purplebtnback"
+                    android:gravity="center"
+                    android:text="99"
+                    android:padding="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/notiCircle"
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/kangana_ranaut" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/notiCircle">
+
+        <TextView
+            android:id="@+id/founder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Letter from Founder"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/founder"
+            android:text="1 June 2019 10PM"
+            android:textSize="6sp"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/type_msg_edt"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="25dp"
+        android:hint="Type your message here"
+        android:gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/notiCircle"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_below="@id/type_msg_edt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/blue_button_back"
+        android:fontFamily="@font/poppins_regular"
+        android:text="SEND"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+
+
+
+
+</RelativeLayout>

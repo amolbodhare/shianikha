@@ -133,6 +133,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     public void  onMethodClick(View v)
     {
         finish();
+        ((MyActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
 
 }

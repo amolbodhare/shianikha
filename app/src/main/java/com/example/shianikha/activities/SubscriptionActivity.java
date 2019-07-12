@@ -62,7 +62,9 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
 
     public void  onMethodClick(View v)
     {
+
         finish();
+        ((SubscriptionActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
     private int getItem(int i) {
         return subPlanSlideViewPager.getCurrentItem() + i;

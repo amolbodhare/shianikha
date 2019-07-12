@@ -71,7 +71,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:tag="N"
                     android:clickable="true"
                     android:onClick="onNotificationIconClick"
                     android:paddingTop="2dp">
@@ -81,6 +80,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_centerInParent="true"
+                        android:tag="N"
                         android:src="@drawable/notification"
                         android:text="hello"
                         android:tint="@color/white" />
@@ -135,7 +135,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:onClick="      bottomFourFragmentClick"
+                    android:onClick="bottomFourFragmentClick"
                     android:orientation="vertical">
 
                     <ImageView

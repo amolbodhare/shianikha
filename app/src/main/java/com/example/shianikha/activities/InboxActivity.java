@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.R;
 
 public class InboxActivity extends AppCompatActivity implements View.OnClickListener
@@ -27,37 +30,58 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
         context = InboxActivity.this;
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
 
-
-            findViewById(R.id.top_matches).setOnClickListener(this);
-            findViewById(R.id.i_am_looking_for).setOnClickListener(this);
-            findViewById(R.id.looking_for_me).setOnClickListener(this);
+            findViewById(R.id.inbox).setOnClickListener(this);
+            findViewById(R.id.sent_message).setOnClickListener(this);
+            findViewById(R.id.receive_list).setOnClickListener(this);
+            //findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
 
             ((ListView) findViewById(R.id.listView)).setAdapter(new ListAdapter());
+        ((ListView) findViewById(R.id.listView)).setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent i = new Intent(InboxActivity.this, InboxMessageActivity.class);
+                startActivity(i);
+                ((InboxActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+            }
+        });
 
         }
 
     @Override
     public void onClick(View v) {
+
         int i = v.getId();
-        if (i == R.id.top_matches || i == R.id.i_am_looking_for || i == R.id.looking_for_me)
-            changeColorsOfThreeTab(v);
-        /*else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn)
+
+        if (i == R.id.inbox || i == R.id.sent_message || i == R.id.receive_list)
         {
-            Intent intent = new Intent(InboxActivity.this, FilterActivity.class);
-            startActivity(intent);
-            ((HomeActivity) context).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+            changeColorsOfThreeTab(v);
+        }
+
+       /* else if (i == R.id.sub_drawerMenu)
+        {
+            onMethodClick(v);
         }*/
 
     }
+    public void  onMethodClick(View v)
+    {
+        finish();
+        ((InboxActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+    }
+
 
     private class ListAdapter extends BaseAdapter
     {
 
         @Override
         public int getCount() {
-            return 10;
+            return 25;
         }
 
         @Override
@@ -74,7 +98,7 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView==null) {
 
-                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item,null,false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.inbox_list_item,null,false);
             }
             return convertView;
         }
@@ -97,5 +121,6 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         childLayout.getChildAt(0).setBackgroundColor(context.getColor(R.color.textpurle2));
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
+
 
 }
