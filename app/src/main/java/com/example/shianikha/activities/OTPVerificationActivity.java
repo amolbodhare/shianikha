@@ -67,8 +67,8 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                 findViewById(R.id.btn_submit).setOnClickListener(this);
                 findViewById(R.id.resendText).setOnClickListener(this);
 
-                addTextWatcherOnAllEditText();
-                //setOnKeyListnerOnAllEditText();
+                //addTextWatcherOnAllEditText();
+                setOnKeyListnerOnAllEditText();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -79,20 +79,25 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_first.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (isValidKey(keyCode))
+                if (event.getAction() == KeyEvent.ACTION_DOWN && isValidKey(keyCode))
                     otp_second.requestFocus();
-                H.log("keyCodeIs", keyCode + "");
                 return false;
             }
         });
 
         otp_second.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (isValidKey(keyCode))
-                    otp_third.requestFocus();
-                else if (keyCode == 67)
-                    otp_first.requestFocus();
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (isValidKey(keyCode))
+                        otp_third.requestFocus();
+                    else if (keyCode == 67 && otp_second.getText().length() == 0)
+                    {
+                        otp_first.requestFocus();
+                        H.log("keyCodeIs", keyCode + "");
+                    }
+                }
 
                 return false;
             }
@@ -101,10 +106,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_third.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (isValidKey(keyCode))
-                    otp_fourth.requestFocus();
-                else if (keyCode == 67)
-                    otp_second.requestFocus();
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (isValidKey(keyCode))
+                        otp_fourth.requestFocus();
+                    else if (keyCode == 67 && otp_third.getText().length() == 0)
+                        otp_second.requestFocus();
+                }
                 return false;
             }
         });
@@ -112,10 +119,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_fourth.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (isValidKey(keyCode))
-                    otp_fifth.requestFocus();
-                else if (keyCode == 67)
-                    otp_third.requestFocus();
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (isValidKey(keyCode))
+                        otp_fifth.requestFocus();
+                    else if (keyCode == 67 && otp_fourth.getText().length() == 0)
+                        otp_third.requestFocus();
+                }
                 return false;
             }
         });
@@ -123,10 +132,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_fifth.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (isValidKey(keyCode))
-                    otp_sixth.requestFocus();
-                else if (keyCode == 67)
-                    otp_fourth.requestFocus();
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (isValidKey(keyCode))
+                        otp_sixth.requestFocus();
+                    else if (keyCode == 67 && otp_fifth.getText().length() == 0)
+                        otp_fourth.requestFocus();
+                }
                 return false;
             }
         });
@@ -134,7 +145,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         otp_sixth.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == 67)
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == 67 && otp_sixth.getText().length() == 0)
                     otp_fifth.requestFocus();
                 return false;
             }
