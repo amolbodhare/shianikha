@@ -87,13 +87,11 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         otp_second.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (isValidKey(keyCode))
                         otp_third.requestFocus();
-                    else if (keyCode == 67 && otp_second.getText().length() == 0)
-                    {
+                    else if (keyCode == 67 && otp_second.getText().length() == 0) {
                         otp_first.requestFocus();
                         H.log("keyCodeIs", keyCode + "");
                     }
@@ -275,8 +273,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.btn_submit)
             hitOtpVerificationApi();
 
-        else if (v.getId() == R.id.resendText)
-            hitRegisterApi();
+        else if (v.getId() == R.id.resendText) {
+            if (from == 2)
+                hitLoginApi();
+            else if(from >2)
+                hitRegisterApi();
+        }
     }
 
     private void hitOtpVerificationApi() {
@@ -340,13 +342,32 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        if (json.getInt(P.status) == 1)
                             H.showMessage(OTPVerificationActivity.this, "OTP sent successfully, please wait for some time...");
-                        } else
+                         else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
                 })
                 .run("hitRegisterApi");
+    }
+
+    private void hitLoginApi() {
+        RequestModel requestModel = RequestModel.newRequestModel("login");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1)
+                            H.showMessage(OTPVerificationActivity.this, "OTP sent successfully, please wait for some time...");
+                         else
+                            H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
+                    }
+                })
+                .run("hitLoginApi");
     }
 
     @Override
