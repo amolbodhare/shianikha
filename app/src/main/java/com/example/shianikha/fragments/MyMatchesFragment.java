@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.activities.HomeActivity;
@@ -34,6 +37,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
     public static Fragment previousFragment;
     public static String previousFragmentName;
+    LoadingDialog loadingDialog;
 
     public static MyMatchesFragment newInstance(Fragment fragment, String string)
     {
@@ -61,9 +65,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
             fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
+            loadingDialog=new LoadingDialog(context);
 
             //((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,));
-            //hitmatchesApi("top_matches");
+ //           ((ListView) fragmentView.findViewById(R.id.listView)).removeAllViews();
+            hitmatchesApi("top_matches");
 
         }
         return fragmentView;
@@ -78,15 +84,16 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
+
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        /*if (isLoading)s
+                        if (isLoading)
                             loadingDialog.show();
                         else
-                            loadingDialog.dismiss();*/
+                            loadingDialog.dismiss();
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -101,6 +108,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
                         if (json.getInt(P.status) == 1) {
 
+
+                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,json.getJsonList(P.data)));
                             //setProfileData(json);
                             //setRecentlyJoinData(json);
                             //setRecentVisitorsData(json);
@@ -118,8 +127,22 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.top_matches || i == R.id.i_am_looking_for || i == R.id.looking_for_me)
+        if (i == R.id.top_matches)
+        {
+            hitmatchesApi("top_matches");
             changeColorsOfThreeTab(v);
+        }
+
+        else  if(i == R.id.i_am_looking_for)
+        {
+            hitmatchesApi("i_am_looking_for");
+            changeColorsOfThreeTab(v);
+        }
+        else  if(i == R.id.looking_for_me)
+        {
+            hitmatchesApi("looking_for_me");
+            changeColorsOfThreeTab(v);
+        }
         else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn)
         {
             Intent intent = new Intent(getActivity(), FilterActivity.class);
@@ -182,7 +205,23 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             if (convertView == null)
                 convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
 
-            convertView.findViewById(R.id.imageView).setOnClickListener(this);
+            convertView.findViewById(R.id.thumbnail).setOnClickListener(this);
+
+            Glide.with(context)
+                    .asBitmap()
+                    .load(jsonList.get(position).getString(P.user_photos))
+                    //.load(R.drawable.kangna)
+                    .into((ImageView) convertView.findViewById(R.id.thumbnail));
+
+
+            ((TextView)convertView.findViewById(R.id.full_name)).setText(jsonList.get(position).getString(P.full_name));
+            ((TextView)convertView.findViewById(R.id.time)).setText(jsonList.get(position).getString(P.day)+" "+"day ago");
+            ((TextView)convertView.findViewById(R.id.profile_id_tv)).setText(jsonList.get(position).getString(P.profile_id)+" "+"day ago");
+            ((TextView)convertView.findViewById(R.id.age_tv)).setText(jsonList.get(position).getString(P.age)+"yrs,");
+            ((TextView)convertView.findViewById(R.id.height_tv)).setText(jsonList.get(position).getString(P.height)+"''");
+            ((TextView)convertView.findViewById(R.id.profession_tv)).setText(jsonList.get(position).getString(P.edu_level));
+            //((TextView)convertView.findViewById(R.id.caste_tv)).setText(jsonList.get(position).getString(P.edu_level));
+            ((TextView)convertView.findViewById(R.id.religion_tv)).setText(jsonList.get(position).getString(P.religion));
 
             /*if (position == 1)
             {
@@ -196,7 +235,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         @Override
         public void onClick(View v)
         {
-            if (v.getId() == R.id.imageView)
+            if(v.getId() == R.id.thumbnail)
+            {
+                Toast.makeText(context, "Clicked on Image", Toast.LENGTH_SHORT).show();
+
+            }
+            else if (v.getId() == R.id.imageView)
             {
                 ImageView imageView = (ImageView)v;
                 if (imageView.getDrawable() == null)
@@ -206,4 +250,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             }
         }
     }
+
+
 }

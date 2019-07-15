@@ -91,11 +91,15 @@ public class P {
     public static String sancity_of_the_holy_quran = "sancity_of_the_holy_quran";
     public static String profile_details="profile_details";
     public static String profile_pic="profile_pic";
+    public static String user_photos="user_photos";
     public static String full_name="full_name";
     public static String profile_id="profile_id";
+    public static String day="day";
     public static String my_matches="my_matches";
     public static String profile_visitors="profile_visitors";
     public static String express_interest="express_interest";
     public static String recently_join="recently_join";
     public static String recently_visitors="recently_visitors";
+    public static String edu_level="educationlevel";
+
 }//class

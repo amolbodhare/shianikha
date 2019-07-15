@@ -12,16 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.adoisstudio.helper.Api;
-import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.Session;
 import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.ImageViewerActivity;
-import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
-import com.example.shianikha.commen.RequestModel;
 
 
 public class ProfileDetailsFragments extends Fragment implements View.OnClickListener {
@@ -44,7 +39,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         context=getContext();
         if (fragmentView == null)
@@ -88,51 +84,5 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private void hitmatchesApi()
-    {
-        Session session = new Session(context);
-        String string = session.getString(P.tokenData);
-        Json json = new Json();
-        json.addString(P.token_id,string);
-        RequestModel requestModel = RequestModel.newRequestModel("");
-        requestModel.addJSON(P.data, json);
-
-        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
-                .setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener() {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        /*if (isLoading)s
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();*/
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(context,"Something went Wrong");
-                    }
-                })
-                .onSuccess(new Api.OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Json json) {
-
-                        if (json.getInt(P.status) == 1) {
-
-                            //setProfileData(json);
-                            //setRecentlyJoinData(json);
-                            //setRecentVisitorsData(json);
-
-                        }
-
-                        else
-
-                            H.showMessage(context, json.getString(P.msg));
-                    }
-                })
-                .run("hitDashoardApi");
     }
 }
