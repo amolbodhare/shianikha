@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EditProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/profile_card_back_color"
+        android:layout_below="@id/view">
+
+        <RelativeLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/aaaaaa">
+
+            <ImageView
+                android:id="@+id/drawerMenu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/clickable_trans_bg"
+                android:clickable="true"
+                android:onClick="onBack"
+                android:padding="13dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="100dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:tag=""
+                android:text="edit profile"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="?actionBarSize"
+                android:layout_height="match_parent"
+                android:text="save"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:textAllCaps="true"
+                android:onClick="onSave"
+                android:textStyle="bold"
+                android:layout_marginRight="9dp"
+                android:fontFamily="@font/poppins_regular"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/dashboard_card_back_color">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/aaaaaa" />
+
+                <FrameLayout
+                    android:id="@+id/cir_imv_frame_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image_profile_pic"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/kangna" />
+
+                </FrameLayout>
+
+
+                <ImageView
+                    android:id="@+id/add_img_imv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="120dp"
+                    android:background="@drawable/add_profile_circle_button_back"
+                    android:padding="8dp"
+                    android:src="@drawable/add_profile_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_layout"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <RelativeLayout
+                    android:id="@+id/profile_for_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/profile_for_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Profile For"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/full_name_til"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_for_Layout"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:alpha="0.5">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/full_name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Full Name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/email_til"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/full_name_til"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:alpha="0.5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#000000"
+                    android:textSize="16dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/email_tie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Email address"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:typeface="monospace" />
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/mob_linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/email_til"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/countryCodeEditText"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="+01"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/mobile_no_til"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/countryCode"
+                        android:alpha="0.5">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/mobile_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Mobile No"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:singleLine="true"
+                            android:textColor="#000000"
+                            android:textSize="16dp"
+                            android:typeface="monospace" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/image_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mob_linearLayout"
+                    android:layout_marginTop="17dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:alpha="0.7"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Gender"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:id="@+id/genderr_male_imv"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/reg_img_bg"
+                        android:padding="10dp"
+                        android:src="@drawable/male" />
+
+                    <ImageView
+                        android:id="@+id/genderr_female_imv"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/reg_img_bg"
+                        android:padding="10dp"
+                        android:src="@drawable/female" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/city_of_residence_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/image_ll"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/city_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="City of Residence"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <!--<Spinner
+                    android:id="@+id/state_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/city_of_residence_spinner"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+                <RelativeLayout
+                    android:id="@+id/state_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/city_of_residence_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/state_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="State/Provenance/Country"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/country_of_residence_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/state_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/country_of_residence_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Country of Residence"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <!-- <Spinner
+                     android:id="@+id/country_of_residence_spinner"
+                     android:layout_marginTop="20dp"
+                     android:layout_below="@id/state_spinner"
+                     android:layout_width="fill_parent"
+                     android:alpha="0.5"
+                     android:layout_height="wrap_content"
+                     android:prompt="@string/spinner_title"/>
+                 <Spinner
+                     android:id="@+id/country_of_citizenship"
+                     android:layout_marginTop="20dp"
+                     android:layout_below="@id/country_of_residence_spinner"
+                     android:layout_width="fill_parent"
+                     android:alpha="0.5"
+                     android:layout_height="wrap_content"
+                     android:prompt="@string/spinner_title"/>-->
+                <RelativeLayout
+                    android:id="@+id/country_of_citizenship_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/country_of_residence_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/country_of_citizenship_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Country of Citizenship"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+
+                <EditText
+                    android:id="@+id/ed_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/country_of_citizenship_layout"
+                    android:layout_marginTop="17dp"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Date of Birth"
+                    android:textSize="16dp" />
+
+                <!--<Spinner
+                    android:id="@+id/height_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/ed_dob"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+                <RelativeLayout
+                    android:id="@+id/height_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/ed_dob"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/height_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Height"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/religion_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/height_spinner_layout">
+
+                    <EditText
+                        android:id="@+id/religion_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Select Religion"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+                <!--<Spinner
+                    android:id="@+id/Ethincity_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/religion_spinner"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+
+                <RelativeLayout
+                    android:id="@+id/Ethincity_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/religion_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/ethinicity_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="ethnicity"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+                <!--<Spinner
+                    android:id="@+id/fathers_city_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/Ethincity_spinner"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+
+                <RelativeLayout
+                    android:id="@+id/fathers_city_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/Ethincity_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/fathers_city_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Father's city/country of origin"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <!--<Spinner
+                    android:id="@+id/mothers_city_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/fathers_city_spinner"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+                <RelativeLayout
+                    android:id="@+id/mothers_city_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/fathers_city_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/mothers_city_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Mother's city/country of origin"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
+
+                <!--<Spinner
+                    android:id="@+id/current_occupation"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/mothers_city_spinner"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+
+                <RelativeLayout
+                    android:id="@+id/current_occupation_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/mothers_city_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/current_occupation_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Current Occupation"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/other_details_occu_til"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/current_occupation_layout"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="0dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/other_details_occu_tiet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Other details about your occupation"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:typeface="monospace" />
+                </android.support.design.widget.TextInputLayout>
+                <!--<Spinner
+                    android:id="@+id/higest_level_edu_spinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/other_details_occu_til"
+                    android:layout_width="fill_parent"
+                    android:alpha="0.5"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"/>-->
+
+                <RelativeLayout
+                    android:id="@+id/higest_level_edu_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/other_details_occu_til"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/higest_level_edu_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Highest level of Education"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/lang_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/higest_level_edu_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/lang_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Select language"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+                <!-- <Spinner
+                     android:id="@+id/habbit_spinner"
+                     android:layout_marginTop="15dp"
+                     android:layout_below="@id/lang_spinner"
+                     android:layout_width="fill_parent"
+                     android:alpha="0.5"
+                     android:layout_height="wrap_content"
+                     android:prompt="@string/spinner_title"/>-->
+                <RelativeLayout
+                    android:id="@+id/habbit_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/lang_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/habbit_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Smoking"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relocate_spinner_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/habbit_spinner_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/relocate_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Willing to Relocate"
+                        android:paddingRight="56dp"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/islam_convert_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relocate_spinner_layout"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Did you convert to Islam?"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/convertedRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/islam_convert_tv"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/yesConverted"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notConverted"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/syed_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/convertedRadioGroup"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Are you a Syed?"
+                    android:textSize="16dp" />
+
+                <RadioGroup
+                    android:id="@+id/syedRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/syed_tv"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/yesSyed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notSyed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                    <RadioButton
+                        android:id="@+id/donnKnowSyed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Don't know" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/handicap_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/syedRadioGroup"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Are you handicap/major disabilities?"
+                    android:textSize="16dp" />
+
+                <RadioGroup
+                    android:id="@+id/handicapRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/handicap_tv"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/yesHandicap"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notHandicap"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                    <RadioButton
+                        android:id="@+id/donnKnowHandicap"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Don't know" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/children_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/handicapRadioGroup"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Do you have children?"
+                    android:textSize="16dp" />
+
+                <RadioGroup
+                    android:id="@+id/childrenRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/children_tv"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/yesChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:id="@+id/seeking_marriage_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/childrenRadioGroup"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/seeking_marriage_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:hint="you are seeking marriage"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
+                <!--    <Spinner
+                        android:id="@+id/interested_in"
+                        android:layout_width="match_parent"
+                        android:alpha="0.5"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginRight="25dp" />
+      -->
+
+                <RelativeLayout
+                    android:id="@+id/interesterd_in_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/seeking_marriage_layout"
+                    android:layout_marginTop="17dp">
+
+                    <EditText
+                        android:id="@+id/interesterd_in_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:hint="Interested in"
+                        android:paddingRight="56dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tint="#bdbdbd" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/religious_exception_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/interesterd_in_layout"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/practice_of_religion"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/religious_exception_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_below="@id/religious_exception_tv"
+                    android:layout_marginTop="45dp" />
+
+                <TextView
+                    android:id="@+id/preferences_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/religious_exception_ed"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/preference"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/qualities_seeking_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_below="@id/preferences_tv"
+                    android:layout_marginTop="45dp" />
+
+                <TextView
+                    android:id="@+id/about_two_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qualities_seeking_ed"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="More about you"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/more_about_you_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/about_two_tv"
+                    android:layout_marginTop="45dp" />
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_below="@id/more_about_you_ed"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="onSave"
+                    android:background="@drawable/blue_button_back"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.shianikha.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -33,14 +34,12 @@ import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
 import com.example.shianikha.fragments.SubscriptionPlanFragment;
-import com.example.shianikha.subfragments.EditProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private MyMatchesFragment myMatchesFragment;
     private SearchFragment searchFragment;
     private MyProfileFragment myProfileFragment;
-    private EditProfileFragment editProfileFragment;
     private NotificationFragment notificationFragment;
     public NotifacationDetails notifacationDetails;
     private SubscriptionPlanFragment subscriptionFragment;
@@ -216,9 +215,9 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    public void OnDrawerMenuClick(View view) {
+    public void OnDrawerMenuClick(View view)
+    {
         if (view.getId() == R.id.drawer_logout_layout) {
-
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setMessage("Do you really want to exit?");
             adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -235,30 +234,25 @@ public class HomeActivity extends AppCompatActivity {
             });
             adb.setNegativeButton("no", null);
             adb.show();
-            drawerLayout.closeDrawer(Gravity.START);
-
         }
-        else if (view.getId() == R.id.drawer_partnerPreference_layout) {
+        else if (view.getId() == R.id.drawer_partnerPreference_layout)
+        {
             Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            drawerLayout.closeDrawer(Gravity.START);
         }
         else if (view.getId() == R.id.drawer_subscription_layout) {
             Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.my_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, MyActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, InboxActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.drawer_noti_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
@@ -266,13 +260,11 @@ public class HomeActivity extends AppCompatActivity {
              if(notificationFragment==null)
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
-            drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.drawer_favourites_layout) {
 
             Intent i = new Intent(HomeActivity.this, FavouritesActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            drawerLayout.closeDrawer(Gravity.START);
 
         } else if (view.getId() == R.id.drawer_help_and_support_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
@@ -280,14 +272,12 @@ public class HomeActivity extends AppCompatActivity {
             if(helpAndSupport==null)
             helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
-            drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.drawer_aboutapp_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
             if(aboutApp==null)
             aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(aboutApp, getString(R.string.aboutapp));
-            drawerLayout.closeDrawer(Gravity.START);
 
         } else if (view.getId() == R.id.drawer_account_settings_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
@@ -295,7 +285,6 @@ public class HomeActivity extends AppCompatActivity {
             if (accountSettingsFragment == null)
                 accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
-            drawerLayout.closeDrawer(Gravity.START);
 
         } else if (view.getId() == R.id.drawer_contactus_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
@@ -304,10 +293,8 @@ public class HomeActivity extends AppCompatActivity {
             if (contactUsFragment == null)
                 contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(contactUsFragment, getString(R.string.contactUs));
-            drawerLayout.closeDrawer(Gravity.START);
-
         }
-
+        drawerLayout.closeDrawer(Gravity.START);
     }
 
     public void onNotificationIconClick(View view) {
@@ -321,16 +308,13 @@ public class HomeActivity extends AppCompatActivity {
 
         H.log("ObjectIs", object + "");
         if (string.equalsIgnoreCase("n")) {
-            H.log("Inside if", "If is Executed");
             if(notificationFragment==null)
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
-        } else if (string.equalsIgnoreCase("e")) {
-            H.log("Inside else if", "Else if is executed");
-            if(editProfileFragment==null)
-            editProfileFragment = EditProfileFragment.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(editProfileFragment, getString(R.string.editprofile));
-            makeStatusBarColorBlue(true);
+        } else if (string.equalsIgnoreCase("e"))
+        {
+            Intent intent = new Intent(this,EditProfileActivity.class);
+            startActivityForResult(intent,31);
         }
     }
 
@@ -416,14 +400,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        } else if (editProfileFragment != null && editProfileFragment.isVisible()) {
-            fragment = EditProfileFragment.previousFragment;
-            string = EditProfileFragment.previousFragmentName;
-            if (fragment != null && string != null) {
-                fragmentLoader(fragment, string);
-                decideBottomSelection(string);
-            }
-        } else if (view == null) {
+        }
+        else if (view == null) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
@@ -457,9 +435,19 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
     public void OnDrawerMyProfileClick(View v) {
         bottomFourFragmentClick(findViewById(R.id.myprofileButton_layout));
         drawerLayout.closeDrawer(Gravity.START);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 31 && resultCode == RESULT_OK)
+        {
+            //if (myProfileFragment!=null )
+            H.log("resultOk","isExecuted");
+        }
     }
 }

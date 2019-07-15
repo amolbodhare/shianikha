@@ -1,17 +1,13 @@
 package com.example.shianikha.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import com.example.shianikha.R;
-import com.example.shianikha.subfragments.EditProfileFragment;
 
 public class MyProfileFragment extends Fragment {
 
