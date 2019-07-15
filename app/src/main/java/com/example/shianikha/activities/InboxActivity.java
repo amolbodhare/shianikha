@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.R;
@@ -37,9 +38,10 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
             findViewById(R.id.inbox).setOnClickListener(this);
             findViewById(R.id.sent_message).setOnClickListener(this);
             findViewById(R.id.receive_list).setOnClickListener(this);
-            //findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
+            findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
 
             ((ListView) findViewById(R.id.listView)).setAdapter(new ListAdapter());
+
         ((ListView) findViewById(R.id.listView)).setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -54,7 +56,8 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
 
         int i = v.getId();
 
@@ -63,10 +66,10 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
             changeColorsOfThreeTab(v);
         }
 
-       /* else if (i == R.id.sub_drawerMenu)
+        else if (v.getId() == R.id.sub_drawerMenu)
         {
             onMethodClick(v);
-        }*/
+        }
 
     }
     public void  onMethodClick(View v)
@@ -99,16 +102,26 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
             if(convertView==null) {
 
                 convertView = LayoutInflater.from(context).inflate(R.layout.inbox_list_item,null,false);
+                convertView.findViewById(R.id.del_msg_btn_imv).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context,"wwant to delete the record?",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             return convertView;
         }
     }
 
-    private void changeColorsOfThreeTab(View v) {
+    private void changeColorsOfThreeTab(View v)
+    {
+
         LinearLayout parentLayout = findViewById(R.id.threeTabContainer);
         LinearLayout childLayout;
         TextView textView;
-        for (int i = 0; i < parentLayout.getChildCount(); i++) {
+
+        for (int i = 0; i < parentLayout.getChildCount(); i++)
+        {
             childLayout = (LinearLayout) parentLayout.getChildAt(i);
             textView = ((TextView) childLayout.getChildAt(0));
             textView.setTextColor(context.getColor(R.color.textview_grey_color));

@@ -56,7 +56,7 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
                     android:tag=""
-                    android:text="dashboard"
+                    android:text="Subscription plan"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="18dp"

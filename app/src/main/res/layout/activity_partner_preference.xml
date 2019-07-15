@@ -1,9 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.PartnerPreferenceActivity">
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/profile_card_back_color"
+        android:layout_below="@id/view">
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/aaaaaa">
+
+            <ImageView
+                android:id="@+id/sub_drawerMenu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/clickable_trans_bg"
+                android:clickable="true"
+                android:onClick="onMethodClick"
+                android:padding="13dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:backgroundTint="@color/white"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:tag=""
+                android:text="Partner Preference"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/noti_layout"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                android:paddingTop="2dp">
+
+                <ImageView
+                    android:id="@+id/imv_noti"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/notification"
+                    android:text="hello"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/noti_text"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/circlenoti"
+                    android:backgroundTint="@color/purplebtnback"
+                    android:gravity="center"
+                    android:text="99"
+                    android:padding="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingTop="25dp"
+            android:text="AGE"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textMin1"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"/>
+            <TextView
+                android:id="@+id/textMax1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/age_rangeSeekbar"
+            android:layout_marginTop="20dp"
+            app:bar_highlight_color="@color/seekbar_color"
+            app:left_thumb_color="@color/seekbar_color"
+            app:right_thumb_color="@color/seekbar_color"
+            app:min_value="18"
+            app:min_start_value="20"
+            app:max_value="30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/maritalStatus"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="17dp">
+
+            <EditText
+                android:id="@+id/match_ethnicity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Preferred Match marital status"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:tint="#bdbdbd" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/minEducation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="17dp">
+
+            <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Preferred Match ethnicity"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:tint="#bdbdbd" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/cityLayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="17dp">
+
+            <EditText
+                android:id="@+id/profile_for_ed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Minimum Education"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:tint="#bdbdbd" />
+
+        </RelativeLayout>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/textpurle"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:text="Email me request from anyone" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/textpurle"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Email me request from Preferred Matches Only"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/textpurle"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:text="Check this box to assest by sanctity of the Holy Quran that (1) all information that you have provided in this form is true to best of my Knowlwdge.(2) you are atleast 21 years of age (3) You agree to our " />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms of Use"
+            android:textColor="@color/textpurle"
+            android:layout_marginLeft="45dp"/>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/image_ll"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/blue_button_back"
+            android:fontFamily="@font/poppins_regular"
+            android:text="SAVE"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

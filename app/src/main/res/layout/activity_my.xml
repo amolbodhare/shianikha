@@ -54,7 +54,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:tag=""
-                android:text="dashboard"
+                android:text="My Activity"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="18dp"

@@ -14,9 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 public class MyMatchesFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
@@ -41,7 +49,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         context = getContext();
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
-        if (fragmentView == null) {
+        if (fragmentView == null)
+        {
             fragmentView = inflater.inflate(R.layout.fragment_my_matches, container, false);
 
             fragmentView.findViewById(R.id.top_matches).setOnClickListener(this);
@@ -53,12 +62,58 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
 
-            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte());
+            //((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,));
+            //hitmatchesApi("top_matches");
 
         }
         return fragmentView;
     }
 
+     private void hitmatchesApi(String api_type)
+     {
+        Session session = new Session(context);
+        String string = session.getString(P.tokenData);
+        Json json = new Json();
+        json.addString(P.token_id,string);
+        RequestModel requestModel = RequestModel.newRequestModel(api_type);
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        /*if (isLoading)s
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();*/
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context,"Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+
+                            //setProfileData(json);
+                            //setRecentlyJoinData(json);
+                            //setRecentVisitorsData(json);
+
+                        }
+
+                        else
+
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitDashoardApi");
+    }
 
     @Override
     public void onClick(View v) {
@@ -98,19 +153,28 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
     class CustomListAdapte extends BaseAdapter implements View.OnClickListener {
 
+        Context context;
+        JsonList jsonList;
+
+        CustomListAdapte(Context context, JsonList jsonList)
+        {
+            this.context=context;
+            this.jsonList=jsonList;
+        }
+
         @Override
         public int getCount() {
-            return 7;
+            return jsonList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return jsonList.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
@@ -120,10 +184,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
             convertView.findViewById(R.id.imageView).setOnClickListener(this);
 
-            if (position == 1) {
+            /*if (position == 1)
+            {
                 convertView.findViewById(R.id.thumbnail).setVisibility(View.GONE);
                 convertView.findViewById(R.id.linearLayout).setVisibility(View.VISIBLE);
-            }
+            }*/
 
             return convertView;
         }

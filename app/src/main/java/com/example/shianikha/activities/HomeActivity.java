@@ -65,8 +65,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         homeFragment = HomeFragment.newInstance();
-        currentFragment = homeFragment;
-        currentFragmentName = getString(R.string.dashboard);
         fragmentLoader(homeFragment, "dashboard");
 
         TextView textView = findViewById(R.id.titleName);
@@ -123,6 +121,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void fragmentLoader(Fragment fragment, String title) {
+        if (currentFragment != null && currentFragment.getClass().toString().equalsIgnoreCase(fragment.getClass().toString()))
+            return;
+
         if (fragment == homeFragment) {
             showBackButton(false);
             makeStatusBarColorBlue(true);////change color except dashboard
@@ -150,22 +151,23 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.titleName)).setText(title);
     }
 
-    public void bottomFourFragmentClick(View view)
-    {
-        if (view.getId() == R.id.homeButton_layout)
-        {
+    public void bottomFourFragmentClick(View view) {
+        if (view.getId() == R.id.homeButton_layout) {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
             changeNotificationicon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
+            if(myMatchesFragment==null)
             myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             changeNotificationicon(false);
 
         } else if (view.getId() == R.id.searchButton_layout) {
+            if(searchFragment==null)
             searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
             changeNotificationicon(false);
         } else if (view.getId() == R.id.myprofileButton_layout) {
+            if(myProfileFragment==null)
             myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
         }
@@ -235,7 +237,14 @@ public class HomeActivity extends AppCompatActivity {
             adb.show();
             drawerLayout.closeDrawer(Gravity.START);
 
-        } else if (view.getId() == R.id.drawer_subscription_layout) {
+        }
+        else if (view.getId() == R.id.drawer_partnerPreference_layout) {
+            Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
+            startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+            drawerLayout.closeDrawer(Gravity.START);
+        }
+        else if (view.getId() == R.id.drawer_subscription_layout) {
             Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
@@ -254,6 +263,7 @@ public class HomeActivity extends AppCompatActivity {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
 
+             if(notificationFragment==null)
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
             drawerLayout.closeDrawer(Gravity.START);
@@ -267,14 +277,14 @@ public class HomeActivity extends AppCompatActivity {
         } else if (view.getId() == R.id.drawer_help_and_support_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
-
+            if(helpAndSupport==null)
             helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
             drawerLayout.closeDrawer(Gravity.START);
         } else if (view.getId() == R.id.drawer_aboutapp_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
-
+            if(aboutApp==null)
             aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(aboutApp, getString(R.string.aboutapp));
             drawerLayout.closeDrawer(Gravity.START);
@@ -282,8 +292,8 @@ public class HomeActivity extends AppCompatActivity {
         } else if (view.getId() == R.id.drawer_account_settings_layout) {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
-
-            accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
+            if (accountSettingsFragment == null)
+                accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
             drawerLayout.closeDrawer(Gravity.START);
 
@@ -291,7 +301,8 @@ public class HomeActivity extends AppCompatActivity {
              /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
              startActivity(i);*/
 
-            contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
+            if (contactUsFragment == null)
+                contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(contactUsFragment, getString(R.string.contactUs));
             drawerLayout.closeDrawer(Gravity.START);
 
@@ -309,15 +320,14 @@ public class HomeActivity extends AppCompatActivity {
         String string = object.toString();
 
         H.log("ObjectIs", object + "");
-        if (string.equalsIgnoreCase("n"))
-        {
+        if (string.equalsIgnoreCase("n")) {
             H.log("Inside if", "If is Executed");
+            if(notificationFragment==null)
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
-        }
-        else if (string.equalsIgnoreCase("e"))
-        {
+        } else if (string.equalsIgnoreCase("e")) {
             H.log("Inside else if", "Else if is executed");
+            if(editProfileFragment==null)
             editProfileFragment = EditProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(editProfileFragment, getString(R.string.editprofile));
             makeStatusBarColorBlue(true);
@@ -399,26 +409,21 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }
-        else if (contactUsFragment != null && contactUsFragment.isVisible())
-        {
+        } else if (contactUsFragment != null && contactUsFragment.isVisible()) {
             fragment = ContactUsFragment.previousFragment;
             string = ContactUsFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }
-        else if (editProfileFragment != null && editProfileFragment.isVisible())
-        {
+        } else if (editProfileFragment != null && editProfileFragment.isVisible()) {
             fragment = EditProfileFragment.previousFragment;
             string = EditProfileFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }
-        else if (view == null) {
+        } else if (view == null) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
@@ -452,8 +457,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void OnDrawerMyProfileClick(View v)
-    {
+
+    public void OnDrawerMyProfileClick(View v) {
         bottomFourFragmentClick(findViewById(R.id.myprofileButton_layout));
         drawerLayout.closeDrawer(Gravity.START);
     }

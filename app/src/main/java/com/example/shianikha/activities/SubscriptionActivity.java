@@ -31,11 +31,13 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
 
         imv_pre_btn = findViewById(R.id.prev_imv);
         imv_next_btn = findViewById(R.id.next_imv);
+
         //back_nav_icon=findViewById(R.id.drawerMenu);
         //findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
 
         imv_pre_btn.setOnClickListener(this);
         imv_next_btn.setOnClickListener(this);
+
         //back_nav_icon.setOnClickListener(this);
 
         subPlanSliderAdapter = new SubscriptionSliderAdapter(context);
@@ -66,6 +68,7 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
         finish();
         ((SubscriptionActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
+
     private int getItem(int i) {
         return subPlanSlideViewPager.getCurrentItem() + i;
     }
