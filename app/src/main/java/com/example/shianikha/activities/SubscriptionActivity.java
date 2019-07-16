@@ -1,6 +1,7 @@
 package com.example.shianikha.activities;
 
 import android.content.Context;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,8 +26,9 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription);
+        getWindow().setStatusBarColor(getColor(R.color.semi_transparent));
         context = SubscriptionActivity.this;
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         subPlanSlideViewPager = findViewById(R.id.sub_plan_viewpager);
 
         imv_pre_btn = findViewById(R.id.prev_imv);
