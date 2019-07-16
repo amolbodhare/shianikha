@@ -3,6 +3,7 @@ package com.example.shianikha.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class SubscriptionSliderAdapter extends PagerAdapter
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o)
     {
-        return view==(LinearLayout)o;
+        return view==(CardView)o;
     }
 
     @NonNull
@@ -58,6 +59,6 @@ public class SubscriptionSliderAdapter extends PagerAdapter
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((LinearLayout)object);
+        container.removeView((CardView)object);
     }
 }
