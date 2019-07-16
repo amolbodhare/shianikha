@@ -52,7 +52,8 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
         if (v.getId() == R.id.prev_imv) {
             subPlanSlideViewPager.setCurrentItem(getItem(-1), true);
         }
-        else if (v.getId() == R.id.next_imv) {
+        else if (v.getId() == R.id.next_imv)
+        {
             subPlanSlideViewPager.setCurrentItem(getItem(+1), true);
         }
         else if (v.getId() == R.id.sub_drawerMenu)

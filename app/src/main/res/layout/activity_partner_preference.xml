@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activities.PartnerPreferenceActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
     <RelativeLayout
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
@@ -145,7 +155,7 @@
             android:layout_marginTop="17dp">
 
             <EditText
-                android:id="@+id/match_ethnicity"
+                android:id="@+id/marital_status_spinner_ed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"
@@ -170,7 +180,7 @@
             android:layout_marginTop="17dp">
 
             <EditText
-
+                android:id="@+id/ethincity_spinner_ed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"
@@ -195,7 +205,7 @@
             android:layout_marginTop="17dp">
 
             <EditText
-                android:id="@+id/profile_for_ed"
+                android:id="@+id/min_edu_spinner_ed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"
@@ -213,39 +223,41 @@
 
         </RelativeLayout>
 
-        <RadioButton
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/syedRadioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:buttonTint="@color/textpurle"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12sp"
-            android:text="Email me request from anyone" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:buttonTint="@color/textpurle"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Email me request from Preferred Matches Only"
-            android:textSize="12sp"/>
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/terms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:buttonTint="@color/textpurle"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12sp"
-            android:text="Check this box to assest by sanctity of the Holy Quran that (1) all information that you have provided in this form is true to best of my Knowlwdge.(2) you are atleast 21 years of age (3) You agree to our " />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Terms of Use"
-            android:textColor="@color/textpurle"
-            android:layout_marginLeft="45dp"/>
+            <RadioButton
+                android:id="@+id/yesSyed"
+                android:layout_marginTop="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:buttonTint="#5C5CFE"
+                android:text="Email me requests from anyone" />
+
+            <RadioButton
+                android:id="@+id/notSyed"
+                android:layout_marginTop="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#5C5CFE"
+                android:text="Email me requests from preferred matchees only" />
+
+            <RadioButton
+                android:id="@+id/donnKnowSyed"
+                android:layout_marginTop="17dp"
+                android:gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#5C5CFE"
+                android:text="@string/terms_conditions" />
+
+        </RadioGroup>
+
 
         <Button
             android:id="@+id/btn_next"
@@ -260,6 +272,29 @@
             android:textSize="20dp" />
 
     </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
 
-</LinearLayout>
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone" />
+
+</RelativeLayout>

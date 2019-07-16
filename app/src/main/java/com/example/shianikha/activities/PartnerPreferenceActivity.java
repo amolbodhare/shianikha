@@ -1,23 +1,56 @@
 package com.example.shianikha.activities;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.EditText;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.RadioGroup;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
 
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
-import com.example.shianikha.R;
+        import com.adoisstudio.helper.Api;
+        import com.adoisstudio.helper.H;
+        import com.adoisstudio.helper.Json;
+        import com.adoisstudio.helper.JsonList;
+        import com.adoisstudio.helper.LoadingDialog;
+        import com.adoisstudio.helper.Session;
+        import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+        import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
+        import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+        import com.example.App;
+        import com.example.shianikha.R;
+        import com.example.shianikha.commen.C;
+        import com.example.shianikha.commen.P;
+        import com.example.shianikha.commen.RequestModel;
+
+        import java.util.ArrayList;
 
 public class PartnerPreferenceActivity extends AppCompatActivity implements View.OnClickListener
 {
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> maritalStatusNameList, maritalStatusCodelist, ethincityNameList, ethincityCodeList, minEduNameList, minEduCodeList;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_preference);
+        session = new Session(this);
+
+        findViewById(R.id.marital_status_spinner_ed).setOnClickListener(this);
+        findViewById(R.id.ethincity_spinner_ed).setOnClickListener(this);
+        findViewById(R.id.min_edu_spinner_ed).setOnClickListener(this);
+        findViewById(R.id.view).setOnClickListener(this);
+        findViewById(R.id.btn_next).setOnClickListener(this);
+
         final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) findViewById(R.id.age_rangeSeekbar);
 
         // get min and max text view
@@ -40,19 +73,249 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
                 Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
             }
         });
+
+
+        setMarginTopOfCustomSpinner();
+        extractRequireList();
     }
 
     @Override
     public void onClick(View v) {
-         if (v.getId() == R.id.sub_drawerMenu)
+
+
+        if (v.getId() == R.id.view)
+            hideCustomSpinnerLayout();
+        else if (v.getId() == R.id.sub_drawerMenu)
         {
             onMethodClick(v);
         }
-
+        else if (v.getId() == R.id.btn_next)
+            makeJson();
+        else
+            setUpCustomSpinner(v);
     }
     public void  onMethodClick(View v)
     {
         finish();
         ((PartnerPreferenceActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
+    private void setMarginTopOfCustomSpinner() {
+        LinearLayout linearLayout = findViewById(R.id.includeContainer);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
+        int i = new Session(this).getInt(P.statusBarHeight);
+        layoutParams.topMargin = i;
+        H.log("heightIs", i + "");
+        linearLayout.setLayoutParams(layoutParams);
+    }
+
+    private void extractRequireList() {
+        JsonList jsonList;
+
+        //for language
+        String string = session.getString(P.marital_status);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            maritalStatusNameList = new ArrayList<>();
+            maritalStatusCodelist = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                maritalStatusNameList.add(string);
+
+                string = j.getString(P.id);
+                maritalStatusCodelist.add(string);
+            }
+        }
+
+        //for smoking
+        string = session.getString(P.ethnicity);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            ethincityNameList = new ArrayList<>();
+            ethincityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                ethincityNameList.add(string);
+
+                string = j.getString(P.id);
+                ethincityCodeList.add(string);
+            }
+        }
+
+        //for relocate
+        string = session.getString(P.education);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            minEduNameList = new ArrayList<>();
+            minEduCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                minEduNameList.add(string);
+
+                string = j.getString(P.id);
+                minEduCodeList.add(string);
+            }
+        }
+        setUpTextWatcher();
+    }
+
+    private void setUpTextWatcher() {
+        ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (arrayAdapter != null)
+                    arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+    }
+
+    private void setUpCustomSpinner(final View view)
+    {
+        ListView listView = findViewById(R.id.listView);
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
+
+        if (view.getId()==R.id.marital_status_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Search Marital Status");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,maritalStatusNameList);
+        }
+        else if (view.getId() == R.id.ethincity_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Search Ethincity");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,ethincityNameList);
+        }
+
+        else if (view.getId() == R.id.min_edu_spinner_ed)
+        {
+            ((EditText)findViewById(R.id.editText)).setHint("Search Education");
+            arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,minEduNameList);
+        }
+
+        if (arrayAdapter == null)
+            return;
+
+        H.showKeyBoard(this, findViewById(R.id.editText));
+
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                TextView textView = v.findViewById(R.id.textView);
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
+                }
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void hideCustomSpinnerLayout() {
+        int i = findViewById(R.id.includeContainer).getWidth();
+        ((EditText) findViewById(R.id.editText)).setText("");
+        findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
+        View view = findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(this, view);
+    }
+    private void makeJson()
+    {
+        Json json = new Json();
+        json.addString(P.token_id,session.getString(P.tokenData));
+
+        EditText editText = findViewById(R.id.marital_status_spinner_ed);
+        String string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your marital status");
+            return;
+        }
+        int i = maritalStatusNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.marital_status_id, maritalStatusCodelist.get(i));
+
+        editText = findViewById(R.id.ethincity_spinner_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select smoking status");
+            return;
+        }
+        i = ethincityNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.ethnicitys_id, ethincityCodeList.get(i));
+
+        editText = findViewById(R.id.min_edu_spinner_ed);
+        string = editText.getText().toString();
+
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please select min Education");
+            return;
+        }
+        i = minEduNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.edulevel_id, minEduCodeList.get(i));
+
+
+        i = ((RadioGroup)findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId();
+        if (i == R.id.yesSyed)
+            string = "1";
+        else if (i == R.id.notSyed)
+            string = "0";
+        else if (i == R.id.donnKnowSyed)
+            string = "2";
+        json.addString(P.syed, string);
+
+
+        H.log("masterJsonIs",App.masterJson.toString());
+        hitPerfectMatchApi(json);
+        //startActivity(new Intent(this,RegFifthPageActivity.class));
+    }
+
+    private void hitPerfectMatchApi(Json json)
+    {
+        final LoadingDialog loadingDialog = new LoadingDialog(this);
+
+        RequestModel requestModel = RequestModel.newRequestModel("perfect_match");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener()
+                {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(PartnerPreferenceActivity.this, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                        {
+                            new Session(PartnerPreferenceActivity.this).addInt(P.full_register, 1);
+                            Intent intent = new Intent(PartnerPreferenceActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else
+                            H.showMessage(PartnerPreferenceActivity.this, json.getString(P.msg));
+                    }
+                })
+                .run("hitPerfectMatchApi");
+    }
+
 }

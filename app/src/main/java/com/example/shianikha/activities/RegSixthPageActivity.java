@@ -200,6 +200,10 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
             hideCustomSpinnerLayout();
         else if (v.getId() == R.id.button)
             makeJson();
+        else if (v.getId() == R.id.sub_drawerMenu)
+        {
+            onMethodClick(v);
+        }
         else
             setUpCustomSpinner(v);
     }
@@ -323,5 +327,12 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
         layoutParams.topMargin = i;
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
+    }
+
+    public void  onMethodClick(View v)
+    {
+
+        finish();
+        ((RegSixthPageActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
 }
