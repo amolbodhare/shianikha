@@ -200,6 +200,7 @@
 
         <RelativeLayout
             android:id="@+id/cityLayout"
+
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="17dp">
@@ -223,40 +224,43 @@
 
         </RelativeLayout>
 
-        <RadioGroup
-            android:id="@+id/syedRadioGroup"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/pref_match_min_education_spinner_layout"
+            android:buttonTint="#5C5CFE"
+            android:layout_marginTop="30dp"
+            android:checked="true"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Email me request from every one"
+            android:textSize="13sp" />
 
-            android:orientation="vertical">
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:buttonTint="#5C5CFE"
+            android:checked="true"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_below="@id/checkBox1"
+            android:text="Email me request from Preferred matches only"
+            android:textSize="13sp" />
 
-            <RadioButton
-                android:id="@+id/yesSyed"
-                android:layout_marginTop="17dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:buttonTint="#5C5CFE"
-                android:text="Email me requests from anyone" />
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:buttonTint="#5C5CFE"
+            android:layout_below="@+id/checkBox2"
+            android:checked="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="top"
+            android:text="check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is ttrue to your best of your knowledge,\n(2) you agree to our Terms of use and \n(3) you are atleast 18 years of age "
+            android:textSize="13sp" />
 
-            <RadioButton
-                android:id="@+id/notSyed"
-                android:layout_marginTop="17dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#5C5CFE"
-                android:text="Email me requests from preferred matchees only" />
-
-            <RadioButton
-                android:id="@+id/donnKnowSyed"
-                android:layout_marginTop="17dp"
-                android:gravity="start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#5C5CFE"
-                android:text="@string/terms_conditions" />
-
-        </RadioGroup>
 
 
         <Button

@@ -60,7 +60,7 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
             @Override
             public void onClick(View view) {
 
-                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position));
+                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position).getString(P.profile_id));
                 ((HomeActivity)context).fragmentLoader(((HomeActivity)context).profileDetailsFragments,P.profile_details);
             }
         });

@@ -9,12 +9,14 @@ package com.example.shianikha.activities;
         import android.view.View;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
+        import android.widget.CheckBox;
         import android.widget.EditText;
         import android.widget.LinearLayout;
         import android.widget.ListView;
         import android.widget.RadioGroup;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import com.adoisstudio.helper.Api;
         import com.adoisstudio.helper.H;
@@ -38,6 +40,8 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> maritalStatusNameList, maritalStatusCodelist, ethincityNameList, ethincityCodeList, minEduNameList, minEduCodeList;
     private Session session;
+    TextView tvMax;
+    TextView tvMin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +58,18 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
         final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) findViewById(R.id.age_rangeSeekbar);
 
         // get min and max text view
-        final TextView tvMin = (TextView) findViewById(R.id.textMin1);
-        final TextView tvMax = (TextView) findViewById(R.id.textMax1);
+         tvMin = (TextView) findViewById(R.id.textMin1);
+
+         tvMax = (TextView) findViewById(R.id.textMax1);
 
 // set listener
         rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
                 tvMin.setText("Min " + String.valueOf(minValue) + " years");
+                tvMin.setTag(minValue);
                 tvMax.setText("Max " + String.valueOf(maxValue) + " years");
+                tvMax.setTag(maxValue);
             }
         });
 
@@ -225,6 +232,7 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
         view.setVisibility(View.GONE);
         H.hideKeyBoard(this, view);
     }
+
     private void makeJson()
     {
         Json json = new Json();
@@ -260,17 +268,20 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
         }
         i = minEduNameList.indexOf(string);
         if (i != -1)
-            json.addString(P.edulevel_id, minEduCodeList.get(i));
+            json.addString(P.education_id, minEduCodeList.get(i));
 
 
-        i = ((RadioGroup)findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId();
-        if (i == R.id.yesSyed)
-            string = "1";
-        else if (i == R.id.notSyed)
-            string = "0";
-        else if (i == R.id.donnKnowSyed)
-            string = "2";
-        json.addString(P.syed, string);
+        string = ((CheckBox)findViewById(R.id.checkBox1)).isChecked() ? "1" : "0";
+        json.addString(P.request_from_anyone,string);
+
+        string = ((CheckBox)findViewById(R.id.checkBox2)).isChecked() ? "1" : "0";
+        json.addString(P.request_from_preferred_match,string);
+
+        string = ((CheckBox)findViewById(R.id.checkBox3)).isChecked() ? "1" : "0";
+        json.addString(P.sancity_of_the_holy_quran,string);
+
+        json.addString(P.min_age,tvMin.getTag().toString());
+        json.addString(P.max_age,tvMax.getTag().toString());
 
 
         H.log("masterJsonIs",App.masterJson.toString());
@@ -308,9 +319,10 @@ public class PartnerPreferenceActivity extends AppCompatActivity implements View
 
                         if (json.getInt(P.status) == 1)
                         {
-                            new Session(PartnerPreferenceActivity.this).addInt(P.full_register, 1);
+                            /*new Session(PartnerPreferenceActivity.this).addInt(P.full_register, 1);
                             Intent intent = new Intent(PartnerPreferenceActivity.this, HomeActivity.class);
-                            startActivity(intent);
+                            startActivity(intent);*/
+                            Toast.makeText(PartnerPreferenceActivity.this, "Your Preference is Submitted", Toast.LENGTH_SHORT).show();
                         } else
                             H.showMessage(PartnerPreferenceActivity.this, json.getString(P.msg));
                     }
