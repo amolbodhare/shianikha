@@ -93,6 +93,7 @@ public class P {
     public static String request_from_preferred_match = "request_from_preferred_match";
     public static String sancity_of_the_holy_quran = "sancity_of_the_holy_quran";
     public static String profile_details="profile_details";
+    public static String profile_details_title="Profile Details";
     public static String profile_pic="profile_pic";
     public static String user_photos="user_photos";
     public static String full_name="full_name";
@@ -107,8 +108,6 @@ public class P {
     public static String edu_level="educationlevel";
 
     public static String packages_applied="packages_applied";
-    public static String country_name="country_name";
     public static String ethnicity_name="ethnicity_name";
-    public static String occupation_name="occupation_name";
     public static String about_1="about_1";
 }//class

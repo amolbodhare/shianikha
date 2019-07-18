@@ -41,7 +41,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     JsonList jsonList;
 
 
-
     public static ProfileDetailsFragments newInstance(Fragment fragment, String prev_frag_name,String profile_id) {
         ProfileDetailsFragments profileDetailsFragments = new ProfileDetailsFragments();
         previousFragment = fragment;
@@ -62,7 +61,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
         if (fragmentView == null)
         {
-
 
             fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
 
