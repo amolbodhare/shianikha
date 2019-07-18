@@ -106,4 +106,9 @@ public class P {
     public static String recently_visitors="recently_visitors";
     public static String edu_level="educationlevel";
 
+    public static String packages_applied="packages_applied";
+    public static String country_name="country_name";
+    public static String ethnicity_name="ethnicity_name";
+    public static String occupation_name="occupation_name";
+    public static String about_1="about_1";
 }//class
