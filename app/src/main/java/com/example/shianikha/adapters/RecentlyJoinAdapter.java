@@ -60,7 +60,8 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
             @Override
             public void onClick(View view) {
 
-                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position).getString(P.profile_id));
+                // we are passing last parameter user_id but in next profile details api it would be considered as profile_id
+                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position).getString(P.user_id));
                 ((HomeActivity)context).fragmentLoader(((HomeActivity)context).profileDetailsFragments,P.profile_details);
             }
         });

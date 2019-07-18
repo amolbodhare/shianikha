@@ -45,6 +45,7 @@
                     android:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/profile_pic_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
@@ -77,6 +78,7 @@
                         android:textSize="21sp" />
 
                     <TextView
+                        android:id="@+id/days_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -107,7 +109,7 @@
                         android:textSize="16sp"/>
 
                     <TextView
-                        android:id="@+id/whichMuslim"
+                        android:id="@+id/religion_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ageAndHeight"
@@ -129,7 +131,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/area"
+                        android:id="@+id/citynamecountryname_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/designation"
@@ -290,6 +292,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:id="@+id/about_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -448,6 +451,7 @@ To add both image and text in android button, you should use button property and
                             android:src="@drawable/user" />
 
                         <TextView
+                            android:id="@+id/marital_status_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Never Married" />
@@ -467,6 +471,7 @@ To add both image and text in android button, you should use button property and
                             android:tint="@color/bluebtnback" />
 
                         <TextView
+                            android:id="@+id/city_state_country_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Lives in Mumbai, Maharashtra, India" />
@@ -493,7 +498,7 @@ To add both image and text in android button, you should use button property and
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical">
@@ -548,7 +553,7 @@ To add both image and text in android button, you should use button property and
                             android:text="Fair Skinned, Slim" />
 
                     </LinearLayout>
-
+-->
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -570,7 +575,7 @@ To add both image and text in android button, you should use button property and
                 app:cardElevation="3dp">
 
                 <TextView
-                    android:id="@+id/religion"
+                    android:id="@+id/background_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -580,7 +585,7 @@ To add both image and text in android button, you should use button property and
             </android.support.v7.widget.CardView>
 
             <!--family-->
-            <TextView
+            <!--<TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -596,6 +601,7 @@ To add both image and text in android button, you should use button property and
                 app:cardElevation="3dp">
 
                 <TextView
+                    android:id="@+id/her_family_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -603,9 +609,10 @@ To add both image and text in android button, you should use button property and
                     android:text="Button with image and text in Android fdjflkdjfdjfandroid project" />
 
             </android.support.v7.widget.CardView>
-
+-->
             <!--education and career-->
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -622,6 +629,7 @@ To add both image and text in android button, you should use button property and
                 android:layout_marginBottom="20dp">
 
                 <TextView
+                    android:id="@+id/education_and_career_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"

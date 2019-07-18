@@ -25,6 +25,7 @@ public class P {
 
     public static String list = "list";
     public static String id = "id";
+    public static String user_id = "user_id";
     public static String val = "val";
 
     public static String title = "title";
@@ -33,6 +34,7 @@ public class P {
     public static String statusBarHeight = "statusBarHeight";
     public static String country_code  = "country_code";
     public static String country = "country";
+    public static String country_name = "country_name";
     public static String ph_number = "ph_number";
     public static String gender = "gender";
 
@@ -53,6 +55,7 @@ public class P {
     public static String religion = "religion";
     public static String ethnicity = "ethnicity";
     public static String occupation = "occupation";
+    public static String occupation_name = "occupation_name";
     public static String relocate = "relocate";
     public static String seeking_marriage = "seeking_marriage";
     public static String intrested_in = "intreasted_in";
@@ -95,6 +98,7 @@ public class P {
     public static String full_name="full_name";
     public static String profile_id="profile_id";
     public static String day="day";
+    public static String days="days";
     public static String my_matches="my_matches";
     public static String profile_visitors="profile_visitors";
     public static String express_interest="express_interest";

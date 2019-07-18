@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.bumptech.glide.Glide;
@@ -26,6 +27,8 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
+import java.util.ArrayList;
+
 
 public class ProfileDetailsFragments extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
@@ -35,6 +38,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     public static String previousFragmentName;
     public static String profileId;
     LoadingDialog loadingDialog;
+    JsonList jsonList;
 
 
 
@@ -69,7 +73,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
         }
 
-        hitmatchesApi("profile_details",profileId);
+        // here in profileId we have got user_id only but according to api its name is changed as profileId for this api
+        hitProfileDetailsApi("profile_details",profileId);
         return fragmentView;
     }
 
@@ -84,6 +89,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         else if(v.getId()==R.id.images_pager_click)
         {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
+            intent.putExtra("ImageList",jsonList.toString());
             startActivity(intent);
 
         }
@@ -95,7 +101,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
 
-    private void hitmatchesApi(String api_type,String profileId)
+    private void hitProfileDetailsApi(String api_type,String profileId)
     {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
@@ -129,9 +135,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
                         if (profileDetailJson.getInt(P.status) == 1)
                         {
+                            profileDetailJson = profileDetailJson.getJson(P.data);
 
 
-                            /*Glide.with(context)
+                            Glide.with(context)
                                     .asBitmap()
                                     .load(profileDetailJson.getString(P.profile_pic))
                                     //.load(R.drawable.kangna)
@@ -139,15 +146,22 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
                             ((TextView)fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
                             ((TextView)fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
-                            ((TextView)fragmentView.findViewById(R.id.ageAndHeight)).setText(profileDetailJson.getString(P.age)+" "+profileDetailJson.getString(P.height));
-                            ((TextView)fragmentView.findViewById(R.id.whichMuslim)).setText(profileDetailJson.getString(P.religion));
-                            ((TextView)fragmentView.findViewById(R.id.designation)).setText(profileDetailJson.getString(P.occupation));
-                            ((TextView)fragmentView.findViewById(R.id.area)).setText(profileDetailJson.getString(P.city_name)+","+profileDetailJson.getString(P.state_name));
+                            ((TextView)fragmentView.findViewById(R.id.days_tv)).setText(profileDetailJson.getString(P.days)+" Days Ago");
+                            ((TextView)fragmentView.findViewById(R.id.ageAndHeight)).setText(profileDetailJson.getString(P.age)+" Yrs, "+profileDetailJson.getString(P.height)+"''");
+                            ((TextView)fragmentView.findViewById(R.id.designation)).setText(profileDetailJson.getString(P.occupation_name));
+                            ((TextView)fragmentView.findViewById(R.id.religion_tv)).setText(profileDetailJson.getString(P.religion));
+                            ((TextView)fragmentView.findViewById(R.id.citynamecountryname_tv)).setText(profileDetailJson.getString(P.city_name)+","+profileDetailJson.getString(P.country_name));
                             ((TextView)fragmentView.findViewById(R.id.phoneNum)).setText(profileDetailJson.getString(P.ph_number));
                             ((TextView)fragmentView.findViewById(R.id.email)).setText(profileDetailJson.getString(P.email));
-                            ((TextView)fragmentView.findViewById(R.id.age_and_height_tv)).setText(profileDetailJson.getString(P.age)+","+profileDetailJson.getString(P.height)+"'");
-                            ((TextView)fragmentView.findViewById(R.id.designation_tv)).setText(profileDetailJson.getString(P.occupation));
-                            ((TextView)fragmentView.findViewById(R.id.religion)).setText(profileDetailJson.getString(P.religion));*/
+                            ((TextView)fragmentView.findViewById(R.id.age_and_height_tv)).setText(profileDetailJson.getString(P.age)+" yrs,"+profileDetailJson.getString(P.height)+"'");
+                            ((TextView)fragmentView.findViewById(R.id.marital_status_tv)).setText(profileDetailJson.getString(P.marital_status));
+                            ((TextView)fragmentView.findViewById(R.id.city_state_country_tv)).setText(profileDetailJson.getString(P.city_name)+","+profileDetailJson.getString(P.state_name)+","+profileDetailJson.getString(P.country_name));
+                            ((TextView)fragmentView.findViewById(R.id.designation_tv)).setText(profileDetailJson.getString(P.occupation_name));
+                             jsonList=profileDetailJson.getJsonList("images");
+                            ((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
+                            ((TextView)fragmentView.findViewById(R.id.background_tv)).setText("Religion : "+profileDetailJson.getString(P.religion));
+                            ((TextView)fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : "+profileDetailJson.getString(P.education)+"\n"+"Education : "+profileDetailJson.getString(P.occupation_name));
+                            //((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(jsonList.size());
 
                         }
 

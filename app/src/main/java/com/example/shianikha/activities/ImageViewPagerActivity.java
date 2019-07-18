@@ -10,26 +10,33 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.example.shianikha.R;
+import com.example.shianikha.adapters.ImageSliderAdapter;
 import com.example.shianikha.adapters.SliderAdapter;
+
+import java.util.ArrayList;
 
 public class ImageViewPagerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager slideViewPager;
-    private SliderAdapter sliderAdapter;
+    private ImageSliderAdapter sliderAdapter;
     private LoadingDialog loadingDialog;
     Context context;
+    ArrayList<String> arrayListString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewpager);
+       String jsonList_string = getIntent().getStringExtra("ImageList");
+       JsonList jsonList=new JsonList(jsonList_string);
 
         context = ImageViewPagerActivity.this;
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager = findViewById(R.id.slideViewPager);
-        sliderAdapter = new SliderAdapter(this);
+        sliderAdapter = new ImageSliderAdapter(this,jsonList);
         slideViewPager.setAdapter(sliderAdapter);
 
         loadingDialog = new LoadingDialog(this);

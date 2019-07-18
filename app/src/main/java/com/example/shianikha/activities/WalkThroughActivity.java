@@ -38,7 +38,7 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         context = WalkThroughActivity.this;
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager = findViewById(R.id.slideViewPager);
-        sliderAdapter = new SliderAdapter(this);
+        sliderAdapter = new SliderAdapter(context);
         slideViewPager.setAdapter(sliderAdapter);
         btn_login = findViewById(R.id.btn_login);
         btn_reg = findViewById(R.id.btn_reg);

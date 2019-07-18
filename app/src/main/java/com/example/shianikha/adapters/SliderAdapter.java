@@ -11,9 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
-import com.example.shianikha.commen.P;
 
 public class SliderAdapter extends PagerAdapter
 {
@@ -25,7 +23,7 @@ public class SliderAdapter extends PagerAdapter
         this.context=context;
 
     }
-    public int[] slide_images={R.drawable.kangana_ranaut,R.drawable.kangna,R.drawable.intro3};
+    public int[] slide_images={R.drawable.intro1,R.drawable.intro2,R.drawable.intro3};
     public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
     public String[] slide_descs={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"};
     @Override
@@ -45,15 +43,13 @@ public class SliderAdapter extends PagerAdapter
         layoutInflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v=layoutInflater.inflate(R.layout.slide_layout,container,false);
 
+        ImageView img=v.findViewById(R.id.slider_image);
+        TextView title_tv=v.findViewById(R.id.title_tv);
+        TextView desc_tv=v.findViewById(R.id.desc_tv);
 
-
-        //img.setImageResource(slide_images[position]);
-
-        Glide.with(context)
-                .asBitmap()
-                .load(slide_images[position])
-                //.load(R.drawable.kangna)
-                .into((ImageView) v.findViewById(R.id.slider_image));
+        img.setImageResource(slide_images[position]);
+        title_tv.setText(slide_headings[position]);
+        desc_tv.setText(slide_descs[position]);
 
         container.addView(v);
 
