@@ -19,7 +19,7 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/aaaaaa">
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/sub_drawerMenu"
@@ -31,7 +31,7 @@
                 android:padding="13dp"
                 android:src="@drawable/ic_arrow_back_black_24dp"
                 android:backgroundTint="@color/white"
-                android:tint="@color/white" />
+                android:tint="@color/titletexttcolor" />
 
             <TextView
                 android:id="@+id/titleName"
@@ -48,11 +48,11 @@
                 android:tag=""
                 android:text="INBOX"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/titletexttcolor"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
+         <!--   <RelativeLayout
                 android:id="@+id/noti_layout"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
@@ -69,7 +69,7 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/notification"
                     android:text="hello"
-                    android:tint="@color/white" />
+                    android:tint="@color/titletexttcolor" />
 
                 <TextView
                     android:id="@+id/noti_text"
@@ -79,14 +79,14 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/circlenoti"
-                    android:backgroundTint="@color/purplebtnback"
+                    android:backgroundTint="@color/titletexttcolor"
                     android:gravity="center"
                     android:text="99"
                     android:padding="3dp"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
         </RelativeLayout>
 

@@ -31,7 +31,7 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
         context = InboxActivity.this;
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
 
