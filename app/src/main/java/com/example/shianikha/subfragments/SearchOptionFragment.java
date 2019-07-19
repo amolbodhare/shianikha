@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,33 +19,47 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SearchOptionFragment extends Fragment {
+public class SearchOptionFragment extends Fragment implements View.OnClickListener
+{
 
     private OnFragmentInteractionListener mListener;
     SeekBar seekBar_age;
     SeekBar seekBar_height;
     View view;
     private ArrayAdapter<String> arrayAdapter;
-    ArrayList<String> marital_status_arrayList;
-    ArrayList<String> religion_arrayList;
-    ArrayList<String> community_arrayList;
-    ArrayList<String> mothertonge_arrayList;
-    ArrayList<String> country_arrayList;
-    ArrayList<String> state_arrayList;
-    ArrayList<String> city_arrayList;
+
+    ArrayList<String> marital_status_name_arrayList;
+    ArrayList<String> marital_status_code_arrayList;
+    ArrayList<String> religion_name_arrayList;
+    ArrayList<String> religion_code_arrayList;
+    ArrayList<String> mothertonge_name_arrayList;
+    ArrayList<String> mothertonge_code_arrayList;
+
+    ArrayList<String> country_name_arrayList;
+    ArrayList<String> country_code_arrayList;
+    ArrayList<String> state_name_arrayList;
+    ArrayList<String> state_code_arrayList;
+    ArrayList<String> city_name_arrayList;
+    ArrayList<String> citycode_arrayList;
+
     ArrayList<String> photo_setting_arrayList;
     Context context;
+    Session session;
 
 
     public SearchOptionFragment() {
@@ -62,7 +77,9 @@ public class SearchOptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_search_option, container, false);
-        context=getActivity();
+        context=getContext();
+        session = new Session(context);
+
         final CrystalRangeSeekbar age_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.age_rangeSeekbar);
         final CrystalRangeSeekbar height_rangeSeekbar = (CrystalRangeSeekbar)view.findViewById(R.id.height_rangeSeekbar);
 
@@ -73,8 +90,19 @@ public class SearchOptionFragment extends Fragment {
         final TextView tvMinHeight = (TextView) view.findViewById(R.id.textMinHeight);
         final TextView tvMaxHeight = (TextView) view.findViewById(R.id.textMaxHeight);
 
+
+        view.findViewById(R.id.marital_status_ed).setOnClickListener(this);
+        view.findViewById(R.id.religion_ed).setOnClickListener(this);
+        view.findViewById(R.id.community_ed).setOnClickListener(this);
+        view.findViewById(R.id.mother_tongue_ed).setOnClickListener(this);
+        view.findViewById(R.id.country_edt).setOnClickListener(this);
+        view.findViewById(R.id.state_edt).setOnClickListener(this);
+        view.findViewById(R.id.city_edt).setOnClickListener(this);
+        //view.findViewById(R.id.photo_setting_edt).setOnClickListener(this);
+
 // set listener
-        age_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+        age_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener()
+        {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
 
@@ -113,7 +141,9 @@ public class SearchOptionFragment extends Fragment {
             }
         });
 
-        marital_status_arrayList=new ArrayList<>();
+
+        //extractRequireList();
+        /*marital_status_arrayList=new ArrayList<>();
         religion_arrayList=new ArrayList<>();
         community_arrayList=new ArrayList<>();
         mothertonge_arrayList=new ArrayList<>();
@@ -189,10 +219,10 @@ public class SearchOptionFragment extends Fragment {
             }
 
 
-           /* for(int i=0;i<jsonArray_height.length();i++)
+           *//* for(int i=0;i<jsonArray_height.length();i++)
             {
                 height_arrayList.add("Hello");
-            }*/
+            }*//*
 
         }
 
@@ -202,13 +232,13 @@ public class SearchOptionFragment extends Fragment {
         }
 
         setUpEditTextClickListner(view);
-        setUpTextWatcher(view);
+        setUpTextWatcher(view);*/
 
         return  view;
     }
 
 
-    private void setUpEditTextClickListner(final View view)
+   /* private void setUpEditTextClickListner(final View view)
     {
         EditText ed_marital_status = view.findViewById(R.id.marital_status_ed);
         EditText ed_religion = view.findViewById(R.id.religion_ed);
@@ -292,7 +322,7 @@ public class SearchOptionFragment extends Fragment {
 
 
 
-    }
+    }*/
 
     private void setUpTextWatcher(View mainview)
     {
@@ -316,7 +346,7 @@ public class SearchOptionFragment extends Fragment {
         });
     }
 
-    private void setUpCustomSpinner(final View view,final View main_view)
+   /* private void setUpCustomSpinner(final View view,final View main_view)
     {
         ListView listView = main_view.findViewById(R.id.listView);
         main_view.findViewById(R.id.view).setVisibility(View.VISIBLE);
@@ -402,9 +432,245 @@ public class SearchOptionFragment extends Fragment {
         int i =main_view.findViewById(R.id.includeContainer).getWidth();
         main_view.findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
         main_view.findViewById(R.id.view).setVisibility(View.GONE);
+    }*/
+
+    @Override
+    public void onClick(View v)
+    {
+        if(v.getId()==R.id.btn_next)
+        {
+            //makeJson();
+        }
+        else if (v.getId() == R.id.view)
+        {
+            //hideCustomSpinnerLayout();
+        }
+
+        else
+        {
+            //setUpCustomSpinner(v);
+        }
+
+
     }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+ /*   private void makeJson()
+    {
+        Json json=new Json();
+
+        EditText editText = view.findViewById(R.id.marital_status_ed);
+        String string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(context, "Please select city name");
+            return;
+        }
+        int i = cityNameList.indexOf(string);
+        if (i != -1)
+            json.addString(P.city, cityCodeList.get(i));
+
+        editText = findViewById(R.id.religion_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {        i = stateNameList.indexOf(string);
+
+            H.showMessage(this, "Please select state name");
+            return;
+        }
+        if (i != -1)
+            App.masterJson.addString(P.state, stateCodeList.get(i));
+
+        editText = findViewById(R.id.community_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select country of residence");
+            return;
+        }
+        i = countryNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.country_res, countryCodeList.get(i));
+
+        editText = findViewById(R.id.mother_tongue_ed);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select country of citizenship");
+            return;
+        }
+        i = countryNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.country_citizen, countryCodeList.get(i));
+
+        editText = findViewById(R.id.country_edt);
+        string = editText.getTag().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select date of birth");
+            return;
+        }
+        App.masterJson.addString(P.dob, string);
+
+        editText = findViewById(R.id.state_edt);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select height");
+            return;
+        }
+
+        App.masterJson.addString(P.height, string);
+
+        editText = findViewById(R.id.city_edt);
+        string = editText.getTag().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select date of birth");
+            return;
+        }
+        App.masterJson.addString(P.dob, string);
+
+
+
+                editText = findViewById(R.id.photo_setting_edt);
+        string = editText.getTag().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select date of birth");
+            return;
+        }
+        App.masterJson.addString(P.dob, string);
+
+        H.log("masterJsonIs",json.toString());
+        startActivity(new Intent(this,RegThirdPageActivity.class));
+    }
+    private void extractRequireList() {
+        JsonList jsonList;
+
+        //for city
+        String string = session.getString(P.city);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            cityNameList = new ArrayList<>();
+            cityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.city_name);
+                cityNameList.add(string);
+
+                string = j.getString(P.city_id);
+                cityCodeList.add(string);
+            }
+        }
+
+        //for state
+        string = session.getString(P.state);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            stateNameList = new ArrayList<>();
+            stateCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.state_name);
+                stateNameList.add(string);
+
+                string = j.getString(P.state_id);
+                stateCodeList.add(string);
+            }
+        }
+
+        //for country
+        string = session.getString(P.country);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            countryNameList = new ArrayList<>();
+            countryCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                countryNameList.add(string);
+
+                string = j.getString(P.id);
+                countryCodeList.add(string);
+            }
+        }
+
+        //for height
+        string = session.getString(P.height);
+        if (string != null) {
+            try {
+                JSONArray jsonArray = new JSONArray(string);
+                heightList = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    string = jsonArray.getString(i);
+                    heightList.add(string);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        setUpTextWatcher();
+    }
+    private void setUpTextWatcher() {
+        ((EditText) view.findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (arrayAdapter != null)
+                    arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    private void setUpCustomSpinner(final View view) {
+        ListView listView = findViewById(R.id.listView);
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
+
+        if (view.getId() == R.id.cityEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search City");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
+        } else if (view.getId() == R.id.stateEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search State");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, stateNameList);
+        } else if (view.getId() == R.id.countryEditText1 || view.getId() == R.id.countryEditText2) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search Country residence");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
+        } else if (view.getId() == R.id.heightEditText)
+        {   EditText editText = findViewById(R.id.editText);
+            editText.setHint("Search height");
+            editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, heightList);
+        }
+
+        if (arrayAdapter == null)
+            return;
+
+        H.showKeyBoard(this, findViewById(R.id.editText));
+
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                TextView textView = v.findViewById(R.id.textView);
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
+                }
+                hideCustomSpinnerLayout();
+            }
+        });
+
+        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void hideCustomSpinnerLayout() {
+        int i = findViewById(R.id.includeContainer).getWidth();
+        ((EditText) findViewById(R.id.editText)).setText("");
+        findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
+        View view = findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(this, view);
+    }*/
 }

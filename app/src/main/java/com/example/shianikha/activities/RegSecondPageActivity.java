@@ -315,4 +315,5 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
     }
+
 }
