@@ -247,14 +247,15 @@
                 android:layout_below="@id/recent_visitors_tv"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+                android:orientation="horizontal"/>
 
             <RelativeLayout
                 android:id="@+id/oandstv_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@id/recent_visitors_recyclerView"
-                android:layout_marginTop="25dp"                android:background="@color/profile_details_grey">
+                android:layout_marginTop="25dp"
+                android:background="@color/profile_details_grey">
 
                 <TextView
 
@@ -273,6 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/oandstv_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -284,7 +286,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Partner Preferences"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -308,6 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/partner_preferences_link_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -319,7 +322,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Subscription Plan"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -344,6 +347,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/subscription_plan_link_layout"
                 android:layout_marginLeft="17dp"
+                android:clickable="true"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
 
@@ -354,7 +358,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="My Activity"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -378,6 +382,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_activity_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -389,7 +394,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Account Settings"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -413,6 +418,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/account_settings_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -424,7 +430,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Notifications"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -448,6 +454,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/notifications_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -459,7 +466,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Help and Support"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -483,6 +490,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/help_suport_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -494,7 +502,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="About App"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -518,6 +526,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/about_app_layout"
+                android:clickable="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
@@ -529,7 +538,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Contact Us"
                     android:textColor="@color/text_back_grey"
-                    android:textSize="12dp" />
+                    android:textSize="13sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

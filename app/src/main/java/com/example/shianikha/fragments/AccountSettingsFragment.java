@@ -24,8 +24,7 @@ import com.example.shianikha.R;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 
-public class AccountSettingsFragment extends Fragment implements View.OnClickListener
-{
+public class AccountSettingsFragment extends Fragment implements View.OnClickListener {
 
     View fragmentView;
     Context context;
@@ -35,11 +34,10 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     ExpandableRelativeLayout change_password_exp_layout;
     TextView edit_password_tv_btn;
     EditText change_password_edt;
-   /* LoadingDialog loadingDialog;
-    ListAdapter listAdapter;*/
-   public static Fragment previousFragment;
+    /* LoadingDialog loadingDialog;
+     ListAdapter listAdapter;*/
+    public static Fragment previousFragment;
     public static String previousFragmentName;
-
 
 
     private OnFragmentInteractionListener mListener;
@@ -64,20 +62,19 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        context =getContext();
+        context = getContext();
         //loadingDialog = new LoadingDialog(context);
-        if(fragmentView==null)
-        {
-            fragmentView=inflater.inflate(R.layout.fragment_account_settings,null,false);
+        if (fragmentView == null) {
+            fragmentView = inflater.inflate(R.layout.fragment_account_settings, null, false);
 
-            edit_password_tv_btn=fragmentView.findViewById(R.id.edit_password_tv_btn);
-            change_password_edt=fragmentView.findViewById(R.id.change_password_edt);
+            edit_password_tv_btn = fragmentView.findViewById(R.id.edit_password_tv_btn);
+            change_password_edt = fragmentView.findViewById(R.id.change_password_edt);
 
-            email_address_link_layout=fragmentView.findViewById(R.id.email_address_link_layout);
-            change_password_link_layout=fragmentView.findViewById(R.id.change_password_link_layout);
+            email_address_link_layout = fragmentView.findViewById(R.id.email_address_link_layout);
+            change_password_link_layout = fragmentView.findViewById(R.id.change_password_link_layout);
 
-            email_address_exp_layout=fragmentView.findViewById(R.id.email_address_exp_layout);
-            change_password_exp_layout=fragmentView.findViewById(R.id.change_password_exp_layout);
+            email_address_exp_layout = fragmentView.findViewById(R.id.email_address_exp_layout);
+            change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
 
             change_password_edt.setEnabled(false);
             email_address_exp_layout.collapse();
@@ -122,14 +119,12 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-        if(v.getId()==R.id.email_address_link_layout)
-        {
+        if (v.getId() == R.id.email_address_link_layout) {
 
             email_address_exp_layout.toggle();
         }
 
-        if(v.getId()==R.id.change_password_link_layout)
-        {
+        if (v.getId() == R.id.change_password_link_layout) {
 
 
             /*if(change_password_exp_layout.isExpanded())
@@ -146,39 +141,33 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         }
 
-        if(v.getId()==R.id.edit_password_tv_btn)
-        {
+        if (v.getId() == R.id.edit_password_tv_btn) {
 
-            if(((TextView)v).getText().equals("Edit")) {
-                ((TextView)v).setText("Save");
+            if (((TextView) v).getText().equals("Edit")) {
+                ((TextView) v).setText("Save");
                 change_password_edt.setEnabled(true);
                 change_password_edt.requestFocus();
                 change_password_edt.setSelection(change_password_edt.getText().length());
-            }
+            } else {
+                //((TextView)v).setText("edit");
+                //Toast.makeText(context, "hh", Toast.LENGTH_SHORT).show();
+                if (change_password_edt.getText().length() == 0) {
+                    //we have to use setError here
+                    Toast.makeText(context, "Empty password not allowed", Toast.LENGTH_SHORT).show();
 
-            else
-                {
-                    //((TextView)v).setText("edit");
-                    //Toast.makeText(context, "hh", Toast.LENGTH_SHORT).show();
-                    if(change_password_edt.getText().length()==0)
-                    {
-                        //we have to use setError here
-                        Toast.makeText(context, "Empty password not allowed", Toast.LENGTH_SHORT).show();
+                    InputMethodManager inputMethodManager =
+                            (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInputFromWindow(
+                            v.getApplicationWindowToken(),
+                            InputMethodManager.SHOW_FORCED, 0);
+                    change_password_edt.requestFocus();
 
-                        InputMethodManager inputMethodManager =
-                                (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.toggleSoftInputFromWindow(
-                                v.getApplicationWindowToken(),
-                                InputMethodManager.SHOW_FORCED, 0);
-                        change_password_edt.requestFocus();
+                } else {
 
-                    }
-                    else {
+                    change_password_edt.setEnabled(false);
+                    ((TextView) v).setText("Edit");
 
-                        change_password_edt.setEnabled(false);
-                        ((TextView)v).setText("Edit");
-
-                    }
+                }
 
 
             }
@@ -189,7 +178,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     }
 
 
-    private class ListAdapter extends BaseAdapter{
+    private class ListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -208,9 +197,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView==null) {
+            if (convertView == null) {
 
-                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item,null,false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item, null, false);
             }
             return convertView;
         }
@@ -222,17 +211,15 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         void onFragmentInteraction(Uri uri);
     }
 
-    private void fragmentLoader(Fragment fragment)
-    {
+    private void fragmentLoader(Fragment fragment) {
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
                 .replace(R.id.frameLayout, fragment).commit();
     }
 
 
-    private void fragmentLoaderSec(Fragment fragment)
-    {
-        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+    private void fragmentLoaderSec(Fragment fragment) {
+        FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
 
         manager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)

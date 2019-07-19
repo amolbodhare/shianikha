@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import static com.example.shianikha.commen.P.recently_join;
 import static com.example.shianikha.commen.P.recently_visitors;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<String> recently_join_Names = new ArrayList<>();
     private ArrayList<String> recently_join_ImageUrls = new ArrayList<>();
@@ -50,17 +50,14 @@ public class HomeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public static HomeFragment newInstance()
-    {
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        if (fragmentView == null)
-        {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (fragmentView == null) {
             context = getContext();
             LoadingDialog loadingDialog = new LoadingDialog(context);
 
@@ -69,7 +66,16 @@ public class HomeFragment extends Fragment {
 
             hitDashboardApi();
 
-            ((HomeActivity)context).makeStatusBarColorBlue(true);
+            ((HomeActivity) context).makeStatusBarColorBlue(true);
+
+            fragmentView.findViewById(R.id.partner_preferences_link_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.subscription_plan_link_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.my_activity_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.account_settings_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.notifications_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.help_suport_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.about_app_layout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.contact_us_layout).setOnClickListener(this);
         }
         return fragmentView;
     }
@@ -78,7 +84,7 @@ public class HomeFragment extends Fragment {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
         Json json = new Json();
-        json.addString(P.token_id,string);
+        json.addString(P.token_id, string);
         RequestModel requestModel = RequestModel.newRequestModel("dashboard");
         requestModel.addJSON(P.data, json);
 
@@ -96,7 +102,7 @@ public class HomeFragment extends Fragment {
                 .onError(new Api.OnErrorListener() {
                     @Override
                     public void onError() {
-                        H.showMessage(context,"Something went Wrong");
+                        H.showMessage(context, "Something went Wrong");
                     }
                 })
                 .onSuccess(new Api.OnSuccessListener() {
@@ -116,35 +122,51 @@ public class HomeFragment extends Fragment {
     }
 
     private void setProfileData(Json parentJson) {
-          Json  json = parentJson.getJson(P.profile_details);
+        Json json = parentJson.getJson(P.profile_details);
         String string = json.getString(P.profile_pic);
-          if(json!=null)
-          {
-            try
-            {
-                Picasso.get().load(string).into((CircularImageView)fragmentView.findViewById(R.id.cir_imv));
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-          }
-        string=json.getString(P.full_name);
-          if(string!=null)
-              ((TextView)fragmentView.findViewById(R.id.name_tv)).setText(string);
-        string=json.getString(P.profile_id);
-            if(json!=null)
-            ((TextView)fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
-         string=parentJson.getString(P.my_matches);
-            if(parentJson!=null)
-                ((TextView)fragmentView.findViewById(R.id.myMatches)).setText(string);
-         string=parentJson.getString(P.profile_visitors);
-            if(parentJson!=null)
-                ((TextView)fragmentView.findViewById(R.id.profileVisitor)).setText(string);
-         string=parentJson.getString(P.express_interest);
-            if(parentJson!=null)
-                ((TextView)fragmentView.findViewById(R.id.expressInterest)).setText(string);
+        try {
+            Picasso.get().load(string).into((CircularImageView) fragmentView.findViewById(R.id.cir_imv));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        string = json.getString(P.full_name);
+        ((TextView) fragmentView.findViewById(R.id.name_tv)).setText(string);
+
+        string = json.getString(P.profile_id);
+        ((TextView) fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
+
+        string = parentJson.getString(P.my_matches);
+        ((TextView) fragmentView.findViewById(R.id.myMatches)).setText(string);
+
+        string = parentJson.getString(P.profile_visitors);
+        ((TextView) fragmentView.findViewById(R.id.profileVisitor)).setText(string);
+
+        string = parentJson.getString(P.express_interest);
+        ((TextView) fragmentView.findViewById(R.id.expressInterest)).setText(string);
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        int i = view.getId();
+
+        if (i == R.id.partner_preferences_link_layout)
+            ((HomeActivity)context).showPartnerPreferenceActivity();
+        else if (i == R.id.subscription_plan_link_layout)
+            ((HomeActivity)context).showSubscriptionPlanActivity();
+        else if (i == R.id.my_activity_layout)
+            ((HomeActivity)context).showMyActivityFragment();
+        else if (i == R.id.account_settings_layout)
+            ((HomeActivity)context).showAccountSettingFragment();
+        else if (i == R.id.notifications_layout)
+            ((HomeActivity)context).showNotificationFragment();
+        else if (i == R.id.help_suport_layout)
+            ((HomeActivity)context).showHelpAndSupportFrgment();
+        else if (i == R.id.about_app_layout)
+            ((HomeActivity)context).showAboutAppFragment();
+        else if (i == R.id.contact_us_layout)
+            ((HomeActivity)context).showContactUsFragment();
     }
 
 
@@ -365,42 +387,28 @@ public class HomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void setRecentlyJoinData(Json json)
-    {
-        JsonList jsonList=json.getJsonList(recently_join);
+    private void setRecentlyJoinData(Json json) {
+        JsonList jsonList = json.getJsonList(recently_join);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = fragmentView.findViewById(R.id.rec_join_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
         recyclerView.setAdapter(adapter);
-
-        /*recyclerView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "clicked",
-                 Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
     }
 
-    private void setRecentVisitorsData(Json json)
-    {
-        JsonList jsonList=json.getJsonList(recently_visitors);
+    private void setRecentVisitorsData(Json json) {
+        JsonList jsonList = json.getJsonList(recently_visitors);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = fragmentView.findViewById(R.id.recent_visitors_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setOnClickListener(new View.OnClickListener()
-        {
+        recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

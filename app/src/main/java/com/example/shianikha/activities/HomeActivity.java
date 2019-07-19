@@ -23,17 +23,16 @@ import com.example.shianikha.ContactUsFragment;
 import com.example.shianikha.HelpAndSupport;
 import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.NotificationFragment;
-import com.example.shianikha.PartnerPreference;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.fragments.AccountSettingsFragment;
+import com.example.shianikha.fragments.FavouritesFragment;
 import com.example.shianikha.fragments.HomeFragment;
 import com.example.shianikha.fragments.MyActivityFragment;
 import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
-import com.example.shianikha.fragments.SubscriptionPlanFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
@@ -42,11 +41,10 @@ public class HomeActivity extends AppCompatActivity {
     private MyProfileFragment myProfileFragment;
     private NotificationFragment notificationFragment;
     public NotifacationDetails notifacationDetails;
-    private SubscriptionPlanFragment subscriptionFragment;
     private AccountSettingsFragment accountSettingsFragment;
-    public PartnerPreference partnerPreference;
     private HelpAndSupport helpAndSupport;
     private AboutApp aboutApp;
+    private FavouritesFragment favouritesFragment;
     public ProfileDetailsFragments profileDetailsFragments;
 
     private DrawerLayout drawerLayout;
@@ -155,19 +153,19 @@ public class HomeActivity extends AppCompatActivity {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
             changeNotificationicon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
-            if(myMatchesFragment==null)
-            myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
+            if (myMatchesFragment == null)
+                myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             changeNotificationicon(false);
 
         } else if (view.getId() == R.id.searchButton_layout) {
-            if(searchFragment==null)
-            searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
+            if (searchFragment == null)
+                searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
             changeNotificationicon(false);
         } else if (view.getId() == R.id.myprofileButton_layout) {
-            if(myProfileFragment==null)
-            myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
+            if (myProfileFragment == null)
+                myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
         }
 
@@ -215,86 +213,105 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    public void OnDrawerMenuClick(View view)
-    {
-        if (view.getId() == R.id.drawer_logout_layout) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setMessage("Do you really want to exit?");
-            adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    new Session(HomeActivity.this).addString(P.tokenData, "");
-                    Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-                    finish();
-                    //((HomeActivity)context).finish();
-                }
-            });
-            adb.setNegativeButton("no", null);
-            adb.show();
-        }
+    public void OnDrawerMenuClick(View view) {
+        if (view.getId() == R.id.drawer_logout_layout)
+            showLogOutAlert();
         else if (view.getId() == R.id.drawer_partnerPreference_layout)
-        {
-            Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
-            startActivity(i);
-            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        }
-        else if (view.getId() == R.id.drawer_subscription_layout) {
-            Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
-            startActivity(i);
-            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.my_activity_drawer_layout) {
-            Intent i = new Intent(HomeActivity.this, MyActivity.class);
-            startActivity(i);
-            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.inbox_activity_drawer_layout) {
+            showPartnerPreferenceActivity();
+        else if (view.getId() == R.id.drawer_subscription_layout)
+            showSubscriptionPlanActivity();
+        else if (view.getId() == R.id.my_activity_drawer_layout)
+            showMyActivityFragment();
+        else if (view.getId() == R.id.drawer_noti_layout)
+            showNotificationFragment();
+        else if (view.getId() == R.id.drawer_help_and_support_layout)
+            showHelpAndSupportFrgment();
+        else if (view.getId() == R.id.drawer_aboutapp_layout)
+            showAboutAppFragment();
+        else if (view.getId() == R.id.drawer_contactus_layout)
+            showContactUsFragment();
+        else if (view.getId() == R.id.drawer_account_settings_layout)
+            showAccountSettingFragment();
+        else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, InboxActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.drawer_noti_layout) {
-             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
-             startActivity(i);*/
+        } else if (view.getId() == R.id.drawer_favourites_layout)
+        {
+            if (favouritesFragment == null)
+                favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
+            fragmentLoader(favouritesFragment, "favourite");
 
-             if(notificationFragment==null)
-            notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(notificationFragment, getString(R.string.notificationn));
-        } else if (view.getId() == R.id.drawer_favourites_layout) {
-
-            Intent i = new Intent(HomeActivity.this, FavouritesActivity.class);
-            startActivity(i);
-            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-
-        } else if (view.getId() == R.id.drawer_help_and_support_layout) {
-             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
-             startActivity(i);*/
-            if(helpAndSupport==null)
-            helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
-        } else if (view.getId() == R.id.drawer_aboutapp_layout) {
-             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
-             startActivity(i);*/
-            if(aboutApp==null)
-            aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(aboutApp, getString(R.string.aboutapp));
-
-        } else if (view.getId() == R.id.drawer_account_settings_layout) {
-             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
-             startActivity(i);*/
-            if (accountSettingsFragment == null)
-                accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
-
-        } else if (view.getId() == R.id.drawer_contactus_layout) {
-             /*Intent i=new Intent(HomeActivity.this,InboxActivity.class);
-             startActivity(i);*/
-
-            if (contactUsFragment == null)
-                contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
-            fragmentLoader(contactUsFragment, getString(R.string.contactUs));
         }
+
         drawerLayout.closeDrawer(Gravity.START);
+    }
+
+    public void showAccountSettingFragment() {
+        if (accountSettingsFragment == null)
+            accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
+    }
+
+    private void showLogOutAlert() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setMessage("Do you really want to exit?");
+        adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new Session(HomeActivity.this).addString(P.tokenData, "");
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+                finish();
+                //((HomeActivity)context).finish();
+            }
+        });
+        adb.setNegativeButton("no", null);
+        adb.show();
+    }
+
+    public void showContactUsFragment() {
+        if (contactUsFragment == null)
+            contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(contactUsFragment, getString(R.string.contactUs));
+    }
+
+    public void showAboutAppFragment() {
+        if (aboutApp == null)
+            aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(aboutApp, getString(R.string.aboutapp));
+    }
+
+    public void showHelpAndSupportFrgment() {
+        if (helpAndSupport == null)
+            helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
+    }
+
+    public void showNotificationFragment() {
+        if (notificationFragment == null)
+            notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(notificationFragment, getString(R.string.notificationn));
+    }
+
+    public void showMyActivityFragment() {
+        if (myActivityFragment == null)
+            myActivityFragment = MyActivityFragment.newInstance(currentFragment, currentFragmentName);
+        fragmentLoader(myActivityFragment, getString(R.string.myactivity));
+    }
+
+    public void showSubscriptionPlanActivity() {
+        Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
+        startActivity(i);
+        ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+    }
+
+    public void showPartnerPreferenceActivity() {
+        Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
+        startActivity(i);
+        ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
 
     public void onNotificationIconClick(View view) {
@@ -308,13 +325,12 @@ public class HomeActivity extends AppCompatActivity {
 
         H.log("ObjectIs", object + "");
         if (string.equalsIgnoreCase("n")) {
-            if(notificationFragment==null)
-            notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+            if (notificationFragment == null)
+                notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
-        } else if (string.equalsIgnoreCase("e"))
-        {
-            Intent intent = new Intent(this,EditProfileActivity.class);
-            startActivityForResult(intent,31);
+        } else if (string.equalsIgnoreCase("e")) {
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            startActivityForResult(intent, 31);
         }
     }
 
@@ -347,13 +363,6 @@ public class HomeActivity extends AppCompatActivity {
         } else if (notificationFragment != null && notificationFragment.isVisible()) {
             fragment = NotificationFragment.previousFragment;
             string = NotificationFragment.previousFragmentName;
-            if (fragment != null && string != null) {
-                fragmentLoader(fragment, string);
-                decideBottomSelection(string);
-            }
-        } else if (partnerPreference != null && partnerPreference.isVisible()) {
-            fragment = PartnerPreference.previousFragment;
-            string = PartnerPreference.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
@@ -400,8 +409,22 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
+        } else if (myActivityFragment != null && myActivityFragment.isVisible()) {
+            fragment = MyActivityFragment.previousFragment;
+            string = MyActivityFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
         }
-        else if (view == null) {
+        else if (favouritesFragment != null && favouritesFragment.isVisible()) {
+            fragment = FavouritesFragment.previousFragment;
+            string = FavouritesFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }else if (view == null) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
@@ -444,10 +467,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 31 && resultCode == RESULT_OK)
-        {
+        if (requestCode == 31 && resultCode == RESULT_OK) {
             //if (myProfileFragment!=null )
-            H.log("resultOk","isExecuted");
+            H.log("resultOk", "isExecuted");
         }
     }
 }
