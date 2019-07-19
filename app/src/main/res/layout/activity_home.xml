@@ -13,19 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@color/profile_card_back_color"
-            android:layout_alignParentTop="true" />
-
         <RelativeLayout
             android:id="@+id/titleBar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/profile_card_back_color"
-            android:layout_below="@id/view">
+            android:layout_alignParentTop="true">
 
             <RelativeLayout
                 android:id="@+id/toolbar_layout"

@@ -65,6 +65,6 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
             Intent i = new Intent(WalkThroughActivity.this, RegistrationActivity.class);
             startActivity(i);
         }
-        finish();
+        //finish();
     }
 }
