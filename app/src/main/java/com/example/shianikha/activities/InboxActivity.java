@@ -19,68 +19,58 @@ import android.widget.Toast;
 import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.R;
 
-public class InboxActivity extends AppCompatActivity implements View.OnClickListener
-{
-
+public class InboxActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
+        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getColor(R.color.transparent));
         context = InboxActivity.this;
-
 
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
 
-            findViewById(R.id.inbox).setOnClickListener(this);
-            findViewById(R.id.sent_message).setOnClickListener(this);
-            findViewById(R.id.receive_list).setOnClickListener(this);
-            findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
+        findViewById(R.id.inbox).setOnClickListener(this);
+        findViewById(R.id.sent_message).setOnClickListener(this);
+        findViewById(R.id.receive_list).setOnClickListener(this);
+        findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
 
-            ((ListView) findViewById(R.id.listView)).setAdapter(new ListAdapter());
+        ((ListView) findViewById(R.id.listView)).setAdapter(new ListAdapter());
 
-        ((ListView) findViewById(R.id.listView)).setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        ((ListView) findViewById(R.id.listView)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(InboxActivity.this, InboxMessageActivity.class);
                 startActivity(i);
                 ((InboxActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
             }
         });
 
-        }
+    }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
 
         int i = v.getId();
 
-        if (i == R.id.inbox || i == R.id.sent_message || i == R.id.receive_list)
-        {
+        if (i == R.id.inbox || i == R.id.sent_message || i == R.id.receive_list) {
             changeColorsOfThreeTab(v);
-        }
-
-        else if (v.getId() == R.id.sub_drawerMenu)
-        {
+        } else if (v.getId() == R.id.sub_drawerMenu) {
             onMethodClick(v);
         }
 
     }
-    public void  onMethodClick(View v)
-    {
+
+    public void onMethodClick(View v) {
         finish();
         ((InboxActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
 
 
-    private class ListAdapter extends BaseAdapter
-    {
+    private class ListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -99,13 +89,13 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView==null) {
+            if (convertView == null) {
 
-                convertView = LayoutInflater.from(context).inflate(R.layout.inbox_list_item,null,false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.inbox_list_item, null, false);
                 convertView.findViewById(R.id.del_msg_btn_imv).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"wwant to delete the record?",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "wwant to delete the record?", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -113,15 +103,13 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void changeColorsOfThreeTab(View v)
-    {
+    private void changeColorsOfThreeTab(View v) {
 
         LinearLayout parentLayout = findViewById(R.id.threeTabContainer);
         LinearLayout childLayout;
         TextView textView;
 
-        for (int i = 0; i < parentLayout.getChildCount(); i++)
-        {
+        for (int i = 0; i < parentLayout.getChildCount(); i++) {
             childLayout = (LinearLayout) parentLayout.getChildAt(i);
             textView = ((TextView) childLayout.getChildAt(0));
             textView.setTextColor(context.getColor(R.color.textview_grey_color));

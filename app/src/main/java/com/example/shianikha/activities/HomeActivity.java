@@ -73,27 +73,17 @@ public class HomeActivity extends AppCompatActivity {
         myMatchesButtonLayout = findViewById(R.id.mymatchesButton_layout);
         searchButtonLayout = findViewById(R.id.searchButton_layout);
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
-
-        setMarginTopOfDrawer();
     }
 
-    private void setMarginTopOfDrawer() {
-        ScrollView scrollView = findViewById(R.id.scrollView);
-        DrawerLayout.LayoutParams layoutParams = (DrawerLayout.LayoutParams) scrollView.getLayoutParams();
-        int i = new Session(this).getInt(P.statusBarHeight);
-        layoutParams.topMargin = i;
-        H.log("heightIs", i + "");
-        scrollView.setLayoutParams(layoutParams);
-    }
-
-    public void makeStatusBarColorBlue(boolean bool) {
-        View view = findViewById(R.id.view);
+    public void makeStatusBarColorBlue(boolean bool)
+    {
         if (bool) {
             int statusBarHeight = new Session(this).getInt(P.statusBarHeight);
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.height = statusBarHeight;
-            view.setLayoutParams(layoutParams);
-            view.setBackgroundColor(getColor(R.color.dashboard_card_back_color));
+
+            getWindow().getDecorView().setSystemUiVisibility( 0);
+            getWindow().setStatusBarColor(getColor(R.color.dashboard_card_back_color));
 
             findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.dashboard_card_back_color));
             //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
@@ -106,7 +96,9 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        view.setBackgroundColor(getColor(R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getColor(R.color.transparent));
+
         findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.white));
         //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
 

@@ -20,27 +20,22 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
     private ViewPager subPlanSlideViewPager;
     private SubscriptionSliderAdapter subPlanSliderAdapter;
     ImageView imv_pre_btn, imv_next_btn;
-    ImageView back_nav_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription);
-        getWindow().setStatusBarColor(getColor(R.color.semi_transparent));
+        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getColor(R.color.transparent));
         context = SubscriptionActivity.this;
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         subPlanSlideViewPager = findViewById(R.id.sub_plan_viewpager);
 
         imv_pre_btn = findViewById(R.id.prev_imv);
         imv_next_btn = findViewById(R.id.next_imv);
 
-        //back_nav_icon=findViewById(R.id.drawerMenu);
-        //findViewById(R.id.sub_drawerMenu).setOnClickListener(this);
 
         imv_pre_btn.setOnClickListener(this);
         imv_next_btn.setOnClickListener(this);
-
-        //back_nav_icon.setOnClickListener(this);
 
         subPlanSliderAdapter = new SubscriptionSliderAdapter(context);
 

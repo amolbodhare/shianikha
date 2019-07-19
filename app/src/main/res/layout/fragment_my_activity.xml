@@ -10,10 +10,13 @@
     <!-- three buttons-->
 
     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:scrollbars="none"
         android:layout_height="wrap_content">
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -21,13 +24,14 @@
             android:baselineAligned="true">
 
             <LinearLayout
+                android:id="@+id/acceptedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/accepted"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:textColor="@color/white"
@@ -35,7 +39,6 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:gravity="center"
-                    android:clickable="true"
                     android:background="@color/textpurle2"
                     android:fontFamily="@font/poppins_regular"
                     android:elevation="7dp"
@@ -50,14 +53,20 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
             <LinearLayout
+                android:id="@+id/acceptedMeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/accepted_me"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -65,7 +74,6 @@
                     android:paddingRight="20dp"
                     android:background="@color/textview_back_color"
                     android:textColor="@color/textview_grey_color"
-                    android:clickable="true"
                     android:textSize="12sp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Accepted Me"/>
@@ -80,14 +88,20 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
             <LinearLayout
+                android:id="@+id/contactedMeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/contacted_me"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -95,7 +109,6 @@
                     android:paddingRight="20dp"
                     android:background="@color/textview_back_color"
                     android:textColor="@color/textview_grey_color"
-                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:text="Contacted Me"/>
@@ -110,14 +123,20 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
             <LinearLayout
+                android:id="@+id/ihaveContactedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/i_have_contacted"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -125,7 +144,6 @@
                     android:paddingRight="20dp"
                     android:background="@color/textview_back_color"
                     android:textColor="@color/textview_grey_color"
-                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:text="I Have Contacted"/>
@@ -140,14 +158,20 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
             <LinearLayout
+                android:id="@+id/whoVisitedMyProfileLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/who_visited_my_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -155,7 +179,6 @@
                     android:paddingRight="20dp"
                     android:background="@color/textview_back_color"
                     android:textColor="@color/textview_grey_color"
-                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:text="Who Visited My Profile"/>
@@ -169,14 +192,21 @@
                     android:tint="@color/textpurle2"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
             <LinearLayout
+                android:id="@+id/profileViewedByMeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clickable="true"
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/profiles_viewed_by_me"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -184,7 +214,6 @@
                     android:paddingRight="20dp"
                     android:background="@color/textview_back_color"
                     android:textColor="@color/textview_grey_color"
-                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:text="Profiles Viewed By Me"/>
@@ -199,15 +228,14 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </HorizontalScrollView>
 
-
-         <FrameLayout
-        android:id="@+id/frameLayout"
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:numColumns="2"/>
 
 </LinearLayout>
