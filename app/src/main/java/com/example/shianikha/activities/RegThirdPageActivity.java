@@ -52,6 +52,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.motherCityEditText).setOnClickListener(this);
         findViewById(R.id.fatherCityEditText).setOnClickListener(this);
         findViewById(R.id.occupationEditText).setOnClickListener(this);
+        findViewById(R.id.fathersoccupationEditText).setOnClickListener(this);
+        findViewById(R.id.mothersoccupationEditText).setOnClickListener(this);
         findViewById(R.id.educationEditText).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
@@ -167,7 +169,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             ((EditText) findViewById(R.id.editText)).setHint("Ethnicity");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ethinicityNameList);
         }
-        if (view.getId() == R.id.fatherCityEditText)
+
+        else if (view.getId() == R.id.fatherCityEditText)
         {
             ((EditText) findViewById(R.id.editText)).setHint("Search Father's City");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
@@ -177,7 +180,16 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         } else if (view.getId() == R.id.occupationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
-        } else if (view.getId() == R.id.educationEditText) {
+        }
+        else if (view.getId() == R.id.fathersoccupationEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Father's Occupation");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
+        }
+        else if (view.getId() == R.id.mothersoccupationEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Mother's Occupation");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
+        }
+        else if (view.getId() == R.id.educationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search education");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
         }
@@ -244,6 +256,25 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         if (i != -1)
             App.masterJson.addString(P.ethnicity, ethinicityCodeList.get(i));
 
+        string = ((EditText)findViewById(R.id.fathers_name)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this,"Please enter Fathers Name!");
+            return;
+        }
+        App.masterJson.addString(P.father_name,string);
+
+        editText = findViewById(R.id.fathersoccupationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select father's occupation");
+            return;
+        }
+        i = occupationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.fathers_occupation_id, occupationCodeList.get(i));
+
+
         editText = findViewById(R.id.fatherCityEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
@@ -254,6 +285,26 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         if (i != -1)
             App.masterJson.addString(P.father_city, cityCodeList.get(i));
 
+
+        string = ((EditText)findViewById(R.id.mothers_name)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this,"Please enter Mothers Name!");
+            return;
+        }
+        App.masterJson.addString(P.mother_name,string);
+
+        editText = findViewById(R.id.mothersoccupationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select mother's occupation");
+            return;
+        }
+        i = occupationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.mothers_occupation_id, occupationCodeList.get(i));
+
+
         editText = findViewById(R.id.motherCityEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
@@ -263,6 +314,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         i = cityNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.mother_city, cityCodeList.get(i));
+
 
         editText = findViewById(R.id.occupationEditText);
         string = editText.getText().toString();

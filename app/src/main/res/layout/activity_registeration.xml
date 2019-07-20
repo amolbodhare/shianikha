@@ -92,7 +92,7 @@
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/full_name_til"
+                android:id="@+id/first_name_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_for_Layout"
@@ -101,12 +101,12 @@
                 android:alpha="0.5">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/full_name"
+                    android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Full Name"
+                    android:hint="First Name"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="#000000"
@@ -115,10 +115,56 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/middle_name_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/first_name_til"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:alpha="0.5">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/middle_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Middle Name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/last_name_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/middle_name_til"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:alpha="0.5">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Last Name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/email_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/full_name_til"
+                android:layout_below="@id/last_name_til"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="0dp"
                 android:alpha="0.5"

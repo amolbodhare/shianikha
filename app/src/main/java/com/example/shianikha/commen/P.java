@@ -14,6 +14,9 @@ public class P {
     public static String curr_ver = "curr_ver";
     public static String msg = "msg";
     public static String name = "name";
+    public static String first_name = "first_name";
+    public static String middle_name = "middle_name";
+    public static String last_name = "last_name";
     public static String mobile = "mobile";
     public static String email = "email";
     public static String city = "city";
@@ -62,9 +65,15 @@ public class P {
     public static String smoking = "smoking";
     public static String education = "education";
     public static String edulevel_id = "edulevel_id";
+    public static String father_name = "father_name";
+    public static String fathers_occupation_id = "fathers_occupation_id";
     public static String father_city = "father_city";
-    public static String occupation_id = "occupation_id";
+
+    public static String mother_name = "mother_name";
+    public static String mothers_occupation_id = "mothers_occupation_id";
     public static String mother_city = "mother_city";
+
+    public static String occupation_id = "occupation_id";
     public static String language = "language";
     public static String about_occupation = "about_occupation";
     public static String mothertongue = "mothertongue";

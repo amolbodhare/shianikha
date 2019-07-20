@@ -284,20 +284,33 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             json.addString(P.profile_for,string);
         }
 
-        string = ((EditText)findViewById(R.id.full_name)).getText().toString();
+        string = ((EditText)findViewById(R.id.first_name)).getText().toString();
         if (string.isEmpty())
         {
-            H.showMessage(context,"Please enter Name!");
+            H.showMessage(context,"Please enter First Name!");
             return;
         }
-        json.addString(P.name,string);
+        json.addString(P.first_name,string);
+
+        string = ((EditText)findViewById(R.id.middle_name)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter Middle Name!");
+            return;
+        }
+        json.addString(P.middle_name,string);
+
+        string = ((EditText)findViewById(R.id.last_name)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter Last name!");
+            return;
+        }
+        json.addString(P.last_name,string);
+
 
         string = ((EditText)findViewById(R.id.email)).getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(context,"Please enter email!");
-            return;
-        }
+
         if (!string.contains("@") || !string.contains(".") || (string.indexOf("@")-string.indexOf(".")==1))
         {
             H.showMessage(context,"Please enter valid email!");
