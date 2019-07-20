@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FavouritesFragment">
+    android:background="@color/white"
+    tools:context=".fragments.FavouritesFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="19dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Refine Search 30"
+            android:textColor="#5B5B5B" />
+
+        <LinearLayout
+            android:id="@+id/sortByLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/edit_text_bg"
+            android:gravity="center_vertical"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Sort by"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="7dp"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/refineLinerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="11dp"
+            android:layout_toLeftOf="@id/sortByLinearLayout"
+            android:background="@drawable/edit_text_bg"
+            android:backgroundTint="#EBEBEB"
+            android:gravity="center_vertical"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Refine"
+                android:textColor="#009898"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:padding="3dp"
+                android:src="@drawable/funnel" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:divider="@null"
+        android:padding="13dp"
+        android:dividerHeight="0dp"/>
 
-</FrameLayout>
+</LinearLayout>

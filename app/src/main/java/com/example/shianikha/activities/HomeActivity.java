@@ -59,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility( 0);
+        getWindow().setStatusBarColor(getColor(R.color.dashboard_card_back_color));
         setContentView(R.layout.activity_home);
 
         homeFragment = HomeFragment.newInstance();
@@ -102,10 +104,10 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.white));
         //findViewById(R.id.toolbar_layout).setBackground(getDrawable(R.drawable.aaaaaa));
 
-        ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.grey));
+        ((TextView) findViewById(R.id.titleName)).setTextColor(getColor(R.color.titleBarColor));
 
-        ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.grey));
-        ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.grey));
+        ((ImageView) findViewById(R.id.drawerMenu)).setColorFilter(getColor(R.color.backArrowColor));
+        ((ImageView) findViewById(R.id.imv_noti)).setColorFilter(getColor(R.color.notificationIcnColor));
 
     }
 

@@ -74,8 +74,10 @@
 
     <color name="seekbar_color">#00CBBD</color>
 
+    <color name="titleBarColor">#585858</color>
+    <color name="backArrowColor">#6C0E8D</color>
 
-
+    <color name="notificationIcnColor">#676767</color>
 
 
 </resources>

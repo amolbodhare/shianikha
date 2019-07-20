@@ -33,7 +33,6 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
         imv_pre_btn = findViewById(R.id.prev_imv);
         imv_next_btn = findViewById(R.id.next_imv);
 
-
         imv_pre_btn.setOnClickListener(this);
         imv_next_btn.setOnClickListener(this);
 

@@ -17,10 +17,11 @@ public class InboxMessageActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getColor(R.color.transparent));
         setContentView(R.layout.activity_inbox_message);
         replymsgBtn=findViewById(R.id.reply_msg_btn);
         replymsgBtn.setOnClickListener(this);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override

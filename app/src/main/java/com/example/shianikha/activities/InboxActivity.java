@@ -95,7 +95,7 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
                 convertView.findViewById(R.id.del_msg_btn_imv).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, "wwant to delete the record?", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "want to delete the record?", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

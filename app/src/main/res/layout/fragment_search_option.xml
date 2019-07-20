@@ -1,390 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     tools:context=".subfragments.SearchOptionFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="19dp">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="AGE"
-            android:textSize="15sp" />
+            android:orientation="vertical"
+            android:padding="19dp">
 
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/textMinAge"
-                android:layout_alignParentLeft="true"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"/>
+                android:fontFamily="@font/poppins_regular"
+                android:text="AGE"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/textMinAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="start" />
+
+                <TextView
+                    android:id="@+id/textMaxAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/age_rangeSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:bar_highlight_color="@color/seekbar_color"
+                app:left_thumb_color="@color/seekbar_color"
+                app:max_value="30"
+                app:min_start_value="20"
+                app:min_value="18"
+                app:right_thumb_color="@color/seekbar_color" />
+
             <TextView
-                android:id="@+id/textMaxAge"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                />
-        </RelativeLayout>
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Height"
+                android:textSize="15sp" />
 
-        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-            android:id="@+id/age_rangeSeekbar"
-            android:layout_marginTop="15dp"
-            app:bar_highlight_color="@color/seekbar_color"
-            app:left_thumb_color="@color/seekbar_color"
-            app:right_thumb_color="@color/seekbar_color"
-            app:min_value="18"
-            app:min_start_value="20"
-            app:max_value="30"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
 
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Height"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/textMinHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="start" />
 
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textMaxHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/height_rangeSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:bar_highlight_color="@color/seekbar_color"
+                app:left_thumb_color="@color/seekbar_color"
+                app:max_value="96"
+                app:min_start_value="48"
+                app:min_value="36"
+                app:right_thumb_color="@color/seekbar_color" />
+
             <TextView
-                android:id="@+id/textMinHeight"
-                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"/>
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="Marital Status" />
+
+
+            <RelativeLayout
+                android:id="@+id/marital_status_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <EditText
+                    android:id="@+id/marital_status_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Never Married"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <!--<Spinner
+                android:id="@+id/state_spinner"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/city_of_residence_spinner"
+                android:layout_width="fill_parent"
+                android:alpha="0.5"
+                android:layout_height="wrap_content"
+                android:prompt="@string/spinner_title"/>-->
+
             <TextView
-                android:id="@+id/textMaxHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                />
-        </RelativeLayout>
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="Religion" />
 
-        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-            android:id="@+id/height_rangeSeekbar"
-            android:layout_marginTop="15dp"
-            app:bar_highlight_color="@color/seekbar_color"
-            app:left_thumb_color="@color/seekbar_color"
-            app:right_thumb_color="@color/seekbar_color"
-            app:min_value="4.5"
-            app:min_start_value="5.0"
-            app:max_value="6.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-        <TextView
-            android:text="Marital Status"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <RelativeLayout
-            android:id="@+id/marital_status_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/marital_status_ed"
+            <RelativeLayout
+                android:id="@+id/religion_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:hint="Never Married"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/religion_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Hindu"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="Community" />
 
-        </RelativeLayout>
-
-        <!--<Spinner
-            android:id="@+id/state_spinner"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/city_of_residence_spinner"
-            android:layout_width="fill_parent"
-            android:alpha="0.5"
-            android:layout_height="wrap_content"
-            android:prompt="@string/spinner_title"/>-->
-
-        <TextView
-            android:text="Religion"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <RelativeLayout
-            android:id="@+id/religion_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/religion_ed"
+            <RelativeLayout
+                android:id="@+id/community_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Hindu"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/community_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Kunbi"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="motherTongue" />
 
-        </RelativeLayout>
 
-        <TextView
-            android:text="Community"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/community_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/community_ed"
+            <RelativeLayout
+                android:id="@+id/mother_tongue_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Kunbi"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/mother_tongue_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Marathi"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <!-- <Spinner
+                 android:id="@+id/country_of_residence_spinner"
+                 android:layout_marginTop="20dp"
+                 android:layout_below="@id/state_spinner"
+                 android:layout_width="fill_parent"
+                 android:alpha="0.5"
+                 android:layout_height="wrap_content"
+                 android:prompt="@string/spinner_title"/>
+             <Spinner
+                 android:id="@+id/country_of_citizenship"
+                 android:layout_marginTop="20dp"
+                 android:layout_below="@id/country_of_residence_spinner"
+                 android:layout_width="fill_parent"
+                 android:alpha="0.5"
+                 android:layout_height="wrap_content"
+                 android:prompt="@string/spinner_title"/>-->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="Country Living In" />
 
-        </RelativeLayout>
-        <TextView
-            android:text="motherTongue"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <RelativeLayout
-            android:id="@+id/mother_tongue_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/mother_tongue_ed"
+            <RelativeLayout
+                android:id="@+id/country_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Marathi"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/country_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="India"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="State Living In" />
 
-        </RelativeLayout>
-
-        <!-- <Spinner
-             android:id="@+id/country_of_residence_spinner"
-             android:layout_marginTop="20dp"
-             android:layout_below="@id/state_spinner"
-             android:layout_width="fill_parent"
-             android:alpha="0.5"
-             android:layout_height="wrap_content"
-             android:prompt="@string/spinner_title"/>
-         <Spinner
-             android:id="@+id/country_of_citizenship"
-             android:layout_marginTop="20dp"
-             android:layout_below="@id/country_of_residence_spinner"
-             android:layout_width="fill_parent"
-             android:alpha="0.5"
-             android:layout_height="wrap_content"
-             android:prompt="@string/spinner_title"/>-->
-        <TextView
-            android:text="Country Living In"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/country_living_in_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/country_edt"
+            <RelativeLayout
+                android:id="@+id/state_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="India"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/state_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="India"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="City/District" />
 
-        </RelativeLayout>
-
-        <TextView
-            android:text="State Living In"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/state_living_in_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/state_edt"
+            <RelativeLayout
+                android:id="@+id/city_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="India"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
+                <EditText
+                    android:id="@+id/city_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Mumbai"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:text="Photo Setting" />
 
-        </RelativeLayout>
-
-        <TextView
-            android:text="City/District"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/city_living_in_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <EditText
-                android:id="@+id/city_edt"
+            <RelativeLayout
+                android:id="@+id/photo_setting_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Mumbai"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
+                android:layout_height="56dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/photo_setting_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Doesn't Matter"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
 
-        <TextView
-            android:text="Photo Setting"
-            android:layout_marginTop="20dp"
-            android:alpha="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/photo_setting_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
 
-            <EditText
-                android:id="@+id/photo_setting_edt"
+            <Button
+                android:id="@+id/btn_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Doesn't Matter"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16dp"
-                android:focusable="false"
-                android:paddingRight="56dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
-        </RelativeLayout>
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_button_back"
+                android:text="SEARCH"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
-
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/blue_button_back"
-            android:text="SEARCH"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-    </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
@@ -408,6 +412,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#60000000"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

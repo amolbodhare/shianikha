@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -13,15 +12,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@color/drawer">
+            android:layout_height="123dp"
+            android:gravity="center_vertical"
+            android:background="@color/drawer"
+            android:paddingLeft="13dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="45dp"
-                android:layout_marginRight="30dp"
                 android:gravity="center_vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -82,14 +80,12 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/drawer_partnerPreference_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
             android:clickable="true"
+            android:padding="13dp"
             android:onClick="OnDrawerMenuClick"
             android:gravity="center">
 
@@ -115,8 +111,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:onClick="OnDrawerMenuClick"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -141,8 +136,7 @@
             android:layout_height="wrap_content"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -167,8 +161,7 @@
             android:layout_height="wrap_content"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -191,8 +184,7 @@
             android:id="@+id/drawer_noti_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:clickable="true"
             android:onClick="OnDrawerMenuClick"
             android:gravity="center">
@@ -219,8 +211,7 @@
             android:layout_height="wrap_content"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -245,8 +236,7 @@
             android:layout_height="wrap_content"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+           android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -269,8 +259,7 @@
             android:id="@+id/drawer_aboutapp_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+           android:padding="13dp"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
             android:gravity="center">
@@ -297,8 +286,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:onClick="OnDrawerMenuClick"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+           android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -321,8 +309,7 @@
             android:id="@+id/drawer_contactus_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="21dp"
+            android:padding="13dp"
             android:onClick="OnDrawerMenuClick"
             android:clickable="true"
             android:gravity="center">
@@ -347,8 +334,7 @@
             android:id="@+id/drawer_logout_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="35dp"
+           android:padding="13dp"
             android:clickable="true"
             android:onClick="OnDrawerMenuClick"
             android:gravity="center">

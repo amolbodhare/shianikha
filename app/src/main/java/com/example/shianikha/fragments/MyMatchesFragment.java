@@ -69,13 +69,13 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
             //((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,));
  //           ((ListView) fragmentView.findViewById(R.id.listView)).removeAllViews();
-            hitmatchesApi("top_matches");
+            hitMatchesApi("top_matches");
 
         }
         return fragmentView;
     }
 
-     private void hitmatchesApi(String api_type)
+     private void hitMatchesApi(String api_type)
      {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
@@ -110,9 +110,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
 
                             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,json.getJsonList(P.data)));
-                            //setProfileData(json);
-                            //setRecentlyJoinData(json);
-                            //setRecentVisitorsData(json);
 
                         }
 
@@ -121,7 +118,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
                             H.showMessage(context, json.getString(P.msg));
                     }
                 })
-                .run("hitDashoardApi");
+                .run("hitMatchesApi");
     }
 
     @Override
@@ -129,18 +126,18 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         int i = v.getId();
         if (i == R.id.top_matches)
         {
-            hitmatchesApi("top_matches");
+            hitMatchesApi("top_matches");
             changeColorsOfThreeTab(v);
         }
 
         else  if(i == R.id.i_am_looking_for)
         {
-            hitmatchesApi("i_am_looking_for");
+            hitMatchesApi("i_am_looking_for");
             changeColorsOfThreeTab(v);
         }
         else  if(i == R.id.looking_for_me)
         {
-            hitmatchesApi("looking_for_me");
+            hitMatchesApi("looking_for_me");
             changeColorsOfThreeTab(v);
         }
         else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn)
