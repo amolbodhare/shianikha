@@ -26,9 +26,9 @@ public class InboxActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inbox);
         getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
+        setContentView(R.layout.activity_inbox);
         context = InboxActivity.this;
 
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));

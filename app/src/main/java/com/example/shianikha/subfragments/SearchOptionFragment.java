@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,39 +21,35 @@ import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class SearchOptionFragment extends Fragment {
+public class SearchOptionFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    View view;
+    private View fragmentView;
     private ArrayAdapter<String> arrayAdapter;
-    ArrayList<String> marital_status_arrayList;
-    ArrayList<String> religion_arrayList;
-    ArrayList<String> community_arrayList;
-    ArrayList<String> mothertonge_arrayList;
-    ArrayList<String> country_arrayList;
-    ArrayList<String> state_arrayList;
-    ArrayList<String> city_arrayList;
-    ArrayList<String> photo_setting_arrayList;
-    Context context;
+    private ArrayList<String> maritalStatusNameList, maritalStatusCodeList, religionNameList, religionCodeList,motherToungueNameList, motherToungeCodeList,
+            countryNameList, countryCodeList, stateNameList, stateCodeList, cityNameList, cityCodeList, photoSettingNameList, photoSettingCodeList;
+    private Context context;
+    private Session session;
 
 
     public SearchOptionFragment() {
         // Required empty public constructor
     }
 
-    public static SearchOptionFragment newInstance()
-    {
+    public static SearchOptionFragment newInstance() {
         SearchOptionFragment fragment = new SearchOptionFragment();
         return fragment;
     }
@@ -61,10 +58,14 @@ public class SearchOptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_search_option, container, false);
-        context=getActivity();
+        if (fragmentView == null)
+        {
+            context = getActivity();
+            session = new Session(context);
+            fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
 
-        handleSeekBar();
+            handleSeekBar();
+            extractRequireList();
 
         /*height_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
             @Override
@@ -74,349 +75,271 @@ public class SearchOptionFragment extends Fragment {
             }
         });*/
 
-        marital_status_arrayList=new ArrayList<>();
-        religion_arrayList=new ArrayList<>();
-        community_arrayList=new ArrayList<>();
-        mothertonge_arrayList=new ArrayList<>();
-        country_arrayList=new ArrayList<>();
-        state_arrayList=new ArrayList<>();
-        city_arrayList=new ArrayList<>();
-        photo_setting_arrayList=new ArrayList<>();
-
-        try
-        {
-
-            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-
-
-
-            //String masterdatajsonstring=getIntent().getExtras().getString("masterDataString");
-            String masterdatajsonstring = new Session(getActivity()).getString(com.example.shianikha.commen.P.masterDataString);
-
-
-            //System.out.print(masterdatajsonstring);
-            Json json=new Json(masterdatajsonstring);
-
-            JSONArray jsonArray_marital_status=json.getJsonArray("marital_status");//val
-            JSONArray jsonArray_religion=json.getJsonArray("religion");//name
-            JSONArray jsonArray_community=json.getJsonArray("religion");//name
-            JSONArray jsonArray_mothertongue=json.getJsonArray("mothertongue");//name
-            JSONArray jsonArray_country=json.getJsonArray("country");//name
-            JSONArray jsonArray_state=json.getJsonArray("state");//state_name
-            JSONArray jsonArray_city=json.getJsonArray("city");//city_name
-            JSONArray jsonArray_photo=json.getJsonArray("city");//city_name
-
-
-            //System.out.print(jsonArray_marital_status);
-
-            for(int i=0;i<jsonArray_marital_status.length();i++)
-            {
-                marital_status_arrayList.add(jsonArray_marital_status.getJSONObject(i).getString("val"));
-            }
-
-            for(int i=0;i<jsonArray_religion.length();i++)
-            {
-                religion_arrayList.add(jsonArray_religion.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_community.length();i++)
-            {
-                community_arrayList.add(jsonArray_community.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_mothertongue.length();i++)
-            {
-                mothertonge_arrayList.add(jsonArray_mothertongue.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_country.length();i++)
-            {
-               country_arrayList.add(jsonArray_country.getJSONObject(i).getString("name"));
-            }
-
-            for(int i=0;i<jsonArray_state.length();i++)
-            {
-                state_arrayList.add(jsonArray_state.getJSONObject(i).getString("state_name"));
-            }
-
-            for(int i=0;i<jsonArray_city.length();i++)
-            {
-                city_arrayList.add(jsonArray_city.getJSONObject(i).getString("city_name"));
-            }
-
-            for(int i=0;i<jsonArray_photo.length();i++)
-            {
-                photo_setting_arrayList.add(jsonArray_photo.getJSONObject(i).getString("city_name"));
-            }
-
-
-           /* for(int i=0;i<jsonArray_height.length();i++)
-            {
-                height_arrayList.add("Hello");
-            }*/
-
         }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        setUpEditTextClickListner(view);
-        setUpTextWatcher(view);
-
-        return  view;
+        return fragmentView;
     }
 
-    private void handleSeekBar()
+    private void extractRequireList()
     {
-        final CrystalRangeSeekbar age_rangeSeekbar = view.findViewById(R.id.age_rangeSeekbar);
-        final CrystalRangeSeekbar height_rangeSeekbar = view.findViewById(R.id.height_rangeSeekbar);
+        JsonList jsonList;
+
+        //for marital status
+        String string = session.getString(P.marital_status);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            maritalStatusNameList = new ArrayList<>();
+            maritalStatusCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                maritalStatusNameList.add(string);
+
+                string = j.getString(P.id);
+                maritalStatusCodeList.add(string);
+            }
+        }
+
+        //for religion list
+        string = session.getString(P.religion);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            religionNameList = new ArrayList<>();
+            religionCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                religionNameList.add(string);
+
+                string = j.getString(P.id);
+                religionCodeList.add(string);
+            }
+        }
+
+        //for mother tongue list
+        string = session.getString(P.language);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            motherToungueNameList = new ArrayList<>();
+            motherToungeCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                motherToungueNameList.add(string);
+
+                string = j.getString(P.id);
+                motherToungeCodeList.add(string);
+            }
+        }
+
+        //for country list
+        string = session.getString(P.country);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            countryNameList = new ArrayList<>();
+            countryCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                countryNameList.add(string);
+
+                string = j.getString(P.id);
+                countryCodeList.add(string);
+            }
+        }
+
+        //for state
+        string = session.getString(P.state);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            stateNameList = new ArrayList<>();
+            stateCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.state_name);
+                stateNameList.add(string);
+
+                string = j.getString(P.state_id);
+                stateCodeList.add(string);
+            }
+        }
+
+        string = session.getString(P.city);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            cityNameList = new ArrayList<>();
+            cityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.city_name);
+                cityNameList.add(string);
+
+                string = j.getString(P.city_id);
+                cityCodeList.add(string);
+            }
+        }
+
+        setUpTextWatcher(fragmentView);
+
+        fragmentView.findViewById(R.id.marital_status_ed).setOnClickListener(this);
+        fragmentView.findViewById(R.id.religion_ed).setOnClickListener(this);
+        //fragmentView.findViewById(R.id.community_ed).setOnClickListener(this);
+        fragmentView.findViewById(R.id.mother_tongue_ed).setOnClickListener(this);
+        fragmentView.findViewById(R.id.country_edt).setOnClickListener(this);
+        fragmentView.findViewById(R.id.state_edt).setOnClickListener(this);
+        fragmentView.findViewById(R.id.city_edt).setOnClickListener(this);
+        //fragmentView.findViewById(R.id.photo_setting_edt).setOnClickListener(this);
+        fragmentView.findViewById(R.id.btn_search).setOnClickListener(this);
+    }
+
+    private void handleSeekBar() {
+        final CrystalRangeSeekbar age_rangeSeekbar = fragmentView.findViewById(R.id.age_rangeSeekbar);
+        final CrystalRangeSeekbar height_rangeSeekbar = fragmentView.findViewById(R.id.height_rangeSeekbar);
 
         // get min and max text view
-        final TextView tvMinAge =  view.findViewById(R.id.textMinAge);
-        final TextView tvMaxAge =  view.findViewById(R.id.textMaxAge);
+        final TextView tvMinAge = fragmentView.findViewById(R.id.textMinAge);
+        final TextView tvMaxAge = fragmentView.findViewById(R.id.textMaxAge);
 
-        final TextView tvMinHeight =  view.findViewById(R.id.textMinHeight);
-        final TextView tvMaxHeight =  view.findViewById(R.id.textMaxHeight);
+        final TextView tvMinHeight = fragmentView.findViewById(R.id.textMinHeight);
+        final TextView tvMaxHeight = fragmentView.findViewById(R.id.textMaxHeight);
 
         age_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
-            public void valueChanged(Number minValue, Number maxValue)
-            {
+            public void valueChanged(Number minValue, Number maxValue) {
 
-                tvMinAge.setText("Min "+minValue+" years");
-                tvMaxAge.setText("Max "+maxValue+" years");
+                tvMinAge.setText("Min " + minValue + " years");
+                tvMaxAge.setText("Max " + maxValue + " years");
 
             }
         });
 
         height_rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
-            public void valueChanged(Number minValue, Number maxValue)
-            {
-                H.log("minValueIs",minValue+"");
-                H.log("maxValueIs",maxValue+"");
+            public void valueChanged(Number minValue, Number maxValue) {
+                H.log("minValueIs", minValue + "");
+                H.log("maxValueIs", maxValue + "");
 
-                long minProgress = (long)minValue;
+                long minProgress = (long) minValue;
 
-                long maxProgress = (long)maxValue;
+                long maxProgress = (long) maxValue;
 
-                long minFt = minProgress/12;
-                long minIn = minProgress%12;
+                long minFt = minProgress / 12;
+                long minIn = minProgress % 12;
 
-                long maxFt = maxProgress/12;
-                long maxIn = maxProgress%12;
+                long maxFt = maxProgress / 12;
+                long maxIn = maxProgress % 12;
 
 
                 /*int ft = progress/12;
                 int in = progress%12;*/
-                float minH = ((float) minFt/3.281f)+((float) minIn/39.37f);//3.281  39.37
-                String text = ""+minFt+"' "+minIn+'"';
-                tvMinHeight.setText("Min "+text);
+                float minH = ((float) minFt / 3.281f) + ((float) minIn / 39.37f);//3.281  39.37
+                String text = "" + minFt + "' " + minIn + '"';
+                tvMinHeight.setText("Min " + text);
 
-                text = ""+maxFt+"' "+maxIn+'"';
-                tvMaxHeight.setText("Max "+text);
+                text = "" + maxFt + "' " + maxIn + '"';
+                tvMaxHeight.setText("Max " + text);
             }
         });
     }
 
-
-    private void setUpEditTextClickListner(final View view)
-    {
-        EditText ed_marital_status = view.findViewById(R.id.marital_status_ed);
-        EditText ed_religion = view.findViewById(R.id.religion_ed);
-        EditText ed_commmunity = view.findViewById(R.id.community_ed);
-        EditText ed_mother_tongue = view.findViewById(R.id.mother_tongue_ed);
-        EditText ed_country = view.findViewById(R.id.country_edt);
-        EditText ed_state = view.findViewById(R.id.state_edt);
-        EditText ed_city = view.findViewById(R.id.city_edt);
-        EditText ed_photo_settings = view.findViewById(R.id.photo_setting_edt);
-
-
-
-        ed_marital_status.setOnClickListener(new View.OnClickListener()
-        {
+    private void setUpTextWatcher(View mainview) {
+        ((EditText) mainview.findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-        ed_religion.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-        ed_commmunity.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-        ed_mother_tongue.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-
-        ed_country.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-
-        ed_state.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-
-        ed_city.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-
-        ed_photo_settings.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setUpCustomSpinner(v,view);
-            }
-        });
-
-
-
-    }
-
-    private void setUpTextWatcher(View mainview)
-    {
-        ((EditText)mainview.findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 arrayAdapter.getFilter().filter(s);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) { }
         });
     }
 
-    private void setUpCustomSpinner(final View view,final View main_view)
+
+
+    private void hideCustomSpinnerLayout() {
+        int i = fragmentView.findViewById(R.id.includeContainer).getWidth();
+        ((EditText)fragmentView. findViewById(R.id.editText)).setText("");
+        fragmentView.findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
+        View view = fragmentView.findViewById(R.id.view);
+        view.setVisibility(View.GONE);
+        H.hideKeyBoard(context, view);
+    }
+
+    @Override
+    public void onClick(View view)
     {
-        ListView listView = main_view.findViewById(R.id.listView);
-        main_view.findViewById(R.id.view).setVisibility(View.VISIBLE);
-        main_view.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideCustomSpinnerLayout(main_view);
-            }
-        });
+        if (view.getId() == R.id.btn_search)
+            hitSearchOptionApi();
+        else
+            setUpCustomSpinner(view);
+    }
 
-        if (view.getId()==R.id.marital_status_ed)
+    private void setUpCustomSpinner(final View view) {
+        ListView listView = fragmentView.findViewById(R.id.listView);
+        fragmentView.findViewById(R.id.view).setVisibility(View.VISIBLE);
+        EditText editText = fragmentView.findViewById(R.id.editText);
+
+        if (view.getId() == R.id.marital_status_ed)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Marital Status");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,marital_status_arrayList);
-            listView.setAdapter(arrayAdapter);
+           editText.setHint("Search Marital Status ");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, maritalStatusNameList);
         }
-
         else if (view.getId() == R.id.religion_ed)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Religion");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,religion_arrayList);
-            listView.setAdapter(arrayAdapter);
+            editText.setHint("Search Religion");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, religionNameList);
         }
-        else if (view.getId() == R.id.community_ed)
+        else if (view.getId() == R.id.community_ed )
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Community");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,community_arrayList);
-            listView.setAdapter(arrayAdapter);
+
         }
         else if (view.getId() == R.id.mother_tongue_ed)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Mother Tongue");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,mothertonge_arrayList);
-            listView.setAdapter(arrayAdapter);
+            editText.setHint("Search Mother Tongue");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, motherToungueNameList);
         }
         else if (view.getId() == R.id.country_edt)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Country");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,country_arrayList);
-            listView.setAdapter(arrayAdapter);
+            editText.setHint("Search Country");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, countryNameList);
         }
         else if (view.getId() == R.id.state_edt)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select State");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,state_arrayList);
-            listView.setAdapter(arrayAdapter);
+            editText.setHint("Search State");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, stateNameList);
         }
         else if (view.getId() == R.id.city_edt)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select City");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,city_arrayList);
-            listView.setAdapter(arrayAdapter);
+            editText.setHint("Search City");
+            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, cityNameList);
         }
-
         else if (view.getId() == R.id.photo_setting_edt)
         {
-            ((EditText)main_view.findViewById(R.id.editText)).setHint("Select Settting");
-            arrayAdapter = new ArrayAdapter<>(context,R.layout.text_view,R.id.textView,photo_setting_arrayList);
-            listView.setAdapter(arrayAdapter);
+
         }
 
+        if (arrayAdapter == null)
+            return;
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        H.showKeyBoard(context,editText);
+
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView!=null)
-                {
-                    Log.e("selectedIs",textView.getText().toString());
-                    ((EditText)view).setText(textView.getText().toString());
-
+                if (textView != null) {
+                    Log.e("selectedIs", textView.getText().toString());
+                    ((EditText) view).setText(textView.getText().toString());
                 }
-                hideCustomSpinnerLayout(main_view);
+                hideCustomSpinnerLayout();
             }
         });
 
-        main_view.findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+        fragmentView.findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+
     }
 
-    private void hideCustomSpinnerLayout(View main_view) {
-        int i =main_view.findViewById(R.id.includeContainer).getWidth();
-        main_view.findViewById(R.id.includeContainer).animate().translationX(i).setDuration(500);
-        main_view.findViewById(R.id.view).setVisibility(View.GONE);
+    private void hitSearchOptionApi() {
+
     }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

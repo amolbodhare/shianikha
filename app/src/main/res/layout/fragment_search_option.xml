@@ -102,7 +102,6 @@
                 android:alpha="0.5"
                 android:text="Marital Status" />
 
-
             <RelativeLayout
                 android:id="@+id/marital_status_layout"
                 android:layout_width="match_parent"

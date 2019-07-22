@@ -32,7 +32,6 @@ public class InboxMessageActivity extends AppCompatActivity implements View.OnCl
             Intent i = new Intent(InboxMessageActivity.this, ReplyMessageActivity.class);
             startActivity(i);
             ((InboxMessageActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         else if (v.getId() == R.id.sub_drawerMenu)
         {

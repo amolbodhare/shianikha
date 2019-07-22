@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:padding="13dp"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:gravity="center">
 
             <ImageView
@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:padding="13dp"
             android:gravity="center">
 
@@ -134,7 +134,7 @@
             android:id="@+id/my_activity_drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:padding="13dp"
             android:gravity="center">
@@ -159,7 +159,7 @@
             android:id="@+id/inbox_activity_drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:padding="13dp"
             android:gravity="center">
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:padding="13dp"
             android:clickable="true"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:gravity="center">
 
             <ImageView
@@ -209,7 +209,7 @@
             android:id="@+id/drawer_favourites_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:padding="13dp"
             android:gravity="center">
@@ -217,7 +217,8 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_star" />
+                android:src="@drawable/ic_star"
+                android:tint="#707070"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -234,7 +235,7 @@
             android:id="@+id/drawer_help_and_support_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
            android:padding="13dp"
             android:gravity="center">
@@ -260,7 +261,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:padding="13dp"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:gravity="center">
 
@@ -285,7 +286,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
            android:padding="13dp"
             android:gravity="center">
 
@@ -310,7 +311,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="13dp"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:gravity="center">
 
@@ -336,7 +337,7 @@
             android:layout_height="wrap_content"
            android:padding="13dp"
             android:clickable="true"
-            android:onClick="OnDrawerMenuClick"
+            android:onClick="onDrawerMenuClick"
             android:gravity="center">
 
             <ImageView

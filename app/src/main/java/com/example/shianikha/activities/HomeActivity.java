@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.H;
@@ -127,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         if (fragment == myProfileFragment)
-            changeNotificationicon(true);
+            changeNotificationIcon(true);
 
         currentFragment = fragment;
         currentFragmentName = title;
@@ -145,18 +144,18 @@ public class HomeActivity extends AppCompatActivity {
     public void bottomFourFragmentClick(View view) {
         if (view.getId() == R.id.homeButton_layout) {
             fragmentLoader(homeFragment, getString(R.string.MyShia));
-            changeNotificationicon(false);
+            changeNotificationIcon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
             if (myMatchesFragment == null)
                 myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
-            changeNotificationicon(false);
+            changeNotificationIcon(false);
 
         } else if (view.getId() == R.id.searchButton_layout) {
             if (searchFragment == null)
                 searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
-            changeNotificationicon(false);
+            changeNotificationIcon(false);
         } else if (view.getId() == R.id.myprofileButton_layout) {
             if (myProfileFragment == null)
                 myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
@@ -207,7 +206,10 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    public void OnDrawerMenuClick(View view) {
+    public void onDrawerMenuClick(View view)
+    {
+        changeIconColor(view);
+
         if (view.getId() == R.id.drawer_logout_layout)
             showLogOutAlert();
         else if (view.getId() == R.id.drawer_partnerPreference_layout)
@@ -235,10 +237,26 @@ public class HomeActivity extends AppCompatActivity {
             if (favouritesFragment == null)
                 favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
-
         }
 
         drawerLayout.closeDrawer(Gravity.START);
+    }
+
+    private void changeIconColor(View view) {
+        LinearLayout parentLayout = (LinearLayout)view.getParent();
+        LinearLayout childLayout;
+        ImageView imageView;
+
+        for (int i=1; i<parentLayout.getChildCount(); i++)
+        {
+            childLayout = (LinearLayout) parentLayout.getChildAt(i);
+            imageView = (ImageView) childLayout.getChildAt(0);
+            imageView.setColorFilter(getColor(R.color.drawerIconColor));
+        }
+
+        childLayout = (LinearLayout)view;
+        imageView = (ImageView) childLayout.getChildAt(0);
+        imageView.setColorFilter(getColor(R.color.goldColor));
     }
 
     public void showAccountSettingFragment() {
@@ -270,42 +288,49 @@ public class HomeActivity extends AppCompatActivity {
         if (contactUsFragment == null)
             contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(contactUsFragment, getString(R.string.contactUs));
+        //onDrawerMenuClick(findViewById(R.id.drawer_contactus_layout));
     }
 
     public void showAboutAppFragment() {
         if (aboutApp == null)
             aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(aboutApp, getString(R.string.aboutapp));
+        //onDrawerMenuClick(findViewById(R.id.drawer_aboutapp_layout));
     }
 
     public void showHelpAndSupportFrgment() {
         if (helpAndSupport == null)
             helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
+        //onDrawerMenuClick(findViewById(R.id.drawer_help_and_support_layout));
     }
 
     public void showNotificationFragment() {
         if (notificationFragment == null)
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(notificationFragment, getString(R.string.notificationn));
+        //onDrawerMenuClick(findViewById(R.id.drawer_noti_layout));
     }
 
     public void showMyActivityFragment() {
         if (myActivityFragment == null)
             myActivityFragment = MyActivityFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(myActivityFragment, getString(R.string.myactivity));
+        //onDrawerMenuClick(findViewById(R.id.my_activity_drawer_layout));
     }
 
     public void showSubscriptionPlanActivity() {
         Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+        //onDrawerMenuClick(findViewById(R.id.drawer_subscription_layout));
     }
 
     public void showPartnerPreferenceActivity() {
         Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+        //onDrawerMenuClick(findViewById(R.id.drawer_partnerPreference_layout));
     }
 
     public void onNotificationIconClick(View view) {
@@ -326,6 +351,8 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EditProfileActivity.class);
             startActivityForResult(intent, 31);
         }
+
+        //onDrawerMenuClick(findViewById(R.id.drawer_noti_layout));
     }
 
     public void onBack(View view) {
@@ -352,7 +379,7 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
-                changeNotificationicon(false);
+                changeNotificationIcon(false);
             }
         } else if (notificationFragment != null && notificationFragment.isVisible()) {
             fragment = NotificationFragment.previousFragment;
@@ -439,7 +466,7 @@ public class HomeActivity extends AppCompatActivity {
             setSelection(myProfileButtonLayout);
     }
 
-    public void changeNotificationicon(boolean b) {
+    public void changeNotificationIcon(boolean b) {
         ImageView imageView = findViewById(R.id.imv_noti);
         if (b) {
             imageView.setImageDrawable(getDrawable(R.drawable.edit));

@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.ImageViewPagerActivity;
 import com.example.shianikha.activities.ImageViewerActivity;
+import com.example.shianikha.activities.ReplyMessageActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
@@ -64,10 +65,12 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
             fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
 
-            ((ImageView)fragmentView.findViewById(R.id.images_pager_click)).setOnClickListener(this);
 
             fragmentView.findViewById(R.id.imagesView).setOnClickListener(this);
             fragmentView.findViewById(R.id.imageViewer1).setOnClickListener(this);
+            fragmentView.findViewById(R.id.sendMessageLinearLayout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.shareProfileLinearLayout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.favouriteLinearLayout).setOnClickListener(this);
 
         }
 
@@ -83,13 +86,13 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         {
             /*Intent intent = new Intent(context, ImageViewerActivity.class);
             startActivity(intent);*/
-        }
-        else if(v.getId()==R.id.images_pager_click)
-        {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList",jsonList.toString());
             startActivity(intent);
-
+        }
+        else if (v.getId() == R.id.sendMessageLinearLayout)
+        {
+            startActivity(new Intent(context, ReplyMessageActivity.class));
         }
     }
 
@@ -97,7 +100,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
     private void hitProfileDetailsApi(String api_type,String profileId)
     {

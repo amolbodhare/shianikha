@@ -331,7 +331,7 @@
                         android:layout_height="match_parent"
                         android:focusable="false"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="State/Provenance/Country"
+                        android:hint="State/Province/Country"
                         android:paddingRight="56dp"
                         android:textSize="16dp" />
 

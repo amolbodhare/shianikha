@@ -79,5 +79,8 @@
 
     <color name="notificationIcnColor">#676767</color>
 
+    <color name="goldColor">#ed8a19</color>
+
+    <color name="drawerIconColor">#707070</color>
 
 </resources>

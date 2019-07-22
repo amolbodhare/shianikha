@@ -37,7 +37,6 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:id="@+id/images_pager_click"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
@@ -201,9 +200,11 @@
             android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/sendMessageLinearLayout"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
+                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/darkGreen"
@@ -226,9 +227,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/shareProfileLinearLayout"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
+                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/yellow"
@@ -252,9 +255,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/favouriteLinearLayout"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/orange"
                 android:gravity="center">
