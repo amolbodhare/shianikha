@@ -44,12 +44,13 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:tag=""
-                android:text="My Activity"
+                android:text="Photos"
                 android:textAllCaps="true"
                 android:textColor="@color/titletexttcolor"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
+<!--
             <RelativeLayout
                 android:id="@+id/noti_layout"
                 android:layout_width="40dp"
@@ -85,6 +86,7 @@
                     android:textSize="10sp" />
 
             </RelativeLayout>
+-->
 
         </RelativeLayout>
 
