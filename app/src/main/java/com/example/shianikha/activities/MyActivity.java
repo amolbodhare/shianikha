@@ -57,13 +57,15 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     }
 
     private void fragmentLoader(Fragment fragment)
-     { getSupportFragmentManager().beginTransaction()
+     {
+         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
                 .replace(R.id.frameLayout, fragment).commit();
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me||
                 v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me)
         {
@@ -112,7 +114,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         {
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
-        }
+         }
         else if (v.getId() == R.id.i_have_contacted)
         {
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();

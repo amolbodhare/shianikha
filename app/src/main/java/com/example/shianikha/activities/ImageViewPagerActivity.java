@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -34,9 +35,10 @@ public class ImageViewPagerActivity extends AppCompatActivity implements View.On
        JsonList jsonList=new JsonList(jsonList_string);
 
         context = ImageViewPagerActivity.this;
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        findViewById(R.id.sub_drawerMenu).setOnClickListener(ImageViewPagerActivity.this);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager = findViewById(R.id.slideViewPager);
-        sliderAdapter = new ImageSliderAdapter(this,jsonList);
+        sliderAdapter = new ImageSliderAdapter(context,jsonList);
         slideViewPager.setAdapter(sliderAdapter);
 
         loadingDialog = new LoadingDialog(this);
@@ -46,20 +48,22 @@ public class ImageViewPagerActivity extends AppCompatActivity implements View.On
 
     }
 
+
+
     @Override
     public void onClick(View v)
     {
-        /*if (v.getId() == R.id.btn_login)
-        {
-            Intent i = new Intent(ImageViewPagerActivity.this, LoginActivity.class);
-            startActivity(i);
-        }
-        else if (v.getId() == R.id.btn_reg)
-        {
-            Intent i = new Intent(ImageViewPagerActivity.this, RegistrationActivity.class);
-            startActivity(i);
-        }
-        finish();
- */
+          if (v.getId() == R.id.sub_drawerMenu)
+    {
+
+           onMethodClick(v);
     }
+
+    }
+    public void  onMethodClick(View v)
+    {
+        finish();
+        ((ImageViewPagerActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+    }
+
 }

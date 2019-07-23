@@ -256,8 +256,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
                     android:text="Yes"
+                    android:onClick="OnChildrenYesChecked"
                     android:layout_weight="1"/>
 
                 <RadioButton
@@ -265,10 +265,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:onClick="OnChildrenNoChecked"
                     android:text="No"
                     android:layout_weight="1"/>
 
             </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button"

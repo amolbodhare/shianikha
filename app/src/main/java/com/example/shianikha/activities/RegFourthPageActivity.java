@@ -51,6 +51,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.languageEditText).setOnClickListener(this);
         findViewById(R.id.smokingEditText).setOnClickListener(this);
         findViewById(R.id.relocateEditText).setOnClickListener(this);
+        findViewById(R.id.yesChildren).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
 
@@ -181,6 +182,10 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
     {
         if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
+        else  if(v.getId()==R.id.yesChildren)
+        {
+
+        }
         else if (v.getId() == R.id.button)
             makeJson();
         else
@@ -264,6 +269,16 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         layoutParams.topMargin = i;
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
+    }
+
+    public  void OnChildrenYesChecked(View view)
+    {
+
+    }
+
+    public  void OnChildrenNoChecked(View view)
+    {
+
     }
 }
 

@@ -264,7 +264,7 @@
                   android:id="@+id/state_ed"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:hint="State/Provenance/Country"
+                  android:hint="State/Province/Country"
                   android:fontFamily="@font/poppins_regular"
                   android:textSize="16dp"
                   android:focusable="false"
