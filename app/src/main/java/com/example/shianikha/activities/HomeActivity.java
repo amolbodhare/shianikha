@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility( 0);
+        getWindow().getDecorView().setSystemUiVisibility(0);
         getWindow().setStatusBarColor(getColor(R.color.dashboard_card_back_color));
         setContentView(R.layout.activity_home);
 
@@ -76,14 +76,13 @@ public class HomeActivity extends AppCompatActivity {
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
     }
 
-    public void makeStatusBarColorBlue(boolean bool)
-    {
+    public void makeStatusBarColorBlue(boolean bool) {
         if (bool) {
             int statusBarHeight = new Session(this).getInt(P.statusBarHeight);
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.height = statusBarHeight;
 
-            getWindow().getDecorView().setSystemUiVisibility( 0);
+            getWindow().getDecorView().setSystemUiVisibility(0);
             getWindow().setStatusBarColor(getColor(R.color.dashboard_card_back_color));
 
             findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.dashboard_card_back_color));
@@ -97,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
 
         findViewById(R.id.titleBar).setBackgroundColor(getColor(R.color.white));
@@ -111,9 +110,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void fragmentLoader(Fragment fragment, String title) {
-        if (currentFragment != null && currentFragment.getClass().toString().equalsIgnoreCase(fragment.getClass().toString()))
-            return;
-
+        if (currentFragment != null && currentFragment.getClass().toString().equalsIgnoreCase(fragment.getClass().toString())) {
+            if (fragment != homeFragment)// this condition is to avoid blank screen of home activity after logging out and logging in
+                return;
+        }
         if (fragment == homeFragment) {
             showBackButton(false);
             makeStatusBarColorBlue(true);////change color except dashboard
@@ -206,8 +206,7 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    public void onDrawerMenuClick(View view)
-    {
+    public void onDrawerMenuClick(View view) {
         changeIconColor(view);
 
         if (view.getId() == R.id.drawer_logout_layout)
@@ -232,8 +231,7 @@ public class HomeActivity extends AppCompatActivity {
             Intent i = new Intent(HomeActivity.this, InboxActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.drawer_favourites_layout)
-        {
+        } else if (view.getId() == R.id.drawer_favourites_layout) {
             if (favouritesFragment == null)
                 favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
@@ -243,18 +241,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void changeIconColor(View view) {
-        LinearLayout parentLayout = (LinearLayout)view.getParent();
+        LinearLayout parentLayout = (LinearLayout) view.getParent();
         LinearLayout childLayout;
         ImageView imageView;
 
-        for (int i=1; i<parentLayout.getChildCount(); i++)
-        {
+        for (int i = 1; i < parentLayout.getChildCount(); i++) {
             childLayout = (LinearLayout) parentLayout.getChildAt(i);
             imageView = (ImageView) childLayout.getChildAt(0);
             imageView.setColorFilter(getColor(R.color.drawerIconColor));
         }
 
-        childLayout = (LinearLayout)view;
+        childLayout = (LinearLayout) view;
         imageView = (ImageView) childLayout.getChildAt(0);
         imageView.setColorFilter(getColor(R.color.goldColor));
     }
@@ -437,15 +434,14 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }
-        else if (favouritesFragment != null && favouritesFragment.isVisible()) {
+        } else if (favouritesFragment != null && favouritesFragment.isVisible()) {
             fragment = FavouritesFragment.previousFragment;
             string = FavouritesFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }else if (view == null) {
+        } else if (view == null) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
