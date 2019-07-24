@@ -3,6 +3,7 @@ package com.example.shianikha.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ public class ImageViewPagerActivity extends AppCompatActivity implements View.On
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         slideViewPager = findViewById(R.id.slideViewPager);
         sliderAdapter = new ImageSliderAdapter(context,jsonList);
+
         slideViewPager.setAdapter(sliderAdapter);
 
         loadingDialog = new LoadingDialog(this);

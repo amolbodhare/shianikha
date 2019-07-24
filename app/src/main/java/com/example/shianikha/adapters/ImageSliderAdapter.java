@@ -3,6 +3,7 @@ package com.example.shianikha.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.shianikha.commen.P;
 
 import java.util.ArrayList;
 
-public class ImageSliderAdapter extends PagerAdapter
+public class ImageSliderAdapter extends PagerAdapter implements ViewPager.PageTransformer
 {
     Context context;
     LayoutInflater layoutInflater;
@@ -66,5 +67,31 @@ public class ImageSliderAdapter extends PagerAdapter
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((RelativeLayout)object);
+    }
+
+    @Override
+    public void transformPage(@NonNull View page, float position) {
+        if (position < -1){    // [-Infinity,-1)
+            // This page is way off-screen to the left.
+            page.setAlpha(0);
+
+        }
+        else if (position <= 0) {    // [-1,0]
+            page.setAlpha(1);
+            page.setPivotX(page.getWidth());
+            page.setRotationY(-90 * Math.abs(position));
+
+        }
+        else if (position <= 1){    // (0,1]
+            page.setAlpha(1);
+            page.setPivotX(0);
+            page.setRotationY(90 * Math.abs(position));
+
+        }
+        else {    // (1,+Infinity]
+            // This page is way off-screen to the right.
+            page.setAlpha(0);
+
+        }
     }
 }
