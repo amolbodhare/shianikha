@@ -57,7 +57,8 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                     page.setPivotX(page.getWidth());
                     page.setRotationY(90*Math.abs(position));
                 }
-                else if (position <= 1){
+                else if (position <= 1)
+                {
                     page.setAlpha(1);
                     page.setPivotX(0);
                     page.setRotationY(-90*Math.abs(position));
@@ -65,7 +66,6 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                 else{
                     page.setAlpha(0);
                 }
-
 
 
                 if (Math.abs(position) <= 0.5){
@@ -77,6 +77,7 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
                 }
             }
         });
+
         slideViewPager.setAdapter(sliderAdapter);
         btn_login = findViewById(R.id.btn_login);
         btn_reg = findViewById(R.id.btn_reg);

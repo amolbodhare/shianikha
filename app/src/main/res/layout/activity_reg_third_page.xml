@@ -22,269 +22,13 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="17dp"
             android:layout_marginRight="15dp">
 
             <RelativeLayout
-                android:id="@+id/religion_spinner_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp">
-
-                <EditText
-                    android:id="@+id/religionEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Select Religion"
-                    android:paddingRight="56dp"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/Ethincity_spinner_layout"
+                android:id="@+id/education_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/religion_spinner_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/ethnicityEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="ethnicity"
-                    android:paddingRight="56dp"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/fathers_name_til"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/other_details_occu_til"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="0dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/fathers_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Fathers Name"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
-                android:id="@+id/fathers_occupation_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/fathers_name_til"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/fathersoccupationEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Fathers Occupation"
-                    android:clickable="true"
-                    android:paddingRight="56dp"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/fathers_city_spinner_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/fathers_occupation_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/fatherCityEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:clickable="true"
-                    android:hint="Father's city/country of origin"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/mothers_name_til"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fathers_city_spinner_layout"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="0dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/mothers_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Mothers Name"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
-
-            </android.support.design.widget.TextInputLayout>
-            <RelativeLayout
-                android:id="@+id/mothers_occupation_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/mothers_name_til"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/mothersoccupationEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Mothers Occupation"
-                    android:clickable="true"
-                    android:paddingRight="56dp"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/mothers_city_spinner_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/mothers_occupation_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/motherCityEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Mother's city/country of origin"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/current_occupation_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/Ethincity_spinner_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/occupationEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Current Occupation"
-                    android:clickable="true"
-                    android:paddingRight="56dp"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/other_details_occu_til"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/current_occupation_layout"
-                android:layout_marginTop="17dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/occupationDetailsEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:lines = "3"
-                    android:gravity = "top"
-                    android:hint="Other details about your occupation"
-                    android:imeOptions="actionNext"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:typeface="monospace" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
-                android:id="@+id/higest_level_edu_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/mothers_city_spinner_layout"
-                android:layout_marginTop="17dp">
+                android:layout_marginTop="50dp">
 
                 <EditText
                     android:id="@+id/educationEditText"
@@ -293,8 +37,9 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Highest level of Education"
-                    android:textSize="16sp" />
+                    android:hint="Education"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -306,18 +51,213 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/occupation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/education_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/occupationEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Occupation"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/monthly_income_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/occupation_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/monthlyIncomeEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Monthly Income"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/residennce_address_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/monthly_income_layout"
+                android:layout_marginTop="17dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Residential Address"
+                android:textSize="16dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/res_add_layout"
+                android:layout_width="match_parent"
+                android:layout_below="@id/residennce_address_tv"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/res_add_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/country_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/res_add_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/countryEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Country"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/city_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/country_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/cityEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="City"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mother_tongue_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/city_spinner_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/mothertongueEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="MotherTongue"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/language_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/mother_tongue_layout"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/languageEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Select Language"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/higest_level_edu_layout"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom = "25dp"
+                android:layout_below="@id/language_layout"
+                android:layout_marginTop="55dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
         </RelativeLayout>
 

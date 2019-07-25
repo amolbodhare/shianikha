@@ -58,8 +58,8 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
         session = new Session(this);
 
-        findViewById(R.id.marriageEditText).setOnClickListener(this);
-        findViewById(R.id.interestedInEditText).setOnClickListener(this);
+        /*findViewById(R.id.marriageEditText).setOnClickListener(this);
+        findViewById(R.id.interestedInEditText).setOnClickListener(this);*/
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
 
@@ -129,17 +129,18 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-    private void setUpCustomSpinner(final View view) {
+    private void setUpCustomSpinner(final View view)
+    {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
 
-        if (view.getId() == R.id.marriageEditText) {
+        /*if (view.getId() == R.id.marriageEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Select option");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, marriageNameList);
         } else if (view.getId() == R.id.interestedInEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Interested In");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, intrestedInNameList);
-        }
+        }*/
 
         if (arrayAdapter == null)
             return;
@@ -185,13 +186,13 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
     {
         if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
-        else if (v.getId() == R.id.button)
+        /*else if (v.getId() == R.id.button)
             makeJson();
-        else
+*/        else
             setUpCustomSpinner(v);
     }
 
-    private void makeJson()
+   /* private void makeJson()
     {
         EditText editText = findViewById(R.id.marriageEditText);
         String string = editText.getText().toString();
@@ -245,7 +246,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
         hitRegisterDetailsApi();
     }
-
+*/
     private void hitRegisterDetailsApi()
     {
         final LoadingDialog loadingDialog = new LoadingDialog(this);
