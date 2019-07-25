@@ -1,8 +1,10 @@
 package com.example.shianikha.activities;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +37,10 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -74,6 +80,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         findViewById(R.id.btn_next).setOnClickListener(this);
         findViewById(R.id.login_here).setOnClickListener(this);
+        findViewById(R.id.dateOfBirthEditText).setOnClickListener(this);
 
         extractRequiredList();
         handleGenderClickListner();
@@ -265,6 +272,45 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }
+        else if(v.getId()==R.id.dateOfBirthEditText)
+        {
+            handleDatePicker();
+        }
+    }
+
+    private void handleDatePicker() {
+
+        final Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel(myCalendar);
+            }
+
+        };
+
+        DatePickerDialog datePickerDialog =  new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setInverseBackgroundForced(false);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
+    }
+
+    private void updateLabel(Calendar calendar) {
+        String myFormat = "dd MMM yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        EditText editText = findViewById(R.id.dateOfBirthEditText);
+        editText.setText(sdf.format(calendar.getTime()));
+
+        myFormat = "yyyy-MM-dd";
+        sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editText.setTag(sdf.format(calendar.getTime()));
     }
 
     private void makeJson()
