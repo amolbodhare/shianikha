@@ -9,13 +9,16 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,30 +38,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private ArrayAdapter<String> arrayAdapter;
 
     private ArrayList<String> cityNameList, cityCodeList, stateNameList, stateCodeList, countryNameList, countryCodeList, heightList;
     private Session session;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
         setContentView(R.layout.activity_reg_second_page);
 
         session = new Session(this);
+        linearLayout = findViewById(R.id.linearLayout);
 
-        findViewById(R.id.cityEditText).setOnClickListener(this);
-        findViewById(R.id.stateEditText).setOnClickListener(this);
-        findViewById(R.id.countryEditText1).setOnClickListener(this);
-        findViewById(R.id.countryEditText2).setOnClickListener(this);
+
         findViewById(R.id.heightEditText).setOnClickListener(this);
-        findViewById(R.id.dateOfBirthEditText).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
+
+        findViewById(R.id.imageView).setOnClickListener(this);
+        ((RadioGroup) findViewById(R.id.convertedRadioGroup)).setOnCheckedChangeListener(this);
+        ((RadioGroup) findViewById(R.id.syedRadioGroup)).setOnCheckedChangeListener(this);
+        ((RadioGroup) findViewById(R.id.childrenRadioGroup)).setOnCheckedChangeListener(this);
 
         setMarginTopOfCustomSpinner();
         extractRequireList();
@@ -153,17 +159,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
 
-        if (view.getId() == R.id.cityEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search City");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
-        } else if (view.getId() == R.id.stateEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search State");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, stateNameList);
-        } else if (view.getId() == R.id.countryEditText1 || view.getId() == R.id.countryEditText2) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search Country residence");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
-        } else if (view.getId() == R.id.heightEditText)
-        {   EditText editText = findViewById(R.id.editText);
+        if (view.getId() == R.id.heightEditText) {
+            EditText editText = findViewById(R.id.editText);
             editText.setHint("Search height");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, heightList);
@@ -202,8 +199,10 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.dateOfBirthEditText)
-            handleDatePicker();
+        if (v.getId() == R.id.imageView)
+            addNewSubLayout();
+        else if (v.getId() == R.id.deleteImageView)
+            deleteLayout(v);
         else if (v.getId() == R.id.button)
             makeJson();
         else if (v.getId() == R.id.view)
@@ -212,101 +211,60 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             setUpCustomSpinner(v);
     }
 
+    private void deleteLayout(View v) {
+        Object object = v.getTag();
+        if (object!=null)
+        {
+            long l = (long)object;
+            for (int i=0; i<linearLayout.getChildCount(); i++)
+            {
+                View view = linearLayout.getChildAt(i);
+                Object o = view.getTag();
+                if (o!=null && (long)o == l) {
+                    linearLayout.removeViewAt(i);
+                    setSrNo();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void addNewSubLayout() {
+        long l = System.currentTimeMillis();
+        View view = LayoutInflater.from(this).inflate(R.layout.inflatable_children_layout, null);
+        view.setTag(l);
+
+        ImageView imageView = view.findViewById(R.id.deleteImageView);
+        imageView.setTag(l);
+        imageView.setOnClickListener(this);
+        imageView.setVisibility(View.VISIBLE);
+
+        linearLayout.addView(view);
+        setSrNo();
+    }
+
+    private void setSrNo()
+    {
+        for (int i=0; i<linearLayout.getChildCount(); i++)
+        {
+            View view = linearLayout.getChildAt(i);
+            ((TextView)view.findViewById(R.id.textView)).setText("Children "+(i+1));
+        }
+    }
+
     private void makeJson() {
         App.masterJson.addString(P.token_id, session.getString(P.tokenData));
-        H.log("tokenIs",session.getString(P.tokenData));
+        H.log("tokenIs", session.getString(P.tokenData));
 
-        EditText editText = findViewById(R.id.cityEditText);
+        EditText editText = findViewById(R.id.heightEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select city name");
-            return;
-        }
-        int i = cityNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.city, cityCodeList.get(i));
-
-        editText = findViewById(R.id.stateEditText);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select state name");
-            return;
-        }
-        i = stateNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.state, stateCodeList.get(i));
-
-        editText = findViewById(R.id.countryEditText1);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select country of residence");
-            return;
-        }
-        i = countryNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.country_res, countryCodeList.get(i));
-
-        editText = findViewById(R.id.countryEditText2);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select country of citizenship");
-            return;
-        }
-        i = countryNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.country_citizen, countryCodeList.get(i));
-
-        editText = findViewById(R.id.dateOfBirthEditText);
-        string = editText.getTag().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select date of birth");
-            return;
-        }
-        App.masterJson.addString(P.dob, string);
-
-        editText = findViewById(R.id.heightEditText);
-        string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select height");
             return;
         }
         App.masterJson.addString(P.height, string);
-        H.log("masterJsonIs",App.masterJson.toString());
-        startActivity(new Intent(this,RegThirdPageActivity.class));
-    }
-
-    private void handleDatePicker() {
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(myCalendar);
-            }
-
-        };
-
-        DatePickerDialog datePickerDialog =  new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setInverseBackgroundForced(false);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-        datePickerDialog.show();
-    }
-
-    private void updateLabel(Calendar calendar) {
-        String myFormat = "dd MMM yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        EditText editText = findViewById(R.id.dateOfBirthEditText);
-        editText.setText(sdf.format(calendar.getTime()));
-
-        myFormat = "yyyy-MM-dd";
-        sdf = new SimpleDateFormat(myFormat, Locale.US);
-        editText.setTag(sdf.format(calendar.getTime()));
+        H.log("masterJsonIs", App.masterJson.toString());
+        startActivity(new Intent(this, RegThirdPageActivity.class));
     }
 
     private void setMarginTopOfCustomSpinner() {
@@ -318,4 +276,18 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         linearLayout.setLayoutParams(layoutParams);
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        int viewId = radioGroup.getId();
+        if (viewId == R.id.convertedRadioGroup) {
+
+        } else if (viewId == R.id.syedRadioGroup) {
+
+        } else if (viewId == R.id.childrenRadioGroup) {
+            if (radioGroup.getCheckedRadioButtonId() == R.id.yesChildren)
+                findViewById(R.id.relativeLayout).setVisibility(View.VISIBLE);
+            else
+                findViewById(R.id.relativeLayout).setVisibility(View.GONE);
+        }
+    }
 }

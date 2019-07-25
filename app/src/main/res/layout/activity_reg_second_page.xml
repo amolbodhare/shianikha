@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,27 +15,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/city_of_residence_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="50dp">
 
                 <EditText
-                    android:id="@+id/cityEditText"
+                    android:id="@+id/complexionEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="City of Residence"
+                    android:hint="Complexion"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -51,115 +49,16 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/state_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/city_of_residence_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/stateEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="State/Province/Country"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/country_of_residence_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/state_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/countryEditText1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Country of Residence"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/country_of_citizenship_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/country_of_residence_layout"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/countryEditText2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Country of Citizenship"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/dateOfBirthEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/country_of_citizenship_layout"
-                android:layout_marginTop="17dp"
-                android:clickable="true"
-                android:tag=""
-                android:focusable="false"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Date of Birth"
-                android:textSize="16dp" />
-
-            <RelativeLayout
-                android:id="@+id/height_spinner_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/dateOfBirthEditText"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/heightEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Height"
                     android:paddingRight="56dp"
@@ -175,20 +74,286 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/bodyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Body Type"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/shiaCommunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Select Shia Community"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/otherShiaEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Type Other Shia Community"
+                    android:tag=""
+                    android:textSize="16dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/islam_convert_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Did you convert to Islam?"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/convertedRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/islam_convert_tv"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/yesConverted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/notConverted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/syed_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Are you a Syed?"
+                android:textSize="16dp" />
+
+            <RadioGroup
+                android:id="@+id/syedRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/syed_tv"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/yesSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/notSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+                <RadioButton
+                    android:id="@+id/donnKnowSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Don't know" />
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/maritalStatusEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Marital Status"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Children, if any"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/childrenRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2.5">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5" />
+
+                    <RadioButton
+                        android:id="@+id/yesChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Details of Child/Children"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/inflatable_children_layout" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/linearLayout"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="-25dp"
+                    android:background="@drawable/circlenoti"
+                    android:backgroundTint="@color/bluebtnback"
+                    android:clickable="true"
+                    android:elevation="6dp"
+                    android:padding="13dp"
+                    android:src="@drawable/ic_add"
+                    android:tint="@color/white" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/height_spinner_layout"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 
