@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +67,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         context = getContext();
         //loadingDialog = new LoadingDialog(context);
-        if (fragmentView == null) {
+        if (fragmentView == null)
+        {
             fragmentView = inflater.inflate(R.layout.fragment_account_settings, null, false);
 
             edit_password_tv_btn = fragmentView.findViewById(R.id.edit_password_tv_btn);
@@ -88,6 +92,41 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
             email_address_exp_layout.setOnClickListener(this);
             change_password_exp_layout.setOnClickListener(this);
+
+           /* change_password_edt.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                    if(keyCode == KeyEvent.KEYCODE_DEL) {
+                        //this is for backspace
+                    }
+                    return false;
+                }
+            });*/
+
+            change_password_edt.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    //change_password_edt.requestFocus();
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    change_password_edt.requestFocus();
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if(change_password_edt.getText().toString().length()==1)
+                    {
+
+                        change_password_edt.requestFocus();
+                        //write your code here
+                    }
+                }
+            });
 
             /*listAdapter=new ListAdapter();
             ListView listView = fragmentView.findViewById(R.id.notificationList);
@@ -143,15 +182,26 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         if (v.getId() == R.id.edit_password_tv_btn) {
 
-            if (((TextView) v).getText().equals("Edit")) {
+            if (((TextView) v).getText().equals("Edit"))
+            {
                 ((TextView) v).setText("Save");
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(
+                        v.getApplicationWindowToken(),
+                        InputMethodManager.SHOW_FORCED, 0);
+
                 change_password_edt.setEnabled(true);
                 change_password_edt.requestFocus();
                 change_password_edt.setSelection(change_password_edt.getText().length());
-            } else {
+            }
+
+            else
+                {
                 //((TextView)v).setText("edit");
                 //Toast.makeText(context, "hh", Toast.LENGTH_SHORT).show();
-                if (change_password_edt.getText().length() == 0) {
+                if (change_password_edt.getText().length() == 0)
+                {
                     //we have to use setError here
                     Toast.makeText(context, "Empty password not allowed", Toast.LENGTH_SHORT).show();
 
@@ -161,8 +211,11 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                             v.getApplicationWindowToken(),
                             InputMethodManager.SHOW_FORCED, 0);
                     change_password_edt.requestFocus();
+                    change_password_edt.setCursorVisible(true);
 
-                } else {
+                }
+                else
+                    {
 
                     change_password_edt.setEnabled(false);
                     ((TextView) v).setText("Edit");
