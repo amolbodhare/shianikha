@@ -49,8 +49,8 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         session = new Session(this);
 
         findViewById(R.id.languageEditText).setOnClickListener(this);
-        findViewById(R.id.smokingEditText).setOnClickListener(this);
-        findViewById(R.id.relocateEditText).setOnClickListener(this);
+        //findViewById(R.id.smokingEditText).setOnClickListener(this);
+        //findViewById(R.id.relocateEditText).setOnClickListener(this);
         findViewById(R.id.yesChildren).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
@@ -135,7 +135,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
             ((EditText)findViewById(R.id.editText)).setHint("Search language");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,languageNameList);
         }
-        else if (view.getId() == R.id.smokingEditText)
+        /*else if (view.getId() == R.id.smokingEditText)
         {
             ((EditText)findViewById(R.id.editText)).setHint("Smoking status");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,smokingNameList);
@@ -145,7 +145,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         {
             ((EditText)findViewById(R.id.editText)).setHint("Relocation opinion");
             arrayAdapter = new ArrayAdapter<>(this,R.layout.text_view,R.id.textView,relocateNameList);
-        }
+        }*/
 
         if (arrayAdapter == null)
             return;
@@ -204,7 +204,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         if (i != -1)
             App.masterJson.addString(P.language, languageCodeList.get(i));
 
-        editText = findViewById(R.id.smokingEditText);
+        /*editText = findViewById(R.id.smokingEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select smoking status");
@@ -224,7 +224,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         }
         i = relocateNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.relocate_id, relocateCodeList.get(i));
+            App.masterJson.addString(P.relocate_id, relocateCodeList.get(i));*/
 
         i = ((RadioGroup)findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId();
         if (i == R.id.yesConverted)

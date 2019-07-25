@@ -16,84 +16,71 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activities.EditProfileActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.ReplyMessageActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.InboxMessageActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.ImageViewerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.ImageViewPagerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.InboxActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.PartnerPreferenceActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.SubscriptionActivity"
-            android:screenOrientation="portrait"/>
-
+        <activity android:name=".activities.RegSeventhPageActivity"></activity>
+        <activity
+            android:name=".activities.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ReplyMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.InboxMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ImageViewerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ImageViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.InboxActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PartnerPreferenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SubscriptionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RefineSearchItemActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
-
         <activity
             android:name=".activities.FilterActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.OTPVerificationActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegSixthPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegFifthPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegFourthPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegThirdPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegSecondPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.RegistrationActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.WalkThroughActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -101,7 +88,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
