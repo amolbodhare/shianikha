@@ -200,7 +200,7 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/mothertongueEditText"
+                    android:id="@+id/motherTongueEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
@@ -219,6 +219,7 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/language_layout"
                 android:layout_width="match_parent"

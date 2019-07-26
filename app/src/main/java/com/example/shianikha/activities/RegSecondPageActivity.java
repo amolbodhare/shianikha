@@ -42,7 +42,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
     private ArrayAdapter<String> arrayAdapter;
 
-    private ArrayList<String> cityNameList, cityCodeList, stateNameList, stateCodeList, countryNameList, countryCodeList, heightList;
+    private ArrayList<String> heightList, maritalStatusNameList, maritalStatusIdList;
     private Session session;
     private LinearLayout linearLayout;
 
@@ -58,6 +58,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
 
         findViewById(R.id.heightEditText).setOnClickListener(this);
+        findViewById(R.id.maritalStatusEditText).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
 
@@ -73,53 +74,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     private void extractRequireList() {
         JsonList jsonList;
 
-        //for city
-        String string = session.getString(P.city);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            cityNameList = new ArrayList<>();
-            cityCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.city_name);
-                cityNameList.add(string);
-
-                string = j.getString(P.city_id);
-                cityCodeList.add(string);
-            }
-        }
-
-        //for state
-        string = session.getString(P.state);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            stateNameList = new ArrayList<>();
-            stateCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.state_name);
-                stateNameList.add(string);
-
-                string = j.getString(P.state_id);
-                stateCodeList.add(string);
-            }
-        }
-
-        //for country
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            countryNameList = new ArrayList<>();
-            countryCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                countryNameList.add(string);
-
-                string = j.getString(P.id);
-                countryCodeList.add(string);
-            }
-        }
-
         //for height
-        string = session.getString(P.height);
+        String string = session.getString(P.height);
         if (string != null) {
             try {
                 JSONArray jsonArray = new JSONArray(string);
@@ -131,6 +87,21 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+        }
+
+        //  fro marital status
+        string = session.getString(P.marital_status);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            maritalStatusNameList = new ArrayList<>();
+            maritalStatusIdList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                maritalStatusNameList.add(string);
+
+                string = j.getString(P.id);
+                maritalStatusIdList.add(string);
             }
         }
 
@@ -158,12 +129,17 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
+        EditText editText = findViewById(R.id.editText);
 
         if (view.getId() == R.id.heightEditText) {
-            EditText editText = findViewById(R.id.editText);
             editText.setHint("Search height");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, heightList);
+        }
+        else if (view.getId() == R.id.maritalStatusEditText)
+        {
+            editText.setHint("Search marital status");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, maritalStatusNameList);
         }
 
         if (arrayAdapter == null)
@@ -204,7 +180,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         else if (v.getId() == R.id.deleteImageView)
             deleteLayout(v);
         else if (v.getId() == R.id.button)
-            makeJson();
+            startActivity(new Intent(this, RegThirdPageActivity.class));
+            //makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
         else
@@ -213,14 +190,12 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
     private void deleteLayout(View v) {
         Object object = v.getTag();
-        if (object!=null)
-        {
-            long l = (long)object;
-            for (int i=0; i<linearLayout.getChildCount(); i++)
-            {
+        if (object != null) {
+            long l = (long) object;
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
                 View view = linearLayout.getChildAt(i);
                 Object o = view.getTag();
-                if (o!=null && (long)o == l) {
+                if (o != null && (long) o == l) {
                     linearLayout.removeViewAt(i);
                     setSrNo();
                     break;
@@ -243,12 +218,10 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         setSrNo();
     }
 
-    private void setSrNo()
-    {
-        for (int i=0; i<linearLayout.getChildCount(); i++)
-        {
+    private void setSrNo() {
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
             View view = linearLayout.getChildAt(i);
-            ((TextView)view.findViewById(R.id.textView)).setText("Children "+(i+1));
+            ((TextView) view.findViewById(R.id.textView)).setText("Children " + (i + 1));
         }
     }
 

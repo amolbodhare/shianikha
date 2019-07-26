@@ -41,7 +41,8 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
     private ArrayAdapter<String> arrayAdapter;
     private Session session;
-    private ArrayList<String> marriageNameList, marriageCodeList, intrestedInNameList, intrestedInCodeList;
+    private ArrayList<String> cityNameList, cityIdList, stateNameList, stateIdList, countryNameList, countryIdList, ethnicityNameList,
+            ethnicityIdList, occupationNameList, occupationIdList, educationNameList, educationIdList, smokingNameList, smokingIdList;
     private String lat= "",longs = "";
 
     @Override
@@ -53,11 +54,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
         session = new Session(this);
 
-        /*findViewById(R.id.marriageEditText).setOnClickListener(this);
-        findViewById(R.id.interestedInEditText).setOnClickListener(this);*/
-        findViewById(R.id.button).setOnClickListener(this);
-        findViewById(R.id.view).setOnClickListener(this);
-
+        setRequiredOnClickListener();
         setMarginTopOfCustomSpinner();
         extractRequireList();
 
@@ -71,37 +68,68 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             Log.e("permission_status", "not granted");
     }
 
+    private void setRequiredOnClickListener() {
+        findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.view).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.cityOfResidenceEditText).setOnClickListener(this);
+        findViewById(R.id.stateEditText).setOnClickListener(this);
+        findViewById(R.id.countryOfResidenceEditText).setOnClickListener(this);
+        findViewById(R.id.countryOfCitizenshipEditText).setOnClickListener(this);
+        findViewById(R.id.ethnicityEditText).setOnClickListener(this);
+        findViewById(R.id.fathersCountryEditText).setOnClickListener(this);
+        findViewById(R.id.mothersCountryEditText).setOnClickListener(this);
+        findViewById(R.id.currentOccupationEditText).setOnClickListener(this);
+        findViewById(R.id.highestLevelEduEditText).setOnClickListener(this);
+        findViewById(R.id.smokingEditText).setOnClickListener(this);
+    }
+
     private void extractRequireList()
     {
         JsonList jsonList;
 
-        //for language
-        String string = session.getString(P.seeking_marriage);
+        //for city
+        String string = session.getString(P.city);
         if (string != null) {
             jsonList = new JsonList(string);
-            marriageNameList = new ArrayList<>();
-            marriageCodeList = new ArrayList<>();
+            cityNameList = new ArrayList<>();
+            cityIdList = new ArrayList<>();
             for (Json j : jsonList) {
-                string = j.getString(P.val);
-                marriageNameList.add(string);
+                string = j.getString(P.city_name);
+                cityNameList.add(string);
 
-                string = j.getString(P.id);
-                marriageCodeList.add(string);
+                string = j.getString(P.city_id);
+                cityIdList.add(string);
             }
         }
 
         //for smoking
-        string = session.getString(P.intreasted_in);
+        string = session.getString(P.smoking);
         if (string != null) {
             jsonList = new JsonList(string);
-            intrestedInCodeList = new ArrayList<>();
-            intrestedInNameList = new ArrayList<>();
+            smokingNameList = new ArrayList<>();
+            smokingIdList = new ArrayList<>();
             for (Json j : jsonList) {
-                string = j.getString(P.name);
-                intrestedInNameList.add(string);
+                string = j.getString(P.val);
+                smokingNameList.add(string);
 
                 string = j.getString(P.id);
-                intrestedInCodeList.add(string);
+                smokingIdList.add(string);
+            }
+        }
+
+        //for relocate
+        string = session.getString(P.relocate);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            relocateNameList = new ArrayList<>();
+            relocateCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                relocateNameList.add(string);
+
+                string = j.getString(P.id);
+                relocateCodeList.add(string);
             }
         }
 
@@ -128,14 +156,6 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
     {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
-
-        /*if (view.getId() == R.id.marriageEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Select option");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, marriageNameList);
-        } else if (view.getId() == R.id.interestedInEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Interested In");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, intrestedInNameList);
-        }*/
 
         if (arrayAdapter == null)
             return;
@@ -181,36 +201,17 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
     {
         if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
-        /*else if (v.getId() == R.id.button)
-            makeJson();
-*/        else
+        else if (v.getId() == R.id.button)
+            startActivity(new Intent(this,RegSixthPageActivity.class));
+            //makeJson();
+        else
             setUpCustomSpinner(v);
     }
 
-   /* private void makeJson()
+    private void makeJson()
     {
-        EditText editText = findViewById(R.id.marriageEditText);
+        EditText editText = findViewById(R.id.descriptionOneEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select marriage option");
-            return;
-        }
-        int i = marriageNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.seeking_marriage, marriageCodeList.get(i));
-
-        editText = findViewById(R.id.interestedInEditText);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select your interest");
-            return;
-        }
-        i = intrestedInNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.intreasted_in, intrestedInCodeList.get(i));
-
-        editText = findViewById(R.id.descriptionOneEditText);
-        string = editText.getText().toString();
         if (string.isEmpty())
         {
             H.showMessage(this,"Please enter level of religion practice");
@@ -241,7 +242,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
         hitRegisterDetailsApi();
     }
-*/
+
     private void hitRegisterDetailsApi()
     {
         final LoadingDialog loadingDialog = new LoadingDialog(this);
