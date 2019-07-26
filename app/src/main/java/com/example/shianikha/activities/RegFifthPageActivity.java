@@ -16,12 +16,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.Api;
@@ -36,10 +34,7 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RegFifthPageActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
@@ -278,7 +273,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                         if (json.getInt(P.status) == 1)
                         {
                             new Session(RegFifthPageActivity.this).addInt(P.full_register, 1);
-                            Intent intent = new Intent(RegFifthPageActivity.this, RegSixthPageActivity.class);
+                            Intent intent = new Intent(RegFifthPageActivity.this, PerfectMatchActivity.class);
                             startActivity(intent);
                         } else
                             H.showMessage(RegFifthPageActivity.this, json.getString(P.msg));

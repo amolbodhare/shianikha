@@ -265,8 +265,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v)
     {
-        if (v.getId() == R.id.btn_next)
+        if (v.getId() == R.id.btn_next) {
             makeJson();
+            /*Intent intent = new Intent(RegistrationActivity.this, PerfectMatchActivity.class);
+            startActivity(intent);*/
+        }
         else if(v.getId() == R.id.login_here)
         {
             Intent intent = new Intent(this,LoginActivity.class);

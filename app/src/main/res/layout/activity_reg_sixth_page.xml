@@ -1,330 +1,332 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".activities.RegSixthPageActivity">
-
-<ImageView
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scaleType="fitXY"
-    android:src="@drawable/aaaaaa" />
+    tools:context=".activities.RegSixthPageActivity">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="17dp"
-    android:scrollbars="none">
-
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:orientation="vertical">
+        android:scaleType="fitXY"
+        android:src="@drawable/aaaaaa" />
 
-        <!--<TextView
-            android:id="@+id/pref_match_tv_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="12dp"
-            android:text="Perferred Match"
-            android:textStyle="bold" />-->
-
-        <TextView
-            android:id="@+id/pref_match_tv_big"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Preferred Match"
-            android:textColor="@color/textpurle"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/und_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pref_match_tv_big">
-
-            <View
-                android:id="@+id/und_view"
-                android:layout_width="40dp"
-                android:layout_height="3dp"
-                android:background="@color/colorAccent" />
-
-            <View
-                android:layout_width="5dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/title"
-                android:layout_marginLeft="5dp"
-                android:background="@color/colorAccent" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/und_layout"
-            android:layout_marginTop="17dp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text="Preferred Age range"
-            android:textSize="16sp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView"
-            android:layout_marginTop="17dp"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Min Age"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingLeft="20dp"
-                android:text="Max Age"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/age_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayout"
-            android:weightSum="10">
-
-            <RelativeLayout
-                android:id="@+id/min_age_spinner_layout"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="4.5">
-
-                <EditText
-                    android:id="@+id/minAgeEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:hint="Min age"
-                    android:textSize="15sp"
-                    android:paddingRight="56dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1" />
-
-            <RelativeLayout
-                android:id="@+id/max_age_spinner_layout"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="4.5">
-
-                <EditText
-                    android:id="@+id/maxAgeEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:hint="Max age"
-                    android:textSize="15sp"
-                    android:paddingRight="56dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/pref_match_marital_status_spinner_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_below="@id/age_layout">
-
-            <EditText
-                android:id="@+id/maritalStatusEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Marital status"
-                android:paddingRight="56dp"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/pref_match_ethnicity_spinner_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_below="@id/pref_match_marital_status_spinner_layout"
-            android:layout_marginTop="17dp">
-
-            <EditText
-                android:id="@+id/ethnicityEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="ethnicity"
-                android:paddingRight="56dp"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/pref_match_min_education_spinner_layout"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_below="@id/pref_match_ethnicity_spinner_layout"
-            android:layout_marginTop="17dp">
-
-            <EditText
-                android:id="@+id/educationEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Minimum education"
-                android:paddingRight="56dp"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
-
-        </RelativeLayout>
-
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pref_match_min_education_spinner_layout"
-            android:buttonTint="#5C5CFE"
-            android:layout_marginTop="30dp"
-            android:checked="true"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Email me request from every one"
-            android:textSize="13sp" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:buttonTint="#5C5CFE"
-            android:checked="true"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_below="@id/checkBox1"
-            android:text="Email me request from Preferred matches only"
-            android:textSize="13sp" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:buttonTint="#5C5CFE"
-            android:layout_below="@+id/checkBox2"
-            android:checked="true"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="top"
-            android:text="check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is ttrue to your best of your knowledge,\n(2) you agree to our Terms of use and \n(3) you are atleast 18 years of age "
-            android:textSize="13sp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="25dp"
-            android:background="@drawable/blue_button_back"
-            android:layout_below="@+id/checkBox3"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Submit"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-    </RelativeLayout>
-
-</ScrollView>
-
-<LinearLayout
-    android:id="@+id/includeContainer"
-    android:layout_width="300dp"
-    android:layout_height="match_parent"
-    android:layout_alignParentRight="true"
-    android:elevation="7dp"
-    android:translationX="300dp">
-
-    <include
-        layout="@layout/custom_spinner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="17dp"
+        android:scrollbars="none">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-<View
-    android:id="@+id/view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#60000000"
-    android:visibility="gone" />
+            <RelativeLayout
+                android:id="@+id/relocate_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:id="@+id/relocate_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Willing to Relocate"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/seeking_marriage_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/seeking_marriage_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:hint="you are seeking marriage"
+                    android:paddingRight="56dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="What common interests do you currently have?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/boardGames"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#707070"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Board Games" />
+
+                <CheckBox
+                    android:id="@+id/cooking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Cooking" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/camping"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Camping/Outdoors" />
+
+                <CheckBox
+                    android:id="@+id/music"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Music" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/currentEvent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Current Events" />
+
+                <CheckBox
+                    android:id="@+id/diningOut"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Dining Out" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/financialMarket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Financial Markets" />
+
+                <CheckBox
+                    android:id="@+id/volunteering"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Volunteering" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/fishing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:textColor="#707070"
+                    android:text="Fishing/Hunting" />
+
+                <CheckBox
+                    android:id="@+id/readingBooks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Reading Books" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/watchingSports"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Watching Sports" />
+
+                <CheckBox
+                    android:id="@+id/styleAndFashion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Style \u0026 fashion" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/playingSports"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Playing Sports" />
+
+                <CheckBox
+                    android:id="@+id/politicalInterest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Political Interest" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@id/more_about_you_ed"
+                android:layout_marginTop="45dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/blue_button_back"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone" />
 
 </RelativeLayout>
