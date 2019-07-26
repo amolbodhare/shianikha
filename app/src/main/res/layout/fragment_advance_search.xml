@@ -29,8 +29,9 @@
 
             <RadioGroup
                 android:id="@+id/looking_for_rdg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="3"
                 android:layout_below="@id/looking_for_tv"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="5dp"
@@ -39,7 +40,8 @@
 
                 <RadioButton
                     android:id="@+id/rdb_bride"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/bluebtnback"
                     android:checked="true"
@@ -47,8 +49,10 @@
 
                 <RadioButton
                     android:id="@+id/rdb_groom"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/bluebtnback"
                     android:text="Groom" />
 
             </RadioGroup>
@@ -87,6 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true" />
+
                 </RelativeLayout>
 
                 <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
@@ -94,12 +99,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:bar_highlight_color="@color/seekbar_color"
-                    app:left_thumb_color="@color/seekbar_color"
+                    app:bar_highlight_color="@color/bluebtnback"
+                    app:left_thumb_color="@color/bluebtnback"
                     app:max_value="30"
                     app:min_start_value="20"
                     app:min_value="18"
-                    app:right_thumb_color="@color/seekbar_color" />
+                    android:buttonTint="@color/bluebtnback" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -133,12 +138,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:bar_highlight_color="@color/seekbar_color"
-                    app:left_thumb_color="@color/seekbar_color"
-                    app:max_value="30"
-                    app:min_start_value="20"
-                    app:min_value="3"
-                    app:right_thumb_color="@color/seekbar_color" />
+                    app:bar_highlight_color="@color/bluebtnback"
+                    app:left_thumb_color="@color/bluebtnback"
+                    app:max_value="96"
+                    app:min_start_value="48"
+                    app:min_value="36"
+                    app:right_thumb_color="@color/bluebtnback" />
             </LinearLayout>
 
 

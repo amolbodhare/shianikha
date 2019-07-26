@@ -54,7 +54,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
         session = new Session(this);
 
-        setRequiredOnClickListener();
+        //setRequiredOnClickListener();
         setMarginTopOfCustomSpinner();
         extractRequireList();
 
@@ -72,14 +72,14 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
-        findViewById(R.id.cityOfResidenceEditText).setOnClickListener(this);
-        findViewById(R.id.stateEditText).setOnClickListener(this);
-        findViewById(R.id.countryOfResidenceEditText).setOnClickListener(this);
-        findViewById(R.id.countryOfCitizenshipEditText).setOnClickListener(this);
+        //findViewById(R.id.cityOfResidenceEditText).setOnClickListener(this);
+        //findViewById(R.id.stateEditText).setOnClickListener(this);
+        //findViewById(R.id.countryOfResidenceEditText).setOnClickListener(this);
+        //findViewById(R.id.countryOfCitizenshipEditText).setOnClickListener(this);
         findViewById(R.id.ethnicityEditText).setOnClickListener(this);
         findViewById(R.id.fathersCountryEditText).setOnClickListener(this);
         findViewById(R.id.mothersCountryEditText).setOnClickListener(this);
-        findViewById(R.id.currentOccupationEditText).setOnClickListener(this);
+        //findViewById(R.id.currentOccupationEditText).setOnClickListener(this);
         findViewById(R.id.highestLevelEduEditText).setOnClickListener(this);
         findViewById(R.id.smokingEditText).setOnClickListener(this);
     }
@@ -119,7 +119,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         }
 
         //for relocate
-        string = session.getString(P.relocate);
+        /*string = session.getString(P.relocate);
         if (string != null) {
             jsonList = new JsonList(string);
             relocateNameList = new ArrayList<>();
@@ -131,7 +131,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                 string = j.getString(P.id);
                 relocateCodeList.add(string);
             }
-        }
+        }*/
 
         setUpTextWatcher();
     }
