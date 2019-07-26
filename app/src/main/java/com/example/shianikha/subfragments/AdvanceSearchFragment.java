@@ -27,16 +27,6 @@ public class AdvanceSearchFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     LinearLayout parent_layout;
     View view;
-
-    CardView location_grew_up_exp_card_layout;
-    CardView education_pro_details_card_layout;
-    CardView lifestyle_and_appearence_card_layout;
-    CardView search_using_keywords_card_layout;
-
-    ExpandableRelativeLayout location_grew_up_exp_layout;
-    ExpandableRelativeLayout education_and_pro_exp_layout;
-    ExpandableRelativeLayout lifestyle_and_appearence_exp_layout;
-    ExpandableRelativeLayout search_using_keywords_exp_layout;
     Context context;
 
 
@@ -105,50 +95,6 @@ public class AdvanceSearchFragment extends Fragment {
                 Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
             }
         });
-
-        location_grew_up_exp_card_layout=view.findViewById(R.id.loc_grew_up_details_card_layout);
-        education_pro_details_card_layout=view.findViewById(R.id.edu_pro_details_card_layout);
-        lifestyle_and_appearence_card_layout=view.findViewById(R.id.lifestyle_and_appearence_card_layout);
-        search_using_keywords_card_layout=view.findViewById(R.id.search_using_keywords_card_layout);
-
-        location_grew_up_exp_layout=view.findViewById(R.id.location_grew_up_exp_layout);
-        education_and_pro_exp_layout=view.findViewById(R.id.education_and_pro_exp_layout);
-        lifestyle_and_appearence_exp_layout=view.findViewById(R.id.lifestyle_and_appearence_exp_layout);
-        search_using_keywords_exp_layout=view.findViewById(R.id.search_using_keywords_exp_layout);
-
-
-       location_grew_up_exp_layout.collapse();
-       education_and_pro_exp_layout.collapse();
-       lifestyle_and_appearence_exp_layout.collapse();
-       search_using_keywords_exp_layout.collapse();
-
-       location_grew_up_exp_card_layout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               //Toast.makeText(getActivity(), "jkgjjh", Toast.LENGTH_SHORT).show();
-               location_grew_up_exp_layout.toggle();
-           }
-       });
-
-       education_pro_details_card_layout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               education_and_pro_exp_layout.toggle();
-           }
-       });
-       lifestyle_and_appearence_card_layout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               lifestyle_and_appearence_exp_layout.toggle();
-           }
-       });
-
-       search_using_keywords_card_layout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               search_using_keywords_exp_layout.toggle();
-           }
-       });
 
 
        return view;

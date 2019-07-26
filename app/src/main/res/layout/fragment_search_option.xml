@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:alpha="0.5"
-                android:text="Religion" />
+                android:text="Select Shia Community" />
 
             <RelativeLayout
                 android:id="@+id/religion_layout"
@@ -154,39 +154,7 @@
                     android:layout_height="match_parent"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Hindu"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:alpha="0.5"
-                android:text="Community" />
-
-            <RelativeLayout
-                android:id="@+id/community_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp">
-
-                <EditText
-                    android:id="@+id/community_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Kunbi"
+                    android:hint="Khoja Shia Ishnasari"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -332,37 +300,6 @@
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Mumbai"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:alpha="0.5"
-                android:text="Photo Setting" />
-
-            <RelativeLayout
-                android:id="@+id/photo_setting_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp">
-
-                <EditText
-                    android:id="@+id/photo_setting_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Doesn't Matter"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 

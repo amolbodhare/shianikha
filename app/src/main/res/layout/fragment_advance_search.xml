@@ -13,7 +13,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/looking_for_tv"
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/looking_for_tv"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="17dp"
                 android:orientation="horizontal">
 
@@ -40,6 +41,7 @@
                     android:id="@+id/rdb_bride"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/bluebtnback"
                     android:checked="true"
                     android:text="Bride" />
 
@@ -188,7 +190,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp"
-                android:text="Religion" />
+                android:text="Select Shia Community" />
 
             <RelativeLayout
                 android:id="@+id/religion_layout"
@@ -204,7 +206,7 @@
                     android:layout_height="match_parent"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Hindu"
+                    android:hint="Khoja Shia Ishnashri"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -218,60 +220,26 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/community_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/religion_layout"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginRight="17dp"
-                android:text="Community" />
 
-            <RelativeLayout
-                android:id="@+id/community_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/community_tv"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp">
-
-                <EditText
-                    android:id="@+id/community_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Community"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
 
 
             <TextView
                 android:id="@+id/mothertongue_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/community_layout"
+                android:layout_below="@id/religion_layout"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp"
+                android:layout_marginTop="17dp"
                 android:text="Mother Tongue" />
 
             <RelativeLayout
                 android:id="@+id/mother_tongue_layout"
                 android:layout_width="match_parent"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+
                 android:layout_height="56dp"
                 android:layout_below="@id/mothertongue_tv">
 
@@ -279,11 +247,47 @@
                     android:id="@+id/mother_tongue_ed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="17dp"
+                                        android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Hindi"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/country_living_in_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mother_tongue_layout"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:text="Country Living in" />
+
+            <RelativeLayout
+                android:id="@+id/country_living_in_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/country_living_in_tv">
+
+                <EditText
+                    android:id="@+id/country_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Doesn't matter"
+                    android:hint="India"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -297,909 +301,736 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/loc_grew_up_details_card_layout"
+            <TextView
+                android:id="@+id/state_living_in_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/country_living_in_layout"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:text="State Living In" />
+
+            <RelativeLayout
+                android:id="@+id/state_layout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/mother_tongue_layout"
-                android:layout_marginTop="20dp"
-                android:background="@color/profile_details_grey"
-                android:elevation="2dp">
+                android:layout_height="56dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/state_living_in_tv">
 
-                <RelativeLayout
+                <EditText
+                    android:id="@+id/state_ed"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Maharashtra"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp">
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
 
-                    <TextView
+            </RelativeLayout>
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Location and Grew up in Detais"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
+            <TextView
+                android:id="@+id/city_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/state_layout"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="17dp"
+                android:text="City/District" />
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_add" />
-                </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/city_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/city_tv">
 
-            </android.support.v7.widget.CardView>
+                <EditText
+                    android:id="@+id/city_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Maharashtra"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
 
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/location_grew_up_exp_layout"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/ethincity_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/loc_grew_up_details_card_layout"
-                android:layout_marginTop="17dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                app:ael_duration="300"
-                app:ael_expanded="false"
-                app:ael_interpolator="accelerateDecelerate"
-                app:ael_orientation="vertical">
-
-                <TextView
-                    android:id="@+id/country_living_in_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/location_grew_up_exp_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Country Living in" />
-
-                <RelativeLayout
-                    android:id="@+id/country_living_in_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/country_living_in_tv">
-
-                    <EditText
-                        android:id="@+id/country_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="India"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/state_living_in_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/country_living_in_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="State Living In" />
-
-                <RelativeLayout
-                    android:id="@+id/state_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/state_living_in_tv">
-
-                    <EditText
-                        android:id="@+id/state_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Maharashtra"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/city_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/state_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="City/District" />
-
-                <RelativeLayout
-                    android:id="@+id/city_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/city_tv">
-
-                    <EditText
-                        android:id="@+id/city_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Maharashtra"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/residency_status_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/city_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Residency Status" />
-
-                <RelativeLayout
-                    android:id="@+id/residency_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/residency_status_tv">
-
-                    <EditText
-                        android:id="@+id/residency_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/country_grew_up_in_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/residency_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Country Grew up in" />
-
-                <RelativeLayout
-                    android:id="@+id/country_grew_up_in_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/country_grew_up_in_tv">
-
-                    <EditText
-                        android:id="@+id/country_grew_up_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/edu_pro_details_card_layout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/location_grew_up_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/profile_details_grey"
-                android:elevation="2dp">
+                android:layout_below="@id/city_layout"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Ethnicity"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp">
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Education and Profession Details"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_add" />
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/education_and_pro_exp_layout"
+            <LinearLayout
+                android:id="@+id/ethincity_checkbox_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edu_pro_details_card_layout"
-                android:layout_marginTop="17dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                app:ael_duration="300"
-                app:ael_expanded="false"
-                app:ael_interpolator="accelerateDecelerate"
-                app:ael_orientation="vertical">
-
-                <TextView
-                    android:id="@+id/education_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/location_grew_up_exp_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Education" />
-
-                <RelativeLayout
-                    android:id="@+id/education_layout"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/ethincity_tv"
+                android:layout_height="wrap_content">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/education_tv">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/education_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
+                    <CheckBox
+                        android:id="@+id/arab_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#707070"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/education_area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/education_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Education Area" />
-
-                <RelativeLayout
-                    android:id="@+id/edu_area_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/education_area">
-
-                    <EditText
-                        android:id="@+id/edu_area_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/working_with_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/edu_area_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="City/District" />
-
-                <RelativeLayout
-                    android:id="@+id/working_with_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/working_with_tv">
-
-                    <EditText
-                        android:id="@+id/working_with_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/profession_area_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/working_with_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Profession Area" />
-
-                <RelativeLayout
-                    android:id="@+id/pro_area_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/profession_area_tv">
-
-                    <EditText
-                        android:id="@+id/pro_area_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="Doesn't matter"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/annual_income_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/pro_area_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="Annual Income" />
-
-                <RadioGroup
-                    android:id="@+id/annual_income_rdg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/annual_income_tv"
-                    android:layout_marginTop="17dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_doesnt_matter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Doesn't matter"
-                        android:textSize="15dp" />
+                        android:text="Arab" />
 
-                    <RadioButton
-                        android:id="@+id/rb_slect_an_income_range"
-                        android:layout_width="wrap_content"
+                    <CheckBox
+                        android:id="@+id/african_cb"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Select an income range"
-                        android:textSize="15dp" />
+                        android:textColor="#707070"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="African" />
 
-                </RadioGroup>
+                    <CheckBox
+                        android:id="@+id/asian_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#707070"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Asian" />
 
+                </LinearLayout>
 
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/lifestyle_and_appearence_card_layout"
+                    <CheckBox
+                        android:id="@+id/caucasian_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#707070"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Caucasian" />
+
+                    <CheckBox
+                        android:id="@+id/hispanic_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#707070"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Hispanic" />
+
+                    <CheckBox
+                        android:id="@+id/persian_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#707070"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Persian" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/southAsian_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#707070"
+                        android:layout_weight="1"
+                        android:buttonTint="#5C5CFE"
+                        android:text="South Asian - Indian" />
+
+                    <CheckBox
+                        android:id="@+id/mixedRace_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#707070"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Mixed Race" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/southAsia_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="#707070"
+                        android:layout_weight="1.2"
+                        android:buttonTint="#5C5CFE"
+                        android:text="South Asian - Pakistani" />
+
+                    <CheckBox
+                        android:id="@+id/other_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:textColor="#707070"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="Other" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/education_tv"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/education_and_pro_exp_layout"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/profile_details_grey"
-                android:elevation="2dp">
+                android:layout_below="@id/ethincity_checkbox_layout"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Education"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp">
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Lifestyle and Appearence"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_add" />
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/lifestyle_and_appearence_exp_layout"
+            <LinearLayout
+                android:id="@+id/educaton_rdg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lifestyle_and_appearence_card_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/education_tv"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/some_schooling_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Some schooling" />
+
+                <CheckBox
+                    android:id="@+id/high_school_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#707070"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:text="High School" />
+                <CheckBox
+                    android:id="@+id/college_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="College" />
+
+                <CheckBox
+                    android:id="@+id/tech_train_dip_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#707070"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Technical Training/Diploma" />
+                <CheckBox
+                    android:id="@+id/associate_degree_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Associate Degree" />
+
+                <CheckBox
+                    android:id="@+id/bachelors_degree_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#707070"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Bachelors Degree" />
+                <CheckBox
+                    android:id="@+id/graduate_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#707070"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Graduate/Masters Degree" />
+
+                <CheckBox
+                    android:id="@+id/prof_deg_phd_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#707070"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Professional Degree/PhD" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/occupation_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/educaton_rdg"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:layout_marginTop="17dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                app:ael_duration="300"
-                app:ael_expanded="false"
-                app:ael_interpolator="accelerateDecelerate"
-                app:ael_orientation="vertical">
+                android:text="Occupation" />
 
-                <TextView
-                    android:id="@+id/diet_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/pro_area_layout"
-                    android:layout_marginTop="17dp"
-                    android:text="Diet" />
-
-                <RadioGroup
-                    android:id="@+id/diet_rdg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/diet_tv"
-                    android:layout_marginTop="13dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_diet_doesnt_matter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Doesn't matter"
-                        android:textSize="15dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_diet_veg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Veg"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_diet_non_veg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Non Veg"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_diet_jain"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="jain"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/smoke_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/diet_rdg"
-                    android:layout_marginTop="17dp"
-                    android:text="Smoke" />
-
-                <RadioGroup
-                    android:id="@+id/smoke_rdg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/smoke_tv"
-                    android:layout_marginTop="13dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_smoke_doesnt_matter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Doesn't matter"
-                        android:textSize="15dp" />
-
-                    <RadioButton
-                        android:id="@+id/rb_smoke_dont_include_profiles"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="17dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Don't include profiles who smoke"
-                        android:textSize="15dp" />
-
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/drink_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/smoke_rdg"
-                    android:layout_marginTop="17dp"
-                    android:text="Drink" />
-
-                <RadioGroup
-                    android:id="@+id/drink_rdg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/drink_tv"
-                    android:layout_marginTop="13dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_drink_doesnt_matter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="doesn't matter"
-                        android:textSize="15dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_drink_never_drinks"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Never Drinks"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_drink_drink_occasionally"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Drinks Occasionally"
-                            android:textSize="11dp" />
-
-                    </LinearLayout>
-
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/body_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/drink_rdg"
-                    android:layout_marginTop="17dp"
-                    android:text="Body Type" />
-
-                <RadioGroup
-                    android:id="@+id/body_type_rdg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/body_tv"
-                    android:layout_marginTop="13dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_body_type_doesnt_matter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Doesn't matter"
-                        android:textSize="15dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_body_type_slim"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Slim"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_body_type_avg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Avg/Athletic"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_body_type_heavy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Heavy"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/skin_tone_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/body_type_rdg"
-                    android:layout_marginTop="17dp"
-                    android:text="Skin Tone" />
-
-                <RadioGroup
-                    android:id="@+id/skin_tone_rdg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/skin_tone_tv"
-                    android:layout_marginTop="13dp"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_skin_tone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center_vertical"
-                        android:text="Doesn't matter"
-                        android:textSize="15dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_skin_tone_fair"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Fair"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_skin_tone_wheatish"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Wheatish"
-                            android:textSize="15dp" />
-
-                        <RadioButton
-                            android:id="@+id/rb_skin_tone_dark"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:gravity="center_vertical"
-                            android:text="Dark"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                </RadioGroup>
-
-
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/search_using_keywords_card_layout"
+            <RelativeLayout
+                android:id="@+id/occupation_layout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/lifestyle_and_appearence_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_height="56dp"
+                android:layout_below="@id/occupation_tv">
+
+                <EditText
+                    android:id="@+id/occupation_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Occupation"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/language_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/occupation_layout"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:text="Language" />
+
+            <RelativeLayout
+                android:id="@+id/language_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/language_tv">
+
+                <EditText
+                    android:id="@+id/language_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Hindi"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/syed_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/language_layout"
                 android:layout_marginTop="20dp"
-                android:background="@color/profile_details_grey"
-                android:elevation="2dp">
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Are you a Syed?"
+                android:textSize="16sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp">
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Search Using Keywords"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_add" />
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/search_using_keywords_exp_layout"
+            <RadioGroup
+                android:id="@+id/syedRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/search_using_keywords_card_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/syed_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/yesSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/notSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+                <RadioButton
+                    android:id="@+id/donnKnowSyed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="Don't know" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/islam_convert_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/syedRadioGroup"
                 android:layout_marginTop="17dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                app:ael_duration="300"
-                app:ael_expanded="false"
-                app:ael_interpolator="accelerateDecelerate"
-                app:ael_orientation="vertical">
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Did you convert to Islam?"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/search_keywords_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/search_using_keywords_card_layout"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="17dp"
-                    android:text="For everry specific results,filter your search using keywords " />
-
-                <RelativeLayout
-                    android:id="@+id/search_keywords_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_below="@id/search_keywords_tv">
-
-                    <EditText
-                        android:id="@+id/search_keywords_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="false"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="eg.MBA,traditional,music,etc"
-                        android:paddingRight="56dp"
-                        android:textSize="16dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                        android:tint="#bdbdbd" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/search_keywords_note_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/search_keywords_layout"
-                    android:layout_marginTop="17dp"
-                    android:text="choosing this option might significantly reduce the number of results" />
-
-
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-            <Button
-                android:id="@+id/btn_search"
+            <RadioGroup
+                android:id="@+id/convertedRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/blue_button_back"
-                android:text="SEARCH"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/islam_convert_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/yesConverted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/notConverted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/children_ifany_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/convertedRadioGroup"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Children,if any"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/childrenRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/children_ifany_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/children_yes_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/children_no_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/disability_ifany_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/childrenRadioGroup"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Disability,if any"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/disabilityRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/disability_ifany_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/disability_yes_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/disability_no_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/namaz_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/disabilityRadioGroup"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Namaz"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/namazRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/namaz_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/namaz_yes_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/namaz_no_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/raza_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/namazRadioGroup"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Disability,if any"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/razaRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/raza_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/raza_yes_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/raza_no_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/hijab_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/razaRadioGroup"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Hijab Preference"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/hijabRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:weightSum="3"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_below="@id/hijab_tv"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/hijab_yes_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:checked="true"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/hijab_no_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:text="No" />
+
+                <RadioButton
+                    android:id="@+id/hijab_with_picture_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="#5C5CFE"
+                    android:textSize="10sp"
+                    android:text="With pictures only" />
+
+            </RadioGroup>
+
+
+             <Button
+                 android:id="@+id/btn_search"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/hijabRadioGroup"
+                 android:layout_marginLeft="17dp"
+                 android:layout_marginRight="17dp"
+                 android:layout_alignParentBottom="true"
+                 android:background="@drawable/blue_button_back"
+                 android:text="SEARCH"
+                 android:textColor="@color/white"
+                 android:textSize="20dp" />
 
 
         </RelativeLayout>

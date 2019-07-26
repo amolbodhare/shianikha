@@ -285,10 +285,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             editText.setHint("Search Religion");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, religionNameList);
         }
-        else if (view.getId() == R.id.community_ed )
-        {
 
-        }
         else if (view.getId() == R.id.mother_tongue_ed)
         {
             editText.setHint("Search Mother Tongue");
@@ -309,10 +306,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             editText.setHint("Search City");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, cityNameList);
         }
-        else if (view.getId() == R.id.photo_setting_edt)
-        {
 
-        }
 
         if (arrayAdapter == null)
             return;
