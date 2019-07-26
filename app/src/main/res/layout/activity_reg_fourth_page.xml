@@ -41,7 +41,7 @@
                     android:gravity="start"
                     android:paddingRight="56dp"
                     android:text="Disability, if any"
-                    android:textColor="@color/black"
+                    android:textColor="#707070"
                     android:textSize="16sp" />
 
                 <RadioGroup
@@ -58,7 +58,8 @@
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:text="Yes" />
+                        android:text="Yes"
+                        android:textColor="#707070" />
 
                     <RadioButton
                         android:id="@+id/noDisable"
@@ -66,9 +67,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
-                        android:text="No" />
+                        android:text="No"
+                        android:textColor="#707070" />
 
                 </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -90,7 +93,7 @@
                     android:gravity="start"
                     android:paddingRight="56dp"
                     android:text="Namaz"
-                    android:textColor="@color/black"
+                    android:textColor="#707070"
                     android:textSize="16sp" />
 
                 <RadioGroup
@@ -107,7 +110,8 @@
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:text="Yes" />
+                        android:text="Yes"
+                        android:textColor="#707070" />
 
                     <RadioButton
                         android:id="@+id/noNamaz"
@@ -115,7 +119,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
-                        android:text="No" />
+                        android:text="No"
+                        android:textColor="#707070" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -139,7 +144,7 @@
                     android:gravity="start"
                     android:paddingRight="56dp"
                     android:text="Roza"
-                    android:textColor="@color/black"
+                    android:textColor="#707070"
                     android:textSize="16sp" />
 
                 <RadioGroup
@@ -156,7 +161,8 @@
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:text="Yes" />
+                        android:text="Yes"
+                        android:textColor="#707070" />
 
                     <RadioButton
                         android:id="@+id/noRoza"
@@ -164,9 +170,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
-                        android:text="No" />
+                        android:text="No"
+                        android:textColor="#707070" />
 
                 </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -188,7 +196,7 @@
                     android:gravity="start"
                     android:paddingRight="56dp"
                     android:text="Hijab Preference"
-                    android:textColor="@color/black"
+                    android:textColor="#707070"
                     android:textSize="16sp" />
 
                 <RadioGroup
@@ -205,7 +213,8 @@
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:text="Yes" />
+                        android:text="Yes"
+                        android:textColor="#707070" />
 
                     <RadioButton
                         android:id="@+id/noHijab"
@@ -213,7 +222,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
-                        android:text="No" />
+                        android:text="No"
+                        android:textColor="#707070" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -258,7 +268,8 @@
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:checked="true"
-                        android:text="Joint Family" />
+                        android:text="Joint Family"
+                        android:textColor="#707070" />
 
                     <RadioButton
                         android:id="@+id/nuclear"
@@ -266,7 +277,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
-                        android:text="Nuclear Family" />
+                        android:text="Nuclear Family"
+                        android:textColor="#707070" />
 
                 </RadioGroup>
 
@@ -276,10 +288,9 @@
                 android:id="@+id/detailsOfParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_below="@+id/familyRadioLayout"
                 android:layout_marginTop="25dp"
-                android:layout_below="@+id/familyRadioLayout">
-
+                android:orientation="vertical">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/fatherName"
@@ -306,16 +317,16 @@
                     android:textSize="16dp" />
 
                 <android.support.design.widget.TextInputEditText
-                android:id="@+id/motherName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Mother's Name"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="16dp" />
+                    android:id="@+id/motherName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Mother's Name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/motherOccupation"
@@ -355,22 +366,20 @@
 
             </LinearLayout>
 
-
-               <Button
-                   android:id="@+id/button"
-                   android:layout_width="match_parent"
-                   android:layout_height="50dp"
-                   android:layout_below="@id/detailsOfParent"
-                   android:layout_marginTop="25dp"
-                   android:layout_marginBottom = "25dp"
-                   android:background="@drawable/blue_button_back"
-                   android:fontFamily="@font/poppins_regular"
-                   android:text="NEXT"
-                   android:textColor="@color/white"
-                   android:textSize="20dp" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/detailsOfParent"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/blue_button_back"
+                android:fontFamily="@font/poppins_regular"
+                android:text="NEXT"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
         </RelativeLayout>
-
 
     </ScrollView>
 

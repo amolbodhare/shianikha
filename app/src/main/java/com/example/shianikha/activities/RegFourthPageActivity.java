@@ -47,7 +47,6 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_reg_fourth_page);
 
         session = new Session(this);
-        findViewById(R.id.yesChildren).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
 
@@ -166,7 +165,8 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
 
         }
         else if (v.getId() == R.id.button)
-            makeJson();
+            startActivity(new Intent(this,RegFifthPageActivity.class));
+            //makeJson();
         else
             setUpCustomSpinner(v);
     }

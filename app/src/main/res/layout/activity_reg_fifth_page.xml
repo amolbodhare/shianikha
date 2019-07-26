@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,8 +18,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="15dp">
 
             <RelativeLayout
@@ -89,8 +88,8 @@
                     android:id="@+id/countryOfResidenceEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Country of Residence"
                     android:paddingRight="56dp"
@@ -105,6 +104,7 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/country_of_citizenshsip_layout"
                 android:layout_width="match_parent"
@@ -116,8 +116,8 @@
                     android:id="@+id/countryOfCitizenshipEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Country of Citizenship"
                     android:paddingRight="56dp"
@@ -132,6 +132,7 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/ethincity_layout"
                 android:layout_width="match_parent"
@@ -140,11 +141,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/ethincityEditText"
+                    android:id="@+id/ethnicityEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Ethincity"
                     android:paddingRight="56dp"
@@ -160,7 +161,6 @@
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/fathers_country_layout"
                 android:layout_width="match_parent"
@@ -169,11 +169,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/FathersCountryEditText"
+                    android:id="@+id/fathersCountryEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Fathers country/city of origin"
                     android:paddingRight="56dp"
@@ -189,8 +189,6 @@
 
             </RelativeLayout>
 
-
-
             <RelativeLayout
                 android:id="@+id/mothers_country_layout"
                 android:layout_width="match_parent"
@@ -199,11 +197,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/cityEditText"
+                    android:id="@+id/mothersCountryEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Mothers country/city of origin"
                     android:paddingRight="56dp"
@@ -230,8 +228,8 @@
                     android:id="@+id/currentOccupationEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Current occupation"
                     android:paddingRight="56dp"
@@ -247,19 +245,18 @@
 
             </RelativeLayout>
 
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/otherDetailsOccupationEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/current_occupation_layout"
-                    android:layout_marginTop="17dp"
-                    android:clickable="true"
-                    android:gravity="start"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="other details about your occupation"
-                    android:lines="3"
-                    android:textSize="16dp" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/otherDetailsOccupationEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/current_occupation_layout"
+                android:layout_marginTop="17dp"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
+                android:hint="other details about your occupation"
+                android:lines="3"
+                android:textSize="16dp" />
 
             <RelativeLayout
                 android:id="@+id/highest_level_education_layout"
@@ -272,8 +269,8 @@
                     android:id="@+id/highestLevelEduEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Highest level of Education"
                     android:paddingRight="56dp"
@@ -288,6 +285,7 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/smoking_layout"
                 android:layout_width="match_parent"
@@ -296,11 +294,11 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
-                    android:id="@+id/smokinEduEditText"
+                    android:id="@+id/smokingEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="false"
                     android:clickable="true"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="smoking"
                     android:paddingRight="56dp"
@@ -316,20 +314,18 @@
 
             </RelativeLayout>
 
-
-
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom = "25dp"
                 android:layout_below="@id/smoking_layout"
                 android:layout_marginTop="55dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
