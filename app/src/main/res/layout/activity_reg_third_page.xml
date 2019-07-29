@@ -22,13 +22,14 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="50dp">
 
             <RelativeLayout
                 android:id="@+id/education_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginTop="50dp">
+                >
 
                 <EditText
                     android:id="@+id/educationEditText"
@@ -56,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_below="@id/education_layout"
-                android:layout_marginTop="17dp">
+                android:layout_marginTop="50dp">
 
                 <EditText
                     android:id="@+id/occupationEditText"
@@ -294,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/language_layout"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"
