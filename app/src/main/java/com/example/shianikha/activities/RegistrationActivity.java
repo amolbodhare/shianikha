@@ -83,10 +83,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.dateOfBirthEditText).setOnClickListener(this);
 
         extractRequiredList();
-        handleGenderClickListner();
         setUpEditTextClickListner();//for custom spinner
-        setMargintopOfCustomSpinner();
         setUpCountryCodePopUP();
+        handleGenderClickListner();
+        setMargintopOfCustomSpinner();
+
     }
 
     private void setUpCountryCodePopUP()
@@ -124,7 +125,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void handleGenderClickListner() {
+
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
         gender_male_imv = findViewById(R.id.genderr_male_imv);
         gender_male_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,9 +269,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v)
     {
         if (v.getId() == R.id.btn_next) {
-            //makeJson();
-            Intent intent = new Intent(RegistrationActivity.this, RegSecondPageActivity.class);
-            startActivity(intent);
+            makeJson();
         }
         else if(v.getId() == R.id.login_here)
         {
@@ -390,7 +391,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.gender,gender);
 
-        hitRegisterApi(json);
+        //hitRegisterApi(json);
+
+        //added temporarily
+        Intent intent = new Intent(RegistrationActivity.this, RegSecondPageActivity.class);
+        //intent.putExtra(P.registrationJson,json.toString());
+        startActivity(intent);
     }
 
     private void hitRegisterApi(Json json)

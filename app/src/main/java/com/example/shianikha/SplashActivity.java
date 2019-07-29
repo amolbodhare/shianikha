@@ -160,6 +160,15 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null)
             session.addString(P.intreasted_in, jsonList.toString());
 
+
+                jsonList = json.getJsonList(P.physical_status);// complexion name and code
+        if (jsonList != null)
+            session.addString(P.physical_status, jsonList.toString());
+
+        jsonList = json.getJsonList(P.complexion);// complexion name and code
+        if (jsonList != null)
+            session.addString(P.complexion, jsonList.toString());
+
         jsonArray = json.getJsonArray(P.min_age);// age array, note: min and max array have same values so keeping only one
         if (jsonArray != null)
             session.addString(P.age, jsonArray.toString());

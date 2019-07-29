@@ -34,7 +34,7 @@ import java.util.List;
 
 public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> educationNameList, educationCodeList ,occupationNameList, occupationCodeList, countryNameList, countryIdList, cityNameList, cityIdList,
+    private ArrayList<String> educationNameList, educationCodeList ,occupationNameList, occupationCodeList, countryNameList, countryIdList,               cityNameList, cityIdList,
             languageNameList, languageIdList;
     private Session session;
 
@@ -232,6 +232,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     {
         EditText editText = findViewById(R.id.occupationEditText);
         String string = editText.getText().toString();
+
         if (string.isEmpty()) {
             H.showMessage(this, "Please select occupation");
             return;
@@ -239,6 +240,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         int i = occupationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
+
 
         editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();

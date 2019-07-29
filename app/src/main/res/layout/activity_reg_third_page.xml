@@ -20,10 +20,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
+            android:paddingBottom="40dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="20dp">
 
             <RelativeLayout
                 android:id="@+id/education_layout"
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_below="@id/education_layout"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/occupationEditText"
@@ -294,8 +294,7 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/language_layout"
-                android:layout_marginTop="30dp"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"

@@ -20,6 +20,8 @@ public class P {
     public static String mobile = "mobile";
     public static String email = "email";
     public static String city = "city";
+    public static String physical_status = "physical_status";
+    public static String complexion = "complexion";
 
     public static String masterDataString = "masterDataString";
 
@@ -72,8 +74,11 @@ public class P {
     public static String mother_name = "mother_name";
     public static String mothers_occupation_id = "mothers_occupation_id";
     public static String mother_city = "mother_city";
+    public static String body_type = "body_type";
+    public static String othrt_religion = "other_religion";
 
     public static String occupation_id = "occupation_id";
+    public static String skin_tone = "skin_tone";
     public static String language = "language";
     public static String about_occupation = "about_occupation";
     public static String mothertongue = "mothertongue";
