@@ -27,8 +27,7 @@
     <string name="practice_of_religion"> Please describe the level of the religion practice; also include the
     religion expectation(required):</string>
     <string name="preference">Preferences or quantities you are seeking</string>
-    <string name="terms_conditions">Check this box to attest by the sanctity of the Holy Quran that (1) all information that you have provided in this form is true to your
-    best of your knowledge,(2) you agree to our Terms of use and (3) you are atleast 18 years of age</string>
+
     <string name="content_founder">Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
 To make your document lookWord remembers where you left off - even on another device.</string>
     <string name="content_mini">Video provides a powerful way to help you prove your point.</string>
@@ -41,7 +40,8 @@ Forfeited you engrossed but gay sometimes explained. Another as studied it to ev
 So feel been kept be at gate. Be september it extensive oh concluded of certainty. In read most gate at body held it ever no. Talking justice welcome message inquiry in started of am me. Led own hearted highest visited lasting sir through compass his. Guest tiled he quick by so these trees am. It announcing alteration at surrounded comparison.
 
 Turned it up should no valley cousin he. Speaking numerous ask did horrible packages set. Ashamed herself has distant can studied mrs. Led therefore its middleton perpetual fulfilled provision frankness. Small he drawn after among every three no. All having but you edward genius though remark one. </string>
-    
-    <string name="perfectMatchLastString">check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is true to your best of your knowledge,\n(2) you agree to our Terms of use and \n(3) you are at least 18 years of age</string>
-    
+
+    <string name="termsAndCondition">check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is true to your best of your knowledge,\n(2) you agree to our </string>
+    <string name="appendedString"> and \n(3) you are at lest 18 years of age</string>
+
 </resources>

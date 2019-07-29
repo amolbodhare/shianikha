@@ -2,12 +2,15 @@ package com.example.shianikha.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,14 +37,14 @@ import java.util.List;
 
 public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> educationNameList, educationCodeList ,occupationNameList, occupationCodeList, countryNameList, countryIdList,               cityNameList, cityIdList,
+    private ArrayList<String> educationNameList, educationCodeList, occupationNameList, occupationCodeList, countryNameList, countryIdList, cityNameList, cityIdList,
             languageNameList, languageIdList;
     private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
         setContentView(R.layout.activity_reg_third_page);
 
@@ -64,7 +67,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         JsonList jsonList;
 
         //for education
-        String  string = session.getString(P.education);
+        String string = session.getString(P.education);
         if (string != null) {
             jsonList = new JsonList(string);
             educationCodeList = new ArrayList<>();
@@ -144,7 +147,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     private void setUpTextWatcher() {
         ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -153,7 +157,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
@@ -164,24 +169,19 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         if (view.getId() == R.id.occupationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
-        }
-        else if (view.getId() == R.id.educationEditText) {
+        } else if (view.getId() == R.id.educationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search education");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
-        }
-        else if (view.getId() == R.id.countryEditText) {
+        } else if (view.getId() == R.id.countryEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search country");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
-        }
-        else if (view.getId() == R.id.cityEditText) {
+        } else if (view.getId() == R.id.cityEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search city");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
-        }
-        else if (view.getId() == R.id.motherTongueEditText) {
+        } else if (view.getId() == R.id.motherTongueEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search mother tongue");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
-        }
-        else if (view.getId() == R.id.languageEditText) {
+        } else if (view.getId() == R.id.languageEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search language");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
         }
@@ -196,15 +196,37 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
+                if (textView != null)
+                {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    String string = textView.getText().toString().trim();
+                    ((EditText) view).setText(string);
+                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
                 hideCustomSpinnerLayout();
             }
         });
 
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void showOtherEditText(View view, boolean b)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
+        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+
+        int i = linearLayout.indexOfChild(relativeLayout);
+        View v = linearLayout.getChildAt(i+1);
+        if (v instanceof TextInputLayout)
+        {
+            if (b)
+                v.setVisibility(View.VISIBLE);
+            else
+                v.setVisibility(View.GONE);
+        }
     }
 
     private void hideCustomSpinnerLayout() {
@@ -217,10 +239,9 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         if (v.getId() == R.id.button)
-            startActivity(new Intent(this,RegFourthPageActivity.class));
+            startActivity(new Intent(this, RegFourthPageActivity.class));
             //makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
@@ -228,11 +249,9 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             setUpCustomSpinner(v);
     }
 
-    private void makeJson()
-    {
+    private void makeJson() {
         EditText editText = findViewById(R.id.occupationEditText);
         String string = editText.getText().toString();
-
         if (string.isEmpty()) {
             H.showMessage(this, "Please select occupation");
             return;
@@ -240,7 +259,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         int i = occupationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
-
 
         editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
@@ -252,8 +270,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         if (i != -1)
             App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
 
-        H.log("masterJsonIs",App.masterJson.toString());
-        startActivity(new Intent(this,RegFourthPageActivity.class));
+        H.log("masterJsonIs", App.masterJson.toString());
+        startActivity(new Intent(this, RegFourthPageActivity.class));
     }
 
     private void setMarginTopOfCustomSpinner() {

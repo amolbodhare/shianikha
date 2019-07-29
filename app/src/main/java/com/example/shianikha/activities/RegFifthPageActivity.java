@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,8 +42,8 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
     private ArrayAdapter<String> arrayAdapter;
     private Session session;
-    private ArrayList<String> cityNameList, cityIdList, stateNameList, stateIdList, countryNameList, countryIdList, ethnicityNameList,
-            ethnicityIdList, occupationNameList, occupationIdList, educationNameList, educationIdList, smokingNameList, smokingIdList;
+    private ArrayList<String> cityNameList,seekingMarriageList, cityIdList,seekingMarriageCodeList, stateNameList, stateIdList, countryNameList, countryIdList, ethnicityNameList,relocateNameList,relocateCodeList,educationCodeList,
+            ethnicityIdList, occupationNameList, occupationIdList, educationNameList, educationIdList, countryCodeList,smokingNameList, smokingIdList,ethincityCodeList;
     private String lat= "",longs = "";
 
     @Override
@@ -68,12 +69,15 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             locationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 0, 0, this);
         } else
             Log.e("permission_status", "not granted");
+        setRequiredOnClickListener();
     }
 
     private void setRequiredOnClickListener() {
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.relocateEditText).setOnClickListener(this);
+        findViewById(R.id.seekingMarriageEditText).setOnClickListener(this);
         //findViewById(R.id.cityOfResidenceEditText).setOnClickListener(this);
         //findViewById(R.id.stateEditText).setOnClickListener(this);
         //findViewById(R.id.countryOfResidenceEditText).setOnClickListener(this);
@@ -120,8 +124,23 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
+        //ethnicity
+        string = session.getString(P.ethnicity);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            ethnicityNameList = new ArrayList<>();
+            ethincityCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                ethnicityNameList.add(string);
+
+                string = j.getString(P.id);
+                ethincityCodeList.add(string);
+            }
+        }
+
         //for relocate
-        /*string = session.getString(P.relocate);
+        string = session.getString(P.relocate);
         if (string != null) {
             jsonList = new JsonList(string);
             relocateNameList = new ArrayList<>();
@@ -133,7 +152,52 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                 string = j.getString(P.id);
                 relocateCodeList.add(string);
             }
-        }*/
+        }
+
+        //education
+        string = session.getString(P.education);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            educationNameList = new ArrayList<>();
+            educationCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                educationNameList.add(string);
+
+                string = j.getString(P.id);
+                educationCodeList.add(string);
+            }
+        }
+
+        string = session.getString(P.country);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            countryNameList = new ArrayList<>();
+            countryCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.name);
+                countryNameList.add(string);
+
+                string = j.getString(P.id);
+                countryCodeList.add(string);
+            }
+        }
+
+        //for seeking Marriage
+        //for seeking marriage
+        string = session.getString(P.seeking_marriage);
+        if (string != null) {
+            jsonList = new JsonList(string);
+            seekingMarriageList = new ArrayList<>();
+            seekingMarriageCodeList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.val);
+                seekingMarriageList.add(string);
+
+                string = j.getString(P.id);
+                seekingMarriageCodeList.add(string);
+            }
+        }
 
         setUpTextWatcher();
     }
@@ -158,9 +222,48 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
     {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
+        EditText editText = findViewById(R.id.editText);
+
+        if(view.getId()==R.id.ethnicityEditText)
+        {
+            editText.setHint("Search Ethnicity");
+            arrayAdapter= new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ethnicityNameList);
+        }
+        else if(view.getId()==R.id.fathersCountryEditText)
+        {
+            editText.setHint("Father's Country/City of Origin");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
+        }
+
+        else if(view.getId()==R.id.mothersCountryEditText)
+        {
+            editText.setHint("Mother's Country/City of Origin");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
+        }
+        else if(view.getId()==R.id.highestLevelEduEditText)
+        {
+            editText.setHint("Highest level of Education");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
+        }
+        else if(view.getId()==R.id.smokingEditText)
+        {
+            editText.setHint("Smoking");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, smokingNameList);
+        }
+        else if(view.getId()==R.id.relocateEditText)
+        {
+            editText.setHint("Willing to relocate");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, relocateNameList);
+        }
+        else if(view.getId()==R.id.seekingMarriageEditText)
+        {
+            editText.setHint("Seeking Marriage");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, seekingMarriageList);
+        }
 
         if (arrayAdapter == null)
             return;
+
 
         H.showKeyBoard(this, findViewById(R.id.editText));
 
@@ -169,9 +272,15 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
+                if (textView != null)
+                {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    String string = textView.getText().toString().trim();
+                    ((EditText) view).setText(string);
+                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
                 hideCustomSpinnerLayout();
             }
@@ -283,6 +392,22 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                     }
                 })
                 .run("hitRegisterDetailsApi");
+    }
+
+    private void showOtherEditText(View view, boolean b)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
+        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+
+        int i = linearLayout.indexOfChild(relativeLayout);
+        View v = linearLayout.getChildAt(i+1);
+        if (v instanceof TextInputLayout)
+        {
+            if (b)
+                v.setVisibility(View.VISIBLE);
+            else
+                v.setVisibility(View.GONE);
+        }
     }
 
     @Override

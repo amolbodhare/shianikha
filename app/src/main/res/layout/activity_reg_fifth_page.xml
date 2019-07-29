@@ -15,16 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="15dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/ethincity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
 
@@ -49,11 +49,23 @@
 
             </RelativeLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/otherEthnicityInputLayout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Please Enter Other Ethnicity's name" />
+
+            </android.support.design.widget.TextInputLayout>
+
             <RelativeLayout
-                android:id="@+id/fathers_country_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/ethincity_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -78,10 +90,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/mothers_country_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/fathers_country_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -106,10 +116,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/highest_level_education_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/mothers_country_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -133,11 +141,23 @@
 
             </RelativeLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/otherEducationInputLayout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Please Enter Other Education's name" />
+
+            </android.support.design.widget.TextInputLayout>
+
             <RelativeLayout
-                android:id="@+id/smoking_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/highest_level_education_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -162,10 +182,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relocate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/smoking_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -190,10 +208,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/seeking_marriage_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_below="@id/relocate_layout"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -455,7 +471,7 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 
