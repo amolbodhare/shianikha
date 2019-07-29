@@ -14,293 +14,103 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:scrollbars="none">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/relocate_spinner_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="17dp">
-
-                <EditText
-                    android:id="@+id/relocate_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Willing to Relocate"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/seeking_marriage_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/seeking_marriage_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:hint="you are seeking marriage"
-                    android:paddingRight="56dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
+            android:orientation="vertical"
+            android:layout_marginTop="17dp"
+            android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="What common interests do you currently have?"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:text="@string/practice_of_religion"
+                android:textSize="14dp" />
 
-            <LinearLayout
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/descriptionOneEditText"
+                    android:layout_width="match_parent"
+                    android:lines="3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="top" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/preference"
+                android:textSize="14dp" />
 
-                <CheckBox
-                    android:id="@+id/boardGames"
-                    android:layout_width="0dp"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/descriptionTwoEditText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Board Games" />
+                    android:lines="3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="top" />
 
-                <CheckBox
-                    android:id="@+id/cooking"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Cooking" />
+            </android.support.design.widget.TextInputLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="More about you"
+                android:textSize="14dp" />
 
-                <CheckBox
-                    android:id="@+id/camping"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Camping/Outdoors" />
-
-                <CheckBox
-                    android:id="@+id/music"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Music" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <CheckBox
-                    android:id="@+id/currentEvent"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/descriptionThreeEditText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Current Events" />
+                    android:lines="3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="top" />
 
-                <CheckBox
-                    android:id="@+id/diningOut"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Dining Out" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/financialMarket"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Financial Markets" />
-
-                <CheckBox
-                    android:id="@+id/volunteering"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Volunteering" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/fishing"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:textColor="#707070"
-                    android:text="Fishing/Hunting" />
-
-                <CheckBox
-                    android:id="@+id/readingBooks"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Reading Books" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/watchingSports"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Watching Sports" />
-
-                <CheckBox
-                    android:id="@+id/styleAndFashion"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Style \u0026 fashion" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/playingSports"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Playing Sports" />
-
-                <CheckBox
-                    android:id="@+id/politicalInterest"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Political Interest" />
-
-            </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_below="@id/more_about_you_ed"
-                android:layout_marginTop="45dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
-                android:text="next"
+                android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 

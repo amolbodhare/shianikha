@@ -58,6 +58,8 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         setMarginTopOfCustomSpinner();
         extractRequireList();
 
+        findViewById(R.id.button).setOnClickListener(this);
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Log.e("returnStatus", "return");
@@ -202,7 +204,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
         else if (v.getId() == R.id.button)
-            startActivity(new Intent(this,RegSixthPageActivity.class));
+            startActivity(new Intent(this, RegSixthPageActivity.class));
             //makeJson();
         else
             setUpCustomSpinner(v);

@@ -164,7 +164,7 @@
                     android:id="@+id/yesConverted"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
                     android:checked="true"
                     android:text="Yes" />
@@ -173,7 +173,7 @@
                     android:id="@+id/notConverted"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
@@ -201,7 +201,7 @@
                     android:id="@+id/yesSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
                     android:checked="true"
                     android:text="Yes" />
@@ -210,7 +210,7 @@
                     android:id="@+id/notSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
@@ -218,7 +218,7 @@
                     android:id="@+id/donnKnowSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:buttonTint="#5C5CFE"
                     android:text="Don't know" />
 

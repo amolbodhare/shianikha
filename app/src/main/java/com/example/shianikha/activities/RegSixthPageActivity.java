@@ -20,9 +20,8 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onClick(View view) {
         if (view.getId() == R.id.button)
-            startActivity(new Intent(this,RegSeventhPageActivity.class));
+            startActivity(new Intent(this,PerfectMatchActivity.class));
     }
 }

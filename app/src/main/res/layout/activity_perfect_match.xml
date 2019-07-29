@@ -124,7 +124,7 @@
                         android:focusable="false"
                         android:gravity="center"
                         android:hint="Min age"
-                        android:paddingRight="56dp"
+                        android:paddingRight="50dp"
                         android:textSize="15sp" />
 
                     <ImageView
@@ -155,7 +155,7 @@
                         android:focusable="false"
                         android:gravity="center"
                         android:hint="Max age"
-                        android:paddingRight="56dp"
+                        android:paddingRight="50dp"
                         android:textSize="15sp" />
 
                     <ImageView
@@ -479,7 +479,7 @@
                 android:checked="true"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="top"
-                android:text="check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is true to your best of your knowledge,\n(2) you agree to our Terms of use and \n(3) you are atleast 18 years of age "
+                android:text="@string/perfectMatchLastString"
                 android:textSize="13sp" />
 
             <Button
