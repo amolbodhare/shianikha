@@ -367,6 +367,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         layoutParams.topMargin = i;
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
+
     }
 
     @Override
