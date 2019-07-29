@@ -1,10 +1,15 @@
 package com.example.shianikha.activities;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +39,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import static android.text.Html.fromHtml;
+
 
 public class PerfectMatchActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -60,6 +67,13 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         extractRequireList();
 
         setOnCheckChangeListener();
+
+        CheckBox checkBox =findViewById(R.id.checkBox3);
+        checkBox.setMovementMethod(LinkMovementMethod.getInstance());
+        checkBox.append(HtmlCompat.fromHtml("<font color=\"blue\"> Terms of Use </font>",HtmlCompat.FROM_HTML_MODE_LEGACY));
+        checkBox.append(getString(R.string.appendedString));
+        Linkify.addLinks(checkBox,Linkify.WEB_URLS);
+
     }
 
     private void setOnCheckChangeListener() {
@@ -145,8 +159,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
     private void setUpTextWatcher() {
         ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -155,8 +168,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) { }
         });
     }
 
@@ -182,15 +194,37 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
+                if (textView != null)
+                {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    String string = textView.getText().toString().trim();
+                    ((EditText) view).setText(string);
+                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
                 hideCustomSpinnerLayout();
             }
         });
 
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void showOtherEditText(View view, boolean b)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
+        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+
+        int i = linearLayout.indexOfChild(relativeLayout);
+        View v = linearLayout.getChildAt(i+1);
+        if (v instanceof TextInputLayout)
+        {
+            if (b)
+                v.setVisibility(View.VISIBLE);
+            else
+                v.setVisibility(View.GONE);
+        }
     }
 
     private void hideCustomSpinnerLayout() {

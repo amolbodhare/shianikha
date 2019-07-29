@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -223,8 +224,6 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.view).setVisibility(View.VISIBLE);
         EditText editText = findViewById(R.id.editText);
 
-
-
         if(view.getId()==R.id.ethnicityEditText)
         {
             editText.setHint("Search Ethnicity");
@@ -262,7 +261,6 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, seekingMarriageList);
         }
 
-
         if (arrayAdapter == null)
             return;
 
@@ -274,9 +272,15 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
+                if (textView != null)
+                {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    String string = textView.getText().toString().trim();
+                    ((EditText) view).setText(string);
+                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
                 hideCustomSpinnerLayout();
             }
@@ -388,6 +392,22 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                     }
                 })
                 .run("hitRegisterDetailsApi");
+    }
+
+    private void showOtherEditText(View view, boolean b)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
+        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+
+        int i = linearLayout.indexOfChild(relativeLayout);
+        View v = linearLayout.getChildAt(i+1);
+        if (v instanceof TextInputLayout)
+        {
+            if (b)
+                v.setVisibility(View.VISIBLE);
+            else
+                v.setVisibility(View.GONE);
+        }
     }
 
     @Override
