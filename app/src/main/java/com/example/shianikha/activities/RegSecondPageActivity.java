@@ -350,6 +350,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         App.masterJson.addString(P.othrt_religion, shiaCommunityIdList.get(i));
 
 
+
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegThirdPageActivity.class));
 
