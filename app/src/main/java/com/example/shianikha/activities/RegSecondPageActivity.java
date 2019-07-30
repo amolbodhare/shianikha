@@ -13,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,6 +71,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         ((RadioGroup) findViewById(R.id.convertedRadioGroup)).setOnCheckedChangeListener(this);
         ((RadioGroup) findViewById(R.id.syedRadioGroup)).setOnCheckedChangeListener(this);
         ((RadioGroup) findViewById(R.id.childrenRadioGroup)).setOnCheckedChangeListener(this);
+
 
         setMarginTopOfCustomSpinner();
         extractRequireList();
@@ -315,10 +318,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select height");
             return;
         }
-        else
-        {
             App.masterJson.addString(P.height, string);
-        }
+
 
         editText = findViewById(R.id.bodyEditText);
         string = editText.getText().toString();
@@ -350,10 +351,29 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         App.masterJson.addString(P.othrt_religion, shiaCommunityIdList.get(i));
 
 
+        string =  findViewById(((RadioGroup)findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.cvt_islam, string);
+
+        string =  findViewById(((RadioGroup)findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.syed, string);
+
+        string =  findViewById(((RadioGroup)findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.children, string);
+
+
+        editText = findViewById(R.id.maritalStatusEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select marital status");
+            return;
+        }
+        i = maritalStatusNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.marital_status, maritalStatusIdList.get(i));
+
 
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegThirdPageActivity.class));
-
 
 
 
@@ -374,15 +394,12 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         int viewId = radioGroup.getId();
-        if (viewId == R.id.convertedRadioGroup) {
 
-        } else if (viewId == R.id.syedRadioGroup) {
-
-        } else if (viewId == R.id.childrenRadioGroup) {
-            if (radioGroup.getCheckedRadioButtonId() == R.id.yesChildren)
-                findViewById(R.id.relativeLayout).setVisibility(View.VISIBLE);
-            else
-                findViewById(R.id.relativeLayout).setVisibility(View.GONE);
+         if (viewId == R.id.childrenRadioGroup)
+        {
+            String string="";
+            string =  findViewById(((RadioGroup)findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+            App.masterJson.addString(P.children, string);
         }
     }
 }

@@ -68,11 +68,20 @@ public class P {
     public static String education = "education";
     public static String edulevel_id = "edulevel_id";
     public static String father_name = "father_name";
-    public static String fathers_occupation_id = "fathers_occupation_id";
+    public static String father_occupation_id = "father_occupation_id";
+    public static String father_other_occupation = "father_other_occupation";
     public static String father_city = "father_city";
 
     public static String mother_name = "mother_name";
-    public static String mothers_occupation_id = "mothers_occupation_id";
+    public static String mother_occupation_id = "mothe_occupation_id";
+    public static String mother_other_occupation = "mother_other_occupation";
+
+
+    public static String siblings = "siblings";
+    public static String siblialternate_contact_no = "alternate_contact_no";
+
+
+
     public static String mother_city = "mother_city";
     public static String body_type = "body_type";
     public static String othrt_religion = "other_religion";
@@ -81,13 +90,19 @@ public class P {
     public static String skin_tone = "skin_tone";
     public static String language = "language";
     public static String about_occupation = "about_occupation";
+    public static String residency_address = "residency_address";
     public static String mothertongue = "mothertongue";
+    public static String mother_tongue = "mother_tongue";
     public static String intreasted_in = "intreasted_in";
     public static String smoke_id = "smoke_id";
     public static String relocate_id = "relocate_id";
     public static String cvt_islam = "cvt_islam";
     public static String syed = "syed";
     public static String handicap = "handicap";
+    public static String namaz = "namaz";
+    public static String roza = "roza";
+    public static String hijab_preference = "hijab_preference";
+
     public static String children = "children";
     public static String religion_expectations = "religion_expectations";
     public static String qualities_seeking = "qualities_seeking";

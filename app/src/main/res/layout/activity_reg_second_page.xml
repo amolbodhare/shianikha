@@ -166,14 +166,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
+                    android:tag="1"
                     android:text="Yes" />
 
                 <RadioButton
                     android:id="@+id/notConverted"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:layout_weight="0.75"
+                    android:tag="2"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
@@ -203,6 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
                     android:buttonTint="#5C5CFE"
+                    android:tag="1"
                     android:checked="true"
                     android:text="Yes" />
 
@@ -211,13 +214,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
+                    android:tag="2"
+                    android:checked="true"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
                 <RadioButton
-                    android:id="@+id/donnKnowSyed"
+                    android:id="@+id/dontKnowSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     android:layout_weight="1.5"
                     android:buttonTint="#5C5CFE"
                     android:text="Don't know" />
@@ -279,8 +285,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -288,6 +294,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:tag="2"
+                        android:checked="true"
                         android:buttonTint="#5C5CFE"
                         android:text="No" />
 
@@ -298,7 +306,8 @@
             <RelativeLayout
                 android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView"

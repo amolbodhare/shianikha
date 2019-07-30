@@ -38,7 +38,7 @@ import java.util.List;
 public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> educationNameList, educationCodeList, occupationNameList, occupationCodeList, countryNameList, countryIdList, cityNameList, cityIdList,
-            languageNameList, languageIdList;
+            languageNameList, languageIdList,stateeNameList, stateIdList;
     private Session session;
 
     @Override
@@ -53,6 +53,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.educationEditText).setOnClickListener(this);
         findViewById(R.id.occupationEditText).setOnClickListener(this);
         findViewById(R.id.countryEditText).setOnClickListener(this);
+        findViewById(R.id.stateEditText).setOnClickListener(this);
         findViewById(R.id.cityEditText).setOnClickListener(this);
         findViewById(R.id.motherTongueEditText).setOnClickListener(this);
         findViewById(R.id.languageEditText).setOnClickListener(this);
@@ -110,6 +111,22 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
                 countryIdList.add(string);
             }
         }
+
+        //for state
+        string = session.getString(P.state);
+        if (string != null) {
+            jsonList = new JsonList(string);
+             stateeNameList= new ArrayList<>();
+            stateIdList = new ArrayList<>();
+            for (Json j : jsonList) {
+                string = j.getString(P.state_name);
+                stateeNameList.add(string);
+
+                string = j.getString(P.state_id);
+                stateIdList.add(string);
+            }
+        }
+
 
         //for city
         string = session.getString(P.city);
@@ -175,6 +192,9 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         } else if (view.getId() == R.id.countryEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search country");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
+        }else if (view.getId() == R.id.stateEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search state");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, stateeNameList);
         } else if (view.getId() == R.id.cityEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search city");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
@@ -241,8 +261,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button)
-            startActivity(new Intent(this, RegFourthPageActivity.class));
-            //makeJson();
+
+            makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
         else
@@ -252,23 +272,101 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     private void makeJson() {
         EditText editText = findViewById(R.id.occupationEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty())
+        {
             H.showMessage(this, "Please select occupation");
             return;
+        }
+        else if(string.equalsIgnoreCase("others"))
+        {
+            String stringg="";
+
+            stringg = ((EditText)findViewById(R.id.other_details_occupation_edt)).getText().toString();
+            if (stringg.isEmpty())
+            {
+                H.showMessage(this,"Please enter other details about occupation");
+                return;
+            }
+            App.masterJson.addString(P.about_occupation, stringg);
+
         }
         int i = occupationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
 
+
         editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select higher education");
+            H.showMessage(this, "Please select highest education");
             return;
         }
         i = educationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
+
+
+        string = ((EditText)findViewById(R.id.res_add_ed)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this,"Please enter residential address");
+            return;
+        }
+        App.masterJson.addString(P.residency_address, string);
+
+        editText = findViewById(R.id.countryEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select country");
+            return;
+        }
+        i = countryNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.country_res, countryIdList.get(i));
+
+        editText = findViewById(R.id.stateEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select state");
+            return;
+        }
+        i = stateeNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.state, stateIdList.get(i));
+
+        editText = findViewById(R.id.cityEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select city");
+            return;
+        }
+        i = cityNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.city, cityIdList.get(i));
+
+        editText = findViewById(R.id.motherTongueEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select Mothertongue");
+            return;
+        }
+        i = languageNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.mother_tongue, languageIdList.get(i));
+
+
+        editText = findViewById(R.id.languageEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select language");
+            return;
+        }
+        i = languageNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.language, languageIdList.get(i));
+
+
+
 
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegFourthPageActivity.class));
