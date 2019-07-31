@@ -237,7 +237,6 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/seeking_marriage_layout"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="What common interests do you currently have?"
