@@ -191,6 +191,7 @@
                     android:id="@+id/neverMarriedBefore"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="1"
                     android:layout_weight="1.1"
                     android:textColor="#707070"
                     android:fontFamily="@font/poppins_regular"
@@ -202,6 +203,7 @@
                     android:id="@+id/divorced"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="2"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="0.9"
@@ -221,6 +223,7 @@
                     android:id="@+id/married"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     android:layout_weight="1.1"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
@@ -231,6 +234,7 @@
                     android:id="@+id/widowed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="4"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="0.9"
@@ -251,6 +255,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:tag="5"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:buttonTint="#5C5CFE"
@@ -279,6 +284,7 @@
                     android:id="@+id/arab"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="1"
                     android:layout_weight="1"
                     android:textColor="#707070"
                     android:fontFamily="@font/poppins_regular"
@@ -290,6 +296,7 @@
                     android:id="@+id/african"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="2"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1"
@@ -300,6 +307,7 @@
                     android:id="@+id/asian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1"
@@ -319,6 +327,7 @@
                     android:id="@+id/caucasian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="4"
                     android:layout_weight="1"
                     android:textColor="#707070"
                     android:fontFamily="@font/poppins_regular"
@@ -329,6 +338,7 @@
                     android:id="@+id/hispanic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="5"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1"
@@ -336,14 +346,15 @@
                     android:text="Hispanic" />
 
                 <CheckBox
-                    android:id="@+id/persian"
+                    android:id="@+id/parsian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="6"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1"
                     android:buttonTint="#5C5CFE"
-                    android:text="Persian" />
+                    android:text="Parsian" />
 
             </LinearLayout>
 
@@ -355,9 +366,10 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/southAsian"
+                    android:id="@+id/southAsian_indian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="7"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1"
@@ -368,6 +380,7 @@
                     android:id="@+id/mixedRace"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="8"
                     android:layout_weight="1"
                     android:textColor="#707070"
                     android:fontFamily="@font/poppins_regular"
@@ -384,9 +397,10 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/southAsia"
+                    android:id="@+id/southAsian_pakistani"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="9"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#707070"
                     android:layout_weight="1.2"
@@ -397,6 +411,7 @@
                     android:id="@+id/other"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:tag="10"
                     android:layout_weight="0.8"
                     android:textColor="#707070"
                     android:fontFamily="@font/poppins_regular"
@@ -406,15 +421,16 @@
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/otherEthnicity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/otherEthnicity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:hint="Type Here . . . "/>
 
             </android.support.design.widget.TextInputLayout>
@@ -467,6 +483,7 @@
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
                 android:checked="true"
+                android:tag="1"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Email me request from every one"
                 android:textSize="13sp" />
@@ -475,6 +492,7 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="2"
                 android:layout_below="@id/checkBox1"
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
@@ -487,6 +505,7 @@
                 android:id="@+id/checkBox3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="3"
                 android:layout_below="@+id/checkBox2"
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"

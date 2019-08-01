@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,8 +43,8 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
 
     private ArrayAdapter<String> arrayAdapter;
     private Session session;
-    private ArrayList<String> cityNameList,seekingMarriageList, cityIdList,seekingMarriageCodeList, stateNameList, stateIdList, countryNameList, countryIdList, ethnicityNameList,relocateNameList,relocateCodeList,educationCodeList,
-            ethnicityIdList, occupationNameList, occupationIdList, educationNameList, educationIdList, countryCodeList,smokingNameList, smokingIdList,ethincityCodeList;
+    private ArrayList<String> cityNameList,seekingMarriageList, cityIdList,seekingMarriageCodeList, stateNameList, stateIdList, countryNameList, ethnicityNameList,relocateNameList,relocateCodeList,educationCodeList,
+            ethnicityIdList, occupationNameList, occupationIdList, educationNameList,countryCodeList,smokingNameList, smokingIdList,ethincityCodeList;
     private String lat= "",longs = "";
 
     @Override
@@ -183,7 +184,6 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
-        //for seeking Marriage
         //for seeking marriage
         string = session.getString(P.seeking_marriage);
         if (string != null) {
@@ -313,86 +313,194 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
         else if (v.getId() == R.id.button)
-            startActivity(new Intent(this, RegSixthPageActivity.class));
-            //makeJson();
+            makeJson();
         else
             setUpCustomSpinner(v);
     }
 
     private void makeJson()
     {
-        EditText editText = findViewById(R.id.descriptionOneEditText);
+
+        EditText editText = findViewById(R.id.ethnicityEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter level of religion practice");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select Ehincity");
+            return;
+        } else if (string.equalsIgnoreCase("others")||string.equalsIgnoreCase("other")) {
+            String stringg = "";
+
+            stringg = ((EditText) findViewById(R.id.other_ethincity_edittext)).getText().toString();
+            if (stringg.isEmpty()) {
+                H.showMessage(this, "Please enter other ethincity details");
+                return;
+            }
+            App.masterJson.addString(P.other_ethnicity, stringg);
+
+        }
+        int i = ethnicityNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.father_occupation_id, ethincityCodeList.get(i));
+
+
+
+        editText = findViewById(R.id.fathersCountryEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select fathers country ");
             return;
         }
-        App.masterJson.addString(P.religion_expectations, string);
+        i = countryNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.father_country, countryCodeList.get(i));
 
-        editText = findViewById(R.id.descriptionTwoEditText);
+
+        editText = findViewById(R.id.mothersCountryEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select mothers country ");
+            return;
+        }
+        i = countryNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.mother_country, countryCodeList.get(i));
+
+
+
+         editText = findViewById(R.id.highestLevelEduEditText);
+         string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select highest level of education");
+            return;
+        } else if (string.equalsIgnoreCase("others")||string.equalsIgnoreCase("other")) {
+            String stringg = "";
+
+            stringg = ((EditText) findViewById(R.id.other_education_edittext)).getText().toString();
+            if (stringg.isEmpty()) {
+                H.showMessage(this, "Please enter other education details");
+                return;
+            }
+            App.masterJson.addString(P.other_edulevel, stringg);
+
+        }
+         i = educationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
+
+
+        editText = findViewById(R.id.smokingEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select smoking habbit ");
+            return;
+        }
+        i = smokingNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.smoke_id, smokingIdList.get(i));
+
+
+        editText = findViewById(R.id.relocateEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select relocation ");
+            return;
+        }
+        i = relocateNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.relocate_id, relocateCodeList.get(i));
+
+
+        editText = findViewById(R.id.seekingMarriageEditText);
         string = editText.getText().toString();
         if (string.isEmpty())
         {
-            H.showMessage(this,"Please preference or qualities you are seeking");
+            H.showMessage(this, "Please select seeking marriage ");
             return;
         }
-        App.masterJson.addString(P.religion_expectations, string);
+        i = seekingMarriageList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.seeking_marriage, seekingMarriageCodeList.get(i));
 
-        editText = findViewById(R.id.descriptionThreeEditText);
-        string = editText.getText().toString();
-        if (string.isEmpty())
+
+        ArrayList<String> arrayList=new ArrayList<>();
+
+        if(((CheckBox)findViewById(R.id.boardGames)).isChecked())
         {
-            H.showMessage(this,"Pleas enter more about you");
-            return;
+            arrayList.add(((CheckBox)findViewById(R.id.boardGames)).getTag().toString());
+
         }
-        App.masterJson.addString(P.about_2, string);
+
+        if(((CheckBox)findViewById(R.id.cooking)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.cooking)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.camping)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.camping)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.music)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.music)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.currentEvent)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.currentEvent)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.diningOut)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.diningOut)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.financialMarket)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.financialMarket)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.volunteering)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.volunteering)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.fishing)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.fishing)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.readingBooks)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.readingBooks)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.watchingSports)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.watchingSports)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.styleAndFashion)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.styleAndFashion)).getTag().toString());
+        }
+
+        if(((CheckBox)findViewById(R.id.playingSports)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.playingSports)).getTag().toString());
+        }
+        if(((CheckBox)findViewById(R.id.politicalInterest)).isChecked())
+        {
+            arrayList.add(((CheckBox)findViewById(R.id.politicalInterest)).getTag().toString());
+        }
+
+
+        App.masterJson.addString(P.intreasted_in, arrayList.toString());
+
+
         App.masterJson.addString(P.lat, lat);
         App.masterJson.addString(P.lng, longs);
         H.log("masterJsonIs",App.masterJson.toString());
 
-        hitRegisterDetailsApi();
+        //hitRegisterDetailsApi();
+        startActivity(new Intent(this, RegSixthPageActivity.class));
     }
 
-    private void hitRegisterDetailsApi()
-    {
-        final LoadingDialog loadingDialog = new LoadingDialog(this);
 
-        RequestModel requestModel = RequestModel.newRequestModel("register_details");
-        requestModel.addJSON(P.data, App.masterJson);
-
-        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener()
-                {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(RegFifthPageActivity.this, "Something went wrong.");
-                    }
-                })
-                .onSuccess(new Api.OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Json json) {
-
-                        if (json.getInt(P.status) == 1)
-                        {
-                            new Session(RegFifthPageActivity.this).addInt(P.full_register, 1);
-                            Intent intent = new Intent(RegFifthPageActivity.this, PerfectMatchActivity.class);
-                            startActivity(intent);
-                        } else
-                            H.showMessage(RegFifthPageActivity.this, json.getString(P.msg));
-                    }
-                })
-                .run("hitRegisterDetailsApi");
-    }
 
     private void showOtherEditText(View view, boolean b)
     {

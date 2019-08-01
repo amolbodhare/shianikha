@@ -270,8 +270,37 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void makeJson() {
-        EditText editText = findViewById(R.id.occupationEditText);
+
+
+        EditText editText = findViewById(R.id.educationEditText);
         String string = editText.getText().toString();
+
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please select education");
+            return;
+        }
+        else if(string.equalsIgnoreCase("others")||string.equalsIgnoreCase("other"))
+        {
+            String stringg="";
+
+            stringg = ((EditText)findViewById(R.id.other_education_details_edt)).getText().toString();
+            if (stringg.isEmpty())
+            {
+                H.showMessage(this,"Please enter other details about education");
+                return;
+            }
+            App.masterJson.addString(P.other_edulevel, stringg);
+
+        }
+        int i = educationNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.edu_level, educationCodeList.get(i));
+
+
+
+         editText = findViewById(R.id.occupationEditText);
+         string = editText.getText().toString();
         if (string.isEmpty())
         {
             H.showMessage(this, "Please select occupation");
@@ -290,20 +319,10 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             App.masterJson.addString(P.about_occupation, stringg);
 
         }
-        int i = occupationNameList.indexOf(string);
+         i = occupationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
 
-
-        editText = findViewById(R.id.educationEditText);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select highest education");
-            return;
-        }
-        i = educationNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.edulevel_id, educationCodeList.get(i));
 
 
         string = ((EditText)findViewById(R.id.res_add_ed)).getText().toString();
@@ -326,7 +345,8 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty())
+        {
             H.showMessage(this, "Please select state");
             return;
         }

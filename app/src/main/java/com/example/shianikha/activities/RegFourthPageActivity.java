@@ -238,7 +238,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
 
         string = ((EditText) findViewById(R.id.parentContact)).getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please enter parent's altername conntact");
+            H.showMessage(this, "Please enter parent's altername contact");
             return;
         }
         App.masterJson.addString(P.siblialternate_contact_no, string);
@@ -260,6 +260,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegFifthPageActivity.class));
     }
+
     private void showOtherEditText(View view, boolean b)
     {
         RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
@@ -275,6 +276,7 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
                 v.setVisibility(View.GONE);
         }
     }
+
     private void setMarginTopOfCustomSpinner() {
         LinearLayout linearLayout = findViewById(R.id.includeContainer);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();

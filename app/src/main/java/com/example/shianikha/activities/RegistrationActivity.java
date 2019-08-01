@@ -322,6 +322,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         Json json = new Json();
 
         String string = profile_for_ed.getText().toString().trim();
+
         if (string.isEmpty())
         {
             H.showMessage(context,"Please select your profile for!");
@@ -358,6 +359,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.last_name,string);
 
+        string = ((EditText)findViewById(R.id.dateOfBirthEditText)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(context,"Please enter Date of Birth!");
+            return;
+        }
+        json.addString(P.dob,string);
+
 
         string = ((EditText)findViewById(R.id.email)).getText().toString();
 
@@ -392,11 +401,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         json.addString(P.gender,gender);
 
         //hitRegisterApi(json);
-
-        //added temporarily
-        Intent intent = new Intent(RegistrationActivity.this, RegSecondPageActivity.class);
-        //intent.putExtra(P.registrationJson,json.toString());
-        startActivity(intent);
+        //added temporary
+        startActivity(new Intent(RegistrationActivity.this,PerfectMatchActivity.class));
     }
 
     private void hitRegisterApi(Json json)

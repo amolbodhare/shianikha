@@ -58,6 +58,7 @@
                 android:layout_marginTop="17dp">
 
                 <EditText
+                    android:id="@+id/other_education_details_edt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Education's name" />
@@ -95,6 +96,7 @@
                 android:id="@+id/otherOccupationInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="17dp">
 
                 <EditText

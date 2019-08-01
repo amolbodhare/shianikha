@@ -67,9 +67,15 @@ public class P {
     public static String smoking = "smoking";
     public static String education = "education";
     public static String edulevel_id = "edulevel_id";
+    public static String other_edulevel = "other_edulevel";
+
     public static String father_name = "father_name";
     public static String father_occupation_id = "father_occupation_id";
+    public static String other_ethnicity = "other_ethnicity";
+
     public static String father_other_occupation = "father_other_occupation";
+    public static String father_country = "father_country";
+    public static String mother_country = "mother_country";
     public static String father_city = "father_city";
 
     public static String mother_name = "mother_name";
@@ -79,7 +85,6 @@ public class P {
 
     public static String siblings = "siblings";
     public static String siblialternate_contact_no = "alternate_contact_no";
-
 
 
     public static String mother_city = "mother_city";
@@ -102,12 +107,12 @@ public class P {
     public static String namaz = "namaz";
     public static String roza = "roza";
     public static String hijab_preference = "hijab_preference";
-
     public static String children = "children";
+
     public static String religion_expectations = "religion_expectations";
-    public static String qualities_seeking = "qualities_seeking";
-    public static String more_about_you = "more_about_you";
-    public static String about_2 = "about_2";
+    public static String qualities_seeking = "about_1";
+    public static String more_about_you = "about_2";
+
     public static String image = "image";
     public static String lat = "lat";
     public static String lng = "lng";
@@ -135,6 +140,7 @@ public class P {
     public static String recently_join="recently_join";
     public static String recently_visitors="recently_visitors";
     public static String edu_level="educationlevel";
+
 
     public static String packages_applied="packages_applied";
     public static String ethnicity_name="ethnicity_name";
