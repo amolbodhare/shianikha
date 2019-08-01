@@ -414,6 +414,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             }
 
 
+
             if(buttonView==((CheckBox)findViewById(R.id.arab)) || buttonView==((CheckBox)findViewById(R.id.african)) || buttonView==((CheckBox)findViewById(R.id.asian))
                     || buttonView==((CheckBox)findViewById(R.id.caucasian))|| buttonView==((CheckBox)findViewById(R.id.hispanic))|| buttonView==((CheckBox)findViewById(R.id.mixedRace))
                     || buttonView==((CheckBox)findViewById(R.id.parsian))|| buttonView==((CheckBox)findViewById(R.id.southAsian_indian)) || buttonView==((CheckBox)findViewById(R.id.southAsian_pakistani))
