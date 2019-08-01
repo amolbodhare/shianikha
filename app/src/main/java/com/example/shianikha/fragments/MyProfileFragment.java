@@ -123,9 +123,6 @@ public class MyProfileFragment extends Fragment {
         string=json.getString(P.gender);
         if(string!=null)
             ((TextView)fragmentView.findViewById(R.id.gender)).setText(string);
-        string=json.getString(P.dob);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.dob)).setText(string);
         string=json.getString(P.height);
         if(string!=null)
             ((TextView)fragmentView.findViewById(R.id.height)).setText(string);
@@ -139,42 +136,11 @@ public class MyProfileFragment extends Fragment {
         if(string!=null)
             ((TextView)fragmentView.findViewById(R.id.Country)).setText(string);
         string=json.getString(P.religion);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.religion)).setText(string);
-        string=json.getString(P.ethnicity_name);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.ethinicity)).setText(string);
-        string=json.getString(P.father_city);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.fatherCity)).setText(string);
-        string=json.getString(P.mother_city);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.motherCity)).setText(string);
-        string=json.getString(P.occupation_name);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.occupation)).setText(string);
-        string=json.getString(P.about_occupation);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.aboutOccupation)).setText(string);
-        string=json.getString(P.education);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.education)).setText(string);
-        string=json.getString(P.language);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.language)).setText(string);
+
         string=json.getString(P.smoke_id);
         if(string!=null)
             ((TextView)fragmentView.findViewById(R.id.smoke)).setText(string);
         string=json.getString(P.relocate_id);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.reLocate)).setText(string);
-        string=json.getString(P.cvt_islam);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.convert)).setText(string);
-        string=json.getString(P.about_1);
-        if(string!=null)
-            ((TextView)fragmentView.findViewById(R.id.aboutOne)).setText(string);
-
 
     }
 
