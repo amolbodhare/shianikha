@@ -68,6 +68,8 @@ public class P {
     public static String education = "education";
     public static String edulevel_id = "edulevel_id";
     public static String other_edulevel = "other_edulevel";
+    public static String other_ethnicitys = "other_ethnicitys";
+
 
     public static String father_name = "father_name";
     public static String father_occupation_id = "father_occupation_id";

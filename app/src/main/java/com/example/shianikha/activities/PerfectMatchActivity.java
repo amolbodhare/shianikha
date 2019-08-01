@@ -50,8 +50,9 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
     private Session session;
     private ArrayList<String> ageList, maritalStatusNameList, maritalStatusCodeList, ethnicityNameList, ethincityCodeList;
     private ArrayList<String> educationNameList, educationCodeList;
-    ;private ArrayList<String> marital_status_arraylist;
-    ;private ArrayList<String> ethincity_arraylist;
+    private ArrayList<String> marital_status_arraylist;
+    private ArrayList<String> ethincity_arraylist;
+    private ArrayList<String> email_arraylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +91,14 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         });*/
 
 
-
-
     }
 
     private void setOnCheckChangeListener() {
        /* LinearLayout linearLayout= findViewById(R.id.linearLayout);
         attachListener(linearLayout);*/
+        marital_status_arraylist=new ArrayList<String>();
+        ethincity_arraylist=new ArrayList<String>();
+
 
         ((CheckBox)findViewById(R.id.neverMarriedBefore)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.divorced)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
@@ -111,6 +113,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         ((CheckBox)findViewById(R.id.hispanic)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.parsian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.southAsian_indian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
+        ((CheckBox)findViewById(R.id.mixedRace)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.southAsian_pakistani)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.other)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
 
@@ -271,15 +274,16 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.view)
-            hideCustomSpinnerLayout();
-        else if (v.getId() == R.id.button)
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.button)
+
             makeJson();
-        else if (v.getId() == R.id.sub_drawerMenu) {
-            onMethodClick(v);
-        } else
+        else if (v.getId() == R.id.view)
+            hideCustomSpinnerLayout();
+        else
             setUpCustomSpinner(v);
+
     }
 
     private void makeJson() {
@@ -310,11 +314,47 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         json.addString(P.max_age, j + "");
 
 
-        i = ethnicityNameList.indexOf(string);
-        if (i != -1)
-            json.addString(P.ethnicitys_id, ethincityCodeList.get(i));
 
-        editText = findViewById(R.id.educationEditText);
+        if(marital_status_arraylist.size()>0)
+        {
+            json.addString(P.marital_status_id,marital_status_arraylist.toString());
+        }
+        else
+        {
+            H.showMessage(this, "Please Select Match Ethnicity");
+            return;
+        }
+
+
+        if(ethincity_arraylist.size()>0)
+        {
+            json.addString(P.ethnicitys_id,ethincity_arraylist.toString());
+        }
+        else
+        {
+            H.showMessage(this, "Please Select Match Ethnicity");
+            return;
+        }
+
+
+
+          if(((CheckBox) findViewById(R.id.other)).isChecked())
+        {
+            String stringg="";
+
+            stringg = ((EditText)findViewById(R.id.otherEthnicity)).getText().toString();
+
+            if (stringg.isEmpty())
+            {
+                H.showMessage(this,"Please enter other match Ethnicity");
+                return;
+            }
+            json.addString(P.other_ethnicitys, stringg);
+
+        }
+
+
+        /*editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select education");
@@ -322,7 +362,8 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         }
         i = educationNameList.indexOf(string);
         if (i != -1)
-            json.addString(P.education_id, educationCodeList.get(i));
+            json.addString(P.education_id, educationCodeList.get(i));*/
+
 
         string = ((CheckBox) findViewById(R.id.checkBox1)).isChecked() ? "1" : "0";
         json.addString(P.request_from_anyone, string);
@@ -403,12 +444,14 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             {
                 if(isChecked)
                 {
+                    marital_status_arraylist.add(buttonView.getTag().toString());
                     Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
                 }
+
                 else
                 {
+                    marital_status_arraylist.remove(buttonView.getTag().toString());
                     Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
-
                 }
 
             }
@@ -416,37 +459,26 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
 
             if(buttonView==((CheckBox)findViewById(R.id.arab)) || buttonView==((CheckBox)findViewById(R.id.african)) || buttonView==((CheckBox)findViewById(R.id.asian))
-                    || buttonView==((CheckBox)findViewById(R.id.caucasian))|| buttonView==((CheckBox)findViewById(R.id.hispanic))|| buttonView==((CheckBox)findViewById(R.id.mixedRace))
-                    || buttonView==((CheckBox)findViewById(R.id.parsian))|| buttonView==((CheckBox)findViewById(R.id.southAsian_indian)) || buttonView==((CheckBox)findViewById(R.id.southAsian_pakistani))
+                    || buttonView==((CheckBox)findViewById(R.id.caucasian))|| buttonView==((CheckBox)findViewById(R.id.hispanic))|| buttonView==((CheckBox)findViewById(R.id.parsian))
+                    || buttonView==((CheckBox)findViewById(R.id.southAsian_indian))|| buttonView==((CheckBox)findViewById(R.id.mixedRace))
+                    || buttonView==((CheckBox)findViewById(R.id.southAsian_pakistani))
+
             )
             {
                 if(isChecked)
                 {
+                    ethincity_arraylist.add(buttonView.getTag().toString());
                     Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    ethincity_arraylist.remove(buttonView.getTag().toString());
                     Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
 
                 }
 
             }
 
-
-            if(buttonView==((CheckBox)findViewById(R.id.neverMarriedBefore)) || buttonView==((CheckBox)findViewById(R.id.divorced)) || buttonView==((CheckBox)findViewById(R.id.married))
-                    || buttonView==((CheckBox)findViewById(R.id.married))|| buttonView==((CheckBox)findViewById(R.id.widowed))|| buttonView==((CheckBox)findViewById(R.id.separated)))
-            {
-                if(isChecked)
-                {
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
 
             if(buttonView==(CheckBox)findViewById(R.id.other))
             {
@@ -463,21 +495,22 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
             }
 
-            if(buttonView==(CheckBox)findViewById(R.id.checkBox1)||buttonView==(CheckBox)findViewById(R.id.checkBox2)|buttonView==(CheckBox)findViewById(R.id.checkBox3))
+            /*if(buttonView==(CheckBox)findViewById(R.id.checkBox1)||buttonView==(CheckBox)findViewById(R.id.checkBox2)|buttonView==(CheckBox)findViewById(R.id.checkBox3))
             {
                 if(isChecked)
                 {
-
-
+                    email_arraylist.add(buttonView.getTag().toString());
+                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    email_arraylist.remove(buttonView.getTag().toString());
+                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
 
                 }
 
 
-            }
-
+            }*/
 
 
         }
