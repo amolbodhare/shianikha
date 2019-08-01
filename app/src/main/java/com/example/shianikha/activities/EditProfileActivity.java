@@ -3,33 +3,35 @@ package com.example.shianikha.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.Api;
@@ -38,21 +40,20 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.example.App;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 import com.theartofdev.edmodo.cropper.CropImage;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -66,17 +67,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     String gender = "";
     String imageId = "";
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> profileForList, cityOfResidenceList, stateList, countryOfResidenceList, countryOfCitizenshipList, heightList;
-    private ArrayList<String> religionList, ethincityList, fathersCityList, mothersCityList, currentOccupationList, highestLevelOfEducationList;
-    private ArrayList<String> languageList, habbitList, relocateList, seekingMarriageList, intrestedInList;
 
-    private ArrayList<String> countryNameList;
-    private ArrayList<String> countryCodeList;
+    private Map<String,String> countryList = new TreeMap<>();
 
-
-    private ArrayList<String> profileForCodeList, cityOfResidenceCodeList, stateCodeList, countryOfResidenceCodeList, countryOfCitizenshipCodeList;
-    private ArrayList<String> religionCodeList, ethincityCodeList, fathersCityCodeList, mothersCityCodeList, currentOccupationCodeList, highestLevelOfEducationCodeList;
-    private ArrayList<String> languageCodeList, habbitCodeList, relocateCodeList, seekingMarriageCodeList, intrestedInCodeList;
     private Session session;
 
     @Override
@@ -93,8 +86,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.button).setOnClickListener(this);
 
         //setMarginTopOfCustomSpinner(view);
-        extractRequireList();
         handleGenderClickListner();
+        makeCountryCodeList();
     }
 
     private void setAllRequiredClickListener(ViewGroup viewGroup) {
@@ -107,13 +100,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void makeCountryCodeList() {
+        String string = new Session(this).getString(P.country_code);
+        if (string != null) {
+            countryList.clear();
+            JsonList jsonList = new JsonList(string);
+            String s1,s2;
+
+            for (Json json : jsonList) {
+                s1 = json.getString(P.name);
+                s2 = json.getString(P.country_code);
+                if (s1 != null && s2 != null)
+                    countryList.put(s1, s2);
+            }
+            H.log("countryNameAndListIs",countryList.toString());
+        }
+    }
+
     @Override
     public void onClick(View v) {
         H.log("iAm", "Clicked");
 
         if (v.getId() == R.id.dateOfBirthEditText)
             handleDatePicker();
-
         else if (v.getId() == R.id.add_img_imv) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 callImageCropper();
@@ -123,10 +132,31 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 return;
             }
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, 47);
-        } else if (v.getId() == R.id.view)
+        }
+        else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
+        else if (v.getId() == R.id.countryCodeEditText)
+        {
+            final Dialog dialog = new Dialog(this);
+            final EditText editText = (EditText)v;
+            dialog.setContentView(R.layout.country_code_layout);
+            ListView listView = dialog.findViewById(R.id.listView);
+            CountryCodeListAdapter countryCodeListAdapter = new CountryCodeListAdapter();
+            listView.setAdapter(countryCodeListAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    editText.setText(((TextView)view.findViewById(R.id.countryCode)).getText().toString());
+                    dialog.hide();
+                }
+            });
+            dialog.show();
+        }
         else
             setUpCustomSpinner(v);
+
+        setUpTextWatcher();
     }
 
     public void onBack(View view) {
@@ -161,13 +191,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select profile for");
             return;
         }
-        int i = profileForList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.profile_for, profileForCodeList.get(i));
-
-
-        //token id is settled  here
-        String check_token_id = session.getString(P.tokenData);
 
         if ((session.getString(P.tokenData)).isEmpty()) {
             H.showMessage(this, "token id not found");
@@ -203,19 +226,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select City of residence");
             return;
         }
-        i = cityOfResidenceList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.city, cityOfResidenceCodeList.get(i));
-
-        editText = findViewById(R.id.state_ed);
-        string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select state");
-            return;
-        }
-        i = stateList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.state, stateCodeList.get(i));
 
         string = ((EditText) findViewById(R.id.dateOfBirthEditText)).getText().toString();
         if (string.isEmpty()) {
@@ -224,7 +234,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         submit_json.addString(P.dob, string);
 
-        string = ((EditText) findViewById(R.id.height_ed)).getText().toString();
+        string = ((EditText) findViewById(R.id.heightEditText)).getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select height");
             return;
@@ -237,116 +247,111 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select religion");
             return;
         }
-        i = religionList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.religion, religionCodeList.get(i));
-
         editText = findViewById(R.id.ethnicityEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select ethincity");
             return;
         }
-        i = ethincityList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.ethnicity, ethincityCodeList.get(i));
 
-        editText = findViewById(R.id.current_occupation_ed);
+        editText = findViewById(R.id.occupationEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select current occupation");
             return;
         }
 
-        i = currentOccupationList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.occupation_id, currentOccupationCodeList.get(i));
 
-        editText = findViewById(R.id.higest_level_edu_ed);
+        editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select highest education");
             return;
         }
-        i = highestLevelOfEducationList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.edulevel_id, highestLevelOfEducationCodeList.get(i));
-
-        i = languageList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.language, languageCodeList.get(i));
 
         //radiogroups and radiobuttons
-
-        i = ((RadioGroup) findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId();
-        if (i == R.id.yesConverted)
-            string = "1";
-        else if (i == R.id.notConverted)
-            string = "0";
-        submit_json.addString(P.cvt_islam, string);
-
-        i = ((RadioGroup) findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId();
-        if (i == R.id.yesSyed)
-            string = "1";
-        else if (i == R.id.notSyed)
-            string = "0";
-        else if (i == R.id.donnKnowSyed)
-            string = "2";
-        submit_json.addString(P.syed, string);
-
-        i = ((RadioGroup) findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId();
-        if (i == R.id.yesChildren)
-            string = "1";
-        else if (i == R.id.notChildren)
-            string = "0";
-        submit_json.addString(P.children, string);
-
-        i = seekingMarriageList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.seeking_marriage, seekingMarriageCodeList.get(i));
-
-
-        i = intrestedInList.indexOf(string);
-        if (i != -1)
-            submit_json.addString(P.intrested_in, intrestedInCodeList.get(i));
 
         H.log("submittedjson", submit_json.toString());
         hitEditProfileApi(submit_json);
         //startActivity(new Intent(this,RegThirdPageActivity.class));
     }
 
-    private void setUpCustomSpinner(final View view) {
+    private void setUpCustomSpinner(final View view)
+    {
         ListView listView = findViewById(R.id.listView);
         findViewById(R.id.view).setVisibility(View.VISIBLE);
+        EditText editText = findViewById(R.id.editText);
+        int i = view.getId();
 
-        if (view.getId() == R.id.profile_for_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search profile for");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, profileForList);
-
-        } else if (view.getId() == R.id.countryCodeEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search Country Code");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryCodeList);
-        } else if (view.getId() == R.id.city_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search City Of Residence");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityOfResidenceList);
-        } else if (view.getId() == R.id.state_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search state");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, stateList);
-        } else if (view.getId() == R.id.height_ed) {
-            EditText editText = findViewById(R.id.editText);
-            editText.setHint("Search height");
-            editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, heightList);
-        } else if (view.getId() == R.id.religion_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search Religion");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, religionList);
+        if (i == R.id.complexionEditText)
+        {
+            editText.setHint("Search Complexion ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.complexionNameList);
         }
-         else if (view.getId() == R.id.current_occupation_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search current occupation");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, currentOccupationList);
-        } else if (view.getId() == R.id.higest_level_edu_ed) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search highest level of education");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, highestLevelOfEducationList);
+        else if (i == R.id.heightEditText)
+        {
+            editText.setHint("Search Height ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.heightList);
+        }
+        else if (i == R.id.bodyTypeEditText)
+        {
+            editText.setHint("Search body Type ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.physicalStatusNameList);
+        }
+        else if (i == R.id.communityEditText)
+        {
+            editText.setHint("Search Shia Community ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.religionNameList);
+        }
+        else if (i == R.id.maritalStatusEditText)
+        {
+            editText.setHint("Search Marital Status ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.maritalStatusNameList);
+        }
+        else if (i == R.id.educationEditText)
+        {
+            editText.setHint("Search Education ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
+        }
+        else if (i == R.id.occupationEditText || i == R.id.fatherOccupationEditText || i == R.id.mothersOccupationEditText)
+        {
+            editText.setHint("Search Occupation ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
+        }
+        else if (i == R.id.monthlyIncomeEditText)
+        {
+            editText.setHint("Search Monthly Income ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
+        }
+        else if (i == R.id.countryEditText || i == R.id.fathersCountryEditText || i==R.id.mothersCountryEditText)
+        {
+            editText.setHint("Search Country Name ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
+        }
+        else if (i == R.id.stateEditText)
+        {
+            editText.setHint("Search State Name ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
+        }
+        else if (i == R.id.cityEditText)
+        {
+            editText.setHint("Search City Name ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
+        }
+        else if (i == R.id.motherTongueEditText || i == R.id.selectLanguagesEditText)
+        {
+            editText.setHint("Search Language ");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
+        }
+        else if (i == R.id.ethnicityEditText)
+        {
+            editText.setHint("Search Ethnicity");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.ethnicityNameList);
+        }
+        else if (i == R.id.smokingEditText)
+        {
+            editText.setHint("Search Smoking Status");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.smokingNameList);
         }
 
         if (arrayAdapter == null)
@@ -361,13 +366,34 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 TextView textView = v.findViewById(R.id.textView);
                 if (textView != null) {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    String string = textView.getText().toString().trim();
+                    ((EditText) view).setText(string);
+                    /*if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);*/
                 }
                 hideCustomSpinnerLayout();
             }
         });
 
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private void showOtherEditText(View view, boolean b)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
+        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+
+        int i = linearLayout.indexOfChild(relativeLayout);
+        View v = linearLayout.getChildAt(i+1);
+        if (v instanceof TextInputLayout)
+        {
+            if (b)
+                v.setVisibility(View.VISIBLE);
+            else
+                v.setVisibility(View.GONE);
+        }
     }
 
     private void hideCustomSpinnerLayout() {
@@ -377,290 +403,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         View view = findViewById(R.id.view);
         view.setVisibility(View.GONE);
         H.hideKeyBoard(this, view);
-    }
-
-    private void extractRequireList() {
-        JsonList jsonList;
-
-        //for profile
-        String string = session.getString(P.profile_for);
-
-        if (string != null) {
-            jsonList = new JsonList(string);
-            profileForList = new ArrayList<>();
-            profileForCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                profileForList.add(string);
-
-                string = j.getString(P.id);
-                profileForCodeList.add(string);
-            }
-        }
-
-
-        //for country code
-        string = session.getString(P.country_code);
-
-        if (string != null) {
-            jsonList = new JsonList(string);
-            countryNameList = new ArrayList<>();
-            countryCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                countryNameList.add(string);
-
-                string = j.getString(P.country_code);
-                countryCodeList.add(string);
-            }
-        }
-
-        //for city of residence
-        string = session.getString(P.city);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            cityOfResidenceCodeList = new ArrayList<>();
-            cityOfResidenceList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.city_name);
-                cityOfResidenceList.add(string);
-
-                string = j.getString(P.city_id);
-                cityOfResidenceCodeList.add(string);
-            }
-        }
-
-        //for state
-        string = session.getString(P.state);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            stateList = new ArrayList<>();
-            stateCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.state_name);
-                stateList.add(string);
-
-                string = j.getString(P.state_id);
-                stateCodeList.add(string);
-            }
-        }
-
-        //for country of residence
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            countryOfResidenceList = new ArrayList<>();
-            countryOfResidenceCodeList = new ArrayList<>();
-
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                countryOfResidenceList.add(string);
-
-                string = j.getString(P.country_code);
-                countryOfResidenceCodeList.add(string);
-            }
-        }
-
-        //for country of citizenship
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            countryOfCitizenshipList = new ArrayList<>();
-            countryOfCitizenshipCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                countryOfCitizenshipList.add(string);
-
-                string = j.getString(P.country_code);
-                countryOfCitizenshipCodeList.add(string);
-            }
-        }
-
-        //for height
-        string = session.getString(P.height);
-        if (string != null) {
-            try {
-                JSONArray jsonArray = new JSONArray(string);
-                heightList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    string = jsonArray.getString(i);
-                    heightList.add(string);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        //for religion
-        string = session.getString(P.religion);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            religionList = new ArrayList<>();
-            religionCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                religionList.add(string);
-
-                string = j.getString(P.id);
-                religionCodeList.add(string);
-            }
-        }
-
-        //for ethincity
-        string = session.getString(P.ethnicity);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            ethincityList = new ArrayList<>();
-            ethincityCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                ethincityList.add(string);
-
-                string = j.getString(P.id);
-                ethincityCodeList.add(string);
-            }
-        }
-
-
-        //for fathers country
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            fathersCityList = new ArrayList<>();
-            fathersCityCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                fathersCityList.add(string);
-
-                string = j.getString(P.id);
-                fathersCityCodeList.add(string);
-            }
-        }
-
-        //for mothers country
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            mothersCityList = new ArrayList<>();
-            mothersCityCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                mothersCityList.add(string);
-
-                string = j.getString(P.id);
-                mothersCityCodeList.add(string);
-            }
-        }
-
-        //for current occupation
-        string = session.getString(P.occupation);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            currentOccupationList = new ArrayList<>();
-            currentOccupationCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                currentOccupationList.add(string);
-
-                string = j.getString(P.id);
-                currentOccupationCodeList.add(string);
-            }
-        }
-
-        //for education
-        string = session.getString(P.education);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            highestLevelOfEducationList = new ArrayList<>();
-            highestLevelOfEducationCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                highestLevelOfEducationList.add(string);
-
-                string = j.getString(P.id);
-                highestLevelOfEducationCodeList.add(string);
-            }
-        }
-
-        //for language
-        string = session.getString(P.language);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            languageList = new ArrayList<>();
-            languageCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                languageList.add(string);
-
-                string = j.getString(P.id);
-                languageCodeList.add(string);
-            }
-        }
-
-        //for smoking
-        string = session.getString(P.smoking);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            habbitList = new ArrayList<>();
-            habbitCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                habbitList.add(string);
-
-                string = j.getString(P.id);
-                habbitCodeList.add(string);
-            }
-        }
-
-
-        //for relocate
-        string = session.getString(P.relocate);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            relocateList = new ArrayList<>();
-            relocateCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                relocateList.add(string);
-
-                string = j.getString(P.id);
-                relocateCodeList.add(string);
-            }
-        }
-
-        //for seeking marriage
-        string = session.getString(P.seeking_marriage);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            seekingMarriageList = new ArrayList<>();
-            seekingMarriageCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                seekingMarriageList.add(string);
-
-                string = j.getString(P.id);
-                seekingMarriageCodeList.add(string);
-            }
-        }
-
-        //for intrested in
-        string = session.getString(P.intrested_in);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            intrestedInList = new ArrayList<>();
-            intrestedInCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                intrestedInList.add(string);
-
-                string = j.getString(P.id);
-                intrestedInCodeList.add(string);
-            }
-        }
-
-        setUpTextWatcher();
     }
 
     private void setUpTextWatcher() {
@@ -867,4 +609,51 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 .run("uploadImage");
     }
 
+    class CountryCodeListAdapter extends BaseAdapter
+    {
+        ArrayList<String> countryCodeList;
+        ArrayList<String> countryNameList;
+        String string;
+
+        CountryCodeListAdapter()
+        {
+            countryCodeList = new ArrayList<>();
+            countryNameList = new ArrayList<>();
+
+            for (Map.Entry<String,String> entry : countryList.entrySet())
+            {
+                string = entry.getKey();
+                countryNameList.add(string);
+                string = entry.getValue();
+                countryCodeList.add(string);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return countryList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            if (convertView==null)
+                convertView = LayoutInflater.from(EditProfileActivity.this).inflate(R.layout.country_code_item,null,false);
+
+            ((TextView)convertView.findViewById(R.id.countryCode)).setText(countryCodeList.get(position));
+            ((TextView)convertView.findViewById(R.id.countryName)).setText(countryNameList.get(position));
+
+            return convertView;
+        }
+    }
 }

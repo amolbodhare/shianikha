@@ -1,44 +1,39 @@
 package com.example.shianikha.activities;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
-import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.App;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.StringTokenizer;
 
 public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> educationNameList, educationCodeList, occupationNameList, occupationCodeList, countryNameList, countryIdList, cityNameList, cityIdList,
-            languageNameList, languageIdList,stateeNameList, stateIdList;
+
     private Session session;
 
     @Override
@@ -56,108 +51,12 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.stateEditText).setOnClickListener(this);
         findViewById(R.id.cityEditText).setOnClickListener(this);
         findViewById(R.id.motherTongueEditText).setOnClickListener(this);
+        findViewById(R.id.monthlyIncomeEditText).setOnClickListener(this);
         findViewById(R.id.languageEditText).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
 
         setMarginTopOfCustomSpinner();
-        extractRequireList();
-    }
-
-    private void extractRequireList() {
-        JsonList jsonList;
-
-        //for education
-        String string = session.getString(P.education);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            educationCodeList = new ArrayList<>();
-            educationNameList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                educationNameList.add(string);
-
-                string = j.getString(P.id);
-                educationCodeList.add(string);
-            }
-        }
-
-        //for occupation
-        string = session.getString(P.occupation);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            occupationNameList = new ArrayList<>();
-            occupationCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                occupationNameList.add(string);
-
-                string = j.getString(P.id);
-                occupationCodeList.add(string);
-            }
-        }
-
-        //for country
-        string = session.getString(P.country);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            countryNameList = new ArrayList<>();
-            countryIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                countryNameList.add(string);
-
-                string = j.getString(P.id);
-                countryIdList.add(string);
-            }
-        }
-
-        //for state
-        string = session.getString(P.state);
-        if (string != null) {
-            jsonList = new JsonList(string);
-             stateeNameList= new ArrayList<>();
-            stateIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.state_name);
-                stateeNameList.add(string);
-
-                string = j.getString(P.state_id);
-                stateIdList.add(string);
-            }
-        }
-
-
-        //for city
-        string = session.getString(P.city);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            cityNameList = new ArrayList<>();
-            cityIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.city_name);
-                cityNameList.add(string);
-
-                string = j.getString(P.city_id);
-                cityIdList.add(string);
-            }
-        }
-
-        //for language
-        string = session.getString(P.language);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            languageNameList = new ArrayList<>();
-            languageIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                languageNameList.add(string);
-
-                string = j.getString(P.id);
-                languageIdList.add(string);
-            }
-        }
-
         setUpTextWatcher();
     }
 
@@ -181,30 +80,38 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
     private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
-        findViewById(R.id.view).setVisibility(View.VISIBLE);
 
         if (view.getId() == R.id.occupationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, occupationNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
         } else if (view.getId() == R.id.educationEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search education");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
         } else if (view.getId() == R.id.countryEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search country");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, countryNameList);
-        }else if (view.getId() == R.id.stateEditText) {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
+        } else if (view.getId() == R.id.stateEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search state");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, stateeNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
         } else if (view.getId() == R.id.cityEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search city");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, cityNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
         } else if (view.getId() == R.id.motherTongueEditText) {
             ((EditText) findViewById(R.id.editText)).setHint("Search mother tongue");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
-        } else if (view.getId() == R.id.languageEditText) {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
+        } else if (view.getId() == R.id.monthlyIncomeEditText) {
+            ((EditText) findViewById(R.id.editText)).setHint("Search income");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
+        } else if (view.getId() == R.id.languageEditText)
+        {
             ((EditText) findViewById(R.id.editText)).setHint("Search language");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
+            String[] languageArray = new String[CommonListHolder.languageNameList.size()];
+            languageArray = CommonListHolder.languageNameList.toArray(languageArray);
+            showMultiChoiceDialog(languageArray, view);
+            return;
+            //arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
         }
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
 
         if (arrayAdapter == null)
             return;
@@ -216,8 +123,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
-                if (textView != null)
-                {
+                if (textView != null) {
                     Log.e("selectedIs", textView.getText().toString());
                     String string = textView.getText().toString().trim();
                     ((EditText) view).setText(string);
@@ -233,14 +139,54 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
     }
 
-    private void showOtherEditText(View view, boolean b)
-    {
-        RelativeLayout relativeLayout = (RelativeLayout)view.getParent();
-        LinearLayout linearLayout = (LinearLayout)relativeLayout.getParent();
+    private ArrayList<String> tempList;
+    boolean[] checkedArray;
+
+    private void showMultiChoiceDialog(final String[] languageArray, final View view) {
+        if (checkedArray == null) {
+            checkedArray = new boolean[languageArray.length];
+            for (int j = 0; j < languageArray.length; j++)
+                checkedArray[j] = false;
+            tempList = new ArrayList<>();
+        }
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMultiChoiceItems(languageArray, checkedArray, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                if (b) {
+                    tempList.add(languageArray[i]);
+                    checkedArray[i] = true;
+                } else {
+                    tempList.remove(languageArray[i]);
+                    checkedArray[i] = false;
+                }
+            }
+        }).setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (tempList != null) {
+                    String string = tempList.toString();
+                    string = string.replace("[", "");
+                    string = string.replace("]", "");
+                    if (string.contains("other") || string.contains("Other"))
+                        findViewById(R.id.otherLanguageInputLayout).setVisibility(View.VISIBLE);
+                    else
+                        findViewById(R.id.otherLanguageInputLayout).setVisibility(View.GONE);
+                    ((EditText) view).setText(string);
+                    hideCustomSpinnerLayout();
+                }
+            }
+        }).show();
+    }
+
+    private void showOtherEditText(View view, boolean b) {
+        RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
+        LinearLayout linearLayout = (LinearLayout) relativeLayout.getParent();
 
         int i = linearLayout.indexOfChild(relativeLayout);
-        View v = linearLayout.getChildAt(i+1);
-        if (v instanceof TextInputLayout)
+        View v = linearLayout.getChildAt(i + 1);
+        if (v instanceof TextInputLayout && v.getId()!=R.id.residentialAddressTextInputLayout)
         {
             if (b)
                 v.setVisibility(View.VISIBLE);
@@ -275,60 +221,55 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         EditText editText = findViewById(R.id.educationEditText);
         String string = editText.getText().toString();
 
-        if (string.isEmpty())
-        {
+        if (string.isEmpty()) {
             H.showMessage(this, "Please select education");
             return;
-        }
-        else if(string.equalsIgnoreCase("others")||string.equalsIgnoreCase("other"))
-        {
-            String stringg="";
+        } else if (string.equalsIgnoreCase("others") || string.equalsIgnoreCase("other")) {
+            String stringg = "";
 
-            stringg = ((EditText)findViewById(R.id.other_education_details_edt)).getText().toString();
-            if (stringg.isEmpty())
-            {
-                H.showMessage(this,"Please enter other details about education");
+            stringg = ((EditText) findViewById(R.id.other_education_details_edt)).getText().toString();
+            if (stringg.isEmpty()) {
+                H.showMessage(this, "Please enter other details about education");
                 return;
             }
             App.masterJson.addString(P.other_edulevel, stringg);
 
         }
-        int i = educationNameList.indexOf(string);
+        int i = CommonListHolder.educationNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.edu_level, educationCodeList.get(i));
+            App.masterJson.addString(P.edu_level, CommonListHolder.educationIdList.get(i));
 
 
-
-         editText = findViewById(R.id.occupationEditText);
-         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
+        editText = findViewById(R.id.occupationEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
             H.showMessage(this, "Please select occupation");
             return;
-        }
-        else if(string.equalsIgnoreCase("others"))
-        {
-            String stringg="";
+        } else if (string.equalsIgnoreCase("others")) {
+            String stringg = "";
 
-            stringg = ((EditText)findViewById(R.id.other_details_occupation_edt)).getText().toString();
-            if (stringg.isEmpty())
-            {
-                H.showMessage(this,"Please enter other details about occupation");
+            stringg = ((EditText) findViewById(R.id.other_details_occupation_edt)).getText().toString();
+            if (stringg.isEmpty()) {
+                H.showMessage(this, "Please enter other details about occupation");
                 return;
             }
             App.masterJson.addString(P.about_occupation, stringg);
 
         }
-         i = occupationNameList.indexOf(string);
+        i = CommonListHolder.occupationNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.occupation_id, occupationCodeList.get(i));
+            App.masterJson.addString(P.occupation_id, CommonListHolder.occupationIdList.get(i));
+
+        editText = findViewById(R.id.monthlyIncomeEditText);
+        string = editText.getText().toString();
+        i = CommonListHolder.monthlyIncomeNameList.indexOf(string);
+        if (i!=-1)
+            App.masterJson.addString(P.monthly_income,CommonListHolder.monthlyIncomeIdList.get(i));
 
 
-
-        string = ((EditText)findViewById(R.id.otherEthnicity)).getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter residential address");
+        string = ((EditText) findViewById(R.id.res_add_ed)).getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter residential address");
             return;
         }
         App.masterJson.addString(P.residency_address, string);
@@ -339,20 +280,19 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(this, "Please select country");
             return;
         }
-        i = countryNameList.indexOf(string);
+        i = CommonListHolder.countryNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.country_res, countryIdList.get(i));
+            App.masterJson.addString(P.country_res, CommonListHolder.countryIdList.get(i));
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
+        if (string.isEmpty()) {
             H.showMessage(this, "Please select state");
             return;
         }
-        i = stateeNameList.indexOf(string);
+        i = CommonListHolder.stateNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.state, stateIdList.get(i));
+            App.masterJson.addString(P.state, CommonListHolder.stateIdList.get(i));
 
         editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
@@ -360,9 +300,9 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(this, "Please select city");
             return;
         }
-        i = cityNameList.indexOf(string);
+        i = CommonListHolder.cityNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.city, cityIdList.get(i));
+            App.masterJson.addString(P.city, CommonListHolder.cityIdList.get(i));
 
         editText = findViewById(R.id.motherTongueEditText);
         string = editText.getText().toString();
@@ -370,23 +310,35 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(this, "Please select Mothertongue");
             return;
         }
-        i = languageNameList.indexOf(string);
+        i = CommonListHolder.languageNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.mother_tongue, languageIdList.get(i));
+            App.masterJson.addString(P.mother_tongue, CommonListHolder.languageIdList.get(i));
 
 
         editText = findViewById(R.id.languageEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select language");
+            H.showMessage(this, "Please select languages");
             return;
         }
-        i = languageNameList.indexOf(string);
-        if (i != -1)
-            App.masterJson.addString(P.language, languageIdList.get(i));
+        StringTokenizer stringTokenizer = new StringTokenizer(string,",");
+        JSONArray jsonArray = new JSONArray();
+        while (stringTokenizer.hasMoreTokens())
+        {
+            string = stringTokenizer.nextToken().trim();
+            H.log("tokenIs",string);
+            i= CommonListHolder.languageNameList.indexOf(string);
+            if (i!=-1)
+                jsonArray.put(CommonListHolder.languageIdList.get(i));
+        }
 
+        App.masterJson.addJSONArray(P.language,jsonArray);
 
+        editText = findViewById(R.id.otherLanguageEditText);
+        string = editText.getText().toString();
+        App.masterJson.addString(P.other_language,string);
 
+        H.log("jsonArrayIs",jsonArray+"");
 
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegFourthPageActivity.class));

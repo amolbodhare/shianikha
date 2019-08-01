@@ -147,4 +147,6 @@ public class P {
     public static String packages_applied="packages_applied";
     public static String ethnicity_name="ethnicity_name";
     public static String about_1="about_1";
+    public static String monthly_income = "monthly_income";
+    public static String other_language = "other_language";
 }//class

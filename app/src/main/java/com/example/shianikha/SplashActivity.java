@@ -17,8 +17,10 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.activities.RegThirdPageActivity;
 import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
@@ -92,90 +94,120 @@ public class SplashActivity extends AppCompatActivity {
         if (json == null)
             return;
 
-        JsonList jsonList = json.getJsonList(P.profile_for);//for whom
-        if (jsonList != null)
-            session.addString(P.profile_for, jsonList.toString());
+        CommonListHolder commonListHolder = new CommonListHolder();
 
-        jsonList = json.getJsonList(P.country_code);// country name and phone code
-        if (jsonList != null)
-            session.addString(P.country_code, jsonList.toString());
+        JsonList jsonList = json.getJsonList(P.profile_for);//for whom
+        if (jsonList != null) {
+            session.addString(P.profile_for, jsonList.toString());
+            commonListHolder.makeProfileForList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.city);// city name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.city, jsonList.toString());
+            commonListHolder.makeCityList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.state);// state name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.state, jsonList.toString());
-
-        jsonList = json.getJsonList(P.state);// state name and code
-        if (jsonList != null)
-            session.addString(P.state, jsonList.toString());
+            commonListHolder.makeStateList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.country);// country name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.country, jsonList.toString());
+            commonListHolder.makeCountryList(jsonList);
+        }
 
         JSONArray jsonArray = json.getJsonArray(P.height);// height array
-        if (jsonArray != null)
+        if (jsonArray != null) {
             session.addString(P.height, jsonArray.toString());
+            commonListHolder.makeHeightList(jsonArray);
+        }
 
         jsonList = json.getJsonList(P.religion);// religion name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.religion, jsonList.toString());
+            commonListHolder.makeReligionList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.ethnicity);// ethnicity name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.ethnicity, jsonList.toString());
+            commonListHolder.makeEthnicityList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.occupation);// occupation name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.occupation, jsonList.toString());
+            commonListHolder.makeOccupationList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.education);// education name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.education, jsonList.toString());
+            commonListHolder.makeEducationList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.mothertongue);// language name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.language, jsonList.toString());
+            commonListHolder.makeMotherTongueList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.smoking);// smoking name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.smoking, jsonList.toString());
+            commonListHolder.makeSmokingList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.relocate);// relocate name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.relocate, jsonList.toString());
-
-        jsonList = json.getJsonList(P.relocate);// relocate name and code
-        if (jsonList != null)
-            session.addString(P.relocate, jsonList.toString());
+            commonListHolder.makeRelocateList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.seeking_marriage);// marriage name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.seeking_marriage, jsonList.toString());
+            commonListHolder.makeSeekingForMarriageList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.intreasted_in);// interrest name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.intreasted_in, jsonList.toString());
-
-
-                jsonList = json.getJsonList(P.physical_status);// complexion name and code
-        if (jsonList != null)
-            session.addString(P.physical_status, jsonList.toString());
+            commonListHolder.makeIntrestedInList(jsonList);
+        }
 
         jsonList = json.getJsonList(P.complexion);// complexion name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.complexion, jsonList.toString());
+            commonListHolder.makeComplexionList(jsonList);
+        }
 
         jsonArray = json.getJsonArray(P.min_age);// age array, note: min and max array have same values so keeping only one
-        if (jsonArray != null)
+        if (jsonArray != null) {
             session.addString(P.age, jsonArray.toString());
+            commonListHolder.makeAgeList(jsonArray);
+        }
 
         jsonList = json.getJsonList(P.marital_status);// marital status name and code
-        if (jsonList != null)
+        if (jsonList != null) {
             session.addString(P.marital_status, jsonList.toString());
+            commonListHolder.makeMaritalStatusList(jsonList);
+        }
+
+        jsonList = json.getJsonList(P.physical_status);// physical status name and code
+        if (jsonList != null) {
+            session.addString(P.physical_status, jsonList.toString());
+            commonListHolder.makePhysicalStatusList(jsonList);
+        }
+
+        jsonList = json.getJsonList(P.monthly_income);// physical status name and code
+        if (jsonList != null)
+            commonListHolder.makeMonthlyIncomeList(jsonList);
+
 
         startNewActivity();
     }
@@ -187,13 +219,15 @@ public class SplashActivity extends AppCompatActivity {
                 /* Create an Intent that will start the Menu-Activity. */
                 Intent intent;
                 String string = session.getString(P.tokenData);
-                H.log("tokenIs",string);
+                H.log("tokenIs", string);
                 if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
-                else if (session.getInt(P.full_register)==0)
-                intent = new Intent(SplashActivity.this, HomeActivity.class);
+                else if (session.getInt(P.full_register) == 0)
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
                 else
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
+
+                //intent = new Intent(SplashActivity.this, RegThirdPageActivity.class);
 
                 startActivity(intent);
                 finish();
@@ -202,8 +236,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         hitMastersApi();
     }
