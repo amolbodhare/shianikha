@@ -2,73 +2,64 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".activities.EditProfileActivity">
 
     <RelativeLayout
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_below="@id/view"
         android:background="@color/profile_card_back_color">
 
-        <RelativeLayout
-            android:id="@+id/toolbar_layout"
+        <ImageView
+            android:id="@+id/drawerMenu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/clickable_trans_bg"
+            android:clickable="true"
+            android:onClick="onBack"
+            android:padding="13dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/titleName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/aaaaaa">
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:tag=""
+            android:text="edit profile"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/drawerMenu"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/clickable_trans_bg"
-                android:clickable="true"
-                android:onClick="onBack"
-                android:padding="13dp"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                android:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/titleName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="100dp"
-                android:ellipsize="marquee"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:letterSpacing="0.1"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:tag=""
-                android:text="edit profile"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="?actionBarSize"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="9dp"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:onClick="onSave"
-                android:text="save"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
+        <TextView
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="9dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:onClick="onSave"
+            android:text="save"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/titleBar">
 
         <LinearLayout
@@ -232,7 +223,7 @@
                         android:clickable="true"
                         android:focusable="false"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="+01"
+                        android:hint="+91"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned" />
 
@@ -327,7 +318,7 @@
                     android:layout_marginTop="17dp">
 
                     <EditText
-                        android:id="@+id/height_ed"
+                        android:id="@+id/heightEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:focusable="false"
@@ -377,6 +368,7 @@
                     android:layout_marginTop="17dp">
 
                     <EditText
+                        android:id="@+id/communityEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:focusable="false"
@@ -446,7 +438,7 @@
                     android:layout_marginTop="17dp">
 
                     <EditText
-                        android:id="@+id/higest_level_edu_ed"
+                        android:id="@+id/educationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:focusable="false"
@@ -465,13 +457,32 @@
 
                 </RelativeLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/otherEducationInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Other Education Name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="17dp">
 
                     <EditText
-                        android:id="@+id/current_occupation_ed"
+                        android:id="@+id/occupationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:focusable="false"
@@ -729,6 +740,26 @@
                     android:layout_marginBottom="0dp">
 
                     <EditText
+                        android:id="@+id/fathersOtherOccupationEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Father's Other Occupation Name"
+                        android:imeOptions="actionNext"
+                        android:visibility="gone"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp">
+
+                    <EditText
                         android:id="@+id/mothersNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -773,14 +804,34 @@
                     android:layout_marginBottom="0dp">
 
                     <EditText
+                        android:id="@+id/mothersOtherOccupationEdiText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Other Occupation Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp">
+
+                    <EditText
                         android:id="@+id/numberOfSiblings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:inputType="numberSigned"
                         android:hint="Number of Siblings"
-                        android:maxLength="2"
                         android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:maxLength="2"
                         android:singleLine="true"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -798,9 +849,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:inputType="numberSigned"
                         android:hint="Parent's/Alternate Mobile Number"
                         android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
                         android:singleLine="true"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -1110,7 +1161,7 @@
                             android:id="@+id/playingSports"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="0.75"
                             android:buttonTint="#5C5CFE"
                             android:fontFamily="@font/poppins_regular"
                             android:text="Playing Sports"
@@ -1120,7 +1171,7 @@
                             android:id="@+id/politicalInterest"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="1.25"
                             android:buttonTint="#5C5CFE"
                             android:fontFamily="@font/poppins_regular"
                             android:text="Political Interest"
