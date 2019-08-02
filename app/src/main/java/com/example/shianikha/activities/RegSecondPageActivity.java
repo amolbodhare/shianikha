@@ -1,8 +1,6 @@
 package com.example.shianikha.activities;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,13 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,21 +25,18 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.App;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private ArrayAdapter<String> arrayAdapter;
 
-    private ArrayList<String> heightList, maritalStatusNameList, maritalStatusIdList,complexionNameList,complexionIdList,physicalStatusNameList,physicalStatusIdList, shiaCommunityNameList, shiaCommunityIdList;
     private Session session;
     private LinearLayout linearLayout;
 
@@ -74,91 +66,6 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
 
         setMarginTopOfCustomSpinner();
-        extractRequireList();
-    }
-
-    private void extractRequireList() {
-        JsonList jsonList;
-
-
-
-        //for height
-        String string = session.getString(P.height);
-        if (string != null) {
-            try {
-                JSONArray jsonArray = new JSONArray(string);
-                heightList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    string = jsonArray.getString(i);
-                    heightList.add(string);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //for body type
-        string = session.getString(P.physical_status);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            physicalStatusNameList = new ArrayList<>();
-            physicalStatusIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                physicalStatusNameList.add(string);
-
-                string = j.getString(P.id);
-                physicalStatusIdList.add(string);
-            }
-        }
-
-        //for shia Community
-        string = session.getString(P.religion);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            shiaCommunityNameList = new ArrayList<>();
-            shiaCommunityIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                shiaCommunityNameList.add(string);
-
-                string = j.getString(P.id);
-                shiaCommunityIdList.add(string);
-            }
-        }
-
-        //for complexion
-        string = session.getString(P.complexion);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            complexionNameList = new ArrayList<>();
-            complexionIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                complexionNameList.add(string);
-
-                string = j.getString(P.id);
-                complexionIdList.add(string);
-            }
-        }
-
-
-        //  for marital status
-        string = session.getString(P.marital_status);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            maritalStatusNameList = new ArrayList<>();
-            maritalStatusIdList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                maritalStatusNameList.add(string);
-
-                string = j.getString(P.id);
-                maritalStatusIdList.add(string);
-            }
-        }
-
         setUpTextWatcher();
     }
 
@@ -188,29 +95,23 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         if (view.getId() == R.id.heightEditText) {
             editText.setHint("Search height");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, heightList);
-        }
-
-        else if (view.getId() == R.id.complexionEditText) {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.heightList);
+        } else if (view.getId() == R.id.complexionEditText) {
             editText.setHint("Search Complexion");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, complexionNameList);
-        }
-        else if (view.getId() == R.id.bodyEditText) {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.complexionNameList);
+        } else if (view.getId() == R.id.bodyEditText) {
             editText.setHint("Search Body Type");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, physicalStatusNameList);
-        }
-        else if (view.getId() == R.id.shiaCommunity) {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.physicalStatusNameList);
+        } else if (view.getId() == R.id.shiaCommunity) {
             editText.setHint("Search shia Community Type");
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, shiaCommunityNameList);
-        }
-        else if (view.getId() == R.id.maritalStatusEditText)
-        {
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.religionNameList);
+        } else if (view.getId() == R.id.maritalStatusEditText) {
             editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
             editText.setHint("Search marital status");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, maritalStatusNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.maritalStatusNameList);
         }
 
         if (arrayAdapter == null)
@@ -306,11 +207,9 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select complexion");
             return;
         }
-        int i = complexionNameList.indexOf(string);
+        int i = CommonListHolder.complexionNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.skin_tone, complexionIdList.get(i));
-
-
+            App.masterJson.addString(P.skin_tone, CommonListHolder.complexionIdList.get(i));
 
         editText = findViewById(R.id.heightEditText);
         string = editText.getText().toString();
@@ -318,8 +217,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select height");
             return;
         }
-            App.masterJson.addString(P.height, string);
-
+        App.masterJson.addString(P.height, string);
 
         editText = findViewById(R.id.bodyEditText);
         string = editText.getText().toString();
@@ -327,9 +225,9 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select body type");
             return;
         }
-        i = physicalStatusNameList.indexOf(string);
+        i = CommonListHolder.physicalStatusNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.body_type, physicalStatusIdList.get(i));
+            App.masterJson.addString(P.body_type, CommonListHolder.physicalStatusIdList.get(i));
 
         editText = findViewById(R.id.shiaCommunity);
         string = editText.getText().toString();
@@ -337,29 +235,24 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select shia commmunity");
             return;
         }
-        i = shiaCommunityNameList.indexOf(string);
+        i = CommonListHolder.religionNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.body_type, shiaCommunityIdList.get(i));
+            App.masterJson.addString(P.religion, CommonListHolder.religionIdList.get(i));
 
 
-        string = ((EditText)findViewById(R.id.otherShiaEditText)).getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter other shia details");
+        string = ((EditText) findViewById(R.id.otherShiaEditText)).getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter other shia details");
             return;
         }
-        App.masterJson.addString(P.othrt_religion, shiaCommunityIdList.get(i));
+        App.masterJson.addString(P.other_religion, string);
 
 
-        string =  findViewById(((RadioGroup)findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        string = findViewById(((RadioGroup) findViewById(R.id.convertedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
         App.masterJson.addString(P.cvt_islam, string);
 
-        string =  findViewById(((RadioGroup)findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        string = findViewById(((RadioGroup) findViewById(R.id.syedRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
         App.masterJson.addString(P.syed, string);
-
-        string =  findViewById(((RadioGroup)findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.children, string);
-
 
         editText = findViewById(R.id.maritalStatusEditText);
         string = editText.getText().toString();
@@ -367,18 +260,33 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             H.showMessage(this, "Please select marital status");
             return;
         }
-        i = maritalStatusNameList.indexOf(string);
+        i = CommonListHolder.maritalStatusNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.marital_status, maritalStatusIdList.get(i));
+            App.masterJson.addString(P.marital_status, CommonListHolder.maritalStatusIdList.get(i));
 
+        string = findViewById(((RadioGroup) findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.children, string);
+
+        JSONArray jsonArray = new JSONArray();
+        Json json;
+        LinearLayout childLayout;
+        for (i=0; i<linearLayout.getChildCount(); i++)
+        {
+            json = new Json();
+            childLayout =(LinearLayout) linearLayout.getChildAt(i);
+            editText = childLayout.findViewById(R.id.childAgeEditText);
+            string = editText.getText().toString();
+            json.addString(P.children_age,string);
+
+            editText = childLayout.findViewById(R.id.childEducationEditText);
+            string = editText.getText().toString();
+            json.addString(P.children_education,string);
+            jsonArray.put(json);
+        }
+        App.masterJson.addJSONArray(P.children_details,jsonArray);
 
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegThirdPageActivity.class));
-
-
-
-
-
     }
 
     private void setMarginTopOfCustomSpinner() {
@@ -392,14 +300,15 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        int viewId = radioGroup.getId();
-
-         if (viewId == R.id.childrenRadioGroup)
-        {
-            String string="";
-            string =  findViewById(((RadioGroup)findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
-            App.masterJson.addString(P.children, string);
+    public void onCheckedChanged(RadioGroup radioGroup, int i)
+    {
+        i = radioGroup.getCheckedRadioButtonId();
+        if (i == R.id.notChildren)
+            findViewById(R.id.relativeLayout).setVisibility(View.GONE);
+        else if (i == R.id.yesChildren) {
+            findViewById(R.id.relativeLayout).setVisibility(View.VISIBLE);
+            if (((LinearLayout)findViewById(R.id.linearLayout)).getChildCount() == 0)
+                addNewSubLayout();
         }
     }
 }

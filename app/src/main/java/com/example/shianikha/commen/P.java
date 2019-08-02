@@ -89,7 +89,7 @@ public class P {
 
     public static String mother_city = "mother_city";
     public static String body_type = "body_type";
-    public static String othrt_religion = "other_religion";
+    public static String other_religion = "other_religion";
 
     public static String occupation_id = "occupation_id";
     public static String skin_tone = "skin_tone";
@@ -147,4 +147,8 @@ public class P {
     public static String about_1="about_1";
     public static String monthly_income = "monthly_income";
     public static String other_language = "other_language";
+    public static String children_age = "children_age";
+    public static String children_education = "children_education";
+    public static String children_details = "children_details";
+    public static String other_intreasted_in = "other_intreasted_in";
 }//class
