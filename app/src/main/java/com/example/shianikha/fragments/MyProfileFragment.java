@@ -28,7 +28,21 @@ public class MyProfileFragment extends Fragment {
     public static String previousFragmentName;
     Context context;
 
-    private OnFragmentInteractionListener mListener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            someEventListener = (onSomeEventListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
+        }
+    }
+
+    public interface onSomeEventListener {
+            public void someEvent(String s);
+        }
+
+        onSomeEventListener someEventListener;
 
 
     public static MyProfileFragment newInstance(Fragment fragment, String string) {
