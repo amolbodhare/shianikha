@@ -301,7 +301,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         DatePickerDialog datePickerDialog =  new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.setInverseBackgroundForced(false);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime() - (365*18-4)*24*60*60*1000l);
         datePickerDialog.show();
     }
 
@@ -379,7 +379,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.email,string);
 
-        string = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
         if (string.isEmpty())
         {
             H.showMessage(context,"Please enter country code!");
@@ -391,6 +391,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         if (string.isEmpty())
         {
             H.showMessage(context,"Please enter mobile number!");
+            return;
+        }
+        else if (countryCode.equalsIgnoreCase("+91") && string.length()<10)
+        {
+            H.showMessage(context,"Please enter valid mobile number.");
             return;
         }
         json.addString(P.ph_number,string);

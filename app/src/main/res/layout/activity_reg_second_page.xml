@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:layout_weight="0.75"
-                    android:tag="2"
+                    android:tag="0"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
@@ -214,7 +214,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
-                    android:tag="2"
+                    android:tag="0"
                     android:checked="true"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
@@ -223,7 +223,7 @@
                     android:id="@+id/dontKnowSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:tag="3"
+                    android:tag="2"
                     android:layout_weight="1.5"
                     android:buttonTint="#5C5CFE"
                     android:text="Don't know" />
@@ -294,7 +294,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:tag="2"
+                        android:tag="0"
                         android:checked="true"
                         android:buttonTint="#5C5CFE"
                         android:text="No" />
@@ -328,7 +328,7 @@
                     android:layout_below="@id/textView"
                     android:orientation="vertical">
 
-                    <include layout="@layout/inflatable_children_layout" />
+                    <!--<include layout="@layout/inflatable_children_layout" />-->
 
                 </LinearLayout>
 
