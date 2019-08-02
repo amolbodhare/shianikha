@@ -306,7 +306,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void updateLabel(Calendar calendar) {
-        String myFormat = "dd MMM yyyy";
+        //String myFormat = "dd MMM yyyy";
+        String myFormat = "yyyy-MM-dd";
+
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         EditText editText = findViewById(R.id.dateOfBirthEditText);
