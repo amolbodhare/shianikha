@@ -55,7 +55,8 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
     private ArrayList<String> email_arraylist;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
@@ -116,6 +117,10 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         ((CheckBox)findViewById(R.id.mixedRace)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.southAsian_pakistani)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
         ((CheckBox)findViewById(R.id.other)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
+
+
+        marital_status_arraylist.add(((CheckBox)findViewById(R.id.neverMarriedBefore)).getTag().toString());
+        ethincity_arraylist.add(((CheckBox)findViewById(R.id.arab)).getTag().toString());
 
     }
 
@@ -230,7 +235,8 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         H.showKeyBoard(this, findViewById(R.id.editText));
 
         listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 TextView textView = v.findViewById(R.id.textView);
@@ -321,7 +327,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         }
         else
         {
-            H.showMessage(this, "Please Select Match Ethnicity");
+            H.showMessage(this, "Please Select Marital status");
             return;
         }
 
