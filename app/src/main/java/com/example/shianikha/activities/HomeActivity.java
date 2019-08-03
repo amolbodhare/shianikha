@@ -325,7 +325,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showPartnerPreferenceActivity() {
-        Intent i = new Intent(HomeActivity.this, PartnerPreferenceActivity.class);
+        Intent i = new Intent(HomeActivity.this, PerfectMatchActivity.class);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         //onDrawerMenuClick(findViewById(R.id.drawer_partnerPreference_layout));

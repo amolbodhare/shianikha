@@ -80,6 +80,10 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
         makeMaritalStatusCheckBox();
         makeEthnicityCheckBox();
+
+        boolean makeVisible = getIntent().getBooleanExtra("makeVisible",false);
+        if (makeVisible)
+            findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
     }
 
     private void makeEthnicityCheckBox()
@@ -419,13 +423,19 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
                 .run("hitPerfectMatchApi");
     }
 
-    private void setMarginTopOfCustomSpinner() {
+    private void setMarginTopOfCustomSpinner()
+    {
         LinearLayout linearLayout = findViewById(R.id.includeContainer);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
         int i = new Session(this).getInt(P.statusBarHeight);
         layoutParams.topMargin = i;
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
+
+        RelativeLayout relativeLayout = findViewById(R.id.toolbar_layout);
+        layoutParams = (RelativeLayout.LayoutParams) relativeLayout.getLayoutParams();
+        layoutParams.topMargin = i;
+        findViewById(R.id.toolbar_layout).setLayoutParams(layoutParams);
     }
 
     @Override
@@ -439,5 +449,9 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             else
                 findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.GONE);
         }
+    }
+
+    public void onBackClick(View view) {
+        finish();
     }
 }
