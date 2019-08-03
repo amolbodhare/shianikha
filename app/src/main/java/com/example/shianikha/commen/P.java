@@ -156,4 +156,5 @@ public class P {
     public static String children_education = "children_education";
     public static String children_details = "children_details";
     public static String other_intreasted_in = "other_intreasted_in";
+    public static String family_details = "family_details";
 }//class

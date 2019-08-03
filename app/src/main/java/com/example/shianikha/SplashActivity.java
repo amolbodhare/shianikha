@@ -17,6 +17,9 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.activities.PerfectMatchActivity;
+import com.example.shianikha.activities.RegFourthPageActivity;
+import com.example.shianikha.activities.RegSecondPageActivity;
 import com.example.shianikha.activities.RegThirdPageActivity;
 import com.example.shianikha.activities.WalkThroughActivity;
 import com.example.shianikha.commen.C;
@@ -223,11 +226,11 @@ public class SplashActivity extends AppCompatActivity {
                 if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register) == 0)
-                    intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
                 else
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
 
-                //intent = new Intent(SplashActivity.this, RegThirdPageActivity.class);
+                //intent = new Intent(SplashActivity.this, RegFourthPageActivity.class);
 
                 startActivity(intent);
                 finish();

@@ -66,7 +66,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:tag="2"
+                        android:tag="0"
                         android:checked="true"
                         android:buttonTint="#5C5CFE"
                         android:text="No"
@@ -121,12 +121,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:tag="2"
+                        android:tag="0"
                         android:buttonTint="#5C5CFE"
                         android:text="No"
                         android:textColor="#707070" />
 
                 </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -174,7 +175,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:tag="2"
+                        android:tag="0"
                         android:buttonTint="#5C5CFE"
                         android:text="No"
                         android:textColor="#707070" />
@@ -226,13 +227,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:tag="2"
+                        android:tag="0"
                         android:checked="true"
                         android:buttonTint="#5C5CFE"
                         android:text="No"
                         android:textColor="#707070" />
 
                 </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -262,14 +264,14 @@
                 android:weightSum="2">
 
                 <RadioGroup
-                    android:id="@+id/familyRadio"
+                    android:id="@+id/familyDetailsGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/joint"
+                        android:id="@+id/jointRadioButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
@@ -280,13 +282,13 @@
                         android:textColor="#707070" />
 
                     <RadioButton
-                        android:id="@+id/nuclear"
+                        android:id="@+id/nuclearRadioButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:buttonTint="#5C5CFE"
                         android:text="Nuclear Family"
-                        android:tag="2"
+                        android:tag="0"
                         android:textColor="#707070" />
 
                 </RadioGroup>
@@ -344,16 +346,16 @@
                     android:id="@+id/fathersOccupationInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="17dp">
 
                     <EditText
                         android:id="@+id/other_details_fathers_occupation_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Other details about your Fathers Occupation" />
+                        android:hint="Father's Other Occupation" />
 
                 </android.support.design.widget.TextInputLayout>
-
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/motherName"
@@ -398,17 +400,18 @@
                     android:id="@+id/mothersOccupationInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="17dp">
 
                     <EditText
                         android:id="@+id/other_details_mothers_occupation_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Other details about your Fathers Occupation" />
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:hint="Mother's Other Occupation" />
 
                 </android.support.design.widget.TextInputLayout>
-
-
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/numberSibilings"
@@ -431,7 +434,7 @@
                     android:layout_marginTop="25dp"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Parent / Alternative Contact No"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="16dp" />

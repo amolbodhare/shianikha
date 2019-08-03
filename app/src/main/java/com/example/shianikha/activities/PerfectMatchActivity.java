@@ -1,8 +1,10 @@
 package com.example.shianikha.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.text.HtmlCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +13,7 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,8 +33,10 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.example.App;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
@@ -39,20 +44,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import static android.text.Html.fromHtml;
 
 
-public class PerfectMatchActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class PerfectMatchActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ArrayAdapter<String> arrayAdapter;
     private Session session;
-    private ArrayList<String> ageList, maritalStatusNameList, maritalStatusCodeList, ethnicityNameList, ethincityCodeList;
-    private ArrayList<String> educationNameList, educationCodeList;
-    private ArrayList<String> marital_status_arraylist;
-    private ArrayList<String> ethincity_arraylist;
-    private ArrayList<String> email_arraylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,9 +70,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.view).setOnClickListener(this);
 
         setMarginTopOfCustomSpinner();
-        extractRequireList();
-
-        setOnCheckChangeListener();
+        setUpTextWatcher();
 
         CheckBox checkBox = findViewById(R.id.checkBox3);
         checkBox.setMovementMethod(LinkMovementMethod.getInstance());
@@ -80,123 +78,48 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         checkBox.append(getString(R.string.appendedString));
         Linkify.addLinks(checkBox, Linkify.WEB_URLS);
 
-        /*((CheckBox)findViewById(R.id.other)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked)
-                findViewById(R.id.other).setVisibility(View.VISIBLE);
-                else
-                    findViewById(R.id.otherEthnicity_layout).setVisibility(View.INVISIBLE);
-            }
-        });*/
-
-
+        makeMaritalStatusCheckBox();
+        makeEthnicityCheckBox();
     }
 
-    private void setOnCheckChangeListener() {
-       /* LinearLayout linearLayout= findViewById(R.id.linearLayout);
-        attachListener(linearLayout);*/
-        marital_status_arraylist=new ArrayList<String>();
-        ethincity_arraylist=new ArrayList<String>();
-
-
-        ((CheckBox)findViewById(R.id.neverMarriedBefore)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.divorced)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.married)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.widowed)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.separated)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-
-        ((CheckBox)findViewById(R.id.arab)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.african)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.asian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.caucasian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.hispanic)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.parsian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.southAsian_indian)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.mixedRace)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.southAsian_pakistani)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-        ((CheckBox)findViewById(R.id.other)).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
-
-
-        marital_status_arraylist.add(((CheckBox)findViewById(R.id.neverMarriedBefore)).getTag().toString());
-        ethincity_arraylist.add(((CheckBox)findViewById(R.id.arab)).getTag().toString());
-
-    }
-
-  /*  private void attachListener(ViewGroup viewGroup)
+    private void makeEthnicityCheckBox()
     {
-        for (int i=0; i<viewGroup.getChildCount(); i++)
-        {
-            View view = viewGroup.getChildAt(i);
-            if (view instanceof ViewGroup)
-                attachListener(viewGroup);
-            else if (view instanceof CheckBox)
-                ((CheckBox)view).setOnCheckedChangeListener(new myCheckBoxChnageClicker());
+        int n = CommonListHolder.ethnicityNameList.size();
+        int i = n%2 + n/2;
+
+        LinearLayout linearLayout = findViewById(R.id.ethnicityContainer1);
+        for (int j = 0; j < n; j++) {
+            LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.inflatable_check_box, null);
+            CheckBox checkBox = (CheckBox) ll.getChildAt(0);
+            checkBox.setText(CommonListHolder.ethnicityNameList.get(j));
+            checkBox.setTag(CommonListHolder.ethnicityIdList.get(j));
+            checkBox.setOnCheckedChangeListener(this);
+
+            linearLayout.addView(ll);
+
+            if (j == i - 1)
+                linearLayout = findViewById(R.id.ethnicityContainer2);
         }
-    }*/
+    }
 
-    private void extractRequireList() {
-        JsonList jsonList;
+    private void makeMaritalStatusCheckBox()
+    {
+        int n = CommonListHolder.maritalStatusNameList.size();
+        int i = n%2 + n/2;
 
-        //for age
-        String string = session.getString(P.age);
-        try {
-            JSONArray jsonArray = new JSONArray(string);
-            ageList = new ArrayList<>();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                string = jsonArray.getString(i);
-                ageList.add(string);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        LinearLayout linearLayout = findViewById(R.id.maritalStatusContainer1);
+        for (int j = 0; j < n; j++) {
+            LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.inflatable_check_box, null);
+            CheckBox checkBox = (CheckBox) ll.getChildAt(0);
+            checkBox.setText(CommonListHolder.maritalStatusNameList.get(j));
+            checkBox.setTag(CommonListHolder.maritalStatusIdList.get(j));
+            checkBox.setOnCheckedChangeListener(this);
+
+            linearLayout.addView(ll);
+
+            if (j == i - 1)
+                linearLayout = findViewById(R.id.maritalStatusContainer2);
         }
-
-        //for marital status
-        string = session.getString(P.marital_status);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            maritalStatusNameList = new ArrayList<>();
-            maritalStatusCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.val);
-                maritalStatusNameList.add(string);
-
-                string = j.getString(P.id);
-                maritalStatusCodeList.add(string);
-            }
-        }
-
-        //for ethnicity
-        string = session.getString(P.ethnicity);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            ethnicityNameList = new ArrayList<>();
-            ethincityCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                ethnicityNameList.add(string);
-
-                string = j.getString(P.id);
-                ethincityCodeList.add(string);
-            }
-        }
-
-        //for education
-        string = session.getString(P.education);
-        if (string != null) {
-            jsonList = new JsonList(string);
-            educationNameList = new ArrayList<>();
-            educationCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                educationNameList.add(string);
-
-                string = j.getString(P.id);
-                educationCodeList.add(string);
-            }
-        }
-        setUpTextWatcher();
     }
 
     private void setUpTextWatcher() {
@@ -219,20 +142,25 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
     private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
-        findViewById(R.id.view).setVisibility(View.VISIBLE);
 
         if (view.getId() == R.id.minAgeEditText || view.getId() == R.id.maxAgeEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search age");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, ageList);
-        } else if (view.getId() == R.id.educationEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search edit text");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, educationNameList);
+            ((EditText) findViewById(R.id.editText)).setHint("Search Age");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.ageList);
+        } else if (view.getId() == R.id.educationEditText)
+        {
+            /*((EditText) findViewById(R.id.editText)).setHint("Search Education");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);*/
+            String[] educationArray = new String[CommonListHolder.educationNameList.size()];
+            educationArray = CommonListHolder.educationNameList.toArray(educationArray);
+            showMultiChoiceDialog(educationArray,view);
+            return;
         }
 
         if (arrayAdapter == null)
             return;
 
         H.showKeyBoard(this, findViewById(R.id.editText));
+        findViewById(R.id.view).setVisibility(View.VISIBLE);
 
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -254,6 +182,47 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         });
 
         findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    }
+
+    private ArrayList<String> tempList;
+    private boolean[] checkedArray;
+
+    private void showMultiChoiceDialog(final String[] languageArray, final View view) {
+        if (checkedArray == null) {
+            checkedArray = new boolean[languageArray.length];
+            for (int j = 0; j < languageArray.length; j++)
+                checkedArray[j] = false;
+            tempList = new ArrayList<>();
+        }
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMultiChoiceItems(languageArray, checkedArray, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                if (b) {
+                    tempList.add(languageArray[i]);
+                    checkedArray[i] = true;
+                } else {
+                    tempList.remove(languageArray[i]);
+                    checkedArray[i] = false;
+                }
+            }
+        }).setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (tempList != null) {
+                    String string = tempList.toString();
+                    string = string.replace("[", "");
+                    string = string.replace("]", "");
+                    if (string.contains("other") || string.contains("Other"))
+                        findViewById(R.id.otherEducationInputLayout).setVisibility(View.VISIBLE);
+                    else
+                        findViewById(R.id.otherEducationInputLayout).setVisibility(View.GONE);
+                    ((EditText) view).setText(string);
+                    hideCustomSpinnerLayout();
+                }
+            }
+        }).show();
     }
 
     private void showOtherEditText(View view, boolean b) {
@@ -283,7 +252,6 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v)
     {
         if (v.getId() == R.id.button)
-
             makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
@@ -292,95 +260,126 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    private void makeJson() {
+    private void makeJson()
+    {
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
 
         EditText editText = findViewById(R.id.minAgeEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select minimum age");
-            return;
-        }
         int i = H.getInt(string);
 
         editText = findViewById(R.id.maxAgeEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select maximum age");
-            return;
-        }
         int j = H.getInt(string);
 
-        if (j - i < 1) {
+        if (i>=18 && j>=18 && j - i < 1) {
             H.showMessage(this, "Maximum age must be greater than minimum age");
             return;
         }
         json.addString(P.min_age, i + "");
         json.addString(P.max_age, j + "");
 
+        JSONArray jsonArray = new JSONArray();
+        makeMaritalStatusJsonArray(jsonArray);
+        json.addJSONArray(P.marital_status_id,jsonArray);
 
+        jsonArray = new JSONArray();
+        makeEthnicityJsonArray(jsonArray);
+        json.addJSONArray(P.ethnicitys_id,jsonArray);
 
-        if(marital_status_arraylist.size()>0)
-        {
-            json.addString(P.marital_status_id,marital_status_arraylist.toString());
-        }
-        else
-        {
-            H.showMessage(this, "Please Select Marital status");
-            return;
-        }
-
-
-        if(ethincity_arraylist.size()>0)
-        {
-            json.addString(P.ethnicitys_id,ethincity_arraylist.toString());
-        }
-        else
-        {
-            H.showMessage(this, "Please Select Match Ethnicity");
-            return;
-        }
-
-
-
-          if(((CheckBox) findViewById(R.id.other)).isChecked())
-        {
-            String stringg="";
-
-            stringg = ((EditText)findViewById(R.id.otherEthnicity)).getText().toString();
-
-            if (stringg.isEmpty())
-            {
-                H.showMessage(this,"Please enter other match Ethnicity");
-                return;
-            }
-            json.addString(P.other_ethnicitys, stringg);
-
-        }
-
-
-        /*editText = findViewById(R.id.educationEditText);
+        editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select education");
-            return;
+        StringTokenizer stringTokenizer = new StringTokenizer(string,",");
+        jsonArray = new JSONArray();
+        while (stringTokenizer.hasMoreTokens())
+        {
+            string = stringTokenizer.nextToken().trim();
+            H.log("tokenIs",string);
+            i= CommonListHolder.educationNameList.indexOf(string);
+            if (i!=-1)
+                jsonArray.put(CommonListHolder.educationIdList.get(i));
         }
-        i = educationNameList.indexOf(string);
-        if (i != -1)
-            json.addString(P.education_id, educationCodeList.get(i));*/
+        json.addJSONArray(P.education_id,jsonArray);
 
+        CheckBox checkBox = findViewById(R.id.checkBox1);
+        string = checkBox.isChecked()? "1":"0";
+        json.addString(P.request_from_anyone,string);
 
-        string = ((CheckBox) findViewById(R.id.checkBox1)).isChecked() ? "1" : "0";
-        json.addString(P.request_from_anyone, string);
+        checkBox = findViewById(R.id.checkBox2);
+        string = checkBox.isChecked() ? "1" : "0";
+        json.addString(P.request_from_preferred_match,string);
 
-        string = ((CheckBox) findViewById(R.id.checkBox2)).isChecked() ? "1" : "0";
-        json.addString(P.request_from_preferred_match, string);
-
-        string = ((CheckBox) findViewById(R.id.checkBox3)).isChecked() ? "1" : "0";
-        json.addString(P.sancity_of_the_holy_quran, string);
+        checkBox = findViewById(R.id.checkBox3);
+        string = checkBox.isChecked() ? "1" : "0";
+        json.addString(P.sancity_of_the_holy_quran,string);
 
         hitPerfectMatchApi(json);
+    }
+
+    private void makeEthnicityJsonArray(JSONArray jsonArray) {
+        LinearLayout linearLayout = findViewById(R.id.ethnicityContainer1);
+        LinearLayout ll;
+        CheckBox checkBox;
+        String string = "";
+        Object object;
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            ll = (LinearLayout) linearLayout.getChildAt(i);
+            checkBox = (CheckBox) ll.getChildAt(0);
+            if (checkBox.isChecked()) {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+
+        linearLayout = findViewById(R.id.ethnicityContainer2);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            ll = (LinearLayout) linearLayout.getChildAt(i);
+            checkBox = (CheckBox) ll.getChildAt(0);
+            if (checkBox.isChecked()) {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+    }
+
+    private void makeMaritalStatusJsonArray(JSONArray jsonArray)
+    {
+        LinearLayout linearLayout = findViewById(R.id.maritalStatusContainer1);
+        LinearLayout ll;
+        CheckBox checkBox;
+        String string = "";
+        Object object;
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            ll = (LinearLayout) linearLayout.getChildAt(i);
+            checkBox = (CheckBox) ll.getChildAt(0);
+            if (checkBox.isChecked()) {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+
+        linearLayout = findViewById(R.id.maritalStatusContainer2);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            ll = (LinearLayout) linearLayout.getChildAt(i);
+            checkBox = (CheckBox) ll.getChildAt(0);
+            if (checkBox.isChecked()) {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
     }
 
     private void hitPerfectMatchApi(Json json) {
@@ -429,96 +428,16 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         linearLayout.setLayoutParams(layoutParams);
     }
 
-    public void onMethodClick(View v) {
-
-        finish();
-        ((PerfectMatchActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-    }
-
-
-    class myCheckBoxChnageClicker implements CheckBox.OnCheckedChangeListener {
-
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView,
-                                     boolean isChecked) {
-            // TODO Auto-generated method stub
-
-            // Toast.makeText(CheckBoxCheckedDemo.this, &quot;Checked =&gt; &quot;+isChecked, Toast.LENGTH_SHORT).show();
-
-            if(buttonView==((CheckBox)findViewById(R.id.neverMarriedBefore)) || buttonView==((CheckBox)findViewById(R.id.divorced)) || buttonView==((CheckBox)findViewById(R.id.married))
-                    || buttonView==((CheckBox)findViewById(R.id.married))|| buttonView==((CheckBox)findViewById(R.id.widowed))|| buttonView==((CheckBox)findViewById(R.id.separated)))
-            {
-                if(isChecked)
-                {
-                    marital_status_arraylist.add(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
-                }
-
-                else
-                {
-                    marital_status_arraylist.remove(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-
-
-            if(buttonView==((CheckBox)findViewById(R.id.arab)) || buttonView==((CheckBox)findViewById(R.id.african)) || buttonView==((CheckBox)findViewById(R.id.asian))
-                    || buttonView==((CheckBox)findViewById(R.id.caucasian))|| buttonView==((CheckBox)findViewById(R.id.hispanic))|| buttonView==((CheckBox)findViewById(R.id.parsian))
-                    || buttonView==((CheckBox)findViewById(R.id.southAsian_indian))|| buttonView==((CheckBox)findViewById(R.id.mixedRace))
-                    || buttonView==((CheckBox)findViewById(R.id.southAsian_pakistani))
-
-            )
-            {
-                if(isChecked)
-                {
-                    ethincity_arraylist.add(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    ethincity_arraylist.remove(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-
-
-            if(buttonView==(CheckBox)findViewById(R.id.other))
-            {
-                if(isChecked)
-                {
-                    findViewById(R.id.otherEthnicity_layout).setVisibility(View.VISIBLE);
-
-                }
-                else
-                {
-                    findViewById(R.id.otherEthnicity_layout).setVisibility(View.GONE);
-                }
-
-
-            }
-
-            /*if(buttonView==(CheckBox)findViewById(R.id.checkBox1)||buttonView==(CheckBox)findViewById(R.id.checkBox2)|buttonView==(CheckBox)findViewById(R.id.checkBox3))
-            {
-                if(isChecked)
-                {
-                    email_arraylist.add(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"selected", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    email_arraylist.remove(buttonView.getTag().toString());
-                    Toast.makeText(PerfectMatchActivity.this, buttonView.getTag().toString()+"unselected", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            }*/
-
-
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+    {
+        String string = compoundButton.getText().toString();
+        if (string.equalsIgnoreCase("other"))
+        {
+            if (b)
+                findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.VISIBLE);
+            else
+                findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.GONE);
         }
     }
 }

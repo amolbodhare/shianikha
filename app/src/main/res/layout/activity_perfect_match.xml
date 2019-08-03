@@ -77,33 +77,6 @@
                 android:text="Preferred Age range"
                 android:textSize="16sp" />
 
-            <!--<LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView"
-                android:layout_marginTop="17dp"
-                android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Min Age"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingLeft="20dp"
-                    android:text="Max Age"
-                    android:textSize="16sp" />
-
-            </LinearLayout>-->
-
             <LinearLayout
                 android:id="@+id/age_layout"
                 android:layout_width="match_parent"
@@ -175,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
+
                 android:fontFamily="@font/poppins_regular"
                 android:text="Marital Status"
                 android:textColor="@color/black"
@@ -184,82 +157,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <CheckBox
-                    android:id="@+id/neverMarriedBefore"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="1"
-                    android:layout_weight="1.1"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Never Married Before" />
-
-                <CheckBox
-                    android:id="@+id/divorced"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="2"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="0.9"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Divorced" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/married"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="3"
-                    android:layout_weight="1.1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Married" />
-
-                <CheckBox
-                    android:id="@+id/widowed"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="4"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="0.9"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Widowed" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/separated"
+                <LinearLayout
+                    android:id="@+id/maritalStatusContainer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tag="5"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Separated" />
+                    android:orientation="vertical" />
+
+                <LinearLayout
+                    android:id="@+id/maritalStatusContainer2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" />
 
             </LinearLayout>
 
@@ -268,7 +181,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Preferred Match Ethnicity"
                 android:textColor="@color/black"
@@ -277,174 +189,65 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:weightSum="2"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/arab"
+                <LinearLayout
+                    android:id="@+id/ethnicityContainer1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:tag="1"
                     android:layout_weight="1"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Arab" />
+                    android:orientation="vertical"/>
 
-                <CheckBox
-                    android:id="@+id/african"
+                <LinearLayout
+                    android:id="@+id/ethnicityContainer2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:tag="2"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
                     android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="African" />
-
-                <CheckBox
-                    android:id="@+id/asian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="3"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Asian" />
+                    android:orientation="vertical"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/otherEthnicityInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="17dp"
+                android:visibility="gone">
 
-                <CheckBox
-                    android:id="@+id/caucasian"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/otherEthnicityEditText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:tag="4"
-                    android:layout_weight="1"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Caucasian" />
+                    android:hint="Please Enter Other Ethnicity's name" />
 
-                <CheckBox
-                    android:id="@+id/hispanic"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="5"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Hispanic" />
-
-                <CheckBox
-                    android:id="@+id/parsian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="6"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Parsian" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/southAsian_indian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="7"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="South Asian - Indian" />
-
-                <CheckBox
-                    android:id="@+id/mixedRace"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="8"
-                    android:layout_weight="1"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Mixed Race" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/southAsian_pakistani"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="9"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:layout_weight="1.2"
-                    android:buttonTint="#5C5CFE"
-                    android:text="South Asian - Pakistani" />
-
-                <CheckBox
-                    android:id="@+id/other"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:tag="10"
-                    android:layout_weight="0.8"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Other" />
-
-            </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/otherEthnicity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/otherEthnicity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Type Here . . . "/>
+                    android:hint="Type Here . . . " />
 
             </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
                 android:id="@+id/pref_match_min_education_spinner_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/educationEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Minimum education"
@@ -464,11 +267,12 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/otherEducationInputLayout"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp">
+                android:layout_marginTop="17dp"
+                android:visibility="gone">
 
                 <EditText
+                    android:id="@+id/otherEducationEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Education's name" />
@@ -483,7 +287,6 @@
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
                 android:checked="true"
-                android:tag="1"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Email me request from every one"
                 android:textSize="13sp" />
@@ -492,7 +295,6 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="2"
                 android:layout_below="@id/checkBox1"
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
@@ -505,15 +307,14 @@
                 android:id="@+id/checkBox3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="3"
                 android:layout_below="@+id/checkBox2"
                 android:layout_marginTop="30dp"
-                android:buttonTint="#5C5CFE"
                 android:autoLink="web"
-                android:linksClickable="true"
+                android:buttonTint="#5C5CFE"
                 android:checked="true"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="top"
+                android:linksClickable="true"
                 android:text="@string/termsAndCondition"
                 android:textSize="13sp" />
 
