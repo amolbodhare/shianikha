@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,10 +12,48 @@
         android:scaleType="fitXY"
         android:src="@drawable/aaaaaa" />
 
+    <RelativeLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/sub_drawerMenu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/clickable_trans_bg"
+            android:clickable="true"
+            android:onClick="onBackClick"
+            android:padding="13dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:tint="#311C63" />
+
+        <TextView
+            android:id="@+id/titleName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="100dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:tag=""
+            android:text="Partner preference"
+            android:textAllCaps="true"
+            android:textColor="#585858"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="17dp"
+        android:layout_below="@+id/toolbar_layout"
         android:scrollbars="none">
 
         <LinearLayout

@@ -343,12 +343,16 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.last_name,string);
 
-        string = ((EditText)findViewById(R.id.dateOfBirthEditText)).getText().toString();
+        EditText editText = findViewById(R.id.dateOfBirthEditText);
+        string = editText.getText().toString();
         if (string.isEmpty())
         {
             H.showMessage(context,"Please enter Date of Birth!");
             return;
         }
+        Object object = editText.getTag();
+        if (object!=null)
+            string = object.toString();
         json.addString(P.dob,string);
 
 

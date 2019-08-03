@@ -2,9 +2,14 @@ package com.example.shianikha.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +30,11 @@ import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.activities.PerfectMatchActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
+import com.squareup.picasso.Picasso;
 
 public class MyMatchesFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
@@ -39,8 +46,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
     public static String previousFragmentName;
     LoadingDialog loadingDialog;
 
-    public static MyMatchesFragment newInstance(Fragment fragment, String string)
-    {
+    public static MyMatchesFragment newInstance(Fragment fragment, String string) {
         MyMatchesFragment myMatchesFragment = new MyMatchesFragment();
         previousFragment = fragment;
         previousFragmentName = string;
@@ -53,34 +59,54 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         context = getContext();
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
-        if (fragmentView == null)
-        {
+        if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_matches, container, false);
 
             fragmentView.findViewById(R.id.top_matches).setOnClickListener(this);
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             fragmentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.edit_btn).setOnClickListener(this);
 
             fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
-            loadingDialog=new LoadingDialog(context);
+            loadingDialog = new LoadingDialog(context);
 
-            //((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,));
- //           ((ListView) fragmentView.findViewById(R.id.listView)).removeAllViews();
             hitMatchesApi("top_matches");
+
+            setSpannableText();
 
         }
         return fragmentView;
     }
 
-     private void hitMatchesApi(String api_type)
-     {
+    private void setSpannableText() {
+        TextView textView = fragmentView.findViewById(R.id.matches_text);
+        SpannableString spannableString = new SpannableString("Matches as per your preferences Edit");
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PerfectMatchActivity.class);
+                intent.putExtra("makeVisible", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, 32, 36, 0);//for bottom line
+        spannableString.setSpan(new ForegroundColorSpan(context.getColor(R.color.text_neon_color)), 32, 36, 0);
+        //    SpanString.setSpan(new UnderlineSpan(), 32, 45, 0);
+
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(spannableString, TextView.BufferType.SPANNABLE);
+
+    }
+
+    private void hitMatchesApi(String api_type) {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
         Json json = new Json();
-        json.addString(P.token_id,string);
+        json.addString(P.token_id, string);
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
@@ -99,7 +125,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
                 .onError(new Api.OnErrorListener() {
                     @Override
                     public void onError() {
-                        H.showMessage(context,"Something went Wrong");
+                        H.showMessage(context, "Something went Wrong");
                     }
                 })
                 .onSuccess(new Api.OnSuccessListener() {
@@ -109,11 +135,9 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
                         if (json.getInt(P.status) == 1) {
 
 
-                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context,json.getJsonList(P.data)));
+                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context, json.getJsonList(P.data)));
 
-                        }
-
-                        else
+                        } else
 
                             H.showMessage(context, json.getString(P.msg));
                     }
@@ -124,24 +148,16 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.top_matches)
-        {
+        if (i == R.id.top_matches) {
             hitMatchesApi("top_matches");
             changeColorsOfThreeTab(v);
-        }
-
-        else  if(i == R.id.i_am_looking_for)
-        {
+        } else if (i == R.id.i_am_looking_for) {
             hitMatchesApi("i_am_looking_for");
             changeColorsOfThreeTab(v);
-        }
-        else  if(i == R.id.looking_for_me)
-        {
+        } else if (i == R.id.looking_for_me) {
             hitMatchesApi("looking_for_me");
             changeColorsOfThreeTab(v);
-        }
-        else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn)
-        {
+        } else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn) {
             Intent intent = new Intent(getActivity(), FilterActivity.class);
             startActivity(intent);
             ((HomeActivity) context).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
@@ -175,11 +191,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
 
         Context context;
         JsonList jsonList;
+        String string = "";
+        Json json;
 
-        CustomListAdapte(Context context, JsonList jsonList)
-        {
-            this.context=context;
-            this.jsonList=jsonList;
+        CustomListAdapte(Context context, JsonList jsonList) {
+            this.context = context;
+            this.jsonList = jsonList;
         }
 
         @Override
@@ -202,48 +219,68 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             if (convertView == null)
                 convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
 
-            convertView.findViewById(R.id.thumbnail).setOnClickListener(this);
+            ImageView imageView = convertView.findViewById(R.id.thumbnail);
+            imageView.setOnClickListener(this);
+            imageView.setTag(jsonList.get(position).getString(P.user_id));
 
-            Glide.with(context)
+            try {
+                Picasso.get().load(jsonList.get(position).getString(P.user_photos)).into(imageView);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+
+
+           /* Glide.with(context)
                     .asBitmap()
                     .load(jsonList.get(position).getString(P.user_photos))
                     //.load(R.drawable.kangna)
-                    .into((ImageView) convertView.findViewById(R.id.thumbnail));
+                    .into(imageView);*/
 
+            json = jsonList.get(position);
+            string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
 
-            ((TextView)convertView.findViewById(R.id.full_name)).setText(jsonList.get(position).getString(P.full_name));
-            ((TextView)convertView.findViewById(R.id.time)).setText(jsonList.get(position).getString(P.day)+" "+"day ago");
-            ((TextView)convertView.findViewById(R.id.profile_id_tv)).setText(jsonList.get(position).getString(P.profile_id)+" "+"day ago");
-            ((TextView)convertView.findViewById(R.id.age_tv)).setText(jsonList.get(position).getString(P.age)+"yrs,");
-            ((TextView)convertView.findViewById(R.id.height_tv)).setText(jsonList.get(position).getString(P.height)+"''");
-            ((TextView)convertView.findViewById(R.id.profession_tv)).setText(jsonList.get(position).getString(P.edu_level));
+            ((TextView) convertView.findViewById(R.id.full_name)).setText(string);
+            ((TextView) convertView.findViewById(R.id.time)).setText(jsonList.get(position).getString(P.day) + " " + "day ago");
+            ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(jsonList.get(position).getString(P.profile_id) + " " + "day ago");
+            ((TextView) convertView.findViewById(R.id.age_tv)).setText(jsonList.get(position).getString(P.age) + "yrs,");
+            ((TextView) convertView.findViewById(R.id.height_tv)).setText(jsonList.get(position).getString(P.height) + "''");
+            ((TextView) convertView.findViewById(R.id.profession_tv)).setText(jsonList.get(position).getString(P.edu_level));
             //((TextView)convertView.findViewById(R.id.caste_tv)).setText(jsonList.get(position).getString(P.edu_level));
-            ((TextView)convertView.findViewById(R.id.religion_tv)).setText(jsonList.get(position).getString(P.religion));
+            ((TextView) convertView.findViewById(R.id.religion_tv)).setText(jsonList.get(position).getString(P.religion));
 
-            /*if (position == 1)
+            convertView.findViewById(R.id.imageView).setOnClickListener(this);
+
+            /*string = jsonList.get(position).getString(P.user_photos);
+            if (string!=null && !string.isEmpty())
             {
-                convertView.findViewById(R.id.thumbnail).setVisibility(View.GONE);
-                convertView.findViewById(R.id.linearLayout).setVisibility(View.VISIBLE);
+                if (string.contains("male") || string.contains("phtoo2p"))
+                    convertView.findViewById(R.id.linearLayout).setVisibility(View.VISIBLE);
             }*/
 
             return convertView;
         }
 
         @Override
-        public void onClick(View v)
-        {
-            if(v.getId() == R.id.thumbnail)
-            {
-                Toast.makeText(context, "Clicked on Image", Toast.LENGTH_SHORT).show();
+        public void onClick(View v) {
+            if (v.getId() == R.id.thumbnail) {
+                Object object = v.getTag();
+                if (object != null) {
+                    string = object.toString();
 
-            }
-            else if (v.getId() == R.id.imageView)
-            {
-                ImageView imageView = (ImageView)v;
-                if (imageView.getDrawable() == null)
+                    ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
+                    ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, "Profile Details");
+                }
+            } else if (v.getId() == R.id.imageView) {
+                ImageView imageView = (ImageView) v;
+                if (imageView.getDrawable() == null) {
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                else
+                } else
                     imageView.setImageDrawable(null);
+
+
             }
         }
     }

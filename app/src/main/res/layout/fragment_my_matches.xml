@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SearchFragment"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".fragments.MyMatchesFragment">
 
     <RelativeLayout
         android:id="@+id/top_second_layout"
@@ -16,15 +16,15 @@
 
         <TextView
             android:id="@+id/matches_text"
-            android:text="Matches as per your preferences"
+            android:text="Matches as per your preferences Edit"
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/edit_btn"
             android:text="Edit"
             android:layout_marginLeft="5dp"
@@ -32,16 +32,16 @@
             android:fontFamily="@font/poppins_regular"
             android:clickable="true"
             android:layout_toRightOf="@id/matches_text"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
 
         <TextView
             android:id="@+id/refine_btn"
             android:text="Refine"
             android:layout_marginLeft="90dp"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:textColor="@color/text_neon_color"
             android:layout_toLeftOf="@id/refine_imv"
             android:layout_width="wrap_content"
