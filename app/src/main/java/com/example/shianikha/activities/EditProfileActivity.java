@@ -45,6 +45,7 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -71,6 +72,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private Map<String,String> countryList = new TreeMap<>();
 
     private Session session;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -656,4 +660,57 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return convertView;
         }
     }
+   /* private void setMyProfileData(Json json) {
+        json=json.getJson(P.data);
+        String string = json.getString(P.profile_pic);
+
+
+        try
+        {
+            Picasso.get().load(string).into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
+            H.log("imageisLoaded","hello");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        string=json.getString(P.full_name);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.name_tv)).setText(string);
+        string=json.getString(P.profile_id);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
+        string=json.getString(P.packages_applied);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.account_type_tv)).setText(string);
+        string=json.getString(P.email);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.eMail)).setText(string);
+        string=json.getString(P.ph_number);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.phNumber)).setText(string);
+        string=json.getString(P.gender);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.gender)).setText(string);
+        string=json.getString(P.height);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.height)).setText(string);
+        string=json.getString(P.city_name);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.cityName)).setText(string);
+        string=json.getString(P.state_name);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.stateName)).setText(string);
+        string=json.getString(P.country_name);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.Country)).setText(string);
+        string=json.getString(P.religion);
+
+        string=json.getString(P.smoke_id);
+        if(string!=null)
+            ((TextView)fragmentView.findViewById(R.id.smoke)).setText(string);
+        string=json.getString(P.relocate_id);
+
+    }*/
 }
