@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
@@ -346,6 +347,7 @@ public class HomeActivity extends AppCompatActivity {
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
         } else if (string.equalsIgnoreCase("e")) {
             Intent intent = new Intent(this, EditProfileActivity.class);
+            intent.putExtra("profile_details_string",MyProfileFragment.profile_details_string);
             startActivityForResult(intent, 31);
         }
 
@@ -487,6 +489,7 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == 31 && resultCode == RESULT_OK) {
             //if (myProfileFragment!=null )
             H.log("resultOk", "isExecuted");
+
         }
     }
 }

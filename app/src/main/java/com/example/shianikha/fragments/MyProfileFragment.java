@@ -27,22 +27,12 @@ public class MyProfileFragment extends Fragment {
     public static Fragment previousFragment;
     public static String previousFragmentName;
     Context context;
+    public static String profile_details_string;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            someEventListener = (onSomeEventListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
-        }
     }
-
-    public interface onSomeEventListener {
-            public void someEvent(String s);
-        }
-
-        onSomeEventListener someEventListener;
 
 
     public static MyProfileFragment newInstance(Fragment fragment, String string) {
@@ -104,8 +94,10 @@ public class MyProfileFragment extends Fragment {
                 .run("my_profile");
     }
 
-    private void setMyProfileData(Json json) {
+    private void setMyProfileData(Json json)
+    {
         json=json.getJson(P.data);
+        profile_details_string=json.toString();
         String string = json.getString(P.profile_pic);
 
 

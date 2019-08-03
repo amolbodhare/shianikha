@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -84,6 +86,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         loadingDialog = new LoadingDialog(this);
 
         session = new Session(this);
+        String profileDetailsString=getIntent().getStringExtra("profile_details_string");
+
+        Toast.makeText(this, ""+profileDetailsString, Toast.LENGTH_SHORT).show();
 
         findViewById(R.id.view).setOnClickListener(this);
         setAllRequiredClickListener((LinearLayout) (findViewById(R.id.linearLayout)));
@@ -91,7 +96,19 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         //setMarginTopOfCustomSpinner(view);
         handleGenderClickListner();
+
         makeCountryCodeList();
+
+        try
+        {
+            Json json=new Json(profileDetailsString);
+            setAllData(json);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private void setAllRequiredClickListener(ViewGroup viewGroup) {
@@ -563,7 +580,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     base64String = getStringImage(bitmap);
                     hitImageUploadApi(base64String);
 
-                } catch (IOException e) {
+                } catch (IOException e)
+                {
                     e.printStackTrace();
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -611,6 +629,83 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     }
                 })
                 .run("uploadImage");
+    }
+
+    private  void setAllData(Json json)
+    {
+        ((EditText)findViewById(R.id.firstNameEditText)).setText(json.getString(P.first_name));
+        ((EditText)findViewById(R.id.middleNameEditText)).setText(json.getString(P.middle_name));
+        ((EditText)findViewById(R.id.lastNameEditText)).setText(json.getString(P.last_name));
+        ((EditText)findViewById(R.id.dateOfBirthEditText)).setText(json.getString(P.dob));
+        ((EditText)findViewById(R.id.emailEditText)).setText(json.getString(P.email));
+        ((EditText)findViewById(R.id.countryCodeEditText)).setText(json.getString(P.country_code));
+        ((EditText)findViewById(R.id.mobile_no)).setText(json.getString(P.ph_number));
+
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        if(json.getString(P.gender).equalsIgnoreCase("male"))
+        {
+
+        gender_male_imv.setBackground(getDrawable(R.drawable.reg_img_bg_selected));
+        gender_female_imv.setBackground(getDrawable(R.drawable.reg_img_bg));
+        gender = "male";
+        myAnim.setInterpolator(interpolator);
+        gender_male_imv.startAnimation(myAnim);
+        gender_female_imv.clearAnimation();
+        }
+
+        else
+        {
+            gender_female_imv.setBackground(getDrawable(R.drawable.reg_img_bg_selected));
+            gender_male_imv.setBackground(getDrawable(R.drawable.reg_img_bg));
+            gender = "female";
+            myAnim.setInterpolator(interpolator);
+            gender_female_imv.startAnimation(myAnim);
+            gender_male_imv.clearAnimation();
+
+        }
+
+        ((EditText)findViewById(R.id.complexionEditText)).setText(json.getString(P.skin_tone));
+
+        ((EditText)findViewById(R.id.heightEditText)).setText(json.getString(P.height));
+        ((EditText)findViewById(R.id.bodyTypeEditText)).setText(json.getString(P.body_type));
+        ((EditText)findViewById(R.id.communityEditText)).setText(json.getString(P.religion));
+
+        ((EditText)findViewById(R.id.maritalStatusEditText)).setText(json.getString(P.marital_status));
+        ((EditText)findViewById(R.id.educationEditText)).setText(json.getString(P.education));
+        ((EditText)findViewById(R.id.occupationEditText)).setText(json.getString(P.occupation_name));
+
+        ((EditText)findViewById(R.id.monthlyIncomeEditText)).setText(json.getString(P.marital_status));
+        ((EditText)findViewById(R.id.resAddEditText)).setText(json.getString(P.residency_address));
+
+        ((EditText)findViewById(R.id.countryEditText)).setText(json.getString(P.country_name));
+        ((EditText)findViewById(R.id.stateEditText)).setText(json.getString(P.state_name));
+        ((EditText)findViewById(R.id.cityEditText)).setText(json.getString(P.city_name));
+
+        ((EditText)findViewById(R.id.motherTongueEditText)).setText(json.getString(P.mother_tongue));
+        ((EditText)findViewById(R.id.selectLanguagesEditText)).setText(json.getString(P.language));
+
+        ((EditText)findViewById(R.id.fathersNameEditText)).setText(json.getString(P.father_name));
+        ((EditText)findViewById(R.id.fathersOccupationEditText)).setText(json.getString(P.father_occupation));
+        ((EditText)findViewById(R.id.fathersOtherOccupationEditText)).setText(json.getString(P.father_other_occupation));
+
+        ((EditText)findViewById(R.id.mothersNameEditText)).setText(json.getString(P.mother_name));
+        ((EditText)findViewById(R.id.mothersOccupationEditText)).setText(json.getString(P.mother_occupation));
+        ((EditText)findViewById(R.id.mothersOtherOccupationEdiText)).setText(json.getString(P.mother_other_occupation));
+
+
+        ((EditText)findViewById(R.id.numberOfSiblings)).setText(json.getString(P.siblings));
+        ((EditText)findViewById(R.id.parentsNumberEditText)).setText(json.getString(P.father_other_occupation));
+
+        ((EditText)findViewById(R.id.ethnicityEditText)).setText(json.getString(P.ethnicity_name));
+
+        ((EditText)findViewById(R.id.fathersCountryEditText)).setText(json.getString(P.father_country));
+        ((EditText)findViewById(R.id.mothersCountryEditText)).setText(json.getString(P.mother_country));
+
+        ((EditText)findViewById(R.id.smokingEditText)).setText(json.getString(P.smoke_id));
+
+
+
+
     }
 
     class CountryCodeListAdapter extends BaseAdapter
