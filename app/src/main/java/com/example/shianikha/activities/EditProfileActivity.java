@@ -704,8 +704,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText)findViewById(R.id.smokingEditText)).setText(json.getString(P.smoke_id));
 
 
-
-
     }
 
     class CountryCodeListAdapter extends BaseAdapter
