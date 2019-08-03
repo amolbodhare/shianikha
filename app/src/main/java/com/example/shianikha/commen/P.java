@@ -75,6 +75,9 @@ public class P {
     public static String father_occupation_id = "father_occupation_id";
     public static String other_ethnicity = "other_ethnicity";
 
+    public static String father_occupation = "father_occupation";
+    public static String mother_occupation = "mother_occupation";
+
     public static String father_other_occupation = "father_other_occupation";
     public static String father_country = "father_country";
     public static String mother_country = "mother_country";

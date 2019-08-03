@@ -552,6 +552,7 @@
                     android:layout_marginTop="13dp">
 
                     <EditText
+                        android:id="@+id/resAddEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
@@ -746,7 +747,6 @@
                         android:fontFamily="@font/poppins_regular"
                         android:hint="Father's Other Occupation Name"
                         android:imeOptions="actionNext"
-                        android:visibility="gone"
                         android:singleLine="true"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -808,7 +808,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="Other Occupation Name"
+                        android:hint="Mother's Other Occupation Name"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned"
                         android:singleLine="true"
