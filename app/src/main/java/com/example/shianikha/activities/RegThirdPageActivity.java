@@ -326,7 +326,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         while (stringTokenizer.hasMoreTokens())
         {
             string = stringTokenizer.nextToken().trim();
-            H.log("tokenIs",string);
             i= CommonListHolder.languageNameList.indexOf(string);
             if (i!=-1)
                 jsonArray.put(CommonListHolder.languageIdList.get(i));

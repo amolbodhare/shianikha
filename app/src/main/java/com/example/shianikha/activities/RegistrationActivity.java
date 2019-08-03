@@ -34,6 +34,7 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 
@@ -59,8 +60,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     String gender = "";
 
-    private ArrayList<String> profileForNameList = new ArrayList<>();
-    private ArrayList<String> profileForCodeList = new ArrayList<>();
+
     private Map<String, String> countryList = new TreeMap<>();
 
     @Override
@@ -159,26 +159,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void extractRequiredList() {
-        String string = new Session(this).getString(P.profile_for);
+        String string = new Session(this).getString(P.country_code);
         JsonList jsonList;
-        if (string != null) {
-            jsonList = new JsonList(string);
-            profileForNameList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.name);
-                profileForNameList.add(string);
-            }
 
-            profileForCodeList = new ArrayList<>();
-            for (Json j : jsonList) {
-                string = j.getString(P.id);
-                profileForCodeList.add(string);
-            }
-
-            setUpTextWatcher();
-        }
-
-        string = new Session(this).getString(P.country_code);
         if (string != null) {
             countryList.clear();
             jsonList = new JsonList(string);
@@ -238,7 +221,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         });
 
         if (view.getId() == R.id.profile_for_ed) {
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, profileForNameList);
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.profileForNameList);
             listView.setAdapter(arrayAdapter);
         }
 
@@ -306,8 +289,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void updateLabel(Calendar calendar) {
-        //String myFormat = "dd MMM yyyy";
-        String myFormat = "yyyy-MM-dd";
+        String myFormat = "dd MMM yyyy";
 
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -330,10 +312,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(context,"Please select your profile for!");
             return;
         }
-        int i= profileForNameList.indexOf(string);
+        int i= CommonListHolder.profileForNameList.indexOf(string);
         if (i!=-1)
         {
-            string = profileForCodeList.get(i);
+            string = CommonListHolder.profileForIdList.get(i);
             json.addString(P.profile_for,string);
         }
 
@@ -372,7 +354,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         string = ((EditText)findViewById(R.id.email)).getText().toString();
 
-        if (!string.contains("@") || !string.contains(".") || (string.indexOf("@")-string.indexOf(".")==1))
+        if (!string.contains("@") || !string.contains(".") || (string.indexOf("@")-string.indexOf(".")==1) || string.contains(" "))
         {
             H.showMessage(context,"Please enter valid email!");
             return;
@@ -407,9 +389,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.gender,gender);
 
-        //hitRegisterApi(json);
-        //added temporary
-        startActivity(new Intent(RegistrationActivity.this,PerfectMatchActivity.class));
+        hitRegisterApi(json);
+
+        //startActivity(new Intent(RegistrationActivity.this,PerfectMatchActivity.class));
     }
 
     private void hitRegisterApi(Json json)
