@@ -429,7 +429,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                         if (json.getInt(P.status) == 1)
                         {
-                            Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
+                            //Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
+                            Intent intent = new Intent(RegistrationActivity.this, PerfectMatchActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());
                             startActivity(intent);
                         }

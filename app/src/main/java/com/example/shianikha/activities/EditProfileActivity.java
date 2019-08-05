@@ -681,7 +681,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText)findViewById(R.id.stateEditText)).setText(json.getString(P.state_name));
         ((EditText)findViewById(R.id.cityEditText)).setText(json.getString(P.city_name));
 
-        ((EditText)findViewById(R.id.motherTongueEditText)).setText(json.getString(P.mother_tongue));
+        ((EditText)findViewById(R.id.motherTongueEditText)).setText(json.getString(P.mothertongue));
         ((EditText)findViewById(R.id.selectLanguagesEditText)).setText(json.getString(P.language));
 
         ((EditText)findViewById(R.id.fathersNameEditText)).setText(json.getString(P.father_name));
