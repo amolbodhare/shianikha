@@ -30,8 +30,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
-    public SearchFragment()
-    {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -44,18 +43,16 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         context = getContext();
-        if (fragMentView == null) {
-            fragMentView = inflater.inflate(R.layout.fragment_search, container, false);
-            fragMentView.findViewById(R.id.searchByProfileId).setOnClickListener(this);
-            fragMentView.findViewById(R.id.advanceSearch).setOnClickListener(this);
-            fragMentView.findViewById(R.id.searchOption).setOnClickListener(this);
+        fragMentView = inflater.inflate(R.layout.fragment_search, container, false);
+        fragMentView.findViewById(R.id.searchByProfileId).setOnClickListener(this);
+        fragMentView.findViewById(R.id.advanceSearch).setOnClickListener(this);
+        fragMentView.findViewById(R.id.searchOption).setOnClickListener(this);
 
-            SearchOptionFragment searchOptionFragment = SearchOptionFragment.newInstance();
-            fragmentLoader(searchOptionFragment);
-        }
+        SearchOptionFragment searchOptionFragment = SearchOptionFragment.newInstance();
+        fragmentLoader(searchOptionFragment);
+
 
         return fragMentView;
     }
@@ -89,27 +86,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void loadSubFragment(View v)
-    {
-        if (v.getId() == R.id.searchOption)
-        {
+    private void loadSubFragment(View v) {
+        if (v.getId() == R.id.searchOption) {
             SearchOptionFragment searchOptionFragment = SearchOptionFragment.newInstance();
             fragmentLoader(searchOptionFragment);
-        }
-        else if (v.getId() == R.id.advanceSearch)
-        {
+        } else if (v.getId() == R.id.advanceSearch) {
             AdvanceSearchFragment advanceSearchFragment = AdvanceSearchFragment.newInstance();
             fragmentLoader(advanceSearchFragment);
-        }
-        else if (v.getId() == R.id.searchByProfileId)
-        {
+        } else if (v.getId() == R.id.searchByProfileId) {
             SearchByProfileIdFragment searchByProfileIdFragment = SearchByProfileIdFragment.newInstance();
             fragmentLoader(searchByProfileIdFragment);
         }
     }
 
-    private void fragmentLoader(Fragment fragment)
-    {
+    private void fragmentLoader(Fragment fragment) {
         getChildFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
                 .replace(R.id.frameLayout, fragment).commit();

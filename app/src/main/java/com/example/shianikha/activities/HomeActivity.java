@@ -44,8 +44,9 @@ public class HomeActivity extends AppCompatActivity {
     private AccountSettingsFragment accountSettingsFragment;
     private HelpAndSupport helpAndSupport;
     private AboutApp aboutApp;
-    private FavouritesFragment favouritesFragment;
+    public FavouritesFragment favouritesFragment;
     public ProfileDetailsFragments profileDetailsFragments;
+
 
     private DrawerLayout drawerLayout;
     private ContactUsFragment contactUsFragment;

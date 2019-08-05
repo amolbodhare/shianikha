@@ -160,7 +160,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                              jsonList=profileDetailJson.getJsonList("images");
                             ((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
                             ((TextView)fragmentView.findViewById(R.id.background_tv)).setText("Religion : "+profileDetailJson.getString(P.religion));
-                            ((TextView)fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : "+profileDetailJson.getString(P.education)+"\n"+"Education : "+profileDetailJson.getString(P.occupation_name));
+                            ((TextView)fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : "+profileDetailJson.getString(P.education)+"\n"+"Occupation : "+profileDetailJson.getString(P.occupation_name));
                             //((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(jsonList.size());
 
                         }
@@ -170,6 +170,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             H.showMessage(context, profileDetailJson.getString(P.msg));
                     }
                 })
-                .run("hitDashoardApi");
+                .run("hitProfileDetailsApi");
     }
 }

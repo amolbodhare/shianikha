@@ -209,4 +209,23 @@ public class H {
         }
         return i;
     }
+
+    public static String extractNumberFromString(String string)
+    {
+        if (string == null)
+            return "";
+
+        String str = "";
+
+        char ch=' ';
+
+        for (int i=0; i<string.length(); i++)
+        {
+            ch = string.charAt(i);
+            if (ch == 46 || (ch >=48 && ch<=57))
+                str = str + ch;
+        }
+
+        return str;
+    }
 }
