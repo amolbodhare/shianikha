@@ -40,44 +40,10 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/active_members_link_layout"
-        android:layout_below="@id/top_layout"
 
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/active_members_link_tv"
-            android:text="Active Members"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12dp"
-            android:textColor="@color/text_back_grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey" />
-
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/active_members_link_tv"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/annual_income_link_layout"
-        android:layout_below="@id/active_members_link_layout"
+        android:layout_below="@id/top_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -109,10 +75,32 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/annual_income_exp_layout"
+            android:layout_below="@id/annual_income_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/annual_income_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     <RelativeLayout
         android:id="@+id/marital_status_link_layout"
-        android:layout_below="@id/annual_income_link_layout"
+        android:layout_below="@id/annual_income_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -144,9 +132,31 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/religion_link_layout"
-        android:layout_below="@id/marital_status_link_layout"
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/marital_status_exp_layout"
+            android:layout_below="@id/marital_status_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/marital_status_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+        android:id="@+id/shia_community_layout"
+        android:layout_below="@id/marital_status_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -154,8 +164,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/religion_tv"
-            android:text="Religion"
+            android:id="@+id/shia_community_tv"
+            android:text="Shia Community"
             android:fontFamily="@font/poppins_regular"
             android:textSize="12dp"
             android:textColor="@color/text_back_grey"
@@ -173,15 +183,38 @@
         <View
             android:background="@color/border_grey"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/religion_tv"
+            android:layout_below="@id/shia_community_tv"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
 
-    <RelativeLayout
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/shia_community_exp_layout"
+            android:layout_below="@id/shia_community_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/shia_community_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <RelativeLayout
         android:id="@+id/mother_tongue_link_layout"
-        android:layout_below="@id/religion_link_layout"
+        android:layout_below="@id/shia_community_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -213,11 +246,32 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/mother_tongue_exp_layout"
+            android:layout_below="@id/mother_tongue_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/mothertongue_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
 
-    <RelativeLayout
+
+        <RelativeLayout
         android:id="@+id/country_living_in_layout"
-        android:layout_below="@id/mother_tongue_link_layout"
+        android:layout_below="@id/mother_tongue_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -250,9 +304,32 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/country_living_in_exp_layout"
+            android:layout_below="@id/country_living_in_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/country_living_in_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <RelativeLayout
         android:id="@+id/State_living_layout"
-        android:layout_below="@id/country_living_in_layout"
+        android:layout_below="@id/country_living_in_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -285,9 +362,32 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/state_living_in_exp_layout"
+            android:layout_below="@id/State_living_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/state_living_in_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <RelativeLayout
         android:id="@+id/education_link_layout"
-        android:layout_below="@id/State_living_layout"
+        android:layout_below="@id/state_living_in_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -319,10 +419,32 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/educatoin_exp_layout"
+            android:layout_below="@id/education_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <RelativeLayout
+
+            <LinearLayout
+                android:id="@+id/education_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <RelativeLayout
         android:id="@+id/working_with_layout"
-        android:layout_below="@id/education_link_layout"
+        android:layout_below="@id/educatoin_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -354,80 +476,34 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/professional_area_link_layout"
-        android:layout_below="@id/working_with_layout"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/profession_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Profession Area"
-            android:textColor="@color/text_back_grey"
-            android:textSize="12dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey"/>
-
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/profession_tv"
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/working_with_exp_layout"
+            android:layout_below="@id/working_with_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/profile_created_by_link_layout"
-        android:layout_below="@id/professional_area_link_layout"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/working_with_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/profile_created_by_tv"
-            android:text="Profile Created By"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12dp"
-            android:textColor="@color/text_back_grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey"/>
 
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/profile_created_by_tv"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
 
-    </RelativeLayout>
 
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/smoking_link_layout"
-        android:layout_below="@id/profile_created_by_link_layout"
+        android:layout_below="@id/working_with_exp_layout"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="17dp"
@@ -459,112 +535,31 @@
             android:layout_height="0.5dp"/>
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/drinking_link_layout"
-        android:layout_below="@id/smoking_link_layout"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/drinking_tv"
-            android:text="Drinking"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12dp"
-            android:textColor="@color/text_back_grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey"/>
-
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/drinking_tv"
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/smoking_exp_layout"
+            android:layout_below="@id/smoking_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/smoking_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/eating_habits_layout"
-        android:layout_below="@id/drinking_link_layout"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/eating_habit_tv"
-            android:text="Eating Habits"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12dp"
-            android:textColor="@color/text_back_grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey"/>
-
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/eating_habit_tv"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/community_layout"
-        android:layout_below="@id/eating_habits_layout"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/community_tv"
-            android:text="Community"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12dp"
-            android:textColor="@color/text_back_grey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow_navigational"
-            android:tint="@color/grey"/>
-
-        <View
-            android:background="@color/border_grey"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/community_tv"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-
-    </RelativeLayout>
-
-    </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>
