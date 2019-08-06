@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -49,12 +50,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:bar_highlight_color="@color/seekbar_color"
-                app:left_thumb_color="@color/seekbar_color"
-                app:max_value="30"
+                app:bar_highlight_color="@color/textpurle2"
+                app:left_thumb_color="@color/textpurle2"
+                app:left_thumb_color_pressed="@color/textpurle2"
+                app:right_thumb_color_pressed="@color/textpurle2"
+                app:max_value="50"
                 app:min_start_value="20"
                 app:min_value="18"
-                app:right_thumb_color="@color/seekbar_color" />
+                app:right_thumb_color="@color/textpurle2" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,13 +77,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:tag="4.0"
                     android:layout_gravity="start" />
 
                 <TextView
                     android:id="@+id/textMaxHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="8.0"
                     android:layout_alignParentRight="true" />
+
             </RelativeLayout>
 
             <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
@@ -88,12 +94,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:bar_highlight_color="@color/seekbar_color"
-                app:left_thumb_color="@color/seekbar_color"
+                app:bar_highlight_color="@color/textpurle2"
+                app:left_thumb_color="@color/textpurle2"
                 app:max_value="96"
+                app:left_thumb_color_pressed="@color/textpurle2"
+                app:right_thumb_color_pressed="@color/textpurle2"
                 app:min_start_value="48"
                 app:min_value="36"
-                app:right_thumb_color="@color/seekbar_color" />
+                app:right_thumb_color="@color/textpurle2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,15 +113,14 @@
             <RelativeLayout
                 android:id="@+id/marital_status_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/marital_status_ed"
+                    android:id="@+id/maritalStatusEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Never Married"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -146,15 +153,14 @@
             <RelativeLayout
                 android:id="@+id/religion_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/religion_ed"
+                    android:id="@+id/shiaCommunityEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Khoja Shia Ishnasari"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -179,15 +185,14 @@
             <RelativeLayout
                 android:id="@+id/mother_tongue_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/mother_tongue_ed"
+                    android:id="@+id/motherTongueEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Marathi"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -227,15 +232,14 @@
             <RelativeLayout
                 android:id="@+id/country_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/country_edt"
+                    android:id="@+id/countryEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="India"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -259,15 +263,14 @@
             <RelativeLayout
                 android:id="@+id/state_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/state_edt"
+                    android:id="@+id/stateEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="India"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -291,15 +294,14 @@
             <RelativeLayout
                 android:id="@+id/city_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/city_edt"
+                    android:id="@+id/cityEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Mumbai"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -312,9 +314,8 @@
                     android:tint="#bdbdbd" />
             </RelativeLayout>
 
-
             <Button
-                android:id="@+id/btn_search"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

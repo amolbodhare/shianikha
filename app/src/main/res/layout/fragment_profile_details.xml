@@ -180,7 +180,6 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/green_circle_button"
                         android:padding="6dp"
-                        android:src="@drawable/ic_check_black_24dp"
                         android:tint="#00a991" />
 
                 </RelativeLayout>

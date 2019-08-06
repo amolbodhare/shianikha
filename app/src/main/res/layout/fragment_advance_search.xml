@@ -6,52 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".subfragments.AdvanceSearchFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="17dp"
             android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/looking_for_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginRight="17dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Looking For"
                 android:textSize="16dp" />
 
             <RadioGroup
-                android:id="@+id/looking_for_rdg"
+                android:id="@+id/lookingForRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_below="@id/looking_for_tv"
-                android:layout_marginLeft="17dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="17dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <RadioButton
-                    android:id="@+id/rdb_bride"
+                    android:id="@+id/brideRadioButton"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="female"
+                    android:fontFamily="@font/poppins_regular"
                     android:buttonTint="@color/bluebtnback"
                     android:checked="true"
                     android:text="Bride" />
 
                 <RadioButton
-                    android:id="@+id/rdb_groom"
+                    android:id="@+id/groomRadioButton"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="1"
+                    android:tag="male"
                     android:buttonTint="@color/bluebtnback"
                     android:text="Groom" />
 
@@ -61,10 +61,7 @@
                 android:id="@+id/spinner_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/looking_for_rdg"
-                android:layout_marginLeft="17dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="17dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -99,12 +96,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:bar_highlight_color="@color/bluebtnback"
-                    app:left_thumb_color="@color/bluebtnback"
-                    app:max_value="30"
+                    app:bar_highlight_color="@color/textpurle2"
+                    app:left_thumb_color="@color/textpurle2"
+                    app:left_thumb_color_pressed="@color/textpurle2"
+                    app:max_value="50"
                     app:min_start_value="20"
                     app:min_value="18"
-                    android:buttonTint="@color/bluebtnback" />
+                    app:right_thumb_color="@color/textpurle2"
+                    app:right_thumb_color_pressed="@color/textpurle2" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -131,6 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true" />
+
                 </RelativeLayout>
 
                 <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
@@ -138,41 +138,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:bar_highlight_color="@color/bluebtnback"
-                    app:left_thumb_color="@color/bluebtnback"
+                    app:bar_highlight_color="@color/textpurle2"
+                    app:left_thumb_color="@color/textpurle2"
+                    app:left_thumb_color_pressed="@color/textpurle2"
                     app:max_value="96"
                     app:min_start_value="48"
                     app:min_value="36"
-                    app:right_thumb_color="@color/bluebtnback" />
+                    app:right_thumb_color="@color/textpurle2"
+                    app:right_thumb_color_pressed="@color/textpurle2" />
+
             </LinearLayout>
 
-
             <TextView
-                android:id="@+id/marital_status_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/spinner_layout"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginRight="17dp"
                 android:text="Marital Status" />
 
             <RelativeLayout
-                android:id="@+id/marital_status_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/marital_status_tv"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/marital_status_ed"
+                    android:id="@+id/maritalStatusEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Never married"
+                    android:hint="Select Marital Status"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -187,31 +181,23 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/religion_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/marital_status_layout"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginRight="17dp"
                 android:text="Select Shia Community" />
 
             <RelativeLayout
-                android:id="@+id/religion_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_below="@id/religion_tv"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/religion_ed"
+                    android:id="@+id/religionEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Khoja Shia Ishnashri"
+                    android:clickable="true"
+                    android:hint="Select Religion"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -225,36 +211,24 @@
 
             </RelativeLayout>
 
-
-
-
             <TextView
-                android:id="@+id/mothertongue_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/religion_layout"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:layout_marginTop="17dp"
                 android:text="Mother Tongue" />
 
             <RelativeLayout
-                android:id="@+id/mother_tongue_layout"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-
-                android:layout_height="56dp"
-                android:layout_below="@id/mothertongue_tv">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/mother_tongue_ed"
+                    android:id="@+id/motherTongueEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Hindi"
+                    android:hint="Select Mother Tongue"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -267,32 +241,57 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <TextView
-                android:id="@+id/country_living_in_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/mother_tongue_layout"
+                android:layout_marginTop="17dp"
+                android:text="Language" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/languageEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Select Language"
+                    android:paddingRight="56dp"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:text="Country Living in" />
 
             <RelativeLayout
-                android:id="@+id/country_living_in_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/country_living_in_tv">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/country_ed"
+                    android:id="@+id/countryEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="India"
+                    android:hint="Select Country"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -307,31 +306,24 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/state_living_in_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/country_living_in_layout"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:text="State Living In" />
 
             <RelativeLayout
-                android:id="@+id/state_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/state_living_in_tv">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/state_ed"
+                    android:id="@+id/stateEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Maharashtra"
+                    android:hint="Select State"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -346,31 +338,23 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/city_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/state_layout"
-                android:layout_alignParentLeft="true"
                 android:layout_marginTop="17dp"
                 android:text="City/District" />
 
             <RelativeLayout
-                android:id="@+id/city_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/city_tv">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/city_ed"
+                    android:id="@+id/cityEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Maharashtra"
+                    android:hint="Select City"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -383,283 +367,72 @@
                     android:tint="#bdbdbd" />
 
             </RelativeLayout>
+
             <TextView
-                android:id="@+id/ethincity_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/city_layout"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Ethnicity"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:id="@+id/ethincity_checkbox_layout"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/ethincity_tv"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/arab_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#707070"
-                        android:fontFamily="@font/poppins_regular"
-                        android:buttonTint="#5C5CFE"
-                        android:checked="true"
-                        android:text="Arab" />
-
-                    <CheckBox
-                        android:id="@+id/african_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1"
-                        android:buttonTint="#5C5CFE"
-                        android:text="African" />
-
-                    <CheckBox
-                        android:id="@+id/asian_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Asian" />
-
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:weightSum="2">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ethnicityContainer1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/caucasian_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#707070"
-                        android:fontFamily="@font/poppins_regular"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Caucasian" />
-
-                    <CheckBox
-                        android:id="@+id/hispanic_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Hispanic" />
-
-                    <CheckBox
-                        android:id="@+id/persian_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Persian" />
-
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ethnicityContainer2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/southAsian_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1"
-                        android:buttonTint="#5C5CFE"
-                        android:text="South Asian - Indian" />
-
-                    <CheckBox
-                        android:id="@+id/mixedRace_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#707070"
-                        android:fontFamily="@font/poppins_regular"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Mixed Race" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/southAsia_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="#707070"
-                        android:layout_weight="1.2"
-                        android:buttonTint="#5C5CFE"
-                        android:text="South Asian - Pakistani" />
-
-                    <CheckBox
-                        android:id="@+id/other_cb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:textColor="#707070"
-                        android:fontFamily="@font/poppins_regular"
-                        android:buttonTint="#5C5CFE"
-                        android:text="Other" />
-
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/education_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/ethincity_checkbox_layout"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Education"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:id="@+id/educaton_rdg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/education_tv"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <CheckBox
-                    android:id="@+id/some_schooling_cb"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/educationContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Some schooling" />
-
-                <CheckBox
-                    android:id="@+id/high_school_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="High School" />
-                <CheckBox
-                    android:id="@+id/college_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="College" />
-
-                <CheckBox
-                    android:id="@+id/tech_train_dip_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Technical Training/Diploma" />
-                <CheckBox
-                    android:id="@+id/associate_degree_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Associate Degree" />
-
-                <CheckBox
-                    android:id="@+id/bachelors_degree_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Bachelors Degree" />
-                <CheckBox
-                    android:id="@+id/graduate_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="#707070"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Graduate/Masters Degree" />
-
-                <CheckBox
-                    android:id="@+id/prof_deg_phd_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#707070"
-                    android:fontFamily="@font/poppins_regular"
-                    android:buttonTint="#5C5CFE"
-                    android:text="Professional Degree/PhD" />
+                    android:orientation="vertical" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/occupation_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/educaton_rdg"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:layout_marginTop="17dp"
                 android:text="Occupation" />
 
             <RelativeLayout
-                android:id="@+id/occupation_layout"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_height="56dp"
-                android:layout_below="@id/occupation_tv">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/occupation_ed"
+                    android:id="@+id/occupationEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Occupation"
@@ -680,60 +453,15 @@
                 android:id="@+id/language_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/occupation_layout"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:text="Language" />
-
-            <RelativeLayout
-                android:id="@+id/language_layout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/language_tv">
-
-                <EditText
-                    android:id="@+id/language_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Hindi"
-                    android:paddingRight="56dp"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="#bdbdbd" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/syed_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/language_layout"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Are you a Syed?"
-                android:textSize="16sp" />
+                android:layout_marginTop="17dp"
+                android:text="Are you a syed ?" />
 
             <RadioGroup
                 android:id="@+id/syedRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/syed_tv"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -742,7 +470,9 @@
                     android:id="@+id/yesSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
+                    android:fontFamily="@font/poppins_regular"
+                    android:tag="1"
                     android:buttonTint="#5C5CFE"
                     android:checked="true"
                     android:text="Yes" />
@@ -751,7 +481,9 @@
                     android:id="@+id/notSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:tag="0"
+                    android:layout_weight="0.9"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
@@ -759,7 +491,9 @@
                     android:id="@+id/donnKnowSyed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
+                    android:tag="2"
+                    android:fontFamily="@font/poppins_regular"
                     android:buttonTint="#5C5CFE"
                     android:text="Don't know" />
 
@@ -769,10 +503,7 @@
                 android:id="@+id/islam_convert_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/syedRadioGroup"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Did you convert to Islam?"
                 android:textSize="16sp" />
@@ -781,18 +512,17 @@
                 android:id="@+id/convertedRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/islam_convert_tv"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <RadioButton
                     android:id="@+id/yesConverted"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
+                    android:fontFamily="@font/poppins_regular"
+                    android:tag="1"
                     android:buttonTint="#5C5CFE"
                     android:checked="true"
                     android:text="Yes" />
@@ -801,247 +531,279 @@
                     android:id="@+id/notConverted"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:tag="0"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.9"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
 
             </RadioGroup>
-            <TextView
-                android:id="@+id/children_ifany_tv"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/convertedRadioGroup"
+                android:orientation="horizontal"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Children,if any"
-                android:textSize="16sp" />
+                android:weightSum="2">
 
-            <RadioGroup
-                android:id="@+id/childrenRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/children_ifany_tv"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/children_yes_rb"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Yes" />
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Children,if any"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
-                <RadioButton
-                    android:id="@+id/children_no_rb"
+                <RadioGroup
+                    android:id="@+id/childrenRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="No" />
+                    android:weightSum="1">
 
-            </RadioGroup>
-            <TextView
-                android:id="@+id/disability_ifany_tv"
+                    <RadioButton
+                        android:id="@+id/yesChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/poppins_regular"
+                        android:tag="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/notChildren"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:tag="0"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/childrenRadioGroup"
+                android:orientation="horizontal"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Disability,if any"
-                android:textSize="16sp" />
+                android:weightSum="2">
 
-            <RadioGroup
-                android:id="@+id/disabilityRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/disability_ifany_tv"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/disability_yes_rb"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Yes" />
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Disability,if any"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
-                <RadioButton
-                    android:id="@+id/disability_no_rb"
+                <RadioGroup
+                    android:id="@+id/disabilityRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="No" />
+                    android:weightSum="1">
 
-            </RadioGroup>
-            <TextView
-                android:id="@+id/namaz_tv"
+                    <RadioButton
+                        android:id="@+id/yesDisable"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_weight="0.5"
+                        android:tag="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/noDisable"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:tag="0"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/disabilityRadioGroup"
+                android:orientation="horizontal"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Namaz"
-                android:textSize="16sp" />
+                android:weightSum="2">
 
-            <RadioGroup
-                android:id="@+id/namazRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/namaz_tv"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/namaz_yes_rb"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Yes" />
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Namaz"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
-                <RadioButton
-                    android:id="@+id/namaz_no_rb"
+                <RadioGroup
+                    android:id="@+id/namazRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="No" />
+                    android:weightSum="1">
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/yesNamaz"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_weight="0.5"
+                        android:tag="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
 
-            <TextView
-                android:id="@+id/raza_tv"
+                    <RadioButton
+                        android:id="@+id/noNamaz"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:tag="0"
+                        android:layout_weight="0.5"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/namazRadioGroup"
+                android:orientation="horizontal"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Disability,if any"
-                android:textSize="16sp" />
+                android:weightSum="2">
 
-            <RadioGroup
-                android:id="@+id/razaRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/raza_tv"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/raza_yes_rb"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Yes" />
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Roza"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
-                <RadioButton
-                    android:id="@+id/raza_no_rb"
+                <RadioGroup
+                    android:id="@+id/rozaRadioGroup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="No" />
+                    android:weightSum="1">
 
-            </RadioGroup>
-            <TextView
-                android:id="@+id/hijab_tv"
+                    <RadioButton
+                        android:id="@+id/yesRoza"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_weight="0.5"
+                        android:tag="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/noRoza"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:tag="0"
+                        android:fontFamily="@font/poppins_regular"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/razaRadioGroup"
+                android:orientation="horizontal"
                 android:layout_marginTop="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Hijab Preference"
-                android:textSize="16sp" />
+                android:weightSum="2">
 
-            <RadioGroup
-                android:id="@+id/hijabRadioGroup"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Hizab Preference"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+
+                <RadioGroup
+                    android:id="@+id/hizabPreferenceRadioGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="1">
+
+                    <RadioButton
+                        android:id="@+id/yesHijab"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_weight="0.5"
+                        android:tag="1"
+                        android:buttonTint="#5C5CFE"
+                        android:checked="true"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/noHijab"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:tag="0"
+                        android:layout_weight="0.5"
+                        android:buttonTint="#5C5CFE"
+                        android:text="No" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:tag="0"
+                android:fontFamily="@font/poppins_regular"
+                android:buttonTint="#5C5CFE"
+                android:text="With Pictures Only"/>
+
+            <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:weightSum="3"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_below="@id/hijab_tv"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:background="@drawable/blue_button_back"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="SEARCH"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-                <RadioButton
-                    android:id="@+id/hijab_yes_rb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:checked="true"
-                    android:text="Yes" />
-
-                <RadioButton
-                    android:id="@+id/hijab_no_rb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:text="No" />
-
-                <RadioButton
-                    android:id="@+id/hijab_with_picture_rb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="#5C5CFE"
-                    android:textSize="10sp"
-                    android:text="With pictures only" />
-
-            </RadioGroup>
-
-
-             <Button
-                 android:id="@+id/btn_search"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@id/hijabRadioGroup"
-                 android:layout_marginLeft="17dp"
-                 android:layout_marginRight="17dp"
-                 android:layout_alignParentBottom="true"
-                 android:background="@drawable/blue_button_back"
-                 android:text="SEARCH"
-                 android:textColor="@color/white"
-                 android:textSize="20dp" />
-
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
-
 
     <LinearLayout
         android:id="@+id/includeContainer"

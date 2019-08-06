@@ -241,7 +241,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         submit_json.addString(P.gender, gender);
 
 
-        editText = findViewById(R.id.city_ed);
+        editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select City of residence");
@@ -262,7 +262,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         submit_json.addString(P.height, string);
 
-        editText = findViewById(R.id.religion_ed);
+        editText = findViewById(R.id.religionEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select religion");

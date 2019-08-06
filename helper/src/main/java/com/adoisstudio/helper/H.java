@@ -17,6 +17,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 /**
  * Created by amitkumar on 05/01/18.
  */
@@ -208,5 +213,39 @@ public class H {
             e.printStackTrace();
         }
         return i;
+    }
+
+    public static String extractNumberFromString(String string)
+    {
+        if (string == null)
+            return "";
+
+        String str = "";
+
+        char ch=' ';
+
+        for (int i=0; i<string.length(); i++)
+        {
+            ch = string.charAt(i);
+            if (ch == 46 || (ch >=48 && ch<=57))
+                str = str + ch;
+        }
+
+        return str;
+    }
+
+    public static JSONArray extractJsonArray(String string, ArrayList<String> nameList, ArrayList<String> idList)
+    {
+        StringTokenizer stringTokenizer = new StringTokenizer(string, ",");
+        int i;
+        JSONArray jsonArray = new JSONArray();
+        while (stringTokenizer.hasMoreTokens()) {
+            string = stringTokenizer.nextToken().trim();
+            i = nameList.indexOf(string);
+            if (i != -1)
+                jsonArray.put(idList.get(i));
+        }
+
+        return jsonArray;
     }
 }
