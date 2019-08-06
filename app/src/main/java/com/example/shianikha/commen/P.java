@@ -58,6 +58,7 @@ public class P {
     public static String dob = "dob";
     public static String token_id = "token_id";
     public static String religion = "religion";
+    public static String religion_id = "religion_id";
     public static String ethnicity = "ethnicity";
     public static String occupation = "occupation";
     public static String occupation_name = "occupation_name";
@@ -103,6 +104,7 @@ public class P {
     public static String residency_address = "residency_address";
     public static String mothertongue = "mothertongue";
     public static String mother_tongue = "mother_tongue";
+    public static String mother_tongue_id = "mother_tongue_id";
     public static String intreasted_in = "intreasted_in";
     public static String smoke_id = "smoke_id";
     public static String relocate_id = "relocate_id";
@@ -151,6 +153,8 @@ public class P {
     public static String ethnicity_name="ethnicity_name";
     public static String about_1="about_1";
     public static String monthly_income = "monthly_income";
+    public static String monthly_income_id = "monthly_income_id";
+
     public static String other_language = "other_language";
     public static String children_age = "children_age";
     public static String children_education = "children_education";

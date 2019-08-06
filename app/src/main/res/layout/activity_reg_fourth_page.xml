@@ -35,7 +35,7 @@
                 <TextView
                     android:id="@+id/disability"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start"
@@ -89,7 +89,7 @@
                 <TextView
                     android:id="@+id/namazText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start"
@@ -143,7 +143,7 @@
                 <TextView
                     android:id="@+id/rozaText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start"
@@ -197,7 +197,7 @@
                 <TextView
                     android:id="@+id/HijabText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start"

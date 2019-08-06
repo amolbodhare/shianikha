@@ -252,7 +252,7 @@
                     android:id="@+id/mother_tongue_ed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                                        android:focusable="false"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Hindi"
                     android:paddingRight="56dp"
