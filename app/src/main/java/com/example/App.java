@@ -2,6 +2,7 @@ package com.example;
 
 import android.app.Application;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Static;
@@ -10,6 +11,7 @@ public class App extends Application
 {
     public static String device_id = "";
     public static Json masterJson = new Json();
+    public static Fragment tempFragment;
 
     @Override
     public void onCreate() {

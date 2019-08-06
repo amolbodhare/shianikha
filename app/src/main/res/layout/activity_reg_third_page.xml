@@ -312,7 +312,6 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/language_layout"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"

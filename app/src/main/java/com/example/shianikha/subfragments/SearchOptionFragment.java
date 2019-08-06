@@ -2,7 +2,6 @@ package com.example.shianikha.subfragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,8 +22,6 @@ import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.App;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
-import com.example.shianikha.activities.PerfectMatchActivity;
-import com.example.shianikha.activities.RegSixthPageActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
@@ -73,15 +70,20 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             }
         });*/
 
-            fragmentView.findViewById(R.id.maritalStatusEditText).setOnClickListener(this);
-            fragmentView.findViewById(R.id.shiaCommunityEditText).setOnClickListener(this);
-            fragmentView.findViewById(R.id.motherTongueEditText).setOnClickListener(this);
-            fragmentView.findViewById(R.id.countryEditText).setOnClickListener(this);
-            fragmentView.findViewById(R.id.stateEditText).setOnClickListener(this);
-            fragmentView.findViewById(R.id.cityEditText).setOnClickListener(this);
+            setAllRequiredClickListener((ViewGroup)fragmentView.findViewById(R.id.linearLayout));
             fragmentView.findViewById(R.id.button).setOnClickListener(this);
         }
         return fragmentView;
+    }
+
+    private void setAllRequiredClickListener(ViewGroup viewGroup) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view instanceof ViewGroup)
+                setAllRequiredClickListener((ViewGroup) view);
+            else if (view instanceof EditText && !view.isFocusable())
+                view.setOnClickListener(this);
+        }
     }
 
     private void handleSeekBar() {
@@ -168,99 +170,35 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
         json.addString(P.max_height, string);
 
         string = ((EditText) fragmentView.findViewById(R.id.maritalStatusEditText)).getText().toString();
-        StringTokenizer stringTokenizer = new StringTokenizer(string, ",");
-        JSONArray jsonArray = new JSONArray();
-        int i;
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.maritalStatusNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.maritalStatusIdList.get(i));
-        }
+        JSONArray jsonArray = H.extractJsonArray(string,CommonListHolder.maritalStatusNameList,CommonListHolder.maritalStatusIdList);
         json.addJSONArray(P.marital_status, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.shiaCommunityEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.religionNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.religionIdList.get(i));
-        }
-        json.addJSONArray(P.religion_id, jsonArray);
-
-        string = ((EditText) fragmentView.findViewById(R.id.shiaCommunityEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.religionNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.religionIdList.get(i));
-        }
+        jsonArray = H.extractJsonArray(string,CommonListHolder.religionNameList,CommonListHolder.religionIdList);
         json.addJSONArray(P.religion_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.motherTongueEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.languageNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.languageIdList.get(i));
-        }
+        jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
         json.addJSONArray(P.mother_tongue_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.countryEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.countryNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.countryIdList.get(i));
-        }
-        json.addJSONArray(P.country, jsonArray);
-
-        string = ((EditText) fragmentView.findViewById(R.id.countryEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.countryNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.countryIdList.get(i));
-        }
+        jsonArray = H.extractJsonArray(string,CommonListHolder.countryNameList,CommonListHolder.countryIdList);
         json.addJSONArray(P.country, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.stateEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.stateNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.stateIdList.get(i));
-        }
+        jsonArray = H.extractJsonArray(string,CommonListHolder.stateNameList,CommonListHolder.stateIdList);
         json.addJSONArray(P.state, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.cityEditText)).getText().toString();
-        stringTokenizer = new StringTokenizer(string, ",");
-        jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens()) {
-            string = stringTokenizer.nextToken().trim();
-            i = CommonListHolder.cityNameList.indexOf(string);
-            if (i != -1)
-                jsonArray.put(CommonListHolder.cityIdList.get(i));
-        }
+        jsonArray = H.extractJsonArray(string,CommonListHolder.cityNameList,CommonListHolder.cityIdList);
         json.addJSONArray(P.city, jsonArray);
 
         hitSearchOptionApi(json);
     }
 
     private void setUpMultiChoicePickerDialog(final View view) {
-        if (view.getId() == R.id.maritalStatusEditText) {
+        if (view.getId() == R.id.maritalStatusEditText)
+        {
             H.log("clickEvent", "isCalled");
             String[] array = new String[CommonListHolder.maritalStatusNameList.size()];
             array = CommonListHolder.maritalStatusNameList.toArray(array);
@@ -290,7 +228,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempCityList;
     private boolean[] cityCheckedArray;
-
     private void showCityMultiChoiceList(final String[] array, final View view) {
         if (cityCheckedArray == null) {
             cityCheckedArray = new boolean[array.length];
@@ -327,7 +264,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempStateList;
     private boolean[] stateCheckedArray;
-
     private void showStateMultiChoiceList(final String[] array, final View view) {
         if (stateCheckedArray == null) {
             stateCheckedArray = new boolean[array.length];
@@ -364,7 +300,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempCountryList;
     private boolean[] countryCheckedArray;
-
     private void showCountryMultiChoiceList(final String[] array, final View view) {
         if (countryCheckedArray == null) {
             countryCheckedArray = new boolean[array.length];
@@ -401,7 +336,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempMotherTongueList;
     private boolean[] motherTongueCheckedArray;
-
     private void showMotherTongueMultiChoiceList(final String[] array, final View view) {
         if (motherTongueCheckedArray == null) {
             motherTongueCheckedArray = new boolean[array.length];
@@ -438,7 +372,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempReligionList;
     private boolean[] religionCheckedArray;
-
     private void showReligionMultiChoiceList(final String[] array, final View view) {
         if (religionCheckedArray == null) {
             religionCheckedArray = new boolean[array.length];
@@ -475,7 +408,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempMaritalStatusList;
     private boolean[] maritalStatusCheckedArray;
-
     private void showMaritalStatusMultiChoiceList(final String[] array, final View view) {
 
         if (maritalStatusCheckedArray == null) {

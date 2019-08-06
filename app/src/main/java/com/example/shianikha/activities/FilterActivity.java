@@ -60,7 +60,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         shia_community_link_layout=(RelativeLayout)findViewById(R.id.shia_community_layout);
         mother_tongue_link_layout=(RelativeLayout)findViewById(R.id.mother_tongue_link_layout);
         country_living_in_link_layout=(RelativeLayout)findViewById(R.id.country_living_in_layout);
-        state_living_in_link_layout=(RelativeLayout)findViewById(R.id.state_layout);
         education_link_layout=(RelativeLayout)findViewById(R.id.education_link_layout);
         working_with_link_layout=(RelativeLayout)findViewById(R.id.working_with_layout);
         smoking_link_layout=(RelativeLayout)findViewById(R.id.smoking_link_layout);

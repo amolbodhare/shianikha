@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -53,7 +54,7 @@
                 app:left_thumb_color="@color/textpurle2"
                 app:left_thumb_color_pressed="@color/textpurle2"
                 app:right_thumb_color_pressed="@color/textpurle2"
-                app:max_value="30"
+                app:max_value="50"
                 app:min_start_value="20"
                 app:min_value="18"
                 app:right_thumb_color="@color/textpurle2" />

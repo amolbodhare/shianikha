@@ -164,4 +164,8 @@ public class P {
     public static String search_now = "search_now";
     public static String json = "json";
     public static String string = "string";
+    public static String full_search = "full_search";
+    public static String ethnicity_id = "ethnicity_id";
+    public static String show_profile_with_photo = "show_profile_with_photo";
+    public static String language_id = "language_id";
 }//class
