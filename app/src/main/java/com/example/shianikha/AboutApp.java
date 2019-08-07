@@ -7,7 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 
 public class AboutApp extends Fragment {
@@ -15,6 +24,10 @@ public class AboutApp extends Fragment {
 
     public static Fragment previousFragment;
     public static String previousFragmentName;
+    private Context context;
+    private LoadingDialog loadingDialog;
+    private View fragmentView;
+    
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,8 +54,63 @@ public class AboutApp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_app, container, false);
+        if(fragmentView==null)
+        {
+            context =getContext();
+            LoadingDialog loadingDialog = new LoadingDialog(context);
+            fragmentView=inflater.inflate(R.layout.fragment_about_app, container, false);
+            hitAboutUs();
+        }
+        return fragmentView;
     }
+
+    private void hitAboutUs() {
+        Session session = new Session(context);
+        String string = session.getString(P.tokenData);
+        Json json = new Json();
+        json.addString(P.token_id, string);
+        RequestModel requestModel = RequestModel.newRequestModel("about");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        /*if (isLoading)s
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();*/
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+
+
+                            String  string = json.getString(P.data);
+                            ((TextView) fragmentView.findViewById(R.id.textView)).setText(string);
+
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitAboutUs");
+    }
+
+
+
+
+
 
 
     public interface OnFragmentInteractionListener {

@@ -264,8 +264,8 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         if (i != -1)
             App.masterJson.addString(P.marital_status, CommonListHolder.maritalStatusIdList.get(i));
 
-        String str = findViewById(((RadioGroup) findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.children, str);
+        string = findViewById(((RadioGroup) findViewById(R.id.childrenRadioGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.children, string);
 
         JSONArray jsonArray = new JSONArray();
         Json json;
@@ -284,12 +284,6 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             jsonArray.put(json);
         }
         App.masterJson.addJSONArray(P.children_details,jsonArray);
-
-        if(str.equals("1")&& jsonArray.length()==0)
-        {
-            H.showMessage(this,"please enter children's details");
-            return;
-        }
 
         H.log("masterJsonIs", App.masterJson.toString());
         startActivity(new Intent(this, RegThirdPageActivity.class));

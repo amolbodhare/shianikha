@@ -68,6 +68,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             fragmentView.findViewById(R.id.shareProfileLinearLayout).setOnClickListener(this);
             fragmentView.findViewById(R.id.favouriteLinearLayout).setOnClickListener(this);
 
+
         }
 
         // here in profileId we have got user_id only but according to api its name is changed as profileId for this api
@@ -89,7 +90,61 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
             } else
                 imageView.setImageDrawable(null);
+        } else if (v.getId() == R.id.favouriteLinearLayout) {
+            Object object = v.getTag();
+            if (object != null) {
+                String string = object.toString();
+                hitFavouriteApi(string);
+            }
+
+
         }
+    }
+
+    private void hitFavouriteApi(String id) {
+
+        Session session = new Session(context);
+        String string = session.getString(P.tokenData);
+
+        Json json = new Json();
+        json.addString(P.token_id, string);
+        json.addString(P.profile_id,id);
+
+        RequestModel requestModel = RequestModel.newRequestModel("add_favourites");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        /*if (isLoading)s
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();*/
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+                            String string = json.getString(P.profile_id);
+
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitFavouriteApi");
+
     }
 
     public interface OnFragmentInteractionListener {
@@ -100,9 +155,12 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     private void hitProfileDetailsApi(String api_type, String profileId) {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
+
         Json json = new Json();
         json.addString(P.token_id, string);
         json.addString(P.profile_id, profileId);
+
+
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
@@ -157,6 +215,11 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             ((TextView) fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : " + profileDetailJson.getString(P.education) + "\n" + "Occupation : " + profileDetailJson.getString(P.occupation_name));
                             //((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(jsonList.size());
                             fragmentView.findViewById(R.id.imageView).setOnClickListener(ProfileDetailsFragments.this);
+
+                            String string = profileDetailJson.getString(P.id);
+                            LinearLayout linearLayout = fragmentView.findViewById(R.id.favouriteLinearLayout);
+                            linearLayout.setTag(string);
+                            linearLayout.setOnClickListener(ProfileDetailsFragments.this);
 
                         } else
 

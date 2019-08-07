@@ -20,8 +20,7 @@ public class RegSeventhPageActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onClick(View view) {
         if (view.getId() == R.id.button)
             startActivity(new Intent(this,PerfectMatchActivity.class));
     }

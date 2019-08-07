@@ -109,7 +109,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.ethnicityEditText).setOnClickListener(this);
         findViewById(R.id.fathersCountryEditText).setOnClickListener(this);
         findViewById(R.id.mothersCountryEditText).setOnClickListener(this);
-        //findViewById(R.id.highestLevelEduEditText).setOnClickListener(this);
+        findViewById(R.id.highestLevelEduEditText).setOnClickListener(this);
         findViewById(R.id.smokingEditText).setOnClickListener(this);
     }
 
@@ -142,10 +142,10 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         } else if (view.getId() == R.id.fathersCountryEditText || view.getId() == R.id.mothersCountryEditText) {
             editText.setHint("Search Country");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
-        } /*else if (view.getId() == R.id.highestLevelEduEditText) {
+        } else if (view.getId() == R.id.highestLevelEduEditText) {
             editText.setHint("Highest level of Education");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
-        }*/ else if (view.getId() == R.id.smokingEditText) {
+        } else if (view.getId() == R.id.smokingEditText) {
             editText.setHint("Smoking");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.smokingNameList);
         } else if (view.getId() == R.id.relocateEditText) {
@@ -255,7 +255,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         if (i != -1)
             App.masterJson.addString(P.mother_country, CommonListHolder.countryIdList.get(i));
 
-      /*  editText = findViewById(R.id.highestLevelEduEditText);
+        editText = findViewById(R.id.highestLevelEduEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please select highest level of education");
@@ -273,7 +273,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         }
         i = CommonListHolder.educationNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.edulevel_id, CommonListHolder.educationIdList.get(i));*/
+            App.masterJson.addString(P.edulevel_id, CommonListHolder.educationIdList.get(i));
 
 
         editText = findViewById(R.id.smokingEditText);
