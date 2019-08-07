@@ -168,4 +168,5 @@ public class P {
     public static String ethnicity_id = "ethnicity_id";
     public static String show_profile_with_photo = "show_profile_with_photo";
     public static String language_id = "language_id";
+    public static String about="about";
 }//class
