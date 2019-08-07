@@ -241,7 +241,7 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
 
     private void makeJson()
     {
-        EditText editText = fragmentView.findViewById(R.id.marital_status_ed);
+        EditText editText = fragmentView.findViewById(R.id.marital_Status_spinner_ed);
         String string = editText.getText().toString();
 
         if (string.isEmpty()) {
@@ -252,7 +252,6 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
         int i = prefMatchMaritalStatuusNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.marital_status, prefMatchMaritalStatuusCodeList.get(i));
-
 
 
         editText = fragmentView.findViewById(R.id.ethincity_spinner_ed);
@@ -276,9 +275,9 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
         i = minEducationNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.father_city, minEducationCodeList.get(i));
-
-
         H.log("masterJsonIs",App.masterJson.toString());
+
+
         //startActivity(new Intent(this,RegFourthPageActivity.class));
     }
     private void setMarginTopOfCustomSpinner() {

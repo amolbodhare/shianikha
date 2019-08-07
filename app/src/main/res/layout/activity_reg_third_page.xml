@@ -26,13 +26,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp">
 
                 <EditText
                     android:id="@+id/educationEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -69,12 +69,12 @@
                 android:id="@+id/occupation_layout"
                 android:layout_width="match_parent"
                 android:layout_marginTop="17dp"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/occupationEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -109,13 +109,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/monthlyIncomeEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -151,7 +151,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -177,13 +177,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/stateEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -203,13 +203,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/cityEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -229,13 +229,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/motherTongueEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"

@@ -26,12 +26,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/ethnicityEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -66,17 +66,17 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/fathersCountryEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Fathers country/city of origin"
+                    android:hint="Fathers country"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -92,17 +92,17 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/mothersCountryEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Mothers country/city of origin"
+                    android:hint="Mothers country"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -116,7 +116,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+           <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="17dp">
@@ -155,17 +155,17 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Education's name" />
 
-            </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/smokingEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -185,13 +185,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/relocateEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
@@ -211,13 +211,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="17dp">
 
                 <EditText
                     android:id="@+id/seekingMarriageEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
