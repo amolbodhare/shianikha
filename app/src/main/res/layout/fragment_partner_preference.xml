@@ -65,7 +65,7 @@
         android:layout_marginTop="17dp">
 
         <EditText
-            android:id="@+id/marital_Status_spinner_ed"
+            android:id="@+id/marital_status_spinner_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="false"

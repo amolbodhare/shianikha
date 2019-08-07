@@ -163,8 +163,6 @@ public class P {
     public static String family_details = "family_details";
     public static String min_height = "min_height";
     public static String max_height = "max_height";
-    public static String religion_id = "religion_id";
-    public static String mother_tongue_id = "mother_tongue_id";
     public static String search_now = "search_now";
     public static String json = "json";
     public static String string = "string";

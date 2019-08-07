@@ -73,7 +73,7 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
         fragmentView.findViewById(R.id.btn_next).setOnClickListener(this);
         fragmentView.findViewById(R.id.view).setOnClickListener(this);
 
-        fragmentView.findViewById(R.id.marital_Status_spinner_ed).setOnClickListener(this);
+        fragmentView.findViewById(R.id.marital_status_spinner_ed).setOnClickListener(this);
         fragmentView.findViewById(R.id.ethincity_spinner_ed).setOnClickListener(this);
         fragmentView.findViewById(R.id.min_edu_spinner_ed).setOnClickListener(this);
 
@@ -125,7 +125,7 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
         ListView listView =fragmentView.findViewById(R.id.listView);
         fragmentView.findViewById(R.id.view).setVisibility(View.VISIBLE);
 
-        if (view.getId() == R.id.marital_Status_spinner_ed)
+        if (view.getId() == R.id.marital_status_spinner_ed)
         {
             ((EditText) fragmentView.findViewById(R.id.editText)).setHint("Search Marital Status");
             arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, prefMatchMaritalStatuusNameList);
@@ -241,7 +241,7 @@ public class PartnerPreference extends Fragment implements View.OnClickListener
 
     private void makeJson()
     {
-        EditText editText = fragmentView.findViewById(R.id.marital_status_ed);
+        EditText editText = fragmentView.findViewById(R.id.marital_status_spinner_ed);
         String string = editText.getText().toString();
 
         if (string.isEmpty()) {
