@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void makeCountryCodeList() {
-        String string = new Session(this).getString(P.country_code);
+        String string = new Session(this).getString(P.country);
         if (string != null) {
             countryList.clear();
             JsonList jsonList = new JsonList(string);
@@ -103,21 +103,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void makeJson()
     {
         Json json = new Json();
+
+        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        json.addString(P.country_code,countryCode);
+
         String string=((EditText)findViewById(R.id.mobile_no)).getText().toString();
         if(string.isEmpty())
         {
             H.showMessage(this,"please enter your Mobile Number");
             return;
         }
-        json.addString(P.ph_number,string);
-
-        string = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
-        if (string.isEmpty())
+        else if (countryCode.equals("+91") && string.length()!=10)
         {
-            H.showMessage(this,"Please enter country code!");
+            H.showMessage(this,"please enter valid Mobile Number");
             return;
         }
-        json.addString(P.country_code,string);
+        json.addString(P.ph_number,string);
         
         hitLoginApi(json);
     }

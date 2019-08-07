@@ -152,6 +152,7 @@ public class P {
     public static String packages_applied="packages_applied";
     public static String ethnicity_name="ethnicity_name";
     public static String about_1="about_1";
+    public static String about_2="about_2";
     public static String monthly_income = "monthly_income";
     public static String monthly_income_id = "monthly_income_id";
 
@@ -170,5 +171,7 @@ public class P {
     public static String ethnicity_id = "ethnicity_id";
     public static String show_profile_with_photo = "show_profile_with_photo";
     public static String language_id = "language_id";
-    public static String about="about";
+    public static String search_by_id = "search_by_id";
+    public static String user_profile_id = "user_profile_id";
+    public static String photo_available = "photo_available";
 }//class

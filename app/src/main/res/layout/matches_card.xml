@@ -45,6 +45,7 @@
                 android:text="No Photo Added" />
 
             <Button
+                android:id="@+id/button"
                 android:background="@drawable/blue_button_back"
                 android:backgroundTint="#00E2BC"
                 android:layout_height="40dp"

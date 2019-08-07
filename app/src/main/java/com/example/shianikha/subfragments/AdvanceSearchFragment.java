@@ -304,7 +304,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                             bundle.putString(P.json,json.toString());
                             ((HomeActivity)context).favouritesFragment.setArguments(bundle);
 
-                            //((HomeActivity) context).fragmentLoader(((HomeActivity) context).favouritesFragment, "Search result");
+                            ((HomeActivity) context).fragmentLoader(((HomeActivity) context).favouritesFragment, "Search result");
                         }
                     }
                 })
