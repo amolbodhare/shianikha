@@ -186,8 +186,6 @@
             </android.support.design.widget.TextInputLayout>
 
 
-
-
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
         <RelativeLayout
