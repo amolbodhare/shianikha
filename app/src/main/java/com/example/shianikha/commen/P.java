@@ -152,7 +152,6 @@ public class P {
     public static String packages_applied="packages_applied";
     public static String ethnicity_name="ethnicity_name";
     public static String about_1="about_1";
-    public static String about_2="about_2";
     public static String monthly_income = "monthly_income";
     public static String monthly_income_id = "monthly_income_id";
 
@@ -164,6 +163,8 @@ public class P {
     public static String family_details = "family_details";
     public static String min_height = "min_height";
     public static String max_height = "max_height";
+    public static String religion_id = "religion_id";
+    public static String mother_tongue_id = "mother_tongue_id";
     public static String search_now = "search_now";
     public static String json = "json";
     public static String string = "string";

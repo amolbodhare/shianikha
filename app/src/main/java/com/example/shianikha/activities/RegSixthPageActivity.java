@@ -51,7 +51,7 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(this, "Please enter preferences or qualities you are seeking");
             return;
         }
-        App.masterJson.addString(P.about_1, string);
+        App.masterJson.addString(P.qualities_seeking, string);
 
         string = ((EditText) findViewById(R.id.descriptionThreeEditText)).getText().toString();
         if (string.isEmpty()) {
@@ -59,7 +59,7 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
             return;
         }
 
-        App.masterJson.addString(P.about_2, string);
+        App.masterJson.addString(P.more_about_you, string);
 
 
         H.log("masterJsonIs",App.masterJson.toString());
