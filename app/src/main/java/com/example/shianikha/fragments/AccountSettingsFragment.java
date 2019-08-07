@@ -35,8 +35,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     RelativeLayout change_password_link_layout;
     ExpandableRelativeLayout email_address_exp_layout;
     ExpandableRelativeLayout change_password_exp_layout;
-    TextView edit_password_tv_btn;
-    EditText change_password_edt;
+    /*TextView edit_password_tv_btn;
+    EditText change_password_edt;*/
     /* LoadingDialog loadingDialog;
      ListAdapter listAdapter;*/
     public static Fragment previousFragment;
@@ -71,8 +71,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         {
             fragmentView = inflater.inflate(R.layout.fragment_account_settings, null, false);
 
-            edit_password_tv_btn = fragmentView.findViewById(R.id.edit_password_tv_btn);
-            change_password_edt = fragmentView.findViewById(R.id.change_password_edt);
+            /*edit_password_tv_btn = fragmentView.findViewById(R.id.edit_password_tv_btn);
+            change_password_edt = fragmentView.findViewById(R.id.change_password_edt);*/
 
             email_address_link_layout = fragmentView.findViewById(R.id.email_address_link_layout);
             change_password_link_layout = fragmentView.findViewById(R.id.change_password_link_layout);
@@ -80,12 +80,11 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             email_address_exp_layout = fragmentView.findViewById(R.id.email_address_exp_layout);
             change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
 
-            change_password_edt.setEnabled(false);
+
             email_address_exp_layout.collapse();
             change_password_exp_layout.collapse();
 
 
-            edit_password_tv_btn.setOnClickListener(this);
 
             email_address_link_layout.setOnClickListener(this);
             change_password_link_layout.setOnClickListener(this);
@@ -104,29 +103,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 }
             });*/
 
-            change_password_edt.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    //change_password_edt.requestFocus();
-                }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    change_password_edt.requestFocus();
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if(change_password_edt.getText().toString().length()==1)
-                    {
-
-                        change_password_edt.requestFocus();
-                        //write your code here
-                    }
-                }
-            });
 
             /*listAdapter=new ListAdapter();
             ListView listView = fragmentView.findViewById(R.id.notificationList);
@@ -174,59 +151,10 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
             }*/
 
-            change_password_edt.setEnabled(false);
-            edit_password_tv_btn.setText("Edit");
+
             change_password_exp_layout.toggle();
 
         }
-
-        if (v.getId() == R.id.edit_password_tv_btn) {
-
-            if (((TextView) v).getText().equals("Edit"))
-            {
-                ((TextView) v).setText("Save");
-                InputMethodManager inputMethodManager =
-                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.toggleSoftInputFromWindow(
-                        v.getApplicationWindowToken(),
-                        InputMethodManager.SHOW_FORCED, 0);
-
-                change_password_edt.setEnabled(true);
-                change_password_edt.requestFocus();
-                change_password_edt.setSelection(change_password_edt.getText().length());
-            }
-
-            else
-                {
-                //((TextView)v).setText("edit");
-                //Toast.makeText(context, "hh", Toast.LENGTH_SHORT).show();
-                if (change_password_edt.getText().length() == 0)
-                {
-                    //we have to use setError here
-                    Toast.makeText(context, "Empty password not allowed", Toast.LENGTH_SHORT).show();
-
-                    InputMethodManager inputMethodManager =
-                            (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.toggleSoftInputFromWindow(
-                            v.getApplicationWindowToken(),
-                            InputMethodManager.SHOW_FORCED, 0);
-                    change_password_edt.requestFocus();
-                    change_password_edt.setCursorVisible(true);
-
-                }
-                else
-                    {
-
-                    change_password_edt.setEnabled(false);
-                    ((TextView) v).setText("Edit");
-
-                }
-
-
-            }
-
-        }
-
 
     }
 
