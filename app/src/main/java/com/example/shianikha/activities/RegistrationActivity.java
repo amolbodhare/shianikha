@@ -83,7 +83,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.dateOfBirthEditText).setOnClickListener(this);
 
         extractRequiredList();
-        setUpEditTextClickListner();//for custom spinner
+        setUpEditTextClickListener();//for custom spinner
         setUpCountryCodePopUP();
         handleGenderClickListner();
         setMargintopOfCustomSpinner();
@@ -159,7 +159,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void extractRequiredList() {
-        String string = new Session(this).getString(P.country_code);
+        String string = new Session(this).getString(P.country);
         JsonList jsonList;
 
         if (string != null) {
@@ -175,9 +175,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             }
             H.log("countryNameAndListIs",countryList.toString());
         }
+
+        setUpTextWatcher();
     }
 
-    private void setUpEditTextClickListner() {
+    private void setUpEditTextClickListener() {
 
         EditText editText = findViewById(R.id.profile_for_ed);
 
@@ -366,11 +368,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         json.addString(P.email,string);
 
         String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(context,"Please enter country code!");
-            return;
-        }
         json.addString(P.country_code,string);
 
         string = ((EditText)findViewById(R.id.mobile_no)).getText().toString();
@@ -379,7 +376,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             H.showMessage(context,"Please enter mobile number!");
             return;
         }
-        else if (countryCode.equalsIgnoreCase("+91") && string.length()<10)
+        else if (countryCode.equalsIgnoreCase("+91") && string.length()!=10)
         {
             H.showMessage(context,"Please enter valid mobile number.");
             return;

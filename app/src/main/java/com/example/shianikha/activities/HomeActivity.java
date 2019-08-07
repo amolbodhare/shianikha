@@ -143,26 +143,25 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.titleName)).setText(title);
     }
 
-    public void bottomFourFragmentClick(View view)
-    {
+    public void bottomFourFragmentClick(View view) {
         if (tempView == view)
             return;
         tempView = view;
 
         if (view.getId() == R.id.homeButton_layout) {
-            fragmentLoader(homeFragment, getString(R.string.MyShia));
+            fragmentLoader(homeFragment, getString(R.string.dashboard));
             changeNotificationIcon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
-                myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
+            myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             changeNotificationIcon(false);
 
         } else if (view.getId() == R.id.searchButton_layout) {
-                searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
+            searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
             changeNotificationIcon(false);
         } else if (view.getId() == R.id.myprofileButton_layout) {
-                myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
+            myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
         }
 
@@ -211,8 +210,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private View tempView;
-    public void onDrawerMenuClick(View view)
-    {
+
+    public void onDrawerMenuClick(View view) {
         if (tempView == view)
             return;
         tempView = view;
@@ -242,7 +241,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         } else if (view.getId() == R.id.drawer_favourites_layout) {
-                favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
+            favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
         }
 
@@ -267,7 +266,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showAccountSettingFragment() {
-            accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
+        accountSettingsFragment = AccountSettingsFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
     }
 
@@ -291,31 +290,31 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showContactUsFragment() {
-            contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
+        contactUsFragment = ContactUsFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(contactUsFragment, getString(R.string.contactUs));
         //onDrawerMenuClick(findViewById(R.id.drawer_contactus_layout));
     }
 
     public void showAboutAppFragment() {
-            aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
+        aboutApp = AboutApp.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(aboutApp, getString(R.string.aboutapp));
         //onDrawerMenuClick(findViewById(R.id.drawer_aboutapp_layout));
     }
 
     public void showHelpAndSupportFrgment() {
-            helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
+        helpAndSupport = HelpAndSupport.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(helpAndSupport, getString(R.string.helpandsupport));
         //onDrawerMenuClick(findViewById(R.id.drawer_help_and_support_layout));
     }
 
     public void showNotificationFragment() {
-            notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+        notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(notificationFragment, getString(R.string.notificationn));
         //onDrawerMenuClick(findViewById(R.id.drawer_noti_layout));
     }
 
     public void showMyActivityFragment() {
-            myActivityFragment = MyActivityFragment.newInstance(currentFragment, currentFragmentName);
+        myActivityFragment = MyActivityFragment.newInstance(currentFragment, currentFragmentName);
         fragmentLoader(myActivityFragment, getString(R.string.myactivity));
         //onDrawerMenuClick(findViewById(R.id.my_activity_drawer_layout));
     }
@@ -334,8 +333,7 @@ public class HomeActivity extends AppCompatActivity {
         //onDrawerMenuClick(findViewById(R.id.drawer_partnerPreference_layout));
     }
 
-    public void onNotificationIconClick(View view)
-    {
+    public void onNotificationIconClick(View view) {
         if (tempView == view)
             return;
         tempView = view;
@@ -350,11 +348,11 @@ public class HomeActivity extends AppCompatActivity {
 
         H.log("ObjectIs", object + "");
         if (string.equalsIgnoreCase("n")) {
-                notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
+            notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
         } else if (string.equalsIgnoreCase("e")) {
             Intent intent = new Intent(this, EditProfileActivity.class);
-            intent.putExtra("profile_details_string",MyProfileFragment.profile_details_string);
+            intent.putExtra("profile_details_string", MyProfileFragment.profile_details_string);
             startActivityForResult(intent, 31);
         }
         //onDrawerMenuClick(findViewById(R.id.drawer_noti_layout));

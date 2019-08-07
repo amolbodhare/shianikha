@@ -36,7 +36,7 @@ import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
-public class MyMatchesFragment extends Fragment implements View.OnClickListener {
+public class MyMatchesFragment extends Fragment implements View.OnClickListener, Api.OnErrorListener, Api.OnLoadingListener {
     private OnFragmentInteractionListener mListener;
 
     private View fragmentView;
@@ -103,31 +103,17 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
     }
 
     private void hitMatchesApi(String api_type) {
-        Session session = new Session(context);
-        String string = session.getString(P.tokenData);
+        String string = new Session(context).getString(P.tokenData);
         Json json = new Json();
         json.addString(P.token_id, string);
+
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
-
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener() {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(context, "Something went Wrong");
-                    }
-                })
+                .onLoading(this)
+                .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
@@ -182,6 +168,19 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onError() {
+        H.showMessage(context, "Something went Wrong");
+    }
+
+    @Override
+    public void onLoading(boolean isLoading) {
+        if (isLoading)
+            loadingDialog.show();
+        else
+            loadingDialog.dismiss();
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -193,6 +192,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
         JsonList jsonList;
         String string = "";
         Json json;
+        LinearLayout linearLayout;
 
         CustomListAdapte(Context context, JsonList jsonList) {
             this.context = context;
@@ -224,41 +224,38 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
             imageView.setTag(jsonList.get(position).getString(P.user_id));
 
             try {
-                Picasso.get().load(jsonList.get(position).getString(P.user_photos)).into(imageView);
-            }
-            catch (Exception e)
-            {
+                //Picasso.get().load(jsonList.get(position).getString(P.user_photos)).into(imageView);
+                Picasso.get().load(jsonList.get(position).getString(P.profile_pic)).into(imageView);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-
-
-           /* Glide.with(context)
-                    .asBitmap()
-                    .load(jsonList.get(position).getString(P.user_photos))
-                    //.load(R.drawable.kangna)
-                    .into(imageView);*/
-
             json = jsonList.get(position);
-            string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
+            //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
+            string = json.getString(P.full_name);
 
             ((TextView) convertView.findViewById(R.id.full_name)).setText(string);
-            ((TextView) convertView.findViewById(R.id.time)).setText(jsonList.get(position).getString(P.day) + " " + "day ago");
-            ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(jsonList.get(position).getString(P.profile_id) + " " + "day ago");
-            ((TextView) convertView.findViewById(R.id.age_tv)).setText(jsonList.get(position).getString(P.age) + "yrs,");
-            ((TextView) convertView.findViewById(R.id.height_tv)).setText(jsonList.get(position).getString(P.height) + "''");
-            ((TextView) convertView.findViewById(R.id.profession_tv)).setText(jsonList.get(position).getString(P.edu_level));
+            ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " " + "day ago");
+            ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id) + " " + "day ago");
+            ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
+            ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
+            ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
             //((TextView)convertView.findViewById(R.id.caste_tv)).setText(jsonList.get(position).getString(P.edu_level));
-            ((TextView) convertView.findViewById(R.id.religion_tv)).setText(jsonList.get(position).getString(P.religion));
+            ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
 
             convertView.findViewById(R.id.imageView).setOnClickListener(this);
 
-            /*string = jsonList.get(position).getString(P.user_photos);
-            if (string!=null && !string.isEmpty())
-            {
-                if (string.contains("male") || string.contains("phtoo2p"))
-                    convertView.findViewById(R.id.linearLayout).setVisibility(View.VISIBLE);
-            }*/
+            linearLayout = convertView.findViewById(R.id.linearLayout);
+            string = json.getString(P.photo_available);
+            if (string.equals("0")) {
+                linearLayout.setVisibility(View.VISIBLE);
+                linearLayout.findViewById(R.id.button).setOnClickListener(this);
+            } else if (string.equals("1")) {
+                linearLayout.setVisibility(View.GONE);
+                linearLayout.findViewById(R.id.button).setOnClickListener(null);
+            }
+            string = json.getString(P.user_id);
+            linearLayout.findViewById(R.id.button).setTag(string);
 
             return convertView;
         }
@@ -279,11 +276,41 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener 
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
                 } else
                     imageView.setImageDrawable(null);
-
+            } else if (v.getId() == R.id.button) {
+                Object object = v.getTag();
+                if (object != null) {
+                    string = object.toString();
+                    hitRequestPhotoApi(string);
+                }
 
             }
         }
     }
 
+    private void hitRequestPhotoApi(String string) {
+        Json json = new Json();
+        json.addString(P.profile_id, string);
 
+        string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("request_photo");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                            H.showMessage(context, "Your request has been sent.");
+                        else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitRequestPhotoApi");
+    }
 }

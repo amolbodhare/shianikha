@@ -171,4 +171,7 @@ public class P {
     public static String ethnicity_id = "ethnicity_id";
     public static String show_profile_with_photo = "show_profile_with_photo";
     public static String language_id = "language_id";
+    public static String search_by_id = "search_by_id";
+    public static String user_profile_id = "user_profile_id";
+    public static String photo_available = "photo_available";
 }//class

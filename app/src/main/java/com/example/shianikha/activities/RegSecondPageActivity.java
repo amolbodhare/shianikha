@@ -241,10 +241,10 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
 
 
         string = ((EditText) findViewById(R.id.otherShiaEditText)).getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please enter other shia details");
             return;
-        }
+        }*/
         App.masterJson.addString(P.other_religion, string);
 
 

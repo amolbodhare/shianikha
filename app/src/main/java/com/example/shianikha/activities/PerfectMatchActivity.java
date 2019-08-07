@@ -306,6 +306,8 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         }
         json.addJSONArray(P.education_id,jsonArray);
 
+        // TODO: 07-08-2019 no id available for other education in api
+
         CheckBox checkBox = findViewById(R.id.checkBox1);
         string = checkBox.isChecked()? "1":"0";
         json.addString(P.request_from_anyone,string);
