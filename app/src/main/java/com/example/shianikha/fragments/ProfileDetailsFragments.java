@@ -54,7 +54,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for th1is fragment
         context = getContext();
         loadingDialog = new LoadingDialog(context);
 
