@@ -31,7 +31,7 @@ import com.example.shianikha.commen.RequestModel;
 import java.util.ArrayList;
 
 
-public class ProfileDetailsFragments extends Fragment implements View.OnClickListener {
+public class ProfileDetailsFragments extends Fragment implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener {
     private OnFragmentInteractionListener mListener;
     private Context context;
     private View fragmentView;
@@ -67,38 +67,89 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             fragmentView.findViewById(R.id.sendMessageLinearLayout).setOnClickListener(this);
             fragmentView.findViewById(R.id.shareProfileLinearLayout).setOnClickListener(this);
             fragmentView.findViewById(R.id.favouriteLinearLayout).setOnClickListener(this);
+            fragmentView.findViewById(R.id.likeImageView).setOnClickListener(this);
 
-
+            hitProfileDetailsApi("profile_details", profileId);
         }
 
         // here in profileId we have got user_id only but according to api its name is changed as profileId for this api
-        hitProfileDetailsApi("profile_details", profileId);
         return fragmentView;
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.imageViewer1) {
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.imageViewer1)
+        {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
             startActivity(intent);
-        } else if (v.getId() == R.id.sendMessageLinearLayout) {
+        }
+        else if (v.getId() == R.id.sendMessageLinearLayout)
+        {
             startActivity(new Intent(context, ReplyMessageActivity.class));
-        } else if (v.getId() == R.id.imageView) {
+        }
+        else if (v.getId() == R.id.imageView)
+        {
             ImageView imageView = (ImageView) v;
             if (imageView.getDrawable() == null) {
                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
             } else
                 imageView.setImageDrawable(null);
-        } else if (v.getId() == R.id.favouriteLinearLayout) {
+        }
+        else if (v.getId() == R.id.favouriteLinearLayout)
+        {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
                 hitFavouriteApi(string);
             }
-
-
         }
+        else if(v.getId() == R.id.likeImageView)
+        {
+            ImageView imageView = (ImageView)v;
+            String string = (String) imageView.getTag();
+            if (string.equals("0"))
+            {
+                imageView.setColorFilter(context.getColor(R.color.green2));
+                imageView.setTag("1");
+            }
+            else if (string.equals("1"))
+            {
+                imageView.setColorFilter(context.getColor(R.color.white));
+                imageView.setTag("0");
+            }
+            hitLikeApi();
+        }
+    }
+
+    private void hitLikeApi()
+    {
+        String string = new Session(context).getString(P.tokenData);
+
+        Json json = new Json();
+        json.addString(P.profile_id,profileId);
+        json.addString(P.token_id,string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("like");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitLikeApi");
     }
 
     private void hitFavouriteApi(String id) {
@@ -115,21 +166,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener() {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        /*if (isLoading)s
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();*/
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(context, "Something went Wrong");
-                    }
-                })
+                .onLoading(this)
+                .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
@@ -147,6 +185,19 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     }
 
+    @Override
+    public void onLoading(boolean isLoading) {
+        if (isLoading)
+            loadingDialog.show();
+        else
+            loadingDialog.dismiss();
+    }
+
+    @Override
+    public void onError() {
+        H.showMessage(context, "Something went Wrong");
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -160,28 +211,14 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         json.addString(P.token_id, string);
         json.addString(P.profile_id, profileId);
 
-
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener() {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(context, "Something went Wrong");
-                    }
-                })
+                .onLoading(this)
+                .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json profileDetailJson) {

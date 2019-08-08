@@ -152,15 +152,15 @@
                     android:layout_height="wrap_content"
                     android:padding="9dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Like this profile"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="italic" />
+                    <ImageView
+                        android:id="@+id/likeImageView"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:clickable="true"
+                        android:tint="@color/white"
+                        android:tag="0"
+                        android:src="@drawable/like_icon"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
