@@ -453,9 +453,12 @@ public class HomeActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
             finish();
-        } else if (view != null)
+        } else if (!homeFragment.isVisible())
+        {
+            fragmentLoader(homeFragment, "dashboard");
+            setSelection(homeButtonLayout);
+        } else
             drawerLayout.openDrawer(Gravity.START);
-
     }
 
     private void decideBottomSelection(String string) {
