@@ -161,6 +161,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/firstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -180,6 +181,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/middleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -199,6 +201,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/lastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -278,6 +281,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/skinTone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -317,6 +321,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/bodyType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -375,6 +380,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/shiaCommunity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -394,6 +400,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/maritualStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -413,6 +420,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/education"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -432,6 +440,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/occupation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -448,9 +457,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Monthly Income : "
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/monthlyIncome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -470,6 +480,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/resAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -549,6 +560,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/motherTongue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -568,6 +580,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -626,6 +639,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/fatherName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -645,6 +659,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/fatherOccupation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -664,6 +679,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/motherName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -683,6 +699,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/motherOccupation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -702,6 +719,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/ethincity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -721,6 +739,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/fatherCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
@@ -740,6 +759,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/mothersCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="" />
