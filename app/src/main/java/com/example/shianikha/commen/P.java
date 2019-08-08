@@ -174,4 +174,7 @@ public class P {
     public static String search_by_id = "search_by_id";
     public static String user_profile_id = "user_profile_id";
     public static String photo_available = "photo_available";
+    public static String educationlevel="educationlevel";
+    public static String other_mother_tongue="other_mother_tongue";
+    public static String other_occupation="other_occupation";
 }//class
