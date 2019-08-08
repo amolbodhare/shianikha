@@ -7,6 +7,14 @@
     tools:context=".fragments.AccountSettingsFragment">
 
 
+    <ScrollView
+        android:id="@+id/scrollview_layout"
+        android:layout_above="@id/btn_search"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -242,10 +250,58 @@
 
         </RelativeLayout>
 
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/who_can_contact_exp_layout"
+            android:layout_below="@id/who_can_contact_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/only_paid_mem_contact_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="1"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="Only Paid Member"
+                android:textColor="#707070" />
+
+            <CheckBox
+                android:id="@+id/mem_with_photo_contact_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="2"
+                android:layout_below="@id/only_paid_mem_contact_cb"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="Members with photo"
+                android:textColor="#707070" />
+
+            <CheckBox
+                android:id="@+id/all_can_contact_cb"
+                android:layout_below="@id/mem_with_photo_contact_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="3"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="All"
+                android:textColor="#707070" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/profile_photo_visibility_layout"
-            android:layout_below="@id/who_can_contact_link_layout"
+            android:layout_below="@id/who_can_contact_exp_layout"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="17dp"
@@ -278,10 +334,58 @@
 
         </RelativeLayout>
 
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/profile_photo_visibility_exp_layout"
+            android:layout_below="@id/profile_photo_visibility_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/photo_visibility_to_all_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="To All"
+                android:tag="1"
+                android:textColor="#707070"/>
+
+            <CheckBox
+                android:id="@+id/photo_visibility_to_onlypaidmem_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/photo_visibility_to_all_cb"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="To only paid members"
+                android:tag="2"
+                android:textColor="#707070" />
+
+
+
+            <LinearLayout
+                android:id="@+id/profile_photo_visibility_container_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
         <RelativeLayout
 
             android:id="@+id/who_can_message_link_layout"
-            android:layout_below="@id/profile_photo_visibility_layout"
+            android:layout_below="@id/profile_photo_visibility_exp_layout"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="17dp"
@@ -314,10 +418,60 @@
 
         </RelativeLayout>
 
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/who_can_message_exp_layout"
+            android:layout_below="@id/who_can_message_link_layout"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:ael_expanded="false"
+            app:ael_duration="300"
+            app:ael_interpolator="accelerateDecelerate"
+            app:ael_orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/only_paid_mem_can_msg_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="1"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="Only Paid Member"
+                android:textColor="#707070" />
+
+            <CheckBox
+                android:id="@+id/in_my_contact_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="2"
+                android:layout_below="@id/only_paid_mem_can_msg_cb"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="Members with photo"
+                android:textColor="#707070" />
+
+            <CheckBox
+                android:id="@+id/all_cb"
+                android:layout_below="@id/in_my_contact_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="3"
+                android:buttonTint="#5C5CFE"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="15dp"
+                android:text="All"
+                android:textColor="#707070" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
         <RelativeLayout
 
             android:id="@+id/notification_link_layout"
-            android:layout_below="@id/who_can_message_link_layout"
+            android:layout_below="@id/who_can_message_exp_layout"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="17dp"
@@ -386,21 +540,21 @@
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginBottom="17dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/blue_button_back"
-            android:text="Hide / Delete Account"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
     </RelativeLayout>
 
+    </ScrollView>
 
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginBottom="17dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_button_back"
+        android:text="Hide / Delete Account"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
 </RelativeLayout>
