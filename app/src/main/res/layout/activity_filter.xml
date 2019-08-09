@@ -64,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/annual_income_link_tv"
-                        android:text="Annual Income"
+                        android:text="Monthly Income"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="12dp"
                         android:textColor="@color/text_back_grey"

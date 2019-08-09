@@ -15,16 +15,28 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+
+import org.json.JSONArray;
 
 
 public class AccountSettingsFragment extends Fragment implements View.OnClickListener {
@@ -42,6 +54,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     ExpandableRelativeLayout who_can_contact_exp_layout;
     ExpandableRelativeLayout profile_visibility_exp_layout;
     ExpandableRelativeLayout who_can_message_exp_layout;
+    private Session session;
 
     /*TextView edit_password_tv_btn;
     EditText change_password_edt;*/
@@ -50,6 +63,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     public static Fragment previousFragment;
     public static String previousFragmentName;
+
+    Switch simpleSwitch;
 
 
     private OnFragmentInteractionListener mListener;
@@ -75,6 +90,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
+        session=new Session(getActivity());
         //loadingDialog = new LoadingDialog(context);
         if (fragmentView == null)
         {
@@ -84,27 +100,30 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             change_password_edt = fragmentView.findViewById(R.id.change_password_edt);*/
 
             email_address_link_layout = fragmentView.findViewById(R.id.email_address_link_layout);
-            change_password_link_layout = fragmentView.findViewById(R.id.change_password_link_layout);
+            //change_password_link_layout = fragmentView.findViewById(R.id.change_password_link_layout);
             who_can_contact_link_layout = fragmentView.findViewById(R.id.who_can_contact_link_layout);
             profile_visibility_link_layout = fragmentView.findViewById(R.id.profile_photo_visibility_layout);
             who_can_message_link_layout = fragmentView.findViewById(R.id.who_can_message_link_layout);
 
             email_address_exp_layout = fragmentView.findViewById(R.id.email_address_exp_layout);
-            change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
+            //change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
             who_can_contact_exp_layout= fragmentView.findViewById(R.id.who_can_contact_exp_layout);
             profile_visibility_exp_layout = fragmentView.findViewById(R.id.profile_photo_visibility_exp_layout);
             who_can_message_exp_layout = fragmentView.findViewById(R.id.who_can_message_exp_layout);
 
 
+             simpleSwitch = (Switch) fragmentView.findViewById(R.id.simpleSwitch);
+
+
 
             email_address_link_layout.setOnClickListener(this);
-            change_password_link_layout.setOnClickListener(this);
+//            change_password_link_layout.setOnClickListener(this);
             who_can_contact_link_layout.setOnClickListener(this);
             profile_visibility_link_layout.setOnClickListener(this);
             who_can_message_link_layout.setOnClickListener(this);
 
             email_address_exp_layout.setOnClickListener(this);
-            change_password_exp_layout.setOnClickListener(this);
+            //change_password_exp_layout.setOnClickListener(this);
             who_can_contact_exp_layout.setOnClickListener(this);
             profile_visibility_exp_layout.setOnClickListener(this);
             who_can_message_exp_layout.setOnClickListener(this);
@@ -113,7 +132,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
 
             email_address_exp_layout.collapse();
-            change_password_exp_layout.collapse();
+            //change_password_exp_layout.collapse();
             who_can_contact_exp_layout.collapse();
             profile_visibility_exp_layout.collapse();
             who_can_message_exp_layout.collapse();
@@ -162,27 +181,13 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.email_address_link_layout) {
+        if (v.getId() == R.id.email_address_link_layout)
+        {
 
             email_address_exp_layout.toggle();
         }
 
-        else if (v.getId() == R.id.change_password_link_layout)
-        {
 
-
-            /*if(change_password_exp_layout.isExpanded())
-            {
-
-            }
-            else {
-
-            }*/
-
-
-            change_password_exp_layout.toggle();
-
-        }
         else if (v.getId() == R.id.who_can_contact_link_layout)
         {
 
@@ -212,7 +217,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             }*/
 
 
-            who_can_contact_exp_layout.toggle();
+           profile_visibility_exp_layout.toggle();
 
         }
 
@@ -234,10 +239,16 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }
 
 
+        else if(v.getId()==R.id.btn_search)
+        {
+            makeJson();
+        }
+
+
     }
 
 
-    private class ListAdapter extends BaseAdapter {
+    /*private class ListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -262,7 +273,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             }
             return convertView;
         }
-    }
+    }*/
 
 
     public interface OnFragmentInteractionListener {
@@ -285,4 +296,163 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 .replace(R.id.frameLayout, fragment).commit();
     }
 
+    private void makeJson()
+    {
+
+        Json json = new Json();
+        json.addString(P.token_id, session.getString(P.tokenData));
+
+
+        JSONArray jsonArray = new JSONArray();
+        WhoCanContactJsonArray(jsonArray);
+
+        if(jsonArray.length()<1)
+        {
+            H.showMessage(context, "Please select contact option");
+            return;
+        }
+        json.addJSONArray(P.who_can_contact, jsonArray);
+
+
+        jsonArray = new JSONArray();
+        profileVisibilityJsonArray(jsonArray);
+        if(jsonArray.length()<1)
+        {
+            H.showMessage(context, "Please select profile visibility");
+            return;
+        }
+        json.addJSONArray(P.profile_with_visibility, jsonArray);
+
+
+        jsonArray = new JSONArray();
+        whoCanMessageJsonArray(jsonArray);
+        if(jsonArray.length()<1)
+        {
+            H.showMessage(context, "Please select who can message you");
+            return;
+        }
+        json.addJSONArray(P.who_can_message, jsonArray);
+
+
+        // check current state of a Switch (true or false).
+        Boolean switchState = simpleSwitch.isChecked();
+
+        if(switchState)
+        {
+            json.addString(P.notification,"1");
+        }
+        else
+        {
+            json.addString(P.notification,"0");
+        }
+
+
+
+        accountSettingsSearchhApi(json);
+
+    }
+
+    private void WhoCanContactJsonArray(JSONArray jsonArray)
+    {
+
+        CheckBox checkBox;
+        String string = "";
+        LinearLayout who_can_contact_ll_view=(LinearLayout)fragmentView.findViewById(R.id.who_can_contact_ll);
+        Object object;
+        for (int i = 0; i < who_can_contact_ll_view.getChildCount(); i++)
+        {
+
+            checkBox = (CheckBox) who_can_contact_ll_view.getChildAt(i);
+
+            if (checkBox.isChecked())
+            {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+    }
+
+    private void profileVisibilityJsonArray(JSONArray jsonArray)
+    {
+
+        CheckBox checkBox;
+        String string = "";
+        LinearLayout profile_photo_visibility_ll_view=(LinearLayout)fragmentView.findViewById(R.id.profile_photo_visibility_ll);
+        Object object;
+        for (int i = 0; i < profile_photo_visibility_ll_view.getChildCount(); i++)
+        {
+
+            checkBox = (CheckBox) profile_photo_visibility_ll_view.getChildAt(i);
+
+            if (checkBox.isChecked())
+            {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+    }
+
+    private void whoCanMessageJsonArray(JSONArray jsonArray)
+    {
+
+        CheckBox checkBox;
+        String string = "";
+        LinearLayout who_can_message_ll_view=(LinearLayout)fragmentView.findViewById(R.id.who_can_message_ll);
+        Object object;
+        for (int i = 0; i < who_can_message_ll_view.getChildCount(); i++)
+        {
+
+            checkBox = (CheckBox) who_can_message_ll_view.getChildAt(i);
+
+            if (checkBox.isChecked())
+            {
+                object = checkBox.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                jsonArray.put(string);
+            }
+        }
+    }
+
+    private void accountSettingsSearchhApi(Json json) {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        RequestModel requestModel = RequestModel.newRequestModel("account_setting");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitPerfectMatchApi");
+    }
 }

@@ -156,6 +156,15 @@ public class P {
     public static String monthly_income = "monthly_income";
     public static String monthly_income_id = "monthly_income_id";
 
+    public static String who_can_contact = "how_can_contact";
+    public static String profile_with_visibility = "profile_with_visibility";
+    public static String who_can_message = "how_can_message";
+
+    public static String notification = "notification";
+
+
+
+
     public static String other_language = "other_language";
     public static String children_age = "children_age";
     public static String children_education = "children_education";
