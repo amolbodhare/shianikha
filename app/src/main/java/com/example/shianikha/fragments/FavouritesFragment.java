@@ -1,6 +1,7 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
+import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
@@ -28,7 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-public class FavouritesFragment extends Fragment implements Api.OnLoadingListener, Api.OnErrorListener {
+public class FavouritesFragment extends Fragment implements Api.OnLoadingListener, Api.OnErrorListener, View.OnClickListener {
     private View fragmentView;
     private Context context;
 
@@ -53,10 +55,13 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Json json;
-        if (fragmentView == null) {
+        if (fragmentView == null)
+        {
             context = getContext();
             loadingDialog = new LoadingDialog(context);
             fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
+
+            fragmentView.findViewById(R.id.refineLinerLayout).setOnClickListener(this);
 
             Bundle bundle = getArguments();
             if (bundle != null) {
@@ -108,6 +113,15 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     }
                 })
                 .run("hitFavouriteListApi");
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        if (view.getId() == R.id.refineLinerLayout)
+        {
+            startActivity(new Intent(context, FilterActivity.class));
+        }
     }
 
     public interface OnFragmentInteractionListener {
