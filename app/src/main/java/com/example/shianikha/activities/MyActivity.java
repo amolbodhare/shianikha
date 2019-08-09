@@ -38,6 +38,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     private View fragMentView;
     Context context;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
