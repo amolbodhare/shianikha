@@ -107,6 +107,10 @@ public class MyProfileFragment extends Fragment {
             e.printStackTrace();
         }
 
+        string=json.getString(P.first_name) + " " +json.getString(P.middle_name)+" "+json.getString(P.last_name);
+        if (string != null)
+            ((TextView) fragmentView.findViewById(R.id.name_tv)).setText(string);
+
         string = json.getString(P.first_name);
         if (string != null)
             ((TextView) fragmentView.findViewById(R.id.firstName)).setText(string);
@@ -130,23 +134,17 @@ public class MyProfileFragment extends Fragment {
             ((TextView) fragmentView.findViewById(R.id.maritualStatus)).setText(string);
 
         string = json.getString(P.educationlevel);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_edulevel);
             ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
         }
         string = json.getString(P.occupation_name);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_occupation);
             ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
         }
 
@@ -160,58 +158,43 @@ public class MyProfileFragment extends Fragment {
 
 
         string = json.getString(P.mothertongue);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_mother_tongue);
             ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
         }
 
         string = json.getString(P.language);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_language);
             ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
         }
 
         string = json.getString(P.father_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.father_other_occupation);
             ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
         }
 
 
         string = json.getString(P.mother_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.mother_other_occupation);
             ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
         }
 
         string = json.getString(P.ethnicity_name);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_ethnicity);
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
-        }
-        else
-        {
+        } else {
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
         }
 

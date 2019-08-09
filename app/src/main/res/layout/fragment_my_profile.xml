@@ -129,13 +129,14 @@
                 android:text="Basic Info"
                 android:textSize="12dp" />
 
-            <ImageView
+    <!--        <ImageView
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:src="@drawable/ic_edit" />
+                android:visibility="invisible"
+                android:src="@drawable/ic_edit" />-->
 
         </RelativeLayout>
 
@@ -347,14 +348,14 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="Religion \u0026 Education Background"
                 android:textSize="12dp" />
-
+<!--
             <ImageView
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:src="@drawable/ic_edit" />
+                android:src="@drawable/ic_edit" />-->
 
         </RelativeLayout>
 
@@ -607,13 +608,13 @@
                 android:text="Family Background"
                 android:textSize="12dp" />
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:src="@drawable/ic_edit" />
+                android:src="@drawable/ic_edit" />-->
 
         </RelativeLayout>
 
