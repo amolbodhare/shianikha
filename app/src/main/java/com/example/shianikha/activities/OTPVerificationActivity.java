@@ -275,7 +275,10 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.btn_submit)
             hitOtpVerificationApi();
 
-        else if (v.getId() == R.id.resendText) {
+        else if (v.getId() == R.id.resendText)
+        {
+            json.remove(P.otp);
+
             if (from == 2)
                 hitLoginApi();
             else if(from >2)

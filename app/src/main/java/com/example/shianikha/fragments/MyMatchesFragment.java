@@ -13,10 +13,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -219,18 +221,25 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             if (convertView == null)
                 convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
 
+            json = jsonList.get(position);
+
             ImageView imageView = convertView.findViewById(R.id.thumbnail);
             imageView.setOnClickListener(this);
-            imageView.setTag(jsonList.get(position).getString(P.user_id));
+
+            string = json.getString(P.user_id);
+            imageView.setTag(string);
 
             try {
-                //Picasso.get().load(jsonList.get(position).getString(P.user_photos)).into(imageView);
-                Picasso.get().load(jsonList.get(position).getString(P.profile_pic)).into(imageView);
+                Picasso.get().load(json.getString(P.profile_pic)).into(imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            json = jsonList.get(position);
+            imageView = convertView.findViewById(R.id.likeImageView);
+            imageView.setOnClickListener(this);
+
+            convertView.findViewById(R.id.fifth_lay).setTag(string);
+
             //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
             string = json.getString(P.full_name);
 
@@ -282,9 +291,56 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     string = object.toString();
                     hitRequestPhotoApi(string);
                 }
+            }
+            else if (v.getId() == R.id.likeImageView)
+            {
+                ImageView imageView = (ImageView) v;
+                String string = (String) imageView.getTag();
+                if (string.equals("0")) {
+                    imageView.setColorFilter(context.getColor(R.color.green2));
+                    imageView.setTag("1");
+                }
+                else if (string.equals("1")) {
+                    imageView.setColorFilter(context.getColor(R.color.white));
+                    imageView.setTag("0");
+                }
 
+                RelativeLayout relativeLayout = (RelativeLayout) v.getParent();
+                Object object = relativeLayout.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                hitLikeApi(string);
             }
         }
+    }
+
+    private void hitLikeApi(String string) {
+        Json json = new Json();
+        json.addString(P.profile_id, string);
+
+        string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("like");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitLikeApi");
     }
 
     private void hitRequestPhotoApi(String string) {

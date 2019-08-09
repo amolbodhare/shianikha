@@ -10,18 +10,25 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-public class FavouritesFragment extends Fragment {
+public class FavouritesFragment extends Fragment implements Api.OnLoadingListener, Api.OnErrorListener {
     private View fragmentView;
     private Context context;
 
@@ -29,6 +36,7 @@ public class FavouritesFragment extends Fragment {
     public static String previousFragmentName;
 
     private OnFragmentInteractionListener mListener;
+    private LoadingDialog loadingDialog;
 
     public FavouritesFragment() {
         // Required empty public constructor
@@ -47,6 +55,7 @@ public class FavouritesFragment extends Fragment {
         Json json;
         if (fragmentView == null) {
             context = getContext();
+            loadingDialog = new LoadingDialog(context);
             fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
 
             Bundle bundle = getArguments();
@@ -55,16 +64,50 @@ public class FavouritesFragment extends Fragment {
                 try {
                     json = new Json(string);
                     JsonList jsonList = json.getJsonList(P.data);
+                    ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
                     CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
                     ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+
+                    fragmentView.findViewById(R.id.refineLinerLayout).setVisibility(View.INVISIBLE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
+            } else
+                hitFavouriteListApi();
 
         }
         return fragmentView;
+    }
+
+    private void hitFavouriteListApi() {
+        Json json = new Json();
+        String string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("favourites");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
+                            CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
+                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+
+                        } else
+
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitFavouriteListApi");
     }
 
     public interface OnFragmentInteractionListener {
@@ -120,6 +163,12 @@ public class FavouritesFragment extends Fragment {
 
             string = json.getString(P.user_id);
             imageView.setTag(string);
+            imageView.setOnClickListener(this);
+
+            view.findViewById(R.id.fifth_lay).setTag(string);
+
+            imageView = view.findViewById(R.id.likeImageView);
+            imageView.setOnClickListener(this);
 
             string = json.getString(P.age);
             ((TextView) view.findViewById(R.id.age_tv)).setText(string + "yrs");
@@ -142,7 +191,6 @@ public class FavouritesFragment extends Fragment {
             ((TextView) view.findViewById(R.id.profession_tv)).setText(string);
 
             view.findViewById(R.id.imageView).setOnClickListener(this);
-            imageView.setOnClickListener(this);
 
             return view;
         }
@@ -164,8 +212,66 @@ public class FavouritesFragment extends Fragment {
                 } else
                     imageView.setImageDrawable(null);
 
+            } else if (view.getId() == R.id.likeImageView) {
+                ImageView imageView = (ImageView) view;
+                String string = (String) imageView.getTag();
+                if (string.equals("0")) {
+                    imageView.setColorFilter(context.getColor(R.color.green2));
+                    imageView.setTag("1");
+                } else if (string.equals("1")) {
+                    imageView.setColorFilter(context.getColor(R.color.white));
+                    imageView.setTag("0");
+                }
+
+                RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
+                Object object = relativeLayout.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                hitLikeApi(string);
             }
         }
     }
 
+    private void hitLikeApi(String string) {
+        Json json = new Json();
+        json.addString(P.profile_id, string);
+
+        string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("like");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitLikeApi");
+    }
+
+
+    @Override
+    public void onError() {
+        H.showMessage(context, "Something went Wrong");
+    }
+
+    @Override
+    public void onLoading(boolean isLoading) {
+        if (isLoading)
+            loadingDialog.show();
+        else
+            loadingDialog.dismiss();
+    }
 }

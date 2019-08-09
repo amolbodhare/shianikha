@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "716031140192",
+    "firebase_url": "https://shia-nikah.firebaseio.com",
+    "project_id": "shia-nikah",
+    "storage_bucket": "shia-nikah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716031140192:android:1662b5099d88544a",
+        "android_client_info": {
+          "package_name": "com.example.shianikha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716031140192-jagd5ft2q8klvmo31rot84uld6fck5le.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shianikha",
+            "certificate_hash": "e4b48a85e508a992a720ed4572a4235b3dfcce8a"
+          }
+        },
+        {
+          "client_id": "716031140192-1s73c1hdlb5lkrla4v23fauplka49dum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR_TzqRpXGrQaouOk4Q6vhQ23TTNHJRog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716031140192-1s73c1hdlb5lkrla4v23fauplka49dum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

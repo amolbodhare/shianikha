@@ -12,6 +12,7 @@
         android:src="@drawable/aaaaaa" />
 
     <ScrollView
+        android:id="@+id/scrollview_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -288,19 +289,6 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/interest_layout"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/blue_button_back"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="NEXT"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -308,26 +296,17 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/includeContainer"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:elevation="7dp"
-        android:translationX="300dp">
-
-        <include
-            layout="@layout/custom_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#60000000"
-        android:visibility="gone" />
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/blue_button_back"
+        android:fontFamily="@font/poppins_regular"
+        android:text="NEXT"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </RelativeLayout>

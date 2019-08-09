@@ -207,28 +207,27 @@
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent">
 
-                <TextView
-                    android:fontFamily="@font/poppins_regular"
-                    android:id="@+id/like_tv"
-                    android:layout_alignParentLeft="true"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:text="Like this profile"
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                <ImageView
+                    android:id="@+id/likeImageView"
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:src="@drawable/like_icon"
+                    android:clickable="true"
+                    android:tag="0"
+                    android:tint="@color/white"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:fontFamily="@font/poppins_medium"
                     android:id="@+id/connect_tv"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
-                    android:layout_marginTop="10dp"
                     android:layout_toLeftOf="@id/imageView"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:text="Connect Now"
                     android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/imageView"

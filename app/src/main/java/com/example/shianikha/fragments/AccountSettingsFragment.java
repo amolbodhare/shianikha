@@ -33,12 +33,21 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     Context context;
     RelativeLayout email_address_link_layout;
     RelativeLayout change_password_link_layout;
+    RelativeLayout who_can_contact_link_layout;
+    RelativeLayout profile_visibility_link_layout;
+    RelativeLayout who_can_message_link_layout;
+
     ExpandableRelativeLayout email_address_exp_layout;
     ExpandableRelativeLayout change_password_exp_layout;
+    ExpandableRelativeLayout who_can_contact_exp_layout;
+    ExpandableRelativeLayout profile_visibility_exp_layout;
+    ExpandableRelativeLayout who_can_message_exp_layout;
+
     /*TextView edit_password_tv_btn;
     EditText change_password_edt;*/
     /* LoadingDialog loadingDialog;
      ListAdapter listAdapter;*/
+
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
@@ -76,21 +85,39 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
             email_address_link_layout = fragmentView.findViewById(R.id.email_address_link_layout);
             change_password_link_layout = fragmentView.findViewById(R.id.change_password_link_layout);
+            who_can_contact_link_layout = fragmentView.findViewById(R.id.who_can_contact_link_layout);
+            profile_visibility_link_layout = fragmentView.findViewById(R.id.profile_photo_visibility_layout);
+            who_can_message_link_layout = fragmentView.findViewById(R.id.who_can_message_link_layout);
 
             email_address_exp_layout = fragmentView.findViewById(R.id.email_address_exp_layout);
             change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
-
-
-            email_address_exp_layout.collapse();
-            change_password_exp_layout.collapse();
+            who_can_contact_exp_layout= fragmentView.findViewById(R.id.who_can_contact_exp_layout);
+            profile_visibility_exp_layout = fragmentView.findViewById(R.id.profile_photo_visibility_exp_layout);
+            who_can_message_exp_layout = fragmentView.findViewById(R.id.who_can_message_exp_layout);
 
 
 
             email_address_link_layout.setOnClickListener(this);
             change_password_link_layout.setOnClickListener(this);
+            who_can_contact_link_layout.setOnClickListener(this);
+            profile_visibility_link_layout.setOnClickListener(this);
+            who_can_message_link_layout.setOnClickListener(this);
 
             email_address_exp_layout.setOnClickListener(this);
             change_password_exp_layout.setOnClickListener(this);
+            who_can_contact_exp_layout.setOnClickListener(this);
+            profile_visibility_exp_layout.setOnClickListener(this);
+            who_can_message_exp_layout.setOnClickListener(this);
+
+            fragmentView.findViewById(R.id.btn_search).setOnClickListener(this);
+
+
+            email_address_exp_layout.collapse();
+            change_password_exp_layout.collapse();
+            who_can_contact_exp_layout.collapse();
+            profile_visibility_exp_layout.collapse();
+            who_can_message_exp_layout.collapse();
+
 
            /* change_password_edt.setOnKeyListener(new View.OnKeyListener() {
                 @Override
@@ -140,7 +167,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             email_address_exp_layout.toggle();
         }
 
-        if (v.getId() == R.id.change_password_link_layout) {
+        else if (v.getId() == R.id.change_password_link_layout)
+        {
 
 
             /*if(change_password_exp_layout.isExpanded())
@@ -155,6 +183,56 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             change_password_exp_layout.toggle();
 
         }
+        else if (v.getId() == R.id.who_can_contact_link_layout)
+        {
+
+
+            /*if(change_password_exp_layout.isExpanded())
+            {
+
+            }
+            else {
+
+            }*/
+
+
+            who_can_contact_exp_layout.toggle();
+
+        }
+        else if (v.getId() == R.id.profile_photo_visibility_layout)
+        {
+
+
+            /*if(change_password_exp_layout.isExpanded())
+            {
+
+            }
+            else {
+
+            }*/
+
+
+            who_can_contact_exp_layout.toggle();
+
+        }
+
+        else if (v.getId() == R.id.who_can_message_link_layout)
+        {
+
+
+            /*if(change_password_exp_layout.isExpanded())
+            {
+
+            }
+            else {
+
+            }*/
+
+
+            who_can_message_exp_layout.toggle();
+
+        }
+
 
     }
 
