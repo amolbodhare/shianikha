@@ -48,9 +48,9 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.accepted).setOnClickListener(MyActivity.this);
         findViewById(R.id.accepted_me).setOnClickListener(this);
         findViewById(R.id.contacted_me).setOnClickListener(this);
-        findViewById(R.id.i_have_contacted).setOnClickListener(this);
+        /*findViewById(R.id.i_have_contacted).setOnClickListener(this);
         findViewById(R.id.who_visited_my_profile).setOnClickListener(this);
-        findViewById(R.id.profiles_viewed_by_me).setOnClickListener(this);
+        findViewById(R.id.profiles_viewed_by_me).setOnClickListener(this);*/
 
         AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
         fragmentLoader(acceptedFragment);
@@ -66,8 +66,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v)
     {
-        if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me||
-                v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me)
+        if (v.getId() == R.id.accepted || v.getId() == R.id.accepted_me || v.getId() == R.id.contacted_me
+                /*v.getId()== R.id.i_have_contacted ||v.getId()==R.id.who_visited_my_profile||v.getId()==R.id.profiles_viewed_by_me*/)
         {
             LinearLayout linearLayout = (LinearLayout) v.getParent();
             linearLayout = (LinearLayout) linearLayout.getParent();
@@ -115,7 +115,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
          }
-        else if (v.getId() == R.id.i_have_contacted)
+        /*else if (v.getId() == R.id.i_have_contacted)
         {
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
@@ -129,7 +129,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         {
             AcceptedFragment acceptedFragment = AcceptedFragment.newInstance();
             fragmentLoader(acceptedFragment);
-        }
+        }*/
 
     }
     public void  onMethodClick(View v)
