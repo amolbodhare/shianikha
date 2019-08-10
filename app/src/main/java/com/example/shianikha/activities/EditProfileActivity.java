@@ -42,6 +42,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.example.App;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
@@ -206,18 +207,80 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void makeJson() {
         Json submit_json = new Json();
 
-        EditText editText = findViewById(R.id.profile_for_ed);
-        String string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please select profile for");
-            return;
-        }
 
         if ((session.getString(P.tokenData)).isEmpty()) {
             H.showMessage(this, "token id not found");
             return;
         }
         submit_json.addString(P.token_id, session.getString(P.tokenData));
+
+
+        String string = ((EditText) findViewById(R.id.firstNameEditText)).getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter first name");
+            return;
+        }
+        submit_json.addString(P.first_name, string);
+
+
+        string = ((EditText) findViewById(R.id.middleNameEditText)).getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter middle name");
+            return;
+        }
+        submit_json.addString(P.middle_name, string);
+
+
+        string = ((EditText) findViewById(R.id.lastNameEditText)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please enter last name");
+            return;
+        }
+        submit_json.addString(P.last_name, string);
+
+        string = ((EditText) findViewById(R.id.dateOfBirthEditText)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please enter DOB");
+            return;
+        }
+        submit_json.addString(P.dob, string);
+
+        string = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please enter email");
+            return;
+        }
+        submit_json.addString(P.email, string);
+
+
+
+
+        // get the country code here----------------------
+
+
+        string = ((EditText) findViewById(R.id.mobile_no)).getText().toString();
+        if (string.isEmpty())
+        {
+            H.showMessage(this, "Please enter mobile number");
+            return;
+        }
+        submit_json.addString(P.ph_number, string);
+
+
+        // get the gender here ------------------------
+
+
+
+        EditText editText = findViewById(R.id.complexionEditText);
+         string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select the complexion");
+            return;
+        }
+        submit_json.addString(P.complexion, string);
 
 
         string = ((EditText) findViewById(R.id.countryCodeEditText)).getText().toString();
