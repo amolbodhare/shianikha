@@ -180,6 +180,10 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             imageView.setTag(string);
             imageView.setOnClickListener(this);
 
+            imageView = view.findViewById(R.id.imageView);
+            imageView.setOnClickListener(this);
+            imageView.setTag(string);
+
             view.findViewById(R.id.fifth_lay).setTag(string);
 
             imageView = view.findViewById(R.id.likeImageView);
@@ -205,8 +209,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             string = json.getString(P.occupation);
             ((TextView) view.findViewById(R.id.profession_tv)).setText(string);
 
-            view.findViewById(R.id.imageView).setOnClickListener(this);
-
             return view;
         }
 
@@ -227,6 +229,12 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 } else
                     imageView.setImageDrawable(null);
 
+                Object object = view.getTag();
+                if (object!=null)
+                    string = object.toString();
+
+                hitConnectNowApi(string);
+
             } else if (view.getId() == R.id.likeImageView) {
                 ImageView imageView = (ImageView) view;
                 String string = (String) imageView.getTag();
@@ -246,6 +254,34 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 hitLikeApi(string);
             }
         }
+    }
+
+    private void hitConnectNowApi(String profileId) {
+        String string = new Session(context).getString(P.tokenData);
+
+        Json json = new Json();
+        json.addString(P.user_id_receiver, profileId);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("send_request");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        }/* else
+                            H.showMessage(context, json.getString(P.msg));*/
+                    }
+                })
+                .run("hitConnectNowApi");
     }
 
     private void hitLikeApi(String string) {
