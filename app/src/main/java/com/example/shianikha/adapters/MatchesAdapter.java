@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
+import com.example.shianikha.commen.P;
 import com.example.shianikha.entities.MatchesEntity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,9 +55,10 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyViewHo
         holder.title.setText(album.getName());
         //holder.count.setText(album.getNumOfSongs() + " songs");
 
-        // loading album cover using Glide library
 
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+
+        Picasso.get().load(album.getThumbnail()).into(holder.thumbnail);
+
 
       /*  holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override

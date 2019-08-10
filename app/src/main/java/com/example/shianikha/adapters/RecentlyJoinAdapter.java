@@ -16,11 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adoisstudio.helper.JsonList;
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,11 +48,10 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        Glide.with(context)
-                .asBitmap()
-                .load(jsonList.get(position).getString(P.profile_pic))
-                //.load(R.drawable.kangna)
+
+        Picasso.get().load(jsonList.get(position).getString(P.profile_pic))
                 .into(viewHolder.thumbnail);
+
 
         viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
 

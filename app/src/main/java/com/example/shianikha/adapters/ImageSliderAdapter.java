@@ -12,9 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.JsonList;
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.P;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,12 +51,8 @@ public class ImageSliderAdapter extends PagerAdapter implements ViewPager.PageTr
         View v=layoutInflater.inflate(R.layout.image_slider_layout,container,false);
 
 
-        Glide.with(context)
-                .asBitmap()
-                .load(jsonList.get(position).getString("photo_name"))
-                //.load(R.drawable.kangna)
+        Picasso.get().load(jsonList.get(position).getString("photo_name"))
                 .into((ImageView) v.findViewById(R.id.slider_image));
-
 
 
         container.addView(v);

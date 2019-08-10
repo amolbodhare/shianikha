@@ -19,7 +19,6 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.ImageViewPagerActivity;
 import com.example.shianikha.activities.ImageViewerActivity;
@@ -27,6 +26,7 @@ import com.example.shianikha.activities.ReplyMessageActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -227,11 +227,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
 
-                            Glide.with(context)
-                                    .asBitmap()
-                                    .load(profileDetailJson.getString(P.profile_pic))
-                                    //.load(R.drawable.kangna)
-                                    .into((ImageView) fragmentView.findViewById(R.id.imagesView));
+                                Picasso.get().load(profileDetailJson.getString(P.profile_pic))
+                                        .into((ImageView) fragmentView.findViewById(R.id.imagesView));
 
                             ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
                             ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
