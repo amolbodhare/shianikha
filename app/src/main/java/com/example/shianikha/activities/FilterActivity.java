@@ -288,10 +288,13 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void smokingCheckBox() {
+
         int n = CommonListHolder.smokingNameList.size();
 
         LinearLayout linearLayout = findViewById(R.id.smoking_container_layout);
-        for (int j = 0; j < n; j++) {
+
+        for (int j = 0; j < n; j++)
+        {
             LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.inflatable_check_box, null);
             CheckBox checkBox = (CheckBox) ll.getChildAt(0);
             checkBox.setText(CommonListHolder.smokingNameList.get(j));

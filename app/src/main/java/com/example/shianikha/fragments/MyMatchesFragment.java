@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -28,7 +27,6 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.bumptech.glide.Glide;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.FilterActivity;
 import com.example.shianikha.activities.HomeActivity;

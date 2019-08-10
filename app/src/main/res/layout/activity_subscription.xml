@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,44 +55,7 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <!--<RelativeLayout
-                    android:id="@+id/noti_layout"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
-                    android:clickable="true"
-                    android:paddingTop="2dp">
-
-                    <ImageView
-                        android:id="@+id/imv_noti"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/notification"
-                        android:text="hello"
-                        android:tint="@color/white" />
-
-                    <TextView
-                        android:id="@+id/noti_text"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/circlenoti"
-                        android:backgroundTint="@color/purplebtnback"
-                        android:gravity="center"
-                        android:text="99"
-                        android:padding="3dp"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
-
-                </RelativeLayout>-->
-
             </RelativeLayout>
-
 
         </RelativeLayout>
 
@@ -105,12 +69,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3.5"
-                android:weightSum="5"
+                android:layout_weight="3"
+                android:weightSum="4"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -119,7 +83,7 @@
                     android:text="select subscription plan"
                     android:textAllCaps="true"
                     android:textColor="#311C63"
-                    android:textSize="20sp" />
+                    android:textSize="20sp" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,15 +115,17 @@
 
             </LinearLayout>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/sub_plan_viewpager"
-                android:layout_width="match_parent"
-                android:layout_weight="6.5"
-                android:layout_height="0dp" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="7">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/sub_plan_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp" />
 
                 <ImageView
                     android:id="@+id/next_imv"
@@ -187,4 +153,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
