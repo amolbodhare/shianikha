@@ -336,7 +336,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onNotificationIconClick(View view) {
         if (tempView == view)
             return;
-        tempView = view;
+
 
         H.log("Inside method", "This is method");
         ImageView imageView = view.findViewById(R.id.imv_noti);
@@ -350,6 +350,7 @@ public class HomeActivity extends AppCompatActivity {
         if (string.equalsIgnoreCase("n")) {
             notificationFragment = NotificationFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(notificationFragment, getString(R.string.notificationn));
+            tempView = view;
         } else if (string.equalsIgnoreCase("e")) {
             Intent intent = new Intent(this, EditProfileActivity.class);
             intent.putExtra("profile_details_string", MyProfileFragment.profile_details_string);

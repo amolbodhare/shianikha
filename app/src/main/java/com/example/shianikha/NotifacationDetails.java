@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.adoisstudio.helper.LoadingDialog;
+
 
 public class NotifacationDetails extends Fragment {
     View fragmentView;
     public static Fragment previousFragment;
     public static String previousFragmentName;
+    Context context;
+    LoadingDialog loadingDialog;
 
 
     private OnFragmentInteractionListener mListener;
@@ -40,8 +44,13 @@ public class NotifacationDetails extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(fragmentView==null)
+        {
+            context = getContext();
+            fragmentView =  inflater.inflate(R.layout.fragment_notifacation_details, container, false);
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifacation_details, container, false);
+        return fragmentView;
     }
 
 

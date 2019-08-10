@@ -269,8 +269,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                         if (json.getInt(P.status) == 1) {
                             json = json.getJson(P.data);
 
-                        } else
-                            H.showMessage(context, json.getString(P.msg));
+                        }/* else
+                            H.showMessage(context, json.getString(P.msg));*/
                     }
                 })
                 .run("hitLikeApi");
