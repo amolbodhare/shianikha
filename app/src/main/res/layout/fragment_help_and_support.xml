@@ -1,82 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HelpAndSupport">
 
-    <RelativeLayout
-        android:id="@+id/basic_info_layout"
-        android:layout_below="@id/main_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:background="@color/profile_details_grey"
-        android:layout_height="54dp">
-        <TextView
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Write to Us"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="25sp"
-            android:layout_marginLeft="15dp"
-            android:paddingTop="7dp"
-            />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="25dp">
 
-
-
-        <RelativeLayout
-            android:id="@+id/typeOfIssue"
-            android:layout_below="@id/und_view"
-            android:layout_width="match_parent"
-            android:layout_marginTop="17dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp">
-
-            <EditText
-                android:id="@+id/profile_for_ed"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusable="false"
+                android:layout_marginLeft="15dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Type of Issue"
-                android:textSize="16dp" />
+                android:paddingTop="7dp"
+                android:text="Write to Us"
+                android:textSize="25sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="#bdbdbd" />
+            <RelativeLayout
+                android:id="@+id/typeIssue"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@id/und_view"
+                >
 
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/typeOfIssueEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Type of Issue"
+                    android:textSize="16dp" />
 
-    <EditText
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="#bdbdbd" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
+                android:hint="Description" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/blue_button_back"
+                android:fontFamily="@font/poppins_regular"
+                android:text="SUBMIT"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/includeContainer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:elevation="7dp"
+        android:translationX="300dp">
+
+        <include
+            layout="@layout/custom_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:hint="Description"
-        android:gravity="start"
-        android:fontFamily="@font/poppins_regular"
-        />
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/blue_button_back"
-        android:fontFamily="@font/poppins_regular"
-        android:text="SUBMIT"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone" />
 
 
-</LinearLayout>
+</RelativeLayout>

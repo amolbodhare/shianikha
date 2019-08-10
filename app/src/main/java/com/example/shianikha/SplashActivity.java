@@ -210,6 +210,10 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null)
             commonListHolder.makeMonthlyIncomeList(jsonList);
 
+        jsonList = json.getJsonList(P.type_of_issue);
+        if (jsonList != null)
+            commonListHolder.makeIssueList(jsonList);
+
 
         startNewActivity();
     }

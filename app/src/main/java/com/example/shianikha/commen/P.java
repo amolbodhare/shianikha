@@ -179,4 +179,5 @@ public class P {
     public static String educationlevel="educationlevel";
     public static String other_occupation="other_occupation";
     public static String other_mother_tongue="other_mother_tongue";
+    public static String type_of_issue="type_of_issue";
 }//class

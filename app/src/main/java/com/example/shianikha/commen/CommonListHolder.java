@@ -17,7 +17,7 @@ public class CommonListHolder
             smokingIdList, relocateNameList, relocateIdList, intrestedInNameList,intrestedInIdList,
             complexionNameList, complexionIdList, ageList, maritalStatusNameList, maritalStatusIdList,
             seekingForMarriageNameList, seekingForMarriageIdList, physicalStatusNameList, physicalStatusIdList,
-            monthlyIncomeNameList, monthlyIncomeIdList;
+            monthlyIncomeNameList, monthlyIncomeIdList, typeOfIssueNameList, typeOfIssueIdList;
 
     public void makeProfileForList(JsonList jsonList) {
         profileForNameList = new ArrayList<>();
@@ -231,6 +231,17 @@ public class CommonListHolder
             monthlyIncomeNameList.add(json.getString(P.name));
 
             monthlyIncomeIdList.add(json.getString(P.id));
+        }
+    }
+
+    public void makeIssueList(JsonList jsonList) {
+        typeOfIssueNameList = new ArrayList<>();
+        typeOfIssueIdList= new ArrayList<>();
+
+        for (Json json : jsonList) {
+            typeOfIssueNameList.add(json.getString(P.name));
+
+            typeOfIssueIdList.add(json.getString(P.id));
         }
     }
 }
