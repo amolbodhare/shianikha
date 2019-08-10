@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -287,5 +288,14 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             loadingDialog.show();
         else
             loadingDialog.dismiss();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
     }
 }

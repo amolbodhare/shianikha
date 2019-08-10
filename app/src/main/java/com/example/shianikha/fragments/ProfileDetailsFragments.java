@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -261,5 +262,13 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                     }
                 })
                 .run("hitProfileDetailsApi");
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
     }
 }

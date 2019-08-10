@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -411,4 +412,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
+    }
+
 }

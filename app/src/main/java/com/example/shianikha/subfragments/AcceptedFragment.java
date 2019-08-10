@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.shianikha.R;
 import com.example.shianikha.adapters.AcceptedAdapter;
@@ -28,7 +29,7 @@ public class AcceptedFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private AcceptedAdapter adapter;
     private ProgressDialog dialog;
-    View view;
+    View view,fragmentView;
     RecyclerView recyclerview;
     private List<MatchesEntity> albumList;
 
@@ -163,5 +164,13 @@ public class AcceptedFragment extends Fragment {
         albumList.add(a);
 
         adapter.notifyDataSetChanged();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
     }
 }

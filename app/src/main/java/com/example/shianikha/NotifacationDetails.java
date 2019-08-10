@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.FrameLayout;
 
 
 public class NotifacationDetails extends Fragment {
-
+    View fragmentView;
     public static Fragment previousFragment;
     public static String previousFragmentName;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,6 +49,14 @@ public class NotifacationDetails extends Fragment {
     public interface OnFragmentInteractionListener {
 
         void onFragmentInteraction(Uri uri);
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
     }
 
 }

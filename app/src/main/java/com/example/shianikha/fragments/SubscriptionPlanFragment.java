@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.adoisstudio.helper.LoadingDialog;
@@ -90,5 +91,13 @@ public class SubscriptionPlanFragment extends Fragment implements View.OnClickLi
 
     private int getItem(int i) {
         return subPlanSlideViewPager.getCurrentItem() + i;
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Object object = fragmentView.getParent();
+        if (object instanceof FrameLayout)
+            ((FrameLayout) object).removeAllViews();
     }
 }
