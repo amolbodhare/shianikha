@@ -239,7 +239,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.inflatable_check_box, null);
             CheckBox checkBox = (CheckBox) ll.getChildAt(0);
             checkBox.setText(CommonListHolder.countryNameList.get(j));
-            checkBox.setTag(CommonListHolder.countryCodeList.get(j));
+            checkBox.setTag(CommonListHolder.countryIdList.get(j));
             checkBox.setOnCheckedChangeListener(this);
             linearLayout.addView(ll);
         }
@@ -339,7 +339,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         jsonArray = new JSONArray();
         countryLivingInJsonArray(jsonArray);
         json.addJSONArray(P.country, jsonArray);
-
 
         jsonArray = new JSONArray();
         stateLivingInJsonArray(jsonArray);

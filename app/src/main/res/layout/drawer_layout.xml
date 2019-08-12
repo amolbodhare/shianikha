@@ -136,6 +136,7 @@
             android:layout_height="wrap_content"
             android:onClick="onDrawerMenuClick"
             android:clickable="true"
+            android:visibility="gone"
             android:padding="13dp"
             android:gravity="center">
 

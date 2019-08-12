@@ -48,6 +48,7 @@
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="125dp"
+                android:visibility="invisible"
                 android:background="@drawable/add_profile_circle_button_back"
                 android:padding="8dp"
                 android:src="@drawable/add_profile_icon" />
