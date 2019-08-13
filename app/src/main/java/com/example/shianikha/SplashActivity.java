@@ -50,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         session = new Session(this);
-
+        generateFcmToken();
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
 
         //to get height of status bar
@@ -69,7 +69,8 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void hitMastersApi() {
+    private void hitMastersApi()
+    {
         Json json = new Json();
 
         RequestModel requestModel = RequestModel.newRequestModel("masters");
