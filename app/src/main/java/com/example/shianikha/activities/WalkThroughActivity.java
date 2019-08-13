@@ -10,10 +10,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.adapters.SliderAdapter;
-
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 public class WalkThroughActivity extends AppCompatActivity implements View.OnClickListener {
 
