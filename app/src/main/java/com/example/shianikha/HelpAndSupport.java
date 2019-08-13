@@ -15,11 +15,15 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
+import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
 
 
 public class HelpAndSupport extends Fragment implements View.OnClickListener {
@@ -28,7 +32,6 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
     View fragmentView;
     Context context;
-    LoadingDialog loadingDialog;
     EditText editText;
 
     private OnFragmentInteractionListener mListener;
@@ -53,17 +56,14 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
         return helpAndSupportFragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(fragmentView == null)
-        {
+        if (fragmentView == null) {
             context = getContext();
-            loadingDialog = new LoadingDialog(context);
             fragmentView = inflater.inflate(R.layout.fragment_help_and_support, container, false);
             editText = fragmentView.findViewById(R.id.typeOfIssueEditText);
-            fragmentView.findViewById(R.id.btn_next).setOnClickListener(this);
+            fragmentView.findViewById(R.id.submitButton).setOnClickListener(this);
             setUpEditTextListener();
         }
         // Inflate the layout for this fragment
@@ -71,16 +71,16 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
     }
 
     private void setUpEditTextListener() {
-        EditText editText = fragmentView.findViewById(R.id.typeOfIssueEditText);
+        final EditText editText = fragmentView.findViewById(R.id.typeOfIssueEditText);
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpCustomSpinner(v);
+                setUpCustomSpinner(editText);
             }
         });
     }
 
-    private void setUpCustomSpinner(final View view) {
+    private void setUpCustomSpinner(final EditText editText) {
         ListView listView = fragmentView.findViewById(R.id.listView);
         fragmentView.findViewById(R.id.view).setVisibility(View.VISIBLE);
         fragmentView.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
@@ -89,19 +89,17 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
                 hideCustomSpinnerLayout();
             }
         });
-        if (view.getId() == R.id.typeOfIssueEditText) {
-            arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, CommonListHolder.typeOfIssueNameList);
-            listView.setAdapter(arrayAdapter);
-        }
+
+        arrayAdapter = new ArrayAdapter<>(context, R.layout.text_view, R.id.textView, CommonListHolder.typeOfIssueNameList);
+        listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
-                TextView textView = view.findViewById(R.id.textView);
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                TextView textView = v.findViewById(R.id.textView);
                 if (textView != null) {
                     Log.e("selectedIs", textView.getText().toString());
-                    ((EditText) view).setText(textView.getText().toString());
+                    editText.setText(textView.getText().toString());
 
                 }
                 hideCustomSpinnerLayout();
@@ -120,7 +118,7 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_next) {
+        if (v.getId() == R.id.submitButton) {
             makeJson();
         }
     }
@@ -129,18 +127,59 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
         Json json = new Json();
 
         String string = editText.getText().toString().trim();
-
-        if (string.isEmpty())
-        {
-            H.showMessage(context,"Please select your profile for!");
+        if (string.isEmpty()) {
+            H.showMessage(context, "Please select your profile for!");
             return;
         }
-        int i= CommonListHolder.typeOfIssueNameList.indexOf(string);
-        if (i!=-1)
-        {
-            string = CommonListHolder.typeOfIssueIdList.get(i);
-            json.addString(P.type_of_issue,string);
-        }
+        int i = CommonListHolder.typeOfIssueNameList.indexOf(string);
+        string = i == -1 ? "" : CommonListHolder.typeOfIssueIdList.get(i);
+        json.addString(P.type_of_issue, string);
+
+        string = ((EditText)fragmentView.findViewById(R.id.descriptionEditText)).getText().toString();
+        json.addString(P.description,string);
+
+        hitHelpAndSupportApi(json);
+    }
+
+    private void hitHelpAndSupportApi(Json json)
+    {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+        Session session = new Session(context);
+        String string = session.getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("type_of_issue");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                        {
+                            H.showMessage(context,"Thanks for your help and support.");
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitHelpAndSupportApi");
     }
 
 
@@ -148,6 +187,7 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

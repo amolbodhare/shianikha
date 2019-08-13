@@ -214,7 +214,7 @@ public class SplashActivity extends AppCompatActivity {
             commonListHolder.makePhysicalStatusList(jsonList);
         }
 
-        jsonList = json.getJsonList(P.monthly_income);// physical status name and code
+        jsonList = json.getJsonList(P.monthly_income);
         if (jsonList != null)
             commonListHolder.makeMonthlyIncomeList(jsonList);
 
