@@ -57,7 +57,7 @@ public class MyProfileFragment extends Fragment {
         return fragmentView;
     }
 
-    private void hitMyProfileApi() {
+    public void hitMyProfileApi() {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
         Json json = new Json();

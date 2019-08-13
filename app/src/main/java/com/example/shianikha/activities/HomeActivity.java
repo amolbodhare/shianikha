@@ -498,6 +498,8 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == 31 && resultCode == RESULT_OK) {
             //if (myProfileFragment!=null )
             H.log("resultOk", "isExecuted");
+            if (myProfileFragment!=null)
+                myProfileFragment.hitMyProfileApi();
 
         }
     }
