@@ -237,6 +237,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             imageView = convertView.findViewById(R.id.likeImageView);
             imageView.setOnClickListener(this);
 
+            imageView = convertView.findViewById(R.id.imageView);
+            imageView.setOnClickListener(this);
+            imageView.setTag(string);
+
             convertView.findViewById(R.id.fifth_lay).setTag(string);
 
             //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
@@ -251,7 +255,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             //((TextView)convertView.findViewById(R.id.caste_tv)).setText(jsonList.get(position).getString(P.edu_level));
             ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
 
-            convertView.findViewById(R.id.imageView).setOnClickListener(this);
 
             linearLayout = convertView.findViewById(R.id.linearLayout);
             string = json.getString(P.photo_available);
@@ -278,28 +281,35 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, "Profile Details");
                 }
-            } else if (v.getId() == R.id.imageView) {
+            }
+            else if (v.getId() == R.id.imageView)
+            {
                 ImageView imageView = (ImageView) v;
-                if (imageView.getDrawable() == null) {
+                if (imageView.getDrawable() == null)
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                } else
+                else
                     imageView.setImageDrawable(null);
-            } else if (v.getId() == R.id.button) {
+
+                Object object = v.getTag();
+                if (object!=null)
+                    string = object.toString();
+
+                hitConnectNowApi(string);
+            }
+            else if (v.getId() == R.id.button) {
                 Object object = v.getTag();
                 if (object != null) {
                     string = object.toString();
                     hitRequestPhotoApi(string);
                 }
             }
-            else if (v.getId() == R.id.likeImageView)
-            {
+            else if (v.getId() == R.id.likeImageView) {
                 ImageView imageView = (ImageView) v;
                 String string = (String) imageView.getTag();
                 if (string.equals("0")) {
                     imageView.setColorFilter(context.getColor(R.color.green2));
                     imageView.setTag("1");
-                }
-                else if (string.equals("1")) {
+                } else if (string.equals("1")) {
                     imageView.setColorFilter(context.getColor(R.color.white));
                     imageView.setTag("0");
                 }
@@ -312,6 +322,34 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 hitLikeApi(string);
             }
         }
+    }
+
+    private void hitConnectNowApi(String profileId) {
+        String string = new Session(context).getString(P.tokenData);
+
+        Json json = new Json();
+        json.addString(P.user_id_receiver, profileId);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("send_request");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        }/* else
+                            H.showMessage(context, json.getString(P.msg));*/
+                    }
+                })
+                .run("hitConnectNowApi");
     }
 
     private void hitLikeApi(String string) {

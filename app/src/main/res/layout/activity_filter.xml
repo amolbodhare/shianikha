@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".activities.FilterActivity">
 
-
     <RelativeLayout
         android:id="@+id/top_layout"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/back_navigation_icon"
@@ -39,561 +38,541 @@
             android:text="Refine Search"
             android:textAllCaps="true"
             android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
-        <ScrollView
-            android:id="@+id/scrollview_layout"
-            android:layout_below="@id/top_layout"
-            android:layout_above="@id/bottem_layout"
+
+    <ScrollView
+        android:id="@+id/scrollview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottem_layout"
+        android:layout_below="@id/top_layout">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <RelativeLayout
+                android:id="@+id/annual_income_link_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
 
-                <RelativeLayout
-                    android:id="@+id/annual_income_link_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
+                <TextView
+                    android:id="@+id/annual_income_link_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Monthly Income"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/annual_income_link_tv"
-                        android:text="Monthly Income"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/annual_income_link_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/annual_income_exp_layout"
-                    android:layout_below="@id/annual_income_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/annual_income_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/marital_status_link_layout"
-                    android:layout_below="@id/annual_income_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/marital_status_tv"
-                        android:text="Marital Status"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/marital_status_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/marital_status_exp_layout"
-                    android:layout_below="@id/marital_status_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/marital_status_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/shia_community_layout"
-                    android:layout_below="@id/marital_status_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/shia_community_tv"
-                        android:text="Shia Community"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/shia_community_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/shia_community_exp_layout"
-                    android:layout_below="@id/shia_community_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/shia_community_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/mother_tongue_link_layout"
-                    android:layout_below="@id/shia_community_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/mother_tongue_tv"
-                        android:text="Mother Tongue"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/mother_tongue_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/mother_tongue_exp_layout"
-                    android:layout_below="@id/mother_tongue_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:id="@+id/mothertongue_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-
-                <RelativeLayout
-                    android:id="@+id/country_living_in_layout"
-                    android:layout_below="@id/mother_tongue_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/country_living_tv"
-                        android:text="Country Living in"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/country_living_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/country_living_in_exp_layout"
-                    android:layout_below="@id/country_living_in_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/country_living_in_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/state_living_in_link_layout"
-                    android:layout_below="@id/country_living_in_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/state_living_tv"
-                        android:text="State Living In"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/state_living_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/state_living_in_exp_layout"
-                    android:layout_below="@id/state_living_in_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/state_living_in_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/education_link_layout"
-                    android:layout_below="@id/state_living_in_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/account_settings_tv"
-                        android:text="Education"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/account_settings_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/educatoin_exp_layout"
-                    android:layout_below="@id/education_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/education_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/working_with_layout"
-                    android:layout_below="@id/educatoin_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/working_with_tv"
-                        android:text="Working With"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/working_with_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/working_with_exp_layout"
-                    android:layout_below="@id/working_with_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/working_with_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-
-
-                <RelativeLayout
-                    android:id="@+id/smoking_link_layout"
-                    android:layout_below="@id/working_with_exp_layout"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/smoking_tv"
-                        android:text="Smoking"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textSize="12dp"
-                        android:textColor="@color/text_back_grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_navigational"
-                        android:tint="@color/grey"/>
-
-                    <View
-                        android:background="@color/border_grey"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/smoking_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"/>
-
-                </RelativeLayout>
-                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                    android:id="@+id/smoking_exp_layout"
-                    android:layout_below="@id/smoking_link_layout"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
-                    android:layout_marginBottom="20dp"
-                    app:ael_expanded="false"
-                    app:ael_duration="300"
-                    app:ael_interpolator="accelerateDecelerate"
-                    app:ael_orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:id="@+id/smoking_container_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    </LinearLayout>
-
-                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-
-
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/annual_income_link_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
 
             </RelativeLayout>
 
-        </ScrollView>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/annual_income_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/annual_income_link_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/annual_income_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/marital_status_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/annual_income_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/marital_status_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Marital Status"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/marital_status_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/marital_status_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/marital_status_link_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/marital_status_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/shia_community_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/marital_status_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/shia_community_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Shia Community"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/shia_community_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/shia_community_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shia_community_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/shia_community_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mother_tongue_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shia_community_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/mother_tongue_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Mother Tongue"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/mother_tongue_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/mother_tongue_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mother_tongue_link_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/mothertongue_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/country_living_in_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mother_tongue_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/country_living_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Country Living in"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/country_living_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/country_living_in_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/country_living_in_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/country_living_in_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/state_living_in_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/country_living_in_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/state_living_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="State Living In"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/state_living_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/state_living_in_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/state_living_in_link_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/state_living_in_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/education_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/state_living_in_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/account_settings_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Education"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/account_settings_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/educatoin_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/education_link_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/education_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/working_with_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/educatoin_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/working_with_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Working With"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/working_with_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/working_with_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/working_with_layout"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/working_with_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/smoking_link_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/working_with_exp_layout"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:id="@+id/smoking_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Smoking"
+                    android:textColor="@color/text_back_grey"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_navigational"
+                    android:tint="@color/grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/smoking_tv"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/border_grey" />
+
+            </RelativeLayout>
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/smoking_exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/smoking_link_layout"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                app:ael_duration="300"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerateDecelerate"
+                app:ael_orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/smoking_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
     <RelativeLayout
         android:id="@+id/bottem_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
-        android:layout_alignParentBottom="true">
+        android:layout_marginBottom="20dp">
 
         <Button
             android:id="@+id/btn_apply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/blue_button_back"
             android:fontFamily="@font/poppins_medium"
-            android:layout_marginTop="20dp"
             android:text="Apply"
             android:textColor="@color/white"
             android:textSize="20sp" />

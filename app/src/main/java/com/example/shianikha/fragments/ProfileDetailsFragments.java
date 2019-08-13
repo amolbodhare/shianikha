@@ -78,45 +78,35 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v)
-    {
-        if (v.getId() == R.id.imageViewer1)
-        {
+    public void onClick(View v) {
+        if (v.getId() == R.id.imageViewer1) {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
             startActivity(intent);
-        }
-        else if (v.getId() == R.id.sendMessageLinearLayout)
-        {
+        } else if (v.getId() == R.id.sendMessageLinearLayout) {
             startActivity(new Intent(context, ReplyMessageActivity.class));
-        }
-        else if (v.getId() == R.id.imageView)
+        } else if (v.getId() == R.id.imageView)
         {
             ImageView imageView = (ImageView) v;
-            if (imageView.getDrawable() == null) {
+            if (imageView.getDrawable() == null)
                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-            } else
+            else
                 imageView.setImageDrawable(null);
-        }
-        else if (v.getId() == R.id.favouriteLinearLayout)
-        {
+
+            hitConnectNowApi();
+        } else if (v.getId() == R.id.favouriteLinearLayout) {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
                 hitFavouriteApi(string);
             }
-        }
-        else if(v.getId() == R.id.likeImageView)
-        {
-            ImageView imageView = (ImageView)v;
+        } else if (v.getId() == R.id.likeImageView) {
+            ImageView imageView = (ImageView) v;
             String string = (String) imageView.getTag();
-            if (string.equals("0"))
-            {
+            if (string.equals("0")) {
                 imageView.setColorFilter(context.getColor(R.color.green2));
                 imageView.setTag("1");
-            }
-            else if (string.equals("1"))
-            {
+            } else if (string.equals("1")) {
                 imageView.setColorFilter(context.getColor(R.color.white));
                 imageView.setTag("0");
             }
@@ -124,13 +114,40 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         }
     }
 
-    private void hitLikeApi()
-    {
+    private void hitConnectNowApi() {
         String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
-        json.addString(P.profile_id,profileId);
-        json.addString(P.token_id,string);
+        json.addString(P.user_id_receiver, profileId);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("send_request");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+
+                        }/* else
+                            H.showMessage(context, json.getString(P.msg));*/
+                    }
+                })
+                .run("hitConnectNowApi");
+    }
+
+    private void hitLikeApi() {
+        String string = new Session(context).getString(P.tokenData);
+
+        Json json = new Json();
+        json.addString(P.profile_id, profileId);
+        json.addString(P.token_id, string);
 
         RequestModel requestModel = RequestModel.newRequestModel("like");
         requestModel.addJSON(P.data, json);
@@ -160,7 +177,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
         Json json = new Json();
         json.addString(P.token_id, string);
-        json.addString(P.profile_id,id);
+        json.addString(P.profile_id, id);
 
         RequestModel requestModel = RequestModel.newRequestModel("add_favourites");
         requestModel.addJSON(P.data, json);
@@ -228,8 +245,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
 
-                                Picasso.get().load(profileDetailJson.getString(P.profile_pic))
-                                        .into((ImageView) fragmentView.findViewById(R.id.imagesView));
+                            Picasso.get().load(profileDetailJson.getString(P.profile_pic))
+                                    .into((ImageView) fragmentView.findViewById(R.id.imagesView));
 
                             ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
                             ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
@@ -254,6 +271,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             String string = profileDetailJson.getString(P.id);
                             LinearLayout linearLayout = fragmentView.findViewById(R.id.favouriteLinearLayout);
                             linearLayout.setTag(string);
+
                             linearLayout.setOnClickListener(ProfileDetailsFragments.this);
 
                         } else
@@ -263,6 +281,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 })
                 .run("hitProfileDetailsApi");
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

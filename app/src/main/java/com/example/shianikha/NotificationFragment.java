@@ -14,16 +14,23 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.example.shianikha.activities.HomeActivity;
+import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.P;
+import com.example.shianikha.commen.RequestModel;
+import com.example.shianikha.fragments.FavouritesFragment;
 
 
 public class NotificationFragment extends Fragment {
 
     View fragmentView;
     Context context;
-    LoadingDialog loadingDialog;
-    ListAdapter listAdapter;
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
@@ -31,8 +38,7 @@ public class NotificationFragment extends Fragment {
 
     // TODO: Rename and change types and number of parameters
 
-    public static NotificationFragment newInstance(Fragment fragment, String string)
-    {
+    public static NotificationFragment newInstance(Fragment fragment, String string) {
         NotificationFragment notificationFragment = new NotificationFragment();
         previousFragment = fragment;
         previousFragmentName = string;
@@ -41,39 +47,80 @@ public class NotificationFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        context =getContext();
-        loadingDialog = new LoadingDialog(context);
-        if(fragmentView==null)
-        {
-            fragmentView=inflater.inflate(R.layout.fragment_notification,null,false);
-            listAdapter=new ListAdapter();
-            ListView listView = fragmentView.findViewById(R.id.notificationList);
-            listView.setAdapter(listAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    ((HomeActivity)context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName);
-                    ((HomeActivity)context).fragmentLoader(((HomeActivity)context).notifacationDetails,context.getString(R.string.notificationdetails));
-                }
-            });
+        context = getContext();
+        if (fragmentView == null) {
+            fragmentView = inflater.inflate(R.layout.fragment_notification, null, false);
+
+            hitNotificationApi();
         }
         return fragmentView;
     }
 
+    private void hitNotificationApi() {
+        Json json = new Json();
+        json.addString(P.token_id, new Session(context).getString(P.tokenData));
 
-    private class ListAdapter extends BaseAdapter
-    {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        RequestModel requestModel = RequestModel.newRequestModel("notification");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            if (jsonList != null) {
+                                ListAdapter listAdapter = new ListAdapter(jsonList);
+                                ListView listView = fragmentView.findViewById(R.id.notificationList);
+                                listView.setAdapter(listAdapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        ((HomeActivity) context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
+                                        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).notifacationDetails, context.getString(R.string.notificationdetails));
+                                    }
+                                });
+                            }
+                        }
+                    }
+                })
+                .run("hitNotificationApi");
+    }
+
+
+    private class ListAdapter extends BaseAdapter {
+        private JsonList jsonList;
+        private Json json;
+        private String string = "";
+
+        ListAdapter(JsonList jsons) {
+            jsonList = jsons;
+        }
 
         @Override
         public int getCount() {
-            return 10;
+            return jsonList.size();
         }
 
         @Override
@@ -88,10 +135,13 @@ public class NotificationFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView==null) {
+            if (convertView == null)
+                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item, null, false);
 
-                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item,null,false);
-            }
+            json = jsonList.get(position);
+
+
+
             return convertView;
         }
     }
