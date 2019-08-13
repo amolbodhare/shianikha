@@ -535,6 +535,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     private void handleDatePicker() {
+
         final Calendar myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 

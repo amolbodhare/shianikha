@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -25,8 +26,14 @@ import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONArray;
+
+import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -246,4 +253,29 @@ public class SplashActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         hitMastersApi();
     }
+
+    private void generateFcmToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(getLocalClassName(), "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = Objects.requireNonNull(task.getResult()).getToken();
+
+                        //H.log(getLocalClassName(), FirebaseInstanceId.getInstance().getId());
+                        String id = FirebaseInstanceId.getInstance().getId();
+
+                        new Session(SplashActivity.this).addString(P.fcmToken,token);
+                        H.log("fcmTokenIs", token);
+                        H.log("idIs",id);
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

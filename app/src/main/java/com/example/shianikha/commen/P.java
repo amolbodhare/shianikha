@@ -8,6 +8,9 @@ public class P {
     public static String data = "data";
 
 
+    public static String fcmToken = "msg_token_fmt";
+
+
     public static String baseUrl = "https://dev.digiinterface.com/2019/shia_nikah/web_services/webservices";
     public static String status = "status";
     public static String min_ver = "min_ver";
