@@ -20,6 +20,7 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
@@ -175,6 +176,7 @@ public class HelpAndSupport extends Fragment implements View.OnClickListener {
                         if (json.getInt(P.status) == 1)
                         {
                             H.showMessage(context,"Thanks for your help and support.");
+                            ((HomeActivity)context).fragmentLoader(((HomeActivity)context).homeFragment,getString(R.string.dashboard));
                         } else
                             H.showMessage(context, json.getString(P.msg));
                     }

@@ -60,7 +60,8 @@ public class NotificationFragment extends Fragment {
         return fragmentView;
     }
 
-    private void hitNotificationApi() {
+    private void hitNotificationApi()
+    {
         Json json = new Json();
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
 

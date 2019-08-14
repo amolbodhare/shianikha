@@ -35,7 +35,7 @@ import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
 
 public class HomeActivity extends AppCompatActivity {
-    private HomeFragment homeFragment;
+    public HomeFragment homeFragment;
     private MyMatchesFragment myMatchesFragment;
     private SearchFragment searchFragment;
     private MyProfileFragment myProfileFragment;
