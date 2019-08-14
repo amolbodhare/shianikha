@@ -3,6 +3,7 @@ package com.example.shianikha;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -42,6 +43,7 @@ public class SplashActivity extends AppCompatActivity {
      **/
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     private Session session;
+    private String profileId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,26 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 987);
 
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+        H.log("appLinkData",appLinkData+"");
+        if (appLinkData!=null)
+        {
+            String string = session.getString(P.tokenData);
+            if (string==null || string.isEmpty())
+            {
+                H.showMessage(this,"You are not logged in");
+                return;
+            }
+
+            string = appLinkData.toString();
+            profileId = string.substring(string.lastIndexOf("/")+1);
+            H.log("profileIdIs",profileId);
+        }
+
+        //handleIntent(getIntent());
     }
 
     private void hitMastersApi()
@@ -240,6 +262,9 @@ public class SplashActivity extends AppCompatActivity {
                     intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
                 else
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
+
+                if (!profileId.isEmpty())
+                    intent.putExtra(P.profile_id,profileId);
 
                 //intent = new Intent(SplashActivity.this, PerfectMatchActivity.class);
 

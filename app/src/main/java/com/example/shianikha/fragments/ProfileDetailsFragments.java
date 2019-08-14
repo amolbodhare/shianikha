@@ -112,6 +112,13 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             }
             hitLikeApi();
         }
+        else if (v.getId() == R.id.shareProfileLinearLayout)
+        {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT,"https://dev.digiinterface.com/2019/shia_nikah/web_services/"+profileId);
+            startActivity(Intent.createChooser(intent,"Share Via"));
+        }
     }
 
     private void hitConnectNowApi() {
@@ -193,7 +200,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                         if (json.getInt(P.status) == 1) {
                             json = json.getJson(P.data);
                             String string = json.getString(P.profile_id);
-
+                            H.showMessage(context,"Added to favourite");
 
                         } else
                             H.showMessage(context, json.getString(P.msg));

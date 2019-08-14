@@ -76,6 +76,14 @@ public class HomeActivity extends AppCompatActivity {
         myMatchesButtonLayout = findViewById(R.id.mymatchesButton_layout);
         searchButtonLayout = findViewById(R.id.searchButton_layout);
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
+
+        // when user comes from shared link
+        String string = getIntent().getStringExtra(P.profile_id);
+        if (string!=null && !string.isEmpty())
+        {
+            profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment,currentFragmentName,string);
+            fragmentLoader(profileDetailsFragments,getString(R.string.profileDetails));
+        }
     }
 
     public void makeStatusBarColorBlue(boolean bool) {
