@@ -356,12 +356,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="25dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
                 android:text="NEXT"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/have_account_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_next"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Already have an account"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/logInHereTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Login Here."
+                android:textColor="@color/text_color"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

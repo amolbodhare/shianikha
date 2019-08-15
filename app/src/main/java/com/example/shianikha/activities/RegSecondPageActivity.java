@@ -58,6 +58,7 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.maritalStatusEditText).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.view).setOnClickListener(this);
+        findViewById(R.id.logInHereTextView).setOnClickListener(this);
 
         findViewById(R.id.imageView).setOnClickListener(this);
         ((RadioGroup) findViewById(R.id.convertedRadioGroup)).setOnCheckedChangeListener(this);
@@ -155,6 +156,11 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
+        else if (v.getId() == R.id.logInHereTextView)
+        {
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
+        }
         else
             setUpCustomSpinner(v);
     }

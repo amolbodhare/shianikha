@@ -368,7 +368,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         json.addString(P.email,string);
 
         String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
-        json.addString(P.country_code,string);
+        json.addString(P.country_code,countryCode);
 
         string = ((EditText)findViewById(R.id.mobile_no)).getText().toString();
         if (string.isEmpty())
