@@ -35,6 +35,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     RelativeLayout mother_tongue_link_layout;
     RelativeLayout country_living_in_link_layout;
     RelativeLayout state_living_in_link_layout;
+
+
     RelativeLayout education_link_layout;
     RelativeLayout working_with_link_layout;
     RelativeLayout smoking_link_layout;
