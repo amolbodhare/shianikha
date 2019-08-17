@@ -212,7 +212,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="17dp">
 
                 <EditText
@@ -296,8 +296,7 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/blue_button_back"
                 android:fontFamily="@font/poppins_regular"
