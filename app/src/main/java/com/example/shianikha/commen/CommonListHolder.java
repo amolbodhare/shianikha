@@ -10,14 +10,20 @@ import java.util.ArrayList;
 
 public class CommonListHolder
 {
-    public static ArrayList<String> profileForNameList, profileForIdList, cityNameList, cityIdList, stateNameList,
-            stateIdList, countryNameList, countryIdList, countryCodeList, heightList, religionNameList,
-            religionIdList, ethnicityNameList, ethnicityIdList, occupationNameList, occupationIdList,
-            educationNameList, educationIdList, languageNameList, languageIdList, smokingNameList,
-            smokingIdList, relocateNameList, relocateIdList, intrestedInNameList,intrestedInIdList,
-            complexionNameList, complexionIdList, ageList, maritalStatusNameList, maritalStatusIdList,
-            seekingForMarriageNameList, seekingForMarriageIdList, physicalStatusNameList, physicalStatusIdList,
-            monthlyIncomeNameList, monthlyIncomeIdList, typeOfIssueNameList, typeOfIssueIdList;
+    public static ArrayList<String> profileForNameList = new ArrayList<>(), profileForIdList = new ArrayList<>(),
+            cityNameList = new ArrayList<>(), cityIdList = new ArrayList<>(), stateNameList = new ArrayList<>(),
+            stateIdList =new ArrayList<>(), countryNameList = new ArrayList<>(), countryIdList = new ArrayList<>(),
+            countryCodeList = new ArrayList<>(), heightList = new ArrayList<>(), religionNameList = new ArrayList<>(),
+            religionIdList = new ArrayList<>(), ethnicityNameList = new ArrayList<>(), ethnicityIdList = new ArrayList<>(),
+            occupationNameList = new ArrayList<>(), occupationIdList = new ArrayList<>(), educationNameList = new ArrayList<>(),
+            educationIdList = new ArrayList<>(), languageNameList = new ArrayList<>(), languageIdList = new ArrayList<>(),
+            smokingNameList = new ArrayList<>(), smokingIdList = new ArrayList<>(), relocateNameList = new ArrayList<>(),
+            relocateIdList = new ArrayList<>(), intrestedInNameList = new ArrayList<>(),intrestedInIdList = new ArrayList<>(),
+            complexionNameList = new ArrayList<>(), complexionIdList = new ArrayList<>(), ageList = new ArrayList<>(),
+            maritalStatusNameList = new ArrayList<>(), maritalStatusIdList = new ArrayList<>(), seekingForMarriageNameList = new ArrayList<>(),
+            seekingForMarriageIdList = new ArrayList<>(), physicalStatusNameList = new ArrayList<>(), physicalStatusIdList = new ArrayList<>(),
+            monthlyIncomeNameList = new ArrayList<>(), monthlyIncomeIdList = new ArrayList<>(), typeOfIssueNameList = new ArrayList<>(),
+            typeOfIssueIdList = new ArrayList<>();
 
     public void makeProfileForList(JsonList jsonList) {
         profileForNameList = new ArrayList<>();

@@ -1,16 +1,13 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +15,6 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.LoadingDialog;
 import com.example.App;
 import com.example.shianikha.R;
-import com.example.shianikha.activities.HomeActivity;
 import com.example.shianikha.subfragments.AdvanceSearchFragment;
 import com.example.shianikha.subfragments.SearchByProfileIdFragment;
 import com.example.shianikha.subfragments.SearchOptionFragment;
@@ -58,12 +54,18 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         fragMentView.findViewById(R.id.searchOption).setOnClickListener(this);
 
         if (App.tempFragment != null) {
-            if (App.tempFragment instanceof SearchOptionFragment)
+            if (App.tempFragment instanceof SearchOptionFragment) {
+                showSearchOptionFragment();
                 changeTabColor(fragMentView.findViewById(R.id.searchOption));
-            else if (App.tempFragment instanceof AdvanceSearchFragment)
+            }
+            else if (App.tempFragment instanceof AdvanceSearchFragment) {
+                showAdvanceSearchFragment();
                 changeTabColor(fragMentView.findViewById(R.id.advanceSearch));
-            else if (App.tempFragment instanceof SearchByProfileIdFragment)
+            }
+            else if (App.tempFragment instanceof SearchByProfileIdFragment) {
+                showSearchByProfileIdFragment();
                 changeTabColor(fragMentView.findViewById(R.id.searchByProfileId));
+            }
 
             H.log("iAmCaught", "inIf");
 
@@ -112,20 +114,34 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         linearLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
 
-    private void loadSubFragment(View v) {
-        if (v.getId() == R.id.searchOption) {
-            if (searchOptionFragment == null)
-                searchOptionFragment = SearchOptionFragment.newInstance();
-            fragmentLoader(searchOptionFragment);
-        } else if (v.getId() == R.id.advanceSearch) {
-            if (advanceSearchFragment == null)
-                advanceSearchFragment = AdvanceSearchFragment.newInstance();
-            fragmentLoader(advanceSearchFragment);
-        } else if (v.getId() == R.id.searchByProfileId) {
-            if (searchByProfileIdFragment == null)
-                searchByProfileIdFragment = SearchByProfileIdFragment.newInstance();
-            fragmentLoader(searchByProfileIdFragment);
-        }
+    private void loadSubFragment(View v)
+    {
+        if (v.getId() == R.id.searchOption)
+            showSearchOptionFragment();
+
+        else if (v.getId() == R.id.advanceSearch)
+            showAdvanceSearchFragment();
+
+        else if (v.getId() == R.id.searchByProfileId)
+            showSearchByProfileIdFragment();
+    }
+
+    private void showSearchByProfileIdFragment() {
+        if (searchByProfileIdFragment == null)
+            searchByProfileIdFragment = SearchByProfileIdFragment.newInstance();
+        fragmentLoader(searchByProfileIdFragment);
+    }
+
+    private void showAdvanceSearchFragment() {
+        if (advanceSearchFragment == null)
+            advanceSearchFragment = AdvanceSearchFragment.newInstance();
+        fragmentLoader(advanceSearchFragment);
+    }
+
+    private void showSearchOptionFragment() {
+        if (searchOptionFragment == null)
+            searchOptionFragment = SearchOptionFragment.newInstance();
+        fragmentLoader(searchOptionFragment);
     }
 
     private void fragmentLoader(Fragment fragment) {

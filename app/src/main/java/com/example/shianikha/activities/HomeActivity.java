@@ -79,10 +79,9 @@ public class HomeActivity extends AppCompatActivity {
 
         // when user comes from shared link
         String string = getIntent().getStringExtra(P.profile_id);
-        if (string!=null && !string.isEmpty())
-        {
-            profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment,currentFragmentName,string);
-            fragmentLoader(profileDetailsFragments,getString(R.string.profileDetails));
+        if (string != null && !string.isEmpty()) {
+            profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment, currentFragmentName, string);
+            fragmentLoader(profileDetailsFragments, getString(R.string.profileDetails));
         }
     }
 
@@ -210,6 +209,8 @@ public class HomeActivity extends AppCompatActivity {
         textView.setTextColor(getColor(R.color.bluebtnback));
         textView.setTextSize(9.4f);
     }
+
+    private long l;
 
     @Override
     public void onBackPressed() {
@@ -458,27 +459,41 @@ public class HomeActivity extends AppCompatActivity {
                 decideBottomSelection(string);
             }
         } else if (view == null) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            finish();
-        } else if (!homeFragment.isVisible())
-        {
+            handleExit();
+        } else if (!homeFragment.isVisible()) {
             fragmentLoader(homeFragment, "dashboard");
             setSelection(homeButtonLayout);
         } else
             drawerLayout.openDrawer(Gravity.START);
     }
 
-    private void decideBottomSelection(String string) {
-        if (string.equals(getString(R.string.dashboard)))
+    private void handleExit() {
+        if (homeFragment.isVisible()) {
+            if (System.currentTimeMillis() - l < 700) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+                finish();
+            } else {
+                H.showMessage(this, "Press again to exit.");
+                l = System.currentTimeMillis();
+            }
+        }
+    }
+
+    private void decideBottomSelection(String string)
+    {
+        H.log("decisionIs","taken");
+        if (string.equalsIgnoreCase(getString(R.string.dashboard)))
             setSelection(homeButtonLayout);
-        else if (string.equals(getString(R.string.MyMatches)))
+        else if (string.equalsIgnoreCase(getString(R.string.MyMatches)))
             setSelection(myMatchesButtonLayout);
-        else if (string.equals(getString(R.string.search)))
+        else if (string.equalsIgnoreCase(getString(R.string.search)))
             setSelection(searchButtonLayout);
-        else if (string.equals(getString(R.string.Myprofile)))
+        else if (string.equalsIgnoreCase(getString(R.string.Myprofile)))
             setSelection(myProfileButtonLayout);
+        else
+            setSelection(homeButtonLayout);
     }
 
     public void changeNotificationIcon(boolean b) {
@@ -506,7 +521,7 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == 31 && resultCode == RESULT_OK) {
             //if (myProfileFragment!=null )
             H.log("resultOk", "isExecuted");
-            if (myProfileFragment!=null)
+            if (myProfileFragment != null)
                 myProfileFragment.hitMyProfileApi();
 
         }

@@ -56,7 +56,6 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (fragmentView == null) {
             context = getActivity();
             session = new Session(context);
             fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
@@ -73,7 +72,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
             setAllRequiredClickListener((ViewGroup)fragmentView.findViewById(R.id.linearLayout));
             fragmentView.findViewById(R.id.button).setOnClickListener(this);
-        }
+
         return fragmentView;
     }
 

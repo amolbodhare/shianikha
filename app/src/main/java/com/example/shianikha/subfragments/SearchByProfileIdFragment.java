@@ -43,8 +43,7 @@ public class SearchByProfileIdFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
-        if (fragmentView == null)
-        {
+
             fragmentView = inflater.inflate(R.layout.fragment_search_by_profile_id, container, false);
             fragmentView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,7 +67,7 @@ public class SearchByProfileIdFragment extends Fragment {
                 }
             });
 
-        }
+
         return fragmentView;
     }
 

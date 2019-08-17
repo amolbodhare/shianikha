@@ -57,7 +57,6 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_advance_search, container, false);
             context = getActivity();
 
@@ -67,7 +66,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
             setAllRequiredClickListener((LinearLayout) fragmentView.findViewById(R.id.linearLayout));
             fragmentView.findViewById(R.id.button).setOnClickListener(this);
-        }
+
 
         return fragmentView;
     }

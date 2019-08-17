@@ -96,6 +96,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         findViewById(R.id.view).setOnClickListener(this);
         setAllRequiredClickListener((LinearLayout) (findViewById(R.id.linearLayout)));
+        findViewById(R.id.add_img_imv).setOnClickListener(this);
 
         //setMarginTopOfCustomSpinner(view);
         handleGenderClickListner();
@@ -165,7 +166,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.dateOfBirthEditText)
             handleDatePicker();
-        else if (v.getId() == R.id.add_img_imv) {
+        else if (v.getId() == R.id.add_img_imv)
+        {
+            H.log("clickEventIs","Triggered");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 callImageCropper();
                 return;
@@ -911,7 +914,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String myFormat = "dd MMM yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        ((EditText) findViewById(R.id.dateOfBirthEditText)).setText(sdf.format(calendar.getTime()));
+        EditText editText = findViewById(R.id.dateOfBirthEditText);
+        editText.setText(sdf.format(calendar.getTime()));
+
+        myFormat = "yyyy-MM-dd";
+        sdf = new SimpleDateFormat(myFormat,Locale.US);
+        editText.setTag(sdf.format(calendar.getTime()));
     }
 
     private void hitEditProfileApi(Json json) {
@@ -1016,7 +1024,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String string = json.getString(P.dob);
         EditText editText = findViewById(R.id.dateOfBirthEditText);
         editText.setTag(string);
-        android.icu.text.SimpleDateFormat simpleDateFormat1 = new android.icu.text.SimpleDateFormat("yyyy-mm-dd");
+        android.icu.text.SimpleDateFormat simpleDateFormat1 = new android.icu.text.SimpleDateFormat("yyyy-MM-dd");
         android.icu.text.SimpleDateFormat simpleDateFormat2 = new android.icu.text.SimpleDateFormat("dd MMM yyyy");
         try {
             Date date = simpleDateFormat1.parse(string);
@@ -1056,7 +1064,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.communityEditText)).setText(json.getString(P.religion));
 
         ((EditText) findViewById(R.id.maritalStatusEditText)).setText(json.getString(P.marital_status));
-        ((EditText) findViewById(R.id.educationEditText)).setText(json.getString(P.education));
+        ((EditText) findViewById(R.id.educationEditText)).setText(json.getString(P.educationlevel));
         ((EditText) findViewById(R.id.occupationEditText)).setText(json.getString(P.occupation_name));
 
         ((EditText) findViewById(R.id.monthlyIncomeEditText)).setText(json.getString(P.monthly_income));

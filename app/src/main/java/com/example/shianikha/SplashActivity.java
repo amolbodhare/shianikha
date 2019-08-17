@@ -130,19 +130,19 @@ public class SplashActivity extends AppCompatActivity {
 
         JsonList jsonList = json.getJsonList(P.profile_for);//for whom
         if (jsonList != null) {
-            session.addString(P.profile_for, jsonList.toString());
+            //session.addString(P.profile_for, jsonList.toString());
             commonListHolder.makeProfileForList(jsonList);
         }
 
         jsonList = json.getJsonList(P.city);// city name and code
         if (jsonList != null) {
-            session.addString(P.city, jsonList.toString());
+            //session.addString(P.city, jsonList.toString());
             commonListHolder.makeCityList(jsonList);
         }
 
         jsonList = json.getJsonList(P.state);// state name and code
         if (jsonList != null) {
-            session.addString(P.state, jsonList.toString());
+            //session.addString(P.state, jsonList.toString());
             commonListHolder.makeStateList(jsonList);
         }
 
@@ -154,85 +154,85 @@ public class SplashActivity extends AppCompatActivity {
 
         JSONArray jsonArray = json.getJsonArray(P.height);// height array
         if (jsonArray != null) {
-            session.addString(P.height, jsonArray.toString());
+            //session.addString(P.height, jsonArray.toString());
             commonListHolder.makeHeightList(jsonArray);
         }
 
         jsonList = json.getJsonList(P.religion);// religion name and code
         if (jsonList != null) {
-            session.addString(P.religion, jsonList.toString());
+            //session.addString(P.religion, jsonList.toString());
             commonListHolder.makeReligionList(jsonList);
         }
 
         jsonList = json.getJsonList(P.ethnicity);// ethnicity name and code
         if (jsonList != null) {
-            session.addString(P.ethnicity, jsonList.toString());
+            //session.addString(P.ethnicity, jsonList.toString());
             commonListHolder.makeEthnicityList(jsonList);
         }
 
         jsonList = json.getJsonList(P.occupation);// occupation name and code
         if (jsonList != null) {
-            session.addString(P.occupation, jsonList.toString());
+            //session.addString(P.occupation, jsonList.toString());
             commonListHolder.makeOccupationList(jsonList);
         }
 
         jsonList = json.getJsonList(P.education);// education name and code
         if (jsonList != null) {
-            session.addString(P.education, jsonList.toString());
+            //session.addString(P.education, jsonList.toString());
             commonListHolder.makeEducationList(jsonList);
         }
 
         jsonList = json.getJsonList(P.mothertongue);// language name and code
         if (jsonList != null) {
-            session.addString(P.language, jsonList.toString());
+            //session.addString(P.language, jsonList.toString());
             commonListHolder.makeMotherTongueList(jsonList);
         }
 
         jsonList = json.getJsonList(P.smoking);// smoking name and code
         if (jsonList != null) {
-            session.addString(P.smoking, jsonList.toString());
+            //session.addString(P.smoking, jsonList.toString());
             commonListHolder.makeSmokingList(jsonList);
         }
 
         jsonList = json.getJsonList(P.relocate);// relocate name and code
         if (jsonList != null) {
-            session.addString(P.relocate, jsonList.toString());
+            //session.addString(P.relocate, jsonList.toString());
             commonListHolder.makeRelocateList(jsonList);
         }
 
         jsonList = json.getJsonList(P.seeking_marriage);// marriage name and code
         if (jsonList != null) {
-            session.addString(P.seeking_marriage, jsonList.toString());
+            //session.addString(P.seeking_marriage, jsonList.toString());
             commonListHolder.makeSeekingForMarriageList(jsonList);
         }
 
         jsonList = json.getJsonList(P.intreasted_in);// interrest name and code
         if (jsonList != null) {
-            session.addString(P.intreasted_in, jsonList.toString());
+            //session.addString(P.intreasted_in, jsonList.toString());
             commonListHolder.makeIntrestedInList(jsonList);
         }
 
         jsonList = json.getJsonList(P.complexion);// complexion name and code
         if (jsonList != null) {
-            session.addString(P.complexion, jsonList.toString());
+            //session.addString(P.complexion, jsonList.toString());
             commonListHolder.makeComplexionList(jsonList);
         }
 
         jsonArray = json.getJsonArray(P.min_age);// age array, note: min and max array have same values so keeping only one
         if (jsonArray != null) {
-            session.addString(P.age, jsonArray.toString());
+            //session.addString(P.age, jsonArray.toString());
             commonListHolder.makeAgeList(jsonArray);
         }
 
         jsonList = json.getJsonList(P.marital_status);// marital status name and code
         if (jsonList != null) {
-            session.addString(P.marital_status, jsonList.toString());
+            //session.addString(P.marital_status, jsonList.toString());
             commonListHolder.makeMaritalStatusList(jsonList);
         }
 
         jsonList = json.getJsonList(P.physical_status);// physical status name and code
         if (jsonList != null) {
-            session.addString(P.physical_status, jsonList.toString());
+            //session.addString(P.physical_status, jsonList.toString());
             commonListHolder.makePhysicalStatusList(jsonList);
         }
 
