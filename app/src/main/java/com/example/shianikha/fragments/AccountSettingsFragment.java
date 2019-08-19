@@ -1,37 +1,26 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.example.shianikha.NotifacationDetails;
 import com.example.shianikha.R;
+import com.example.shianikha.activities.EditProfileActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
@@ -70,9 +59,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     private OnFragmentInteractionListener mListener;
 
-    public AccountSettingsFragment() {
-
-    }
+    public AccountSettingsFragment() { }
 
 
     // TODO: Rename and change types and number of parameters
@@ -91,10 +78,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
-        session=new Session(getActivity());
+        session = new Session(getActivity());
         //loadingDialog = new LoadingDialog(context);
-        if (fragmentView == null)
-        {
+        if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_account_settings, null, false);
 
             /*edit_password_tv_btn = fragmentView.findViewById(R.id.edit_password_tv_btn);
@@ -108,13 +94,13 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
             email_address_exp_layout = fragmentView.findViewById(R.id.email_address_exp_layout);
             //change_password_exp_layout = fragmentView.findViewById(R.id.change_password_exp_layout);
-            who_can_contact_exp_layout= fragmentView.findViewById(R.id.who_can_contact_exp_layout);
+            who_can_contact_exp_layout = fragmentView.findViewById(R.id.who_can_contact_exp_layout);
             profile_visibility_exp_layout = fragmentView.findViewById(R.id.profile_photo_visibility_exp_layout);
             who_can_message_exp_layout = fragmentView.findViewById(R.id.who_can_message_exp_layout);
 
 
-             simpleSwitch = (Switch) fragmentView.findViewById(R.id.simpleSwitch);
-
+            simpleSwitch =  fragmentView.findViewById(R.id.simpleSwitch);
+            fragmentView.findViewById(R.id.edit_profile_link_layout).setOnClickListener(this);
 
 
             email_address_link_layout.setOnClickListener(this);
@@ -129,7 +115,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             profile_visibility_exp_layout.setOnClickListener(this);
             who_can_message_exp_layout.setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.btn_search).setOnClickListener(this);
+            fragmentView.findViewById(R.id.saveButon).setOnClickListener(this);
 
 
             email_address_exp_layout.collapse();
@@ -150,31 +136,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                 }
             });*/
 
-
-
-            /*listAdapter=new ListAdapter();
-            ListView listView = fragmentView.findViewById(R.id.notificationList);
-            listView.setAdapter(listAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-
-                    NotifacationDetails editProfileFragment = NotifacationDetails.newInstance("frgfg","fgf");
-
-                    try
-                    {
-                        fragmentLoader(editProfileFragment);
-                    }
-
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-
-                }
-            });*/
         }
         return fragmentView;
     }
@@ -183,122 +144,30 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
 
         if (v.getId() == R.id.email_address_link_layout)
-        {
-
             email_address_exp_layout.toggle();
-        }
-
 
         else if (v.getId() == R.id.who_can_contact_link_layout)
-        {
-
-
-            /*if(change_password_exp_layout.isExpanded())
-            {
-
-            }
-            else {
-
-            }*/
-
-
             who_can_contact_exp_layout.toggle();
 
-        }
         else if (v.getId() == R.id.profile_photo_visibility_layout)
-        {
-
-
-            /*if(change_password_exp_layout.isExpanded())
-            {
-
-            }
-            else {
-
-            }*/
-
-
-           profile_visibility_exp_layout.toggle();
-
-        }
+            profile_visibility_exp_layout.toggle();
 
         else if (v.getId() == R.id.who_can_message_link_layout)
-        {
-
-
-            /*if(change_password_exp_layout.isExpanded())
-            {
-
-            }
-            else {
-
-            }*/
-
-
             who_can_message_exp_layout.toggle();
 
-        }
+        else if (v.getId() == R.id.edit_profile_link_layout)
+            startActivity(new Intent(getActivity(), EditProfileActivity.class));
 
-
-        else if(v.getId()==R.id.btn_search)
-        {
+        else if (v.getId() == R.id.saveButon)
             makeJson();
-        }
-
-
     }
-
-
-    /*private class ListAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return 10;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-
-                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item, null, false);
-            }
-            return convertView;
-        }
-    }*/
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    private void fragmentLoader(Fragment fragment) {
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).commit();
-    }
-
-
-    private void fragmentLoaderSec(Fragment fragment) {
-        FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-
-        manager.beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).commit();
-    }
-
-    private void makeJson()
-    {
+    private void makeJson() {
 
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
@@ -307,8 +176,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         JSONArray jsonArray = new JSONArray();
         WhoCanContactJsonArray(jsonArray);
 
-        if(jsonArray.length()<1)
-        {
+        if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select contact option");
             return;
         }
@@ -317,8 +185,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         jsonArray = new JSONArray();
         profileVisibilityJsonArray(jsonArray);
-        if(jsonArray.length()<1)
-        {
+        if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select profile visibility");
             return;
         }
@@ -327,8 +194,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         jsonArray = new JSONArray();
         whoCanMessageJsonArray(jsonArray);
-        if(jsonArray.length()<1)
-        {
+        if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select who can message you");
             return;
         }
@@ -336,37 +202,30 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
 
         // check current state of a Switch (true or false).
-        Boolean switchState = simpleSwitch.isChecked();
+        boolean switchState = simpleSwitch.isChecked();
 
-        if(switchState)
-        {
-            json.addString(P.notification,"1");
-        }
-        else
-        {
-            json.addString(P.notification,"0");
+        if (switchState) {
+            json.addString(P.notification, "1");
+        } else {
+            json.addString(P.notification, "0");
         }
 
 
-
-        accountSettingsSearchhApi(json);
+        hitAccountSettingApi(json);
 
     }
 
-    private void WhoCanContactJsonArray(JSONArray jsonArray)
-    {
+    private void WhoCanContactJsonArray(JSONArray jsonArray) {
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout who_can_contact_ll_view=(LinearLayout)fragmentView.findViewById(R.id.who_can_contact_ll);
+        LinearLayout who_can_contact_ll_view =  fragmentView.findViewById(R.id.who_can_contact_ll);
         Object object;
-        for (int i = 0; i < who_can_contact_ll_view.getChildCount(); i++)
-        {
+        for (int i = 0; i < who_can_contact_ll_view.getChildCount(); i++) {
 
             checkBox = (CheckBox) who_can_contact_ll_view.getChildAt(i);
 
-            if (checkBox.isChecked())
-            {
+            if (checkBox.isChecked()) {
                 object = checkBox.getTag();
                 if (object != null)
                     string = object.toString();
@@ -376,20 +235,17 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void profileVisibilityJsonArray(JSONArray jsonArray)
-    {
+    private void profileVisibilityJsonArray(JSONArray jsonArray) {
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout profile_photo_visibility_ll_view=(LinearLayout)fragmentView.findViewById(R.id.profile_photo_visibility_ll);
+        LinearLayout profile_photo_visibility_ll_view =  fragmentView.findViewById(R.id.profile_photo_visibility_ll);
         Object object;
-        for (int i = 0; i < profile_photo_visibility_ll_view.getChildCount(); i++)
-        {
+        for (int i = 0; i < profile_photo_visibility_ll_view.getChildCount(); i++) {
 
             checkBox = (CheckBox) profile_photo_visibility_ll_view.getChildAt(i);
 
-            if (checkBox.isChecked())
-            {
+            if (checkBox.isChecked()) {
                 object = checkBox.getTag();
                 if (object != null)
                     string = object.toString();
@@ -399,20 +255,17 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void whoCanMessageJsonArray(JSONArray jsonArray)
-    {
+    private void whoCanMessageJsonArray(JSONArray jsonArray) {
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout who_can_message_ll_view=(LinearLayout)fragmentView.findViewById(R.id.who_can_message_ll);
+        LinearLayout who_can_message_ll_view =  fragmentView.findViewById(R.id.who_can_message_ll);
         Object object;
-        for (int i = 0; i < who_can_message_ll_view.getChildCount(); i++)
-        {
+        for (int i = 0; i < who_can_message_ll_view.getChildCount(); i++) {
 
             checkBox = (CheckBox) who_can_message_ll_view.getChildAt(i);
 
-            if (checkBox.isChecked())
-            {
+            if (checkBox.isChecked()) {
                 object = checkBox.getTag();
                 if (object != null)
                     string = object.toString();
@@ -422,7 +275,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void accountSettingsSearchhApi(Json json) {
+    private void hitAccountSettingApi(Json json) {
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
         RequestModel requestModel = RequestModel.newRequestModel("account_setting");
@@ -454,8 +307,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                             H.showMessage(context, json.getString(P.msg));
                     }
                 })
-                .run("hitPerfectMatchApi");
+                .run("hitAccountSettingApi");
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
