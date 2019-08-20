@@ -735,6 +735,7 @@
                     android:id="@+id/fathersOtherOccupationInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp">
 
                     <EditText
@@ -797,6 +798,7 @@
                     android:id="@+id/mothersOtherOccupationInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp">
 
                     <EditText

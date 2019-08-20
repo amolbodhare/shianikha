@@ -509,6 +509,14 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    public void hideOrUpdateNotificationCount(boolean hide,int count)
+    {
+        if (hide || count == 0)
+            findViewById(R.id.noti_text).setVisibility(View.INVISIBLE);
+        else
+            ((TextView)findViewById(R.id.noti_text)).setText(count+"");
+    }
+
     public void OnDrawerMyProfileClick(View v) {
         bottomFourFragmentClick(findViewById(R.id.myprofileButton_layout));
         drawerLayout.closeDrawer(Gravity.START);

@@ -142,11 +142,12 @@ public class MyProfileFragment extends Fragment {
             ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
         }
         string = json.getString(P.occupation_name);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        if (string.isEmpty() || string.equalsIgnoreCase("null"))
+        {
             string = json.getString(P.other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
+            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
         } else {
-            ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
+            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
         }
 
         string = json.getString(P.monthly_income);

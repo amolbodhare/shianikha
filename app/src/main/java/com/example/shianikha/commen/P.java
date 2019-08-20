@@ -193,4 +193,6 @@ public class P {
     public static String other_mother_tongue="other_mother_tongue";
     public static String type_of_issue="type_of_issue";
     public static String user_id_receiver = "user_id_receiver";
+    public static String other_high_edulevel = "other_high_edulevel";
+    public static String alternate_contact_no = "alternate_contact_no";
 }//class

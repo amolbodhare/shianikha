@@ -56,6 +56,7 @@ public class NotificationFragment extends Fragment {
             fragmentView = inflater.inflate(R.layout.fragment_notification, null, false);
 
             hitNotificationApi();
+            ((HomeActivity)context).hideOrUpdateNotificationCount(true,0);
         }
         return fragmentView;
     }

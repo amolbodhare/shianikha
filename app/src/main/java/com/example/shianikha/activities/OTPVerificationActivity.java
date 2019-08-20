@@ -312,19 +312,25 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        if (json.getInt(P.status) == 1)
+                        {
+                            Session session = new Session(OTPVerificationActivity.this);
                             String str = json.getString(P.tokenData);
                             if (str != null)
-                                new Session(OTPVerificationActivity.this).addString(P.tokenData, str);
+                                session.addString(P.tokenData, str);
 
                             json = json.getJson(P.data);
                             str = json.getString(P.full_register);
-                            new Session(OTPVerificationActivity.this).addInt(P.full_register, H.getInt(str));
+                            session.addInt(P.full_register, H.getInt(str));
+
                             Intent intent;
                             if (str.equals("1"))
                                 intent = new Intent(OTPVerificationActivity.this, HomeActivity.class);
                             else
                                 intent = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
+
+                            str = json.getString(P.email);
+                            session.addString(P.email,str);
 
                             startActivity(intent);
                             finish();

@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -123,6 +124,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             who_can_contact_exp_layout.collapse();
             profile_visibility_exp_layout.collapse();
             who_can_message_exp_layout.collapse();
+
+            String string = new Session(context).getString(P.email);
+            ((TextView)fragmentView.findViewById(R.id.email_address_exp_link_tv)).setText(string);
 
 
            /* change_password_edt.setOnKeyListener(new View.OnKeyListener() {
