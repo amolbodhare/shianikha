@@ -54,6 +54,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -294,7 +295,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         submit_json.addString(P.dob, string);
 
-        editText = findViewById(R.id.emailEditText);
+        /*editText = findViewById(R.id.emailEditText);
         string = editText.getText().toString();
         int i = string.indexOf("@") - string.indexOf(".");
         if (string.isEmpty()) {
@@ -308,9 +309,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.email, string);
+        submit_json.addString(P.email, string);*/
 
-        editText = findViewById(R.id.countryCodeEditText);
+        /*editText = findViewById(R.id.countryCodeEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter country code!");
@@ -318,9 +319,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         i = CommonListHolder.countryCodeList.indexOf(string);
         string = i==-1?"" : CommonListHolder.countryIdList.get(i);
-        submit_json.addString(P.country_code, string);
+        submit_json.addString(P.country_code, string);*/
 
-        editText = findViewById(R.id.mobileEditText);
+        /*editText = findViewById(R.id.mobileEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter mobile number");
@@ -331,7 +332,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this,"Please enter valid mobile number");
             return;
         }
-        submit_json.addString(P.ph_number, string);
+        submit_json.addString(P.ph_number, string);*/
 
         if (gender.isEmpty()) {
             H.showMessage(this, "Please select gender!");
@@ -347,7 +348,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        i = CommonListHolder.complexionNameList.indexOf(string);
+        int i = CommonListHolder.complexionNameList.indexOf(string);
         string = i==-1?"" : CommonListHolder.complexionIdList.get(i);
         submit_json.addString(P.skin_tone, string);
 
@@ -437,7 +438,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         string = i==-1?"" : CommonListHolder.occupationIdList.get(i);
         submit_json.addString(P.occupation_id,string);
 
-        /*view = findViewById(R.id.otherOccupationInputLayout);
+        view = findViewById(R.id.otherOccupationInputLayout);
         editText = findViewById(R.id.otherOccupationEditText);
         string = editText.getText().toString();
         if (view.getVisibility() == View.VISIBLE && string.isEmpty())
@@ -446,7 +447,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.);*/
+        submit_json.addString(P.other_occupation,string);
 
         editText = findViewById(R.id.monthlyIncomeEditText);
         string = editText.getText().toString();
@@ -522,6 +523,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         JSONArray jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
         submit_json.addJSONArray(P.language,jsonArray);
+
+        view = findViewById(R.id.otherLanguageInputLayout);
+        editText = findViewById(R.id.otherLanguageEditText);
+        string = editText.getText().toString();
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty())
+        {
+            H.showMessage(this,"Please enter other language's name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.other_language,string);
 
         editText = findViewById(R.id.fathersNameEditText);
         string = editText.getText().toString();
@@ -652,6 +664,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         jsonArray = makeInterestedInJsonArray();
         submit_json.addJSONArray(P.intreasted_in,jsonArray);
+
+        editText = findViewById(R.id.otherHobbyEditText);
+        string = editText.getText().toString();
+        submit_json.addString(P.other_intreasted,string);
 
         H.log("submittedjson", submit_json.toString());
         hitEditProfileApi(submit_json);
@@ -814,6 +830,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     string = string.replace("]", "");
 
                     ((EditText) view).setText(string);
+                    string = string.toLowerCase();
+                    if (string.contains("other"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
             }
         }).show();
@@ -845,8 +866,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void setUpTextWatcher() {
         ((EditText) findViewById(R.id.editText)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -855,8 +875,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) { }
         });
     }
 
@@ -1038,10 +1057,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
 
-        //((EditText) findViewById(R.id.dateOfBirthEditText)).setText(json.getString(P.dob));
-        ((EditText) findViewById(R.id.emailEditText)).setText(json.getString(P.email));
+        /*((EditText) findViewById(R.id.emailEditText)).setText(json.getString(P.email));
         ((EditText) findViewById(R.id.countryCodeEditText)).setText("+"+json.getString(P.country_code));
-        ((EditText) findViewById(R.id.mobileEditText)).setText(json.getString(P.ph_number));
+        ((EditText) findViewById(R.id.mobileEditText)).setText(json.getString(P.ph_number));*/
 
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         if (json.getString(P.gender).equalsIgnoreCase("male")) {
@@ -1079,7 +1097,61 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.cityEditText)).setText(json.getString(P.city_name));
 
         ((EditText) findViewById(R.id.motherTongueEditText)).setText(json.getString(P.mothertongue));
-        ((EditText) findViewById(R.id.selectLanguagesEditText)).setText(json.getString(P.language));
+        //((EditText) findViewById(R.id.selectLanguagesEditText)).setText(json.getString(P.language));
+        JSONArray jsonArray = json.getJsonArray(P.language_id);
+        if (jsonArray!=null)
+        {
+            tempLanguageList = new ArrayList<>();
+            languageCheckedArray = new boolean[CommonListHolder.languageNameList.size()];
+
+            for (int i=0; i<jsonArray.length(); i++)
+            {
+                try {
+                    string = jsonArray.getString(i);
+                    for (int j=0; j<CommonListHolder.languageNameList.size(); j++)
+                    {
+                        if (string.equals(CommonListHolder.languageIdList.get(j))) {
+                            tempLanguageList.add(CommonListHolder.languageNameList.get(j));
+                            languageCheckedArray[j] = true;
+                        }
+                        else if (!languageCheckedArray[j])
+                            languageCheckedArray[j] = false;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            string = tempLanguageList.toString();
+            string = string.replace("[", "");
+            string = string.replace("]", "");
+            editText = findViewById(R.id.selectLanguagesEditText);
+            editText.setText(string);
+        }
+
+        jsonArray = json.getJsonArray(P.intreasted_in);
+        if (jsonArray!=null)
+        {
+            LinearLayout linearLayout = findViewById(R.id.interest_layout);
+            View view;
+            for (int i=0; i<jsonArray.length(); i++)
+            {
+                try {
+                    string = jsonArray.getString(i);
+                    view = linearLayout.findViewWithTag(string);
+                    if (view instanceof CheckBox)
+                        ((CheckBox)view).setChecked(true);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (findViewById(R.id.otherHobbyInputLayout).getVisibility() == View.VISIBLE)
+            {
+                string = json.getString(P.other_intreasted);
+                ((EditText)findViewById(R.id.otherHobbyEditText)).setText(string);
+            }
+        }
 
         ((EditText) findViewById(R.id.fathersNameEditText)).setText(json.getString(P.father_name));
         ((EditText) findViewById(R.id.fathersOccupationEditText)).setText(json.getString(P.father_occupation));
@@ -1091,7 +1163,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
         ((EditText) findViewById(R.id.numberOfSiblings)).setText(json.getString(P.siblings));
-        ((EditText) findViewById(R.id.parentsNumberEditText)).setText(json.getString(P.father_other_occupation));
+        ((EditText) findViewById(R.id.parentsNumberEditText)).setText(json.getString(P.alternate_contact_no));
 
         ((EditText) findViewById(R.id.ethnicityEditText)).setText(json.getString(P.ethnicity_name));
 
@@ -1099,6 +1171,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.mothersCountryEditText)).setText(json.getString(P.mother_country));
 
         ((EditText) findViewById(R.id.smokingEditText)).setText(json.getString(P.smoke_id));
+
 
         string = json.getString(P.profile_pic);
         try {

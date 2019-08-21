@@ -483,7 +483,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void decideBottomSelection(String string)
     {
-        H.log("decisionIs","taken");
+        //H.log("decisionIs","taken");
         if (string.equalsIgnoreCase(getString(R.string.dashboard)))
             setSelection(homeButtonLayout);
         else if (string.equalsIgnoreCase(getString(R.string.MyMatches)))

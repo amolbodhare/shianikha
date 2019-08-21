@@ -173,6 +173,7 @@ public class P {
     public static String children_education = "children_education";
     public static String children_details = "children_details";
     public static String other_intreasted_in = "other_intreasted_in";
+    public static String other_intreasted = "other_intreasted";
     public static String family_details = "family_details";
     public static String min_height = "min_height";
     public static String max_height = "max_height";
