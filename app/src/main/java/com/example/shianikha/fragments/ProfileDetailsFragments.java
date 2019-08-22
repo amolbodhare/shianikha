@@ -257,6 +257,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
                             ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
                             ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
+                            ((TextView) fragmentView.findViewById(R.id.aboutTextView)).setText(profileDetailJson.getString(P.about_2));
                             ((TextView) fragmentView.findViewById(R.id.days_tv)).setText(profileDetailJson.getString(P.days) + " Days Ago");
                             ((TextView) fragmentView.findViewById(R.id.ageAndHeight)).setText(profileDetailJson.getString(P.age) + " Yrs, " + profileDetailJson.getString(P.height) + "''");
                             ((TextView) fragmentView.findViewById(R.id.designation)).setText(profileDetailJson.getString(P.occupation_name));

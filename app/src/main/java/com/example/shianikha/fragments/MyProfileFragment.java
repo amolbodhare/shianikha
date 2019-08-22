@@ -162,7 +162,6 @@ public class MyProfileFragment extends Fragment {
         string = json.getString(P.residency_address);
         ((TextView) fragmentView.findViewById(R.id.resAddress)).setText(string);
 
-
         string = json.getString(P.mothertongue);
         textView = fragmentView.findViewById(R.id.motherTongue);
         textView.setText(string);

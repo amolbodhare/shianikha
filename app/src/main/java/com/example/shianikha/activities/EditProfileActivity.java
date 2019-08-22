@@ -167,7 +167,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.dateOfBirthEditText)
             handleDatePicker();
-        else if (v.getId() == R.id.add_img_imv) {
+        else if (v.getId() == R.id.add_img_imv)
+        {
             H.log("clickEventIs", "Triggered");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 callImageCropper();
@@ -1002,7 +1003,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void hitImageUploadApi(String base64String) {
         Json json = new Json();
         json.addString(P.token_id, new Session(this).getString(P.tokenData));
-        json.addString(P.image, base64String);
+        json.addString(P.image,"data:image/jpg;base64," +base64String);
         json.addString("album_id","1");
 
         RequestModel requestModel = RequestModel.newRequestModel("uploadPhoto");

@@ -44,6 +44,7 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="-15dp"
+                    android:visibility="gone"
                     android:layout_below="@id/cir_imv"
                     android:background="@drawable/add_profile_circle_button_back"
                     android:padding="9dp"
@@ -107,7 +108,6 @@
                 </LinearLayout>
 
             </RelativeLayout>
-
 
             <LinearLayout
                 android:id="@+id/design_buttons_layout"
@@ -226,7 +226,7 @@
                 android:layout_below="@id/recently_join_tv"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+                android:orientation="horizontal"/>
 
             <TextView
                 android:id="@+id/recent_visitors_tv"

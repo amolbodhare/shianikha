@@ -97,7 +97,6 @@
 
                 </FrameLayout>
 
-
                 <ImageView
                     android:id="@+id/add_img_imv"
                     android:layout_width="25dp"

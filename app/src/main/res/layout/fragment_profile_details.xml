@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/linearLayout"
                 android:layout_alignParentRight="true"
+                android:visibility="gone"
                 android:layout_marginBottom="20dp"
                 android:background="@color/semiTrans"
                 android:clickable="true"
@@ -300,7 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="About kangana Ranout"
+                    android:text="About Profile"
                     android:textColor="@color/textpurle2"
                     android:textSize="12sp" />
 
@@ -320,12 +321,12 @@
                 app:cardElevation="3dp">
 
                 <TextView
+                    android:id="@+id/aboutTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="7dp"
-                    android:text="Button with image and text in Android
-To add both image and text in android button, you should use button property android:drawableTop, android:drawableBottom, android:drawableLeft or android:drawableRight. The property value is just a drawable object id exist in the android project" />
+                    android:text="" />
 
             </android.support.v7.widget.CardView>
 

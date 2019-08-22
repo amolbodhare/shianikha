@@ -61,8 +61,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         back_navigation_icon = findViewById(R.id.back_navigation_icon);
 
-        getWindow().getDecorView().setSystemUiVisibility(0);
-        getWindow().setStatusBarColor(getColor(R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getColor(R.color.transparent));
 
         session = new Session(this);
 
