@@ -229,7 +229,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             imageView.setTag(string);
 
             try {
-                Picasso.get().load(json.getString(P.profile_pic)).into(imageView);
+                Picasso.get().load(json.getString(P.user_photos)).into(imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
