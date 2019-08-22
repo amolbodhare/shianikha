@@ -54,6 +54,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     ImageView gender_male_imv;
     ImageView gender_female_imv;
     private Bitmap bitmap;
-    private String base64String = "";
+    //private String base64String = "";
     MyBounceInterpolator interpolator;
     String gender = "";
     String imageId = "";
@@ -116,7 +117,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private void makeInterestedInCheckBoxList() {
         int n = CommonListHolder.intrestedInNameList.size();
-        int i = n%2 + n/2;
+        int i = n % 2 + n / 2;
 
         LinearLayout linearLayout = findViewById(R.id.hobbyContainer1);
         for (int j = 0; j < n; j++) {
@@ -166,9 +167,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.dateOfBirthEditText)
             handleDatePicker();
-        else if (v.getId() == R.id.add_img_imv)
-        {
-            H.log("clickEventIs","Triggered");
+        else if (v.getId() == R.id.add_img_imv) {
+            H.log("clickEventIs", "Triggered");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 callImageCropper();
                 return;
@@ -179,19 +179,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, 47);
         } else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
-        else if (v.getId() == R.id.countryCodeEditText)
-        {
+        else if (v.getId() == R.id.countryCodeEditText) {
             final Dialog dialog = new Dialog(this);
-            final EditText editText = (EditText)v;
+            final EditText editText = (EditText) v;
             dialog.setContentView(R.layout.country_code_layout);
             ListView listView = dialog.findViewById(R.id.listView);
             CountryCodeListAdapter countryCodeListAdapter = new CountryCodeListAdapter();
             listView.setAdapter(countryCodeListAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    editText.setText(((TextView)view.findViewById(R.id.countryCode)).getText().toString());
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    editText.setText(((TextView) view.findViewById(R.id.countryCode)).getText().toString());
                     dialog.hide();
                 }
             });
@@ -207,11 +205,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-    {
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         String string = compoundButton.getText().toString();
-        if (string.equalsIgnoreCase("other"))
-        {
+        if (string.equalsIgnoreCase("other")) {
             if (b)
                 findViewById(R.id.otherHobbyInputLayout).setVisibility(View.VISIBLE);
             else
@@ -284,9 +280,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.dateOfBirthEditText);
         string = "";
-        Object object =  editText.getTag();
-        if (object!=null) {
-            string =object.toString();
+        Object object = editText.getTag();
+        if (object != null) {
+            string = object.toString();
             if (string.isEmpty()) {
                 H.showMessage(this, "Please enter DOB");
                 return;
@@ -294,7 +290,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         submit_json.addString(P.dob, string);
 
-        editText = findViewById(R.id.emailEditText);
+        /*editText = findViewById(R.id.emailEditText);
         string = editText.getText().toString();
         int i = string.indexOf("@") - string.indexOf(".");
         if (string.isEmpty()) {
@@ -308,9 +304,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.email, string);
+        submit_json.addString(P.email, string);*/
 
-        editText = findViewById(R.id.countryCodeEditText);
+        /*editText = findViewById(R.id.countryCodeEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter country code!");
@@ -318,9 +314,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         i = CommonListHolder.countryCodeList.indexOf(string);
         string = i==-1?"" : CommonListHolder.countryIdList.get(i);
-        submit_json.addString(P.country_code, string);
+        submit_json.addString(P.country_code, string);*/
 
-        editText = findViewById(R.id.mobileEditText);
+        /*editText = findViewById(R.id.mobileEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter mobile number");
@@ -331,7 +327,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this,"Please enter valid mobile number");
             return;
         }
-        submit_json.addString(P.ph_number, string);
+        submit_json.addString(P.ph_number, string);*/
 
         if (gender.isEmpty()) {
             H.showMessage(this, "Please select gender!");
@@ -347,31 +343,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        i = CommonListHolder.complexionNameList.indexOf(string);
-        string = i==-1?"" : CommonListHolder.complexionIdList.get(i);
+        int i = CommonListHolder.complexionNameList.indexOf(string);
+        string = i == -1 ? "" : CommonListHolder.complexionIdList.get(i);
         submit_json.addString(P.skin_tone, string);
 
-       editText = findViewById(R.id.heightEditText);
-       string = editText.getText().toString();
-       if (string.isEmpty())
-       {
-           H.showMessage(this,"Please select your height");
-           return;
-       }
-       i = CommonListHolder.heightList.indexOf(string);
-       string = i==-1 ? "" : CommonListHolder.heightList.get(i);
-       submit_json.addString(P.height,string);
+        editText = findViewById(R.id.heightEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your height");
+            return;
+        }
+        i = CommonListHolder.heightList.indexOf(string);
+        string = i == -1 ? "" : CommonListHolder.heightList.get(i);
+        submit_json.addString(P.height, string);
 
-       editText =findViewById(R.id.bodyTypeEditText);
-       string = editText.getText().toString();
-       if (string.isEmpty())
-       {
-           H.showMessage(this,"Please select your body type");
-           return;
-       }
-       i = CommonListHolder.physicalStatusNameList.indexOf(string);
-       string = i==-1 ? "" : CommonListHolder.physicalStatusIdList.get(i);
-       submit_json.addString(P.body_type,string);
+        editText = findViewById(R.id.bodyTypeEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your body type");
+            return;
+        }
+        i = CommonListHolder.physicalStatusNameList.indexOf(string);
+        string = i == -1 ? "" : CommonListHolder.physicalStatusIdList.get(i);
+        submit_json.addString(P.body_type, string);
 
         editText = findViewById(R.id.communityEditText);
         string = editText.getText().toString();
@@ -380,8 +374,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         i = CommonListHolder.religionNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.religionIdList.get(i);
-        submit_json.addString(P.religion,string);
+        string = i == -1 ? "" : CommonListHolder.religionIdList.get(i);
+        submit_json.addString(P.religion, string);
 
         /*View view = findViewById(R.id.otherCommunityInputLayout);
         editText = findViewById(R.id.otherCommunityEditText);
@@ -396,15 +390,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.maritalStatusEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter marital status");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter marital status");
             return;
 
         }
         i = CommonListHolder.maritalStatusNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.maritalStatusIdList.get(i);
-        submit_json.addString(P.marital_status,string);
+        string = i == -1 ? "" : CommonListHolder.maritalStatusIdList.get(i);
+        submit_json.addString(P.marital_status, string);
 
         editText = findViewById(R.id.educationEditText);
         string = editText.getText().toString();
@@ -413,19 +406,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         i = CommonListHolder.educationNameList.indexOf(string);
-        string = i==-1 ? "" : CommonListHolder.educationIdList.get(i);
-        submit_json.addString(P.edulevel_id,string);
+        string = i == -1 ? "" : CommonListHolder.educationIdList.get(i);
+        submit_json.addString(P.edulevel_id, string);
 
         View view = findViewById(R.id.otherEducationInputLayout);
         editText = findViewById(R.id.otherEducationEditText);
         string = editText.getText().toString();
-        if (view.getVisibility() == View.VISIBLE && string.isEmpty())
-        {
-            H.showMessage(this,"Please enter other community's name");
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty()) {
+            H.showMessage(this, "Please enter other community's name");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.other_high_edulevel,string);
+        submit_json.addString(P.other_edulevel, string);
 
         editText = findViewById(R.id.occupationEditText);
         string = editText.getText().toString();
@@ -434,178 +426,182 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         i = CommonListHolder.occupationNameList.indexOf(string);
-        string = i==-1?"" : CommonListHolder.occupationIdList.get(i);
-        submit_json.addString(P.occupation_id,string);
+        string = i == -1 ? "" : CommonListHolder.occupationIdList.get(i);
+        submit_json.addString(P.occupation_id, string);
 
-        /*view = findViewById(R.id.otherOccupationInputLayout);
+        view = findViewById(R.id.otherOccupationInputLayout);
         editText = findViewById(R.id.otherOccupationEditText);
         string = editText.getText().toString();
-        if (view.getVisibility() == View.VISIBLE && string.isEmpty())
-        {
-            H.showMessage(this,"Please enter other community's name");
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty()) {
+            H.showMessage(this, "Please enter other community's name");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.);*/
+        submit_json.addString(P.other_occupation, string);
 
         editText = findViewById(R.id.monthlyIncomeEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select your monthly income");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your monthly income");
             return;
         }
         i = CommonListHolder.monthlyIncomeNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.monthlyIncomeIdList.get(i);
-        submit_json.addString(P.monthly_income,string);
+        string = i == -1 ? "" : CommonListHolder.monthlyIncomeIdList.get(i);
+        submit_json.addString(P.monthly_income, string);
 
         editText = findViewById(R.id.resAddEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter your residential address.");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter your residential address.");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.residency_address,string);
+        submit_json.addString(P.residency_address, string);
 
         editText = findViewById(R.id.countryEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select your country");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your country");
             return;
         }
         i = CommonListHolder.countryNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.countryIdList.get(i);
-        submit_json.addString(P.country_res,string);
+        string = i == -1 ? "" : CommonListHolder.countryIdList.get(i);
+        submit_json.addString(P.country_res, string);
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select your state");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your state");
             return;
         }
         i = CommonListHolder.stateNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.stateIdList.get(i);
-        submit_json.addString(P.state,string);
+        string = i == -1 ? "" : CommonListHolder.stateIdList.get(i);
+        submit_json.addString(P.state, string);
 
         editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select your city");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your city");
             return;
         }
         i = CommonListHolder.cityNameList.indexOf(string);
-        string = i==-1? "" : CommonListHolder.cityIdList.get(i);
-        submit_json.addString(P.city,string);
+        string = i == -1 ? "" : CommonListHolder.cityIdList.get(i);
+        submit_json.addString(P.city, string);
 
         editText = findViewById(R.id.motherTongueEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select your city");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select your city");
             return;
         }
         i = CommonListHolder.languageNameList.indexOf(string);
-        string = i== -1 ? "" : CommonListHolder.languageIdList.get(i);
-        submit_json.addString(P.mother_tongue,string);
+        string = i == -1 ? "" : CommonListHolder.languageIdList.get(i);
+        submit_json.addString(P.mother_tongue, string);
 
-        editText = findViewById(R.id.selectLanguagesEditText);
+        view = findViewById(R.id.otherMotherTongueInputLayout);
+        editText = findViewById(R.id.otherMotherTongueEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select known languages");
-            return;
-        }
-        JSONArray jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
-        submit_json.addJSONArray(P.language,jsonArray);
-
-        editText = findViewById(R.id.fathersNameEditText);
-        string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter father's name");
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty()) {
+            H.showMessage(this, "Please enter other language's name");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.father_name,string);
+        submit_json.addString(P.other_mother_tongue, string);
+
+        editText = findViewById(R.id.selectLanguagesEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select known languages");
+            return;
+        }
+        JSONArray jsonArray = H.extractJsonArray(string, CommonListHolder.languageNameList, CommonListHolder.languageIdList);
+        submit_json.addJSONArray(P.language, jsonArray);
+
+        view = findViewById(R.id.otherLanguageInputLayout);
+        editText = findViewById(R.id.otherLanguageEditText);
+        string = editText.getText().toString();
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty()) {
+            H.showMessage(this, "Please enter other language's name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.other_language, string);
+
+        editText = findViewById(R.id.fathersNameEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter father's name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.father_name, string);
 
         editText = findViewById(R.id.fathersOccupationEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select father's occupation");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select father's occupation");
             return;
         }
         i = CommonListHolder.occupationNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.occupationIdList.get(i);
-        submit_json.addString(P.father_occupation_id,string);
+        submit_json.addString(P.father_occupation_id, string);
 
         view = findViewById(R.id.fathersOtherOccupationInputLayout);
         editText = findViewById(R.id.fathersOtherOccupationEditText);
         string = editText.getText().toString();
-        if (view.getVisibility() == View.VISIBLE && editText.getText().toString().isEmpty())
-        {
-            H.showMessage(this,"Please enter father's other occupation");
+        if (view.getVisibility() == View.VISIBLE && editText.getText().toString().isEmpty()) {
+            H.showMessage(this, "Please enter father's other occupation");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.father_other_occupation,string);
+        submit_json.addString(P.father_other_occupation, string);
 
         editText = findViewById(R.id.mothersNameEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter mother's name");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter mother's name");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.mother_name,string);
+        submit_json.addString(P.mother_name, string);
 
         editText = findViewById(R.id.mothersOccupationEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select mother's occupation");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select mother's occupation");
             return;
         }
         i = CommonListHolder.occupationNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.occupationIdList.get(i);
-        submit_json.addString(P.mother_occupation_id,string);
+        submit_json.addString(P.mother_occupation_id, string);
 
         view = findViewById(R.id.mothersOtherOccupationInputLayout);
         editText = findViewById(R.id.mothersOtherOccupationEdiText);
         string = editText.getText().toString();
-        if (view.getVisibility() == View.VISIBLE && editText.getText().toString().isEmpty())
-        {
-            H.showMessage(this,"Please enter mother's other occupation");
+        if (view.getVisibility() == View.VISIBLE && editText.getText().toString().isEmpty()) {
+            H.showMessage(this, "Please enter mother's other occupation");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.mother_other_occupation,string);
+        submit_json.addString(P.mother_other_occupation, string);
 
         editText = findViewById(R.id.numberOfSiblings);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter number of siblings.");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter number of siblings.");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.siblings,string);
+        submit_json.addString(P.siblings, string);
 
         editText = findViewById(R.id.parentsNumberEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please enter parent's of alternate mobile number");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter parent's of alternate mobile number");
             editText.requestFocus();
             return;
         }
-        submit_json.addString(P.alternate_contact_no,string);
+        submit_json.addString(P.alternate_contact_no, string);
 
         editText = findViewById(R.id.ethnicityEditText);
         string = editText.getText().toString();
@@ -614,52 +610,62 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         i = CommonListHolder.ethnicityNameList.indexOf(string);
-        string = i==-1 ?"" : CommonListHolder.educationIdList.get(i);
-        submit_json.addString(P.ethnicity,string);
+        string = i == -1 ? "" : CommonListHolder.ethnicityIdList.get(i);
+        submit_json.addString(P.ethnicity, string);
+
+        view = findViewById(R.id.otherEthnicityInputLayout);
+        editText = findViewById(R.id.otherEthnicityEditText);
+        string = editText.getText().toString();
+        if (view.getVisibility() == View.VISIBLE && string.isEmpty()) {
+            H.showMessage(this, "Please enter other ethnicity's name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.other_ethnicity, string);
 
         editText = findViewById(R.id.fathersCountryEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select father's country.");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select father's country.");
             return;
         }
         i = CommonListHolder.countryNameList.indexOf(string);
-        string = i==-1 ?"" : CommonListHolder.countryIdList.get(i);
-        submit_json.addString(P.father_country,string);
+        string = i == -1 ? "" : CommonListHolder.countryIdList.get(i);
+        submit_json.addString(P.father_country, string);
 
         editText = findViewById(R.id.mothersCountryEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select mother's country.");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select mother's country.");
             return;
         }
         i = CommonListHolder.countryNameList.indexOf(string);
-        string = i==-1 ?"" : CommonListHolder.countryIdList.get(i);
-        submit_json.addString(P.mother_country,string);
+        string = i == -1 ? "" : CommonListHolder.countryIdList.get(i);
+        submit_json.addString(P.mother_country, string);
 
         editText = findViewById(R.id.smokingEditText);
         string = editText.getText().toString();
-        if (string.isEmpty())
-        {
-            H.showMessage(this,"Please select smoking status");
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please select smoking status");
             return;
         }
         i = CommonListHolder.smokingNameList.indexOf(string);
-        string = i==-1 ? "": CommonListHolder.smokingIdList.get(i);
-        submit_json.addString(P.smoke_id,string);
+        string = i == -1 ? "" : CommonListHolder.smokingIdList.get(i);
+        submit_json.addString(P.smoke_id, string);
 
         jsonArray = makeInterestedInJsonArray();
-        submit_json.addJSONArray(P.intreasted_in,jsonArray);
+        submit_json.addJSONArray(P.intreasted_in, jsonArray);
+
+        editText = findViewById(R.id.otherHobbyEditText);
+        string = editText.getText().toString();
+        submit_json.addString(P.other_intreasted, string);
 
         H.log("submittedjson", submit_json.toString());
         hitEditProfileApi(submit_json);
         //startActivity(new Intent(this,RegThirdPageActivity.class));
     }
 
-    private JSONArray makeInterestedInJsonArray()
-    {
+    private JSONArray makeInterestedInJsonArray() {
         JSONArray jsonArray = new JSONArray();
 
         LinearLayout linearLayout = findViewById(R.id.hobbyContainer1);
@@ -733,20 +739,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         } else if (i == R.id.cityEditText) {
             editText.setHint("Search City Name ");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
-        }
-        else if (i == R.id.motherTongueEditText)
-        {
+        } else if (i == R.id.motherTongueEditText) {
             editText.setHint("Search Language ");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
-        }
-        else if (i == R.id.selectLanguagesEditText)
-        {
+        } else if (i == R.id.selectLanguagesEditText) {
             String[] stringArray = new String[CommonListHolder.languageNameList.size()];
             stringArray = CommonListHolder.languageNameList.toArray(stringArray);
-            showLanguageMultiChoiceList(stringArray,view);
+            showLanguageMultiChoiceList(stringArray, view);
             return;
-        }
-        else if (i == R.id.ethnicityEditText) {
+        } else if (i == R.id.ethnicityEditText) {
             editText.setHint("Search Ethnicity");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.ethnicityNameList);
         } else if (i == R.id.smokingEditText) {
@@ -785,7 +786,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private ArrayList<String> tempLanguageList;
     private boolean[] languageCheckedArray;
-    private void showLanguageMultiChoiceList(final String[] stringArray,final View view) {
+
+    private void showLanguageMultiChoiceList(final String[] stringArray, final View view) {
         if (languageCheckedArray == null) {
             languageCheckedArray = new boolean[stringArray.length];
             for (int j = 0; j < stringArray.length; j++)
@@ -814,6 +816,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     string = string.replace("]", "");
 
                     ((EditText) view).setText(string);
+                    string = string.toLowerCase();
+                    if (string.contains("other"))
+                        showOtherEditText(view, true);
+                    else
+                        showOtherEditText(view, false);
                 }
             }
         }).show();
@@ -828,7 +835,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         if (v instanceof TextInputLayout) {
             if (b)
                 v.setVisibility(View.VISIBLE);
-            else if (view.getId()!=R.id.monthlyIncomeEditText)
+            else if (view.getId() != R.id.monthlyIncomeEditText)
                 v.setVisibility(View.GONE);
         }
     }
@@ -908,9 +915,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         };
 
-        DatePickerDialog datePickerDialog =  new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.setInverseBackgroundForced(false);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime() - (365*18-4)*24*60*60*1000l);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime() - (365 * 18 - 4) * 24 * 60 * 60 * 1000l);
         datePickerDialog.show();
     }
 
@@ -922,7 +929,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         editText.setText(sdf.format(calendar.getTime()));
 
         myFormat = "yyyy-MM-dd";
-        sdf = new SimpleDateFormat(myFormat,Locale.US);
+        sdf = new SimpleDateFormat(myFormat, Locale.US);
         editText.setTag(sdf.format(calendar.getTime()));
     }
 
@@ -980,7 +987,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
                     Bitmap.createScaledBitmap(bitmap, 300, 300, false);
-                    base64String = getStringImage(bitmap);
+                    String base64String = getStringImage(bitmap);
                     hitImageUploadApi(base64String);
 
                 } catch (IOException e) {
@@ -994,10 +1001,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private void hitImageUploadApi(String base64String) {
         Json json = new Json();
-        //json.addString(P.token, new Session(context).getString(P.tokenData));
+        json.addString(P.token_id, new Session(this).getString(P.tokenData));
         json.addString(P.image, base64String);
+        json.addString("album_id","1");
 
-        RequestModel requestModel = RequestModel.newRequestModel("upload_profile_pic");
+        RequestModel requestModel = RequestModel.newRequestModel("uploadPhoto");
         requestModel.addJSON(P.data, json);
 
         Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
@@ -1009,9 +1017,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         if (json.getInt(P.status) == 1) {
                             ((CircleImageView) findViewById(R.id.image_profile_pic)).setImageBitmap(bitmap);
                             json = json.getJson(P.data);
-                            String string = json.getString("file_name");
+                            /*String string = json.getString("file_name");
                             if (string != null)
-                                imageId = string;
+                                imageId = string;*/
 
                         } else
                             H.showMessage(EditProfileActivity.this, json.getString(P.msg));
@@ -1038,10 +1046,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
 
-        //((EditText) findViewById(R.id.dateOfBirthEditText)).setText(json.getString(P.dob));
-        ((EditText) findViewById(R.id.emailEditText)).setText(json.getString(P.email));
+        /*((EditText) findViewById(R.id.emailEditText)).setText(json.getString(P.email));
         ((EditText) findViewById(R.id.countryCodeEditText)).setText("+"+json.getString(P.country_code));
-        ((EditText) findViewById(R.id.mobileEditText)).setText(json.getString(P.ph_number));
+        ((EditText) findViewById(R.id.mobileEditText)).setText(json.getString(P.ph_number));*/
 
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         if (json.getString(P.gender).equalsIgnoreCase("male")) {
@@ -1068,8 +1075,23 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.communityEditText)).setText(json.getString(P.religion));
 
         ((EditText) findViewById(R.id.maritalStatusEditText)).setText(json.getString(P.marital_status));
-        ((EditText) findViewById(R.id.educationEditText)).setText(json.getString(P.educationlevel));
-        ((EditText) findViewById(R.id.occupationEditText)).setText(json.getString(P.occupation_name));
+
+        string = json.getString(P.educationlevel);
+        ((EditText) findViewById(R.id.educationEditText)).setText(string);
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
+            string = json.getString(P.other_edulevel);
+            ((EditText) findViewById(R.id.otherEducationEditText)).setText(string);
+            findViewById(R.id.otherEducationInputLayout).setVisibility(View.VISIBLE);
+        }
+
+        string = json.getString(P.occupation_name);
+        ((EditText) findViewById(R.id.occupationEditText)).setText(string);
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+        {
+            string = json.getString(P.other_occupation);
+            ((EditText) findViewById(R.id.otherOccupationEditText)).setText(string);
+            findViewById(R.id.otherOccupationInputLayout).setVisibility(View.VISIBLE);
+        }
 
         ((EditText) findViewById(R.id.monthlyIncomeEditText)).setText(json.getString(P.monthly_income));
         ((EditText) findViewById(R.id.resAddEditText)).setText(json.getString(P.residency_address));
@@ -1078,22 +1100,106 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.stateEditText)).setText(json.getString(P.state_name));
         ((EditText) findViewById(R.id.cityEditText)).setText(json.getString(P.city_name));
 
-        ((EditText) findViewById(R.id.motherTongueEditText)).setText(json.getString(P.mothertongue));
-        ((EditText) findViewById(R.id.selectLanguagesEditText)).setText(json.getString(P.language));
+        string = json.getString(P.mothertongue);
+        ((EditText) findViewById(R.id.motherTongueEditText)).setText(string);
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+        {
+            string = json.getString(P.other_mother_tongue);
+            ((EditText) findViewById(R.id.otherMotherTongueEditText)).setText(string);
+            findViewById(R.id.otherMotherTongueInputLayout).setVisibility(View.VISIBLE);
+        }
+
+        JSONArray jsonArray = json.getJsonArray(P.language_id);
+        if (jsonArray != null) {
+            tempLanguageList = new ArrayList<>();
+            languageCheckedArray = new boolean[CommonListHolder.languageNameList.size()];
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    string = jsonArray.getString(i);
+                    for (int j = 0; j < CommonListHolder.languageNameList.size(); j++) {
+                        if (string.equals(CommonListHolder.languageIdList.get(j))) {
+                            tempLanguageList.add(CommonListHolder.languageNameList.get(j));
+                            languageCheckedArray[j] = true;
+                        } else if (!languageCheckedArray[j])
+                            languageCheckedArray[j] = false;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            string = tempLanguageList.toString();
+            string = string.replace("[", "");
+            string = string.replace("]", "");
+            editText = findViewById(R.id.selectLanguagesEditText);
+            editText.setText(string);
+
+            if (string.contains("ther") || string.contains("THER"))
+            {
+                string = json.getString(P.other_language);
+                if (!string.isEmpty())
+                {
+                    ((EditText)findViewById(R.id.otherLanguageEditText)).setText(string);
+                    findViewById(R.id.otherLanguageInputLayout).setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+        jsonArray = json.getJsonArray(P.intreasted_in);
+        if (jsonArray != null) {
+            LinearLayout linearLayout = findViewById(R.id.interest_layout);
+            View view;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    string = jsonArray.getString(i);
+                    view = linearLayout.findViewWithTag(string);
+                    if (view instanceof CheckBox)
+                        ((CheckBox) view).setChecked(true);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (findViewById(R.id.otherHobbyInputLayout).getVisibility() == View.VISIBLE) {
+                string = json.getString(P.other_intreasted);
+                ((EditText) findViewById(R.id.otherHobbyEditText)).setText(string);
+            }
+        }
 
         ((EditText) findViewById(R.id.fathersNameEditText)).setText(json.getString(P.father_name));
-        ((EditText) findViewById(R.id.fathersOccupationEditText)).setText(json.getString(P.father_occupation));
-        ((EditText) findViewById(R.id.fathersOtherOccupationEditText)).setText(json.getString(P.father_other_occupation));
+
+        string = json.getString(P.father_occupation);
+        ((EditText) findViewById(R.id.fathersOccupationEditText)).setText(string);
+        if (string.contains("ther") || string.contains("THER"))
+        {
+            string = json.getString(P.father_other_occupation);
+            ((EditText) findViewById(R.id.fathersOtherOccupationEditText)).setText(string);
+            findViewById(R.id.fathersOtherOccupationInputLayout).setVisibility(View.VISIBLE);
+        }
 
         ((EditText) findViewById(R.id.mothersNameEditText)).setText(json.getString(P.mother_name));
-        ((EditText) findViewById(R.id.mothersOccupationEditText)).setText(json.getString(P.mother_occupation));
-        ((EditText) findViewById(R.id.mothersOtherOccupationEdiText)).setText(json.getString(P.mother_other_occupation));
 
+        string = json.getString(P.mother_occupation);
+        ((EditText) findViewById(R.id.mothersOccupationEditText)).setText(string);
+        if (string.contains("ther") || string.contains("THER"))
+        {
+            string = json.getString(P.mother_other_occupation);
+            ((EditText) findViewById(R.id.mothersOtherOccupationEdiText)).setText(string);
+            findViewById(R.id.mothersOtherOccupationInputLayout).setVisibility(View.VISIBLE);
+        }
 
         ((EditText) findViewById(R.id.numberOfSiblings)).setText(json.getString(P.siblings));
-        ((EditText) findViewById(R.id.parentsNumberEditText)).setText(json.getString(P.father_other_occupation));
+        ((EditText) findViewById(R.id.parentsNumberEditText)).setText(json.getString(P.alternate_contact_no));
 
-        ((EditText) findViewById(R.id.ethnicityEditText)).setText(json.getString(P.ethnicity_name));
+        string = json.getString(P.ethnicity_name);
+        ((EditText) findViewById(R.id.ethnicityEditText)).setText(string);
+        if (string.contains("ther") || string.contains("THER"))
+        {
+            string = json.getString(P.other_ethnicity);
+            ((EditText) findViewById(R.id.otherEthnicityEditText)).setText(string);
+            findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.VISIBLE);
+        }
 
         ((EditText) findViewById(R.id.fathersCountryEditText)).setText(json.getString(P.father_country));
         ((EditText) findViewById(R.id.mothersCountryEditText)).setText(json.getString(P.mother_country));
@@ -1102,10 +1208,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).into(((ImageView)findViewById(R.id.image_profile_pic)));
-        }
-        catch (Exception e)
-        {
+            Picasso.get().load(string).into(((ImageView) findViewById(R.id.image_profile_pic)));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

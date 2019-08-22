@@ -17,10 +17,14 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.commen.C;
+import com.example.shianikha.commen.CommonListHolder;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class MyProfileFragment extends Fragment {
 
@@ -100,7 +104,6 @@ public class MyProfileFragment extends Fragment {
         profile_details_string = json.toString();
         String string = json.getString(P.profile_pic);
 
-
         try {
             Picasso.get().load(string).into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
             H.log("imageisLoaded", "hello");
@@ -108,148 +111,197 @@ public class MyProfileFragment extends Fragment {
             e.printStackTrace();
         }
 
-        string=json.getString(P.first_name) + " " +json.getString(P.middle_name)+" "+json.getString(P.last_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.name_tv)).setText(string);
+        string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
+        ((TextView) fragmentView.findViewById(R.id.name_tv)).setText(string);
 
         string = json.getString(P.first_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.firstName)).setText(string);
-        string = json.getString(P.middle_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.middleName)).setText(string);
-        string = json.getString(P.last_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.lastName)).setText(string);
-        string = json.getString(P.skin_tone);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.skinTone)).setText(string);
-        string = json.getString(P.body_type);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.bodyType)).setText(string);
-        string = json.getString(P.religion);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.shiaCommunity)).setText(string);
-        string = json.getString(P.marital_status);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.maritualStatus)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.firstName)).setText(string);
 
+        string = json.getString(P.middle_name);
+        ((TextView) fragmentView.findViewById(R.id.middleName)).setText(string);
+
+        string = json.getString(P.last_name);
+        ((TextView) fragmentView.findViewById(R.id.lastName)).setText(string);
+
+        string = json.getString(P.skin_tone);
+        ((TextView) fragmentView.findViewById(R.id.skinTone)).setText(string);
+
+        string = json.getString(P.body_type);
+        ((TextView) fragmentView.findViewById(R.id.bodyType)).setText(string);
+
+        string = json.getString(P.religion);
+        ((TextView) fragmentView.findViewById(R.id.shiaCommunity)).setText(string);
+
+        string = json.getString(P.marital_status);
+        ((TextView) fragmentView.findViewById(R.id.maritualStatus)).setText(string);
+
+        TextView textView = fragmentView.findViewById(R.id.education);
         string = json.getString(P.educationlevel);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_edulevel);
-            ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
+
+        textView = fragmentView.findViewById(R.id.occupation);
         string = json.getString(P.occupation_name);
-        if (string.isEmpty() || string.equalsIgnoreCase("null"))
-        {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
+
 
         string = json.getString(P.monthly_income);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.monthlyIncome)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.monthlyIncome)).setText(string);
 
         string = json.getString(P.residency_address);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.resAddress)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.resAddress)).setText(string);
 
 
         string = json.getString(P.mothertongue);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView = fragmentView.findViewById(R.id.motherTongue);
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_mother_tongue);
-            ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
-        string = json.getString(P.language);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
-            string = json.getString(P.other_language);
-            ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.language)).setText(string);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray = json.getJsonArray(P.language_id);
+        textView = fragmentView.findViewById(R.id.language);
+        StringBuilder stringBuilder = new StringBuilder();
+        int j = 0;
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    j = CommonListHolder.languageIdList.indexOf(jsonArray.getString(i));
+                    if (j != -1)
+                        stringBuilder.append(CommonListHolder.languageNameList.get(j)).append(", ");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            j = stringBuilder.lastIndexOf(",");
+            if (j != -1)
+                stringBuilder.deleteCharAt(j);
+            textView.setText(stringBuilder);
         }
 
+        string = json.getString(P.other_language);
+        if (!string.isEmpty())
+            textView.append("(" + string + ")");
+
+        jsonArray = json.getJsonArray(P.intreasted_in);
+        stringBuilder = new StringBuilder();
+        textView = fragmentView.findViewById(R.id.interestedInTextView);
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    j = CommonListHolder.intrestedInIdList.indexOf(jsonArray.getString(i));
+                    if (j != -1)
+                        stringBuilder.append(CommonListHolder.intrestedInNameList.get(j)).append(", ");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            j = stringBuilder.lastIndexOf(",");
+            if (j != -1)
+                stringBuilder.deleteCharAt(j);
+            textView.setText(stringBuilder);
+        }
+
+        string = json.getString(P.other_intreasted);
+        if (!string.isEmpty())
+            textView.append("(" + string + ")");
+
+        textView = fragmentView.findViewById(R.id.fatherOccupation);
         string = json.getString(P.father_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.father_other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
-
+        textView = fragmentView.findViewById(R.id.motherOccupation);
         string = json.getString(P.mother_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.mother_other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
+        textView = fragmentView.findViewById(R.id.ethincity);
         string = json.getString(P.ethnicity_name);
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
+            string = json.getString(P.other_ethnicity);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
+        }
+
+        /*string = json.getString(P.ethnicity_name);
         if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_ethnicity);
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
         } else {
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
-        }
+        }*/
 
         string = json.getString(P.father_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.fatherName)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.fatherName)).setText(string);
 
         string = json.getString(P.mother_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.motherName)).setText(string);
-
+        ((TextView) fragmentView.findViewById(R.id.motherName)).setText(string);
 
         string = json.getString(P.father_country);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.fatherCountry)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.fatherCountry)).setText(string);
 
         string = json.getString(P.mother_country);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.mothersCountry)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.mothersCountry)).setText(string);
 
         string = json.getString(P.profile_id);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
-        string = json.getString(P.packages_applied);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(string);
-        string = json.getString(P.email);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.eMail)).setText(string);
-        string = json.getString(P.ph_number);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.phNumber)).setText(string);
-        string = json.getString(P.gender);
+        ((TextView) fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
 
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.gender)).setText(string);
+        string = json.getString(P.packages_applied);
+        ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(string);
+
+        string = json.getString(P.email);
+        ((TextView) fragmentView.findViewById(R.id.eMail)).setText(string);
+
+        string = json.getString(P.ph_number);
+        ((TextView) fragmentView.findViewById(R.id.phNumber)).setText(string);
+
+        string = json.getString(P.gender);
+        ((TextView) fragmentView.findViewById(R.id.gender)).setText(string);
+
         string = json.getString(P.height);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.height)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.height)).setText(string);
+
         string = json.getString(P.city_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.cityName)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.cityName)).setText(string);
+
         string = json.getString(P.state_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.stateName)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.stateName)).setText(string);
+
         string = json.getString(P.country_name);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.Country)).setText(string);
-        string = json.getString(P.religion);
+        ((TextView) fragmentView.findViewById(R.id.Country)).setText(string);
+
+        //string = json.getString(P.religion);
 
         string = json.getString(P.smoke_id);
-        if (string != null)
-            ((TextView) fragmentView.findViewById(R.id.smoke)).setText(string);
+        ((TextView) fragmentView.findViewById(R.id.smoke)).setText(string);
 
 
     }

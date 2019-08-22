@@ -803,13 +803,14 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/interestedInTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="idea of donaddknskdn sdksnjdksdkld sdj sdh sdj sddsdbbds sdjbsd bdjksdb  " />
+                    android:text="" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -828,7 +829,7 @@
                     android:layout_height="wrap_content"
                     android:text="idea of donaddknskdn sdksnjdksdkld sdj sdh sdj sddsdbbds sdjbsd bdjksdb  " />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 
