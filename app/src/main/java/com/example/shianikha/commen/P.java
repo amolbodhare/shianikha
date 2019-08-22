@@ -88,7 +88,7 @@ public class P {
     public static String father_city = "father_city";
 
     public static String mother_name = "mother_name";
-    public static String mother_occupation_id = "mothe_occupation_id";
+    public static String mother_occupation_id = "mother_occupation_id";
     public static String mother_other_occupation = "mother_other_occupation";
 
 

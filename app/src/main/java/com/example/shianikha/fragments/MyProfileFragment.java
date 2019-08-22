@@ -135,20 +135,26 @@ public class MyProfileFragment extends Fragment {
         string = json.getString(P.marital_status);
         ((TextView) fragmentView.findViewById(R.id.maritualStatus)).setText(string);
 
+        TextView textView = fragmentView.findViewById(R.id.education);
         string = json.getString(P.educationlevel);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_edulevel);
-            ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.education)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
+
+        textView = fragmentView.findViewById(R.id.occupation);
         string = json.getString(P.occupation_name);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.occupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
+
 
         string = json.getString(P.monthly_income);
         ((TextView) fragmentView.findViewById(R.id.monthlyIncome)).setText(string);
@@ -158,16 +164,18 @@ public class MyProfileFragment extends Fragment {
 
 
         string = json.getString(P.mothertongue);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView = fragmentView.findViewById(R.id.motherTongue);
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_mother_tongue);
-            ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.motherTongue)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
         JSONArray jsonArray = new JSONArray();
         jsonArray = json.getJsonArray(P.language_id);
-        TextView textView = fragmentView.findViewById(R.id.language);
+        textView = fragmentView.findViewById(R.id.language);
         StringBuilder stringBuilder = new StringBuilder();
         int j = 0;
         if (jsonArray != null) {
@@ -188,7 +196,7 @@ public class MyProfileFragment extends Fragment {
 
         string = json.getString(P.other_language);
         if (!string.isEmpty())
-            textView.append("("+ string+")");
+            textView.append("(" + string + ")");
 
         jsonArray = json.getJsonArray(P.intreasted_in);
         stringBuilder = new StringBuilder();
@@ -211,31 +219,45 @@ public class MyProfileFragment extends Fragment {
 
         string = json.getString(P.other_intreasted);
         if (!string.isEmpty())
-            textView.append("(" + string+")");
+            textView.append("(" + string + ")");
 
+        textView = fragmentView.findViewById(R.id.fatherOccupation);
         string = json.getString(P.father_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.father_other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
+        textView = fragmentView.findViewById(R.id.motherOccupation);
         string = json.getString(P.mother_occupation);
-        if (string.isEmpty() || string.equalsIgnoreCase("null")) {
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.mother_other_occupation);
-            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
-        } else {
-            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(string);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
         }
 
+        textView = fragmentView.findViewById(R.id.ethincity);
         string = json.getString(P.ethnicity_name);
+        textView.setText(string);
+
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
+            string = json.getString(P.other_ethnicity);
+            if (!string.isEmpty())
+                textView.append("(" + string + ")");
+        }
+
+        /*string = json.getString(P.ethnicity_name);
         if (string.isEmpty() || string.equalsIgnoreCase("null")) {
             string = json.getString(P.other_ethnicity);
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
         } else {
             ((TextView) fragmentView.findViewById(R.id.ethincity)).setText(string);
-        }
+        }*/
 
         string = json.getString(P.father_name);
         ((TextView) fragmentView.findViewById(R.id.fatherName)).setText(string);
