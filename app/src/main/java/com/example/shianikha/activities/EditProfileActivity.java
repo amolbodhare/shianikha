@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -1034,7 +1035,19 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.middleNameEditText)).setText(json.getString(P.middle_name));
         ((EditText) findViewById(R.id.lastNameEditText)).setText(json.getString(P.last_name));
 
-        String string = json.getString(P.dob);
+
+        String  gender = json.getString(P.gender);
+        gender = gender.toLowerCase();
+        Drawable drawable = gender.equals("male")? getDrawable(R.drawable.male) : getDrawable(R.drawable.female);
+
+        String  string = json.getString(P.profile_pic);
+        try {
+            Picasso.get().load(string).placeholder(drawable).into(((ImageView) findViewById(R.id.image_profile_pic)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        string = json.getString(P.dob);
         EditText editText = findViewById(R.id.dateOfBirthEditText);
         editText.setTag(string);
         android.icu.text.SimpleDateFormat simpleDateFormat1 = new android.icu.text.SimpleDateFormat("yyyy-MM-dd");
@@ -1206,13 +1219,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.mothersCountryEditText)).setText(json.getString(P.mother_country));
 
         ((EditText) findViewById(R.id.smokingEditText)).setText(json.getString(P.smoke_id));
-
-        string = json.getString(P.profile_pic);
-        try {
-            Picasso.get().load(string).into(((ImageView) findViewById(R.id.image_profile_pic)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     class CountryCodeListAdapter extends BaseAdapter {

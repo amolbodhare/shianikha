@@ -1,6 +1,7 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -102,10 +103,14 @@ public class MyProfileFragment extends Fragment {
     private void setMyProfileData(Json json) {
         json = json.getJson(P.data);
         profile_details_string = json.toString();
-        String string = json.getString(P.profile_pic);
 
+        String  gender = json.getString(P.gender);
+        gender = gender.toLowerCase();
+        Drawable drawable = gender.equals("male")? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
+
+        String string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
+            Picasso.get().load(string).placeholder(drawable).into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
             H.log("imageisLoaded", "hello");
         } catch (Exception e) {
             e.printStackTrace();

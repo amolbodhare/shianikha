@@ -124,9 +124,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setProfileData(Json parentJson) {
         Json json = parentJson.getJson(P.profile_details);
+
+        String  gender = json.getString(P.gender);
+        gender = gender.toLowerCase();
+        Drawable drawable = gender.equals("male")? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
+
         String string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).into((CircularImageView) fragmentView.findViewById(R.id.cir_imv));
+            Picasso.get().load(string).placeholder(drawable).into((CircularImageView) fragmentView.findViewById(R.id.cir_imv));
         } catch (Exception e) {
             e.printStackTrace();
         }

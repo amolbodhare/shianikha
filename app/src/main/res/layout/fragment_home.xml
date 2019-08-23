@@ -36,7 +36,7 @@
                     android:layout_height="125dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/kangna" />
+                    android:src="@null" />
 
                 <ImageView
                     android:id="@+id/imageView"
