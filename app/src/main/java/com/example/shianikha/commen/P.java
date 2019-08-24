@@ -196,4 +196,7 @@ public class P {
     public static String user_id_receiver = "user_id_receiver";
     public static String other_high_edulevel = "other_high_edulevel";
     public static String alternate_contact_no = "alternate_contact_no";
+    public static String message = "message";
+    public static String inbox = "inbox";
+    public static String message_id = "message_id";
 }//class

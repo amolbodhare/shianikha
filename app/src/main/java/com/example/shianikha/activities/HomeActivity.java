@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
@@ -246,7 +245,7 @@ public class HomeActivity extends AppCompatActivity {
         else if (view.getId() == R.id.drawer_account_settings_layout)
             showAccountSettingFragment();
         else if (view.getId() == R.id.inbox_activity_drawer_layout) {
-            Intent i = new Intent(HomeActivity.this, InboxActivity.class);
+            Intent i = new Intent(HomeActivity.this, MessageActivity.class);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         } else if (view.getId() == R.id.drawer_favourites_layout) {

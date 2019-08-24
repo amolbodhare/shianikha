@@ -49,7 +49,6 @@
         android:layout_below="@+id/linearLayout"
         android:layout_toRightOf="@+id/notiCircle"
         android:fontFamily="@font/poppins_regular"
-        android:text="@string/content_founder"
         android:textColor="@color/black"
         android:textSize="15sp" />
 

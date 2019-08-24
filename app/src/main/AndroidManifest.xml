@@ -23,10 +23,10 @@
             android:name=".activities.EditProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ReplyMessageActivity"
+            android:name=".activities.WriteMessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.InboxMessageActivity"
+            android:name=".activities.ReadMessageActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ImageViewerActivity"
@@ -35,7 +35,7 @@
             android:name=".activities.ImageViewPagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.InboxActivity"
+            android:name=".activities.MessageActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SubscriptionActivity"

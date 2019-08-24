@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.WriteMessageActivity">
+
+    <RelativeLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@drawable/aaaaaa">
+
+            <ImageView
+                android:id="@+id/sub_drawerMenu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/clickable_trans_bg"
+                android:clickable="true"
+                android:onClick="onMethodClick"
+                android:tint="#311C63"
+                android:padding="13dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:tag=""
+                android:text="Reply MESSAGE"
+                android:textAllCaps="true"
+                android:textColor="#585858"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/notiCircle"
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/kangana_ranaut" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/notiCircle">
+
+        <TextView
+            android:id="@+id/founder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Letter from Founder"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/founder"
+            android:text="1 June 2019 10PM"
+            android:textSize="6sp"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>-->
+
+    <EditText
+        android:id="@+id/type_msg_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:hint="Type your message here"
+        android:maxLines="12"
+        android:lines="12"
+        android:gravity="start"
+        android:padding="3dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/blue_button_back"
+        android:fontFamily="@font/poppins_regular"
+        android:text="SEND"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

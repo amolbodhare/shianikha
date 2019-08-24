@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:padding="7dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -12,50 +11,49 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/kangana_ranaut" />
+        android:src="@null" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/del_msg_btn_imv"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/notiCircle">
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@+id/notiCircle"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/founder"
-            android:layout_width="wrap_content"
+            android:id="@+id/dateAndTime"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="end"
+            android:text="1 June 2019 10PM"
+            android:textColor="@color/black"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="Letter from Founder"
             android:textColor="@color/black"
             android:textSize="13sp"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/founder"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="bottom"
-            android:layout_alignParentRight="true"
-            android:text="1 June 2019 10PM"
-            android:textColor="@color/black"
-            android:textSize="11sp" />
-
-        <TextView
-            android:id="@+id/msg"
+            android:id="@+id/messageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/founder"
-            android:layout_marginLeft="15dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/content_mini"
+            android:text="dfdfdfdsfdsfdsfdsfdsfdsfdsfdsfdsf"
+            android:maxLines="3"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/del_msg_btn_imv"
@@ -65,6 +63,8 @@
         android:layout_centerVertical="true"
         android:baselineAlignBottom="true"
         android:padding="13dp"
+        android:background="@drawable/clickable_trans_bg"
+        android:clickable="true"
         android:layout_marginRight="-7dp"
         android:src="@drawable/ic_rubbish_bin"
         android:tint="@color/delete_btn_back" />

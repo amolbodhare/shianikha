@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.Api;
@@ -22,14 +21,11 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.R;
 import com.example.shianikha.activities.ImageViewPagerActivity;
-import com.example.shianikha.activities.ImageViewerActivity;
-import com.example.shianikha.activities.ReplyMessageActivity;
+import com.example.shianikha.activities.WriteMessageActivity;
 import com.example.shianikha.commen.C;
 import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 
 public class ProfileDetailsFragments extends Fragment implements View.OnClickListener, Api.OnLoadingListener, Api.OnErrorListener {
@@ -83,9 +79,18 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
             startActivity(intent);
-        } else if (v.getId() == R.id.sendMessageLinearLayout) {
-            startActivity(new Intent(context, ReplyMessageActivity.class));
-        } else if (v.getId() == R.id.imageView)
+        } else if (v.getId() == R.id.sendMessageLinearLayout)
+        {
+            Intent intent = new Intent(context, WriteMessageActivity.class);
+            Object object = v.getTag();
+            if (object!=null)
+            {
+                String string = object.toString();
+                intent.putExtra(P.profile_id,string);
+                startActivity(intent);
+            }
+        }
+        else if (v.getId() == R.id.imageView)
         {
             ImageView imageView = (ImageView) v;
             if (imageView.getDrawable() == null)
@@ -279,7 +284,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             String string = profileDetailJson.getString(P.id);
                             LinearLayout linearLayout = fragmentView.findViewById(R.id.favouriteLinearLayout);
                             linearLayout.setTag(string);
+                            linearLayout.setOnClickListener(ProfileDetailsFragments.this);
 
+                            linearLayout = fragmentView.findViewById(R.id.sendMessageLinearLayout);
+                            linearLayout.setTag(string);
                             linearLayout.setOnClickListener(ProfileDetailsFragments.this);
 
                         } else
