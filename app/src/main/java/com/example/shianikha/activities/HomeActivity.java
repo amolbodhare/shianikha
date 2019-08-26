@@ -246,6 +246,7 @@ public class HomeActivity extends AppCompatActivity {
             showAccountSettingFragment();
         else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, MessageActivity.class);
+            i.putExtra("open",P.inbox);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         } else if (view.getId() == R.id.drawer_favourites_layout) {

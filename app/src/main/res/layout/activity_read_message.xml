@@ -71,7 +71,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@id/circleImageView"
             android:fontFamily="@font/poppins_medium"
-            android:text="ddfdsfdfdfdfdsfdfdsfdsfdsfdsfd"
+            android:text="name"
             android:textColor="#3E3E3E" />
 
         <TextView
@@ -82,10 +82,19 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@id/circleImageView"
             android:fontFamily="@font/poppins_medium"
-            android:text="ddfdsfdfdfdfdsfdfdsfdsfdsfdsfd"
-            android:textSize="10sp" />
+            android:text="date"
+            android:textSize="13sp" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout"
+        android:layout_margin="13dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_regular"/>
 
     <LinearLayout
         android:id="@+id/replyLinearLayour"
@@ -113,13 +122,5 @@
             android:src="@drawable/ic_reply_all_button" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativeLayout"
-        android:textSize="10sp"
-        android:fontFamily="@font/poppins_regular"/>
 
 </RelativeLayout>

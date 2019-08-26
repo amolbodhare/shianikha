@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/founder"
             android:fontFamily="@font/poppins_regular"
-            android:text="dfdfdfdsfdsfdsfdsfdsfdsfdsfdsfdsf"
+            android:text=""
             android:maxLines="3"
             android:textColor="@color/black"
             android:textSize="12sp" />

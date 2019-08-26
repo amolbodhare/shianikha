@@ -47,8 +47,14 @@ public class ReadMessageActivity extends AppCompatActivity implements View.OnCli
                 if (string!=null)
                     userId = string;
 
+                string = json.getString(P.message);
+                ((TextView)findViewById(R.id.messageTextView)).setText(string);
+
+                string = json.getString(P.date);
+                ((TextView)findViewById(R.id.dateAndTimeTextView)).setText(string);
+
                 string = json.getString(P.profile_pic);
-                Picasso.get().load(string).into(((ImageView)findViewById(R.id.circleImageView)));
+                Picasso.get().load(string).placeholder(R.drawable.user).fit().into(((ImageView)findViewById(R.id.circleImageView)));
 
             } catch (Exception e) {
                 e.printStackTrace();

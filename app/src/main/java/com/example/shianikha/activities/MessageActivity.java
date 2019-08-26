@@ -25,6 +25,8 @@ import com.example.shianikha.commen.P;
 import com.example.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoadingDialog loadingDialog;
@@ -47,13 +49,15 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.sub_drawerMenu).setOnClickListener(this);*/
 
         String string = getIntent().getStringExtra("open");
-        if (string != null) {
+        if (string != null)
+        {
             apiName = string.equalsIgnoreCase(P.inbox) ? "inbox" : "sent_message";
-            hitApiForInboxOrSentMessage(string);
+            hitApiForInboxOrSentMessage(apiName);
         }
     }
 
-    private void hitApiForInboxOrSentMessage(final String string) {
+    private void hitApiForInboxOrSentMessage(final String string)
+    {
         Json json = new Json();
         json.addString(P.token_id, new Session(this).getString(P.tokenData));
 
@@ -78,11 +82,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 })
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
-                    public void onSuccess(final Json json) {
+                    public void onSuccess(final Json json)
+                    {
                         if (json.getInt(P.status) == 1) {
                             JsonList jsonList = json.getJsonList(P.data);
                             if (jsonList == null)
                                 return;
+
+                            if (string.equalsIgnoreCase("sent_message"))
+                                changeColorsOfThreeTab(findViewById(R.id.sent_message));
+
                             ListView listView = findViewById(R.id.listView);
                             listView.setAdapter(new ListAdapter(jsonList));
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -180,6 +189,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
             string = json.getString(P.message_id);
             convertView.findViewById(R.id.del_msg_btn_imv).setTag(string);
+
+            string = json.getString(P.message);
+            ((TextView)convertView.findViewById(R.id.messageTextView)).setText(string);
+
+            string = json.getString(P.date);
+            ((TextView)convertView.findViewById(R.id.dateAndTime)).setText(string);
+
 
             convertView.findViewById(R.id.del_msg_btn_imv).setOnClickListener(new View.OnClickListener()
             {

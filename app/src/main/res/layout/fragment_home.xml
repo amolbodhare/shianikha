@@ -60,7 +60,7 @@
                     android:gravity="center_horizontal"
                     android:text="John Doe"
                     android:textColor="@color/white"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/profile_id_tv"
@@ -72,7 +72,7 @@
                     android:gravity="center_horizontal"
                     android:text="John Doe"
                     android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:textSize="10sp" />
 
                 <LinearLayout
                     android:id="@+id/account_type_lay"
@@ -91,7 +91,7 @@
                         android:gravity="center_horizontal"
                         android:text="Account Type"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/account_type_tv"
@@ -104,7 +104,7 @@
                         android:gravity="center_horizontal"
                         android:text="Free"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -122,87 +122,84 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/card_back_design"
-                    android:orientation="vertical">
+                    android:elevation="3dp"
+                    android:orientation="vertical"
+                    android:padding="13dp">
 
                     <TextView
                         android:id="@+id/myMatches"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="102"
                         android:textColor="@color/textpurle2"
-                        android:textSize="21dp" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="My Matches"
-                        android:textSize="8dp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_weight="1"
+                    android:elevation="3dp"
                     android:background="@drawable/card_back_design"
+                    android:padding="13dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/profileVisitor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="50"
                         android:textColor="@color/textpurle2"
-                        android:textSize="21dp" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Profile Visitors"
-                        android:textSize="8dp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_weight="1"
+                    android:elevation="3dp"
                     android:background="@drawable/card_back_design"
+                    android:padding="13dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/expressInterest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="30"
                         android:textColor="@color/textpurle2"
-                        android:textSize="21dp" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Express Interest"
-                        android:textSize="8dp" />
+                        android:textSize="11sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -216,8 +213,8 @@
                 android:layout_marginTop="27dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Recently Join"
-                android:textColor="@color/textgreycolor"
-                android:textSize="15dp" />
+                android:textSize="16sp"
+                android:textColor="@color/textgreycolor" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rec_join_recyclerView"
@@ -236,9 +233,9 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="22dp"
                 android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
                 android:text="Recent Visitors"
-                android:textColor="@color/textgreycolor"
-                android:textSize="15dp" />
+                android:textColor="@color/textgreycolor" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recent_visitors_recyclerView"

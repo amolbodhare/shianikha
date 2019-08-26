@@ -85,7 +85,7 @@ public class WriteMessageActivity extends AppCompatActivity  {
                         if (json.getInt(P.status) == 1)
                         {
                             Intent intent = new Intent(WriteMessageActivity.this, MessageActivity.class);
-                            intent.putExtra("open",P.inbox);
+                            intent.putExtra("open","");
                             startActivity(intent);
                         }
                     }

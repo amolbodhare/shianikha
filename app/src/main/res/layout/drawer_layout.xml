@@ -176,7 +176,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingLeft="10dp"
-                android:text="Inbox"
+                android:text="Messages"
                 android:textSize="15sp" />
 
         </LinearLayout>
