@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
 import com.example.shianikha.AboutApp;
 import com.example.shianikha.ContactUsFragment;
@@ -32,6 +33,7 @@ import com.example.shianikha.fragments.MyMatchesFragment;
 import com.example.shianikha.fragments.MyProfileFragment;
 import com.example.shianikha.fragments.ProfileDetailsFragments;
 import com.example.shianikha.fragments.SearchFragment;
+import com.squareup.picasso.Picasso;
 
 public class HomeActivity extends AppCompatActivity {
     public HomeFragment homeFragment;
@@ -532,6 +534,26 @@ public class HomeActivity extends AppCompatActivity {
             if (myProfileFragment != null)
                 myProfileFragment.hitMyProfileApi();
 
+        }
+    }
+
+    public void setDrawerData(Json json)
+    {
+        json = json.getJson(P.profile_details);
+
+        String string = json.getString(P.full_name);
+        ((TextView)findViewById(R.id.name)).setText(string);
+
+        string = json.getString(P.profile_id);
+        ((TextView)findViewById(R.id.profileId)).setText(string);
+
+        string = json.getString(P.profile_pic);
+        try {
+            Picasso.get().load(string).into(((ImageView)findViewById(R.id.circleImageView)));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }

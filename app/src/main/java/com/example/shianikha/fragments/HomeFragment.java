@@ -110,10 +110,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        if (json.getInt(P.status) == 1)
+                        {
                             setProfileData(json);
                             setRecentlyJoinData(json);
                             setRecentVisitorsData(json);
+                            ((HomeActivity)context).setDrawerData(json);
 
                         } else
                             H.showMessage(context, json.getString(P.msg));

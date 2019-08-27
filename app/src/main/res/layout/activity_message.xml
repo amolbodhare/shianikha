@@ -44,7 +44,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:tag=""
-                android:text="inbox"
+                android:text="messages"
                 android:textAllCaps="true"
                 android:textColor="#585858"
                 android:textSize="18dp"
