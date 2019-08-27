@@ -42,7 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Kangna Ranout"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9dp"
+                android:textSize="9sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -52,17 +52,18 @@
                 android:layout_below="@id/title"
                 android:text="SN461358"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9dp"
+                android:textSize="9sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/age_height_cast_religion_details"
                 android:layout_marginTop="3dp"
                 android:layout_below="@id/profile_id"
                 android:text="21 yrs,5'1' Shia Muslim"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9dp"
+                android:textSize="9sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -75,6 +76,7 @@
                 android:orientation="horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/age_height_cast_religion_details">
+
                 <ImageView
                     android:id="@+id/imv_call"
                     android:layout_width="28dp"
@@ -85,6 +87,7 @@
                     android:padding="8dp"
                     android:tint="@color/grey"
                     android:src="@drawable/ic_telephone" />
+
                 <ImageView
                     android:id="@+id/imv_mail"
                     android:layout_width="28dp"

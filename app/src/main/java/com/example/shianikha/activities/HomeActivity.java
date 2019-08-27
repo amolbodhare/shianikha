@@ -534,6 +534,8 @@ public class HomeActivity extends AppCompatActivity {
             if (myProfileFragment != null)
                 myProfileFragment.hitMyProfileApi();
 
+            if (homeFragment!=null)
+                homeFragment.hitDashboardApi();
         }
     }
 

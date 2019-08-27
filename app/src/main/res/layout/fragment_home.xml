@@ -345,7 +345,6 @@
                 android:layout_below="@id/subscription_plan_link_layout"
                 android:layout_marginLeft="17dp"
                 android:clickable="true"
-                android:visibility="gone"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
 

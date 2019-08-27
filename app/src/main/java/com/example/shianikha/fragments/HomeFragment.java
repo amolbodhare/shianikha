@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return fragmentView;
     }
 
-    private void hitDashboardApi() {
+    public void hitDashboardApi() {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
         Json json = new Json();
