@@ -113,9 +113,9 @@
                 android:id="@+id/design_buttons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="220dp"
-                android:layout_marginRight="17dp"
+                android:layout_marginRight="15dp"
                 android:elevation="3dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -126,6 +126,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/card_back_design"
                     android:elevation="3dp"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:padding="13dp">
 
@@ -142,7 +143,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="My Matches"
+                        android:gravity="center"
+                        android:text="My\nMatches"
                         android:textSize="11sp" />
 
                 </LinearLayout>
@@ -155,6 +157,7 @@
                     android:elevation="3dp"
                     android:background="@drawable/card_back_design"
                     android:padding="13dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -170,7 +173,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Profile Visitors"
+                        android:text="Profile\nVisitors"
+                        android:gravity="center"
                         android:textSize="11sp" />
 
                 </LinearLayout>
@@ -183,6 +187,7 @@
                     android:elevation="3dp"
                     android:background="@drawable/card_back_design"
                     android:padding="13dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -198,8 +203,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Express Interest"
+                        android:text="Express\nInterest"
+                        android:gravity="center"
                         android:textSize="11sp" />
+
                 </LinearLayout>
 
             </LinearLayout>

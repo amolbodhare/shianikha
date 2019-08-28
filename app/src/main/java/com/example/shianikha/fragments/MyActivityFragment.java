@@ -1,6 +1,7 @@
 package com.example.shianikha.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -160,7 +161,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         void onFragmentInteraction(Uri uri);
     }
 
-    class GridViewAdapter extends BaseAdapter {
+    class GridViewAdapter extends BaseAdapter implements View.OnClickListener {
         private JsonList jsonList;
 
         private GridViewAdapter(JsonList jsons) {
@@ -220,8 +221,63 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
             ((TextView)view.findViewById(R.id.age_height_cast_religion_details)).setText(string);
 
+            string = json.getString(P.ph_number);
+            ImageView imageView = view.findViewById(R.id.imv_call);
+            imageView.setTag(string);
+            imageView.setOnClickListener(this);
+
+            string = json.getString(P.email);
+            imageView = view.findViewById(R.id.imv_mail);
+            imageView.setTag(string);
+            imageView.setOnClickListener(this);
+
             return view;
         }
+
+        @Override
+        public void onClick(View view)
+        {
+            Object object;
+            if (view.getId() == R.id.imv_call)
+            {
+                object = view.getTag();
+                if (object!=null)
+                    makeIntent(object.toString(),"p");
+            }
+            else if (view.getId() == R.id.imv_mail)
+            {
+                object = view.getTag();
+                if (object!=null)
+                    makeIntent(object.toString(),"m");
+            }
+        }
+    }
+
+    private void makeIntent(String data, String string)
+    {
+        Intent intent = new Intent();
+
+        try {
+            if (string.equalsIgnoreCase("p"))
+            {
+                intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + data));
+            }
+            else if (string.equalsIgnoreCase("m"))
+            {
+                intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{data});//, " atul.hemani@citizencenter.co.in"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "");
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+            }
+            startActivity(intent);
+        }
+        catch ( Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
