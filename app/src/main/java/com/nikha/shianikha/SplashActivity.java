@@ -42,6 +42,7 @@ public class SplashActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     private Session session;
     private String profileId = "";
+    private String sharableLink = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +75,17 @@ public class SplashActivity extends AppCompatActivity {
         H.log("appLinkData",appLinkData+"");
         if (appLinkData!=null)
         {
-            String string = session.getString(P.tokenData);
+            /*String string = session.getString(P.tokenData);
             if (string==null || string.isEmpty())
             {
                 H.showMessage(this,"You are not logged in");
                 return;
-            }
+            }*/
 
-            string = appLinkData.toString();
-            profileId = string.substring(string.lastIndexOf("/")+1);
-            H.log("profileIdIs",profileId);
+            String string = appLinkData.toString();
+            sharableLink = string;
+            /*profileId = string.substring(string.lastIndexOf("/")+1);
+            H.log("profileIdIs",profileId);*/
         }
 
         //handleIntent(getIntent());
@@ -254,17 +256,21 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent;
                 String string = session.getString(P.tokenData);
                 H.log("tokenIs", string);
-                if (string == null || string.isEmpty())
+                if (!sharableLink.isEmpty()) {
+                    intent = new Intent(SplashActivity.this, WebViewActivity.class);
+                    intent.putExtra("url",sharableLink);
+                }
+                else if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register) == 0)
                     intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
                 else
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
 
-                if (!profileId.isEmpty())
-                    intent.putExtra(P.profile_id,profileId);
 
-                //intent = new Intent(SplashActivity.this, PerfectMatchActivity.class);
+                //for deep linking
+                /*if (!profileId.isEmpty())
+                    intent.putExtra(P.profile_id,profileId);*/
 
                 startActivity(intent);
                 finish();

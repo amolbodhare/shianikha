@@ -79,11 +79,11 @@ public class HomeActivity extends AppCompatActivity {
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
 
         // when user comes from shared link
-        String string = getIntent().getStringExtra(P.profile_id);
+        /*String string = getIntent().getStringExtra(P.profile_id);
         if (string != null && !string.isEmpty()) {
             profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment, currentFragmentName, string);
             fragmentLoader(profileDetailsFragments, getString(R.string.profileDetails));
-        }
+        }*/
     }
 
     public void makeStatusBarColorBlue(boolean bool) {

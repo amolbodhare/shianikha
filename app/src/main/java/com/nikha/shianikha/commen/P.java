@@ -199,4 +199,5 @@ public class P {
     public static String inbox = "inbox";
     public static String message_id = "message_id";
     public static String date = "date";
+    public static String share_profile = "share_profile";
 }//class

@@ -35,8 +35,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     public static Fragment previousFragment;
     public static String previousFragmentName;
     public static String profileId;
-    LoadingDialog loadingDialog;
-    JsonList jsonList;
+    private LoadingDialog loadingDialog;
+    private JsonList jsonList;
+    private String sharingLink = "";
 
 
     public static ProfileDetailsFragments newInstance(Fragment fragment, String prev_frag_name, String profile_id) {
@@ -112,10 +113,12 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 imageView.setTag("0");
             }
             hitLikeApi();
-        } else if (v.getId() == R.id.shareProfileLinearLayout) {
+        } else if (v.getId() == R.id.shareProfileLinearLayout)
+        {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, "https://dev.digiinterface.com/2019/shia_nikah/web_services/" + profileId);
+            String string = sharingLink.isEmpty() ? "linkNotFound" : sharingLink;
+            intent.putExtra(Intent.EXTRA_TEXT, string + profileId);
             startActivity(Intent.createChooser(intent, "Share Via"));
         }
     }
@@ -253,6 +256,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
                             Picasso.get().load(profileDetailJson.getString(P.profile_pic))
                                     .into((ImageView) fragmentView.findViewById(R.id.imagesView));
+
+                            sharingLink = profileDetailJson.getString(P.share_profile);
 
                             ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
                             ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
