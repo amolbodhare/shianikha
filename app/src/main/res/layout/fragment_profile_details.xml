@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".fragments.ProfileDetailsFragments">
+    tools:context="com.nikha.shianikha.fragments.ProfileDetailsFragments">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/linearLayout"
                 android:layout_alignParentRight="true"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:layout_marginBottom="20dp"
                 android:background="@color/semiTrans"
                 android:clickable="true"
@@ -74,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Kangna Ranaut"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         android:textSize="21sp" />
 
@@ -376,6 +377,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:visibility="invisible"
                         android:fontFamily="@font/poppins_regular"
                         android:text="+91 889854XXXX" />
 
@@ -395,6 +397,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/phoneNum"
                         android:layout_alignParentRight="true"
+                        android:visibility="invisible"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
                         android:text="RohitXXXXXX100@gmail.com" />

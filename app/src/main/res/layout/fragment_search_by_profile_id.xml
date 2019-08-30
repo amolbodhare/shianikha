@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:padding="25dp"
-    tools:context=".subfragments.SearchByProfileIdFragment">
+    tools:context="com.nikha.shianikha.subfragments.SearchByProfileIdFragment">
 
     <TextView
         android:id="@+id/tv_profile_id"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".fragments.MyMatchesFragment">
+    tools:context="com.nikha.shianikha.fragments.MyMatchesFragment">
 
     <RelativeLayout
         android:id="@+id/top_second_layout"

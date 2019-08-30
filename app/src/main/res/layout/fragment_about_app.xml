@@ -11,7 +11,7 @@
     android:paddingStart="25dp"
     android:paddingEnd="25dp"
 
-    tools:context=".AboutApp">
+    tools:context="com.nikha.shianikha.AboutApp">
 
 
     <!-- TODO: Update blank fragment layout -->

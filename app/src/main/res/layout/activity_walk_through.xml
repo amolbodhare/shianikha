@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/walkscreenback"
-    tools:context=".activities.WalkThroughActivity">
+    tools:context="com.nikha.shianikha.activities.WalkThroughActivity">
 
     <ImageView
         android:layout_width="match_parent"

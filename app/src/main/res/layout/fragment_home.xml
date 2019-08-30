@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+    tools:context="com.nikha.shianikha.fragments.HomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -315,6 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/partner_preferences_link_layout"
                 android:clickable="true"
+                android:visibility="gone"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">

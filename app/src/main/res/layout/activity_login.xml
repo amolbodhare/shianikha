@@ -7,7 +7,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
-    tools:context=".activities.LoginActivity">
+    tools:context="com.nikha.shianikha.activities.LoginActivity">
 
     <TextView
         android:id="@+id/sub_title"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".subfragments.SearchOptionFragment">
+    tools:context="com.nikha.shianikha.subfragments.SearchOptionFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                 app:left_thumb_color="@color/textpurle2"
                 app:left_thumb_color_pressed="@color/textpurle2"
                 app:right_thumb_color_pressed="@color/textpurle2"
-                app:max_value="50"
+                app:max_value="80"
                 app:min_start_value="20"
                 app:min_value="18"
                 app:right_thumb_color="@color/textpurle2" />

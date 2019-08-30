@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="13dp"
-    tools:context=".NotifacationDetails">
+    tools:context="com.nikha.shianikha.NotifacationDetails">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/notiCircle"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".subfragments.AdvanceSearchFragment">
+    tools:context="com.nikha.shianikha.subfragments.AdvanceSearchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                     app:bar_highlight_color="@color/textpurle2"
                     app:left_thumb_color="@color/textpurle2"
                     app:left_thumb_color_pressed="@color/textpurle2"
-                    app:max_value="50"
+                    app:max_value="80"
                     app:min_start_value="20"
                     app:min_value="18"
                     app:right_thumb_color="@color/textpurle2"

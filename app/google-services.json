@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "716031140192",
-    "firebase_url": "https://shia-nikah.firebaseio.com",
-    "project_id": "shia-nikah",
-    "storage_bucket": "shia-nikah.appspot.com"
+    "project_number": "745140059150",
+    "firebase_url": "https://shia-nikah-62ae4.firebaseio.com",
+    "project_id": "shia-nikah-62ae4",
+    "storage_bucket": "shia-nikah-62ae4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:716031140192:android:1662b5099d88544a",
+        "mobilesdk_app_id": "1:745140059150:android:32aea70270313e16",
         "android_client_info": {
-          "package_name": "com.example.shianikha"
+          "package_name": "com.nikha.shianikha"
         }
       },
       "oauth_client": [
         {
-          "client_id": "716031140192-jagd5ft2q8klvmo31rot84uld6fck5le.apps.googleusercontent.com",
+          "client_id": "745140059150-c1u10kaofh9duqsiodpskjljhmhuaseq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.shianikha",
-            "certificate_hash": "e4b48a85e508a992a720ed4572a4235b3dfcce8a"
+            "package_name": "com.nikha.shianikha",
+            "certificate_hash": "19741c4375136bc6c8357059c791e1c0bdaa3e7b"
           }
         },
         {
-          "client_id": "716031140192-1s73c1hdlb5lkrla4v23fauplka49dum.apps.googleusercontent.com",
+          "client_id": "745140059150-asi3mmkah4mqls0uvqmhdhn46a4dq7n4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDR_TzqRpXGrQaouOk4Q6vhQ23TTNHJRog"
+          "current_key": "AIzaSyCeeRm3mvICanYC4XZayTXlzyIOwbDb99o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "716031140192-1s73c1hdlb5lkrla4v23fauplka49dum.apps.googleusercontent.com",
+              "client_id": "745140059150-asi3mmkah4mqls0uvqmhdhn46a4dq7n4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

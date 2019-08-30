@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FilterActivity">
+    tools:context="com.nikha.shianikha.activities.FilterActivity">
 
     <RelativeLayout
         android:id="@+id/top_layout"
@@ -46,7 +46,6 @@
         android:id="@+id/scrollview_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottem_layout"
         android:layout_below="@id/top_layout">
 
         <RelativeLayout
@@ -552,43 +551,32 @@
 
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp"
+                android:background="@drawable/blue_button_back"
+                android:layout_below="@+id/smoking_exp_layout"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Apply"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_apply"
+                android:layout_margin="17dp"
+                android:background="@drawable/orange_button_back"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
         </RelativeLayout>
 
     </ScrollView>
-
-
-    <RelativeLayout
-        android:id="@+id/bottem_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
-        android:layout_marginBottom="20dp">
-
-        <Button
-            android:id="@+id/btn_apply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/blue_button_back"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Apply"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_apply"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/orange_button_back"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Cancel"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

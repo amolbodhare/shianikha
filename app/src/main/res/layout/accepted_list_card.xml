@@ -41,6 +41,7 @@
                 android:layout_below="@id/cir_imv_frame_layout"
                 android:layout_centerHorizontal="true"
                 android:text="Kangna Ranout"
+                android:visibility="gone"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="9sp"
                 android:layout_width="wrap_content"
@@ -85,6 +86,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/my_activity_card_circle_button_back"
                     android:padding="8dp"
+                    android:visibility="gone"
                     android:tint="@color/grey"
                     android:src="@drawable/ic_telephone" />
 
@@ -98,6 +100,7 @@
                     android:background="@drawable/my_activity_card_circle_button_back"
                     android:padding="8dp"
                     android:tint="@color/grey"
+                    android:visibility="gone"
                     android:src="@drawable/ic_mail_outline_black_24dp" />
 
             </LinearLayout>

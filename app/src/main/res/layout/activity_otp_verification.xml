@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.OTPVerificationActivity">
+    tools:context="com.nikha.shianikha.activities.OTPVerificationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

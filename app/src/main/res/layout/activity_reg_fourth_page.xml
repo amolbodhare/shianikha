@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RegFourthPageActivity">
+    tools:context="com.nikha.shianikha.activities.RegFourthPageActivity">
 
     <ImageView
         android:layout_width="match_parent"
