@@ -1,14 +1,22 @@
 package com.nikha.shianikha.activities;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.adapters.SubscriptionSliderAdapter;
+import com.nikha.shianikha.commen.C;
+import com.nikha.shianikha.commen.P;
+import com.nikha.shianikha.commen.RequestModel;
 
 public class SubscriptionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,10 +41,48 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
         imv_pre_btn.setOnClickListener(this);
         imv_next_btn.setOnClickListener(this);
 
-        subPlanSliderAdapter = new SubscriptionSliderAdapter(context);
+        hitSubscriptionPlanApi();
+    }
 
-        subPlanSlideViewPager.setAdapter(subPlanSliderAdapter);
+    private void hitSubscriptionPlanApi()
+    {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
 
+        RequestModel requestModel = RequestModel.newRequestModel("plan_list");
+        requestModel.addJSON(P.data, new Json());
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1)
+                        {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            if (jsonList != null)
+                            {
+                                subPlanSliderAdapter = new SubscriptionSliderAdapter(context, jsonList);
+
+                                subPlanSlideViewPager.setAdapter(subPlanSliderAdapter);
+                            }
+                        }
+                    }
+                })
+                .run("hitSubscriptionPlanApi");
     }
 
     @Override

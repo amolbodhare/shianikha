@@ -200,4 +200,6 @@ public class P {
     public static String message_id = "message_id";
     public static String date = "date";
     public static String share_profile = "share_profile";
+    public static String package_name = "package_name";
+    public static String amount = "amount";
 }//class
