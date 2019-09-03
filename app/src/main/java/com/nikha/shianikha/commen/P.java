@@ -202,4 +202,6 @@ public class P {
     public static String share_profile = "share_profile";
     public static String package_name = "package_name";
     public static String amount = "amount";
+    public static String like = "like";
+    public static String connected = "connected";
 }//class

@@ -3,13 +3,16 @@ package com.nikha.shianikha.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -66,9 +70,29 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
         CheckBox checkBox = findViewById(R.id.checkBox3);
         checkBox.setMovementMethod(LinkMovementMethod.getInstance());
-        checkBox.append(HtmlCompat.fromHtml("<font color=\"blue\"> Terms of Use </font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-        checkBox.append(getString(R.string.appendedString));
-        Linkify.addLinks(checkBox, Linkify.WEB_URLS);
+
+        TextView textView = findViewById(R.id.termsAndCondition);
+        textView.append(HtmlCompat.fromHtml("<font color=\"blue\"> Terms of Use </font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+        textView.append(getString(R.string.appendedString));
+        Linkify.addLinks(textView, Linkify.WEB_URLS);
+        String string = textView.getText().toString();
+
+        int i = string.indexOf("T");
+        int j = string.indexOf("U");
+
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        if (i!=-1 && j!=-1)
+        {
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(string);
+            spannableStringBuilder.setSpan(new ClickableSpan()
+            {
+                @Override
+                public void onClick(@NonNull View view) {
+                    Toast.makeText(getApplicationContext(), "i am clicked",
+                            Toast.LENGTH_SHORT).show();
+                }
+            },i,j+2,0);
+        }
 
         makeMaritalStatusCheckBox();
         makeEthnicityCheckBox();
@@ -77,6 +101,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         if (makeVisible)
             findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
     }
+
 
     private void makeEthnicityCheckBox()
     {

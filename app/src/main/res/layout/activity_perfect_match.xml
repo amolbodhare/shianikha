@@ -322,7 +322,6 @@
                 android:id="@+id/checkBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pref_match_min_education_spinner_layout"
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
                 android:checked="true"
@@ -334,7 +333,6 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/checkBox1"
                 android:layout_marginTop="30dp"
                 android:buttonTint="#5C5CFE"
                 android:checked="true"
@@ -346,9 +344,7 @@
                 android:id="@+id/checkBox3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBox2"
                 android:layout_marginTop="30dp"
-                android:autoLink="web"
                 android:buttonTint="#5C5CFE"
                 android:checked="true"
                 android:fontFamily="@font/poppins_regular"
@@ -357,11 +353,21 @@
                 android:text="@string/termsAndCondition"
                 android:textSize="13sp" />
 
+            <TextView
+                android:id="@+id/termsAndCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="(2) you agree to our "
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:autoLink="web"/>
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_below="@+id/checkBox3"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="25dp"

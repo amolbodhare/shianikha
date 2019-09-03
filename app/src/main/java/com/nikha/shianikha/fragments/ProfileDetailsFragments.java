@@ -2,6 +2,7 @@ package com.nikha.shianikha.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -88,8 +89,15 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 intent.putExtra(P.profile_id, string);
                 startActivity(intent);
             }
-        } else if (v.getId() == R.id.imageView) {
+        } else if (v.getId() == R.id.imageView)
+        {
             ImageView imageView = (ImageView) v;
+            Object object = imageView.getTag();
+            if (object!=null && object.toString().equals("2")) {
+                H.showMessage(context, "Connection request already sent.");
+                return;
+            }
+
             if (imageView.getDrawable() == null)
                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
             else
@@ -288,6 +296,32 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             linearLayout = fragmentView.findViewById(R.id.sendMessageLinearLayout);
                             linearLayout.setTag(string);
                             linearLayout.setOnClickListener(ProfileDetailsFragments.this);
+
+                            string = profileDetailJson.getString(P.like);
+                            if (string == null)
+                                return;
+
+                            ImageView imageView = fragmentView.findViewById(R.id.likeImageView);
+                            if (string.equals("1"))
+                            {
+                                imageView.setColorFilter(Color.parseColor("#00d882"));
+                                imageView.setTag(string);
+                            }
+
+                            string = profileDetailJson.getString(P.connected);
+                            if (string == null)
+                                return;
+
+                            imageView = fragmentView.findViewById(R.id.imageView);
+                            if (string.equals("1")) {
+                                imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
+                                ((TextView)fragmentView.findViewById(R.id.connectNow)).setText("Connected");
+                            }
+                            else if (string.equals("2")) {
+                                ((TextView)fragmentView.findViewById(R.id.connectNow)).setText("Pending Connection");
+                                imageView.setTag("2");
+                            }
+
 
                         } else
 
