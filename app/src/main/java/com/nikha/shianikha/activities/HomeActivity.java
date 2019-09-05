@@ -2,12 +2,12 @@ package com.nikha.shianikha.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.AboutApp;
+import com.nikha.shianikha.BuildConfig;
 import com.nikha.shianikha.ContactUsFragment;
 import com.nikha.shianikha.HelpAndSupport;
 import com.nikha.shianikha.NotifacationDetails;
@@ -78,12 +80,24 @@ public class HomeActivity extends AppCompatActivity {
         searchButtonLayout = findViewById(R.id.searchButton_layout);
         myProfileButtonLayout = findViewById(R.id.myprofileButton_layout);
 
+        setVersionCodeToDrawer();
+
         // when user comes from shared link
         /*String string = getIntent().getStringExtra(P.profile_id);
         if (string != null && !string.isEmpty()) {
             profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment, currentFragmentName, string);
             fragmentLoader(profileDetailsFragments, getString(R.string.profileDetails));
         }*/
+    }
+
+    private void setVersionCodeToDrawer() {
+        TextView textView = findViewById(R.id.versionName);
+
+        String string = App.IS_DEV ? "DEV - " : "V - ";
+        textView.setText(string);
+
+        string = BuildConfig.VERSION_NAME;
+        textView.append(string);
     }
 
     public void makeStatusBarColorBlue(boolean bool) {

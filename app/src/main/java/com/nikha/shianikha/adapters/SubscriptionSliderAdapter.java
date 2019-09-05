@@ -1,6 +1,7 @@
 package com.nikha.shianikha.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -10,21 +11,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.WebViewActivity;
+import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
+import com.nikha.shianikha.commen.RequestModel;
 
 public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnClickListener {
     private Context context;
     private LayoutInflater layoutInflater;
     private JsonList jsonList;
 
-    public SubscriptionSliderAdapter(Context context, JsonList jsons)
-    {
-        this.context=context;
-        jsonList  = jsons;
+    public SubscriptionSliderAdapter(Context context, JsonList jsons) {
+        this.context = context;
+        jsonList = jsons;
     }
 
     //public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
@@ -36,17 +42,15 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object o)
-    {
-        return view==(CardView)o;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return view == (CardView) o;
     }
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position)
-    {
-        layoutInflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v=layoutInflater.inflate(R.layout.sub_plan_slide_layout,container,false);
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = layoutInflater.inflate(R.layout.sub_plan_slide_layout, container, false);
 
         Json json = jsonList.get(position);
 
@@ -54,9 +58,9 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
         TextView textView = v.findViewById(R.id.sub_plan_tv);
         textView.setText(string);
 
-        string = " "+json.getString(P.amount);
+        string = " " + json.getString(P.amount);
         textView = v.findViewById(R.id.sub_plan_price_tv);
-        textView.setText('\u20B9'+string);
+        textView.setText('\u20B9' + string);
 
         string = json.getString(P.description);
         textView = v.findViewById(R.id.sub_plan_duration_tv);
@@ -65,11 +69,11 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
         string = json.getString(P.view);
         textView = v.findViewById(R.id.viewProfileTextView);
         //textView.setText("View " + string+ " profiles" );
-        textView.setText(String.format("View %s profiles",string));
+        textView.setText(String.format("View %s profiles", string));
 
         textView = v.findViewById(R.id.shareProfileTextView);
         //textView.setText("Share " + string+ " profiles" );
-        textView.setText(String.format("Share %s profiles",string));
+        textView.setText(String.format("Share %s profiles", string));
 
         string = json.getString(P.id);
         Button button = v.findViewById(R.id.continueButton);
@@ -83,12 +87,58 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((CardView)object);
+        container.removeView((CardView) object);
     }
 
     @Override
-    public void onClick(View view)
-    {
-        H.log("planIdIs",view.getTag()+"");
+    public void onClick(View view) {
+        H.log("planIdIs", view.getTag() + "");
+        Object object = view.getTag();
+        if (object != null)
+            hitPurchasePlanApi(object.toString());
+    }
+
+    private void hitPurchasePlanApi(String string) {
+        Json json = new Json();
+        json.addString(P.plan,string);
+        json.addString(P.token_id, new Session(context).getString(P.tokenData));
+
+        RequestModel requestModel = RequestModel.newRequestModel("plan_purchase");
+        requestModel.addJSON(P.data, json);
+
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1)
+                        {
+                            String url = json.getString(P.url);
+                            Intent intent = new Intent(context, WebViewActivity.class);
+                            intent.putExtra("url",url);
+                            context.startActivity(intent);
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitPurchasePlanApi");
+
     }
 }

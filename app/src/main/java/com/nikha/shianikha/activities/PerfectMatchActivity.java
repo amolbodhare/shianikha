@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.SpannableStringBuilder;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -34,6 +33,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.WebViewActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
@@ -67,32 +67,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
         setMarginTopOfCustomSpinner();
         setUpTextWatcher();
-
-        CheckBox checkBox = findViewById(R.id.checkBox3);
-        checkBox.setMovementMethod(LinkMovementMethod.getInstance());
-
-        TextView textView = findViewById(R.id.termsAndCondition);
-        textView.append(HtmlCompat.fromHtml("<font color=\"blue\"> Terms of Use </font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-        textView.append(getString(R.string.appendedString));
-        Linkify.addLinks(textView, Linkify.WEB_URLS);
-        String string = textView.getText().toString();
-
-        int i = string.indexOf("T");
-        int j = string.indexOf("U");
-
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
-        if (i!=-1 && j!=-1)
-        {
-            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(string);
-            spannableStringBuilder.setSpan(new ClickableSpan()
-            {
-                @Override
-                public void onClick(@NonNull View view) {
-                    Toast.makeText(getApplicationContext(), "i am clicked",
-                            Toast.LENGTH_SHORT).show();
-                }
-            },i,j+2,0);
-        }
+        handleTermsOfUse();
 
         makeMaritalStatusCheckBox();
         makeEthnicityCheckBox();
@@ -100,6 +75,32 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         boolean makeVisible = getIntent().getBooleanExtra("makeVisible",false);
         if (makeVisible)
             findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
+    }
+
+    private void handleTermsOfUse() {
+        TextView textView = findViewById(R.id.termsAndCondition);
+        String string = textView.getText().toString();
+
+        SpannableString spannableString = new SpannableString(string);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View view)
+            {
+                Intent intent = new Intent(PerfectMatchActivity.this, WebViewActivity.class);
+                intent.putExtra("url","https://shianikah.in/privacy-policy.html");
+                startActivity(intent);
+            }
+
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(getColor(R.color.darkblue));
+            }
+        };
+
+        spannableString.setSpan(clickableSpan,string.indexOf("T"),string.indexOf("U")+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

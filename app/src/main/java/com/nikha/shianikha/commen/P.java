@@ -204,4 +204,6 @@ public class P {
     public static String amount = "amount";
     public static String like = "like";
     public static String connected = "connected";
+    public static String plan = "plan";
+    public static String url = "url";
 }//class

@@ -6,6 +6,6 @@ package com.adoisstudio.helper;
 
 public class Static {
 
-    public static boolean show_log = true;
+    public static boolean show_log;
 
 }

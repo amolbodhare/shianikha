@@ -315,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/partner_preferences_link_layout"
                 android:clickable="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="17dp">
