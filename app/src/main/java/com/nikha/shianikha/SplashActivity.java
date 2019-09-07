@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
 
         session = new Session(this);
         generateFcmToken();
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
 
         //to get height of status bar
         new Handler().postDelayed(new Runnable() {

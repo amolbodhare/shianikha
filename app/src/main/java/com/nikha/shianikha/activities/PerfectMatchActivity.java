@@ -73,7 +73,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         makeEthnicityCheckBox();
 
         boolean makeVisible = getIntent().getBooleanExtra("makeVisible",false);
-        if (makeVisible)
+        if (makeVisible)// reusing activity for perfect match and my preferences.
             findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
     }
 

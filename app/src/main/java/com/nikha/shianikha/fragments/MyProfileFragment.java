@@ -109,7 +109,7 @@ public class MyProfileFragment extends Fragment {
 
         String string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).placeholder(drawable).into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
+            Picasso.get().load(string).placeholder(drawable).fit().into((ImageView) fragmentView.findViewById(R.id.image_profile_pic));
             H.log("imageisLoaded", "hello");
         } catch (Exception e) {
             e.printStackTrace();

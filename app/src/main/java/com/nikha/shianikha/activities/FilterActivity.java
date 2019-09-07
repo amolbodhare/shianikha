@@ -313,12 +313,11 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
-
+        json.addString(P.search_now,"1");
 
         JSONArray jsonArray = new JSONArray();
         annualIncomeJsonArray(jsonArray);
         json.addJSONArray(P.monthly_income_id, jsonArray);
-
 
         jsonArray = new JSONArray();
         makeMaritalStatusJsonArray(jsonArray);
@@ -568,7 +567,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
                             H.showMessage(FilterActivity.this, json.getString(P.msg));
                     }
                 })
-                .run("hitPerfectMatchApi");
+                .run("hitRefineSearchhApi");
     }
 
 }

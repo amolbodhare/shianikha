@@ -2,9 +2,6 @@ package com.nikha.shianikha.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,8 +42,7 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
         Log.d(TAG, "onBindViewHolder: called.");
 
 
-        Picasso.get().load(jsonList.get(position).getString(P.profile_pic))
-                .into(viewHolder.thumbnail);
+        Picasso.get().load(jsonList.get(position).getString(P.profile_pic)).placeholder(R.drawable.user).fit().into(viewHolder.thumbnail);
 
 
         viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
@@ -89,14 +85,5 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
         }
 
 
-    }
-
-    private void fragmentLoader(Fragment fragment)
-    {
-        FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
-
-                 manager.beginTransaction()
-                .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
-                .replace(R.id.frameLayout, fragment).commit();
     }
 }

@@ -3,15 +3,11 @@ package com.adoisstudio.helper;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -56,7 +52,7 @@ public class H {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
+                //alertDialog.dismiss();
                 listener.onOk();
             }
         });

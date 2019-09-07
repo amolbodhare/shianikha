@@ -1041,7 +1041,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         String  string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).placeholder(drawable).into(((ImageView) findViewById(R.id.image_profile_pic)));
+            Picasso.get().load(string).placeholder(drawable).fit().into(((ImageView) findViewById(R.id.image_profile_pic)));
         } catch (Exception e) {
             e.printStackTrace();
         }

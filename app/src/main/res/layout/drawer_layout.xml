@@ -113,7 +113,7 @@
             android:clickable="true"
             android:onClick="onDrawerMenuClick"
             android:padding="13dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:gravity="center">
 
             <ImageView

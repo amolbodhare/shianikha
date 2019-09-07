@@ -165,7 +165,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             string = json.getString(P.profile_pic);
             imageView = view.findViewById(R.id.thumbnail);
             try {
-                Picasso.get().load(string).into(imageView);
+                Picasso.get().load(string).placeholder(R.drawable.user).fit().into(imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }

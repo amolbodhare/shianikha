@@ -227,7 +227,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             imageView.setTag(string);
 
             try {
-                Picasso.get().load(json.getString(P.user_photos)).into(imageView);
+                Picasso.get().load(json.getString(P.profile_pic)).fit().placeholder(R.drawable.user).into(imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -279,9 +279,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, "Profile Details");
                 }
-            }
-            else if (v.getId() == R.id.imageView)
-            {
+            } else if (v.getId() == R.id.imageView) {
                 ImageView imageView = (ImageView) v;
                 if (imageView.getDrawable() == null)
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
@@ -289,19 +287,17 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     imageView.setImageDrawable(null);
 
                 Object object = v.getTag();
-                if (object!=null)
+                if (object != null)
                     string = object.toString();
 
                 hitConnectNowApi(string);
-            }
-            else if (v.getId() == R.id.button) {
+            } else if (v.getId() == R.id.button) {
                 Object object = v.getTag();
                 if (object != null) {
                     string = object.toString();
                     hitRequestPhotoApi(string);
                 }
-            }
-            else if (v.getId() == R.id.likeImageView) {
+            } else if (v.getId() == R.id.likeImageView) {
                 ImageView imageView = (ImageView) v;
                 String string = (String) imageView.getTag();
                 if (string.equals("0")) {
@@ -397,8 +393,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     public void onSuccess(Json json) {
 
                         if (json.getInt(P.status) == 1)
-                            H.showMessage(context, "Your request has been sent.");
-                        else
+                            //H.showMessage(context, "Your request has been sent.");
                             H.showMessage(context, json.getString(P.msg));
                     }
                 })

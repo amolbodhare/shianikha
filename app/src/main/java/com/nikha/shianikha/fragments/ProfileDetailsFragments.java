@@ -21,6 +21,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.activities.ImageViewPagerActivity;
 import com.nikha.shianikha.activities.WriteMessageActivity;
 import com.nikha.shianikha.commen.C;
@@ -89,11 +90,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 intent.putExtra(P.profile_id, string);
                 startActivity(intent);
             }
-        } else if (v.getId() == R.id.imageView)
-        {
+        } else if (v.getId() == R.id.imageView) {
             ImageView imageView = (ImageView) v;
             Object object = imageView.getTag();
-            if (object!=null && object.toString().equals("2")) {
+            if (object != null && object.toString().equals("2")) {
                 H.showMessage(context, "Connection request already sent.");
                 return;
             }
@@ -121,8 +121,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 imageView.setTag("0");
             }
             hitLikeApi();
-        } else if (v.getId() == R.id.shareProfileLinearLayout)
-        {
+        } else if (v.getId() == R.id.shareProfileLinearLayout) {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String string = sharingLink.isEmpty() ? "linkNotFound" : sharingLink;
@@ -261,9 +260,31 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                         if (profileDetailJson.getInt(P.status) == 1) {
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
+                            int action = profileDetailJson.getInt(P.view);
+                            if (action == 0)
+                            {
+                                H.showYesNoDialog(context, "Plan not purchased", "You have to purchase the plan before viewing profile", "purchase plan", "cancel", new H.OnYesNoListener() {
+                                    @Override
+                                    public void onDecision(boolean isYes) {
+                                        if (isYes)
+                                            ((HomeActivity) context).showSubscriptionPlanActivity();
+                                        ((HomeActivity)context).onBack(new View(context));
+                                    }
+                                });
+                                return;
+                            } else if (action == 2) {
+                                H.showYesNoDialog(context, "Limit expired", "You have exhausted you viewing limit", "purchase plan", "cancel", new H.OnYesNoListener() {
+                                    @Override
+                                    public void onDecision(boolean isYes) {
+                                        if (isYes)
+                                            ((HomeActivity) context).showSubscriptionPlanActivity();
+                                        ((HomeActivity)context).onBack(new View(context));
+                                    }
+                                });
+                                return;
+                            }
 
-                            Picasso.get().load(profileDetailJson.getString(P.profile_pic))
-                                    .into((ImageView) fragmentView.findViewById(R.id.imagesView));
+                            Picasso.get().load(profileDetailJson.getString(P.profile_pic)).placeholder(R.drawable.user).fit().into((ImageView) fragmentView.findViewById(R.id.imagesView));
 
                             sharingLink = profileDetailJson.getString(P.share_profile);
 
@@ -302,8 +323,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                                 return;
 
                             ImageView imageView = fragmentView.findViewById(R.id.likeImageView);
-                            if (string.equals("1"))
-                            {
+                            if (string.equals("1")) {
                                 imageView.setColorFilter(Color.parseColor("#00d882"));
                                 imageView.setTag(string);
                             }
@@ -315,13 +335,11 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             imageView = fragmentView.findViewById(R.id.imageView);
                             if (string.equals("1")) {
                                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                                ((TextView)fragmentView.findViewById(R.id.connectNow)).setText("Connected");
-                            }
-                            else if (string.equals("2")) {
-                                ((TextView)fragmentView.findViewById(R.id.connectNow)).setText("Pending Connection");
+                                ((TextView) fragmentView.findViewById(R.id.connectNow)).setText("Connected");
+                            } else if (string.equals("2")) {
+                                ((TextView) fragmentView.findViewById(R.id.connectNow)).setText("Pending Connection");
                                 imageView.setTag("2");
                             }
-
 
                         } else
 

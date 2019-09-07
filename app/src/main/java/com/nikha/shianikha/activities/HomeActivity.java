@@ -411,21 +411,23 @@ public class HomeActivity extends AppCompatActivity {
                 decideBottomSelection(string);
                 changeNotificationIcon(false);
             }
-        } else if (notificationFragment != null && notificationFragment.isVisible()) {
+        } /*else if (notificationFragment != null && notificationFragment.isVisible()) {
             fragment = NotificationFragment.previousFragment;
             string = NotificationFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        } else if (profileDetailsFragments != null && profileDetailsFragments.isVisible()) {
+        } */
+        else if (profileDetailsFragments != null && profileDetailsFragments.isVisible()) {
             fragment = ProfileDetailsFragments.previousFragment;
             string = ProfileDetailsFragments.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        } else if (notifacationDetails != null && notifacationDetails.isVisible()) {
+        }
+        else if (notifacationDetails != null && notifacationDetails.isVisible()) {
             fragment = NotifacationDetails.previousFragment;
             string = NotifacationDetails.previousFragmentName;
             if (fragment != null && string != null) {
@@ -474,11 +476,12 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        } else if (view == null) {
-            handleExit();
         } else if (!homeFragment.isVisible()) {
             fragmentLoader(homeFragment, "dashboard");
             setSelection(homeButtonLayout);
+        }
+        else if (view == null) {
+            handleExit();
         } else
             drawerLayout.openDrawer(Gravity.START);
     }
@@ -565,7 +568,7 @@ public class HomeActivity extends AppCompatActivity {
 
         string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).into(((ImageView)findViewById(R.id.circleImageView)));
+            Picasso.get().load(string).fit().placeholder(R.drawable.user).into(((ImageView)findViewById(R.id.circleImageView)));
         }
         catch (Exception e)
         {

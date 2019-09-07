@@ -52,7 +52,7 @@ public class ImageViewerActivity extends AppCompatActivity {
             View view = LayoutInflater.from(context).inflate(R.layout.slider_item, container, false);
             ImageView imageView = view.findViewById(R.id.imageView);
             try {
-                Picasso.get().load(imageList.get(position)).into(imageView);
+                Picasso.get().load(imageList.get(position)).placeholder(R.drawable.user).fit().into(imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -47,8 +47,7 @@ public class ImageSliderAdapter extends PagerAdapter implements ViewPager.PageTr
         View v=layoutInflater.inflate(R.layout.image_slider_layout,container,false);
 
 
-        Picasso.get().load(jsonList.get(position).getString("photo_name"))
-                .into((ImageView) v.findViewById(R.id.slider_image));
+        Picasso.get().load(jsonList.get(position).getString("photo_name")).placeholder(R.drawable.user).fit().into((ImageView) v.findViewById(R.id.slider_image));
 
 
         container.addView(v);

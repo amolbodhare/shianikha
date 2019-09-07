@@ -1,5 +1,7 @@
 package com.nikha.shianikha.commen;
 
+import com.nikha.App;
+
 public class P {
 
     public static String api = "api";
@@ -12,7 +14,8 @@ public class P {
 
 
     // public static String baseUrl = "https://dev.digiinterface.com/2019/shia_nikah/web_services/webservices";
-    public static String baseUrl = "https://shianikah.in/index.php/web_services/Webservices";
+    //public static String baseUrl = "https://shianikah.in/index.php/web_services/Webservices";
+    public static String baseUrl = App.IS_DEV ?  "http://dev.digiinterface.com/2019/shia_nikah/web_services/webservices" : "https://shianikah.in/index.php/web_services/Webservices";
     public static String status = "status";
     public static String min_ver = "min_ver";
     public static String curr_ver = "curr_ver";

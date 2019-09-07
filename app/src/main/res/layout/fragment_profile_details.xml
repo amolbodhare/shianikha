@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="1 Day Ago"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/name"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="A314749"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -105,7 +105,7 @@
                         android:layout_below="@id/profileId"
                         android:layout_marginTop="18dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="21 yrs 5'3'"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp"/>
 
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ageAndHeight"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Shia Muslim"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -127,7 +127,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="18dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="UI Designer"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -138,7 +138,7 @@
                         android:layout_below="@id/designation"
                         android:layout_alignParentRight="true"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Mumbai ,India"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -444,7 +444,7 @@
                             android:id="@+id/age_and_height_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="21Yrs 5'3'" />
+                            android:text="" />
 
                     </LinearLayout>
 
@@ -457,13 +457,13 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:padding="8dp"
-                            android:src="@drawable/user" />
+                            android:src="@drawable/ring" />
 
                         <TextView
                             android:id="@+id/marital_status_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Never Married" />
+                            android:text="" />
 
                     </LinearLayout>
 
@@ -483,7 +483,7 @@
                             android:id="@+id/city_state_country_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lives in Mumbai, Maharashtra, India" />
+                            android:text="" />
 
                     </LinearLayout>
 
@@ -503,7 +503,7 @@
                             android:id="@+id/designation_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="UI Designer" />
+                            android:text="" />
 
                     </LinearLayout>
 
@@ -589,7 +589,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="7dp"
-                    android:text="Button with image and text in Android fdjflkdjfdjfandroid project" />
+                    android:text="" />
 
             </android.support.v7.widget.CardView>
 
@@ -643,7 +643,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="7dp"
-                    android:text="Button with image and text in Android fdjflkdjfdjfandroid project" />
+                    android:text="" />
 
             </android.support.v7.widget.CardView>
 
