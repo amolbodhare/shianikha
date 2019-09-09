@@ -117,9 +117,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
-
-
+                        if (json.getInt(P.status) == 1)
+                        {
                             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context, json.getJsonList(P.data)));
 
                         } else
@@ -232,27 +231,22 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 e.printStackTrace();
             }
 
-            imageView = convertView.findViewById(R.id.likeImageView);
-            imageView.setOnClickListener(this);
+            //string = json.getString(P.profile_id);
+            convertView.findViewById(R.id.fifth_lay).setTag(string);
+
+            //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
+            setData(convertView,json);
 
             imageView = convertView.findViewById(R.id.imageView);
             imageView.setOnClickListener(this);
             imageView.setTag(string);
+            handleConnectNow(imageView,string);
 
-            convertView.findViewById(R.id.fifth_lay).setTag(string);
-
-            //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
-            string = json.getString(P.full_name);
-
-            ((TextView) convertView.findViewById(R.id.full_name)).setText(string);
-            ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " " + "day ago");
-            ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id) + " " + "day ago");
-            ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
-            ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
-            ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
-            //((TextView)convertView.findViewById(R.id.caste_tv)).setText(jsonList.get(position).getString(P.edu_level));
-            ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
-
+            string = json.getString(P.like);
+            imageView = convertView.findViewById(R.id.likeImageView);
+            imageView.setTag(string);
+            imageView.setOnClickListener(this);
+            changeLikeIconColor(imageView,string);
 
             linearLayout = convertView.findViewById(R.id.linearLayout);
             string = json.getString(P.photo_available);
@@ -279,12 +273,15 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, "Profile Details");
                 }
-            } else if (v.getId() == R.id.imageView) {
-                ImageView imageView = (ImageView) v;
+            } else if (v.getId() == R.id.imageView)
+            {
+                /*ImageView imageView = (ImageView) v;
                 if (imageView.getDrawable() == null)
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
                 else
-                    imageView.setImageDrawable(null);
+                    imageView.setImageDrawable(null);*/
+
+
 
                 Object object = v.getTag();
                 if (object != null)
@@ -297,16 +294,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     string = object.toString();
                     hitRequestPhotoApi(string);
                 }
-            } else if (v.getId() == R.id.likeImageView) {
+            } else if (v.getId() == R.id.likeImageView)
+            {
                 ImageView imageView = (ImageView) v;
                 String string = (String) imageView.getTag();
-                if (string.equals("0")) {
-                    imageView.setColorFilter(context.getColor(R.color.green2));
-                    imageView.setTag("1");
-                } else if (string.equals("1")) {
-                    imageView.setColorFilter(context.getColor(R.color.white));
-                    imageView.setTag("0");
-                }
+                changeLikeIconColor(imageView,string);
 
                 RelativeLayout relativeLayout = (RelativeLayout) v.getParent();
                 Object object = relativeLayout.getTag();
@@ -316,6 +308,50 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 hitLikeApi(string);
             }
         }
+    }
+
+    private void handleConnectNow(ImageView imageView,String string)
+    {
+        RelativeLayout relativeLayout = (RelativeLayout)imageView.getParent();
+        TextView textView = relativeLayout.findViewById(R.id.connect_tv);
+
+        if (string.equals("0"))
+        {
+            imageView.setImageDrawable(null);
+            textView.setText("Connect now");
+        }
+        else if (string.equals("1"))
+        {
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
+            textView.setText("Connected");
+        }
+        else if (string.equals("2"))
+        {
+            imageView.setImageDrawable(null);
+            textView.setText("Connection pending");
+        }
+    }
+
+    private void changeLikeIconColor(ImageView imageView,String string) {
+        if (string.equals("1")) {
+            imageView.setColorFilter(context.getColor(R.color.green2));
+            imageView.setTag("0");
+        }
+        else if (string.equals("0")) {
+            imageView.setColorFilter(context.getColor(R.color.white));
+            imageView.setTag("1");
+        }
+
+    }
+
+    private void setData(View convertView,Json json) {
+        ((TextView) convertView.findViewById(R.id.full_name)).setText(json.getString(P.full_name));
+        ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " day ago");
+        ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id));
+        ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
+        ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
+        ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
+        ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
     }
 
     private void hitConnectNowApi(String profileId) {

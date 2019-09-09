@@ -77,12 +77,15 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.imageViewer1) {
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.imageViewer1)
+        {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
             startActivity(intent);
-        } else if (v.getId() == R.id.sendMessageLinearLayout) {
+        }
+        else if (v.getId() == R.id.sendMessageLinearLayout) {
             Intent intent = new Intent(context, WriteMessageActivity.class);
             Object object = v.getTag();
             if (object != null) {
@@ -90,27 +93,17 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 intent.putExtra(P.profile_id, string);
                 startActivity(intent);
             }
-        } else if (v.getId() == R.id.imageView) {
-            ImageView imageView = (ImageView) v;
-            Object object = imageView.getTag();
-            if (object != null && object.toString().equals("2")) {
-                H.showMessage(context, "Connection request already sent.");
-                return;
-            }
-
-            if (imageView.getDrawable() == null)
-                imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-            else
-                imageView.setImageDrawable(null);
-
+        }
+        else if (v.getId() == R.id.imageView)
             hitConnectNowApi();
-        } else if (v.getId() == R.id.favouriteLinearLayout) {
+        else if (v.getId() == R.id.favouriteLinearLayout) {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
                 hitFavouriteApi(string);
             }
-        } else if (v.getId() == R.id.likeImageView) {
+        }
+        else if (v.getId() == R.id.likeImageView) {
             ImageView imageView = (ImageView) v;
             String string = (String) imageView.getTag();
             if (string.equals("0")) {
@@ -131,7 +124,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     private void hitConnectNowApi() {
-        String string = new Session(context).getString(P.tokenData);
+        final String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
         json.addString(P.user_id_receiver, profileId);
@@ -148,11 +141,20 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
-
-                        }/* else
-                            H.showMessage(context, json.getString(P.msg));*/
+                        String string = json.getString(P.msg);
+                        int i = json.getInt(P.status);
+                        ((ImageView)fragmentView.findViewById(R.id.imageView)).setImageDrawable(null);
+                        TextView textView = fragmentView.findViewById(R.id.connectNow);
+                        if (i==0)
+                        {
+                            textView.setText("Connect Now");
+                            H.showMessage(context,string);
+                        }
+                        else if (i == 1)
+                        {
+                            textView.setText("Pending Connection");
+                            H.showMessage(context,string);
+                        }
                     }
                 })
                 .run("hitConnectNowApi");
@@ -248,7 +250,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         RequestModel requestModel = RequestModel.newRequestModel(api_type);
         requestModel.addJSON(P.data, json);
 
-
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
                 .setMethod(Api.POST)
                 .onLoading(this)
@@ -257,7 +258,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(Json profileDetailJson) {
 
-                        if (profileDetailJson.getInt(P.status) == 1) {
+                        if (profileDetailJson.getInt(P.status) == 1)
+                        {
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
                             int action = profileDetailJson.getInt(P.view);
@@ -272,7 +274,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                                     }
                                 });
                                 return;
-                            } else if (action == 2) {
+                            }
+                            else if (action == 2) {
                                 H.showYesNoDialog(context, "Limit expired", "You have exhausted you viewing limit", "purchase plan", "cancel", new H.OnYesNoListener() {
                                     @Override
                                     public void onDecision(boolean isYes) {
@@ -284,69 +287,94 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                                 return;
                             }
 
-                            Picasso.get().load(profileDetailJson.getString(P.profile_pic)).placeholder(R.drawable.user).fit().into((ImageView) fragmentView.findViewById(R.id.imagesView));
-
                             sharingLink = profileDetailJson.getString(P.share_profile);
-
-                            ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
-                            ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
-                            ((TextView) fragmentView.findViewById(R.id.aboutTextView)).setText(profileDetailJson.getString(P.about_2));
-                            ((TextView) fragmentView.findViewById(R.id.days_tv)).setText(profileDetailJson.getString(P.days) + " Days Ago");
-                            ((TextView) fragmentView.findViewById(R.id.ageAndHeight)).setText(profileDetailJson.getString(P.age) + " Yrs, " + profileDetailJson.getString(P.height) + "''");
-                            ((TextView) fragmentView.findViewById(R.id.designation)).setText(profileDetailJson.getString(P.occupation_name));
-                            ((TextView) fragmentView.findViewById(R.id.religion_tv)).setText(profileDetailJson.getString(P.religion));
-                            ((TextView) fragmentView.findViewById(R.id.citynamecountryname_tv)).setText(profileDetailJson.getString(P.city_name) + "," + profileDetailJson.getString(P.country_name));
-                            ((TextView) fragmentView.findViewById(R.id.phoneNum)).setText(profileDetailJson.getString(P.ph_number));
-                            ((TextView) fragmentView.findViewById(R.id.email)).setText(profileDetailJson.getString(P.email));
-                            ((TextView) fragmentView.findViewById(R.id.age_and_height_tv)).setText(profileDetailJson.getString(P.age) + " yrs," + profileDetailJson.getString(P.height) + "'");
-                            ((TextView) fragmentView.findViewById(R.id.marital_status_tv)).setText(profileDetailJson.getString(P.marital_status));
-                            ((TextView) fragmentView.findViewById(R.id.city_state_country_tv)).setText(profileDetailJson.getString(P.city_name) + "," + profileDetailJson.getString(P.state_name) + "," + profileDetailJson.getString(P.country_name));
-                            ((TextView) fragmentView.findViewById(R.id.designation_tv)).setText(profileDetailJson.getString(P.occupation_name));
-                            jsonList = profileDetailJson.getJsonList("images");
-                            ((TextView) fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
-                            ((TextView) fragmentView.findViewById(R.id.background_tv)).setText("Religion : " + profileDetailJson.getString(P.religion));
-                            ((TextView) fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : " + profileDetailJson.getString(P.education) + "\n" + "Occupation : " + profileDetailJson.getString(P.occupation_name));
-                            //((TextView)fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(jsonList.size());
-                            fragmentView.findViewById(R.id.imageView).setOnClickListener(ProfileDetailsFragments.this);
+                            setData(profileDetailJson);
 
                             String string = profileDetailJson.getString(P.id);
-                            LinearLayout linearLayout = fragmentView.findViewById(R.id.favouriteLinearLayout);
-                            linearLayout.setTag(string);
-                            linearLayout.setOnClickListener(ProfileDetailsFragments.this);
+                            if (string!=null)
+                                handleMessageAndFavouriteButton(string);
 
-                            linearLayout = fragmentView.findViewById(R.id.sendMessageLinearLayout);
-                            linearLayout.setTag(string);
-                            linearLayout.setOnClickListener(ProfileDetailsFragments.this);
+                            fragmentView.findViewById(R.id.relativeLayout).setTag(string);
+
+                            string = profileDetailJson.getString(P.connected);
+                            ImageView imageView = fragmentView.findViewById(R.id.imageView);
+                            imageView.setOnClickListener(ProfileDetailsFragments.this);
+                            imageView.setTag(string);
+                            changeConnectButtonStatus(string);
 
                             string = profileDetailJson.getString(P.like);
-                            if (string == null)
-                                return;
-
-                            ImageView imageView = fragmentView.findViewById(R.id.likeImageView);
+                            imageView = fragmentView.findViewById(R.id.likeImageView);
                             if (string.equals("1")) {
                                 imageView.setColorFilter(Color.parseColor("#00d882"));
                                 imageView.setTag(string);
                             }
-
-                            string = profileDetailJson.getString(P.connected);
-                            if (string == null)
-                                return;
-
-                            imageView = fragmentView.findViewById(R.id.imageView);
-                            if (string.equals("1")) {
-                                imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                                ((TextView) fragmentView.findViewById(R.id.connectNow)).setText("Connected");
-                            } else if (string.equals("2")) {
-                                ((TextView) fragmentView.findViewById(R.id.connectNow)).setText("Pending Connection");
-                                imageView.setTag("2");
-                            }
-
                         } else
 
                             H.showMessage(context, profileDetailJson.getString(P.msg));
                     }
                 })
                 .run("hitProfileDetailsApi");
+    }
+
+    private void changeConnectButtonStatus(String string)
+    {
+        ImageView imageView = fragmentView.findViewById(R.id.imageView);
+        TextView textView = fragmentView.findViewById(R.id.connectNow);
+        if (string.equals("0")) {
+            imageView.setImageDrawable(null);
+            textView.setText("Connect now");
+        }
+        else if (string.equals("1"))
+        {
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
+            textView.setText("Connected");
+        }
+        else if (string.equals("2"))
+        {
+            imageView.setImageDrawable(null);
+            textView.setText("Pending Connection");
+        }
+    }
+
+    private void handleMessageAndFavouriteButton(String string)
+    {
+        LinearLayout linearLayout = fragmentView.findViewById(R.id.favouriteLinearLayout);
+        linearLayout.setTag(string);
+        linearLayout.setOnClickListener(ProfileDetailsFragments.this);
+
+        linearLayout = fragmentView.findViewById(R.id.sendMessageLinearLayout);
+        linearLayout.setTag(string);
+        linearLayout.setOnClickListener(ProfileDetailsFragments.this);
+    }
+
+    private void setData(Json profileDetailJson) {
+
+        try {
+            Picasso.get().load(profileDetailJson.getString(P.profile_pic)).placeholder(R.drawable.user).fit().into((ImageView) fragmentView.findViewById(R.id.imagesView));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        ((TextView) fragmentView.findViewById(R.id.name)).setText(profileDetailJson.getString(P.full_name));
+        ((TextView) fragmentView.findViewById(R.id.profileId)).setText(profileDetailJson.getString(P.profile_id));
+        ((TextView) fragmentView.findViewById(R.id.aboutTextView)).setText(profileDetailJson.getString(P.about_2));
+        ((TextView) fragmentView.findViewById(R.id.days_tv)).setText(profileDetailJson.getString(P.days) + " Days Ago");
+        ((TextView) fragmentView.findViewById(R.id.ageAndHeight)).setText(profileDetailJson.getString(P.age) + " Yrs, " + profileDetailJson.getString(P.height) + "''");
+        ((TextView) fragmentView.findViewById(R.id.designation)).setText(profileDetailJson.getString(P.occupation_name));
+        ((TextView) fragmentView.findViewById(R.id.religion_tv)).setText(profileDetailJson.getString(P.religion));
+        ((TextView) fragmentView.findViewById(R.id.citynamecountryname_tv)).setText(profileDetailJson.getString(P.city_name) + "," + profileDetailJson.getString(P.country_name));
+        ((TextView) fragmentView.findViewById(R.id.phoneNum)).setText(profileDetailJson.getString(P.ph_number));
+        ((TextView) fragmentView.findViewById(R.id.email)).setText(profileDetailJson.getString(P.email));
+        ((TextView) fragmentView.findViewById(R.id.age_and_height_tv)).setText(profileDetailJson.getString(P.age) + " yrs," + profileDetailJson.getString(P.height) + "'");
+        ((TextView) fragmentView.findViewById(R.id.marital_status_tv)).setText(profileDetailJson.getString(P.marital_status));
+        ((TextView) fragmentView.findViewById(R.id.city_state_country_tv)).setText(profileDetailJson.getString(P.city_name) + "," + profileDetailJson.getString(P.state_name) + "," + profileDetailJson.getString(P.country_name));
+        ((TextView) fragmentView.findViewById(R.id.designation_tv)).setText(profileDetailJson.getString(P.occupation_name));
+        jsonList = profileDetailJson.getJsonList("images");
+        ((TextView) fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
+        ((TextView) fragmentView.findViewById(R.id.background_tv)).setText("Religion : " + profileDetailJson.getString(P.religion));
+        ((TextView) fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : " + profileDetailJson.getString(P.education) + "\n" + "Occupation : " + profileDetailJson.getString(P.occupation_name));
     }
 
     @Override
