@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +44,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
     public static Fragment previousFragment;
     public static String previousFragmentName;
-    LoadingDialog loadingDialog;
+    private LoadingDialog loadingDialog;
+    private JsonList jsonList = new JsonList();
+    private CustomListAdapter customListAdapter;
+    private String apiName = "";
 
     public static MyMatchesFragment newInstance(Fragment fragment, String string) {
         MyMatchesFragment myMatchesFragment = new MyMatchesFragment();
@@ -60,6 +64,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         //((HomeActivity) context).makeStatusBarColorBlue(context.getColor(R.color.white));
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_matches, container, false);
+
+            ListView listView = fragmentView.findViewById(R.id.listView);
+            customListAdapter = new CustomListAdapter();
+            listView.setAdapter(customListAdapter);
 
             fragmentView.findViewById(R.id.top_matches).setOnClickListener(this);
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
@@ -102,6 +110,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     }
 
     private void hitMatchesApi(String api_type) {
+        apiName = api_type;
         String string = new Session(context).getString(P.tokenData);
         Json json = new Json();
         json.addString(P.token_id, string);
@@ -117,12 +126,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
-                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(new CustomListAdapte(context, json.getJsonList(P.data)));
+                        if (json.getInt(P.status) == 1) {
+                            jsonList.clear();
+                            jsonList = json.getJsonList(P.data);
+                            customListAdapter.notifyDataSetChanged();
 
                         } else
-
                             H.showMessage(context, json.getString(P.msg));
                     }
                 })
@@ -184,18 +193,14 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         void onFragmentInteraction(Uri uri);
     }
 
-    class CustomListAdapte extends BaseAdapter implements View.OnClickListener {
+    class CustomListAdapter extends BaseAdapter implements View.OnClickListener {
 
-        Context context;
-        JsonList jsonList;
-        String string = "";
+        String userId = "";
         Json json;
         LinearLayout linearLayout;
-
-        CustomListAdapte(Context context, JsonList jsonList) {
-            this.context = context;
-            this.jsonList = jsonList;
-        }
+        ImageView imageView;
+        String string = "";
+        Button button;
 
         @Override
         public int getCount() {
@@ -219,11 +224,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
             json = jsonList.get(position);
 
-            ImageView imageView = convertView.findViewById(R.id.thumbnail);
+            imageView = convertView.findViewById(R.id.thumbnail);
             imageView.setOnClickListener(this);
 
-            string = json.getString(P.user_id);
-            imageView.setTag(string);
+            userId = json.getString(P.user_id);
+            imageView.setTag(userId);
 
             try {
                 Picasso.get().load(json.getString(P.profile_pic)).fit().placeholder(R.drawable.user).into(imageView);
@@ -231,22 +236,22 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 e.printStackTrace();
             }
 
-            //string = json.getString(P.profile_id);
-            convertView.findViewById(R.id.fifth_lay).setTag(string);
+            //convertView.findViewById(R.id.fifth_lay).setTag(string);
 
             //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
-            setData(convertView,json);
+            setData(convertView, json);
 
             imageView = convertView.findViewById(R.id.imageView);
+            imageView.setTag(userId);
             imageView.setOnClickListener(this);
-            imageView.setTag(string);
-            handleConnectNow(imageView,string);
+            string = json.getString(P.connected);
+            handleConnectNow(imageView, string);
 
-            string = json.getString(P.like);
             imageView = convertView.findViewById(R.id.likeImageView);
-            imageView.setTag(string);
+            imageView.setTag(userId);
             imageView.setOnClickListener(this);
-            changeLikeIconColor(imageView,string);
+            string = json.getString(P.like);
+            changeLikeIconColor(imageView, string);
 
             linearLayout = convertView.findViewById(R.id.linearLayout);
             string = json.getString(P.photo_available);
@@ -257,8 +262,14 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 linearLayout.setVisibility(View.GONE);
                 linearLayout.findViewById(R.id.button).setOnClickListener(null);
             }
-            string = json.getString(P.user_id);
-            linearLayout.findViewById(R.id.button).setTag(string);
+            button = linearLayout.findViewById(R.id.button);
+            button.setTag(userId);
+
+            string = json.getString(P.request_photo);
+            if (string.equals("0"))
+                button.setText("Request Photo");
+            else if (string.equals("1"))
+                button.setText("Photo already requested.");
 
             return convertView;
         }
@@ -273,79 +284,54 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, "Profile Details");
                 }
-            } else if (v.getId() == R.id.imageView)
-            {
-                /*ImageView imageView = (ImageView) v;
-                if (imageView.getDrawable() == null)
-                    imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                else
-                    imageView.setImageDrawable(null);*/
-
-
-
+            } else if (v.getId() == R.id.imageView) {
                 Object object = v.getTag();
-                if (object != null)
+                if (object != null) {
                     string = object.toString();
-
-                hitConnectNowApi(string);
-            } else if (v.getId() == R.id.button) {
+                    hitConnectNowApi(string);
+                }
+            } else if (v.getId() == R.id.button)
+            {
                 Object object = v.getTag();
                 if (object != null) {
                     string = object.toString();
                     hitRequestPhotoApi(string);
                 }
-            } else if (v.getId() == R.id.likeImageView)
-            {
-                ImageView imageView = (ImageView) v;
-                String string = (String) imageView.getTag();
-                changeLikeIconColor(imageView,string);
-
-                RelativeLayout relativeLayout = (RelativeLayout) v.getParent();
-                Object object = relativeLayout.getTag();
-                if (object != null)
+            } else if (v.getId() == R.id.likeImageView) {
+                Object object = v.getTag();
+                if (object != null) {
                     string = object.toString();
-
-                hitLikeApi(string);
+                    hitLikeApi(string);
+                }
             }
         }
     }
 
-    private void handleConnectNow(ImageView imageView,String string)
-    {
-        RelativeLayout relativeLayout = (RelativeLayout)imageView.getParent();
+    private void handleConnectNow(ImageView imageView, String string) {
+        RelativeLayout relativeLayout = (RelativeLayout) imageView.getParent();
         TextView textView = relativeLayout.findViewById(R.id.connect_tv);
 
-        if (string.equals("0"))
-        {
+        if (string.equals("0")) {
             imageView.setImageDrawable(null);
             textView.setText("Connect now");
-        }
-        else if (string.equals("1"))
-        {
+        } else if (string.equals("1")) {
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
             textView.setText("Connected");
-        }
-        else if (string.equals("2"))
-        {
+        } else if (string.equals("2")) {
             imageView.setImageDrawable(null);
             textView.setText("Connection pending");
         }
     }
 
-    private void changeLikeIconColor(ImageView imageView,String string) {
-        if (string.equals("1")) {
+    private void changeLikeIconColor(ImageView imageView, String string) {
+        if (string.equals("1"))
             imageView.setColorFilter(context.getColor(R.color.green2));
-            imageView.setTag("0");
-        }
-        else if (string.equals("0")) {
+        else if (string.equals("0"))
             imageView.setColorFilter(context.getColor(R.color.white));
-            imageView.setTag("1");
-        }
-
     }
 
-    private void setData(View convertView,Json json) {
-        ((TextView) convertView.findViewById(R.id.full_name)).setText(json.getString(P.full_name));
+    private void setData(View convertView, Json json) {
+        //((TextView) convertView.findViewById(R.id.full_name)).setText(json.getString(P.full_name));
         ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " day ago");
         ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id));
         ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
@@ -354,11 +340,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
     }
 
-    private void hitConnectNowApi(String profileId) {
+    private void hitConnectNowApi(String userId) {
         String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
-        json.addString(P.user_id_receiver, profileId);
+        json.addString(P.user_id_receiver, userId);
         json.addString(P.token_id, string);
 
         RequestModel requestModel = RequestModel.newRequestModel("send_request");
@@ -372,10 +358,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        hitMatchesApi(apiName);
+                        /*if (json.getInt(P.status) == 1) {
                             json = json.getJson(P.data);
-
-                        }/* else
+                        } else
                             H.showMessage(context, json.getString(P.msg));*/
                     }
                 })
@@ -400,11 +386,13 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        /*if (json.getInt(P.status) == 1) {
                             json = json.getJson(P.data);
 
-                        } /*else
+
+                        } else
                             H.showMessage(context, json.getString(P.msg));*/
+                        hitMatchesApi(apiName);
                     }
                 })
                 .run("hitLikeApi");
@@ -428,9 +416,10 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
+                        /*if (json.getInt(P.status) == 1)
                             //H.showMessage(context, "Your request has been sent.");
-                            H.showMessage(context, json.getString(P.msg));
+                            H.showMessage(context, json.getString(P.msg));*/
+                        hitMatchesApi(apiName);
                     }
                 })
                 .run("hitRequestPhotoApi");

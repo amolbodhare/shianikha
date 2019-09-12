@@ -1036,6 +1036,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
         String  gender = json.getString(P.gender);
+        this.gender = gender;
         gender = gender.toLowerCase();
         Drawable drawable = gender.equals("male")? getDrawable(R.drawable.male) : getDrawable(R.drawable.female);
 

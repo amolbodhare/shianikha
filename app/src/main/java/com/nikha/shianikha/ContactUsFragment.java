@@ -1,7 +1,6 @@
 package com.nikha.shianikha;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,17 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.adoisstudio.helper.LoadingDialog;
-
-import jp.wasabeef.blurry.Blurry;
 
 
 public class ContactUsFragment extends Fragment {
 
-    ImageView imageView;
     Context context;
     View fragmentView;
     LoadingDialog loadingDialog;
@@ -53,12 +47,7 @@ public class ContactUsFragment extends Fragment {
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_contact_us, container, false);
             context = getContext();
-            Blurry.with(context)
-                    .radius(10)
-                    .sampling(8)
-                    .color(Color.argb(66, 255, 255, 0))
-                    .async()
-                    .onto(((RelativeLayout) fragmentView.findViewById(R.id.relativeLayout)));
+
         }
         return fragmentView;
 

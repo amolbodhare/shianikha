@@ -209,4 +209,5 @@ public class P {
     public static String connected = "connected";
     public static String plan = "plan";
     public static String url = "url";
+    public static String request_photo = "request_photo";
 }//class

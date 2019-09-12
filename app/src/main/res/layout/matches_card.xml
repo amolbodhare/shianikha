@@ -214,7 +214,6 @@
                     android:layout_width="30dp"
                     android:src="@drawable/like_icon"
                     android:clickable="true"
-                    android:tag="0"
                     android:tint="@color/white"
                     android:textColor="@color/white" />
 
