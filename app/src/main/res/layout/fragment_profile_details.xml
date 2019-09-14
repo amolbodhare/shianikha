@@ -73,8 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Kangna Ranaut"
-                        android:visibility="gone"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="21sp" />
 
@@ -379,9 +378,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:visibility="invisible"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="+91 889854XXXX" />
+                        android:text="XXXXXXXXXX" />
 
                     <TextView
 
@@ -399,10 +397,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/phoneNum"
                         android:layout_alignParentRight="true"
-                        android:visibility="invisible"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="RohitXXXXXX100@gmail.com" />
+                        android:text="X@xx.xml" />
 
                 </RelativeLayout>
 

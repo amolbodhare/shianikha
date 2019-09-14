@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.nikha.App;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.activities.RegSecondPageActivity;
 import com.nikha.shianikha.activities.WalkThroughActivity;
@@ -52,6 +53,8 @@ public class SplashActivity extends AppCompatActivity {
 
         session = new Session(this);
         generateFcmToken();
+        int i = session.getInt(P.showName);
+        App.showName = i==1? true:false;
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
 
         //to get height of status bar

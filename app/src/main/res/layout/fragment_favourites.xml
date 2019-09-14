@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="Refine Search 30"
+            android:text="Refine Search 0"
             android:textColor="#5B5B5B" />
 
         <LinearLayout

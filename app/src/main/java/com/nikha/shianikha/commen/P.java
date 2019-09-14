@@ -210,4 +210,7 @@ public class P {
     public static String plan = "plan";
     public static String url = "url";
     public static String request_photo = "request_photo";
+    public static String user_data = "user_data";
+    public static String show = "show";
+    public static String showName = "showName";
 }//class

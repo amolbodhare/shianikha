@@ -1,8 +1,8 @@
 package com.nikha.shianikha.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -15,6 +15,7 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -32,7 +33,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
         setContentView(R.layout.activity_otp_verification);
 
@@ -275,13 +276,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.btn_submit)
             hitOtpVerificationApi();
 
-        else if (v.getId() == R.id.resendText)
-        {
+        else if (v.getId() == R.id.resendText) {
             json.remove(P.otp);
 
             if (from == 2)
                 hitLoginApi();
-            else if(from >2)
+            else if (from > 2)
                 hitRegisterApi();
         }
     }
@@ -312,8 +312,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             Session session = new Session(OTPVerificationActivity.this);
                             String str = json.getString(P.tokenData);
                             if (str != null)
@@ -330,7 +329,11 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                                 intent = new Intent(OTPVerificationActivity.this, RegSecondPageActivity.class);
 
                             str = json.getString(P.email);
-                            session.addString(P.email,str);
+                            session.addString(P.email, str);
+
+                            int i = json.getInt(P.show);
+                            session.addInt(P.showName,i);
+                            App.showName = i==1? true : false;
 
                             startActivity(intent);
                             finish();
@@ -355,7 +358,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
                         if (json.getInt(P.status) == 1)
                             H.showMessage(OTPVerificationActivity.this, "OTP sent successfully, please wait for some time...");
-                         else
+                        else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
                 })
@@ -374,7 +377,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     public void onSuccess(Json json) {
                         if (json.getInt(P.status) == 1)
                             H.showMessage(OTPVerificationActivity.this, "OTP sent successfully, please wait for some time...");
-                         else
+                        else
                             H.showMessage(OTPVerificationActivity.this, json.getString(P.msg));
                     }
                 })

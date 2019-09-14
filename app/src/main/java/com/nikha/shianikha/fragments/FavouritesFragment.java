@@ -21,6 +21,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;;
 import com.nikha.shianikha.activities.FilterActivity;
 import com.nikha.shianikha.activities.HomeActivity;
@@ -56,8 +57,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Json json;
-        if (fragmentView == null)
-        {
+        if (fragmentView == null) {
             context = getContext();
             loadingDialog = new LoadingDialog(context);
             fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
@@ -117,10 +117,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     }
 
     @Override
-    public void onClick(View view)
-    {
-        if (view.getId() == R.id.refineLinerLayout)
-        {
+    public void onClick(View view) {
+        if (view.getId() == R.id.refineLinerLayout) {
             startActivity(new Intent(context, FilterActivity.class));
         }
     }
@@ -170,8 +168,11 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 e.printStackTrace();
             }
 
-            string = json.getString(P.first_name) + json.getString(P.middle_name) + json.getString(P.last_name);
-            ((TextView) view.findViewById(R.id.full_name)).setText(string);
+            //string = json.getString(P.first_name) + json.getString(P.middle_name) + json.getString(P.last_name);
+            if (App.showName) {
+                string = json.getString(P.full_name);
+                ((TextView) view.findViewById(R.id.full_name)).setText(string);
+            }
 
             string = json.getString(P.profile_id);
             ((TextView) view.findViewById(R.id.profile_id_tv)).setText(string);
@@ -206,7 +207,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             string = json.getString(P.country_name);
             ((TextView) view.findViewById(R.id.country_tv)).setText(string);
 
-            string = json.getString(P.occupation);
+            string = json.getString(P.occupation_name);
             ((TextView) view.findViewById(R.id.profession_tv)).setText(string);
 
             return view;
@@ -214,7 +215,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.thumbnail) {
+            if (view.getId() == R.id.thumbnail)
+            {
                 Object object = view.getTag();
                 if (object != null) {
                     string = object.toString();
@@ -222,7 +224,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
                 }
-            } else if (view.getId() == R.id.imageView) {
+            }
+            else if (view.getId() == R.id.imageView)
+            {
                 ImageView imageView = (ImageView) view;
                 if (imageView.getDrawable() == null) {
                     imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
@@ -230,21 +234,20 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     imageView.setImageDrawable(null);
 
                 Object object = view.getTag();
-                if (object!=null)
+                if (object != null)
                     string = object.toString();
 
                 hitConnectNowApi(string);
 
-            } else if (view.getId() == R.id.likeImageView) {
+            }
+            else if (view.getId() == R.id.likeImageView)
+            {
                 ImageView imageView = (ImageView) view;
-                String string = (String) imageView.getTag();
-                if (string.equals("0")) {
-                    imageView.setColorFilter(context.getColor(R.color.green2));
-                    imageView.setTag("1");
-                } else if (string.equals("1")) {
-                    imageView.setColorFilter(context.getColor(R.color.white));
+                if (imageView.getTag() == null)
                     imageView.setTag("0");
-                }
+
+                String string = (String) imageView.getTag();
+                changeLikeButtonColor(imageView,string);
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
                 Object object = relativeLayout.getTag();
@@ -253,6 +256,16 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
                 hitLikeApi(string);
             }
+        }
+    }
+
+    private void changeLikeButtonColor(ImageView imageView,String string) {
+        if (string.equals("0")) {
+            imageView.setColorFilter(context.getColor(R.color.green2));
+            imageView.setTag("1");
+        } else if (string.equals("1")) {
+            imageView.setColorFilter(context.getColor(R.color.white));
+            imageView.setTag("0");
         }
     }
 

@@ -27,6 +27,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.FilterActivity;
 import com.nikha.shianikha.activities.HomeActivity;
@@ -72,7 +73,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             fragmentView.findViewById(R.id.top_matches).setOnClickListener(this);
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             fragmentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
-
 
             fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
@@ -238,7 +238,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
             //convertView.findViewById(R.id.fifth_lay).setTag(string);
 
-            //string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
             setData(convertView, json);
 
             imageView = convertView.findViewById(R.id.imageView);
@@ -338,6 +337,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
         ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
         ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
+
+        if (App.showName) {
+            String string = json.getString(P.first_name) + " " + json.getString(P.middle_name) + " " + json.getString(P.last_name);
+            ((TextView) convertView.findViewById(R.id.full_name)).setText(string);
+        }
+
     }
 
     private void hitConnectNowApi(String userId) {

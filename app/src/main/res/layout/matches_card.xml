@@ -75,8 +75,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:text="Kangna Ranout"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 
