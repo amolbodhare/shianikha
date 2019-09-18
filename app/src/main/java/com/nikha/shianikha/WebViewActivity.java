@@ -11,6 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Session;
+import com.nikha.App;
+import com.nikha.shianikha.commen.P;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -50,8 +53,16 @@ public class WebViewActivity extends AppCompatActivity {
                     //super.onPageFinished(view, url);
                     findViewById(R.id.linearLayout).setVisibility(View.GONE);
                     H.log("loadedUrlIs",url);
+                    url = url.toLowerCase();
                     if (url.contains("success") || url.contains("fail"))
                     {
+                        if (url.contains("success"))
+                        {
+                            Session session = new Session(WebViewActivity.this);
+                            session.addInt(P.showName,1);
+                            App.showName = true;
+                        }
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {

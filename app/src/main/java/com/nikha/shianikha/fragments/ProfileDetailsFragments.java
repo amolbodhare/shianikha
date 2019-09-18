@@ -255,7 +255,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
                             int action = profileDetailJson.getInt(P.view);
-                            if (action == 0) {
+                            if (action == 0)
+                            {
                                 H.showYesNoDialog(context, "Plan not purchased", "You have to purchase the plan before viewing profile", "purchase plan", "cancel", new H.OnYesNoListener() {
                                     @Override
                                     public void onDecision(boolean isYes) {
@@ -265,7 +266,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                                     }
                                 });
                                 return;
-                            } else if (action == 2) {
+                            }
+                            else if (action == 2)
+                            {
                                 H.showYesNoDialog(context, "Limit expired", "You have exhausted you viewing limit", "purchase plan", "cancel", new H.OnYesNoListener() {
                                     @Override
                                     public void onDecision(boolean isYes) {

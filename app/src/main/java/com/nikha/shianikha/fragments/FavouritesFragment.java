@@ -181,14 +181,20 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             imageView.setTag(string);
             imageView.setOnClickListener(this);
 
-            imageView = view.findViewById(R.id.imageView);
-            imageView.setOnClickListener(this);
-            imageView.setTag(string);
-
             view.findViewById(R.id.fifth_lay).setTag(string);
 
+            string = json.getString(P.like);
             imageView = view.findViewById(R.id.likeImageView);
+            if (string.equalsIgnoreCase("1"))
+                imageView.setColorFilter(context.getColor(R.color.green2));
+            else
+                imageView.setColorFilter(context.getColor(R.color.white));
             imageView.setOnClickListener(this);
+
+            string = json.getString(P.connected);
+            imageView = view.findViewById(R.id.imageView);
+            imageView.setOnClickListener(this);
+            changeConnectNowStatus(imageView,string);
 
             string = json.getString(P.age);
             ((TextView) view.findViewById(R.id.age_tv)).setText(string + "yrs");
@@ -200,7 +206,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             ((TextView) view.findViewById(R.id.religion_tv)).setText(string);
 
             String str = json.getString(P.state_name);
-
             string = json.getString(P.city_name);
             ((TextView) view.findViewById(R.id.city_tv)).setText(string + str);
 
@@ -227,56 +232,74 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             }
             else if (view.getId() == R.id.imageView)
             {
-                ImageView imageView = (ImageView) view;
-                if (imageView.getDrawable() == null) {
-                    imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-                } else
-                    imageView.setImageDrawable(null);
-
-                Object object = view.getTag();
-                if (object != null)
-                    string = object.toString();
-
-                hitConnectNowApi(string);
-
-            }
-            else if (view.getId() == R.id.likeImageView)
-            {
-                ImageView imageView = (ImageView) view;
-                if (imageView.getTag() == null)
-                    imageView.setTag("0");
-
-                String string = (String) imageView.getTag();
-                changeLikeButtonColor(imageView,string);
+                final ImageView imageView = (ImageView) view;
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
                 Object object = relativeLayout.getTag();
                 if (object != null)
                     string = object.toString();
 
-                hitLikeApi(string);
+                hitConnectNowApi(string, new Response() {
+                    @Override
+                    public void onResponse(String string) {
+                        changeConnectNowStatus(imageView,string);
+                    }
+                });
+
+            }
+            else if (view.getId() == R.id.likeImageView)
+            {
+                final ImageView imageView = (ImageView) view;
+
+                RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
+                Object object = relativeLayout.getTag();
+                if (object != null)
+                    string = object.toString();
+
+                hitLikeApi(string, new CallBack() {
+                    @Override
+                    public void onCallBack(boolean statusTrue)
+                    {
+                        if (statusTrue)
+                            imageView.setColorFilter(context.getColor(R.color.green2));
+                        else
+                            imageView.setColorFilter(context.getColor(R.color.white));
+                    }
+                });
             }
         }
     }
 
-    private void changeLikeButtonColor(ImageView imageView,String string) {
-        if (string.equals("0")) {
-            imageView.setColorFilter(context.getColor(R.color.green2));
-            imageView.setTag("1");
-        } else if (string.equals("1")) {
-            imageView.setColorFilter(context.getColor(R.color.white));
-            imageView.setTag("0");
+    private void changeConnectNowStatus(ImageView imageView,String string)
+    {
+        RelativeLayout relativeLayout = ((RelativeLayout)imageView.getParent());
+        TextView textView = relativeLayout.findViewById(R.id.connect_tv);
+
+        if (string.equalsIgnoreCase("0"))
+        {
+            textView.setText("Connect Now");
+            imageView.setImageDrawable(null);
+        }
+        else if (string.equalsIgnoreCase("1"))
+        {
+            textView.setText("Connected");
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
+        }
+        else if (string.equalsIgnoreCase("2"))
+        {
+            textView.setText("Pending Connection");
+            imageView.setImageDrawable(null);
         }
     }
 
-    private void hitConnectNowApi(String profileId) {
+    private void hitConnectNowApi(String profileId, final Response response) {
         String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
         json.addString(P.user_id_receiver, profileId);
         json.addString(P.token_id, string);
 
-        RequestModel requestModel = RequestModel.newRequestModel("send_request");
+        final RequestModel requestModel = RequestModel.newRequestModel("send_request");
         requestModel.addJSON(P.data, json);
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
@@ -285,19 +308,17 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
-                    public void onSuccess(Json json) {
+                    public void onSuccess(Json json)
+                    {
 
-                        if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
-
-                        }/* else
-                            H.showMessage(context, json.getString(P.msg));*/
+                        String string = json.getInt(P.status)+"";
+                        response.onResponse(string);
                     }
                 })
                 .run("hitConnectNowApi");
     }
 
-    private void hitLikeApi(String string) {
+    private void hitLikeApi(String string, final CallBack callBack) {
         Json json = new Json();
         json.addString(P.profile_id, string);
 
@@ -315,11 +336,16 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
+                        if (json.getInt(P.status) == 1)
+                        {
+                            //json = json.getJson(P.data);
+                            callBack.onCallBack(true);
 
-                        }/* else
-                            H.showMessage(context, json.getString(P.msg));*/
+                        }
+                        else {
+                            callBack.onCallBack(false);
+                            H.showMessage(context, json.getString(P.msg));
+                        }
                     }
                 })
                 .run("hitLikeApi");
@@ -346,5 +372,15 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
+    }
+
+    private interface CallBack
+    {
+        void onCallBack(boolean statusTrue);
+    }
+
+    private interface Response
+    {
+        void onResponse(String string);
     }
 }

@@ -203,7 +203,6 @@ public class HomeActivity extends AppCompatActivity {
         ImageView imageView;
         TextView textView;
 
-
         for (int i = 0; i < parentLayout.getChildCount(); i++) {
             childLayout = ((LinearLayout) parentLayout.getChildAt(i));
 
@@ -265,7 +264,8 @@ public class HomeActivity extends AppCompatActivity {
             i.putExtra("open",P.inbox);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.drawer_favourites_layout) {
+        } else if (view.getId() == R.id.drawer_favourites_layout)
+        {
             favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
         }
@@ -300,8 +300,12 @@ public class HomeActivity extends AppCompatActivity {
         adb.setMessage("Do you really want to exit?");
         adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                new Session(HomeActivity.this).addString(P.tokenData, "");
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Session session = new Session(HomeActivity.this);
+                session.addString(P.tokenData, "");
+                session.addInt(P.showName,1);
+
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -411,14 +415,7 @@ public class HomeActivity extends AppCompatActivity {
                 decideBottomSelection(string);
                 changeNotificationIcon(false);
             }
-        } /*else if (notificationFragment != null && notificationFragment.isVisible()) {
-            fragment = NotificationFragment.previousFragment;
-            string = NotificationFragment.previousFragmentName;
-            if (fragment != null && string != null) {
-                fragmentLoader(fragment, string);
-                decideBottomSelection(string);
-            }
-        } */
+        }
         else if (profileDetailsFragments != null && profileDetailsFragments.isVisible()) {
             fragment = ProfileDetailsFragments.previousFragment;
             string = ProfileDetailsFragments.previousFragmentName;
