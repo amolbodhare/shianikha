@@ -572,4 +572,13 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    public void updateNotificationCount(int i)
+    {
+        TextView textView = findViewById(R.id.noti_text);
+        if (i==0)
+            textView.setVisibility(View.INVISIBLE);
+        else
+            textView.setText(i+"");
+    }
 }

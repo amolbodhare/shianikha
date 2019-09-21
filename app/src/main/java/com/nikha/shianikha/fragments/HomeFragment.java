@@ -145,6 +145,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         string = parentJson.getString(P.express_interest);
         ((TextView) fragmentView.findViewById(R.id.expressInterest)).setText(string);
+
+        int i = json.getInt(P.notifacation_count);
+        ((HomeActivity)context).updateNotificationCount(i);
     }
 
     @Override

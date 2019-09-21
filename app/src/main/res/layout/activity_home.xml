@@ -88,7 +88,7 @@
                         android:background="@drawable/circlenoti"
                         android:backgroundTint="@color/purplebtnback"
                         android:gravity="center"
-                        android:text="99"
+                        android:text="00"
                         android:padding="3dp"
                         android:textColor="@color/white"
                         android:textSize="10sp" />

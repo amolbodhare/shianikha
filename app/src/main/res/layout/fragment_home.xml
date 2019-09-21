@@ -58,7 +58,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_horizontal"
-                    android:text="John Doe"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -70,7 +70,7 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_horizontal"
-                    android:text="John Doe"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -135,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="102"
+                        android:text="00"
                         android:textColor="@color/textpurle2"
                         android:textSize="23sp" />
 
@@ -165,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="50"
+                        android:text="00"
                         android:textColor="@color/textpurle2"
                         android:textSize="23sp" />
 
@@ -195,7 +195,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="30"
+                        android:text="00"
                         android:textColor="@color/textpurle2"
                         android:textSize="23sp" />
 

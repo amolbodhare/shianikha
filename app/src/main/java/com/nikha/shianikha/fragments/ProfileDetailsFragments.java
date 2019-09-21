@@ -41,6 +41,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     private LoadingDialog loadingDialog;
     private JsonList jsonList;
     private String sharingLink = "";
+    private int viewFlag;//0 = dont'show, 1 = show, 2 = plan expired.
 
 
     public static ProfileDetailsFragments newInstance(Fragment fragment, String prev_frag_name, String profile_id) {
@@ -60,18 +61,16 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         loadingDialog = new LoadingDialog(context);
 
 
-        if (fragmentView == null) {
+        fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
 
-            fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
+        fragmentView.findViewById(R.id.imageViewer1).setOnClickListener(this);
+        fragmentView.findViewById(R.id.sendMessageLinearLayout).setOnClickListener(this);
+        fragmentView.findViewById(R.id.shareProfileLinearLayout).setOnClickListener(this);
+        fragmentView.findViewById(R.id.favouriteLinearLayout).setOnClickListener(this);
+        fragmentView.findViewById(R.id.likeImageView).setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.imageViewer1).setOnClickListener(this);
-            fragmentView.findViewById(R.id.sendMessageLinearLayout).setOnClickListener(this);
-            fragmentView.findViewById(R.id.shareProfileLinearLayout).setOnClickListener(this);
-            fragmentView.findViewById(R.id.favouriteLinearLayout).setOnClickListener(this);
-            fragmentView.findViewById(R.id.likeImageView).setOnClickListener(this);
+        hitProfileDetailsApi("profile_details", profileId);
 
-            hitProfileDetailsApi("profile_details", profileId);
-        }
 
         // here in profileId we have got user_id only but according to api its name is changed as profileId for this api
         return fragmentView;
@@ -79,6 +78,30 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if (viewFlag == 2) {
+            H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
+                @Override
+                public void onDecision(boolean isYes) {
+                    if (isYes) {
+                        ((HomeActivity) context).showSubscriptionPlanActivity();
+                        //((HomeActivity) context).onBack(new View(context));
+                    }
+                }
+            });
+            return;
+        } else if (viewFlag == 0) {
+            H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
+                @Override
+                public void onDecision(boolean isYes) {
+                    if (isYes) {
+                        ((HomeActivity) context).showSubscriptionPlanActivity();
+                        //((HomeActivity) context).onBack(new View(context));
+                    }
+                }
+            });
+            return;
+        }
+
         if (v.getId() == R.id.imageViewer1) {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
@@ -255,7 +278,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             profileDetailJson = profileDetailJson.getJson(P.data);
 
                             int action = profileDetailJson.getInt(P.view);
-                            if (action == 0)
+                            viewFlag = action;
+                            /*if (action == 0)
                             {
                                 H.showYesNoDialog(context, "Plan not purchased", "You have to purchase the plan before viewing profile", "purchase plan", "cancel", new H.OnYesNoListener() {
                                     @Override
@@ -278,7 +302,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                                     }
                                 });
                                 return;
-                            }
+                            }*/
 
                             sharingLink = profileDetailJson.getString(P.share_profile);
                             setData(profileDetailJson);
