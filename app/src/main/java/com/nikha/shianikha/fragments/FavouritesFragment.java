@@ -108,9 +108,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                             CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
                             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
 
-                        } else
-
-                            H.showMessage(context, json.getString(P.msg));
+                        }
+                        H.showMessage(context, json.getString(P.msg));
                     }
                 })
                 .run("hitFavouriteListApi");
@@ -310,8 +309,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     @Override
                     public void onSuccess(Json json)
                     {
-
-                        String string = json.getInt(P.status)+"";
+                        H.showMessage(context,json.getString(P.msg));
+                        json = json.getJson(P.data);
+                        String string = json.getInt(P.connected)+"";
                         response.onResponse(string);
                     }
                 })

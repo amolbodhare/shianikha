@@ -229,6 +229,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        drawerLayout.closeDrawer(Gravity.START);
         onBack(null);
     }
 

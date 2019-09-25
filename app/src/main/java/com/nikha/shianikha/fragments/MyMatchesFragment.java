@@ -289,8 +289,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     string = object.toString();
                     hitConnectNowApi(string);
                 }
-            } else if (v.getId() == R.id.button)
-            {
+            } else if (v.getId() == R.id.button) {
                 Object object = v.getTag();
                 if (object != null) {
                     string = object.toString();
@@ -363,11 +362,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
+                        H.showMessage(context, json.getString(P.msg));
                         hitMatchesApi(apiName);
-                        /*if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
-                        } else
-                            H.showMessage(context, json.getString(P.msg));*/
                     }
                 })
                 .run("hitConnectNowApi");
@@ -391,12 +387,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        /*if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
-
-
-                        } else
-                            H.showMessage(context, json.getString(P.msg));*/
+                        H.showMessage(context, json.getString(P.msg));
                         hitMatchesApi(apiName);
                     }
                 })
