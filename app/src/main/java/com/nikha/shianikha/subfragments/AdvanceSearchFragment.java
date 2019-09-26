@@ -16,16 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
@@ -269,12 +266,18 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
     }
 
     private void hitSearch1Api(Json json) {
-        final LoadingDialog loadingDialog = new LoadingDialog(context);
 
         RequestModel requestModel = RequestModel.newRequestModel("search");
         requestModel.addJSON(P.data, json);
 
-        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+        ((HomeActivity) context).favouritesFragment = FavouritesFragment.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(P.json, requestModel.toString());
+        ((HomeActivity) context).favouritesFragment.setArguments(bundle);
+        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).favouritesFragment, "Search result");
+
+        /*Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener()
                 {
                     @Override
@@ -307,7 +310,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                         }
                     }
                 })
-                .run("hitSearch1Api");
+                .run("hitSearch1Api");*/
     }
 
     private JSONArray makeEducationJsonArray()

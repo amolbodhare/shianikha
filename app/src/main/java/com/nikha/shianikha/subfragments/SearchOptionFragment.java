@@ -13,16 +13,13 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
@@ -54,11 +51,11 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-            context = getActivity();
-            session = new Session(context);
-            fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
+        context = getActivity();
+        session = new Session(context);
+        fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
 
-            handleSeekBar();
+        handleSeekBar();
 
         /*height_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
             @Override
@@ -68,8 +65,8 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             }
         });*/
 
-            setAllRequiredClickListener((ViewGroup)fragmentView.findViewById(R.id.linearLayout));
-            fragmentView.findViewById(R.id.button).setOnClickListener(this);
+        setAllRequiredClickListener((ViewGroup) fragmentView.findViewById(R.id.linearLayout));
+        fragmentView.findViewById(R.id.button).setOnClickListener(this);
 
         return fragmentView;
     }
@@ -124,11 +121,11 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
                 //float minH = ((float) minFt / 3.281f) + ((float) minIn / 39.37f);//3.281  39.37
                 String text = "" + minFt + "' " + minIn + '"';
                 tvMinHeight.setText("Min " + text);
-                tvMinHeight.setTag(minFt+"."+minIn);
+                tvMinHeight.setTag(minFt + "." + minIn);
 
                 text = "" + maxFt + "' " + maxIn + '"';
                 tvMaxHeight.setText("Max " + text);
-                tvMaxHeight.setTag(maxFt+"."+maxIn);
+                tvMaxHeight.setTag(maxFt + "." + maxIn);
             }
         });
     }
@@ -144,8 +141,8 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private void makeJson() {
         Json json = new Json();
-        json.addString(P.token_id,new Session(context).getString(P.tokenData));
-        json.addString(P.search_now,"1");
+        json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        json.addString(P.search_now, "1");
 
         String string = ((TextView) fragmentView.findViewById(R.id.textMinAge)).getText().toString();
         string = H.extractNumberFromString(string);
@@ -155,48 +152,47 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
         string = H.extractNumberFromString(string);
         json.addString(P.max_age, string);
 
-        Object object =  fragmentView.findViewById(R.id.textMinHeight).getTag();
+        Object object = fragmentView.findViewById(R.id.textMinHeight).getTag();
         if (object != null)
             string = object.toString();
         string = H.extractNumberFromString(string);
         json.addString(P.min_height, string);
 
-        object =  fragmentView.findViewById(R.id.textMaxHeight).getTag();
+        object = fragmentView.findViewById(R.id.textMaxHeight).getTag();
         if (object != null)
             string = object.toString();
         string = H.extractNumberFromString(string);
         json.addString(P.max_height, string);
 
         string = ((EditText) fragmentView.findViewById(R.id.maritalStatusEditText)).getText().toString();
-        JSONArray jsonArray = H.extractJsonArray(string, CommonListHolder.maritalStatusNameList,CommonListHolder.maritalStatusIdList);
+        JSONArray jsonArray = H.extractJsonArray(string, CommonListHolder.maritalStatusNameList, CommonListHolder.maritalStatusIdList);
         json.addJSONArray(P.marital_status, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.shiaCommunityEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.religionNameList,CommonListHolder.religionIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.religionNameList, CommonListHolder.religionIdList);
         json.addJSONArray(P.religion_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.motherTongueEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.languageNameList, CommonListHolder.languageIdList);
         json.addJSONArray(P.mother_tongue_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.countryEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.countryNameList,CommonListHolder.countryIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.countryNameList, CommonListHolder.countryIdList);
         json.addJSONArray(P.country, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.stateEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.stateNameList,CommonListHolder.stateIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.stateNameList, CommonListHolder.stateIdList);
         json.addJSONArray(P.state, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.cityEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.cityNameList,CommonListHolder.cityIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.cityNameList, CommonListHolder.cityIdList);
         json.addJSONArray(P.city, jsonArray);
 
         hitSearchOptionApi(json);
     }
 
     private void setUpMultiChoicePickerDialog(final View view) {
-        if (view.getId() == R.id.maritalStatusEditText)
-        {
+        if (view.getId() == R.id.maritalStatusEditText) {
             H.log("clickEvent", "isCalled");
             String[] array = new String[CommonListHolder.maritalStatusNameList.size()];
             array = CommonListHolder.maritalStatusNameList.toArray(array);
@@ -226,6 +222,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempCityList;
     private boolean[] cityCheckedArray;
+
     private void showCityMultiChoiceList(final String[] array, final View view) {
         if (cityCheckedArray == null) {
             cityCheckedArray = new boolean[array.length];
@@ -262,6 +259,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempStateList;
     private boolean[] stateCheckedArray;
+
     private void showStateMultiChoiceList(final String[] array, final View view) {
         if (stateCheckedArray == null) {
             stateCheckedArray = new boolean[array.length];
@@ -298,6 +296,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempCountryList;
     private boolean[] countryCheckedArray;
+
     private void showCountryMultiChoiceList(final String[] array, final View view) {
         if (countryCheckedArray == null) {
             countryCheckedArray = new boolean[array.length];
@@ -334,6 +333,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempMotherTongueList;
     private boolean[] motherTongueCheckedArray;
+
     private void showMotherTongueMultiChoiceList(final String[] array, final View view) {
         if (motherTongueCheckedArray == null) {
             motherTongueCheckedArray = new boolean[array.length];
@@ -370,6 +370,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempReligionList;
     private boolean[] religionCheckedArray;
+
     private void showReligionMultiChoiceList(final String[] array, final View view) {
         if (religionCheckedArray == null) {
             religionCheckedArray = new boolean[array.length];
@@ -406,6 +407,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<String> tempMaritalStatusList;
     private boolean[] maritalStatusCheckedArray;
+
     private void showMaritalStatusMultiChoiceList(final String[] array, final View view) {
 
         if (maritalStatusCheckedArray == null) {
@@ -441,14 +443,20 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
         }).show();
     }
 
-    private void hitSearchOptionApi(Json json)
-    {
-        final LoadingDialog loadingDialog = new LoadingDialog(context);
+    private void hitSearchOptionApi(Json json) {
 
         RequestModel requestModel = RequestModel.newRequestModel("search");
         requestModel.addJSON(P.data, json);
 
-        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+        ((HomeActivity) context).favouritesFragment = FavouritesFragment.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(P.json, requestModel.toString());
+        ((HomeActivity) context).favouritesFragment.setArguments(bundle);
+        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).favouritesFragment, "Search result");
+
+
+        /*Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener()
                 {
                     @Override
@@ -481,7 +489,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
                         }
                     }
                 })
-                .run("hitSearchApi");
+                .run("hitSearchApi");*/
     }
 
 

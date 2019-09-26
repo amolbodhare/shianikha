@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ascending"
+        android:orderInCategory="100"
+        android:title="Ascending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/descending"
+        android:orderInCategory="100"
+        android:title="Descending"
+        app:showAsAction="never" />
+
+</menu>

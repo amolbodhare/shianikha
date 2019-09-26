@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
 import com.nikha.shianikha.fragments.FavouritesFragment;
@@ -73,12 +70,17 @@ public class SearchByProfileIdFragment extends Fragment {
 
     private void hitSearchApi(Json json)
     {
-        final LoadingDialog loadingDialog = new LoadingDialog(context);
-
         RequestModel requestModel = RequestModel.newRequestModel("search");
         requestModel.addJSON(P.data, json);
 
-        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+        ((HomeActivity) context).favouritesFragment = FavouritesFragment.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(P.json, requestModel.toString());
+        ((HomeActivity) context).favouritesFragment.setArguments(bundle);
+        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).favouritesFragment, "Search result");
+
+       /* Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener()
                 {
                     @Override
@@ -111,7 +113,7 @@ public class SearchByProfileIdFragment extends Fragment {
                         }
                     }
                 })
-                .run("hitSearchApi");
+                .run("hitSearchApi");*/
     }
 
     public interface OnFragmentInteractionListener {

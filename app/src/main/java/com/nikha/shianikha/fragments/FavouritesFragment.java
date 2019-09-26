@@ -6,12 +6,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,7 +25,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
-import com.nikha.shianikha.R;;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.FilterActivity;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
@@ -30,7 +33,7 @@ import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
+;import org.json.JSONException;
 
 public class FavouritesFragment extends Fragment implements Api.OnLoadingListener, Api.OnErrorListener, View.OnClickListener {
     private View fragmentView;
@@ -64,26 +67,63 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
             fragmentView.findViewById(R.id.refineLinerLayout).setOnClickListener(this);
 
+            fragmentView.findViewById(R.id.sortByLinearLayout).setOnClickListener(this);
+
             Bundle bundle = getArguments();
             if (bundle != null) {
                 String string = bundle.getString(P.json);
+
                 try {
                     json = new Json(string);
-                    JsonList jsonList = json.getJsonList(P.data);
-                    ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
-                    CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
-                    ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
-
-                    fragmentView.findViewById(R.id.refineLinerLayout).setVisibility(View.INVISIBLE);
+                    hitAllSearchApi(json);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             } else
                 hitFavouriteListApi();
 
         }
         return fragmentView;
+    }
+
+    private void hitAllSearchApi(Json json) {
+        Api.newApi(context, P.baseUrl).addJson(json).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1)
+                        {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
+                            CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
+                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+
+                            fragmentView.findViewById(R.id.refineLinerLayout).setVisibility(View.INVISIBLE);
+                        }
+                    }
+                })
+                .run("hitAllSearchApi");
+    }
+
+    private void showPopUpMenu(View viewById) {
+        PopupMenu popupMenu = new PopupMenu(context, viewById);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.sort_by_menu, popupMenu.getMenu());
+        popupMenu.show();
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem)
+            {
+
+
+                return false;
+            }
+        });
     }
 
     private void hitFavouriteListApi() {
@@ -119,7 +159,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     public void onClick(View view) {
         if (view.getId() == R.id.refineLinerLayout) {
             startActivity(new Intent(context, FilterActivity.class));
-        }
+        } else if (view.getId() == R.id.sortByLinearLayout)
+            showPopUpMenu(view);
     }
 
     public interface OnFragmentInteractionListener {
@@ -135,6 +176,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         private CustomListAdapter(JsonList jsons) {
             jsonList = jsons;
+            H.log("lineIsExecuted", 138 + "");
         }
 
         @Override
@@ -167,9 +209,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 e.printStackTrace();
             }
 
-            //string = json.getString(P.first_name) + json.getString(P.middle_name) + json.getString(P.last_name);
             if (App.showName) {
-                string = json.getString(P.full_name);
+                //string = json.getString(P.full_name);
+                string = json.getString(P.first_name) + json.getString(P.middle_name) + json.getString(P.last_name);
                 ((TextView) view.findViewById(R.id.full_name)).setText(string);
             }
 
@@ -193,7 +235,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             string = json.getString(P.connected);
             imageView = view.findViewById(R.id.imageView);
             imageView.setOnClickListener(this);
-            changeConnectNowStatus(imageView,string);
+            changeConnectNowStatus(imageView, string);
 
             string = json.getString(P.age);
             ((TextView) view.findViewById(R.id.age_tv)).setText(string + "yrs");
@@ -219,8 +261,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.thumbnail)
-            {
+            if (view.getId() == R.id.thumbnail) {
                 Object object = view.getTag();
                 if (object != null) {
                     string = object.toString();
@@ -228,9 +269,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
                 }
-            }
-            else if (view.getId() == R.id.imageView)
-            {
+            } else if (view.getId() == R.id.imageView) {
                 final ImageView imageView = (ImageView) view;
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
@@ -241,13 +280,11 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 hitConnectNowApi(string, new Response() {
                     @Override
                     public void onResponse(String string) {
-                        changeConnectNowStatus(imageView,string);
+                        changeConnectNowStatus(imageView, string);
                     }
                 });
 
-            }
-            else if (view.getId() == R.id.likeImageView)
-            {
+            } else if (view.getId() == R.id.likeImageView) {
                 final ImageView imageView = (ImageView) view;
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
@@ -257,8 +294,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
                 hitLikeApi(string, new CallBack() {
                     @Override
-                    public void onCallBack(boolean statusTrue)
-                    {
+                    public void onCallBack(boolean statusTrue) {
                         if (statusTrue)
                             imageView.setColorFilter(context.getColor(R.color.green2));
                         else
@@ -269,23 +305,17 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         }
     }
 
-    private void changeConnectNowStatus(ImageView imageView,String string)
-    {
-        RelativeLayout relativeLayout = ((RelativeLayout)imageView.getParent());
+    private void changeConnectNowStatus(ImageView imageView, String string) {
+        RelativeLayout relativeLayout = ((RelativeLayout) imageView.getParent());
         TextView textView = relativeLayout.findViewById(R.id.connect_tv);
 
-        if (string.equalsIgnoreCase("0"))
-        {
+        if (string.equalsIgnoreCase("0")) {
             textView.setText("Connect Now");
             imageView.setImageDrawable(null);
-        }
-        else if (string.equalsIgnoreCase("1"))
-        {
+        } else if (string.equalsIgnoreCase("1")) {
             textView.setText("Connected");
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_check_black_24dp));
-        }
-        else if (string.equalsIgnoreCase("2"))
-        {
+        } else if (string.equalsIgnoreCase("2")) {
             textView.setText("Pending Connection");
             imageView.setImageDrawable(null);
         }
@@ -307,11 +337,10 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
-                    public void onSuccess(Json json)
-                    {
-                        H.showMessage(context,json.getString(P.msg));
+                    public void onSuccess(Json json) {
+                        H.showMessage(context, json.getString(P.msg));
                         json = json.getJson(P.data);
-                        String string = json.getInt(P.connected)+"";
+                        String string = json.getInt(P.connected) + "";
                         response.onResponse(string);
                     }
                 })
@@ -336,13 +365,11 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             //json = json.getJson(P.data);
                             callBack.onCallBack(true);
 
-                        }
-                        else {
+                        } else {
                             callBack.onCallBack(false);
                             H.showMessage(context, json.getString(P.msg));
                         }
@@ -374,13 +401,11 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             ((FrameLayout) object).removeAllViews();
     }
 
-    private interface CallBack
-    {
+    private interface CallBack {
         void onCallBack(boolean statusTrue);
     }
 
-    private interface Response
-    {
+    private interface Response {
         void onResponse(String string);
     }
 }
