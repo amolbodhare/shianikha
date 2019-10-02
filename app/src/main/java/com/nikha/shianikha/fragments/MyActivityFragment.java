@@ -22,7 +22,9 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
@@ -147,6 +149,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             hitApiForList("accepted_me");
         else if (string.equalsIgnoreCase("contacted me"))
             hitApiForList("contacted_me");
+        else if (string.equalsIgnoreCase("I Have Contacted"))
+            hitApiForList("i_have_contacted");
+        else if (string.equalsIgnoreCase("Who Visited My Profile"))
+            hitApiForList("who_visited_my_profile");
+        else if (string.equalsIgnoreCase("Profiles Viewed By Me"))
+            hitApiForList("profiles_viewed_by_me");
     }
 
     private void implementAutoScroll(LinearLayout linearLayout) {
@@ -194,28 +202,6 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 e.printStackTrace();
             }
 
-            string = json.getString(P.full_name);
-            ((TextView) view.findViewById(R.id.title)).setText(string);
-
-            string = json.getString(P.profile_id);
-            ((TextView) view.findViewById(R.id.profile_id)).setText(string);
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            string = json.getString(P.age) + "yrs";
-            stringBuilder.append(string);
-
-            string = json.getString(P.height);
-            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(string.split(".")));
-            if (arrayList.size() == 2)
-                string = arrayList.get(0) + "'" + arrayList.get(1) + "\"";
-            stringBuilder.append(string);
-
-            string = json.getString(P.religion);
-            stringBuilder.append(string);
-
-            ((TextView) view.findViewById(R.id.age_height_cast_religion_details)).setText(string);
-
             string = json.getString(P.ph_number);
             ImageView imageView = view.findViewById(R.id.imv_call);
             imageView.setTag(string);
@@ -226,21 +212,60 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             imageView.setTag(string);
             imageView.setOnClickListener(this);
 
+            string = json.getString(P.profile_id);
+            ((TextView) view.findViewById(R.id.profile_id)).setText(string);
+
+            if (App.showName) {
+
+                string = json.getString(P.full_name);
+                ((TextView) view.findViewById(R.id.title)).setText(string);
+
+                StringBuilder stringBuilder = new StringBuilder();
+
+                string = json.getString(P.age) + "yrs";
+                stringBuilder.append(string);
+
+                string = json.getString(P.height);
+                ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(string.split(".")));
+                if (arrayList.size() == 2)
+                    string = arrayList.get(0) + "'" + arrayList.get(1) + "\"";
+                stringBuilder.append(string);
+
+                string = json.getString(P.religion);
+                stringBuilder.append(string);
+
+                ((TextView) view.findViewById(R.id.age_height_cast_religion_details)).setText(string);
+            }
+
             return view;
         }
 
         @Override
         public void onClick(View view) {
-          /*  Object object;
-            if (view.getId() == R.id.imv_call) {
-                object = view.getTag();
-                if (object != null)
-                    makeIntent(object.toString(), "p");
-            } else if (view.getId() == R.id.imv_mail) {
-                object = view.getTag();
-                if (object != null)
-                    makeIntent(object.toString(), "m");
-            }*/
+            if (App.showName) {
+                Object object;
+                if (view.getId() == R.id.imv_call) {
+                    object = view.getTag();
+                    if (object != null)
+                        makeIntent(object.toString(), "p");
+                } else if (view.getId() == R.id.imv_mail) {
+                    object = view.getTag();
+                    if (object != null)
+                        makeIntent(object.toString(), "m");
+                }
+            }
+            else
+            {
+                H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
+                    @Override
+                    public void onDecision(boolean isYes) {
+                        if (isYes) {
+                            ((HomeActivity) context).showSubscriptionPlanActivity();
+                            //((HomeActivity) context).onBack(new View(context));
+                        }
+                    }
+                });
+            }
         }
     }
 

@@ -188,6 +188,8 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
         jsonArray = H.extractJsonArray(string, CommonListHolder.cityNameList, CommonListHolder.cityIdList);
         json.addJSONArray(P.city, jsonArray);
 
+        json.addString(P.sort,"1");
+
         hitSearchOptionApi(json);
     }
 

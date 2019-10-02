@@ -262,6 +262,8 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
         string = checkBox.isChecked() ? "1" : "0";
         json.addString(P.show_profile_with_photo,string);
 
+        json.addString(P.sort,"1");
+
         hitSearch1Api(json);
     }
 

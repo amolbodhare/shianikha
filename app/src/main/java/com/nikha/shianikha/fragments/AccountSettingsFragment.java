@@ -180,28 +180,28 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         JSONArray jsonArray = new JSONArray();
         WhoCanContactJsonArray(jsonArray);
 
-        if (jsonArray.length() < 1) {
+        /*if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select contact option");
             return;
-        }
+        }*/
         json.addJSONArray(P.who_can_contact, jsonArray);
 
 
         jsonArray = new JSONArray();
         profileVisibilityJsonArray(jsonArray);
-        if (jsonArray.length() < 1) {
+        /*if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select profile visibility");
             return;
-        }
+        }*/
         json.addJSONArray(P.profile_with_visibility, jsonArray);
 
 
         jsonArray = new JSONArray();
         whoCanMessageJsonArray(jsonArray);
-        if (jsonArray.length() < 1) {
+       /* if (jsonArray.length() < 1) {
             H.showMessage(context, "Please select who can message you");
             return;
-        }
+        }*/
         json.addJSONArray(P.who_can_message, jsonArray);
 
 

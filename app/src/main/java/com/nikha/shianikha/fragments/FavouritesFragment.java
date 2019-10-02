@@ -45,6 +45,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     private OnFragmentInteractionListener mListener;
     private LoadingDialog loadingDialog;
 
+    private Json searchJson = new Json();
+
     public FavouritesFragment() {
         // Required empty public constructor
     }
@@ -75,21 +77,22 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
                 try {
                     json = new Json(string);
-                    hitAllSearchApi(json);
+                    searchJson = json;
+                    hitAllSearchApi();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             } else
-                hitFavouriteListApi();
+                hitFavouriteListApi("1");
 
         }
         return fragmentView;
     }
 
-    private void hitAllSearchApi(Json json) {
-        Api.newApi(context, P.baseUrl).addJson(json).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+    private void hitAllSearchApi() {
+        Api.newApi(context, P.baseUrl).addJson(searchJson).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(this)
                 .onError(this)
                 .onSuccess(new Api.OnSuccessListener() {
@@ -119,17 +122,39 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             @Override
             public boolean onMenuItemClick(MenuItem menuItem)
             {
+                if (menuItem.getItemId() == R.id.ascending)
+                {
+                    if (searchJson.length() == 0)
+                        hitFavouriteListApi("2");
+                    else
+                        updateSearchJson("2");
 
-
+                }
+                else if (menuItem.getItemId() == R.id.descending)
+                {
+                    if (searchJson.length() == 0)
+                        hitFavouriteListApi("3");
+                    else
+                        updateSearchJson("3");
+                }
                 return false;
             }
         });
     }
 
-    private void hitFavouriteListApi() {
+    private void updateSearchJson(String string)
+    {
+        Json json = searchJson.getJson(P.data);
+        json.addString(P.sort,string);
+        searchJson.addJSON(P.data,json);
+        hitAllSearchApi();
+    }
+
+    private void hitFavouriteListApi(String sortFlag) {
         Json json = new Json();
         String string = new Session(context).getString(P.tokenData);
         json.addString(P.token_id, string);
+        json.addString(P.sort,sortFlag);//1 = sort by id, 2 = sort by name in ascending and 3 = sort by name in descending
 
         RequestModel requestModel = RequestModel.newRequestModel("favourites");
         requestModel.addJSON(P.data, json);
@@ -176,7 +201,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         private CustomListAdapter(JsonList jsons) {
             jsonList = jsons;
-            H.log("lineIsExecuted", 138 + "");
         }
 
         @Override

@@ -40,10 +40,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_below="@id/cir_imv_frame_layout"
                 android:layout_centerHorizontal="true"
-                android:text="Kangna Ranout"
-                android:visibility="gone"
+                android:text=""
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9sp"
+                android:textSize="11sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -51,9 +50,9 @@
                 android:id="@+id/profile_id"
                 android:layout_marginTop="3dp"
                 android:layout_below="@id/title"
-                android:text="SN461358"
+                android:text=""
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9sp"
+                android:textSize="11sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -62,9 +61,9 @@
                 android:id="@+id/age_height_cast_religion_details"
                 android:layout_marginTop="3dp"
                 android:layout_below="@id/profile_id"
-                android:text="21 yrs,5'1' Shia Muslim"
+                android:text=""
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="9sp"
+                android:textSize="11sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -80,27 +79,25 @@
 
                 <ImageView
                     android:id="@+id/imv_call"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:clickable="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/my_activity_card_circle_button_back"
                     android:padding="8dp"
-                    android:visibility="gone"
                     android:tint="@color/grey"
                     android:src="@drawable/ic_telephone" />
 
                 <ImageView
                     android:id="@+id/imv_mail"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:clickable="true"
                     android:layout_marginLeft="10dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/my_activity_card_circle_button_back"
                     android:padding="8dp"
                     android:tint="@color/grey"
-                    android:visibility="gone"
                     android:src="@drawable/ic_mail_outline_black_24dp" />
 
             </LinearLayout>
