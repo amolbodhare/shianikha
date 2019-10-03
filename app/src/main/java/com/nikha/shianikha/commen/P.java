@@ -216,4 +216,6 @@ public class P {
     public static String notifacation_count = "notifacation_count";
     public static String requestModel = "requestModel";
     public static String sort = "sort";
+    public static String account_hide = "account_hide";
+    public static String account_delete = "account_delete";
 }//class

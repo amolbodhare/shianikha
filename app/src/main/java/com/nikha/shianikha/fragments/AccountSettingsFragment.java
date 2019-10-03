@@ -117,6 +117,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             who_can_message_exp_layout.setOnClickListener(this);
 
             fragmentView.findViewById(R.id.saveButon).setOnClickListener(this);
+            fragmentView.findViewById(R.id.hideButton).setOnClickListener(this);
+            fragmentView.findViewById(R.id.deleteButton).setOnClickListener(this);
 
 
             email_address_exp_layout.collapse();
@@ -163,7 +165,13 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             startActivity(new Intent(getActivity(), EditProfileActivity.class));
 
         else if (v.getId() == R.id.saveButon)
-            makeJson();
+            makeJson("0","0");
+
+        else if (v.getId() == R.id.hideButton)
+            makeJson("0","1");
+
+        else if (v.getId() == R.id.deleteButton)
+            makeJson("1","0");
     }
 
     public interface OnFragmentInteractionListener {
@@ -171,11 +179,12 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         void onFragmentInteraction(Uri uri);
     }
 
-    private void makeJson() {
+    private void makeJson(String delete, String hide) {
 
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
-
+        json.addString(P.account_hide,hide);
+        json.addString(P.account_delete,delete);
 
         JSONArray jsonArray = new JSONArray();
         WhoCanContactJsonArray(jsonArray);

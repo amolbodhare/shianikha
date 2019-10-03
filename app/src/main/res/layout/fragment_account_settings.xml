@@ -380,7 +380,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/profile_photo_visibility_container_layout"
                 android:layout_width="match_parent"
@@ -443,7 +442,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
 
                 <CheckBox
                     android:id="@+id/only_paid_mem_can_msg_cb"
@@ -564,7 +562,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/btn_search"
+            android:id="@+id/hideButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -572,7 +570,20 @@
             android:layout_marginRight="17dp"
             android:layout_marginBottom="17dp"
             android:background="@drawable/blue_button_back"
-            android:text="Hide / Delete Account"
+            android:text="Hide Account"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/blue_button_back"
+            android:text="Delete Account"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
