@@ -351,6 +351,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showSubscriptionPlanActivity() {
         Intent i = new Intent(HomeActivity.this, SubscriptionActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         //onDrawerMenuClick(findViewById(R.id.drawer_subscription_layout));
@@ -366,7 +367,6 @@ public class HomeActivity extends AppCompatActivity {
     public void onNotificationIconClick(View view) {
         if (tempView == view)
             return;
-
 
         H.log("Inside method", "This is method");
         ImageView imageView = view.findViewById(R.id.imv_noti);

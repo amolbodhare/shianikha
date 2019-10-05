@@ -1,5 +1,6 @@
 package com.nikha.shianikha;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
+import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.P;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -67,6 +69,9 @@ public class WebViewActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 finish();
+                                Intent intent = new Intent(WebViewActivity.this, HomeActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                             }
                         },1230);
                     }
