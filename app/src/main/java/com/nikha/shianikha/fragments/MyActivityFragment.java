@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
@@ -39,6 +40,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     private Context context;
     public static Fragment previousFragment;
     public static String previousFragmentName;
+    private String which = "Accept request";
 
     public MyActivityFragment() {
         // Required empty public constructor
@@ -57,7 +59,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_activity, container, false);
 
-            hitApiForList("accepted");
+            hitApiForList("request_list");
 
             setOnClickListenerOnScrollBarChild();
         }
@@ -100,8 +102,10 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                             if (jsonList != null)
                                 ((GridView) fragmentView.findViewById(R.id.gridView)).setAdapter(new GridViewAdapter(jsonList));
 
-                        } else
+                        } else {
                             H.showMessage(context, json.getString(P.msg));
+                            ((GridView) fragmentView.findViewById(R.id.gridView)).setAdapter(new GridViewAdapter(new JsonList()));
+                        }
                     }
                 })
                 .run("hitMyActivitiesApi");
@@ -135,6 +139,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         childLayout = (LinearLayout) view;
         textView = (TextView) childLayout.getChildAt(0);
         String string = textView.getText().toString();
+        which = string;
         chooseApi(string);
         textView.setBackgroundColor(context.getColor(R.color.textpurle2));
         textView.setTextColor(context.getColor(R.color.white));
@@ -143,7 +148,10 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     }
 
     private void chooseApi(String string) {
-        if (string.equalsIgnoreCase("accepted"))
+
+        if (string.equalsIgnoreCase("Accept request"))
+            hitApiForList("request_list");
+        else if (string.equalsIgnoreCase("accepted"))
             hitApiForList("accepted");
         else if (string.equalsIgnoreCase("accepted me"))
             hitApiForList("accepted_me");
@@ -191,11 +199,25 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            if (view == null)
-                view = LayoutInflater.from(context).inflate(R.layout.accepted_list_card, viewGroup, false);
-
             Json json = jsonList.get(i);
-            String string = json.getString(P.profile_pic);
+            String string = "";
+
+            if (!which.equals("Accept request"))
+                view = LayoutInflater.from(context).inflate(R.layout.accepted_list_card, viewGroup, false);
+            else {
+                view = LayoutInflater.from(context).inflate(R.layout.request_item, viewGroup, false);
+                string = json.getString(P.user_id);
+
+                Button button = view.findViewById(R.id.acceptButton);
+                button.setTag(string);
+                button.setOnClickListener(this);
+
+                button = view.findViewById(R.id.rejectButton);
+                button.setTag(string);
+                button.setOnClickListener(this);
+            }
+
+            string = json.getString(P.profile_pic);
             try {
                 Picasso.get().load(string).fit().placeholder(R.drawable.user).into((ImageView) view.findViewById(R.id.thumbnail));
             } catch (Exception e) {
@@ -204,13 +226,17 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
             string = json.getString(P.ph_number);
             ImageView imageView = view.findViewById(R.id.imv_call);
-            imageView.setTag(string);
-            imageView.setOnClickListener(this);
+            if (imageView != null) {
+                imageView.setTag(string);
+                imageView.setOnClickListener(this);
+            }
 
             string = json.getString(P.email);
             imageView = view.findViewById(R.id.imv_mail);
-            imageView.setTag(string);
-            imageView.setOnClickListener(this);
+            if (imageView != null) {
+                imageView.setTag(string);
+                imageView.setOnClickListener(this);
+            }
 
             string = json.getString(P.profile_id);
             ((TextView) view.findViewById(R.id.profile_id)).setText(string);
@@ -242,7 +268,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
         @Override
         public void onClick(View view) {
-            if (App.showName) {
+            if (view.getId() == R.id.acceptButton || view.getId() == R.id.rejectButton) {
+                if (view.getId() == R.id.acceptButton)
+                    hitAcceptRejectApi("1", view.getTag() + "");
+                else
+                    hitAcceptRejectApi("0", view.getTag() + "");
+            } else if (App.showName) {
                 Object object;
                 if (view.getId() == R.id.imv_call) {
                     object = view.getTag();
@@ -253,9 +284,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                     if (object != null)
                         makeIntent(object.toString(), "m");
                 }
-            }
-            else
-            {
+            } else {
                 H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
                     @Override
                     public void onDecision(boolean isYes) {
@@ -267,6 +296,43 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 });
             }
         }
+    }
+
+    private void hitAcceptRejectApi(String flag, String id) {
+        Json json = new Json();
+        json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        json.addString("user_id_receiver", id);
+        json.addString("status", flag);
+
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        RequestModel requestModel = RequestModel.newRequestModel("accept_reject_request");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        hitApiForList("request_list");
+                    }
+                })
+                .run("hitAcceptRejectApi");
     }
 
     private void makeIntent(String data, String string) {

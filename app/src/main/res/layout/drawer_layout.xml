@@ -86,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:background="@drawable/clickable_trans_bg"
             android:padding="13dp"
             android:onClick="onDrawerMenuClick"
             android:gravity="center">
@@ -112,6 +113,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:onClick="onDrawerMenuClick"
+            android:background="@drawable/clickable_trans_bg"
             android:padding="13dp"
             android:visibility="visible"
             android:gravity="center">
@@ -138,6 +140,7 @@
             android:layout_height="wrap_content"
             android:onClick="onDrawerMenuClick"
             android:clickable="true"
+            android:background="@drawable/clickable_trans_bg"
             android:padding="13dp"
             android:gravity="center">
 
@@ -162,6 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onDrawerMenuClick"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:padding="13dp"
             android:gravity="center">
@@ -187,6 +191,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="13dp"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:onClick="onDrawerMenuClick"
             android:gravity="center">
@@ -212,6 +217,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onDrawerMenuClick"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:padding="13dp"
             android:gravity="center">
@@ -238,6 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onDrawerMenuClick"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
            android:padding="13dp"
             android:gravity="center">
@@ -262,7 +269,8 @@
             android:id="@+id/drawer_aboutapp_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:padding="13dp"
+            android:padding="13dp"
+            android:background="@drawable/clickable_trans_bg"
             android:onClick="onDrawerMenuClick"
             android:clickable="true"
             android:gravity="center">
@@ -287,9 +295,10 @@
             android:id="@+id/drawer_account_settings_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:onClick="onDrawerMenuClick"
-           android:padding="13dp"
+            android:padding="13dp"
             android:gravity="center">
 
             <ImageView
@@ -314,6 +323,7 @@
             android:layout_height="wrap_content"
             android:padding="13dp"
             android:onClick="onDrawerMenuClick"
+            android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:gravity="center">
 
@@ -339,6 +349,7 @@
             android:layout_height="wrap_content"
             android:padding="13dp"
             android:clickable="true"
+            android:background="@drawable/clickable_trans_bg"
             android:onClick="onDrawerMenuClick"
             android:gravity="center">
 

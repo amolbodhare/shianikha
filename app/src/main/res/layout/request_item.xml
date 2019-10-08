@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/cir_imv_frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/kangna" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/cir_imv_frame_layout"
+                android:layout_centerHorizontal="true"
+                android:text=""
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/profile_id"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/title"
+                android:text=""
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="11sp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/age_height_cast_religion_details"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/profile_id"
+                android:text=""
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="11sp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/age_height_cast_religion_details">
+
+                <Button
+                    android:id="@+id/acceptButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="18dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_regular"
+                    android:background="@drawable/blue_button_back"
+                    android:text="Accept request" />
+
+                <Button
+                    android:id="@+id/rejectButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#464646"
+                    android:backgroundTint="#CBCBCB"
+                    android:background="@drawable/blue_button_back"
+                    android:text="Reject request" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

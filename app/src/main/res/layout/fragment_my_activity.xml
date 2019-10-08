@@ -24,7 +24,7 @@
             android:baselineAligned="true">
 
             <LinearLayout
-                android:id="@+id/acceptedLayout"
+                android:id="@+id/requestLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -42,12 +42,48 @@
                     android:background="@color/textpurle2"
                     android:fontFamily="@font/poppins_regular"
                     android:elevation="7dp"
+                    android:text="Request"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-15dp"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:tint="@color/textpurle2"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/grey5"/>
+
+            <LinearLayout
+                android:id="@+id/acceptedLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textSize="12sp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:gravity="center"
+                    android:background="@color/textview_back_color"
+                    android:textColor="@color/textview_grey_color"
+                    android:fontFamily="@font/poppins_regular"
+                    android:elevation="7dp"
                     android:text="Accepted"/>
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="-15dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_arrow_drop_down_black_24dp"
                     android:tint="@color/textpurle2"/>
 
