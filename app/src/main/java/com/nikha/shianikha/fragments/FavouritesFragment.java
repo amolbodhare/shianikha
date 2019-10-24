@@ -98,14 +98,24 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             JsonList jsonList = json.getJsonList(P.data);
                             ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
                             CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
                             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
 
                             fragmentView.findViewById(R.id.refineLinerLayout).setVisibility(View.INVISIBLE);
+
+                            String string = searchJson+"";
+                            if (string.contains(":"))
+                            {
+                                string = string.substring(string.lastIndexOf(":"));
+
+                                if (string.contains("2"))
+                                    ((TextView) fragmentView.findViewById(R.id.sortByTextView)).setText("Ascending");
+                                else if (string.contains("3"))
+                                    ((TextView) fragmentView.findViewById(R.id.sortByTextView)).setText("Descending");
+                            }
                         }
                     }
                 })
@@ -120,18 +130,14 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem)
-            {
-                if (menuItem.getItemId() == R.id.ascending)
-                {
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.ascending) {
                     if (searchJson.length() == 0)
                         hitFavouriteListApi("2");
                     else
                         updateSearchJson("2");
 
-                }
-                else if (menuItem.getItemId() == R.id.descending)
-                {
+                } else if (menuItem.getItemId() == R.id.descending) {
                     if (searchJson.length() == 0)
                         hitFavouriteListApi("3");
                     else
@@ -142,19 +148,18 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         });
     }
 
-    private void updateSearchJson(String string)
-    {
+    private void updateSearchJson(String string) {
         Json json = searchJson.getJson(P.data);
-        json.addString(P.sort,string);
-        searchJson.addJSON(P.data,json);
+        json.addString(P.sort, string);
+        searchJson.addJSON(P.data, json);
         hitAllSearchApi();
     }
 
-    private void hitFavouriteListApi(String sortFlag) {
+    private void hitFavouriteListApi(final String sortFlag) {
         Json json = new Json();
         String string = new Session(context).getString(P.tokenData);
         json.addString(P.token_id, string);
-        json.addString(P.sort,sortFlag);//1 = sort by id, 2 = sort by name in ascending and 3 = sort by name in descending
+        json.addString(P.sort, sortFlag);//1 = sort by id, 2 = sort by name in ascending and 3 = sort by name in descending
 
         RequestModel requestModel = RequestModel.newRequestModel("favourites");
         requestModel.addJSON(P.data, json);
@@ -172,7 +177,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                             ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
                             CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
                             ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
-
                         }
                         H.showMessage(context, json.getString(P.msg));
                     }

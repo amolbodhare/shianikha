@@ -54,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
         session = new Session(this);
         generateFcmToken();
         int i = session.getInt(P.showName);
-        App.showName = i==1? true:false;
+        App.showName = i == 1 ? true : false;
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
 
         //to get height of status bar
@@ -75,9 +75,8 @@ public class SplashActivity extends AppCompatActivity {
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
-        H.log("appLinkData",appLinkData+"");
-        if (appLinkData!=null)
-        {
+        H.log("appLinkData", appLinkData + "");
+        if (appLinkData != null) {
             /*String string = session.getString(P.tokenData);
             if (string==null || string.isEmpty())
             {
@@ -94,8 +93,7 @@ public class SplashActivity extends AppCompatActivity {
         //handleIntent(getIntent());
     }
 
-    private void hitMastersApi()
-    {
+    private void hitMastersApi() {
         Json json = new Json();
 
         RequestModel requestModel = RequestModel.newRequestModel("masters");
@@ -261,9 +259,8 @@ public class SplashActivity extends AppCompatActivity {
                 H.log("tokenIs", string);
                 if (!sharableLink.isEmpty()) {
                     intent = new Intent(SplashActivity.this, WebViewActivity.class);
-                    intent.putExtra("url",sharableLink);
-                }
-                else if (string == null || string.isEmpty())
+                    intent.putExtra("url", sharableLink);
+                } else if (string == null || string.isEmpty())
                     intent = new Intent(SplashActivity.this, WalkThroughActivity.class);
                 else if (session.getInt(P.full_register) == 0)
                     intent = new Intent(SplashActivity.this, RegSecondPageActivity.class);
@@ -303,9 +300,10 @@ public class SplashActivity extends AppCompatActivity {
                         //H.log(getLocalClassName(), FirebaseInstanceId.getInstance().getId());
                         String id = FirebaseInstanceId.getInstance().getId();
 
-                        new Session(SplashActivity.this).addString(P.fcmToken,token);
+                        new Session(SplashActivity.this).addString(P.fcmToken, token);
                         H.log("fcmTokenIs", token);
-                        H.log("idIs",id);
+                        App.fcmToken = token+"";
+                        H.log("idIs", id);
                         //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });

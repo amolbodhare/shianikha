@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
@@ -26,7 +27,9 @@ import com.nikha.shianikha.HelpAndSupport;
 import com.nikha.shianikha.NotifacationDetails;
 import com.nikha.shianikha.NotificationFragment;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
+import com.nikha.shianikha.commen.RequestModel;
 import com.nikha.shianikha.fragments.AccountSettingsFragment;
 import com.nikha.shianikha.fragments.FavouritesFragment;
 import com.nikha.shianikha.fragments.HomeFragment;
@@ -88,6 +91,42 @@ public class HomeActivity extends AppCompatActivity {
             profileDetailsFragments = ProfileDetailsFragments.newInstance(currentFragment, currentFragmentName, string);
             fragmentLoader(profileDetailsFragments, getString(R.string.profileDetails));
         }*/
+
+        hitLastLogInDetails();
+    }
+
+    private void hitLastLogInDetails() {
+        Json json = new Json();
+        json.addString(P.token_id, new Session(this).getString(P.tokenData));
+        json.addString(P.fcm_token,App.fcmToken);
+
+        RequestModel requestModel = RequestModel.newRequestModel("last_login_details");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        /*if (isLoading)s
+                            loadingDialog.show();
+                        else
+                            loadingDialog.dismiss();*/
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(HomeActivity.this, "Something went Wrong");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                    }
+                })
+                .run("hitLastLogInDetails");
     }
 
     private void setVersionCodeToDrawer() {
