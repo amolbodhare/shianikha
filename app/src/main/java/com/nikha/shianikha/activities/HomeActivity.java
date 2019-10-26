@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
     private void hitLastLogInDetails() {
         Json json = new Json();
         json.addString(P.token_id, new Session(this).getString(P.tokenData));
-        json.addString(P.fcm_token,App.fcmToken);
+        json.addString(P.fcm_token, App.fcmToken);
 
         RequestModel requestModel = RequestModel.newRequestModel("last_login_details");
         requestModel.addJSON(P.data, json);
@@ -301,11 +301,10 @@ public class HomeActivity extends AppCompatActivity {
             showAccountSettingFragment();
         else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, MessageActivity.class);
-            i.putExtra("open",P.inbox);
+            i.putExtra("open", P.inbox);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.drawer_favourites_layout)
-        {
+        } else if (view.getId() == R.id.drawer_favourites_layout) {
             favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
         }
@@ -340,11 +339,10 @@ public class HomeActivity extends AppCompatActivity {
         adb.setMessage("Do you really want to exit?");
         adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+            public void onClick(DialogInterface dialog, int which) {
                 Session session = new Session(HomeActivity.this);
                 session.addString(P.tokenData, "");
-                session.addInt(P.showName,1);
+                session.addInt(P.showName, 1);
 
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -455,16 +453,14 @@ public class HomeActivity extends AppCompatActivity {
                 decideBottomSelection(string);
                 changeNotificationIcon(false);
             }
-        }
-        else if (profileDetailsFragments != null && profileDetailsFragments.isVisible()) {
+        } else if (profileDetailsFragments != null && profileDetailsFragments.isVisible()) {
             fragment = ProfileDetailsFragments.previousFragment;
             string = ProfileDetailsFragments.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        }
-        else if (notifacationDetails != null && notifacationDetails.isVisible()) {
+        } else if (notifacationDetails != null && notifacationDetails.isVisible()) {
             fragment = NotifacationDetails.previousFragment;
             string = NotifacationDetails.previousFragmentName;
             if (fragment != null && string != null) {
@@ -516,8 +512,7 @@ public class HomeActivity extends AppCompatActivity {
         } else if (!homeFragment.isVisible()) {
             fragmentLoader(homeFragment, "dashboard");
             setSelection(homeButtonLayout);
-        }
-        else if (view == null) {
+        } else if (view == null) {
             handleExit();
         } else
             drawerLayout.openDrawer(Gravity.START);
@@ -537,8 +532,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void decideBottomSelection(String string)
-    {
+    private void decideBottomSelection(String string) {
         //H.log("decisionIs","taken");
         if (string.equalsIgnoreCase(getString(R.string.dashboard)))
             setSelection(homeButtonLayout);
@@ -565,12 +559,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void hideOrUpdateNotificationCount(boolean hide,int count)
-    {
+    public void hideOrUpdateNotificationCount(boolean hide, int count) {
         if (hide || count == 0)
             findViewById(R.id.noti_text).setVisibility(View.INVISIBLE);
         else
-            ((TextView)findViewById(R.id.noti_text)).setText(count+"");
+            ((TextView) findViewById(R.id.noti_text)).setText(count + "");
     }
 
     public void OnDrawerMyProfileClick(View v) {
@@ -582,43 +575,53 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        H.log("onActivityResult", "isExecuted");
+
         if (requestCode == 31 && resultCode == RESULT_OK) {
             //if (myProfileFragment!=null )
             H.log("resultOk", "isExecuted");
             if (myProfileFragment != null)
                 myProfileFragment.hitMyProfileApi();
 
-            if (homeFragment!=null)
+            if (homeFragment != null)
                 homeFragment.hitDashboardApi();
+        } else if (requestCode == 47 && resultCode == RESULT_OK) {
+            H.log("result47", "isExecuted");
+            if (myMatchesFragment != null && myMatchesFragment.isVisible())
+                myMatchesFragment.hitApiForRefineSearchRequest();
+            else if (favouritesFragment != null && favouritesFragment.isVisible())
+                favouritesFragment.hitApiForRefineSearchRequest();
         }
     }
 
-    public void setDrawerData(Json json)
-    {
+    public void startRefineSearchActivity() {
+        Intent intent = new Intent(this, FilterActivity.class);
+        startActivityForResult(intent, 47);
+        overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+    }
+
+    public void setDrawerData(Json json) {
         json = json.getJson(P.profile_details);
 
         String string = json.getString(P.full_name);
-        ((TextView)findViewById(R.id.name)).setText(string);
+        ((TextView) findViewById(R.id.name)).setText(string);
 
         string = json.getString(P.profile_id);
-        ((TextView)findViewById(R.id.profileId)).setText(string);
+        ((TextView) findViewById(R.id.profileId)).setText(string);
 
         string = json.getString(P.profile_pic);
         try {
-            Picasso.get().load(string).fit().placeholder(R.drawable.user).into(((ImageView)findViewById(R.id.circleImageView)));
-        }
-        catch (Exception e)
-        {
+            Picasso.get().load(string).fit().placeholder(R.drawable.user).into(((ImageView) findViewById(R.id.circleImageView)));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void updateNotificationCount(int i)
-    {
+    public void updateNotificationCount(int i) {
         TextView textView = findViewById(R.id.noti_text);
-        if (i==0)
+        if (i == 0)
             textView.setVisibility(View.INVISIBLE);
         else
-            textView.setText(i+"");
+            textView.setText(i + "");
     }
 }

@@ -1,7 +1,6 @@
 package com.nikha.shianikha.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,14 +25,15 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
 import com.nikha.shianikha.R;
-import com.nikha.shianikha.activities.FilterActivity;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
-;import org.json.JSONException;
+import org.json.JSONException;
+
+;
 
 public class FavouritesFragment extends Fragment implements Api.OnLoadingListener, Api.OnErrorListener, View.OnClickListener {
     private View fragmentView;
@@ -46,6 +46,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     private LoadingDialog loadingDialog;
 
     private Json searchJson = new Json();
+
+    private JsonList jsonList = new JsonList();
+    private CustomListAdapter customListAdapter = new CustomListAdapter();
 
     public FavouritesFragment() {
         // Required empty public constructor
@@ -71,12 +74,16 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
             fragmentView.findViewById(R.id.sortByLinearLayout).setOnClickListener(this);
 
+            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+
             Bundle bundle = getArguments();
             if (bundle != null) {
                 String string = bundle.getString(P.json);
 
                 try {
                     json = new Json(string);
+                    if (string.contains("search_by_id"))
+                        fragmentView.findViewById(R.id.sortByLinearLayout).setVisibility(View.INVISIBLE);
                     searchJson = json;
                     hitAllSearchApi();
 
@@ -99,16 +106,13 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     @Override
                     public void onSuccess(Json json) {
                         if (json.getInt(P.status) == 1) {
-                            JsonList jsonList = json.getJsonList(P.data);
+                            jsonList = json.getJsonList(P.data);
                             ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
-                            CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
-                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
 
                             fragmentView.findViewById(R.id.refineLinerLayout).setVisibility(View.INVISIBLE);
 
-                            String string = searchJson+"";
-                            if (string.contains(":"))
-                            {
+                            String string = searchJson + "";
+                            if (string.contains(":")) {
                                 string = string.substring(string.lastIndexOf(":"));
 
                                 if (string.contains("2"))
@@ -116,6 +120,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                                 else if (string.contains("3"))
                                     ((TextView) fragmentView.findViewById(R.id.sortByTextView)).setText("Descending");
                             }
+
+                            customListAdapter.notifyDataSetChanged();
                         }
                     }
                 })
@@ -173,10 +179,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     public void onSuccess(Json json) {
 
                         if (json.getInt(P.status) == 1) {
-                            JsonList jsonList = json.getJsonList(P.data);
+                            jsonList = json.getJsonList(P.data);
                             ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
-                            CustomListAdapter customListAdapter = new CustomListAdapter(jsonList);
-                            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+                            customListAdapter.notifyDataSetChanged();
                         }
                         H.showMessage(context, json.getString(P.msg));
                     }
@@ -184,10 +189,11 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .run("hitFavouriteListApi");
     }
 
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.refineLinerLayout) {
-            startActivity(new Intent(context, FilterActivity.class));
+            ((HomeActivity) context).startRefineSearchActivity();
         } else if (view.getId() == R.id.sortByLinearLayout)
             showPopUpMenu(view);
     }
@@ -198,14 +204,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     }
 
     private class CustomListAdapter extends BaseAdapter implements View.OnClickListener {
-        private JsonList jsonList;
         String string = "";
         Json json;
         ImageView imageView;
-
-        private CustomListAdapter(JsonList jsons) {
-            jsonList = jsons;
-        }
 
         @Override
         public int getCount() {
@@ -406,6 +407,42 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .run("hitLikeApi");
     }
 
+    public void hitApiForRefineSearchRequest() {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        RequestModel requestModel = RequestModel.newRequestModel("search");
+        requestModel.addJSON(P.data, App.json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            jsonList = json.getJsonList(P.data);
+                            customListAdapter.notifyDataSetChanged();
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitRefineSearchhApi");
+    }
 
     @Override
     public void onError() {

@@ -16,6 +16,8 @@ public class App extends Application {
 
     public static String fcmToken = "";
 
+    public static Json json = new Json();
+
     @Override
     public void onCreate() {
         super.onCreate();
