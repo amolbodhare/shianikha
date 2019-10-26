@@ -359,8 +359,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
         string = ((EditText)findViewById(R.id.email)).getText().toString();
-
-        if (!string.contains("@") || !string.contains(".") || (string.indexOf("@")-string.indexOf(".")==1) || string.contains(" "))
+        i = Math.abs(string.indexOf("@") - string.indexOf("."));
+        if (!string.contains("@") || !string.contains(".") || i==1 || string.contains(" "))
         {
             H.showMessage(context,"Please enter valid email!");
             return;

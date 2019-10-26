@@ -1,5 +1,6 @@
 package com.nikha.shianikha.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -10,17 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.adoisstudio.helper.Api;
-import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.nikha.shianikha.R;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
-import com.nikha.shianikha.commen.C;
+import com.nikha.App;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
-import com.nikha.shianikha.commen.RequestModel;
 
 import org.json.JSONArray;
 
@@ -33,7 +30,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     RelativeLayout mother_tongue_link_layout;
     RelativeLayout country_living_in_link_layout;
     RelativeLayout state_living_in_link_layout;
-
 
     RelativeLayout education_link_layout;
     RelativeLayout working_with_link_layout;
@@ -51,7 +47,6 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
     private Session session;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +54,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         back_navigation_icon = findViewById(R.id.back_navigation_icon);
 
-        getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
 
         session = new Session(this);
@@ -145,12 +140,9 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v.getId() == R.id.btn_apply)
             makeJson();
-        else if(v.getId() == R.id.btn_cancel)
-        {
+        else if (v.getId() == R.id.btn_cancel) {
             finish();
-        }
-
-        else if (v.getId() == R.id.annual_income_link_layout) {
+        } else if (v.getId() == R.id.annual_income_link_layout) {
             annual_income_exp_layout.toggle();
             /*Intent i=new Intent(FilterActivity.this,RefineSearchItemActivity.class);
             i.putExtra("filter_title","Active Members");
@@ -293,8 +285,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         LinearLayout linearLayout = findViewById(R.id.smoking_container_layout);
 
-        for (int j = 0; j < n; j++)
-        {
+        for (int j = 0; j < n; j++) {
             LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.inflatable_check_box, null);
             CheckBox checkBox = (CheckBox) ll.getChildAt(0);
             checkBox.setText(CommonListHolder.smokingNameList.get(j));
@@ -313,7 +304,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
-        json.addString(P.search_now,"1");
+        json.addString(P.search_now, "1");
 
         JSONArray jsonArray = new JSONArray();
         annualIncomeJsonArray(jsonArray);
@@ -359,8 +350,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void annualIncomeJsonArray(JSONArray jsonArray)
-    {
+    private void annualIncomeJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.annual_income_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -378,8 +368,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-    private void makeMaritalStatusJsonArray(JSONArray jsonArray)
-    {
+
+    private void makeMaritalStatusJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.marital_status_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -398,8 +388,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void shiaCommunityJsonArray(JSONArray jsonArray)
-    {
+    private void shiaCommunityJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.shia_community_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -417,8 +406,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-    private void motherTongueJsonArray(JSONArray jsonArray)
-    {
+
+    private void motherTongueJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.mothertongue_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -437,8 +426,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void countryLivingInJsonArray(JSONArray jsonArray)
-    {
+    private void countryLivingInJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.country_living_in_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -456,8 +444,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-    private void stateLivingInJsonArray(JSONArray jsonArray)
-    {
+
+    private void stateLivingInJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.state_living_in_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -475,8 +463,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-    private void educatoinJsonArray(JSONArray jsonArray)
-    {
+
+    private void educatoinJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.education_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -495,8 +483,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void workingWithJsonArray(JSONArray jsonArray)
-    {
+    private void workingWithJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.working_with_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -515,8 +502,7 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void smokingJsonArray(JSONArray jsonArray)
-    {
+    private void smokingJsonArray(JSONArray jsonArray) {
         LinearLayout linearLayout = findViewById(R.id.smoking_container_layout);
         LinearLayout ll;
         CheckBox checkBox;
@@ -536,38 +522,8 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void hitRefineSearchhApi(Json json) {
-        final LoadingDialog loadingDialog = new LoadingDialog(this);
-
-        RequestModel requestModel = RequestModel.newRequestModel("search");
-        requestModel.addJSON(P.data, json);
-
-        Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
-                .onLoading(new Api.OnLoadingListener() {
-                    @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
-                    }
-                })
-                .onError(new Api.OnErrorListener() {
-                    @Override
-                    public void onError() {
-                        H.showMessage(FilterActivity.this, "Something went wrong.");
-                    }
-                })
-                .onSuccess(new Api.OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Json json) {
-
-                        if (json.getInt(P.status) == 1) {
-
-                        } else
-                            H.showMessage(FilterActivity.this, json.getString(P.msg));
-                    }
-                })
-                .run("hitRefineSearchhApi");
+        App.json = json;
+        setResult(Activity.RESULT_OK);
+        finish();
     }
-
 }

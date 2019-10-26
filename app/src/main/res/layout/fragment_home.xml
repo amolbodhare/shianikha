@@ -128,7 +128,8 @@
                     android:elevation="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="13dp">
+                    android:padding="13dp"
+                    android:layout_marginBottom="7dp">
 
                     <TextView
                         android:id="@+id/myMatches"
@@ -158,7 +159,8 @@
                     android:background="@drawable/card_back_design"
                     android:padding="13dp"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="7dp">
 
                     <TextView
                         android:id="@+id/profileVisitor"
@@ -183,6 +185,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="7dp"
                     android:layout_weight="1"
                     android:elevation="3dp"
                     android:background="@drawable/card_back_design"

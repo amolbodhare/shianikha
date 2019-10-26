@@ -11,14 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.adoisstudio.helper.JsonList;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.fragments.ProfileDetailsFragments;
 import com.squareup.picasso.Picasso;
 
-public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapter.ViewHolder>
-{
+public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapter.ViewHolder> {
     private static final String TAG = "RecentlyJoinAdapter";
 
     //vars
@@ -44,16 +44,18 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
 
         Picasso.get().load(jsonList.get(position).getString(P.profile_pic)).placeholder(R.drawable.user).fit().into(viewHolder.thumbnail);
 
-
-        viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
+        if (App.showName)
+            viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
+        else
+            viewHolder.title.setText("");
 
         viewHolder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 // we are passing last parameter user_id but in next profile details api it would be considered as profile_id
-                ((HomeActivity)context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment,HomeActivity.currentFragmentName,jsonList.get(position).getString(P.user_id));
-                ((HomeActivity)context).fragmentLoader(((HomeActivity)context).profileDetailsFragments,P.profile_details_title);
+                ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, jsonList.get(position).getString(P.user_id));
+                ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, P.profile_details_title);
             }
         });
     }
@@ -64,13 +66,12 @@ public class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapte
         return jsonList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title;
         public ImageView thumbnail, overflow;
 
-        public ViewHolder(View view)
-        {
+        public ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);

@@ -29,7 +29,6 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
 import com.nikha.shianikha.R;
-import com.nikha.shianikha.activities.FilterActivity;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.activities.PerfectMatchActivity;
 import com.nikha.shianikha.commen.C;
@@ -46,7 +45,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     public static Fragment previousFragment;
     public static String previousFragmentName;
     private LoadingDialog loadingDialog;
-    private JsonList jsonList = new JsonList();
+    public JsonList jsonList = new JsonList();
     private CustomListAdapter customListAdapter;
     private String apiName = "";
 
@@ -129,8 +128,8 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                         if (json.getInt(P.status) == 1) {
                             jsonList.clear();
                             jsonList = json.getJsonList(P.data);
-                            customListAdapter.notifyDataSetChanged();
 
+                            customListAdapter.notifyDataSetChanged();
                         } else
                             H.showMessage(context, json.getString(P.msg));
                     }
@@ -151,9 +150,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             hitMatchesApi("looking_for_me");
             changeColorsOfThreeTab(v);
         } else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn) {
-            Intent intent = new Intent(getActivity(), FilterActivity.class);
-            startActivity(intent);
-            ((HomeActivity) context).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+            ((HomeActivity) context).startRefineSearchActivity();
         }
     }
 
@@ -428,5 +425,42 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
+    }
+
+    public void hitApiForRefineSearchRequest() {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        RequestModel requestModel = RequestModel.newRequestModel("search");
+        requestModel.addJSON(P.data, App.json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("Please wait submitting your data...");
+                        else
+                            loadingDialog.dismiss();
+                    }
+                })
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        if (json.getInt(P.status) == 1) {
+                            jsonList = json.getJsonList(P.data);
+                            customListAdapter.notifyDataSetChanged();
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitRefineSearchhApi");
     }
 }

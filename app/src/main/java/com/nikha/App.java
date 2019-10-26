@@ -14,6 +14,10 @@ public class App extends Application {
     public static boolean IS_DEV = false;
     public static boolean showName = false;
 
+    public static String fcmToken = "";
+
+    public static Json json = new Json();
+
     @Override
     public void onCreate() {
         super.onCreate();
