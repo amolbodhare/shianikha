@@ -884,6 +884,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:hint="Parent's/Alternate Mobile Number"
                         android:imeOptions="actionNext"
+                        android:maxLength="15"
                         android:inputType="numberSigned"
                         android:singleLine="true"
                         android:textColor="#000000"
