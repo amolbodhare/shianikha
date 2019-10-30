@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -80,6 +81,16 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             hitMatchesApi("top_matches");
 
             setSpannableText();
+
+            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh()
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                    hitMatchesApi(apiName);
+                }
+            });
 
         }
         return fragmentView;

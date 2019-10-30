@@ -144,12 +144,13 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         textView.setBackgroundColor(context.getColor(R.color.textpurle2));
         textView.setTextColor(context.getColor(R.color.white));
         textView.setElevation(7f);
+        H.log("theDataList",textView.toString());
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
 
     private void chooseApi(String string) {
 
-        if (string.equalsIgnoreCase("Accept request"))
+        if (string.equalsIgnoreCase("request"))
             hitApiForList("request_list");
         else if (string.equalsIgnoreCase("accepted"))
             hitApiForList("accepted");
@@ -267,7 +268,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View view)
+        {
             if (view.getId() == R.id.acceptButton || view.getId() == R.id.rejectButton) {
                 if (view.getId() == R.id.acceptButton)
                     hitAcceptRejectApi("1", view.getTag() + "");
@@ -329,7 +331,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-                        hitApiForList("request_list");
+                        //hitApiForList("request_list");
+                        chooseApi(which);
                     }
                 })
                 .run("hitAcceptRejectApi");

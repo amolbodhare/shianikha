@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,7 +84,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 try {
                     json = new Json(string);
                     if (string.contains("search_by_id"))
-                        fragmentView.findViewById(R.id.sortByLinearLayout).setVisibility(View.INVISIBLE);
+                        fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
                     searchJson = json;
                     hitAllSearchApi();
 
@@ -93,6 +94,16 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
             } else
                 hitFavouriteListApi("1");
+
+            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh()
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                   hitFavouriteListApi("1");
+                }
+            });
 
         }
         return fragmentView;

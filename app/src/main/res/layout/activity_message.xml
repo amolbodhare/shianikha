@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nikha.shianikha.activities.MessageActivity"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@color/white">
+    tools:context="com.nikha.shianikha.activities.MessageActivity">
 
     <RelativeLayout
         android:id="@+id/titleBar"
@@ -67,27 +66,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/inbox"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:clickable="true"
                 android:background="@color/textpurle2"
-                android:fontFamily="@font/poppins_regular"
+                android:clickable="true"
                 android:elevation="7dp"
-                android:text="Inbox"/>
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Inbox"
+                android:textColor="@color/white" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="-15dp"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
+                android:tint="@color/textpurle2" />
 
         </LinearLayout>
 
@@ -95,27 +94,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/sent_message"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:background="@color/textview_back_color"
-                android:textColor="@color/textview_grey_color"
                 android:clickable="true"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Sent Message"/>
+                android:gravity="center"
+                android:text="Sent Message"
+                android:textColor="@color/textview_grey_color" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="-15dp"
-                android:visibility="gone"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
+                android:tint="@color/textpurle2"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -123,40 +122,47 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/receive_list"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:background="@color/textview_back_color"
-                android:textColor="@color/textview_grey_color"
                 android:clickable="true"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="12sp"
-                android:text="Receive List"/>
+                android:gravity="center"
+                android:text="Receive List"
+                android:textColor="@color/textview_grey_color"
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="-15dp"
-                android:visibility="gone"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                android:tint="@color/textpurle2"/>
+                android:tint="@color/textpurle2"
+                android:visibility="gone" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:dividerHeight="0dp"/>
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

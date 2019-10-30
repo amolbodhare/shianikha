@@ -1,6 +1,7 @@
 package com.nikha.shianikha.activities;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,6 +53,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             apiName = string.equalsIgnoreCase(P.inbox) ? "inbox" : "sent_message";
             hitApiForInboxOrSentMessage(apiName);
         }
+
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                swipeRefreshLayout.setRefreshing(false);
+                hitApiForInboxOrSentMessage(apiName);
+            }
+        });
     }
 
     private void hitApiForInboxOrSentMessage(final String string)
