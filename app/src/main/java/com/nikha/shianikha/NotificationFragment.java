@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -23,6 +25,9 @@ import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class NotificationFragment extends Fragment {
@@ -105,13 +110,13 @@ public class NotificationFragment extends Fragment {
                                 ListAdapter listAdapter = new ListAdapter(jsonList);
                                 ListView listView = fragmentView.findViewById(R.id.notificationList);
                                 listView.setAdapter(listAdapter);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         ((HomeActivity) context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
                                         ((HomeActivity) context).fragmentLoader(((HomeActivity) context).notifacationDetails, context.getString(R.string.notificationdetails));
                                     }
-                                });
+                                });*/
                             }
                         }
                     }
@@ -123,6 +128,8 @@ public class NotificationFragment extends Fragment {
     private class ListAdapter extends BaseAdapter {
         private JsonList jsonList;
         private Json json;
+        private CircleImageView imageView;
+        private TextView textView;
         private String string = "";
 
         ListAdapter(JsonList jsons) {
@@ -145,15 +152,35 @@ public class NotificationFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null)
-                convertView = LayoutInflater.from(context).inflate(R.layout.notification_list_item, null, false);
+        public View getView(int position, View view, ViewGroup parent) {
+            if (view == null)
+                view = LayoutInflater.from(context).inflate(R.layout.notification_list_item, null, false);
 
             json = jsonList.get(position);
+            view.setTag(json);
 
+            imageView=view.findViewById(R.id.notiCircle);
+            string = json.getString(P.profile_pic);
+            if (string != null)
+                try {
+                    Picasso.get().load( string).placeholder(R.drawable.placeholder).into(imageView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+            string = json.getString(P.message);
+            if (string != null) {
+                textView = view.findViewById(R.id.message);
+                textView.setText(string);
+            }
 
-            return convertView;
+            string = json.getString(P.date);
+            if (string != null) {
+                textView = view.findViewById(R.id.date);
+                textView.setText(string);
+            }
+
+             return view;
         }
     }
 

@@ -71,6 +71,7 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="Mobile No"
             android:imeOptions="actionDone"
+            android:maxLength="15"
             android:inputType="number"
             android:singleLine="true"
             android:textColor="#000000"

@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 .run("hitDashoardApi");
     }
 
-    private void setProfileData(Json parentJson) {
+    private void  setProfileData(Json parentJson) {
         Json json = parentJson.getJson(P.profile_details);
 
         String  gender = json.getString(P.gender);
