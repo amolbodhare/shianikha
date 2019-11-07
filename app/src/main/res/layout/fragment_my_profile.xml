@@ -153,19 +153,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="First Name : "
-                    android:textSize="12dp" />
+                    android:text="First Name"
+                    android:layout_weight="2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=":"
+                    android:layout_weight="0.5"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/firstName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:textSize="12sp"
                     android:text="" />
 
             </LinearLayout>
@@ -173,19 +185,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="2"
                     android:text="Middle Name : "
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/middleName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -193,19 +216,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Last Name"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Last Name : "
-                    android:textSize="12dp" />
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/lastName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -213,19 +247,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Email Address : "
-                    android:textSize="12dp" />
+                    android:text="Email"
+                    android:layout_weight="2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/eMail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -233,19 +278,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Gender"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Gender : "
-                    android:textSize="12dp" />
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/gender"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -253,19 +309,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Mobile No"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Mobile No : "
-                    android:textSize="12dp" />
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/phNumber"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -273,19 +340,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Complexion : "
+                    android:layout_weight="2"
+                    android:text="Complexion"
                     android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/skinTone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -293,19 +371,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Height : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Height"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/height"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -313,19 +402,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="2"
                     android:text="Body Type : "
-                    android:textSize="12dp" />
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/bodyType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -372,19 +472,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Shia Community : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Shia Community"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/shiaCommunity"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -392,19 +503,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Marital Status : "
+                    android:layout_weight="2"
+                    android:text="Marital Status"
                     android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/maritualStatus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -412,19 +534,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Education : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Education"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/education"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -432,19 +565,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Occupation : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Occupation"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/occupation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -452,19 +596,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Monthly Income : "
+                    android:layout_weight="2"
+                    android:text="Monthly Income"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/monthlyIncome"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -472,19 +627,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Residence Address : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Residence Address"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/resAddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -492,19 +658,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Country : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Country"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/Country"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -512,19 +689,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="State : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="State"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/stateName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -532,39 +720,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="City : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="City"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/cityName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mumbai" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Mother Tongue : "
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/motherTongue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -572,19 +751,61 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Language : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Mother Tongue"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/motherTongue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5.5"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Language"
+                    android:layout_weight="2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/language"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -631,19 +852,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Father's Name : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Father's Name"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/fatherName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -651,19 +883,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="2"
                     android:text="Father's Occupation : "
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/fatherOccupation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fatherOccupation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -671,19 +914,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Mother's Name : "
-                    android:textSize="12dp" />
+                    android:text="Mother's Name"
+                    android:layout_weight="2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/motherName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -691,19 +945,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Mother's Occupation : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Mother's Occupation"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/motherOccupation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -711,19 +976,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="2"
                     android:text="Ethnicity : "
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/ethincity"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/ethincity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -731,19 +1007,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Father's Country : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Father's Country"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/fatherCountry"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -751,19 +1038,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Mother's Country : "
-                    android:textSize="12dp" />
-
+                    android:layout_weight="2"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
                 <TextView
                     android:id="@+id/mothersCountry"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
@@ -771,19 +1067,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="5.5"
                 android:layout_marginTop="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Smoking : "
-                    android:textSize="12dp" />
+                    android:layout_weight="2"
+                    android:text="Smoking"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="0.5"
+                    android:text=":"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/smoke"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="" />
 
             </LinearLayout>
