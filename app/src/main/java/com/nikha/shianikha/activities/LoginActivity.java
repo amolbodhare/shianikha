@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -19,6 +21,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -208,5 +211,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             return convertView;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.adapters.ImageSliderAdapter;
 
@@ -61,5 +62,16 @@ public class ImageViewPagerActivity extends AppCompatActivity implements View.On
         finish();
         ((ImageViewPagerActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

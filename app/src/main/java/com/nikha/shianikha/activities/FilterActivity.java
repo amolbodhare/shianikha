@@ -526,4 +526,16 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         setResult(Activity.RESULT_OK);
         finish();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

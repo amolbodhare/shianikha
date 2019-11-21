@@ -396,5 +396,17 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
     public void onError() {
         H.showMessage(OTPVerificationActivity.this, "Something went wrong.");
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 
 }

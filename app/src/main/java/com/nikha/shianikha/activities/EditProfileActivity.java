@@ -45,6 +45,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
@@ -1263,5 +1264,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             return convertView;
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }

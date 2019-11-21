@@ -242,4 +242,16 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

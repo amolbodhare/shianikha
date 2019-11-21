@@ -101,4 +101,16 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
                 })
                 .run("hitRegisterDetailsApi");
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

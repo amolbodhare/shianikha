@@ -400,4 +400,16 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
                 findViewById(R.id.otherHobbyInputLayout).setVisibility(View.GONE);
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

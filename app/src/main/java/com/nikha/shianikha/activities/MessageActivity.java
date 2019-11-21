@@ -20,6 +20,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -280,6 +281,18 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         ((TextView) childLayout.getChildAt(0)).setTextColor(this.getColor(R.color.white));
         childLayout.getChildAt(0).setBackgroundColor(this.getColor(R.color.textpurle2));
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 
 }

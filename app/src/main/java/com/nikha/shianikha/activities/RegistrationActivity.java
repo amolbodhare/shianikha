@@ -1,51 +1,52 @@
 package com.nikha.shianikha.activities;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.icu.util.Calendar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+        import android.app.DatePickerDialog;
+        import android.app.Dialog;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.icu.util.Calendar;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.view.animation.Animation;
+        import android.view.animation.AnimationUtils;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.BaseAdapter;
+        import android.widget.DatePicker;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
 
-import com.adoisstudio.helper.Api;
-import com.adoisstudio.helper.H;
-import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.JsonList;
-import com.adoisstudio.helper.LoadingDialog;
-import com.adoisstudio.helper.Session;
-import com.nikha.shianikha.R;
-import com.nikha.shianikha.commen.C;
-import com.nikha.shianikha.commen.CommonListHolder;
-import com.nikha.shianikha.commen.P;
-import com.nikha.shianikha.commen.RequestModel;
+        import com.adoisstudio.helper.Api;
+        import com.adoisstudio.helper.H;
+        import com.adoisstudio.helper.Json;
+        import com.adoisstudio.helper.JsonList;
+        import com.adoisstudio.helper.LoadingDialog;
+        import com.adoisstudio.helper.Session;
+        import com.nikha.App;
+        import com.nikha.shianikha.R;
+        import com.nikha.shianikha.commen.C;
+        import com.nikha.shianikha.commen.CommonListHolder;
+        import com.nikha.shianikha.commen.P;
+        import com.nikha.shianikha.commen.RequestModel;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.Locale;
+        import java.util.Map;
+        import java.util.TreeMap;
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
@@ -512,5 +513,17 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
             return convertView;
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }

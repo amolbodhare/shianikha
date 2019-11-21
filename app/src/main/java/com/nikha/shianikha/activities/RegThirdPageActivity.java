@@ -350,4 +350,16 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         H.log("heightIs", i + "");
         linearLayout.setLayoutParams(layoutParams);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
+    }
 }

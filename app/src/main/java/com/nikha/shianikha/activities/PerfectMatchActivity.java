@@ -32,6 +32,7 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.WebViewActivity;
 import com.nikha.shianikha.commen.C;
@@ -473,5 +474,17 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
     public void onBackClick(View view) {
         finish();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }

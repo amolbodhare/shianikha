@@ -45,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     private String profileId = "";
     private String sharableLink = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -308,5 +309,6 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 }

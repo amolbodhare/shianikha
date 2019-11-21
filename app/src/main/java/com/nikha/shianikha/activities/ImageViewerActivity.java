@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.squareup.picasso.Picasso;
 
@@ -75,6 +76,18 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
 
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }
 

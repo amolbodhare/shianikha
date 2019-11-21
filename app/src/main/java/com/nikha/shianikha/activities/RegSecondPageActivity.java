@@ -1,33 +1,33 @@
 package com.nikha.shianikha.activities;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.Editable;
+        import android.text.InputType;
+        import android.text.TextWatcher;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.RadioGroup;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
 
-import com.adoisstudio.helper.H;
-import com.adoisstudio.helper.Json;
-import com.adoisstudio.helper.Session;
-import com.nikha.App;
-import com.nikha.shianikha.R;
-import com.nikha.shianikha.commen.CommonListHolder;
-import com.nikha.shianikha.commen.P;
+        import com.adoisstudio.helper.H;
+        import com.adoisstudio.helper.Json;
+        import com.adoisstudio.helper.Session;
+        import com.nikha.App;
+        import com.nikha.shianikha.R;
+        import com.nikha.shianikha.commen.CommonListHolder;
+        import com.nikha.shianikha.commen.P;
 
-import org.json.JSONArray;
+        import org.json.JSONArray;
 
 public class RegSecondPageActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
@@ -312,5 +312,17 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             if (((LinearLayout)findViewById(R.id.linearLayout)).getChildCount() == 0)
                 addNewSubLayout();
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App.mPlayer.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App.mPlayer.pause();
     }
 }
