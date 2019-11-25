@@ -16,6 +16,7 @@ import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
@@ -103,9 +104,9 @@ public class MyProfileFragment extends Fragment {
         json = json.getJson(P.data);
         profile_details_string = json.toString();
 
-        String  gender = json.getString(P.gender);
+        String gender = json.getString(P.gender);
         gender = gender.toLowerCase();
-        Drawable drawable = gender.equals("male")? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
+        Drawable drawable = gender.equals("male") ? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
 
         String string = json.getString(P.profile_pic);
         try {
@@ -277,8 +278,10 @@ public class MyProfileFragment extends Fragment {
         string = json.getString(P.profile_id);
         ((TextView) fragmentView.findViewById(R.id.profile_id_tv)).setText(string);
 
-        string = json.getString(P.packages_applied);
-        ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(string);
+        if (App.showName)
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Paid");
+        else
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Free");
 
         string = json.getString(P.email);
         ((TextView) fragmentView.findViewById(R.id.eMail)).setText(string);

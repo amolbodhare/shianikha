@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Minimum education"
+                    android:hint="Minimum Education"
                     android:paddingRight="56dp"
                     android:textSize="16sp" />
 

@@ -98,7 +98,7 @@ public class AboutApp extends Fragment {
 
 
                             String  string = json.getString(P.data);
-                            ((TextView) fragmentView.findViewById(R.id.textView)).setText(string);
+                            ((TextView) fragmentView.findViewById(R.id.textView)).append(string);
 
 
                         } else
@@ -106,6 +106,8 @@ public class AboutApp extends Fragment {
                     }
                 })
                 .run("hitAboutUs");
+
+
     }
 
 

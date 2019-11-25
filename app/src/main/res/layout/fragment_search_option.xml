@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="AGE"
+                android:text="Age"
                 android:textSize="15sp" />
 
             <RelativeLayout
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:alpha="0.5"
-                android:text="motherTongue" />
+                android:text="Mother Tongue" />
 
 
             <RelativeLayout

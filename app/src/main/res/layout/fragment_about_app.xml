@@ -19,7 +19,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_app"
+        android:text="The Audio Credits goes to Hassan Ali\n"
         android:textSize="15sp"/>
 
 </ScrollView>

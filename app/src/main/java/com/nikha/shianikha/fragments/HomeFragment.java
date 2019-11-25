@@ -20,6 +20,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.adapters.RecentlyJoinAdapter;
@@ -117,7 +118,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 .run("hitDashoardApi");
     }
 
-    private void  setProfileData(Json parentJson) {
+    private void  setProfileData(Json parentJson)
+    {
         Json json = parentJson.getJson(P.profile_details);
 
         String  gender = json.getString(P.gender);
@@ -148,6 +150,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         int i = json.getInt(P.notifacation_count);
         ((HomeActivity)context).updateNotificationCount(i);
+
+        if (App.showName)
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Paid");
+        else
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Free");
     }
 
     @Override
