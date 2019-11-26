@@ -1,18 +1,13 @@
 package com.nikha;
 
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Static;
 import com.nikha.shianikha.R;
-
-import java.util.List;
 
 public class App extends Application
 {
@@ -37,7 +32,7 @@ public class App extends Application
         mPlayer.setLooping(true);
         //device_id = Settings.Secure.ANDROID_ID;
 
-        Static.show_log = true;
+        Static.show_log = false;
 
     }//init
 
