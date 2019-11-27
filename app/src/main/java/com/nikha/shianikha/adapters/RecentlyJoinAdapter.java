@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.JsonList;
 import com.nikha.App;
 import com.nikha.shianikha.R;

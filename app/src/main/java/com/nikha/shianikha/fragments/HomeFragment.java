@@ -107,8 +107,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         if (json.getInt(P.status) == 1)
                         {
                             setProfileData(json);
-                            setRecentlyJoinData(json);
-                            setRecentVisitorsData(json);
+                            if (App.i == 0) {//to avoid crash
+                                setRecentlyJoinData(json);
+                                setRecentVisitorsData(json);
+                                App.i = 1;
+                            }
                             ((HomeActivity)context).setDrawerData(json);
 
                         } else

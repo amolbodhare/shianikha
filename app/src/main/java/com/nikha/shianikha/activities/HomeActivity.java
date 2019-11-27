@@ -342,7 +342,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Session session = new Session(HomeActivity.this);
                 session.addString(P.tokenData, "");
-                session.addInt(P.showName, 1);
+                App.i = 0;
+                //session.addInt(P.showName, 1);
 
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

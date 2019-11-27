@@ -22,6 +22,8 @@ public class App extends Application
     public static Json json = new Json();
     public static MediaPlayer mPlayer;
 
+    public static int i;
+
     @Override
     public void onCreate() {
         super.onCreate();
