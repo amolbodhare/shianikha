@@ -31,11 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/linearLayout"
                 android:layout_alignParentRight="true"
-                android:visibility="invisible"
                 android:layout_marginBottom="20dp"
                 android:background="@color/semiTrans"
                 android:clickable="true"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:visibility="invisible">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/religion_tv"
@@ -156,13 +156,13 @@
 
                     <ImageView
                         android:id="@+id/likeImageView"
-                        android:layout_height="30dp"
                         android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:clickable="true"
-                        android:tint="@color/white"
-                        android:tag="0"
                         android:src="@drawable/like_icon"
-                        android:textColor="@color/white" />
+                        android:tag="0"
+                        android:textColor="@color/white"
+                        android:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/connectNow"
@@ -206,10 +206,10 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
-                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/darkGreen"
+                android:clickable="true"
                 android:gravity="center">
 
                 <ImageView
@@ -233,10 +233,10 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
-                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/yellow"
+                android:clickable="true"
                 android:gravity="center">
 
                 <ImageView
@@ -261,9 +261,9 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:background="@drawable/blue_button_color"
                 android:backgroundTint="@color/orange"
+                android:clickable="true"
                 android:gravity="center">
 
                 <ImageView
@@ -581,13 +581,200 @@
                 android:layout_marginTop="6dp"
                 app:cardElevation="3dp">
 
-                <TextView
-                    android:id="@+id/background_tv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:padding="7dp"
-                    android:text="" />
+                    android:orientation="vertical"
+                    android:padding="7dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Religion" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/background_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Father's Name" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/fatherName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Mother's Name" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/motherName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Father's Occupation" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/fatherOccupation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Mother's Occupation" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/motherOccupation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Marital Status" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/maritalStatus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
@@ -632,16 +819,81 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                app:cardElevation="3dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                app:cardElevation="3dp">
 
-                <TextView
-                    android:id="@+id/education_and_career_tv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:padding="7dp"
-                    android:text="" />
+                    android:orientation="vertical"
+                    android:padding="7dp">
+
+                    <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.25"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Education" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/occupation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.25"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="7dp"
+                        android:text="" />
+
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Occupation" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/carrerOccupation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
 

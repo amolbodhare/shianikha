@@ -384,8 +384,14 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         ((TextView) fragmentView.findViewById(R.id.designation_tv)).setText(profileDetailJson.getString(P.occupation_name));
         jsonList = profileDetailJson.getJsonList("images");
         ((TextView) fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
-        ((TextView) fragmentView.findViewById(R.id.background_tv)).setText("Religion : " + profileDetailJson.getString(P.religion));
-        ((TextView) fragmentView.findViewById(R.id.education_and_career_tv)).setText("Education : " + profileDetailJson.getString(P.education) + "\n" + "Occupation : " + profileDetailJson.getString(P.occupation_name));
+        ((TextView) fragmentView.findViewById(R.id.background_tv)).setText(profileDetailJson.getString(P.religion));
+        ((TextView)fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
+        ((TextView)fragmentView.findViewById(R.id.motherName)).setText(profileDetailJson.getString(P.mother_name));
+        ((TextView)fragmentView.findViewById(R.id.fatherOccupation)).setText(profileDetailJson.getString(P.father_occupation));
+        ((TextView)fragmentView.findViewById(R.id.motherOccupation)).setText(profileDetailJson.getString(P.mother_occupation));
+        ((TextView)fragmentView.findViewById(R.id.maritalStatus)).setText(profileDetailJson.getString(P.marital_status));
+        ((TextView) fragmentView.findViewById(R.id.occupation)).setText(profileDetailJson.getString(P.education));
+        ((TextView)fragmentView.findViewById(R.id.carrerOccupation)).setText( profileDetailJson.getString(P.occupation_name));
     }
 
     @Override
