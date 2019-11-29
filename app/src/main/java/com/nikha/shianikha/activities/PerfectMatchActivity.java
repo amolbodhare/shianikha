@@ -337,6 +337,10 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
 
         checkBox = findViewById(R.id.checkBox3);
         string = checkBox.isChecked() ? "1" : "0";
+        if(string.equals("0")){
+            H.showMessage(this,"Please check the Terms of Use");
+            return;
+        }
         json.addString(P.sancity_of_the_holy_quran,string);
 
         hitPerfectMatchApi(json);

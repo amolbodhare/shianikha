@@ -20,6 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/poppins_regular"
+            android:visibility="invisible"
             android:text="Matches as per your preferences Edit"
             android:textSize="10sp" />
 

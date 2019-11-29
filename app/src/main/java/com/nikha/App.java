@@ -34,7 +34,7 @@ public class App extends Application
         mPlayer.setLooping(true);
         //device_id = Settings.Secure.ANDROID_ID;
 
-        Static.show_log = false;
+        Static.show_log = true;
 
     }//init
 
