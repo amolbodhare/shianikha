@@ -2,7 +2,7 @@ package com.nikha.shianikha.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -28,7 +28,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
     private EditText otp_first, otp_second, otp_third, otp_fourth, otp_fifth, otp_sixth;
     private Json json = new Json();
     private LoadingDialog loadingDialog;
-    private int from;//if from =2 hai tho login se if 6 hai tho registration se hai
+    private int from;//if from =3 hai tho login se if 6 hai tho registration se hai
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -279,9 +279,9 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         else if (v.getId() == R.id.resendText) {
             json.remove(P.otp);
 
-            if (from == 2)
+            if (from == 3)
                 hitLoginApi();
-            else if (from > 2)
+            else if (from > 3)
                 hitRegisterApi();
         }
     }
@@ -300,7 +300,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
         json.addString(P.otp, string);
 
-        string = from == 2 ? "validate_login_otp" : "validate_otp";
+        string = from == 3 ? "validate_login_otp" : "validate_otp";
 
         RequestModel requestModel = RequestModel.newRequestModel(string);
         requestModel.addJSON(P.data, json);

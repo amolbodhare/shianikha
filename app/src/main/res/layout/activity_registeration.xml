@@ -84,7 +84,7 @@
 
                 </RelativeLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/first_name_til"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                     android:layout_marginBottom="0dp">
 
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,9 +106,9 @@
                         android:textColor="#000000"
                         android:textSize="16dp" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/middle_name_til"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="0dp">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/middle_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -129,9 +129,9 @@
                         android:textColor="#000000"
                         android:textSize="16dp" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/last_name_til"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="0dp">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -153,9 +153,9 @@
                         android:textSize="16dp" />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="0dp">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/dateOfBirthEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -177,10 +177,10 @@
                         android:textSize="16dp" />
 
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_til"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                     android:textColor="#000000"
                     android:textSize="16dp">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                         android:textSize="16dp"
                         android:typeface="monospace" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -226,13 +226,13 @@
                         android:inputType="numberSigned"
                         android:text="+91" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/mobile_no_til"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/countryCode">
 
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/mobile_no"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -246,7 +246,7 @@
                             android:textSize="16dp"
                             android:typeface="monospace" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 

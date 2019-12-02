@@ -2,9 +2,8 @@ package com.nikha.shianikha.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -22,6 +20,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
+import com.nikha.shianikha.AppSignatureHashHelper;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -34,6 +33,7 @@ import java.util.TreeMap;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Map<String,String> countryList = new TreeMap<>();
+    private String hashKey;
 
 
     @Override
@@ -50,6 +50,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.countryCodeEditText).setOnClickListener(this);
 
         makeCountryCodeList();
+        extractHashKey();
+    }
+
+    private void extractHashKey() {
+        AppSignatureHashHelper appSignatureHashHelper = new AppSignatureHashHelper(this);
+
+        if (appSignatureHashHelper.getAppSignatures() != null && appSignatureHashHelper.getAppSignatures().size() > 0)
+            hashKey = appSignatureHashHelper.getAppSignatures().get(0);
+
+        H.log("hashKeyIs", hashKey);
     }
 
     private void makeCountryCodeList() {
@@ -121,12 +131,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         json.addString(P.ph_number,string);
-        
+        json.addString(P.hash_code, hashKey);
         hitLoginApi(json);
     }
 
     private void hitLoginApi(Json json) {
         final Json j = json;
+
         final LoadingDialog loadingDialog = new LoadingDialog(this);
 
         RequestModel requestModel = RequestModel.newRequestModel("login");

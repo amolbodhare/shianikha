@@ -50,7 +50,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherEducationInputLayout"
                 android:layout_width="match_parent"
                 android:visibility="gone"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Education's name" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
                 android:id="@+id/occupation_layout"
@@ -92,7 +92,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherOccupationInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Other details about your Occupation" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -133,7 +133,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/residentialAddressTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="top" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <RelativeLayout
@@ -253,7 +253,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherMotherTongueInputLayout"
                 android:layout_width="match_parent"
                 android:visibility="gone"
@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Mother Tongue's Name" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -293,7 +293,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherLanguageInputLayout"
                 android:layout_width="match_parent"
                 android:visibility="gone"
@@ -306,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Language's Name"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/button"

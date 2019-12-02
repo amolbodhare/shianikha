@@ -135,7 +135,7 @@
                 android:rotation="180"
                 android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/sub_plan_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

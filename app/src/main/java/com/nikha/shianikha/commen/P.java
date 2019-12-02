@@ -219,4 +219,5 @@ public class P {
     public static String account_hide = "account_hide";
     public static String account_delete = "account_delete";
     public static String fcm_token = "fcm_token";
+    public static String hash_code="hash_code";
 }//class

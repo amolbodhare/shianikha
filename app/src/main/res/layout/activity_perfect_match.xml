@@ -247,7 +247,7 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherEthnicityInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -260,9 +260,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Ethnicity's name" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherEthnicity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Type Here . . . " />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
                 android:id="@+id/pref_match_min_education_spinner_layout"
@@ -303,7 +303,7 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/otherEducationInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -316,7 +316,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Please Enter Other Education's name" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/checkBox1"
