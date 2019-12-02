@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Search Here..."
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:paddingLeft="10dp"
             android:imeOptions="actionDone"
             android:paddingRight="?actionBarSize"

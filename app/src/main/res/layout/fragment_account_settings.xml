@@ -572,6 +572,7 @@
             android:layout_marginBottom="17dp"
             android:background="@drawable/blue_button_back"
             android:text="Hide Account"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -585,7 +586,6 @@
             android:layout_marginBottom="17dp"
             android:background="@drawable/blue_button_back"
             android:text="Delete Account"
-            android:visibility="invisible"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
