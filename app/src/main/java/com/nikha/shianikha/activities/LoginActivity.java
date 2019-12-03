@@ -2,7 +2,6 @@ package com.nikha.shianikha.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
@@ -20,7 +21,6 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
-import com.nikha.shianikha.AppSignatureHashHelper;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -33,8 +33,6 @@ import java.util.TreeMap;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Map<String,String> countryList = new TreeMap<>();
-    private String hashKey;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,16 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.countryCodeEditText).setOnClickListener(this);
 
         makeCountryCodeList();
-        extractHashKey();
-    }
-
-    private void extractHashKey() {
-        AppSignatureHashHelper appSignatureHashHelper = new AppSignatureHashHelper(this);
-
-        if (appSignatureHashHelper.getAppSignatures() != null && appSignatureHashHelper.getAppSignatures().size() > 0)
-            hashKey = appSignatureHashHelper.getAppSignatures().get(0);
-
-        H.log("hashKeyIs", hashKey);
+        App.app.extractHashKey(this);
     }
 
     private void makeCountryCodeList() {
@@ -131,7 +120,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         json.addString(P.ph_number,string);
-        json.addString(P.hash_code, hashKey);
+
+        App.app.startSmsListener(this);
+        json.addString(P.hash_code, App.hashKey);
         hitLoginApi(json);
     }
 

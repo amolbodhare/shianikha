@@ -1,52 +1,53 @@
 package com.nikha.shianikha.activities;
 
         import android.app.DatePickerDialog;
-        import android.app.Dialog;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.icu.util.Calendar;
-        import androidx.appcompat.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.text.Editable;
-        import android.text.TextWatcher;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.animation.Animation;
-        import android.view.animation.AnimationUtils;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.BaseAdapter;
-        import android.widget.DatePicker;
-        import android.widget.EditText;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.ListView;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.icu.util.Calendar;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-        import com.adoisstudio.helper.Api;
-        import com.adoisstudio.helper.H;
-        import com.adoisstudio.helper.Json;
-        import com.adoisstudio.helper.JsonList;
-        import com.adoisstudio.helper.LoadingDialog;
-        import com.adoisstudio.helper.Session;
-        import com.nikha.App;
-        import com.nikha.shianikha.R;
-        import com.nikha.shianikha.commen.C;
-        import com.nikha.shianikha.commen.CommonListHolder;
-        import com.nikha.shianikha.commen.P;
-        import com.nikha.shianikha.commen.RequestModel;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.Locale;
-        import java.util.Map;
-        import java.util.TreeMap;
-        import java.util.regex.Matcher;
-        import java.util.regex.Pattern;
+import com.adoisstudio.helper.Api;
+import com.adoisstudio.helper.H;
+import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
+import com.nikha.App;
+import com.nikha.shianikha.R;
+import com.nikha.shianikha.commen.C;
+import com.nikha.shianikha.commen.CommonListHolder;
+import com.nikha.shianikha.commen.P;
+import com.nikha.shianikha.commen.RequestModel;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayAdapter<String> arrayAdapter;
@@ -61,7 +62,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     String gender = "";
 
-
     private Map<String, String> countryList = new TreeMap<>();
 
     @Override
@@ -73,6 +73,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_registeration);
 
         context = RegistrationActivity.this;
+        App.app.extractHashKey(context);
+
 
         profile_for_ed = findViewById(R.id.profile_for_ed);
 
@@ -88,7 +90,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         setUpCountryCodePopUP();
         handleGenderClickListner();
         setMargintopOfCustomSpinner();
-
     }
 
     private void setUpCountryCodePopUP()
@@ -391,6 +392,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.gender,gender);
 
+        json.addString(P.hash_code, App.hashKey);
+
+        App.app.startSmsListener(this);
         hitRegisterApi(json);
 
         //startActivity(new Intent(RegistrationActivity.this,PerfectMatchActivity.class));
