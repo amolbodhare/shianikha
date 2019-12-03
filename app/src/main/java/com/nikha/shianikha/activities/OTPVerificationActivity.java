@@ -2,13 +2,15 @@ package com.nikha.shianikha.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -36,6 +38,8 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(getColor(R.color.transparent));
         setContentView(R.layout.activity_otp_verification);
+
+        App.app.startSmsListener(this);
 
         loadingDialog = new LoadingDialog(this);
 
@@ -76,6 +80,8 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                 e.printStackTrace();
             }
         }
+
+        setSixDigitOtp();
     }
 
     private void setOnKeyListnerOnAllEditText() {
@@ -332,8 +338,8 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                             session.addString(P.email, str);
 
                             int i = json.getInt(P.show);
-                            session.addInt(P.showName,i);
-                            App.showName = i==1? true : false;
+                            session.addInt(P.showName, i);
+                            App.showName = i == 1 ? true : false;
 
                             startActivity(intent);
                             finish();
@@ -396,6 +402,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
     public void onError() {
         H.showMessage(OTPVerificationActivity.this, "Something went wrong.");
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -409,4 +416,25 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         App.mPlayer.pause();
     }
 
+    public void setSixDigitOtp()
+    {
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (App.tempOTP == null)
+                    handler.postDelayed(this, 500);
+                else {
+                    otp_first.setText(App.tempOTP.charAt(0)+"");
+                    otp_second.setText(App.tempOTP.charAt(1)+"");
+                    otp_third.setText(App.tempOTP.charAt(2)+"");
+                    otp_fourth.setText(App.tempOTP.charAt(3)+"");
+                    otp_fifth.setText(App.tempOTP.charAt(4)+"");
+                    otp_sixth.setText(App.tempOTP.charAt(5)+"");
+                    handler.removeCallbacks(this);
+                }
+            }
+        };
+        runnable.run();
+    }
 }

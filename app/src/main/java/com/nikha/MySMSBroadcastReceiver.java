@@ -1,23 +1,18 @@
-package com.nikha.shianikha;
+package com.nikha;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.util.Log;
 
 import com.adoisstudio.helper.H;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.Status;
 
-
 public class MySMSBroadcastReceiver extends BroadcastReceiver {
-    Context context;
-
-    public MySMSBroadcastReceiver() {
-
-    }
+    private Context context;
 
     public MySMSBroadcastReceiver(Context context) {
         this.context = context;
@@ -25,7 +20,7 @@ public class MySMSBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-       /* if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
+        if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
             Bundle extras = intent.getExtras();
 
             if (extras == null)
@@ -38,19 +33,14 @@ public class MySMSBroadcastReceiver extends BroadcastReceiver {
             switch (status.getStatusCode()) {
                 case CommonStatusCodes.SUCCESS:
 
-                    H.log("switchSuccess", "isExecuted");
+                    H.log("CommonStatusCodes", "SUCCESS");
 
                     //This is the full message
                     String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
                     if (message != null) {
-                        int i = message.indexOf("s");
-                        message = message.substring(i + 2, i + 8);
-                        App.generatedOtp = message;
-
-                        if (this.context != null) {
-                            EditText editText = ((OtpActivity) this.context).findViewById(R.id.edt_otp);
-                            editText.setText(message);
-                        }
+                        Log.e("smsIs", message);
+                        if (this.context != null)
+                            setText(message);
                     }
 
                     break;
@@ -80,6 +70,17 @@ public class MySMSBroadcastReceiver extends BroadcastReceiver {
                     break;
 
             }
-        }*/
+        }
+    }
+
+    private void setText(String message)
+    {
+        if (message.contains("."))
+        {
+            int i = message.indexOf(".");
+            message = message.substring(i-6,i);
+            H.log("otpIs",message);
+            App.tempOTP = message.trim();
+        }
     }
 }

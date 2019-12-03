@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +14,19 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.EditProfileActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.json.JSONArray;
 
@@ -171,7 +172,15 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             makeJson("0","1");
 
         else if (v.getId() == R.id.deleteButton)
-            makeJson("1","0");
+        {
+            H.showYesNoDialog(context, "Alert", "Do you really want to delete account?", "Yes", "No", new H.OnYesNoListener() {
+                @Override
+                public void onDecision(boolean isYes) {
+                    if (isYes)
+                        makeJson("1","0");
+                }
+            });
+        }
     }
 
     public interface OnFragmentInteractionListener {
