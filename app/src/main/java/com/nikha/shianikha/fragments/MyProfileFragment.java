@@ -171,6 +171,38 @@ public class MyProfileFragment extends Fragment {
         textView = fragmentView.findViewById(R.id.motherTongue);
         textView.setText(string);
 
+
+        string = json.getString(P.hijab_preference);
+        textView = fragmentView.findViewById(R.id.hijab);
+        textView.setText(string);
+
+        string = json.getString(P.roza);
+        textView = fragmentView.findViewById(R.id.roza);
+        textView.setText(string);
+
+        string = json.getString(P.namaz);
+        textView = fragmentView.findViewById(R.id.namaz);
+        textView.setText(string);
+
+        string = json.getString(P.relocate_id);
+        textView = fragmentView.findViewById(R.id.relocate);
+        textView.setText(string);
+
+
+        string = json.getString(P.religion_expectations);
+        textView = fragmentView.findViewById(R.id.religionPractice);
+        textView.setText(string);
+
+        string = json.getString(P.qualities_seeking);
+        textView = fragmentView.findViewById(R.id.preference);
+        textView.setText(string);
+
+        string = json.getString(P.more_about_you);
+        textView = fragmentView.findViewById(R.id.moreAboutYou);
+        textView.setText(string);
+
+
+
         if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_mother_tongue);
             if (!string.isEmpty())

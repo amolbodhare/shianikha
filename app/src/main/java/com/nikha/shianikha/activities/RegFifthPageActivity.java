@@ -374,6 +374,7 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
             lat = location.getLatitude() + "";
         if (longs.isEmpty())
             longs = location.getLongitude() + "";
+        H.log("latLong",lat+"     "+longs+"");
     }
 
     @Override

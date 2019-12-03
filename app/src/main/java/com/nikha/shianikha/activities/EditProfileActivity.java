@@ -12,10 +12,13 @@ import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.provider.MediaStore;
+
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +39,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -168,8 +172,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.dateOfBirthEditText)
             handleDatePicker();
-        else if (v.getId() == R.id.add_img_imv)
-        {
+        else if (v.getId() == R.id.add_img_imv) {
             H.log("clickEventIs", "Triggered");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 callImageCropper();
@@ -280,6 +283,48 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         submit_json.addString(P.last_name, string);
 
+         editText = findViewById(R.id.email);
+         string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter Email Address");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.email, string);
+
+
+        editText = findViewById(R.id.descriptionOneEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter first name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.religion_expectations, string);
+
+
+        editText = findViewById(R.id.descriptionTwoEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter first name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.about_1, string);
+
+
+        editText = findViewById(R.id.descriptionThreeEditText);
+        string = editText.getText().toString();
+        if (string.isEmpty()) {
+            H.showMessage(this, "Please enter first name");
+            editText.requestFocus();
+            return;
+        }
+        submit_json.addString(P.about_2, string);
+
+
+
+
         editText = findViewById(R.id.dateOfBirthEditText);
         string = "";
         Object object = editText.getTag();
@@ -291,6 +336,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             }
         }
         submit_json.addString(P.dob, string);
+
+
 
         /*editText = findViewById(R.id.emailEditText);
         string = editText.getText().toString();
@@ -389,6 +436,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         submit_json.addString(P.);*/
+
+
 
         editText = findViewById(R.id.maritalStatusEditText);
         string = editText.getText().toString();
@@ -651,9 +700,23 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select smoking status");
             return;
         }
+
+        string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.handicap, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.namazGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.namaz, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.rozaGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.roza, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.hijabGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.hijab_preference, string);
+
         i = CommonListHolder.smokingNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.smokingIdList.get(i);
         submit_json.addString(P.smoke_id, string);
+
 
         jsonArray = makeInterestedInJsonArray();
         submit_json.addJSONArray(P.intreasted_in, jsonArray);
@@ -661,6 +724,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         editText = findViewById(R.id.otherHobbyEditText);
         string = editText.getText().toString();
         submit_json.addString(P.other_intreasted, string);
+
+
+        editText = findViewById(R.id.relocateEditText);
+        string = editText.getText().toString();
+
+
+        i = CommonListHolder.relocateNameList.indexOf(string);
+        if (i != -1)
+            App.masterJson.addString(P.relocate_id, CommonListHolder.relocateIdList.get(i));
 
         H.log("submittedjson", submit_json.toString());
         hitEditProfileApi(submit_json);
@@ -744,6 +816,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         } else if (i == R.id.motherTongueEditText) {
             editText.setHint("Search Language ");
             arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
+        } else if (view.getId() == R.id.relocateEditText) {
+            editText.setHint("Willing to relocate");
+            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.relocateNameList);
         } else if (i == R.id.selectLanguagesEditText) {
             String[] stringArray = new String[CommonListHolder.languageNameList.size()];
             stringArray = CommonListHolder.languageNameList.toArray(stringArray);
@@ -1004,8 +1079,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void hitImageUploadApi(String base64String) {
         Json json = new Json();
         json.addString(P.token_id, new Session(this).getString(P.tokenData));
-        json.addString(P.image,"data:image/jpg;base64," +base64String);
-        json.addString("album_id","1");
+        json.addString(P.image, "data:image/jpg;base64," + base64String);
+        json.addString("album_id", "1");
 
         RequestModel requestModel = RequestModel.newRequestModel("uploadPhoto");
         requestModel.addJSON(P.data, json);
@@ -1036,12 +1111,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.lastNameEditText)).setText(json.getString(P.last_name));
 
 
-        String  gender = json.getString(P.gender);
+
+        String gender = json.getString(P.gender);
         this.gender = gender;
         gender = gender.toLowerCase();
-        Drawable drawable = gender.equals("male")? getDrawable(R.drawable.male) : getDrawable(R.drawable.female);
+        Drawable drawable = gender.equals("male") ? getDrawable(R.drawable.male) : getDrawable(R.drawable.female);
 
-        String  string = json.getString(P.profile_pic);
+        String string = json.getString(P.profile_pic);
         try {
             Picasso.get().load(string).placeholder(drawable).fit().into(((ImageView) findViewById(R.id.image_profile_pic)));
         } catch (Exception e) {
@@ -1082,7 +1158,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             gender_female_imv.startAnimation(myAnim);
             gender_male_imv.clearAnimation();
         }
-
+        ((EditText) findViewById(R.id.email)).setText(json.getString(P.email));
+        //((EditText) findViewById(R.id.mobile_no)).setText(json.getString(P.mobile));
         ((EditText) findViewById(R.id.complexionEditText)).setText(json.getString(P.skin_tone));
 
         ((EditText) findViewById(R.id.heightEditText)).setText(json.getString(P.height));
@@ -1101,8 +1178,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.occupation_name);
         ((EditText) findViewById(R.id.occupationEditText)).setText(string);
-        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-        {
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_occupation);
             ((EditText) findViewById(R.id.otherOccupationEditText)).setText(string);
             findViewById(R.id.otherOccupationInputLayout).setVisibility(View.VISIBLE);
@@ -1114,11 +1190,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.countryEditText)).setText(json.getString(P.country_name));
         ((EditText) findViewById(R.id.stateEditText)).setText(json.getString(P.state_name));
         ((EditText) findViewById(R.id.cityEditText)).setText(json.getString(P.city_name));
+        ((EditText) findViewById(R.id.relocateEditText)).setText(json.getString(P.relocate_id));
+        ((EditText) findViewById(R.id.descriptionOneEditText)).setText(json.getString(P.religion_expectations));
+        ((EditText) findViewById(R.id.descriptionTwoEditText)).setText(json.getString(P.about_1));
+        ((EditText) findViewById(R.id.descriptionThreeEditText)).setText(json.getString(P.about_2));
+
 
         string = json.getString(P.mothertongue);
         ((EditText) findViewById(R.id.motherTongueEditText)).setText(string);
-        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-        {
+        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others")) {
             string = json.getString(P.other_mother_tongue);
             ((EditText) findViewById(R.id.otherMotherTongueEditText)).setText(string);
             findViewById(R.id.otherMotherTongueInputLayout).setVisibility(View.VISIBLE);
@@ -1149,12 +1229,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText = findViewById(R.id.selectLanguagesEditText);
             editText.setText(string);
 
-            if (string.contains("ther") || string.contains("THER"))
-            {
+            if (string.contains("ther") || string.contains("THER")) {
                 string = json.getString(P.other_language);
-                if (!string.isEmpty())
-                {
-                    ((EditText)findViewById(R.id.otherLanguageEditText)).setText(string);
+                if (!string.isEmpty()) {
+                    ((EditText) findViewById(R.id.otherLanguageEditText)).setText(string);
                     findViewById(R.id.otherLanguageInputLayout).setVisibility(View.VISIBLE);
                 }
             }
@@ -1186,8 +1264,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.father_occupation);
         ((EditText) findViewById(R.id.fathersOccupationEditText)).setText(string);
-        if (string.contains("ther") || string.contains("THER"))
-        {
+        if (string.contains("ther") || string.contains("THER")) {
             string = json.getString(P.father_other_occupation);
             ((EditText) findViewById(R.id.fathersOtherOccupationEditText)).setText(string);
             findViewById(R.id.fathersOtherOccupationInputLayout).setVisibility(View.VISIBLE);
@@ -1197,8 +1274,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.mother_occupation);
         ((EditText) findViewById(R.id.mothersOccupationEditText)).setText(string);
-        if (string.contains("ther") || string.contains("THER"))
-        {
+        if (string.contains("ther") || string.contains("THER")) {
             string = json.getString(P.mother_other_occupation);
             ((EditText) findViewById(R.id.mothersOtherOccupationEdiText)).setText(string);
             findViewById(R.id.mothersOtherOccupationInputLayout).setVisibility(View.VISIBLE);
@@ -1209,8 +1285,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.ethnicity_name);
         ((EditText) findViewById(R.id.ethnicityEditText)).setText(string);
-        if (string.contains("ther") || string.contains("THER"))
-        {
+        if (string.contains("ther") || string.contains("THER")) {
             string = json.getString(P.other_ethnicity);
             ((EditText) findViewById(R.id.otherEthnicityEditText)).setText(string);
             findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.VISIBLE);
@@ -1265,6 +1340,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return convertView;
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
