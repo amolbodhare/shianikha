@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -77,8 +78,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v) {
-        if (viewFlag == 2) {
+    public void onClick(View v)
+    {
+        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout) // condition after & is written to exclude favourite from paid
+        {
             H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override
                 public void onDecision(boolean isYes) {
@@ -89,7 +92,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 }
             });
             return;
-        } else if (viewFlag == 0) {
+        }
+        else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout)// condition after & is written to exclude favourite from paid
+        {
             H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override
                 public void onDecision(boolean isYes) {
@@ -116,7 +121,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             }
         } else if (v.getId() == R.id.imageView)
             hitConnectNowApi();
-        else if (v.getId() == R.id.favouriteLinearLayout) {
+        else if (v.getId() == R.id.favouriteLinearLayout)
+        {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
@@ -279,30 +285,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
                             int action = profileDetailJson.getInt(P.view);
                             viewFlag = action;
-                            /*if (action == 0)
-                            {
-                                H.showYesNoDialog(context, "Plan not purchased", "You have to purchase the plan before viewing profile", "purchase plan", "cancel", new H.OnYesNoListener() {
-                                    @Override
-                                    public void onDecision(boolean isYes) {
-                                        if (isYes)
-                                            ((HomeActivity) context).showSubscriptionPlanActivity();
-                                        ((HomeActivity) context).onBack(new View(context));
-                                    }
-                                });
-                                return;
-                            }
-                            else if (action == 2)
-                            {
-                                H.showYesNoDialog(context, "Limit expired", "You have exhausted you viewing limit", "purchase plan", "cancel", new H.OnYesNoListener() {
-                                    @Override
-                                    public void onDecision(boolean isYes) {
-                                        if (isYes)
-                                            ((HomeActivity) context).showSubscriptionPlanActivity();
-                                        ((HomeActivity) context).onBack(new View(context));
-                                    }
-                                });
-                                return;
-                            }*/
+
 
                             sharingLink = profileDetailJson.getString(P.share_profile);
                             setData(profileDetailJson);
