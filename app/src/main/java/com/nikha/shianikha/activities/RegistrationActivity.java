@@ -518,16 +518,4 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             return convertView;
         }
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
 }

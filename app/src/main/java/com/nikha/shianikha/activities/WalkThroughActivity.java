@@ -1,20 +1,20 @@
 package com.nikha.shianikha.activities;
 
         import android.content.Context;
-        import android.content.Intent;
-        import androidx.annotation.NonNull;
-        import com.google.android.material.tabs.TabLayout;
-        import androidx.viewpager.widget.ViewPager;
-        import androidx.appcompat.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.view.WindowManager;
-        import android.widget.Button;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 
-        import com.adoisstudio.helper.LoadingDialog;
-        import com.nikha.App;
-        import com.nikha.shianikha.R;
-        import com.nikha.shianikha.adapters.SliderAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.adoisstudio.helper.LoadingDialog;
+import com.google.android.material.tabs.TabLayout;
+import com.nikha.shianikha.R;
+import com.nikha.shianikha.adapters.SliderAdapter;
 
 public class WalkThroughActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,18 +98,5 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
             startActivity(i);
         }
         //finish();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

@@ -11,12 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
-import android.provider.MediaStore;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -39,13 +35,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.nikha.App;
+import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
@@ -1264,17 +1264,5 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             return convertView;
         }
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

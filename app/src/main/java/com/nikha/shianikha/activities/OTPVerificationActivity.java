@@ -403,26 +403,13 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         H.showMessage(OTPVerificationActivity.this, "Something went wrong.");
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
-
     public void setSixDigitOtp()
     {
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (App.tempOTP == null)
+                if (App.tempOTP == null || App.tempOTP.isEmpty())
                     handler.postDelayed(this, 500);
                 else {
                     otp_first.setText(App.tempOTP.charAt(0)+"");

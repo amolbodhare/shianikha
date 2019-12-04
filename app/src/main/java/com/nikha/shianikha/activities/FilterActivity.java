@@ -2,7 +2,6 @@ package com.nikha.shianikha.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -10,6 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
@@ -525,17 +526,5 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
         App.json = json;
         setResult(Activity.RESULT_OK);
         finish();
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

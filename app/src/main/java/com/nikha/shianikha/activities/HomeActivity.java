@@ -626,16 +626,4 @@ public class HomeActivity extends AppCompatActivity {
         else
             textView.setText(i + "");
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
 }

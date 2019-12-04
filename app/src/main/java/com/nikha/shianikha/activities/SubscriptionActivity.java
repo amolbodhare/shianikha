@@ -2,17 +2,17 @@ package com.nikha.shianikha.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
-import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.adapters.SubscriptionSliderAdapter;
 import com.nikha.shianikha.commen.C;
@@ -113,17 +113,4 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
     private int getItem(int i) {
         return subPlanSlideViewPager.getCurrentItem() + i;
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
-
 }

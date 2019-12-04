@@ -1,10 +1,11 @@
 package com.nikha.shianikha.activities;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -100,17 +101,5 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
                     }
                 })
                 .run("hitRegisterDetailsApi");
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

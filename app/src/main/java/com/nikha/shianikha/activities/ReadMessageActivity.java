@@ -1,14 +1,14 @@
 package com.nikha.shianikha.activities;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.adoisstudio.helper.Json;
-import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.P;
 import com.squareup.picasso.Picasso;
@@ -84,17 +84,5 @@ public class ReadMessageActivity extends AppCompatActivity implements View.OnCli
     {
         finish();
         ((ReadMessageActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

@@ -3,10 +3,6 @@ package com.nikha.shianikha.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -27,12 +23,16 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.nikha.App;
+import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.WebViewActivity;
 import com.nikha.shianikha.commen.C;
@@ -474,21 +474,5 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             else
                 findViewById(R.id.otherEthnicityInputLayout).setVisibility(View.GONE);
         }
-    }
-
-    public void onBackClick(View view) {
-        finish();
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
     }
 }

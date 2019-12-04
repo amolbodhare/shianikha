@@ -214,17 +214,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return convertView;
         }
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
 }

@@ -3,7 +3,6 @@ package com.nikha;
 import android.app.Application;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.media.MediaPlayer;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.nikha.shianikha.R;
 
 public class App extends Application
 {
@@ -30,7 +28,6 @@ public class App extends Application
     public static String fcmToken = "";
 
     public static Json json = new Json();
-    public static MediaPlayer mPlayer;
 
     public static int i;
     public static App app;
@@ -43,9 +40,7 @@ public class App extends Application
         super.onCreate();
 
         device_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.ali_ke_sath);
-        mPlayer.start();
-        mPlayer.setLooping(true);
+      
         //device_id = Settings.Secure.ANDROID_ID;
 
         app = new App();
