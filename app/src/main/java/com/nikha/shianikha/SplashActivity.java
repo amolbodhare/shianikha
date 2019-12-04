@@ -6,12 +6,15 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -44,7 +47,6 @@ public class SplashActivity extends AppCompatActivity {
     private Session session;
     private String profileId = "";
     private String sharableLink = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,12 @@ public class SplashActivity extends AppCompatActivity {
         //handleIntent(getIntent());
     }
 
-    private void hitMastersApi() {
+
+
+    private void hitMastersApi()
+    {
+        App.showWidget = true;
+
         Json json = new Json();
 
         RequestModel requestModel = RequestModel.newRequestModel("masters");
@@ -282,7 +289,32 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        hitMastersApi();
+
+        if (Settings.canDrawOverlays(this))
+            hitMastersApi();
+        else
+            requestWidget();
+
+        //hitMastersApi();
+    }
+
+    private void requestWidget() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, 147);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 147 && Settings.canDrawOverlays(this))
+            hitMastersApi();
+        else
+        {
+            H.showMessage(this,"Please enable this option to stop music");
+            requestWidget();
+        }
     }
 
     private void generateFcmToken() {
@@ -303,12 +335,11 @@ public class SplashActivity extends AppCompatActivity {
 
                         new Session(SplashActivity.this).addString(P.fcmToken, token);
                         H.log("fcmTokenIs", token);
-                        App.fcmToken = token+"";
+                        App.fcmToken = token + "";
                         H.log("idIs", id);
                         //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
 }

@@ -419,6 +419,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                     otp_fifth.setText(App.tempOTP.charAt(4)+"");
                     otp_sixth.setText(App.tempOTP.charAt(5)+"");
                     handler.removeCallbacks(this);
+                    App.tempOTP = "";
                 }
             }
         };
