@@ -743,6 +743,38 @@
                     </LinearLayout>
 
                     <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.25"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Marital Status" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/maritalStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.25"
+                        android:fontFamily="@font/poppins_regular"
+                        android:padding="7dp"
+                        android:text="---" />
+
+                </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -753,7 +785,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2.25"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Marital Status" />
+                            android:text="Hijab" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -764,7 +796,71 @@
                             android:text=":" />
 
                         <TextView
-                            android:id="@+id/maritalStatus"
+                            android:id="@+id/hijab"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="---" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Roza" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/roza"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:padding="7dp"
+                            android:text="---" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.25"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Namaz" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/namaz"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2.25"

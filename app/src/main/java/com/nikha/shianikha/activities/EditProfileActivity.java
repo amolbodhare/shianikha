@@ -39,6 +39,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -702,16 +703,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
         string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.handicap, string);
+        submit_json.addString(P.handicap, string);
+        H.log("isExecuted","yes");
 
         string = findViewById(((RadioGroup) findViewById(R.id.namazGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.namaz, string);
+        submit_json.addString(P.namaz, string);
 
         string = findViewById(((RadioGroup) findViewById(R.id.rozaGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.roza, string);
+        submit_json.addString(P.roza, string);
 
         string = findViewById(((RadioGroup) findViewById(R.id.hijabGroup)).getCheckedRadioButtonId()).getTag().toString();
-        App.masterJson.addString(P.hijab_preference, string);
+        submit_json.addString(P.hijab_preference, string);
 
         i = CommonListHolder.smokingNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.smokingIdList.get(i);
@@ -1106,11 +1108,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setAllData(Json json) {
-        ((EditText) findViewById(R.id.firstNameEditText)).setText(json.getString(P.first_name));
+
+        H.log("Json is" ,json+"");
+        ((EditText) findViewById(R.id. firstNameEditText)).setText(json.getString(P.first_name));
         ((EditText) findViewById(R.id.middleNameEditText)).setText(json.getString(P.middle_name));
         ((EditText) findViewById(R.id.lastNameEditText)).setText(json.getString(P.last_name));
-
-
 
         String gender = json.getString(P.gender);
         this.gender = gender;
@@ -1194,6 +1196,22 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.descriptionOneEditText)).setText(json.getString(P.religion_expectations));
         ((EditText) findViewById(R.id.descriptionTwoEditText)).setText(json.getString(P.about_1));
         ((EditText) findViewById(R.id.descriptionThreeEditText)).setText(json.getString(P.about_2));
+
+
+        string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.handicap, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.namazGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.namaz, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.rozaGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.roza, string);
+
+        string = findViewById(((RadioGroup) findViewById(R.id.hijabGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.hijab_preference, string);
+
+       /* string = findViewById(((RadioGroup) findViewById(R.id.familyDetailsGroup)).getCheckedRadioButtonId()).getTag().toString();
+        App.masterJson.addString(P.family_details, string);*/
 
 
         string = json.getString(P.mothertongue);
@@ -1295,6 +1313,45 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ((EditText) findViewById(R.id.mothersCountryEditText)).setText(json.getString(P.mother_country));
 
         ((EditText) findViewById(R.id.smokingEditText)).setText(json.getString(P.smoke_id));
+
+        string = json.getString(P.cvt_islam);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesConverted)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.notConverted)).setChecked(false);
+
+        string = json.getString(P.handicap);
+        if(string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesDisable)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.noDisable)).setChecked(true);
+
+
+        string = json.getString(P.namaz);
+        if(string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesNamaz)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.noNamaz)).setChecked(true);
+
+        string = json.getString(P.roza);
+        if(string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesRoza)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.noRoza)).setChecked(true);
+
+        string = json.getString(P.hijab_preference);
+        if(string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesHijab)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.noHijab)).setChecked(true);
+
+        string = json.getString(P.syed);
+        if(string.equalsIgnoreCase("yes"))
+            ((RadioButton)findViewById(R.id.yesSyed)).setChecked(true);
+        else if(string.equalsIgnoreCase("no"))
+            ((RadioButton)findViewById(R.id.notSyed)).setChecked(true);
+        else
+            ((RadioButton)findViewById(R.id.donnKnowSyed)).setChecked(true);
     }
 
     class CountryCodeListAdapter extends BaseAdapter {
@@ -1341,16 +1398,5 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        App.mPlayer.start();
 
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        App.mPlayer.pause();
-    }
 }
