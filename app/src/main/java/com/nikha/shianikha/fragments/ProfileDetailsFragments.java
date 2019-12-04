@@ -368,6 +368,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         jsonList = profileDetailJson.getJsonList("images");
         ((TextView) fragmentView.findViewById(R.id.profile_pic_count_tv)).setText(String.valueOf(jsonList.size()));
         ((TextView) fragmentView.findViewById(R.id.background_tv)).setText(profileDetailJson.getString(P.religion));
+        ((TextView) fragmentView.findViewById(R.id.hijab)).setText(profileDetailJson.getString(P.hijab_preference));
+        ((TextView) fragmentView.findViewById(R.id.roza)).setText(profileDetailJson.getString(P.roza));
+        ((TextView) fragmentView.findViewById(R.id.namaz)).setText(profileDetailJson.getString(P.namaz));
 
         if(App.showName){
             ((TextView)fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
