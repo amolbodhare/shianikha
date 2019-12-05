@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -61,6 +63,15 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
             hitApiForList("request_list");
 
+            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+           swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    hitApiForList("request_list");
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+
             setOnClickListenerOnScrollBarChild();
         }
 
@@ -97,12 +108,14 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
+                        if (json.getInt(P.status) == 1)
+                        {
                             JsonList jsonList = json.getJsonList(P.data);
                             if (jsonList != null)
                                 ((GridView) fragmentView.findViewById(R.id.gridView)).setAdapter(new GridViewAdapter(jsonList));
 
-                        } else {
+                        }
+                        else {
                             H.showMessage(context, json.getString(P.msg));
                             ((GridView) fragmentView.findViewById(R.id.gridView)).setAdapter(new GridViewAdapter(new JsonList()));
                         }
@@ -185,6 +198,10 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
         @Override
         public int getCount() {
+            if (jsonList.size() == 0)
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.VISIBLE);
+            else
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.GONE);
             return jsonList.size();
         }
 
