@@ -149,20 +149,37 @@
 
     </LinearLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ListView
-            android:id="@+id/listView"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:layout_height="wrap_content">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/noDataTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:text="No data available"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="30sp"/>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -71,6 +71,9 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(getColor(R.color.dashboard_card_back_color));
         setContentView(R.layout.activity_home);
 
+        // when user opens app directly via notification
+        App.showWidget = true;
+
         homeFragment = HomeFragment.newInstance();
         fragmentLoader(homeFragment, "dashboard");
 

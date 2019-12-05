@@ -298,10 +298,17 @@ public class SplashActivity extends AppCompatActivity {
         //hitMastersApi();
     }
 
-    private void requestWidget() {
-        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-        intent.setData(Uri.parse("package:" + getPackageName()));
-        startActivityForResult(intent, 147);
+    private void requestWidget()
+    {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 147);
+            }
+        },1230);
+
     }
 
     @Override

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -21,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -212,6 +213,11 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
         @Override
         public int getCount() {
+            if (jsonList.size() == 0)
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.VISIBLE);
+            else
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.GONE);
+
             return jsonList.size();
         }
 

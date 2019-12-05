@@ -3,8 +3,6 @@ package com.nikha.shianikha;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -30,8 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NotificationFragment extends Fragment {
 
-    View fragmentView;
-    Context context;
+    private View fragmentView;
+    private Context context;
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
@@ -136,6 +137,10 @@ public class NotificationFragment extends Fragment {
 
         @Override
         public int getCount() {
+            if (jsonList.size() == 0)
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.VISIBLE);
+            else
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.GONE);
             return jsonList.size();
         }
 

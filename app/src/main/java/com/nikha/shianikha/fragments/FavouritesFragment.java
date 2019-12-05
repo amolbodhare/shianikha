@@ -3,8 +3,6 @@ package com.nikha.shianikha.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +15,9 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -221,6 +222,10 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
         @Override
         public int getCount() {
+            if (jsonList.size() == 0)
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.VISIBLE);
+            else
+                fragmentView.findViewById(R.id.noDataTextView).setVisibility(View.GONE);
             return jsonList.size();
         }
 

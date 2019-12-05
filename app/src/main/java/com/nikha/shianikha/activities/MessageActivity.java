@@ -161,6 +161,11 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
         @Override
         public int getCount() {
+            if (jsonList.size() == 0)
+                findViewById(R.id.noDataTextView).setVisibility(View.VISIBLE);
+            else
+                findViewById(R.id.noDataTextView).setVisibility(View.GONE);
+
             return jsonList.size();
         }
 

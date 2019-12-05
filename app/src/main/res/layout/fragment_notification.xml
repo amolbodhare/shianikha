@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.nikha.shianikha.NotificationFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -19,4 +17,15 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/noDataTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:text="No data available"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="30sp"/>
+
+</FrameLayout>
