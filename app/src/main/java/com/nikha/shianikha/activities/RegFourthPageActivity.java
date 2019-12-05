@@ -126,8 +126,11 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         EditText editText =  findViewById(R.id.fatherName);
         String string = editText.getText().toString();
 
-        if (string.isEmpty()) {
+        if (string.isEmpty() || string.length() < 3) {
+            if (string.isEmpty())
             H.showMessage(this, "Please enter father name");
+            else
+                H.showMessage(this, "Father name is not valid");
             return;
         }
         App.masterJson.addString(P.father_name, string);
@@ -157,8 +160,11 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         editText =  findViewById(R.id.motherName);
         string = editText.getText().toString();
 
-        if (string.isEmpty()) {
+        if (string.isEmpty() || string.length()<3) {
+            if (string.isEmpty())
             H.showMessage(this, "Please enter mother name");
+            else
+                H.showMessage(this, "Mother's name is not valid.");
             return;
         }
         App.masterJson.addString(P.mother_name, string);
@@ -193,14 +199,12 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         }
         App.masterJson.addString(P.siblings, string);
 
-
         string = ((EditText) findViewById(R.id.parentContact)).getText().toString();
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter parent's altername contact");
             return;
         }
         App.masterJson.addString(P.siblialternate_contact_no, string);
-
 
         string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
         App.masterJson.addString(P.handicap, string);

@@ -324,25 +324,34 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
 
         string = ((EditText)findViewById(R.id.first_name)).getText().toString();
-        if (string.isEmpty())
+        if (string.isEmpty() || string.length()<3)
         {
+            if (string.isEmpty())
             H.showMessage(context,"Please enter First Name!");
+            else
+                H.showMessage(context,"Please enter valid Name!");
             return;
         }
         json.addString(P.first_name,string);
 
         string = ((EditText)findViewById(R.id.middle_name)).getText().toString();
-        if (string.isEmpty())
+        if (string.isEmpty() || string.length()<3)
         {
+            if (string.isEmpty())
             H.showMessage(context,"Please enter Middle Name!");
+            else
+                H.showMessage(context,"Please enter valid Middle Name!");
             return;
         }
         json.addString(P.middle_name,string);
 
         string = ((EditText)findViewById(R.id.last_name)).getText().toString();
-        if (string.isEmpty())
+        if (string.isEmpty() ||  string.length()<3)
         {
+            if (string.isEmpty())
             H.showMessage(context,"Please enter Last name!");
+            else
+                H.showMessage(context,"Please enter valid Last Name!");
             return;
         }
         json.addString(P.last_name,string);

@@ -40,22 +40,32 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
 
     private void makeJson() {
         String string = ((EditText) findViewById(R.id.descriptionOneEditText)).getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty() || string.length()<3) {
+
+            if (string.isEmpty())
             H.showMessage(this, "Please enter religious expectations");
+            else
+                H.showMessage(this, "Please enter valid religious expectations");
             return;
         }
         App.masterJson.addString(P.religion_expectations, string);
 
         string = ((EditText) findViewById(R.id.descriptionTwoEditText)).getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty() || string.length()<3) {
+            if (string.isEmpty())
             H.showMessage(this, "Please enter preferences or qualities you are seeking");
+            else
+                H.showMessage(this, "Please enter valid preferences or qualities you are seeking");
             return;
         }
         App.masterJson.addString(P.qualities_seeking, string);
 
         string = ((EditText) findViewById(R.id.descriptionThreeEditText)).getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty() ||  string.length() < 3) {
+            if (string.isEmpty())
             H.showMessage(this, "Please enter more about you");
+            else
+                H.showMessage(this, "Please enter valid more about you");
             return;
         }
 

@@ -11,15 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
-import android.provider.MediaStore;
-
-import com.google.android.material.textfield.TextInputLayout;
-
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -44,12 +37,17 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
@@ -259,8 +257,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         EditText editText = findViewById(R.id.firstNameEditText);
         String string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter first name");
+        if (string.isEmpty() || string.length() < 3) {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter first name");
+            else
+                H.showMessage(this, "Please enter valid name");
             editText.requestFocus();
             return;
         }
@@ -268,8 +269,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.middleNameEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter middle name");
+        if (string.isEmpty() || string.length() < 3) {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter middle name");
+            else
+                H.showMessage(this, "Please enter valid middle name");
             editText.requestFocus();
             return;
         }
@@ -277,27 +281,37 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.lastNameEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter last name");
+        if (string.isEmpty() || string.length() < 3) {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter last name");
+            else
+                H.showMessage(this, "Please enter valid last name");
             editText.requestFocus();
             return;
         }
         submit_json.addString(P.last_name, string);
 
-         editText = findViewById(R.id.email);
-         string = editText.getText().toString();
+        editText = findViewById(R.id.email);
+        string = editText.getText().toString();
+        int i = Math.abs(string.indexOf(".") - string.indexOf("@"));
         if (string.isEmpty()) {
             H.showMessage(this, "Please enter Email Address");
+            editText.requestFocus();
+            return;
+        } else if (!string.contains(".") || !string.contains("@") || i == 1 || string.contains(" ")) {
+            H.showMessage(this, "Please enter valid Email Address");
             editText.requestFocus();
             return;
         }
         submit_json.addString(P.email, string);
 
-
         editText = findViewById(R.id.descriptionOneEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter first name");
+        if (string.isEmpty() || string.length() < 3) {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter religion expectation");
+            else
+                H.showMessage(this, "Please enter valid expectation");
             editText.requestFocus();
             return;
         }
@@ -306,24 +320,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.descriptionTwoEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter first name");
+        if (string.isEmpty() || string.length() < 3)
+        {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter preference and quality ");
+            else
+                H.showMessage(this, "Please enter valid preference and quality");
             editText.requestFocus();
             return;
         }
         submit_json.addString(P.about_1, string);
 
-
         editText = findViewById(R.id.descriptionThreeEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
-            H.showMessage(this, "Please enter first name");
+        if (string.isEmpty() || string.length() < 3 )
+        {
+            if (string.isEmpty())
+                H.showMessage(this, "Please enter more about you");
+            else
+                H.showMessage(this, "Please enter valid about you.");
             editText.requestFocus();
             return;
         }
         submit_json.addString(P.about_2, string);
-
-
 
 
         editText = findViewById(R.id.dateOfBirthEditText);
@@ -393,7 +412,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editText.requestFocus();
             return;
         }
-        int i = CommonListHolder.complexionNameList.indexOf(string);
+        i = CommonListHolder.complexionNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.complexionIdList.get(i);
         submit_json.addString(P.skin_tone, string);
 
@@ -423,6 +442,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select community");
             return;
         }
+
         i = CommonListHolder.religionNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.religionIdList.get(i);
         submit_json.addString(P.religion, string);
@@ -437,7 +457,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         submit_json.addString(P.);*/
-
 
 
         editText = findViewById(R.id.maritalStatusEditText);
@@ -704,7 +723,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
         submit_json.addString(P.handicap, string);
-        H.log("isExecuted","yes");
+        H.log("isExecuted", "yes");
 
         string = findViewById(((RadioGroup) findViewById(R.id.namazGroup)).getCheckedRadioButtonId()).getTag().toString();
         submit_json.addString(P.namaz, string);
@@ -1109,8 +1128,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private void setAllData(Json json) {
 
-        H.log("Json is" ,json+"");
-        ((EditText) findViewById(R.id. firstNameEditText)).setText(json.getString(P.first_name));
+        H.log("Json is", json + "");
+        ((EditText) findViewById(R.id.firstNameEditText)).setText(json.getString(P.first_name));
         ((EditText) findViewById(R.id.middleNameEditText)).setText(json.getString(P.middle_name));
         ((EditText) findViewById(R.id.lastNameEditText)).setText(json.getString(P.last_name));
 
@@ -1316,42 +1335,42 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         string = json.getString(P.cvt_islam);
         if (string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesConverted)).setChecked(true);
+            ((RadioButton) findViewById(R.id.yesConverted)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.notConverted)).setChecked(false);
+            ((RadioButton) findViewById(R.id.notConverted)).setChecked(false);
 
         string = json.getString(P.handicap);
-        if(string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesDisable)).setChecked(true);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton) findViewById(R.id.yesDisable)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.noDisable)).setChecked(true);
+            ((RadioButton) findViewById(R.id.noDisable)).setChecked(true);
 
 
         string = json.getString(P.namaz);
-        if(string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesNamaz)).setChecked(true);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton) findViewById(R.id.yesNamaz)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.noNamaz)).setChecked(true);
+            ((RadioButton) findViewById(R.id.noNamaz)).setChecked(true);
 
         string = json.getString(P.roza);
-        if(string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesRoza)).setChecked(true);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton) findViewById(R.id.yesRoza)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.noRoza)).setChecked(true);
+            ((RadioButton) findViewById(R.id.noRoza)).setChecked(true);
 
         string = json.getString(P.hijab_preference);
-        if(string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesHijab)).setChecked(true);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton) findViewById(R.id.yesHijab)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.noHijab)).setChecked(true);
+            ((RadioButton) findViewById(R.id.noHijab)).setChecked(true);
 
         string = json.getString(P.syed);
-        if(string.equalsIgnoreCase("yes"))
-            ((RadioButton)findViewById(R.id.yesSyed)).setChecked(true);
-        else if(string.equalsIgnoreCase("no"))
-            ((RadioButton)findViewById(R.id.notSyed)).setChecked(true);
+        if (string.equalsIgnoreCase("yes"))
+            ((RadioButton) findViewById(R.id.yesSyed)).setChecked(true);
+        else if (string.equalsIgnoreCase("no"))
+            ((RadioButton) findViewById(R.id.notSyed)).setChecked(true);
         else
-            ((RadioButton)findViewById(R.id.donnKnowSyed)).setChecked(true);
+            ((RadioButton) findViewById(R.id.donnKnowSyed)).setChecked(true);
     }
 
     class CountryCodeListAdapter extends BaseAdapter {

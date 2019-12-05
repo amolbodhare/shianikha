@@ -268,8 +268,11 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
 
         string = ((EditText) findViewById(R.id.res_add_ed)).getText().toString();
-        if (string.isEmpty()) {
+        if (string.isEmpty() || string.length()<3) {
+            if (string.isEmpty())
             H.showMessage(this, "Please enter residential address");
+            else
+                H.showMessage(this, "Please enter valid residential address");
             return;
         }
         App.masterJson.addString(P.residency_address, string);
