@@ -37,6 +37,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -46,6 +47,7 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.MessageBox;
 import com.adoisstudio.helper.Session;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.App;
@@ -320,8 +322,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.descriptionTwoEditText);
         string = editText.getText().toString();
-        if (string.isEmpty() || string.length() < 3)
-        {
+        if (string.isEmpty() || string.length() < 3) {
             if (string.isEmpty())
                 H.showMessage(this, "Please enter preference and quality ");
             else
@@ -333,8 +334,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.descriptionThreeEditText);
         string = editText.getText().toString();
-        if (string.isEmpty() || string.length() < 3 )
-        {
+        if (string.isEmpty() || string.length() < 3) {
             if (string.isEmpty())
                 H.showMessage(this, "Please enter more about you");
             else
@@ -1417,5 +1417,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == -1 || grantResults[1] == -1)
+        {
+           /* MessageBox.showOkMessage(this, "permission request", "You Must provide the Camera Permission.", new MessageBox.OnOkListener() {
+                @Override
+                public void onOk()
+                {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 31);
+                }
+            });*/
 
+            AlertDialog.Builder  adb = new AlertDialog.Builder(EditProfileActivity.this);
+            adb.setTitle("permission request");
+            adb.setMessage("You Must provide the Permission.");
+            adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //requestPermissions(new String[]{Manifest.permission.CAMERA}, 31);
+                }
+            });
+            adb.show();
+        }
+    }
 }
