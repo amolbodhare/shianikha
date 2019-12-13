@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         App.showWidget = true;
 
         homeFragment = HomeFragment.newInstance();
-        fragmentLoader(homeFragment, "dashboard");
+        fragmentLoader(homeFragment, getString(R.string.shiaNikah));
 
         TextView textView = findViewById(R.id.titleName);
         textView.setSelected(true);
@@ -214,7 +214,7 @@ public class HomeActivity extends AppCompatActivity {
         tempView = view;
 
         if (view.getId() == R.id.homeButton_layout) {
-            fragmentLoader(homeFragment, getString(R.string.dashboard));
+            fragmentLoader(homeFragment, getString(R.string.shiaNikah));
             changeNotificationIcon(false);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
             myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);

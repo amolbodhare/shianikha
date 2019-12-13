@@ -291,7 +291,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:layout_gravity="center"
-            android:text="No data available"
+            android:text="No result found"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="30sp"/>
 

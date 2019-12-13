@@ -24,7 +24,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
-            android:onClick="onBackClick"
             android:padding="13dp"
             android:src="@drawable/ic_arrow_back_black_24dp"
             android:tint="#311C63" />

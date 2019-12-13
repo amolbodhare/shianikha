@@ -4,9 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +11,17 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
@@ -27,7 +29,6 @@ import com.nikha.shianikha.adapters.RecentlyJoinAdapter;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -107,11 +108,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         if (json.getInt(P.status) == 1)
                         {
                             setProfileData(json);
-                            if (App.i == 0) {//to avoid crash
+                            //if (App.i == 0) {//to avoid crash
                                 setRecentlyJoinData(json);
                                 setRecentVisitorsData(json);
-                                App.i = 1;
-                            }
+                                //App.i = 1;
+                           // }
                             ((HomeActivity)context).setDrawerData(json);
 
                         } else

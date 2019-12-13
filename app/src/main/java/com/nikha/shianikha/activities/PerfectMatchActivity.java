@@ -331,9 +331,15 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         string = checkBox.isChecked()? "1":"0";
         json.addString(P.request_from_anyone,string);
 
-        checkBox = findViewById(R.id.checkBox2);
-        string = checkBox.isChecked() ? "1" : "0";
+        CheckBox cB = findViewById(R.id.checkBox2);
+        string = cB.isChecked() ? "1" : "0";
         json.addString(P.request_from_preferred_match,string);
+
+        if (!checkBox.isChecked() && !cB.isChecked())
+        {
+            H.showMessage(this,"Please select any of the email option");
+            return;
+        }
 
         checkBox = findViewById(R.id.checkBox3);
         string = checkBox.isChecked() ? "1" : "0";
