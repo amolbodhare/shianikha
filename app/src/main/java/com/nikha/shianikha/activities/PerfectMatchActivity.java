@@ -78,7 +78,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
     }
 
-    private void handleTermsOfUse() {
+    private void  handleTermsOfUse() {
         TextView textView = findViewById(R.id.termsAndCondition);
         String string = textView.getText().toString();
 
