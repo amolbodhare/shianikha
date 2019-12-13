@@ -338,27 +338,33 @@ public class HomeActivity extends AppCompatActivity {
         fragmentLoader(accountSettingsFragment, getString(R.string.accountsettings));
     }
 
-    private void showLogOutAlert() {
+    private void showLogOutAlert()
+    {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setMessage("Do you really want to exit?");
         adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Session session = new Session(HomeActivity.this);
-                session.addString(P.tokenData, "");
-                App.i = 0;
-                //session.addInt(P.showName, 1);
-
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-                finish();
-                //((HomeActivity)context).finish();
+            public void onClick(DialogInterface dialog, int which)
+            {
+               takeAction();
             }
         });
         adb.setNegativeButton("no", null);
         adb.show();
+    }
+
+    public void takeAction() {
+        Session session = new Session(HomeActivity.this);
+        session.addString(P.tokenData, "");
+        App.i = 0;
+        //session.addInt(P.showName, 1);
+
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+        finish();
+        //((HomeActivity)context).finish();
     }
 
     public void showContactUsFragment() {

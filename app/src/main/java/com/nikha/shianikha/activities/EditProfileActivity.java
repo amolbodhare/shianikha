@@ -47,7 +47,6 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
-import com.adoisstudio.helper.MessageBox;
 import com.adoisstudio.helper.Session;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.App;
@@ -720,6 +719,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             H.showMessage(this, "Please select smoking status");
             return;
         }
+        i = CommonListHolder.smokingNameList.indexOf(string);
+        string = i == -1 ? "" : CommonListHolder.smokingIdList.get(i);
+        submit_json.addString(P.smoke_id, string);
 
         string = findViewById(((RadioGroup) findViewById(R.id.disabilityGroup)).getCheckedRadioButtonId()).getTag().toString();
         submit_json.addString(P.handicap, string);
@@ -734,11 +736,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         string = findViewById(((RadioGroup) findViewById(R.id.hijabGroup)).getCheckedRadioButtonId()).getTag().toString();
         submit_json.addString(P.hijab_preference, string);
 
-        i = CommonListHolder.smokingNameList.indexOf(string);
-        string = i == -1 ? "" : CommonListHolder.smokingIdList.get(i);
-        submit_json.addString(P.smoke_id, string);
-
-
         jsonArray = makeInterestedInJsonArray();
         submit_json.addJSONArray(P.intreasted_in, jsonArray);
 
@@ -750,10 +747,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         editText = findViewById(R.id.relocateEditText);
         string = editText.getText().toString();
 
-
         i = CommonListHolder.relocateNameList.indexOf(string);
         if (i != -1)
-            App.masterJson.addString(P.relocate_id, CommonListHolder.relocateIdList.get(i));
+            submit_json.addString(P.relocate_id, CommonListHolder.relocateIdList.get(i));
 
         H.log("submittedjson", submit_json.toString());
         hitEditProfileApi(submit_json);

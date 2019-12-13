@@ -24,6 +24,7 @@ import com.adoisstudio.helper.Session;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.EditProfileActivity;
+import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
@@ -323,8 +324,9 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
-
+                        if (json.getInt(P.status) == 1)
+                        {
+                            ((HomeActivity)context).takeAction();
                         } else
                             H.showMessage(context, json.getString(P.msg));
                     }
