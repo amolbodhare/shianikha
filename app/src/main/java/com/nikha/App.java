@@ -63,7 +63,7 @@ public class App extends Application implements View.OnTouchListener {
 
         app = new App();
 
-        Static.show_log = false;
+        Static.show_log = true;
 
         handleMusicPlayer();
 

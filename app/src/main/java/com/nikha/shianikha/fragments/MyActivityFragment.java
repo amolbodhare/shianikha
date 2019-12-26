@@ -43,6 +43,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     public static Fragment previousFragment;
     public static String previousFragmentName;
     private String which = "Accept request";
+    private String whichApi = "";
 
     public MyActivityFragment() {
         // Required empty public constructor
@@ -61,13 +62,15 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_activity, container, false);
 
-            hitApiForList("request_list");
+            whichApi = "request_list";
+
+            hitApiForList(whichApi);
 
             final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    hitApiForList("request_list");
+                    hitApiForList(whichApi);
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });
@@ -81,6 +84,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     private void hitApiForList(String string) {
         Json json = new Json();
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        whichApi = string;
 
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
@@ -161,7 +165,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
 
-    private void chooseApi(String string) {
+    private void chooseApi(String string)
+    {
 
         if (string.equalsIgnoreCase("request"))
             hitApiForList("request_list");

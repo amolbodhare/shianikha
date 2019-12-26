@@ -456,7 +456,16 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
             }
-        } else if (myProfileFragment != null && myProfileFragment.isVisible()) {
+        }
+        else if (accountSettingsFragment != null && accountSettingsFragment.isVisible()) {
+            fragment = AccountSettingsFragment.previousFragment;
+            string = AccountSettingsFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        }
+        else if (myProfileFragment != null && myProfileFragment.isVisible()) {
             fragment = MyProfileFragment.previousFragment;
             string = MyProfileFragment.previousFragmentName;
             if (fragment != null && string != null) {

@@ -519,6 +519,7 @@
             android:id="@+id/privacy_policy_link_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@id/notification_link_layout"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="17dp"
@@ -529,7 +530,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:visibility="gone"
                 android:text="Privacy Policy"
                 android:textColor="@color/text_back_grey"
                 android:textSize="12sp" />

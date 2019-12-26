@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -83,7 +82,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
             setSpannableText();
 
-            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+           /* final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh()
@@ -91,7 +90,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     swipeRefreshLayout.setRefreshing(false);
                     hitMatchesApi(apiName);
                 }
-            });
+            });*/
 
         }
         return fragmentView;

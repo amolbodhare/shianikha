@@ -57,12 +57,15 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
     public static Fragment previousFragment;
     public static String previousFragmentName;
 
+    private boolean bool;
+
     Switch simpleSwitch;
 
 
     private OnFragmentInteractionListener mListener;
 
-    public AccountSettingsFragment() { }
+    public AccountSettingsFragment() {
+    }
 
 
     // TODO: Rename and change types and number of parameters
@@ -102,7 +105,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             who_can_message_exp_layout = fragmentView.findViewById(R.id.who_can_message_exp_layout);
 
 
-            simpleSwitch =  fragmentView.findViewById(R.id.simpleSwitch);
+            simpleSwitch = fragmentView.findViewById(R.id.simpleSwitch);
             fragmentView.findViewById(R.id.edit_profile_link_layout).setOnClickListener(this);
 
 
@@ -130,19 +133,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             who_can_message_exp_layout.collapse();
 
             String string = new Session(context).getString(P.email);
-            ((TextView)fragmentView.findViewById(R.id.email_address_exp_link_tv)).setText(string);
-
-
-           /* change_password_edt.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                    if(keyCode == KeyEvent.KEYCODE_DEL) {
-                        //this is for backspace
-                    }
-                    return false;
-                }
-            });*/
+            ((TextView) fragmentView.findViewById(R.id.email_address_exp_link_tv)).setText(string);
 
         }
         return fragmentView;
@@ -167,18 +158,18 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             startActivity(new Intent(getActivity(), EditProfileActivity.class));
 
         else if (v.getId() == R.id.saveButon)
-            makeJson("0","0");
+            makeJson("0", "0");
 
         else if (v.getId() == R.id.hideButton)
-            makeJson("0","1");
+            makeJson("0", "1");
 
-        else if (v.getId() == R.id.deleteButton)
-        {
+        else if (v.getId() == R.id.deleteButton) {
+            bool = true;
             H.showYesNoDialog(context, "Alert", "Do you really want to delete account?", "Yes", "No", new H.OnYesNoListener() {
                 @Override
                 public void onDecision(boolean isYes) {
                     if (isYes)
-                        makeJson("1","0");
+                        makeJson("1", "0");
                 }
             });
         }
@@ -193,8 +184,8 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         Json json = new Json();
         json.addString(P.token_id, session.getString(P.tokenData));
-        json.addString(P.account_hide,hide);
-        json.addString(P.account_delete,delete);
+        json.addString(P.account_hide, hide);
+        json.addString(P.account_delete, delete);
 
         JSONArray jsonArray = new JSONArray();
         WhoCanContactJsonArray(jsonArray);
@@ -205,7 +196,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }*/
         json.addJSONArray(P.who_can_contact, jsonArray);
 
-
         jsonArray = new JSONArray();
         profileVisibilityJsonArray(jsonArray);
         /*if (jsonArray.length() < 1) {
@@ -214,7 +204,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
         }*/
         json.addJSONArray(P.profile_with_visibility, jsonArray);
 
-
         jsonArray = new JSONArray();
         whoCanMessageJsonArray(jsonArray);
        /* if (jsonArray.length() < 1) {
@@ -222,7 +211,6 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             return;
         }*/
         json.addJSONArray(P.who_can_message, jsonArray);
-
 
         // check current state of a Switch (true or false).
         boolean switchState = simpleSwitch.isChecked();
@@ -233,16 +221,14 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
             json.addString(P.notification, "0");
         }
 
-
         hitAccountSettingApi(json);
-
     }
 
     private void WhoCanContactJsonArray(JSONArray jsonArray) {
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout who_can_contact_ll_view =  fragmentView.findViewById(R.id.who_can_contact_ll);
+        LinearLayout who_can_contact_ll_view = fragmentView.findViewById(R.id.who_can_contact_ll);
         Object object;
         for (int i = 0; i < who_can_contact_ll_view.getChildCount(); i++) {
 
@@ -262,7 +248,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout profile_photo_visibility_ll_view =  fragmentView.findViewById(R.id.profile_photo_visibility_ll);
+        LinearLayout profile_photo_visibility_ll_view = fragmentView.findViewById(R.id.profile_photo_visibility_ll);
         Object object;
         for (int i = 0; i < profile_photo_visibility_ll_view.getChildCount(); i++) {
 
@@ -282,7 +268,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
         CheckBox checkBox;
         String string = "";
-        LinearLayout who_can_message_ll_view =  fragmentView.findViewById(R.id.who_can_message_ll);
+        LinearLayout who_can_message_ll_view = fragmentView.findViewById(R.id.who_can_message_ll);
         Object object;
         for (int i = 0; i < who_can_message_ll_view.getChildCount(); i++) {
 
@@ -300,6 +286,7 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
 
     private void hitAccountSettingApi(Json json) {
         final LoadingDialog loadingDialog = new LoadingDialog(context);
+        bool = false;
 
         RequestModel requestModel = RequestModel.newRequestModel("account_setting");
         requestModel.addJSON(P.data, json);
@@ -324,9 +311,11 @@ public class AccountSettingsFragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
-                            ((HomeActivity)context).takeAction();
+                        if (json.getInt(P.status) == 1) {
+                            if (bool)
+                                ((HomeActivity) context).takeAction();
+
+                            ((HomeActivity)context).onBack(new View(context));
                         } else
                             H.showMessage(context, json.getString(P.msg));
                     }
