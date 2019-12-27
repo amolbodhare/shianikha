@@ -222,7 +222,9 @@ public class RegFourthPageActivity extends AppCompatActivity implements View.OnC
         App.masterJson.addString(P.family_details, string);
 
         H.log("masterJsonIs", App.masterJson.toString());
-        startActivity(new Intent(this, RegFifthPageActivity.class));
+        Intent intent = new Intent(this,RegFifthPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void showOtherEditText(View view, boolean b) {

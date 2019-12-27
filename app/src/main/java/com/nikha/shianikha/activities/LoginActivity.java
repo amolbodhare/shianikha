@@ -79,7 +79,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         else if (v.getId() == R.id.reg_tv)
         {
-            startActivity(new Intent(this,RegistrationActivity.class));
+            Intent intent = new Intent(this,RegistrationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         else if (v.getId() == R.id.countryCodeEditText)
         {
@@ -159,6 +161,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         {
                             Intent intent = new Intent(LoginActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());//same parameter is required in everyscreen
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(LoginActivity.this, json.getString(P.msg));

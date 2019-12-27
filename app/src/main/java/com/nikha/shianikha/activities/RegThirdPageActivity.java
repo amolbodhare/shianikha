@@ -343,7 +343,9 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         H.log("jsonArrayIs",jsonArray+"");
 
         H.log("masterJsonIs", App.masterJson.toString());
-        startActivity(new Intent(this, RegFourthPageActivity.class));
+        Intent intent = new Intent(this,RegFourthPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void setMarginTopOfCustomSpinner() {

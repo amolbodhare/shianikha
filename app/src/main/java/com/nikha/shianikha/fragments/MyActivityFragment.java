@@ -42,8 +42,9 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     private Context context;
     public static Fragment previousFragment;
     public static String previousFragmentName;
-    private String which = "Accept request";
+    private String which = "Request";
     private String whichApi = "";
+    private String userId = "";
 
     public MyActivityFragment() {
         // Required empty public constructor
@@ -167,7 +168,6 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
     private void chooseApi(String string)
     {
-
         if (string.equalsIgnoreCase("request"))
             hitApiForList("request_list");
         else if (string.equalsIgnoreCase("accepted"))
@@ -182,6 +182,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             hitApiForList("who_visited_my_profile");
         else if (string.equalsIgnoreCase("Profiles Viewed By Me"))
             hitApiForList("profiles_viewed_by_me");
+        else
+            H.log("wentTo","log and string is "+string);
     }
 
     private void implementAutoScroll(LinearLayout linearLayout) {
@@ -225,7 +227,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             Json json = jsonList.get(i);
             String string = "";
 
-            if (!which.equals("Accept request"))
+            if (!which.equals("Request"))
                 view = LayoutInflater.from(context).inflate(R.layout.accepted_list_card, viewGroup, false);
             else {
                 view = LayoutInflater.from(context).inflate(R.layout.request_item, viewGroup, false);

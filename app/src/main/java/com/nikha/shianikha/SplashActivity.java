@@ -279,7 +279,7 @@ public class SplashActivity extends AppCompatActivity {
                 //for deep linking
                 /*if (!profileId.isEmpty())
                     intent.putExtra(P.profile_id,profileId);*/
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }

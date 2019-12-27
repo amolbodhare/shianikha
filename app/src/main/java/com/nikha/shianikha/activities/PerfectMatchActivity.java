@@ -89,6 +89,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             {
                 Intent intent = new Intent(PerfectMatchActivity.this, WebViewActivity.class);
                 intent.putExtra("url","https://shianikah.in/privacy-policy.html");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
 
@@ -446,6 +447,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
                         if (json.getInt(P.status) == 1) {
                             new Session(PerfectMatchActivity.this).addInt(P.full_register, 1);
                             Intent intent = new Intent(PerfectMatchActivity.this, HomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(PerfectMatchActivity.this, json.getString(P.msg));

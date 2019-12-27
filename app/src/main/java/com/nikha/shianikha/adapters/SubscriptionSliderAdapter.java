@@ -2,14 +2,15 @@ package com.nikha.shianikha.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -133,6 +134,7 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                             String url = json.getString(P.url);
                             Intent intent = new Intent(context, WebViewActivity.class);
                             intent.putExtra("url",url);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent);
                         } else
                             H.showMessage(context, json.getString(P.msg));

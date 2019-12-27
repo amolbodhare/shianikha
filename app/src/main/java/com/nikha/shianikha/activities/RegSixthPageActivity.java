@@ -105,6 +105,7 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
                         if (json.getInt(P.status) == 1) {
                             new Session(RegSixthPageActivity.this).addInt(P.full_register, 1);
                             Intent intent = new Intent(RegSixthPageActivity.this, PerfectMatchActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(RegSixthPageActivity.this, json.getString(P.msg));

@@ -341,6 +341,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                             session.addInt(P.showName, i);
                             App.showName = i == 1 ? true : false;
 
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
 

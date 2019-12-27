@@ -35,8 +35,9 @@ public class App extends Application implements View.OnTouchListener {
     public static String device_id = "";
     public static Json masterJson = new Json();
     public static Fragment tempFragment;
-    public static boolean IS_DEV = false;
-    public static boolean showName = false;
+    public static boolean IS_DEV; //= false;
+    public static boolean showName; //= false;
+    public static boolean notificationFlag = true ;
 
     public static String fcmToken = "";
 

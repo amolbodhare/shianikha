@@ -220,4 +220,5 @@ public class P {
     public static String account_delete = "account_delete";
     public static String fcm_token = "fcm_token";
     public static String hash_code="hash_code";
+    public static String notification_users_id = "notification_users_id";
 }//class

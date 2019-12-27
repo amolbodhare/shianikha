@@ -216,18 +216,22 @@ public class HomeActivity extends AppCompatActivity {
         if (view.getId() == R.id.homeButton_layout) {
             fragmentLoader(homeFragment, getString(R.string.shiaNikah));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true,0);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
             myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true,0);
 
         } else if (view.getId() == R.id.searchButton_layout) {
             searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true,0);
         } else if (view.getId() == R.id.myprofileButton_layout) {
             myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
+            hideOrUpdateNotificationCount(true,0);
         }
 
         setSelection(view);
@@ -306,6 +310,7 @@ public class HomeActivity extends AppCompatActivity {
         else if (view.getId() == R.id.inbox_activity_drawer_layout) {
             Intent i = new Intent(HomeActivity.this, MessageActivity.class);
             i.putExtra("open", P.inbox);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         } else if (view.getId() == R.id.drawer_favourites_layout) {
@@ -407,6 +412,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showPartnerPreferenceActivity() {
         Intent i = new Intent(HomeActivity.this, PerfectMatchActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         //onDrawerMenuClick(findViewById(R.id.drawer_partnerPreference_layout));
@@ -543,6 +549,7 @@ public class HomeActivity extends AppCompatActivity {
             if (System.currentTimeMillis() - l < 700) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             } else {
@@ -579,11 +586,18 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void hideOrUpdateNotificationCount(boolean hide, int count) {
+    public void hideOrUpdateNotificationCount(boolean hide, int count)
+    {
+        TextView textView = findViewById(R.id.noti_text);
         if (hide || count == 0)
-            findViewById(R.id.noti_text).setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
         else
-            ((TextView) findViewById(R.id.noti_text)).setText(count + "");
+            textView.setText(count + "");
+
+        if (App.notificationFlag)
+            textView.setVisibility(View.VISIBLE);
+        else
+            textView.setVisibility(View.INVISIBLE);
     }
 
     public void OnDrawerMyProfileClick(View v) {

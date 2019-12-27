@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -96,7 +95,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             } else
                 hitFavouriteListApi("1");
 
-            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+            /*final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh()
@@ -104,7 +103,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     swipeRefreshLayout.setRefreshing(false);
                    hitFavouriteListApi("1");
                 }
-            });
+            });*/
 
         }
         return fragmentView;

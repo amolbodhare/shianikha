@@ -110,6 +110,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         if (v.getId() == R.id.imageViewer1) {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         } else if (v.getId() == R.id.sendMessageLinearLayout) {
             Intent intent = new Intent(context, WriteMessageActivity.class);
@@ -117,6 +118,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             if (object != null) {
                 String string = object.toString();
                 intent.putExtra(P.profile_id, string);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         } else if (v.getId() == R.id.imageView)

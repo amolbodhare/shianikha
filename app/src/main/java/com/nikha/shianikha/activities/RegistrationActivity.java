@@ -261,6 +261,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         else if(v.getId() == R.id.login_here)
         {
             Intent intent = new Intent(this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         else if(v.getId()==R.id.dateOfBirthEditText)
@@ -442,6 +443,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                         {
                             Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                         else
