@@ -283,6 +283,9 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             else if (string.equals("1"))
                 button.setText("Photo already requested.");
 
+            string = json.getString(P.day);
+            ((TextView) convertView.findViewById(R.id.time)).setText(string + " days ago");
+
             return convertView;
         }
 
@@ -345,7 +348,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         //((TextView) convertView.findViewById(R.id.full_name)).setText(json.getString(P.full_name));
         ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " day ago");
         ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id));
-        ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
+        ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + " yrs,");
         ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
         ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
         ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
@@ -446,7 +449,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     public void hitApiForRefineSearchRequest() {
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
-        RequestModel requestModel = RequestModel.newRequestModel("search");
+        RequestModel requestModel = RequestModel.newRequestModel(apiName);
         requestModel.addJSON(P.data, App.json);
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)

@@ -282,7 +282,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             changeConnectNowStatus(imageView, string);
 
             string = json.getString(P.age);
-            ((TextView) view.findViewById(R.id.age_tv)).setText(string + "yrs");
+            ((TextView) view.findViewById(R.id.age_tv)).setText(string + " yrs");
 
             string = json.getString(P.height);
             ((TextView) view.findViewById(R.id.height_tv)).setText(string + "\"");
@@ -299,6 +299,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
             string = json.getString(P.occupation_name);
             ((TextView) view.findViewById(R.id.profession_tv)).setText(string);
+
+            string = json.getString(P.day);
+            ((TextView) view.findViewById(R.id.time)).setText(string + " days ago");
 
             return view;
         }
