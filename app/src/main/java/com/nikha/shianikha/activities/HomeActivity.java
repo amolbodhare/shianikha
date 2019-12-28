@@ -593,11 +593,6 @@ public class HomeActivity extends AppCompatActivity {
             textView.setVisibility(View.INVISIBLE);
         else
             textView.setText(count + "");
-
-        if (App.notificationFlag)
-            textView.setVisibility(View.VISIBLE);
-        else
-            textView.setVisibility(View.INVISIBLE);
     }
 
     public void OnDrawerMyProfileClick(View v) {

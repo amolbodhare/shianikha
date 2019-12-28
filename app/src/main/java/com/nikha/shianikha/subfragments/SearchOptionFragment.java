@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
@@ -170,6 +171,8 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
 
         string = ((EditText) fragmentView.findViewById(R.id.shiaCommunityEditText)).getText().toString();
         jsonArray = H.extractJsonArray(string, CommonListHolder.religionNameList, CommonListHolder.religionIdList);
+        H.log("religionNameListIs",CommonListHolder.religionNameList.toString());
+        H.log("religionIdListIs",CommonListHolder.religionIdList.toString());
         json.addJSONArray(P.religion_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.motherTongueEditText)).getText().toString();

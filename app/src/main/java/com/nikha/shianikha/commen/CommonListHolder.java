@@ -4,7 +4,6 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -28,10 +27,16 @@ public class CommonListHolder {
         profileForNameList = new ArrayList<>();
         profileForIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            profileForNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                profileForNameList.add(json.getString(P.name).trim());
 
-            profileForIdList.add(json.getString(P.id));
+                profileForIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -39,10 +44,16 @@ public class CommonListHolder {
         cityNameList = new ArrayList<>();
         cityIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            cityNameList.add(json.getString(P.city_name));
+        try {
+            for (Json json : jsonList) {
+                cityNameList.add(json.getString(P.city_name).trim());
 
-            cityIdList.add(json.getString(P.city_id));
+                cityIdList.add(json.getString(P.city_id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -50,10 +61,16 @@ public class CommonListHolder {
         stateNameList = new ArrayList<>();
         stateIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            stateNameList.add(json.getString(P.state_name));
+        try {
+            for (Json json : jsonList) {
+                stateNameList.add(json.getString(P.state_name).trim());
 
-            stateIdList.add(json.getString(P.state_id));
+                stateIdList.add(json.getString(P.state_id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -62,24 +79,32 @@ public class CommonListHolder {
         countryIdList = new ArrayList<>();
         countryCodeList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            countryNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                countryNameList.add(json.getString(P.name).trim());
 
-            countryIdList.add(json.getString(P.id));
+                countryIdList.add(json.getString(P.id).trim());
 
-            countryCodeList.add(json.getString(P.country_code));
+                countryCodeList.add(json.getString(P.country_code).trim());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
     public void makeHeightList(JSONArray jsonArray) {
         heightList = new ArrayList<>();
 
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                heightList.add(jsonArray.getString(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                heightList.add(jsonArray.getString(i).trim());
             }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -87,21 +112,33 @@ public class CommonListHolder {
         religionNameList = new ArrayList<>();
         religionIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            religionNameList.add(json.getString(P.name));
+       try {
+           for (Json json : jsonList) {
+               religionNameList.add(json.getString(P.name).trim());
 
-            religionIdList.add(json.getString(P.id));
-        }
+               religionIdList.add(json.getString(P.id).trim());
+           }
+       }
+       catch (NullPointerException e)
+       {
+           e.printStackTrace();
+       }
     }
 
     public void makeEthnicityList(JsonList jsonList) {
         ethnicityNameList = new ArrayList<>();
         ethnicityIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            ethnicityNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                ethnicityNameList.add(json.getString(P.name).trim());
 
-            ethnicityIdList.add(json.getString(P.id));
+                ethnicityIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -109,10 +146,16 @@ public class CommonListHolder {
         occupationNameList = new ArrayList<>();
         occupationIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            occupationNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                occupationNameList.add(json.getString(P.name).trim());
 
-            occupationIdList.add(json.getString(P.id));
+                occupationIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -120,10 +163,16 @@ public class CommonListHolder {
         educationNameList = new ArrayList<>();
         educationIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            educationNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                educationNameList.add(json.getString(P.name).trim());
 
-            educationIdList.add(json.getString(P.id));
+                educationIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -131,32 +180,50 @@ public class CommonListHolder {
         languageNameList = new ArrayList<>();
         languageIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            languageNameList.add(json.getString(P.name));
+       try {
+           for (Json json : jsonList) {
+               languageNameList.add(json.getString(P.name).trim());
 
-            languageIdList.add(json.getString(P.id));
-        }
+               languageIdList.add(json.getString(P.id).trim());
+           }
+       }
+       catch (NullPointerException e)
+       {
+           e.printStackTrace();
+       }
     }
 
     public void makeSmokingList(JsonList jsonList) {
         smokingNameList = new ArrayList<>();
         smokingIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            smokingNameList.add(json.getString(P.val));
+       try {
+           for (Json json : jsonList) {
+               smokingNameList.add(json.getString(P.val).trim());
 
-            smokingIdList.add(json.getString(P.id));
-        }
+               smokingIdList.add(json.getString(P.id).trim());
+           }
+       }
+       catch (NullPointerException e)
+       {
+           e.printStackTrace();
+       }
     }
 
     public void makeRelocateList(JsonList jsonList) {
         relocateNameList = new ArrayList<>();
         relocateIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            relocateNameList.add(json.getString(P.val));
+        try {
+            for (Json json : jsonList) {
+                relocateNameList.add(json.getString(P.val).trim());
 
-            relocateIdList.add(json.getString(P.id));
+                relocateIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -164,10 +231,16 @@ public class CommonListHolder {
         intrestedInNameList = new ArrayList<>();
         intrestedInIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            intrestedInNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                intrestedInNameList.add(json.getString(P.name).trim());
 
-            intrestedInIdList.add(json.getString(P.id));
+                intrestedInIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -175,10 +248,16 @@ public class CommonListHolder {
         complexionNameList = new ArrayList<>();
         complexionIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            complexionNameList.add(json.getString(P.val));
+        try {
+            for (Json json : jsonList) {
+                complexionNameList.add(json.getString(P.val).trim());
 
-            complexionIdList.add(json.getString(P.id));
+                complexionIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -187,8 +266,8 @@ public class CommonListHolder {
 
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                ageList.add(jsonArray.getString(i));
-            } catch (JSONException e) {
+                ageList.add(jsonArray.getString(i).trim());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -198,10 +277,16 @@ public class CommonListHolder {
         maritalStatusNameList = new ArrayList<>();
         maritalStatusIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            maritalStatusNameList.add(json.getString(P.val));
+        try {
+            for (Json json : jsonList) {
+                maritalStatusNameList.add(json.getString(P.val).trim());
 
-            maritalStatusIdList.add(json.getString(P.id));
+                maritalStatusIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -209,10 +294,16 @@ public class CommonListHolder {
         seekingForMarriageNameList = new ArrayList<>();
         seekingForMarriageIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            seekingForMarriageNameList.add(json.getString(P.val));
+        try {
+            for (Json json : jsonList) {
+                seekingForMarriageNameList.add(json.getString(P.val).trim());
 
-            seekingForMarriageIdList.add(json.getString(P.id));
+                seekingForMarriageIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -220,10 +311,16 @@ public class CommonListHolder {
         physicalStatusNameList = new ArrayList<>();
         physicalStatusIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            physicalStatusNameList.add(json.getString(P.val));
+        try {
+            for (Json json : jsonList) {
+                physicalStatusNameList.add(json.getString(P.val).trim());
 
-            physicalStatusIdList.add(json.getString(P.id));
+                physicalStatusIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -231,10 +328,16 @@ public class CommonListHolder {
         monthlyIncomeNameList = new ArrayList<>();
         monthlyIncomeIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            monthlyIncomeNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                monthlyIncomeNameList.add(json.getString(P.name).trim());
 
-            monthlyIncomeIdList.add(json.getString(P.id));
+                monthlyIncomeIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -242,10 +345,16 @@ public class CommonListHolder {
         typeOfIssueNameList = new ArrayList<>();
         typeOfIssueIdList = new ArrayList<>();
 
-        for (Json json : jsonList) {
-            typeOfIssueNameList.add(json.getString(P.name));
+        try {
+            for (Json json : jsonList) {
+                typeOfIssueNameList.add(json.getString(P.name).trim());
 
-            typeOfIssueIdList.add(json.getString(P.id));
+                typeOfIssueIdList.add(json.getString(P.id).trim());
+            }
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
         }
     }
 }

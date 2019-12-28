@@ -3,7 +3,6 @@ package com.nikha.shianikha.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.adoisstudio.helper.H;
+import androidx.fragment.app.Fragment;
+
 import com.adoisstudio.helper.LoadingDialog;
 import com.nikha.App;
 import com.nikha.shianikha.R;
@@ -66,8 +66,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 showSearchByProfileIdFragment();
                 changeTabColor(fragMentView.findViewById(R.id.searchByProfileId));
             }
-
-            H.log("iAmCaught", "inIf");
 
             fragmentLoader(App.tempFragment);
 
