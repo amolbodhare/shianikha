@@ -19,6 +19,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.Session;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.CommonListHolder;
@@ -54,9 +55,12 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         context = getActivity();
         session = new Session(context);
-        fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
 
-        handleSeekBar();
+        if (fragmentView == null) {
+
+            fragmentView = inflater.inflate(R.layout.fragment_search_option, container, false);
+
+            handleSeekBar();
 
         /*height_rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
             @Override
@@ -66,8 +70,9 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             }
         });*/
 
-        setAllRequiredClickListener((ViewGroup) fragmentView.findViewById(R.id.linearLayout));
-        fragmentView.findViewById(R.id.button).setOnClickListener(this);
+            setAllRequiredClickListener((ViewGroup) fragmentView.findViewById(R.id.linearLayout));
+            fragmentView.findViewById(R.id.button).setOnClickListener(this);
+        }
 
         return fragmentView;
     }
@@ -214,14 +219,46 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             String[] array = new String[CommonListHolder.countryNameList.size()];
             array = CommonListHolder.countryNameList.toArray(array);
             showCountryMultiChoiceList(array, view);
-        } else if (view.getId() == R.id.stateEditText) {
-            String[] array = new String[CommonListHolder.stateNameList.size()];
-            array = CommonListHolder.stateNameList.toArray(array);
-            showStateMultiChoiceList(array, view);
+        }
+        else if (view.getId() == R.id.stateEditText)
+        {
+            String string = ((EditText)fragmentView.findViewById(R.id.countryEditText)).getText().toString();
+            if(string.contains(","))
+                H.showMessage(context,"Available only for single country");
+            else if (string.isEmpty())
+                H.showMessage(context,"Please select country");
+            else
+            {
+                string = CommonListHolder.countryIdList.get(CommonListHolder.countryNameList.indexOf(string));
+                App app = new App();
+                app.hitStateApi(string, context, new App.StateAndCityListCallBack() {
+                    @Override
+                    public void listIsPrepared() {
+                        String[] array = new String[CommonListHolder.stateNameList.size()];
+                        array = CommonListHolder.stateNameList.toArray(array);
+                        showStateMultiChoiceList(array, view);
+                    }
+                });
+            }
         } else if (view.getId() == R.id.cityEditText) {
-            String[] array = new String[CommonListHolder.cityNameList.size()];
-            array = CommonListHolder.cityNameList.toArray(array);
-            showCityMultiChoiceList(array, view);
+            String string = ((EditText)fragmentView.findViewById(R.id.stateEditText)).getText().toString();
+            if(string.contains(","))
+                H.showMessage(context,"Available only for single state");
+            else if (string.isEmpty())
+                H.showMessage(context,"Please select state");
+            else
+            {
+                string = CommonListHolder.stateIdList.get(CommonListHolder.stateNameList.indexOf(string));
+                App app = new App();
+                app.hitStateApi(string, context, new App.StateAndCityListCallBack() {
+                    @Override
+                    public void listIsPrepared() {
+                        String[] array = new String[CommonListHolder.cityNameList.size()];
+                        array = CommonListHolder.cityNameList.toArray(array);
+                        showCityMultiChoiceList(array, view);
+                    }
+                });
+            }
         }
     }
 

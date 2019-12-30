@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -67,10 +68,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             fragmentView.findViewById(R.id.help_suport_layout).setOnClickListener(this);
             fragmentView.findViewById(R.id.about_app_layout).setOnClickListener(this);
             fragmentView.findViewById(R.id.contact_us_layout).setOnClickListener(this);
+
+            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    swipeRefreshLayout.setRefreshing(false);
+                    hitDashboardApi();
+                }
+            });
+
         }
         return fragmentView;
     }
-
     public void hitDashboardApi() {
         Session session = new Session(context);
         String string = session.getString(P.tokenData);
