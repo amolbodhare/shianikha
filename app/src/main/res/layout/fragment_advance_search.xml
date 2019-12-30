@@ -474,7 +474,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:tag="1"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
                     android:text="Yes" />
 
                 <RadioButton
@@ -482,6 +481,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
+                    android:checked="true"
                     android:tag="0"
                     android:layout_weight="0.9"
                     android:buttonTint="#5C5CFE"
@@ -524,7 +524,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:tag="1"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
                     android:text="Yes" />
 
                 <RadioButton
@@ -533,6 +532,7 @@
                     android:layout_height="wrap_content"
                     android:tag="0"
                     android:fontFamily="@font/poppins_regular"
+                    android:checked="true"
                     android:layout_weight="0.9"
                     android:buttonTint="#5C5CFE"
                     android:text="No" />
@@ -570,7 +570,6 @@
                         android:fontFamily="@font/poppins_regular"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -578,6 +577,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
+                        android:checked="true"
                         android:tag="0"
                         android:fontFamily="@font/poppins_regular"
                         android:buttonTint="#5C5CFE"
@@ -618,7 +618,6 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -627,6 +626,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:tag="0"
+                        android:checked="true"
                         android:fontFamily="@font/poppins_regular"
                         android:buttonTint="#5C5CFE"
                         android:text="No" />
@@ -666,7 +666,6 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -674,6 +673,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:checked="true"
                         android:tag="0"
                         android:layout_weight="0.5"
                         android:buttonTint="#5C5CFE"
@@ -714,7 +714,6 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -722,6 +721,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
+                        android:checked="true"
                         android:tag="0"
                         android:fontFamily="@font/poppins_regular"
                         android:buttonTint="#5C5CFE"
@@ -762,7 +762,6 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
                         android:text="Yes" />
 
                     <RadioButton
@@ -770,6 +769,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
+                        android:checked="true"
                         android:tag="0"
                         android:layout_weight="0.5"
                         android:buttonTint="#5C5CFE"

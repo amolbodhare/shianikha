@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,8 +79,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout) // condition after & is written to exclude favourite from paid
         {
             H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
@@ -92,8 +92,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 }
             });
             return;
-        }
-        else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout)// condition after & is written to exclude favourite from paid
+        } else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout)// condition after & is written to exclude favourite from paid
         {
             H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override
@@ -123,8 +122,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             }
         } else if (v.getId() == R.id.imageView)
             hitConnectNowApi();
-        else if (v.getId() == R.id.favouriteLinearLayout)
-        {
+        else if (v.getId() == R.id.favouriteLinearLayout) {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
@@ -147,6 +145,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             String string = sharingLink.isEmpty() ? "linkNotFound" : sharingLink;
             intent.putExtra(Intent.EXTRA_TEXT, string + profileId);
             startActivity(Intent.createChooser(intent, "Share Via"));
+        }
+        else if (v.getId() == R.id.button)
+        {
+            hitRequestPhotoApi();
         }
     }
 
@@ -374,16 +376,34 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         ((TextView) fragmentView.findViewById(R.id.roza)).setText(profileDetailJson.getString(P.roza));
         ((TextView) fragmentView.findViewById(R.id.namaz)).setText(profileDetailJson.getString(P.namaz));
 
-        if(App.showName){
-            ((TextView)fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
-            ((TextView)fragmentView.findViewById(R.id.motherName)).setText(profileDetailJson.getString(P.mother_name));
-            ((TextView)fragmentView.findViewById(R.id.fatherOccupation)).setText(profileDetailJson.getString(P.father_occupation));
-            ((TextView)fragmentView.findViewById(R.id.motherOccupation)).setText(profileDetailJson.getString(P.mother_occupation));
-            ((TextView)fragmentView.findViewById(R.id.maritalStatus)).setText(profileDetailJson.getString(P.marital_status));
+        if (App.showName) {
+            ((TextView) fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
+            ((TextView) fragmentView.findViewById(R.id.motherName)).setText(profileDetailJson.getString(P.mother_name));
+            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(profileDetailJson.getString(P.father_occupation));
+            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(profileDetailJson.getString(P.mother_occupation));
+            ((TextView) fragmentView.findViewById(R.id.maritalStatus)).setText(profileDetailJson.getString(P.marital_status));
         }
 
         ((TextView) fragmentView.findViewById(R.id.occupation)).setText(profileDetailJson.getString(P.education));
-        ((TextView)fragmentView.findViewById(R.id.carrerOccupation)).setText( profileDetailJson.getString(P.occupation_name));
+        ((TextView) fragmentView.findViewById(R.id.carrerOccupation)).setText(profileDetailJson.getString(P.occupation_name));
+
+        LinearLayout linearLayout = fragmentView.findViewById(R.id.noPhotoLinearLayout);
+        String string = profileDetailJson.getString(P.photo_available);
+        Button button = linearLayout.findViewById(R.id.button);
+
+        if (string.equals("0")) {
+            linearLayout.setVisibility(View.VISIBLE);
+            button.setOnClickListener(this);
+        } else if (string.equals("1")) {
+            linearLayout.setVisibility(View.GONE);
+            //button.setOnClickListener(null);
+        }
+
+        /*string = json.getString(P.request_photo);
+        if (string.equals("0"))
+            button.setText("Request Photo");
+        else if (string.equals("1"))
+            button.setText("Photo already requested.");*/
     }
 
     @Override
@@ -393,5 +413,32 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
+    }
+
+    private void hitRequestPhotoApi() {
+        Json json = new Json();
+        json.addString(P.profile_id, profileId);
+
+        String  string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("request_photo");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+
+                        /*if (json.getInt(P.status) == 1)
+                            //H.showMessage(context, "Your request has been sent.");
+                            H.showMessage(context, json.getString(P.msg));*/
+                       hitProfileDetailsApi("profile_details",profileId);
+                    }
+                })
+                .run("hitRequestPhotoApi");
     }
 }

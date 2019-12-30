@@ -74,7 +74,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             fragmentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
             loadingDialog = new LoadingDialog(context);
 
@@ -160,7 +159,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         } else if (i == R.id.looking_for_me) {
             hitMatchesApi("looking_for_me");
             changeColorsOfThreeTab(v);
-        } else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn) {
+        } else if (v.getId() == R.id.refine_btn) {
             ((HomeActivity) context).startRefineSearchActivity();
         }
     }
@@ -233,7 +232,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null)
-                convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, parent, false);
 
             json = jsonList.get(position);
 

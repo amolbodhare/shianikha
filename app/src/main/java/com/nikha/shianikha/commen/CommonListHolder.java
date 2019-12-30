@@ -227,7 +227,7 @@ public class CommonListHolder {
         }
     }
 
-    public void makeIntrestedInList(JsonList jsonList) {
+    public void makeInterestedInList(JsonList jsonList) {
         intrestedInNameList = new ArrayList<>();
         intrestedInIdList = new ArrayList<>();
 

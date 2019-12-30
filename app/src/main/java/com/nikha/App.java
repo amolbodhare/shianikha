@@ -19,8 +19,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
+import com.adoisstudio.helper.JsonList;
+import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Static;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
@@ -28,6 +31,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.commen.C;
+import com.nikha.shianikha.commen.CommonListHolder;
+import com.nikha.shianikha.commen.P;
+import com.nikha.shianikha.commen.RequestModel;
 
 import java.util.List;
 
@@ -37,7 +44,7 @@ public class App extends Application implements View.OnTouchListener {
     public static Fragment tempFragment;
     public static boolean IS_DEV; //= false;
     public static boolean showName; //= false;
-    public static boolean notificationFlag = true ;
+    public static boolean notificationFlag = true;
 
     public static String fcmToken = "";
 
@@ -164,14 +171,14 @@ public class App extends Application implements View.OnTouchListener {
         }
 
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, LAYOUT_FLAG,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 PixelFormat.TRANSLUCENT);
 
 
         view = LayoutInflater.from(this).inflate(R.layout.widget_layout, null, false);
 
         layoutParams.gravity = Gravity.TOP | Gravity.END;
-        layoutParams.x = (int)H.convertDpToPixel(60,this);
+        layoutParams.x = (int) H.convertDpToPixel(60, this);
         layoutParams.y = 0;
         view.setLayoutParams(layoutParams);
         windowManager.addView(view, layoutParams);
@@ -182,19 +189,16 @@ public class App extends Application implements View.OnTouchListener {
             @Override
             public void onClick(View view) {
                 //H.showMessage(App.this,"fired");
-                if (view.getTag().toString().equalsIgnoreCase("1"))
-                {
+                if (view.getTag().toString().equalsIgnoreCase("1")) {
                     mediaPlayer.pause();
                     view.setTag("0");
                     stopByForce = true;
-                    ((ImageView)view.findViewById(R.id.imageView)).setImageDrawable(getDrawable(R.drawable.ic_play_arrow_black_24dp));
-                }
-                else
-                {
+                    ((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(getDrawable(R.drawable.ic_play_arrow_black_24dp));
+                } else {
                     stopByForce = false;
                     mediaPlayer.start();
                     view.setTag("1");
-                    ((ImageView)view.findViewById(R.id.imageView)).setImageDrawable(getDrawable(R.drawable.ic_pause_black_24dp));
+                    ((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(getDrawable(R.drawable.ic_pause_black_24dp));
                 }
             }
         });
@@ -235,5 +239,93 @@ public class App extends Application implements View.OnTouchListener {
                 return false;
         }
         return true;
+    }
+
+    public void hitStateApi(String countryCode, final Context context, final StateAndCityListCallBack stateAndCityListCallBack) {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        Json json = new Json();
+        json.addString(P.country, countryCode);
+
+        RequestModel requestModel = RequestModel.newRequestModel("get_state_id");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("loading state...");
+                        else
+                            loadingDialog.hide();
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            CommonListHolder commonListHolder = new CommonListHolder();
+                            commonListHolder.makeStateList(jsonList);
+                            stateAndCityListCallBack.success();
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitStateApi");
+    }
+
+    public void hitCityApi(String stateCode, final Context context, final StateAndCityListCallBack stateAndCityListCallBack) {
+        final LoadingDialog loadingDialog = new LoadingDialog(context);
+
+        Json json = new Json();
+        json.addString(P.state, stateCode);
+
+        RequestModel requestModel = RequestModel.newRequestModel("get_city_id");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onError(new Api.OnErrorListener() {
+                    @Override
+                    public void onError() {
+                        H.showMessage(context, "Something went wrong.");
+                    }
+                })
+                .onLoading(new Api.OnLoadingListener() {
+                    @Override
+                    public void onLoading(boolean isLoading) {
+                        if (isLoading)
+                            loadingDialog.show("loading city...");
+                        else
+                            loadingDialog.hide();
+                    }
+                })
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            JsonList jsonList = json.getJsonList(P.data);
+                            CommonListHolder commonListHolder = new CommonListHolder();
+                            commonListHolder.makeCityList(jsonList);
+                            stateAndCityListCallBack.success();
+
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+                    }
+                })
+                .run("hitCityApi");
+    }
+
+    public interface StateAndCityListCallBack
+    {
+        void success();
     }
 }

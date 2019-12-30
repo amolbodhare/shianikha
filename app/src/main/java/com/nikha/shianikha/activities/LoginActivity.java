@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         Json json = new Json();
 
-        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString().replace("+","");
         json.addString(P.country_code,countryCode);
 
         String string=((EditText)findViewById(R.id.mobile_no)).getText().toString();
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 string = entry.getKey();
                 countryNameList.add(string);
                 string = entry.getValue();
-                countryCodeList.add(string);
+                countryCodeList.add("+"+string);
             }
         }
 

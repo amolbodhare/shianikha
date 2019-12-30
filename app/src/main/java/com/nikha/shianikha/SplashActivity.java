@@ -127,8 +127,6 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 })
                 .run("hitMastersApi");
-
-
     }
 
     private void makeSeperateJsonList(Json json) {
@@ -143,7 +141,7 @@ public class SplashActivity extends AppCompatActivity {
             commonListHolder.makeProfileForList(jsonList);
         }
 
-        jsonList = json.getJsonList(P.city);// city name and code
+       /* jsonList = json.getJsonList(P.city);// city name and code
         if (jsonList != null) {
             //session.addString(P.city, jsonList.toString());
             commonListHolder.makeCityList(jsonList);
@@ -153,7 +151,7 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null) {
             //session.addString(P.state, jsonList.toString());
             commonListHolder.makeStateList(jsonList);
-        }
+        }*/
 
         jsonList = json.getJsonList(P.country);// country name and code
         if (jsonList != null) {
@@ -218,7 +216,7 @@ public class SplashActivity extends AppCompatActivity {
         jsonList = json.getJsonList(P.intreasted_in);// interrest name and code
         if (jsonList != null) {
             //session.addString(P.intreasted_in, jsonList.toString());
-            commonListHolder.makeIntrestedInList(jsonList);
+            commonListHolder.makeInterestedInList(jsonList);
         }
 
         jsonList = json.getJsonList(P.complexion);// complexion name and code
