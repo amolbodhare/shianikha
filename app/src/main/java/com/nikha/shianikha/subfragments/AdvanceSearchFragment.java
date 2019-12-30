@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
@@ -53,15 +54,15 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-            fragmentView = inflater.inflate(R.layout.fragment_advance_search, container, false);
-            context = getActivity();
+        fragmentView = inflater.inflate(R.layout.fragment_advance_search, container, false);
+        context = getActivity();
 
-            handleSeekBar();
-            makeEthnicityCheckBox();
-            makeEducationCheckBox();
+        handleSeekBar();
+        makeEthnicityCheckBox();
+        makeEducationCheckBox();
 
-            setAllRequiredClickListener((LinearLayout) fragmentView.findViewById(R.id.linearLayout));
-            fragmentView.findViewById(R.id.button).setOnClickListener(this);
+        setAllRequiredClickListener((LinearLayout) fragmentView.findViewById(R.id.linearLayout));
+        fragmentView.findViewById(R.id.button).setOnClickListener(this);
 
 
         return fragmentView;
@@ -146,24 +147,26 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
             String[] array = new String[CommonListHolder.languageNameList.size()];
             array = CommonListHolder.languageNameList.toArray(array);
             showLanguageMultiChoiceList(array, view);
-        }
-        else if (view.getId() == R.id.occupationEditText) {
+        } else if (view.getId() == R.id.occupationEditText) {
             String[] array = new String[CommonListHolder.occupationNameList.size()];
             array = CommonListHolder.occupationNameList.toArray(array);
             showOccupationMultiChoiceList(array, view);
         }
     }
 
-    private void makeJson()
-    {
+    private void makeJson() {
         Json json = new Json();
-        json.addString(P.token_id,new Session(context).getString(P.tokenData));
-        json.addString(P.full_search,"1");
+        json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        json.addString(P.full_search, "1");
 
         RadioGroup radioGroup = fragmentView.findViewById(R.id.lookingForRadioGroup);
         int i = radioGroup.getCheckedRadioButtonId();
-        String string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.gender,string);
+        H.log("idIs", i + "");
+        String string = "";
+        if (i != -1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.gender, string);
+        }
 
         string = ((TextView) fragmentView.findViewById(R.id.textMinAge)).getText().toString();
         string = H.extractNumberFromString(string);
@@ -173,97 +176,111 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
         string = H.extractNumberFromString(string);
         json.addString(P.max_age, string);
 
-        Object object =  fragmentView.findViewById(R.id.textMinHeight).getTag();
+        Object object = fragmentView.findViewById(R.id.textMinHeight).getTag();
         if (object != null)
             string = object.toString();
         string = H.extractNumberFromString(string);
         json.addString(P.min_height, string);
 
-        object =  fragmentView.findViewById(R.id.textMaxHeight).getTag();
+        object = fragmentView.findViewById(R.id.textMaxHeight).getTag();
         if (object != null)
             string = object.toString();
         string = H.extractNumberFromString(string);
         json.addString(P.max_height, string);
 
         string = ((EditText) fragmentView.findViewById(R.id.maritalStatusEditText)).getText().toString();
-        JSONArray jsonArray = H.extractJsonArray(string,CommonListHolder.maritalStatusNameList,CommonListHolder.maritalStatusIdList);
+        JSONArray jsonArray = H.extractJsonArray(string, CommonListHolder.maritalStatusNameList, CommonListHolder.maritalStatusIdList);
         json.addJSONArray(P.marital_status, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.religionEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.religionNameList,CommonListHolder.religionIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.religionNameList, CommonListHolder.religionIdList);
         json.addJSONArray(P.religion_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.motherTongueEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.languageNameList, CommonListHolder.languageIdList);
         json.addJSONArray(P.mother_tongue_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.languageEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.languageNameList,CommonListHolder.languageIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.languageNameList, CommonListHolder.languageIdList);
         json.addJSONArray(P.language_id, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.countryEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.countryNameList,CommonListHolder.countryIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.countryNameList, CommonListHolder.countryIdList);
         json.addJSONArray(P.country, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.stateEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.stateNameList,CommonListHolder.stateIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.stateNameList, CommonListHolder.stateIdList);
         json.addJSONArray(P.state, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.cityEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.cityNameList,CommonListHolder.cityIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.cityNameList, CommonListHolder.cityIdList);
         json.addJSONArray(P.city, jsonArray);
 
         string = ((EditText) fragmentView.findViewById(R.id.occupationEditText)).getText().toString();
-        jsonArray = H.extractJsonArray(string,CommonListHolder.occupationNameList,CommonListHolder.occupationIdList);
+        jsonArray = H.extractJsonArray(string, CommonListHolder.occupationNameList, CommonListHolder.occupationIdList);
         json.addJSONArray(P.occupation_id, jsonArray);
 
         jsonArray = makeEthnicityJsonArray();
-        json.addJSONArray(P.ethnicity_id,jsonArray);
+        json.addJSONArray(P.ethnicity_id, jsonArray);
 
         jsonArray = makeEducationJsonArray();
-        json.addJSONArray(P.edulevel_id,jsonArray);
+        json.addJSONArray(P.edulevel_id, jsonArray);
 
         radioGroup = fragmentView.findViewById(R.id.syedRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        H.log("IvalueIs",i+"");
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.syed,string);
+        H.log("IvalueIs", i + "");
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.syed, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.convertedRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.cvt_islam,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.cvt_islam, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.childrenRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.children,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.children, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.disabilityRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.handicap,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.handicap, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.namazRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.namaz,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.namaz, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.rozaRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.roza,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.roza, string);
+        }
 
         radioGroup = fragmentView.findViewById(R.id.hizabPreferenceRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
-        string = radioGroup.findViewById(i).getTag().toString();
-        json.addString(P.hijab_preference,string);
+        if (i!=-1) {
+            string = radioGroup.findViewById(i).getTag().toString();
+            json.addString(P.hijab_preference, string);
+        }
 
         CheckBox checkBox = fragmentView.findViewById(R.id.checkBox);
         string = checkBox.isChecked() ? "1" : "0";
-        json.addString(P.show_profile_with_photo,string);
+        json.addString(P.show_profile_with_photo, string);
 
-        json.addString(P.sort,"1");
+        json.addString(P.sort, "1");
 
         hitSearch1Api(json);
     }
@@ -316,8 +333,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                 .run("hitSearch1Api");*/
     }
 
-    private JSONArray makeEducationJsonArray()
-    {
+    private JSONArray makeEducationJsonArray() {
         JSONArray jsonArray = new JSONArray();
 
         LinearLayout linearLayout = fragmentView.findViewById(R.id.educationContainer);
@@ -340,8 +356,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
         return jsonArray;
     }
 
-    private JSONArray makeEthnicityJsonArray()
-    {
+    private JSONArray makeEthnicityJsonArray() {
         JSONArray jsonArray = new JSONArray();
 
         LinearLayout linearLayout = fragmentView.findViewById(R.id.ethnicityContainer1);
@@ -425,17 +440,18 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
                 float minH = ((float) minFt / 3.281f) + ((float) minIn / 39.37f);//3.281  39.37
                 String text = "" + minFt + "' " + minIn + '"';
                 tvMinHeight.setText("Min " + text);
-                tvMinHeight.setTag(minFt+"."+minIn);
+                tvMinHeight.setTag(minFt + "." + minIn);
 
                 text = "" + maxFt + "' " + maxIn + '"';
                 tvMaxHeight.setText("Max " + text);
-                tvMaxHeight.setTag(maxFt+"."+maxIn);
+                tvMaxHeight.setTag(maxFt + "." + maxIn);
             }
         });
     }
 
     private ArrayList<String> tempCityList;
     private boolean[] cityCheckedArray;
+
     private void showCityMultiChoiceList(final String[] array, final View view) {
         if (cityCheckedArray == null) {
             cityCheckedArray = new boolean[array.length];
@@ -472,6 +488,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempStateList;
     private boolean[] stateCheckedArray;
+
     private void showStateMultiChoiceList(final String[] array, final View view) {
         if (stateCheckedArray == null) {
             stateCheckedArray = new boolean[array.length];
@@ -508,6 +525,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempCountryList;
     private boolean[] countryCheckedArray;
+
     private void showCountryMultiChoiceList(final String[] array, final View view) {
         if (countryCheckedArray == null) {
             countryCheckedArray = new boolean[array.length];
@@ -544,6 +562,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempMotherTongueList;
     private boolean[] motherTongueCheckedArray;
+
     private void showMotherTongueMultiChoiceList(final String[] array, final View view) {
         if (motherTongueCheckedArray == null) {
             motherTongueCheckedArray = new boolean[array.length];
@@ -580,6 +599,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempReligionList;
     private boolean[] religionCheckedArray;
+
     private void showReligionMultiChoiceList(final String[] array, final View view) {
         if (religionCheckedArray == null) {
             religionCheckedArray = new boolean[array.length];
@@ -616,6 +636,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempMaritalStatusList;
     private boolean[] maritalStatusCheckedArray;
+
     private void showMaritalStatusMultiChoiceList(final String[] array, final View view) {
 
         if (maritalStatusCheckedArray == null) {
@@ -653,6 +674,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempLanguageList;
     private boolean[] languageCheckedArray;
+
     private void showLanguageMultiChoiceList(final String[] array, final View view) {
 
         if (languageCheckedArray == null) {
@@ -690,6 +712,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
     private ArrayList<String> tempOccupationList;
     private boolean[] occupationCheckedArray;
+
     private void showOccupationMultiChoiceList(final String[] array, final View view) {
 
         if (occupationCheckedArray == null) {
@@ -724,6 +747,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
             }
         }).show();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

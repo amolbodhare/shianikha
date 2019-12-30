@@ -274,7 +274,7 @@ public class App extends Application implements View.OnTouchListener {
                             JsonList jsonList = json.getJsonList(P.data);
                             CommonListHolder commonListHolder = new CommonListHolder();
                             commonListHolder.makeStateList(jsonList);
-                            stateAndCityListCallBack.success();
+                            stateAndCityListCallBack.listIsPrepared();
                         } else
                             H.showMessage(context, json.getString(P.msg));
                     }
@@ -315,7 +315,7 @@ public class App extends Application implements View.OnTouchListener {
                             JsonList jsonList = json.getJsonList(P.data);
                             CommonListHolder commonListHolder = new CommonListHolder();
                             commonListHolder.makeCityList(jsonList);
-                            stateAndCityListCallBack.success();
+                            stateAndCityListCallBack.listIsPrepared();
 
                         } else
                             H.showMessage(context, json.getString(P.msg));
@@ -326,6 +326,6 @@ public class App extends Application implements View.OnTouchListener {
 
     public interface StateAndCityListCallBack
     {
-        void success();
+        void listIsPrepared();
     }
 }

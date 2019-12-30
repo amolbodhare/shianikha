@@ -279,7 +279,7 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Select Languages"
+                    android:hint="Known Languages"
                     android:paddingRight="56dp"
                     android:textSize="16sp" />
 

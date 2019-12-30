@@ -153,7 +153,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         App app = new App();
         app.hitCityApi(string, this, new App.StateAndCityListCallBack() {
             @Override
-            public void success() {
+            public void listIsPrepared() {
                 arrayAdapter = new ArrayAdapter<>(RegThirdPageActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
                 listView.setAdapter(arrayAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -164,10 +164,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
                             Log.e("selectedIs", textView.getText().toString());
                             String string = textView.getText().toString().trim();
                             ((EditText) view).setText(string);
-                            if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-                                showOtherEditText(view, true);
-                            else
-                                showOtherEditText(view, false);
                         }
                         hideCustomSpinnerLayout();
                     }
@@ -182,7 +178,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         App app = new App();
         app.hitStateApi(string, this, new App.StateAndCityListCallBack() {
             @Override
-            public void success() {
+            public void listIsPrepared() {
                 arrayAdapter = new ArrayAdapter<>(RegThirdPageActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
                 listView.setAdapter(arrayAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -193,10 +189,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
                             Log.e("selectedIs", textView.getText().toString());
                             String string = textView.getText().toString().trim();
                             ((EditText) view).setText(string);
-                            if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-                                showOtherEditText(view, true);
-                            else
-                                showOtherEditText(view, false);
                         }
                         hideCustomSpinnerLayout();
                     }
@@ -387,7 +379,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         editText = findViewById(R.id.languageEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select languages");
+            H.showMessage(this, "Please select known languages");
             return;
         }
         StringTokenizer stringTokenizer = new StringTokenizer(string, ",");

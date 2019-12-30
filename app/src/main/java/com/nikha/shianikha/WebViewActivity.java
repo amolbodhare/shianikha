@@ -56,9 +56,9 @@ public class WebViewActivity extends AppCompatActivity {
                     findViewById(R.id.linearLayout).setVisibility(View.GONE);
                     H.log("loadedUrlIs",url);
                     url = url.toLowerCase();
-                    if (url.contains("success") || url.contains("fail"))
+                    if (url.contains("listIsPrepared") || url.contains("fail"))
                     {
-                        if (url.contains("success"))
+                        if (url.contains("listIsPrepared"))
                         {
                             Session session = new Session(WebViewActivity.this);
                             session.addInt(P.showName,1);

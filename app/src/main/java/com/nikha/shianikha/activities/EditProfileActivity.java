@@ -797,85 +797,151 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         EditText editText = findViewById(R.id.editText);
         int i = view.getId();
 
-        if (i == R.id.complexionEditText) {
-            editText.setHint("Search Complexion ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.complexionNameList);
-        } else if (i == R.id.heightEditText) {
-            editText.setHint("Search Height ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.heightList);
-        } else if (i == R.id.bodyTypeEditText) {
-            editText.setHint("Search body Type ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.physicalStatusNameList);
-        } else if (i == R.id.communityEditText) {
-            editText.setHint("Search Shia Community ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.religionNameList);
-        } else if (i == R.id.maritalStatusEditText) {
-            editText.setHint("Search Marital Status ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.maritalStatusNameList);
-        } else if (i == R.id.educationEditText) {
-            editText.setHint("Search Education ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
-        } else if (i == R.id.occupationEditText || i == R.id.fathersOccupationEditText || i == R.id.mothersOccupationEditText) {
-            editText.setHint("Search Occupation ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
-        } else if (i == R.id.monthlyIncomeEditText) {
-            editText.setHint("Search Monthly Income ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
-        } else if (i == R.id.countryEditText || i == R.id.fathersCountryEditText || i == R.id.mothersCountryEditText) {
-            editText.setHint("Search Country Name ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
-        } else if (i == R.id.stateEditText) {
-            editText.setHint("Search State Name ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
-        } else if (i == R.id.cityEditText) {
-            editText.setHint("Search City Name ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
-        } else if (i == R.id.motherTongueEditText) {
-            editText.setHint("Search Language ");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
-        } else if (view.getId() == R.id.relocateEditText) {
-            editText.setHint("Willing to relocate");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.relocateNameList);
-        } else if (i == R.id.selectLanguagesEditText) {
-            String[] stringArray = new String[CommonListHolder.languageNameList.size()];
-            stringArray = CommonListHolder.languageNameList.toArray(stringArray);
-            showLanguageMultiChoiceList(stringArray, view);
-            return;
-        } else if (i == R.id.ethnicityEditText) {
-            editText.setHint("Search Ethnicity");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.ethnicityNameList);
-        } else if (i == R.id.smokingEditText) {
-            editText.setHint("Search Smoking Status");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.smokingNameList);
-        }
+        try {
 
-        findViewById(R.id.view).setVisibility(View.VISIBLE);
+            if (i == R.id.complexionEditText) {
+                editText.setHint("Search Complexion ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.complexionNameList);
+            } else if (i == R.id.heightEditText) {
+                editText.setHint("Search Height ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.heightList);
+            } else if (i == R.id.bodyTypeEditText) {
+                editText.setHint("Search body Type ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.physicalStatusNameList);
+            } else if (i == R.id.communityEditText) {
+                editText.setHint("Search Shia Community ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.religionNameList);
+            } else if (i == R.id.maritalStatusEditText) {
+                editText.setHint("Search Marital Status ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.maritalStatusNameList);
+            } else if (i == R.id.educationEditText) {
+                editText.setHint("Search Education ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
+            } else if (i == R.id.occupationEditText || i == R.id.fathersOccupationEditText || i == R.id.mothersOccupationEditText) {
+                editText.setHint("Search Occupation ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
+            } else if (i == R.id.monthlyIncomeEditText) {
+                editText.setHint("Search Monthly Income ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
+            } else if (i == R.id.countryEditText || i == R.id.fathersCountryEditText || i == R.id.mothersCountryEditText) {
+                if (i == R.id.countryEditText)
+                    editText.setHint("Search Country Name ");
+                else if (i == R.id.fathersCountryEditText)
+                    editText.setHint("Father's Country");
+                else
+                    editText.setHint("Mother's Country");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
+            } else if (i == R.id.stateEditText) {
+                editText.setHint("Search State Name ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
+                String string = ((EditText) findViewById(R.id.countryEditText)).getText().toString();
+                string = CommonListHolder.countryIdList.get(CommonListHolder.countryNameList.indexOf(string));
+                setStateAdapter(string, listView, view);
+            } else if (i == R.id.cityEditText) {
+                editText.setHint("Search City Name ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
+                String string = ((EditText) findViewById(R.id.stateEditText)).getText().toString();
+                string = CommonListHolder.stateIdList.get(CommonListHolder.stateNameList.indexOf(string));
+                setCityAdapter(string, listView, view);
+            } else if (i == R.id.motherTongueEditText) {
+                editText.setHint("Search Language ");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
+            } else if (view.getId() == R.id.relocateEditText) {
+                editText.setHint("Willing to relocate");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.relocateNameList);
+            } else if (i == R.id.selectLanguagesEditText) {
+                String[] stringArray = new String[CommonListHolder.languageNameList.size()];
+                stringArray = CommonListHolder.languageNameList.toArray(stringArray);
+                showLanguageMultiChoiceList(stringArray, view);
+                return;
+            } else if (i == R.id.ethnicityEditText) {
+                editText.setHint("Search Ethnicity");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.ethnicityNameList);
+            } else if (i == R.id.smokingEditText) {
+                editText.setHint("Search Smoking Status");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.smokingNameList);
+            }
 
-        if (arrayAdapter == null)
-            return;
+            findViewById(R.id.view).setVisibility(View.VISIBLE);
 
-        H.showKeyBoard(this, findViewById(R.id.editText));
+            if (arrayAdapter == null)
+                return;
 
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
-                    Log.e("selectedIs", textView.getText().toString());
-                    String string = textView.getText().toString().trim();
-                    ((EditText) view).setText(string);
+            H.showKeyBoard(this, findViewById(R.id.editText));
 
-                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-                        showOtherEditText(view, true);
-                    else
-                        showOtherEditText(view, false);
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    TextView textView = v.findViewById(R.id.textView);
+                    if (textView != null) {
+                        Log.e("selectedIs", textView.getText().toString());
+                        String string = textView.getText().toString().trim();
+                        ((EditText) view).setText(string);
+
+                        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                            showOtherEditText(view, true);
+                        else
+                            showOtherEditText(view, false);
+                    }
+                    hideCustomSpinnerLayout();
                 }
-                hideCustomSpinnerLayout();
+            });
+
+            findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setStateAdapter(String string, final ListView listView, final View view) {
+        App app = new App();
+        app.hitStateApi(string, this, new App.StateAndCityListCallBack() {
+            @Override
+            public void listIsPrepared() {
+                arrayAdapter = new ArrayAdapter<>(EditProfileActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
+                listView.setAdapter(arrayAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        TextView textView = v.findViewById(R.id.textView);
+                        if (textView != null) {
+                            Log.e("selectedIs", textView.getText().toString());
+                            String string = textView.getText().toString().trim();
+                            ((EditText) view).setText(string);
+                        }
+                        hideCustomSpinnerLayout();
+                    }
+                });
+
+                findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
             }
         });
+    }
 
-        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    private void setCityAdapter(String string, final ListView listView, final View view) {
+        App app = new App();
+        app.hitCityApi(string, this, new App.StateAndCityListCallBack() {
+            @Override
+            public void listIsPrepared() {
+                arrayAdapter = new ArrayAdapter<>(EditProfileActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
+                listView.setAdapter(arrayAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        TextView textView = v.findViewById(R.id.textView);
+                        if (textView != null) {
+                            Log.e("selectedIs", textView.getText().toString());
+                            String string = textView.getText().toString().trim();
+                            ((EditText) view).setText(string);
+                        }
+                        hideCustomSpinnerLayout();
+                    }
+                });
+
+                findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+            }
+        });
     }
 
     private ArrayList<String> tempLanguageList;
@@ -1000,7 +1066,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -1416,8 +1481,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0] == -1 || grantResults[1] == -1)
-        {
+        if (grantResults[0] == -1 || grantResults[1] == -1) {
            /* MessageBox.showOkMessage(this, "permission request", "You Must provide the Camera Permission.", new MessageBox.OnOkListener() {
                 @Override
                 public void onOk()
@@ -1426,7 +1490,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 }
             });*/
 
-            AlertDialog.Builder  adb = new AlertDialog.Builder(EditProfileActivity.this);
+            AlertDialog.Builder adb = new AlertDialog.Builder(EditProfileActivity.this);
             adb.setTitle("permission request");
             adb.setMessage("You Must provide the Permission.");
             adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
