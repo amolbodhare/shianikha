@@ -225,6 +225,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
 
         radioGroup = fragmentView.findViewById(R.id.syedRadioGroup);
         i = radioGroup.getCheckedRadioButtonId();
+        H.log("IvalueIs",i+"");
         string = radioGroup.findViewById(i).getTag().toString();
         json.addString(P.syed,string);
 

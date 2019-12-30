@@ -66,7 +66,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Json json;
-        if (fragmentView == null) {
+        //if (fragmentView == null) {
             context = getContext();
             loadingDialog = new LoadingDialog(context);
             fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
@@ -105,7 +105,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 }
             });*/
 
-        }
+        //}
         return fragmentView;
     }
 
