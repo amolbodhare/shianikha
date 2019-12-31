@@ -23,10 +23,10 @@ import com.adoisstudio.helper.Session;
 import com.nikha.App;
 import com.nikha.shianikha.AboutApp;
 import com.nikha.shianikha.BuildConfig;
-import com.nikha.shianikha.ContactUsFragment;
+import com.nikha.shianikha.fragments.ContactUsFragment;
 import com.nikha.shianikha.HelpAndSupport;
 import com.nikha.shianikha.NotifacationDetails;
-import com.nikha.shianikha.NotificationFragment;
+import com.nikha.shianikha.fragments.NotificationFragment;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -280,7 +280,7 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    private View tempView;
+    public View tempView;
 
     public void onDrawerMenuClick(View view) {
         if (tempView == view)

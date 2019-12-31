@@ -62,7 +62,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         context = getContext();
         loadingDialog = new LoadingDialog(context);
 
-
         fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
 
         fragmentView.findViewById(R.id.imageViewer1).setOnClickListener(this);
@@ -80,7 +79,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout) // condition after & is written to exclude favourite from paid
+        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout  && v.getId() != R.id.button) // condition after & is written to exclude from paid
         {
             H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override
@@ -92,7 +91,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 }
             });
             return;
-        } else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout)// condition after & is written to exclude favourite from paid
+        } else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout && v.getId() != R.id.button)// condition after & is written to exclude favourite from paid
         {
             H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override

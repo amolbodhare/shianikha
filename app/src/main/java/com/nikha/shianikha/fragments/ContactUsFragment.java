@@ -1,15 +1,17 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.Fragment;
+
 import com.adoisstudio.helper.LoadingDialog;
+import com.nikha.shianikha.R;
 
 
 public class ContactUsFragment extends Fragment {

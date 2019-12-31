@@ -1,4 +1,4 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
-import com.nikha.shianikha.activities.HomeActivity;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.P;
 
 public class WebViewActivity extends AppCompatActivity {

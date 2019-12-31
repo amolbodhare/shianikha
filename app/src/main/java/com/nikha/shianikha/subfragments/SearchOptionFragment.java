@@ -250,7 +250,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
             {
                 string = CommonListHolder.stateIdList.get(CommonListHolder.stateNameList.indexOf(string));
                 App app = new App();
-                app.hitStateApi(string, context, new App.StateAndCityListCallBack() {
+                app.hitCityApi(string, context, new App.StateAndCityListCallBack() {
                     @Override
                     public void listIsPrepared() {
                         String[] array = new String[CommonListHolder.cityNameList.size()];

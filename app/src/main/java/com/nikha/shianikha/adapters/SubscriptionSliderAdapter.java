@@ -19,7 +19,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
-import com.nikha.shianikha.WebViewActivity;
+import com.nikha.shianikha.activities.WebViewActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;

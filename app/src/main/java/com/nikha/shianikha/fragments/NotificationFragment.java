@@ -1,4 +1,4 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -22,11 +22,11 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.App;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
-import com.nikha.shianikha.fragments.ProfileDetailsFragments;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -122,6 +122,7 @@ public class NotificationFragment extends Fragment {
                                         String  string = j.getString(P.notification_users_id);
                                         ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
                                         ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
+                                        ((HomeActivity)context).tempView = view;
                                     }
                                 });
                             }

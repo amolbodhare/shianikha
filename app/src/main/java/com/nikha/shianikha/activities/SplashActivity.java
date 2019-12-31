@@ -1,4 +1,4 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -26,9 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.nikha.App;
-import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.activities.RegSecondPageActivity;
-import com.nikha.shianikha.activities.WalkThroughActivity;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
