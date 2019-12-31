@@ -85,11 +85,14 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
         Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                    public void onLoading(boolean isLoading)
+                    {
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

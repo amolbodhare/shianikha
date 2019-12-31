@@ -19,6 +19,7 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
+import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.activities.WebViewActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -113,10 +114,12 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

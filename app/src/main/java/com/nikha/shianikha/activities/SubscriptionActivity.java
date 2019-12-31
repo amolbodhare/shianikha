@@ -56,10 +56,12 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

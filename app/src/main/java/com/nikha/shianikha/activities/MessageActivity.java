@@ -78,10 +78,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -249,10 +251,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

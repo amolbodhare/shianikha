@@ -393,10 +393,12 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+        if (!isDestroyed()) {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     @Override

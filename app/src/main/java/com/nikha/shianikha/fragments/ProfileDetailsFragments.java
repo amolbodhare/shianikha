@@ -79,7 +79,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout  && v.getId() != R.id.button) // condition after & is written to exclude from paid
+        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout && v.getId() != R.id.button) // condition after & is written to exclude from paid
         {
             H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
                 @Override
@@ -144,10 +144,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             String string = sharingLink.isEmpty() ? "linkNotFound" : sharingLink;
             intent.putExtra(Intent.EXTRA_TEXT, string + profileId);
             startActivity(Intent.createChooser(intent, "Share Via"));
-        }
-        else if (v.getId() == R.id.button)
-        {
-            hitRequestPhotoApi();
+        } else if (v.getId() == R.id.button) {
+            hitRequestPhotoApi(v);
         }
     }
 
@@ -247,11 +245,15 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+    public void onLoading(boolean isLoading)
+    {
+        if (!((HomeActivity)context).isDestroyed())
+        {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     @Override
@@ -414,11 +416,11 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             ((FrameLayout) object).removeAllViews();
     }
 
-    private void hitRequestPhotoApi() {
+    private void hitRequestPhotoApi(final View view) {
         Json json = new Json();
         json.addString(P.profile_id, profileId);
 
-        String  string = new Session(context).getString(P.tokenData);
+        String string = new Session(context).getString(P.tokenData);
         json.addString(P.token_id, string);
 
         RequestModel requestModel = RequestModel.newRequestModel("request_photo");
@@ -431,11 +433,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-
-                        /*if (json.getInt(P.status) == 1)
-                            //H.showMessage(context, "Your request has been sent.");
-                            H.showMessage(context, json.getString(P.msg));*/
-                       hitProfileDetailsApi("profile_details",profileId);
+                        int i = json.getInt(P.status);
+                        if (i == 1)
+                            ((Button) view).setText("photo already requested.");
                     }
                 })
                 .run("hitRequestPhotoApi");

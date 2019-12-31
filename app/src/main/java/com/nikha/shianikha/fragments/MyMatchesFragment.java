@@ -189,10 +189,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+        if (!((HomeActivity)context).isDestroyed()) {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     public interface OnFragmentInteractionListener {
@@ -455,10 +457,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

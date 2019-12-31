@@ -141,10 +141,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

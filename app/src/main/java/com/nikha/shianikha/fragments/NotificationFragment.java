@@ -91,10 +91,12 @@ public class NotificationFragment extends Fragment {
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

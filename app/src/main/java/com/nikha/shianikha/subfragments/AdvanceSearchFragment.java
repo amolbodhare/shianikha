@@ -115,6 +115,7 @@ public class AdvanceSearchFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int i = view.getId();
+        ((HomeActivity)context).tempView = view;
 
         if (i == R.id.button)
             makeJson();

@@ -97,10 +97,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -340,10 +342,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

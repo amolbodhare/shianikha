@@ -139,6 +139,7 @@ public class SearchOptionFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         H.log("clickEvent", "isCalled");
+        ((HomeActivity)context).tempView = view;
         if (view.getId() == R.id.button)
             makeJson();
         else

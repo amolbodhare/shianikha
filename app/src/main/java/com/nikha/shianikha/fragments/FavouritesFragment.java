@@ -435,10 +435,12 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -469,10 +471,12 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+        if (!((HomeActivity)context).isDestroyed()) {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     @Override
