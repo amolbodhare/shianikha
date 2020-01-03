@@ -51,6 +51,8 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     private JsonList jsonList = new JsonList();
     private CustomListAdapter customListAdapter = new CustomListAdapter();
 
+    private Bundle bundle;
+
     public FavouritesFragment() {
         // Required empty public constructor
     }
@@ -67,33 +69,33 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Json json;
         //if (fragmentView == null) {
-            context = getContext();
-            loadingDialog = new LoadingDialog(context);
-            fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
+        context = getContext();
+        loadingDialog = new LoadingDialog(context);
+        fragmentView = inflater.inflate(R.layout.fragment_favourites, container, false);
 
-            fragmentView.findViewById(R.id.refineLinerLayout).setOnClickListener(this);
+        fragmentView.findViewById(R.id.refineLinerLayout).setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.sortByLinearLayout).setOnClickListener(this);
+        fragmentView.findViewById(R.id.sortByLinearLayout).setOnClickListener(this);
 
-            ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
+        ((ListView) fragmentView.findViewById(R.id.listView)).setAdapter(customListAdapter);
 
-            Bundle bundle = getArguments();
-            if (bundle != null) {
-                String string = bundle.getString(P.json);
+        bundle = getArguments();
+        if (bundle != null) {
+            String string = bundle.getString(P.json);
 
-                try {
-                    json = new Json(string);
-                    if (string.contains("search_by_id"))
-                        fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
-                    searchJson = json;
-                    hitAllSearchApi();
+            try {
+                json = new Json(string);
+                if (string.contains("search_by_id"))
+                    fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
+                searchJson = json;
+                hitAllSearchApi();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            } else
-                hitFavouriteListApi("1");
+        } else
+            hitFavouriteListApi("1");
 
             /*final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -324,12 +326,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 if (object != null)
                     string = object.toString();
 
-                hitConnectNowApi(string, new Response() {
-                    @Override
-                    public void onResponse(String string) {
-                        changeConnectNowStatus(imageView, string);
-                    }
-                });
+                hitConnectNowApi(string);
 
             } else if (view.getId() == R.id.likeImageView) {
                 final ImageView imageView = (ImageView) view;
@@ -339,15 +336,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 if (object != null)
                     string = object.toString();
 
-                hitLikeApi(string, new CallBack() {
-                    @Override
-                    public void onCallBack(boolean statusTrue) {
-                        if (statusTrue)
-                            imageView.setColorFilter(context.getColor(R.color.green2));
-                        else
-                            imageView.setColorFilter(context.getColor(R.color.white));
-                    }
-                });
+                hitLikeApi(string);
             }
         }
     }
@@ -368,7 +357,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         }
     }
 
-    private void hitConnectNowApi(String profileId, final Response response) {
+    private void hitConnectNowApi(String profileId) {
         String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
@@ -385,16 +374,42 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-                        H.showMessage(context, json.getString(P.msg));
-                        json = json.getJson(P.data);
-                        String string = json.getInt(P.connected) + "";
-                        response.onResponse(string);
+                        if (json.getInt(P.status) == 1)
+                        {
+                            json = json.getJson(P.data);
+                            String string = json.getString(P.connected_status);
+                            if (string.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (string.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else if (bundle != null)
+                            {
+                                string = bundle.getString(P.json);
+
+                                try {
+                                    json = new Json(string);
+                                    if (string.contains("search_by_id"))
+                                        fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
+                                    searchJson = json;
+                                    hitAllSearchApi();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                            else
+                                hitFavouriteListApi("1");
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+
                     }
                 })
                 .run("hitConnectNowApi");
     }
 
-    private void hitLikeApi(String string, final CallBack callBack) {
+    private void hitLikeApi(String string) {
         Json json = new Json();
         json.addString(P.profile_id, string);
 
@@ -411,15 +426,33 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-
                         if (json.getInt(P.status) == 1) {
-                            //json = json.getJson(P.data);
-                            callBack.onCallBack(true);
+                            json = json.getJson(P.data);
+                            String string = json.getString(P.like_status);
+                            if (string.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (string.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else {
+                                if (bundle != null) {
+                                    string = bundle.getString(P.json);
 
-                        } else {
-                            callBack.onCallBack(false);
+                                    try {
+                                        json = new Json(string);
+                                        if (string.contains("search_by_id"))
+                                            fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
+                                        searchJson = json;
+                                        hitAllSearchApi();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } else
+                                    hitFavouriteListApi("1");
+                            }
+                        } else
                             H.showMessage(context, json.getString(P.msg));
-                        }
                     }
                 })
                 .run("hitLikeApi");
@@ -435,7 +468,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (!((HomeActivity)context).isDestroyed()) {
+                        if (!((HomeActivity) context).isDestroyed()) {
                             if (isLoading)
                                 loadingDialog.show("Please wait submitting your data...");
                             else
@@ -471,7 +504,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (!((HomeActivity)context).isDestroyed()) {
+        if (!((HomeActivity) context).isDestroyed()) {
             if (isLoading)
                 loadingDialog.show();
             else
@@ -486,13 +519,5 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
-    }
-
-    private interface CallBack {
-        void onCallBack(boolean statusTrue);
-    }
-
-    private interface Response {
-        void onResponse(String string);
     }
 }

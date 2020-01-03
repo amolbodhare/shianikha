@@ -82,8 +82,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return fragmentView;
     }
     public void hitDashboardApi() {
-        Session session = new Session(context);
-        String string = session.getString(P.tokenData);
+        String string = new Session(context).getString(P.tokenData);
         Json json = new Json();
         json.addString(P.token_id, string);
         RequestModel requestModel = RequestModel.newRequestModel("dashboard");
@@ -157,6 +156,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         int i = json.getInt(P.notifacation_count);
         ((HomeActivity) context).updateNotificationCount(i);
+
+        i = json.getInt(P.show);
+        new Session(context).addInt(P.showName, i);
+        App.showName = i == 1 ? true : false;
 
         if (App.showName)
             ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Paid");

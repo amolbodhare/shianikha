@@ -663,4 +663,28 @@ public class HomeActivity extends AppCompatActivity {
         else
             textView.setText(i + "");
     }
+
+    public void showNotPurchasedPopUp() {
+        H.showYesNoDialog(this, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
+            @Override
+            public void onDecision(boolean isYes) {
+                if (isYes) {
+                    showSubscriptionPlanActivity();
+                    //((HomeActivity) context).onBack(new View(context));
+                }
+            }
+        });
+    }
+
+    public void showExpiredPopUp() {
+        H.showYesNoDialog(this, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
+            @Override
+            public void onDecision(boolean isYes) {
+                if (isYes) {
+                    showSubscriptionPlanActivity();
+                    //((HomeActivity) context).onBack(new View(context));
+                }
+            }
+        });
+    }
 }

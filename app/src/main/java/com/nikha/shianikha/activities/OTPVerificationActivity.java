@@ -58,7 +58,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                 from = json.length();
                 H.log("json length is ", json.length() + "");
                 String s1 = json.getString(P.country_code);
-                if (s1.equals("+91")) {
+                if (s1.equals("91")) {
                     String s2 = json.getString(P.ph_number);
                     string = s1 + "-" + s2;
                     ((TextView) findViewById(R.id.mobile_no)).setText("OTP sent to " + string);
@@ -75,7 +75,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
                 findViewById(R.id.resendText).setOnClickListener(this);
 
                 //addTextWatcherOnAllEditText();
-                setOnKeyListnerOnAllEditText();
+                setOnKeyListenerOnAllEditText();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -84,7 +84,7 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
         setSixDigitOtp();
     }
 
-    private void setOnKeyListnerOnAllEditText() {
+    private void setOnKeyListenerOnAllEditText() {
         otp_first.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -336,10 +336,6 @@ public class OTPVerificationActivity extends AppCompatActivity implements View.O
 
                             str = json.getString(P.email);
                             session.addString(P.email, str);
-
-                            int i = json.getInt(P.show);
-                            session.addInt(P.showName, i);
-                            App.showName = i == 1 ? true : false;
 
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

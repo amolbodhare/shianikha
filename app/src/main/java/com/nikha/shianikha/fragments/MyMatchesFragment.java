@@ -189,7 +189,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (!((HomeActivity)context).isDestroyed()) {
+        if (!((HomeActivity) context).isDestroyed()) {
             if (isLoading)
                 loadingDialog.show();
             else
@@ -362,7 +362,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     }
 
     private void hitConnectNowApi(String userId) {
-        String string = new Session(context).getString(P.tokenData);
+        final String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
         json.addString(P.user_id_receiver, userId);
@@ -378,9 +378,19 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+                            String str = json.getString(P.connected_status);
 
-                        H.showMessage(context, json.getString(P.msg));
-                        hitMatchesApi(apiName);
+                            if (str.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (str.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else
+                                hitMatchesApi(apiName);
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+
                     }
                 })
                 .run("hitConnectNowApi");
@@ -404,8 +414,20 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        H.showMessage(context, json.getString(P.msg));
-                        hitMatchesApi(apiName);
+                        /*H.showMessage(context, json.getString(P.msg));
+                        hitMatchesApi(apiName);*/
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+                            String string = json.getString(P.like_status);
+                            if (string.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (string.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else
+                                hitMatchesApi(apiName);
+                            //changeLikeIconColor(((ImageView)view),string);
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
                     }
                 })
                 .run("hitLikeApi");
@@ -457,7 +479,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (!((HomeActivity)context).isDestroyed()) {
+                        if (!((HomeActivity) context).isDestroyed()) {
                             if (isLoading)
                                 loadingDialog.show("Please wait submitting your data...");
                             else

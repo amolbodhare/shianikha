@@ -98,10 +98,10 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             startActivity(intent);
         } else if (v.getId() == R.id.sendMessageLinearLayout) {
             if (viewFlag == 0) {
-                showNotPurchasedPopUp();
+                ((HomeActivity)context).showNotPurchasedPopUp();
                 return;
             } else if (viewFlag == 2) {
-                showExpiredPopUp();
+                ((HomeActivity)context).showExpiredPopUp();
                 return;
             }
 
@@ -115,9 +115,9 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             }
         } else if (v.getId() == R.id.imageView) {
             if (allowConnected.equalsIgnoreCase("0"))
-                showNotPurchasedPopUp();
+                ((HomeActivity)context).showNotPurchasedPopUp();
             else if (allowConnected.equalsIgnoreCase("2"))
-                showExpiredPopUp();
+                ((HomeActivity)context).showExpiredPopUp();
             else
                 hitConnectNowApi();
         } else if (v.getId() == R.id.favouriteLinearLayout) {
@@ -128,19 +128,19 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
             }
         } else if (v.getId() == R.id.likeImageView) {
             if (allowLike.equalsIgnoreCase("0"))
-                showNotPurchasedPopUp();
+                ((HomeActivity)context).showNotPurchasedPopUp();
             else if (allowLike.equalsIgnoreCase("2"))
-                showExpiredPopUp();
+                ((HomeActivity)context).showExpiredPopUp();
             else
                 hitLikeApi();
 
 
         } else if (v.getId() == R.id.shareProfileLinearLayout) {
             if (viewFlag == 0) {
-                showNotPurchasedPopUp();
+                ((HomeActivity)context).showNotPurchasedPopUp();
                 return;
             } else if (viewFlag == 2) {
-                showExpiredPopUp();
+                ((HomeActivity)context).showExpiredPopUp();
                 return;
             }
 
@@ -153,30 +153,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         {
             hitRequestPhotoApi();
         }
-    }
-
-    private void showNotPurchasedPopUp() {
-        H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
-            @Override
-            public void onDecision(boolean isYes) {
-                if (isYes) {
-                    ((HomeActivity) context).showSubscriptionPlanActivity();
-                    //((HomeActivity) context).onBack(new View(context));
-                }
-            }
-        });
-    }
-
-    private void showExpiredPopUp() {
-        H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
-            @Override
-            public void onDecision(boolean isYes) {
-                if (isYes) {
-                    ((HomeActivity) context).showSubscriptionPlanActivity();
-                    //((HomeActivity) context).onBack(new View(context));
-                }
-            }
-        });
     }
 
     private void hitConnectNowApi() {
@@ -325,6 +301,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             imageView = fragmentView.findViewById(R.id.likeImageView);
                             if (string.equals("1"))
                                 imageView.setColorFilter(Color.parseColor("#00d882"));
+                            else
+                                imageView.setColorFilter(Color.parseColor("#FFFFFF"));
 
                         } else
 
