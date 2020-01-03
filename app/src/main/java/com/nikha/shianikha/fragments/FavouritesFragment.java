@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -245,6 +247,9 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             if (view == null)
                 view = LayoutInflater.from(context).inflate(R.layout.matches_card, viewGroup, false);
 
+            LinearLayout linearLayout = view.findViewById(R.id.linearLayout);
+            Button button = linearLayout.findViewById(R.id.button);
+
             json = jsonList.get(i);
 
             string = json.getString(P.profile_pic);
@@ -265,8 +270,12 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             ((TextView) view.findViewById(R.id.profile_id_tv)).setText(string);
 
             string = json.getString(P.user_id);
+
             imageView.setTag(string);
             imageView.setOnClickListener(this);
+
+            button.setTag(string);
+            button.setOnClickListener(this);
 
             view.findViewById(R.id.fifth_lay).setTag(string);
 
@@ -305,11 +314,27 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
             string = json.getString(P.day);
             ((TextView) view.findViewById(R.id.time)).setText(string + " days ago");
 
+            string = json.getString(P.photo_available);
+            if (string.equals("0")) {
+                linearLayout.setVisibility(View.VISIBLE);
+                button.setOnClickListener(this);
+            } else if (string.equals("1")) {
+                linearLayout.setVisibility(View.GONE);
+                button.setOnClickListener(null);
+            }
+
+            string = json.getString(P.request_photo);
+            if (string.equals("0"))
+                button.setText("Request Photo");
+            else if (string.equals("1"))
+                button.setText("Photo already requested.");
+
             return view;
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View view)
+        {
             if (view.getId() == R.id.thumbnail) {
                 Object object = view.getTag();
                 if (object != null) {
@@ -319,7 +344,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
                 }
             } else if (view.getId() == R.id.imageView) {
-                final ImageView imageView = (ImageView) view;
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
                 Object object = relativeLayout.getTag();
@@ -329,7 +353,6 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                 hitConnectNowApi(string);
 
             } else if (view.getId() == R.id.likeImageView) {
-                final ImageView imageView = (ImageView) view;
 
                 RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
                 Object object = relativeLayout.getTag();
@@ -337,6 +360,14 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
                     string = object.toString();
 
                 hitLikeApi(string);
+            }
+            else if (view.getId() == R.id.button)
+            {
+                Object object = view.getTag();
+                if (object != null)
+                    string = object.toString();
+
+               hitRequestPhotoApi(string);
             }
         }
     }
@@ -488,6 +519,7 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
 
                         if (json.getInt(P.status) == 1) {
                             jsonList = json.getJsonList(P.data);
+                            ((TextView) fragmentView.findViewById(R.id.refineCount)).setText("Refine Search " + jsonList.size());
                             customListAdapter.notifyDataSetChanged();
 
                         } else
@@ -519,5 +551,47 @@ public class FavouritesFragment extends Fragment implements Api.OnLoadingListene
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
+    }
+
+    private void hitRequestPhotoApi(String string) {
+        Json json = new Json();
+        json.addString(P.profile_id, string);
+
+        string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("request_photo");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json)
+                    {
+                        if (json.getInt(P.status) == 1)
+                        {
+                            if (bundle != null) {
+                                String string = bundle.getString(P.json);
+
+                                try {
+                                    json = new Json(string);
+                                    if (string.contains("search_by_id"))
+                                        fragmentView.findViewById(R.id.sortByLinearLayout).setEnabled(false);
+                                    searchJson = json;
+                                    hitAllSearchApi();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            } else
+                                hitFavouriteListApi("1");
+                        }
+                    }
+                })
+                .run("hitRequestPhotoApi");
     }
 }
