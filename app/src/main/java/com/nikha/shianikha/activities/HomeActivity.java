@@ -374,7 +374,6 @@ public class HomeActivity extends AppCompatActivity {
     public void takeAction() {
         Session session = new Session(HomeActivity.this);
         session.addString(P.tokenData, "");
-        App.i = 0;
         //session.addInt(P.showName, 1);
 
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
