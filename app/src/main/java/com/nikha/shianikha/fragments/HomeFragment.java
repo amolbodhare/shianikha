@@ -162,9 +162,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         App.showName = i == 1 ? true : false;
 
         if (App.showName)
-            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Paid");
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(" : Paid");
         else
-            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Free");
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(" : Free");
     }
 
     @Override
