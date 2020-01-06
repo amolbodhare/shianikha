@@ -542,20 +542,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select your state");
             return;
-        }
+        }*/
         i = CommonListHolder.stateNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.stateIdList.get(i);
         submit_json.addString(P.state, string);
 
         editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select your city");
             return;
-        }
+        }*/
         i = CommonListHolder.cityNameList.indexOf(string);
         string = i == -1 ? "" : CommonListHolder.cityIdList.get(i);
         submit_json.addString(P.city, string);

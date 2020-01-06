@@ -266,7 +266,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button)
-
             makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
@@ -347,34 +346,37 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select state");
             return;
-        }
+        }*/
         i = CommonListHolder.stateNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.state, CommonListHolder.stateIdList.get(i));
+        else
+            App.masterJson.addString(P.state, "");
 
         editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select city");
             return;
-        }
+        }*/
         i = CommonListHolder.cityNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.city, CommonListHolder.cityIdList.get(i));
+        else
+            App.masterJson.addString(P.city, "");
 
         editText = findViewById(R.id.motherTongueEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select Mothertongue");
+            H.showMessage(this, "Please select Mother tongue");
             return;
         }
         i = CommonListHolder.languageNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.mother_tongue, CommonListHolder.languageIdList.get(i));
-
 
         editText = findViewById(R.id.languageEditText);
         string = editText.getText().toString();
