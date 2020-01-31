@@ -29,10 +29,13 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
     private Context context;
     private LayoutInflater layoutInflater;
     private JsonList jsonList;
+    private String currency = "";
 
-    public SubscriptionSliderAdapter(Context context, JsonList jsons) {
+    public SubscriptionSliderAdapter(Context context, JsonList jsons, int i)
+    {
         this.context = context;
         jsonList = jsons;
+        currency = i==1? "\u20B9" : "$";
     }
 
     //public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
@@ -62,7 +65,7 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
 
         string = " " + json.getString(P.amount);
         textView = v.findViewById(R.id.sub_plan_price_tv);
-        textView.setText('\u20B9' + string);
+        textView.setText(currency + string);
 
         string = json.getString(P.description);
         textView = v.findViewById(R.id.sub_plan_duration_tv);
@@ -104,6 +107,8 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
         Json json = new Json();
         json.addString(P.plan,string);
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        //
+        //5XtinfoxR0jl2d4JQGKvzVwNc
 
         RequestModel requestModel = RequestModel.newRequestModel("plan_purchase");
         requestModel.addJSON(P.data, json);

@@ -44,7 +44,6 @@ public class App extends Application implements View.OnTouchListener {
     public static Fragment tempFragment;
     public static boolean IS_DEV = false;
     public static boolean showName;
-    public static boolean notificationFlag = true;
 
     public static String fcmToken = "";
 
@@ -70,7 +69,7 @@ public class App extends Application implements View.OnTouchListener {
 
         app = new App();
 
-        Static.show_log = false;
+        Static.show_log = true;
 
         handleMusicPlayer();
 

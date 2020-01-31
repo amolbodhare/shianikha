@@ -21,7 +21,6 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
-import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
@@ -61,7 +60,6 @@ public class NotificationFragment extends Fragment {
 
             hitNotificationApi();
             ((HomeActivity)context).hideOrUpdateNotificationCount(true,0);
-            App.notificationFlag = false;//if false hide
         }
 
         final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);

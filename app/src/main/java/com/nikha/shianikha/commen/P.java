@@ -225,4 +225,5 @@ public class P {
     public static String allow_connected = "allow_connected";
     public static String like_status = "like_status";
     public static String connected_status = "connected_status";
+    public static String currency_type = "currency_type";
 }//class

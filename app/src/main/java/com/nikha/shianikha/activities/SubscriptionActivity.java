@@ -13,6 +13,7 @@ import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
+import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.adapters.SubscriptionSliderAdapter;
 import com.nikha.shianikha.commen.C;
@@ -50,7 +51,10 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
         RequestModel requestModel = RequestModel.newRequestModel("plan_list");
-        requestModel.addJSON(P.data, new Json());
+        Json json = new Json();
+        json.addString(P.token_id,new Session(context).getString(P.tokenData));
+        requestModel.addJSON(P.data, json);
+        //5XtinfoxR0jl2d4JQGKvzVwNc
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener() {
@@ -75,10 +79,12 @@ public class SubscriptionActivity extends AppCompatActivity implements View.OnCl
                     public void onSuccess(Json json) {
                         if (json.getInt(P.status) == 1)
                         {
+                            int i = json.getInt(P.currency_type);
+
                             JsonList jsonList = json.getJsonList(P.data);
                             if (jsonList != null)
                             {
-                                subPlanSliderAdapter = new SubscriptionSliderAdapter(context, jsonList);
+                                subPlanSliderAdapter = new SubscriptionSliderAdapter(context, jsonList,i);
 
                                 subPlanSlideViewPager.setAdapter(subPlanSliderAdapter);
                             }
