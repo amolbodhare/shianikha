@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="The Validation code That\nGet the SMS."
+            android:text="The Validation code That\nGet via SMS."
             android:textSize="14sp" />
 
         <TextView
@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="don't get the code "
+                android:text="don't get the code ? "
                 android:textSize="14sp" />
 
             <TextView

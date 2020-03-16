@@ -86,7 +86,7 @@
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="1 Day Ago"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -97,7 +97,7 @@
                     android:layout_below="@id/full_name"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="SN481358"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -118,7 +118,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="21 Yrs,"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -129,7 +129,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/age_tv"
                     android:layout_width="wrap_content"
-                    android:text="5'1"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -139,7 +139,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="UI Designer"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -159,7 +159,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Shia"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -170,7 +170,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/caste_tv"
                     android:layout_width="wrap_content"
-                    android:text="Muslim"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
@@ -181,7 +181,7 @@
                     android:layout_marginRight="3dp"
                     android:layout_toLeftOf="@id/country_tv"
                     android:layout_width="wrap_content"
-                    android:text="Mumbai,"
+                    android:text=""
                     android:textColor="@color/white"
                     android:visibility="gone"
                     android:textSize="10dp" />

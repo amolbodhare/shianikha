@@ -36,7 +36,7 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Ethincity"
+                    android:hint="Ethnicity"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 
@@ -222,7 +222,7 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="you are seeking marrriage"
+                    android:hint="you are seeking marriage"
                     android:paddingRight="56dp"
                     android:textSize="16dp" />
 

@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="17dp"
-                android:text="mailtobodhare@gmail.com" />
+                android:text="" />
 
 
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
