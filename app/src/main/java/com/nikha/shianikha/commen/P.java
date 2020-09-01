@@ -226,4 +226,8 @@ public class P {
     public static String like_status = "like_status";
     public static String connected_status = "connected_status";
     public static String currency_type = "currency_type";
+    public static String default_currency = "default_currency";
+    public static String currency_list = "currency_list";
+    public static String plan_list = "plan_list";
+    public static String currency = "currency";
 }//class

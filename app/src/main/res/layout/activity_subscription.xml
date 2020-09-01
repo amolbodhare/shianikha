@@ -79,20 +79,40 @@
                 android:textColor="#311C63"
                 android:textSize="20sp" />-->
 
-            <ImageView
-                android:layout_width="30dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.3"
-                android:src="@drawable/ic_coupon" />
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_coupon" />
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pay in"
+                    android:layout_marginStart="13dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_medium"/>
+                
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
                 android:layout_weight="1.7"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp"
                 android:text="Each of our payment plans will allow you to access all the features that we offer on the app on a prepaid basis. No hidden fees, we promise."
                 android:textColor="#5D5D5D"
                 android:textSize="12sp" />
@@ -140,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"/>
+                android:layout_marginRight="35dp" />
 
         </RelativeLayout>
 

@@ -31,11 +31,10 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
     private JsonList jsonList;
     private String currency = "";
 
-    public SubscriptionSliderAdapter(Context context, JsonList jsons, int i)
-    {
+    public SubscriptionSliderAdapter(Context context, JsonList jsons, int i) {
         this.context = context;
         jsonList = jsons;
-        currency = i==1? "\u20B9" : "$";
+        currency = i == 1 ? "\u20B9" : "$";
     }
 
     //public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
@@ -105,9 +104,9 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
 
     private void hitPurchasePlanApi(String string) {
         Json json = new Json();
-        json.addString(P.plan,string);
+        json.addString(P.plan, string);
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
-        //
+        json.addString(P.currency, currency.equals("$") ? "USD" : "INR");
         //5XtinfoxR0jl2d4JQGKvzVwNc
 
         RequestModel requestModel = RequestModel.newRequestModel("plan_purchase");
@@ -119,7 +118,7 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (!((SubscriptionActivity)context).isDestroyed()) {
+                        if (!((SubscriptionActivity) context).isDestroyed()) {
                             if (isLoading)
                                 loadingDialog.show("Please wait submitting your data...");
                             else
@@ -137,11 +136,10 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             String url = json.getString(P.url);
                             Intent intent = new Intent(context, WebViewActivity.class);
-                            intent.putExtra("url",url);
+                            intent.putExtra("url", url);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent);
                         } else
