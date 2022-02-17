@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -327,6 +328,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView"
+                    android:animateLayoutChanges="true"
                     android:orientation="vertical">
 
                     <!--<include layout="@layout/inflatable_children_layout" />-->

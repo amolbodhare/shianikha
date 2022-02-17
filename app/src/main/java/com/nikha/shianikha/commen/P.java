@@ -220,4 +220,14 @@ public class P {
     public static String account_delete = "account_delete";
     public static String fcm_token = "fcm_token";
     public static String hash_code="hash_code";
+    public static String notification_users_id = "notification_users_id";
+    public static String allow_like = "allow_like";
+    public static String allow_connected = "allow_connected";
+    public static String like_status = "like_status";
+    public static String connected_status = "connected_status";
+    public static String currency_type = "currency_type";
+    public static String default_currency = "default_currency";
+    public static String currency_list = "currency_list";
+    public static String plan_list = "plan_list";
+    public static String currency = "currency";
 }//class

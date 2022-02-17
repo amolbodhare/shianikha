@@ -23,10 +23,10 @@ import com.adoisstudio.helper.Session;
 import com.nikha.App;
 import com.nikha.shianikha.AboutApp;
 import com.nikha.shianikha.BuildConfig;
-import com.nikha.shianikha.ContactUsFragment;
+import com.nikha.shianikha.fragments.ContactUsFragment;
 import com.nikha.shianikha.HelpAndSupport;
 import com.nikha.shianikha.NotifacationDetails;
-import com.nikha.shianikha.NotificationFragment;
+import com.nikha.shianikha.fragments.NotificationFragment;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         App.showWidget = true;
 
         homeFragment = HomeFragment.newInstance();
-        fragmentLoader(homeFragment, "dashboard");
+        fragmentLoader(homeFragment, getString(R.string.shiaNikah));
 
         TextView textView = findViewById(R.id.titleName);
         textView.setSelected(true);
@@ -217,20 +217,24 @@ public class HomeActivity extends AppCompatActivity {
         tempView = view;
 
         if (view.getId() == R.id.homeButton_layout) {
-            fragmentLoader(homeFragment, getString(R.string.dashboard));
+            fragmentLoader(homeFragment, getString(R.string.shiaNikah));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true, 0);
         } else if (view.getId() == R.id.mymatchesButton_layout) {
             myMatchesFragment = MyMatchesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myMatchesFragment, getString(R.string.MyMatches));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true, 0);
 
         } else if (view.getId() == R.id.searchButton_layout) {
             searchFragment = SearchFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(searchFragment, getString(R.string.search));
             changeNotificationIcon(false);
+            hideOrUpdateNotificationCount(true, 0);
         } else if (view.getId() == R.id.myprofileButton_layout) {
             myProfileFragment = MyProfileFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(myProfileFragment, getString(R.string.Myprofile));
+            hideOrUpdateNotificationCount(true, 0);
         }
 
         setSelection(view);
@@ -279,7 +283,7 @@ public class HomeActivity extends AppCompatActivity {
         onBack(null);
     }
 
-    private View tempView;
+    public View tempView;
 
     public void onDrawerMenuClick(View view) {
         if (tempView == view)
@@ -306,18 +310,34 @@ public class HomeActivity extends AppCompatActivity {
             showContactUsFragment();
         else if (view.getId() == R.id.drawer_account_settings_layout)
             showAccountSettingFragment();
-        else if (view.getId() == R.id.inbox_activity_drawer_layout) {
-            Intent i = new Intent(HomeActivity.this, MessageActivity.class);
-            i.putExtra("open", P.inbox);
-            startActivity(i);
-            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-        } else if (view.getId() == R.id.drawer_favourites_layout) {
+        else if (view.getId() == R.id.inbox_activity_drawer_layout)
+            handleMessageBoxNavigation();
+        else if (view.getId() == R.id.drawer_favourites_layout) {
             favouritesFragment = FavouritesFragment.newInstance(currentFragment, currentFragmentName);
             fragmentLoader(favouritesFragment, "favourite");
         }
 
         drawerLayout.closeDrawer(Gravity.LEFT);
         tempView = null;
+    }
+
+    private void handleMessageBoxNavigation() {
+        if (!App.showName) {
+            H.showYesNoDialog(this, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
+                @Override
+                public void onDecision(boolean isYes) {
+                    if (isYes) {
+                        showSubscriptionPlanActivity();
+                    }
+                }
+            });
+        } else {
+            Intent i = new Intent(HomeActivity.this, MessageActivity.class);
+            i.putExtra("open", P.inbox);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+        }
     }
 
     private void changeIconColor(View view) {
@@ -347,21 +367,24 @@ public class HomeActivity extends AppCompatActivity {
         adb.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Session session = new Session(HomeActivity.this);
-                session.addString(P.tokenData, "");
-                App.i = 0;
-                //session.addInt(P.showName, 1);
-
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
-                finish();
-                //((HomeActivity)context).finish();
+                takeAction();
             }
         });
         adb.setNegativeButton("no", null);
         adb.show();
+    }
+
+    public void takeAction() {
+        Session session = new Session(HomeActivity.this);
+        session.addString(P.tokenData, "");
+        //session.addInt(P.showName, 1);
+
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+        finish();
+        //((HomeActivity)context).finish();
     }
 
     public void showContactUsFragment() {
@@ -404,6 +427,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showPartnerPreferenceActivity() {
         Intent i = new Intent(HomeActivity.this, PerfectMatchActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         ((HomeActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         //onDrawerMenuClick(findViewById(R.id.drawer_partnerPreference_layout));
@@ -449,6 +473,13 @@ public class HomeActivity extends AppCompatActivity {
         } else if (searchFragment != null && searchFragment.isVisible()) {
             fragment = SearchFragment.previousFragment;
             string = SearchFragment.previousFragmentName;
+            if (fragment != null && string != null) {
+                fragmentLoader(fragment, string);
+                decideBottomSelection(string);
+            }
+        } else if (accountSettingsFragment != null && accountSettingsFragment.isVisible()) {
+            fragment = AccountSettingsFragment.previousFragment;
+            string = AccountSettingsFragment.previousFragmentName;
             if (fragment != null && string != null) {
                 fragmentLoader(fragment, string);
                 decideBottomSelection(string);
@@ -531,6 +562,7 @@ public class HomeActivity extends AppCompatActivity {
             if (System.currentTimeMillis() - l < 700) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             } else {
@@ -568,10 +600,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void hideOrUpdateNotificationCount(boolean hide, int count) {
+        TextView textView = findViewById(R.id.noti_text);
         if (hide || count == 0)
-            findViewById(R.id.noti_text).setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
         else
-            ((TextView) findViewById(R.id.noti_text)).setText(count + "");
+            textView.setText(count + "");
     }
 
     public void OnDrawerMyProfileClick(View v) {
@@ -631,5 +664,29 @@ public class HomeActivity extends AppCompatActivity {
             textView.setVisibility(View.INVISIBLE);
         else
             textView.setText(i + "");
+    }
+
+    public void showNotPurchasedPopUp() {
+        H.showYesNoDialog(this, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
+            @Override
+            public void onDecision(boolean isYes) {
+                if (isYes) {
+                    showSubscriptionPlanActivity();
+                    //((HomeActivity) context).onBack(new View(context));
+                }
+            }
+        });
+    }
+
+    public void showExpiredPopUp() {
+        H.showYesNoDialog(this, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
+            @Override
+            public void onDecision(boolean isYes) {
+                if (isYes) {
+                    showSubscriptionPlanActivity();
+                    //((HomeActivity) context).onBack(new View(context));
+                }
+            }
+        });
     }
 }

@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:padding="13dp"
+            android:background="@drawable/clickable_trans_bg"
             android:src="@drawable/ic_arrow_back_black_24dp"
             android:tint="@color/tab_back" />
 

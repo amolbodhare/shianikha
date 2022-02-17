@@ -1,4 +1,4 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
@@ -47,7 +49,6 @@ public class NotificationFragment extends Fragment {
 
         return notificationFragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,10 +89,12 @@ public class NotificationFragment extends Fragment {
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -109,13 +112,19 @@ public class NotificationFragment extends Fragment {
                                 ListAdapter listAdapter = new ListAdapter(jsonList);
                                 ListView listView = fragmentView.findViewById(R.id.notificationList);
                                 listView.setAdapter(listAdapter);
-                                /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        ((HomeActivity) context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
-                                        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).notifacationDetails, context.getString(R.string.notificationdetails));
+                                       /* ((HomeActivity) context).notifacationDetails = NotifacationDetails.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName);
+                                        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).notifacationDetails, context.getString(R.string.notificationdetails));*/
+
+                                        Json j = (Json)view.getTag();
+                                        String  string = j.getString(P.notification_users_id);
+                                        ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, string);
+                                        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
+                                        ((HomeActivity)context).tempView = view;
                                     }
-                                });*/
+                                });
                             }
                         }
                     }

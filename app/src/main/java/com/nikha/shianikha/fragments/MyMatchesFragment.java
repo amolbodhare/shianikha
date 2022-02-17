@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -75,7 +74,6 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
             fragmentView.findViewById(R.id.i_am_looking_for).setOnClickListener(this);
             fragmentView.findViewById(R.id.looking_for_me).setOnClickListener(this);
 
-            fragmentView.findViewById(R.id.refine_imv).setOnClickListener(this);
             fragmentView.findViewById(R.id.refine_btn).setOnClickListener(this);
             loadingDialog = new LoadingDialog(context);
 
@@ -83,7 +81,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
             setSpannableText();
 
-            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+           /* final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh()
@@ -91,7 +89,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     swipeRefreshLayout.setRefreshing(false);
                     hitMatchesApi(apiName);
                 }
-            });
+            });*/
 
         }
         return fragmentView;
@@ -161,7 +159,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         } else if (i == R.id.looking_for_me) {
             hitMatchesApi("looking_for_me");
             changeColorsOfThreeTab(v);
-        } else if (v.getId() == R.id.refine_imv || v.getId() == R.id.refine_btn) {
+        } else if (v.getId() == R.id.refine_btn) {
             ((HomeActivity) context).startRefineSearchActivity();
         }
     }
@@ -191,10 +189,12 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+        if (!((HomeActivity) context).isDestroyed()) {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     public interface OnFragmentInteractionListener {
@@ -234,7 +234,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null)
-                convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, null, false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.matches_card, parent, false);
 
             json = jsonList.get(position);
 
@@ -283,6 +283,9 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 button.setText("Request Photo");
             else if (string.equals("1"))
                 button.setText("Photo already requested.");
+
+            string = json.getString(P.day);
+            ((TextView) convertView.findViewById(R.id.time)).setText(string + " days ago");
 
             return convertView;
         }
@@ -346,7 +349,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
         //((TextView) convertView.findViewById(R.id.full_name)).setText(json.getString(P.full_name));
         ((TextView) convertView.findViewById(R.id.time)).setText(json.getString(P.day) + " day ago");
         ((TextView) convertView.findViewById(R.id.profile_id_tv)).setText(json.getString(P.profile_id));
-        ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + "yrs,");
+        ((TextView) convertView.findViewById(R.id.age_tv)).setText(json.getString(P.age) + " yrs,");
         ((TextView) convertView.findViewById(R.id.height_tv)).setText(json.getString(P.height) + "''");
         ((TextView) convertView.findViewById(R.id.profession_tv)).setText(json.getString(P.edu_level));
         ((TextView) convertView.findViewById(R.id.religion_tv)).setText(json.getString(P.religion));
@@ -359,7 +362,7 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     }
 
     private void hitConnectNowApi(String userId) {
-        String string = new Session(context).getString(P.tokenData);
+        final String string = new Session(context).getString(P.tokenData);
 
         Json json = new Json();
         json.addString(P.user_id_receiver, userId);
@@ -375,9 +378,19 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+                            String str = json.getString(P.connected_status);
 
-                        H.showMessage(context, json.getString(P.msg));
-                        hitMatchesApi(apiName);
+                            if (str.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (str.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else
+                                hitMatchesApi(apiName);
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
+
                     }
                 })
                 .run("hitConnectNowApi");
@@ -401,8 +414,20 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onSuccess(Json json) {
 
-                        H.showMessage(context, json.getString(P.msg));
-                        hitMatchesApi(apiName);
+                        /*H.showMessage(context, json.getString(P.msg));
+                        hitMatchesApi(apiName);*/
+                        if (json.getInt(P.status) == 1) {
+                            json = json.getJson(P.data);
+                            String string = json.getString(P.like_status);
+                            if (string.equalsIgnoreCase("0"))
+                                ((HomeActivity) context).showNotPurchasedPopUp();
+                            else if (string.equalsIgnoreCase("2"))
+                                ((HomeActivity) context).showExpiredPopUp();
+                            else
+                                hitMatchesApi(apiName);
+                            //changeLikeIconColor(((ImageView)view),string);
+                        } else
+                            H.showMessage(context, json.getString(P.msg));
                     }
                 })
                 .run("hitLikeApi");
@@ -447,17 +472,19 @@ public class MyMatchesFragment extends Fragment implements View.OnClickListener,
     public void hitApiForRefineSearchRequest() {
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
-        RequestModel requestModel = RequestModel.newRequestModel("search");
+        RequestModel requestModel = RequestModel.newRequestModel(apiName);
         requestModel.addJSON(P.data, App.json);
 
         Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity) context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

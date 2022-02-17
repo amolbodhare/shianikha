@@ -27,7 +27,7 @@ public class MessageBox {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        //dialog.setCancelable(false);
         dialog.setContentView(R.layout.helper_dialog_message_ok);
 
         ((TextView) dialog.findViewById(R.id.title)).setText(title);

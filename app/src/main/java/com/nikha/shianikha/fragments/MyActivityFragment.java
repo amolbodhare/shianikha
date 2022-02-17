@@ -33,16 +33,15 @@ import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class MyActivityFragment extends Fragment implements View.OnClickListener {
     private View fragmentView;
     private Context context;
     public static Fragment previousFragment;
     public static String previousFragmentName;
-    private String which = "Accept request";
+    private String which = "Request";
+    private String whichApi = "";
+    private String userId = "";
 
     public MyActivityFragment() {
         // Required empty public constructor
@@ -61,13 +60,15 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         if (fragmentView == null) {
             fragmentView = inflater.inflate(R.layout.fragment_my_activity, container, false);
 
-            hitApiForList("request_list");
+            whichApi = "request_list";
+
+            hitApiForList(whichApi);
 
             final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    hitApiForList("request_list");
+                    hitApiForList(whichApi);
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });
@@ -81,6 +82,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
     private void hitApiForList(String string) {
         Json json = new Json();
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        whichApi = string;
 
         final LoadingDialog loadingDialog = new LoadingDialog(context);
 
@@ -92,10 +94,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -161,8 +165,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         childLayout.getChildAt(1).setVisibility(View.VISIBLE);
     }
 
-    private void chooseApi(String string) {
-
+    private void chooseApi(String string)
+    {
         if (string.equalsIgnoreCase("request"))
             hitApiForList("request_list");
         else if (string.equalsIgnoreCase("accepted"))
@@ -177,6 +181,8 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             hitApiForList("who_visited_my_profile");
         else if (string.equalsIgnoreCase("Profiles Viewed By Me"))
             hitApiForList("profiles_viewed_by_me");
+        else
+            H.log("wentTo","log and string is "+string);
     }
 
     private void implementAutoScroll(LinearLayout linearLayout) {
@@ -220,7 +226,7 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
             Json json = jsonList.get(i);
             String string = "";
 
-            if (!which.equals("Accept request"))
+            if (!which.equals("Request"))
                 view = LayoutInflater.from(context).inflate(R.layout.accepted_list_card, viewGroup, false);
             else {
                 view = LayoutInflater.from(context).inflate(R.layout.request_item, viewGroup, false);
@@ -234,6 +240,10 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 button.setTag(string);
                 button.setOnClickListener(this);
             }
+
+            view.setOnClickListener(this);
+            string = json.getString(P.user_id);
+            view.setTag(string);
 
             string = json.getString(P.profile_pic);
             try {
@@ -263,22 +273,35 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
 
                 string = json.getString(P.full_name);
                 ((TextView) view.findViewById(R.id.title)).setText(string);
+            }
 
+            TextView textView = view.findViewById(R.id.age_height_cast_religion_details);
+            if (textView!=null)
+            {
                 StringBuilder stringBuilder = new StringBuilder();
 
-                string = json.getString(P.age) + "yrs";
+                string = json.getString(P.age) + "yrs, ";
                 stringBuilder.append(string);
 
                 string = json.getString(P.height);
-                ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(string.split(".")));
-                if (arrayList.size() == 2)
-                    string = arrayList.get(0) + "'" + arrayList.get(1) + "\"";
-                stringBuilder.append(string);
+
+                if (string.contains("."))
+                {
+                    String str = string.substring(0,string.indexOf("."));
+                    str = str + "\'";
+                    stringBuilder.append(str);
+                    H.log("ftIs",str);
+
+                    str = string.substring(string.indexOf(".")+1);
+                    str = str + "\" ";
+                    stringBuilder.append(str);
+                    H.log("inchIs",str);
+                }
 
                 string = json.getString(P.religion);
                 stringBuilder.append(string);
 
-                ((TextView) view.findViewById(R.id.age_height_cast_religion_details)).setText(string);
+                textView.setText(stringBuilder);
             }
 
             return view;
@@ -287,12 +310,14 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
         @Override
         public void onClick(View view)
         {
-            if (view.getId() == R.id.acceptButton || view.getId() == R.id.rejectButton) {
+            if (view.getId() == R.id.acceptButton || view.getId() == R.id.rejectButton)
+            {
                 if (view.getId() == R.id.acceptButton)
                     hitAcceptRejectApi("1", view.getTag() + "");
                 else
                     hitAcceptRejectApi("0", view.getTag() + "");
-            } else if (App.showName) {
+            }
+            else if (App.showName) {
                 Object object;
                 if (view.getId() == R.id.imv_call) {
                     object = view.getTag();
@@ -303,16 +328,14 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                     if (object != null)
                         makeIntent(object.toString(), "m");
                 }
-            } else {
-                H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
-                    @Override
-                    public void onDecision(boolean isYes) {
-                        if (isYes) {
-                            ((HomeActivity) context).showSubscriptionPlanActivity();
-                            //((HomeActivity) context).onBack(new View(context));
-                        }
+            }
+            else
+                {
+                    Object object = view.getTag();
+                    if (object!=null) {
+                        ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, (String) object);
+                        ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, getString(R.string.profileDetails));
                     }
-                });
             }
         }
     }
@@ -333,10 +356,12 @@ public class MyActivityFragment extends Fragment implements View.OnClickListener
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!((HomeActivity)context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

@@ -18,7 +18,7 @@
             android:background="@drawable/clickable_trans_bg"
             android:clickable="true"
             android:onClick="onBack"
-            android:padding="13dp"
+                android:padding="13dp"
             android:src="@drawable/ic_arrow_back_black_24dp"
             android:tint="@color/white" />
 
@@ -51,6 +51,7 @@
             android:gravity="center"
             android:onClick="onSaveOrSubmit"
             android:text="save"
+            android:background="@drawable/clickable_trans_bg"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textStyle="bold" />

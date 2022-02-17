@@ -155,7 +155,9 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
             hideCustomSpinnerLayout();
         else if (v.getId() == R.id.logInHereTextView)
         {
-            startActivity(new Intent(this,LoginActivity.class));
+            Intent intent = new Intent(this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             finish();
         }
         else
@@ -289,7 +291,9 @@ public class RegSecondPageActivity extends AppCompatActivity implements View.OnC
         App.masterJson.addJSONArray(P.children_details,jsonArray);
 
         H.log("masterJsonIs", App.masterJson.toString());
-        startActivity(new Intent(this, RegThirdPageActivity.class));
+        Intent intent = new Intent(this,RegThirdPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void setMarginTopOfCustomSpinner() {

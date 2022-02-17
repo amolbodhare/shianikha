@@ -79,7 +79,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         else if (v.getId() == R.id.reg_tv)
         {
-            startActivity(new Intent(this,RegistrationActivity.class));
+            Intent intent = new Intent(this,RegistrationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         else if (v.getId() == R.id.countryCodeEditText)
         {
@@ -105,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         Json json = new Json();
 
-        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString().replace("+","");
         json.addString(P.country_code,countryCode);
 
         String string=((EditText)findViewById(R.id.mobile_no)).getText().toString();
@@ -139,10 +141,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -159,6 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         {
                             Intent intent = new Intent(LoginActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());//same parameter is required in everyscreen
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(LoginActivity.this, json.getString(P.msg));
@@ -183,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 string = entry.getKey();
                 countryNameList.add(string);
                 string = entry.getValue();
-                countryCodeList.add(string);
+                countryCodeList.add("+"+string);
             }
         }
 

@@ -173,7 +173,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 s1 = json.getString(P.name);
                 s2 = json.getString(P.country_code);
                 if (s1 != null && s2 != null)
-                    countryList.put(s1, s2);
+                    countryList.put(s1, "+"+s2);
             }
             H.log("countryNameAndListIs",countryList.toString());
         }
@@ -261,6 +261,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         else if(v.getId() == R.id.login_here)
         {
             Intent intent = new Intent(this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         else if(v.getId()==R.id.dateOfBirthEditText)
@@ -378,7 +379,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
         json.addString(P.email,string);
 
-        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString();
+        String countryCode = ((EditText)findViewById(R.id.countryCodeEditText)).getText().toString().replace("+","");
         json.addString(P.country_code,countryCode);
 
         string = ((EditText)findViewById(R.id.mobile_no)).getText().toString();
@@ -422,10 +423,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show();
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show();
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -442,6 +445,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                         {
                             Intent intent = new Intent(RegistrationActivity.this, OTPVerificationActivity.class);
                             intent.putExtra(P.registrationJson,j.toString());
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                         else

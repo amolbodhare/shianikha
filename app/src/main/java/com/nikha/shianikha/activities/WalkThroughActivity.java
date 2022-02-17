@@ -90,11 +90,13 @@ public class WalkThroughActivity extends AppCompatActivity implements View.OnCli
         if (v.getId() == R.id.btn_login)
         {
             Intent i = new Intent(WalkThroughActivity.this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
         else if (v.getId() == R.id.btn_reg)
         {
             Intent i = new Intent(WalkThroughActivity.this, RegistrationActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
         //finish();

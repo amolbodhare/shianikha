@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nikha.shianikha.NotificationFragment">
+    tools:context="com.nikha.shianikha.fragments.NotificationFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -24,7 +24,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:layout_gravity="center"
-        android:text="No data available"
+        android:text="No result found"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="30sp"/>
 

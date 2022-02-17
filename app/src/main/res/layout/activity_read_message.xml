@@ -71,7 +71,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@id/circleImageView"
             android:fontFamily="@font/poppins_medium"
-            android:text="name"
+            android:text=""
             android:textColor="#3E3E3E" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@id/circleImageView"
             android:fontFamily="@font/poppins_medium"
-            android:text="date"
+            android:text=""
             android:textSize="13sp" />
 
     </RelativeLayout>

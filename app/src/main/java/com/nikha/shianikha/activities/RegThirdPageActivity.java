@@ -32,9 +32,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class RegThirdPageActivity extends AppCompatActivity implements View.OnClickListener {
-    private ArrayAdapter<String> arrayAdapter;
 
     private Session session;
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,62 +81,122 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     private void setUpCustomSpinner(final View view) {
         ListView listView = findViewById(R.id.listView);
 
-        if (view.getId() == R.id.occupationEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
-        } else if (view.getId() == R.id.educationEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search education");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
-        } else if (view.getId() == R.id.countryEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search country");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
-        } else if (view.getId() == R.id.stateEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search state");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
-        } else if (view.getId() == R.id.cityEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search city");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
-        } else if (view.getId() == R.id.motherTongueEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search mother tongue");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
-        } else if (view.getId() == R.id.monthlyIncomeEditText) {
-            ((EditText) findViewById(R.id.editText)).setHint("Search income");
-            arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
-        } else if (view.getId() == R.id.languageEditText)
-        {
-            ((EditText) findViewById(R.id.editText)).setHint("Search language");
-            String[] languageArray = new String[CommonListHolder.languageNameList.size()];
-            languageArray = CommonListHolder.languageNameList.toArray(languageArray);
-            showMultiChoiceDialog(languageArray, view);
-            return;
-            //arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
-        }
-        findViewById(R.id.view).setVisibility(View.VISIBLE);
+        try {
 
-        if (arrayAdapter == null)
-            return;
+            if (view.getId() == R.id.occupationEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search Occupation");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.occupationNameList);
+            } else if (view.getId() == R.id.educationEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search education");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.educationNameList);
+            } else if (view.getId() == R.id.countryEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search country");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.countryNameList);
+            } else if (view.getId() == R.id.stateEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search state");
+                String string = ((EditText) findViewById(R.id.countryEditText)).getText().toString();
+                string = CommonListHolder.countryIdList.get(CommonListHolder.countryNameList.indexOf(string));
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
+                setStateAdapter(string,listView,view);
+            } else if (view.getId() == R.id.cityEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search city");
+                String string = ((EditText) findViewById(R.id.stateEditText)).getText().toString();
+                string = CommonListHolder.stateIdList.get(CommonListHolder.stateNameList.indexOf(string));
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
+                setCityAdapter(string,listView,view);
+            } else if (view.getId() == R.id.motherTongueEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search mother tongue");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.languageNameList);
+            } else if (view.getId() == R.id.monthlyIncomeEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search income");
+                arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, CommonListHolder.monthlyIncomeNameList);
+            } else if (view.getId() == R.id.languageEditText) {
+                ((EditText) findViewById(R.id.editText)).setHint("Search language");
+                String[] languageArray = new String[CommonListHolder.languageNameList.size()];
+                languageArray = CommonListHolder.languageNameList.toArray(languageArray);
+                showMultiChoiceDialog(languageArray, view);
+                return;
+                //arrayAdapter = new ArrayAdapter<>(this, R.layout.text_view, R.id.textView, languageNameList);
+            }
+            findViewById(R.id.view).setVisibility(View.VISIBLE);
 
-        H.showKeyBoard(this, findViewById(R.id.editText));
+            if (arrayAdapter == null)
+                return;
 
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                TextView textView = v.findViewById(R.id.textView);
-                if (textView != null) {
-                    Log.e("selectedIs", textView.getText().toString());
-                    String string = textView.getText().toString().trim();
-                    ((EditText) view).setText(string);
-                    if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
-                        showOtherEditText(view, true);
-                    else
-                        showOtherEditText(view, false);
+            H.showKeyBoard(this, findViewById(R.id.editText));
+
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    TextView textView = v.findViewById(R.id.textView);
+                    if (textView != null) {
+                        Log.e("selectedIs", textView.getText().toString());
+                        String string = textView.getText().toString().trim();
+                        ((EditText) view).setText(string);
+                        if (string.equalsIgnoreCase("other") || string.equalsIgnoreCase("others"))
+                            showOtherEditText(view, true);
+                        else
+                            showOtherEditText(view, false);
+                    }
+                    hideCustomSpinnerLayout();
                 }
-                hideCustomSpinnerLayout();
+            });
+
+            findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCityAdapter(String string, final ListView listView, final View view) {
+        App app = new App();
+        app.hitCityApi(string, this, new App.StateAndCityListCallBack() {
+            @Override
+            public void listIsPrepared() {
+                arrayAdapter = new ArrayAdapter<>(RegThirdPageActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.cityNameList);
+                listView.setAdapter(arrayAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        TextView textView = v.findViewById(R.id.textView);
+                        if (textView != null) {
+                            Log.e("selectedIs", textView.getText().toString());
+                            String string = textView.getText().toString().trim();
+                            ((EditText) view).setText(string);
+                        }
+                        hideCustomSpinnerLayout();
+                    }
+                });
+
+                findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
             }
         });
+    }
 
-        findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+    private void setStateAdapter(String string,final ListView listView,final View view) {
+        App app = new App();
+        app.hitStateApi(string, this, new App.StateAndCityListCallBack() {
+            @Override
+            public void listIsPrepared() {
+                arrayAdapter = new ArrayAdapter<>(RegThirdPageActivity.this, R.layout.text_view, R.id.textView, CommonListHolder.stateNameList);
+                listView.setAdapter(arrayAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        TextView textView = v.findViewById(R.id.textView);
+                        if (textView != null) {
+                            Log.e("selectedIs", textView.getText().toString());
+                            String string = textView.getText().toString().trim();
+                            ((EditText) view).setText(string);
+                        }
+                        hideCustomSpinnerLayout();
+                    }
+                });
+
+                findViewById(R.id.includeContainer).animate().translationX(0).setDuration(500);
+            }
+        });
     }
 
     private ArrayList<String> tempList;
@@ -186,8 +246,7 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
         int i = linearLayout.indexOfChild(relativeLayout);
         View v = linearLayout.getChildAt(i + 1);
-        if (v instanceof TextInputLayout && v.getId()!=R.id.residentialAddressTextInputLayout)
-        {
+        if (v instanceof TextInputLayout && v.getId() != R.id.residentialAddressTextInputLayout) {
             if (b)
                 v.setVisibility(View.VISIBLE);
             else
@@ -207,7 +266,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button)
-
             makeJson();
         else if (v.getId() == R.id.view)
             hideCustomSpinnerLayout();
@@ -216,7 +274,6 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void makeJson() {
-
 
         EditText editText = findViewById(R.id.educationEditText);
         String string = editText.getText().toString();
@@ -263,14 +320,14 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
         editText = findViewById(R.id.monthlyIncomeEditText);
         string = editText.getText().toString();
         i = CommonListHolder.monthlyIncomeNameList.indexOf(string);
-        if (i!=-1)
-            App.masterJson.addString(P.monthly_income,CommonListHolder.monthlyIncomeIdList.get(i));
+        if (i != -1)
+            App.masterJson.addString(P.monthly_income, CommonListHolder.monthlyIncomeIdList.get(i));
 
 
         string = ((EditText) findViewById(R.id.res_add_ed)).getText().toString();
-        if (string.isEmpty() || string.length()<3) {
+        if (string.isEmpty() || string.length() < 3) {
             if (string.isEmpty())
-            H.showMessage(this, "Please enter residential address");
+                H.showMessage(this, "Please enter residential address");
             else
                 H.showMessage(this, "Please enter valid residential address");
             return;
@@ -289,61 +346,65 @@ public class RegThirdPageActivity extends AppCompatActivity implements View.OnCl
 
         editText = findViewById(R.id.stateEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select state");
             return;
-        }
+        }*/
         i = CommonListHolder.stateNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.state, CommonListHolder.stateIdList.get(i));
+        else
+            App.masterJson.addString(P.state, "");
 
         editText = findViewById(R.id.cityEditText);
         string = editText.getText().toString();
-        if (string.isEmpty()) {
+        /*if (string.isEmpty()) {
             H.showMessage(this, "Please select city");
             return;
-        }
+        }*/
         i = CommonListHolder.cityNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.city, CommonListHolder.cityIdList.get(i));
+        else
+            App.masterJson.addString(P.city, "");
 
         editText = findViewById(R.id.motherTongueEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select Mothertongue");
+            H.showMessage(this, "Please select Mother tongue");
             return;
         }
         i = CommonListHolder.languageNameList.indexOf(string);
         if (i != -1)
             App.masterJson.addString(P.mother_tongue, CommonListHolder.languageIdList.get(i));
 
-
         editText = findViewById(R.id.languageEditText);
         string = editText.getText().toString();
         if (string.isEmpty()) {
-            H.showMessage(this, "Please select languages");
+            H.showMessage(this, "Please select known languages");
             return;
         }
-        StringTokenizer stringTokenizer = new StringTokenizer(string,",");
+        StringTokenizer stringTokenizer = new StringTokenizer(string, ",");
         JSONArray jsonArray = new JSONArray();
-        while (stringTokenizer.hasMoreTokens())
-        {
+        while (stringTokenizer.hasMoreTokens()) {
             string = stringTokenizer.nextToken().trim();
-            i= CommonListHolder.languageNameList.indexOf(string);
-            if (i!=-1)
+            i = CommonListHolder.languageNameList.indexOf(string);
+            if (i != -1)
                 jsonArray.put(CommonListHolder.languageIdList.get(i));
         }
 
-        App.masterJson.addJSONArray(P.language,jsonArray);
+        App.masterJson.addJSONArray(P.language, jsonArray);
 
         editText = findViewById(R.id.otherLanguageEditText);
         string = editText.getText().toString();
-        App.masterJson.addString(P.other_language,string);
+        App.masterJson.addString(P.other_language, string);
 
-        H.log("jsonArrayIs",jsonArray+"");
+        H.log("jsonArrayIs", jsonArray + "");
 
         H.log("masterJsonIs", App.masterJson.toString());
-        startActivity(new Intent(this, RegFourthPageActivity.class));
+        Intent intent = new Intent(this, RegFourthPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void setMarginTopOfCustomSpinner() {

@@ -85,11 +85,14 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
         Api.newApi(this, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders()).setMethod(Api.POST)
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
-                    public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                    public void onLoading(boolean isLoading)
+                    {
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -105,6 +108,7 @@ public class RegSixthPageActivity extends AppCompatActivity implements View.OnCl
                         if (json.getInt(P.status) == 1) {
                             new Session(RegSixthPageActivity.this).addInt(P.full_register, 1);
                             Intent intent = new Intent(RegSixthPageActivity.this, PerfectMatchActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(RegSixthPageActivity.this, json.getString(P.msg));

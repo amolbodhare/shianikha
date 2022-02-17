@@ -314,7 +314,9 @@ public class RegFifthPageActivity extends AppCompatActivity implements View.OnCl
         H.log("masterJsonIs", App.masterJson.toString());
 
         //hitRegisterDetailsApi();
-        startActivity(new Intent(this, RegSixthPageActivity.class));
+        Intent intent = new Intent(this,RegSixthPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private JSONArray addValueToJsonArray() {

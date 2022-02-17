@@ -1,9 +1,8 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -11,10 +10,11 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.adoisstudio.helper.H;
 import com.adoisstudio.helper.Session;
-import com.nikha.App;
-import com.nikha.shianikha.activities.HomeActivity;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.P;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -62,7 +62,7 @@ public class WebViewActivity extends AppCompatActivity {
                         {
                             Session session = new Session(WebViewActivity.this);
                             session.addInt(P.showName,1);
-                            App.showName = true;
+                            //App.showName = true;
                         }
 
                         new Handler().postDelayed(new Runnable() {
@@ -72,6 +72,7 @@ public class WebViewActivity extends AppCompatActivity {
                                 Intent intent = new Intent(WebViewActivity.this, HomeActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
+                                finish();
                             }
                         },1230);
                     }

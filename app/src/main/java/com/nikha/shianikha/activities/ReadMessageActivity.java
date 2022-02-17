@@ -71,6 +71,7 @@ public class ReadMessageActivity extends AppCompatActivity implements View.OnCli
             Intent intent = new Intent(ReadMessageActivity.this, WriteMessageActivity.class);
             intent.putExtra(P.profile_id,userId);
             intent.putExtra(P.message_id,messageId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             ((ReadMessageActivity.this)).overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
         }

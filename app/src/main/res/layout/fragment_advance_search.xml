@@ -42,7 +42,6 @@
                     android:tag="female"
                     android:fontFamily="@font/poppins_regular"
                     android:buttonTint="@color/bluebtnback"
-                    android:checked="true"
                     android:text="Bride" />
 
                 <RadioButton
@@ -474,7 +473,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:tag="1"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
                     android:text="Yes" />
 
                 <RadioButton
@@ -524,7 +522,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:tag="1"
                     android:buttonTint="#5C5CFE"
-                    android:checked="true"
+
                     android:text="Yes" />
 
                 <RadioButton
@@ -570,7 +568,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
+
                         android:text="Yes" />
 
                     <RadioButton
@@ -618,7 +616,7 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
+
                         android:text="Yes" />
 
                     <RadioButton
@@ -666,7 +664,7 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
+
                         android:text="Yes" />
 
                     <RadioButton
@@ -714,7 +712,7 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
+
                         android:text="Yes" />
 
                     <RadioButton
@@ -762,7 +760,7 @@
                         android:layout_weight="0.5"
                         android:tag="1"
                         android:buttonTint="#5C5CFE"
-                        android:checked="true"
+
                         android:text="Yes" />
 
                     <RadioButton

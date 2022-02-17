@@ -1,4 +1,4 @@
-package com.nikha.shianikha;
+package com.nikha.shianikha.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -27,9 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.nikha.App;
-import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.activities.RegSecondPageActivity;
-import com.nikha.shianikha.activities.WalkThroughActivity;
+import com.nikha.shianikha.R;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
@@ -61,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
         generateFcmToken();
         int i = session.getInt(P.showName);
         App.showName = i == 1 ? true : false;
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 31);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 31);
 
         //to get height of status bar
         new Handler().postDelayed(new Runnable() {
@@ -130,8 +128,6 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 })
                 .run("hitMastersApi");
-
-
     }
 
     private void makeSeperateJsonList(Json json) {
@@ -146,7 +142,7 @@ public class SplashActivity extends AppCompatActivity {
             commonListHolder.makeProfileForList(jsonList);
         }
 
-        jsonList = json.getJsonList(P.city);// city name and code
+       /* jsonList = json.getJsonList(P.city);// city name and code
         if (jsonList != null) {
             //session.addString(P.city, jsonList.toString());
             commonListHolder.makeCityList(jsonList);
@@ -156,7 +152,7 @@ public class SplashActivity extends AppCompatActivity {
         if (jsonList != null) {
             //session.addString(P.state, jsonList.toString());
             commonListHolder.makeStateList(jsonList);
-        }
+        }*/
 
         jsonList = json.getJsonList(P.country);// country name and code
         if (jsonList != null) {
@@ -221,7 +217,7 @@ public class SplashActivity extends AppCompatActivity {
         jsonList = json.getJsonList(P.intreasted_in);// interrest name and code
         if (jsonList != null) {
             //session.addString(P.intreasted_in, jsonList.toString());
-            commonListHolder.makeIntrestedInList(jsonList);
+            commonListHolder.makeInterestedInList(jsonList);
         }
 
         jsonList = json.getJsonList(P.complexion);// complexion name and code
@@ -282,7 +278,7 @@ public class SplashActivity extends AppCompatActivity {
                 //for deep linking
                 /*if (!profileId.isEmpty())
                     intent.putExtra(P.profile_id,profileId);*/
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }

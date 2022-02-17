@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:gravity="end"
-            android:text="1 June 2019 10PM"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="11sp" />
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Letter from Founder"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="13sp"/>
 

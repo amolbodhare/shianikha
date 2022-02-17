@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,12 +39,13 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     private View fragmentView;
     public static Fragment previousFragment;
     public static String previousFragmentName;
-    public static String profileId;
+    private static String profileId;
     private LoadingDialog loadingDialog;
     private JsonList jsonList;
     private String sharingLink = "";
     private int viewFlag;//0 = dont'show, 1 = show, 2 = plan expired.
-
+    private String allowLike = "";
+    private String allowConnected = "";
 
     public static ProfileDetailsFragments newInstance(Fragment fragment, String prev_frag_name, String profile_id) {
         ProfileDetailsFragments profileDetailsFragments = new ProfileDetailsFragments();
@@ -61,7 +63,6 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         context = getContext();
         loadingDialog = new LoadingDialog(context);
 
-
         fragmentView = inflater.inflate(R.layout.fragment_profile_details, container, false);
 
         fragmentView.findViewById(R.id.imageViewer1).setOnClickListener(this);
@@ -78,73 +79,79 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v)
-    {
-        if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout) // condition after & is written to exclude favourite from paid
+    public void onClick(View v) {
+       /* if (viewFlag == 2 && v.getId() != R.id.favouriteLinearLayout && v.getId() != R.id.button) // condition after & is written to exclude from paid
         {
-            H.showYesNoDialog(context, "Limit expired", "You have exhausted your limit", "purchase plan", "cancel", new H.OnYesNoListener() {
-                @Override
-                public void onDecision(boolean isYes) {
-                    if (isYes) {
-                        ((HomeActivity) context).showSubscriptionPlanActivity();
-                        //((HomeActivity) context).onBack(new View(context));
-                    }
-                }
-            });
+            showExpiredPopUp();
             return;
         }
-        else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout)// condition after & is written to exclude favourite from paid
+        else if (viewFlag == 0 && v.getId() != R.id.favouriteLinearLayout && v.getId() != R.id.button)// condition after & is written to exclude favourite from paid
         {
-            H.showYesNoDialog(context, "Plan not purchased", "Feature available only for paid user.", "purchase plan", "cancel", new H.OnYesNoListener() {
-                @Override
-                public void onDecision(boolean isYes) {
-                    if (isYes) {
-                        ((HomeActivity) context).showSubscriptionPlanActivity();
-                        //((HomeActivity) context).onBack(new View(context));
-                    }
-                }
-            });
+            showNotPurchasedPopUp();
             return;
-        }
+        }*/
 
         if (v.getId() == R.id.imageViewer1) {
             Intent intent = new Intent(context, ImageViewPagerActivity.class);
             intent.putExtra("ImageList", jsonList.toString());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         } else if (v.getId() == R.id.sendMessageLinearLayout) {
+            if (viewFlag == 0) {
+                ((HomeActivity)context).showNotPurchasedPopUp();
+                return;
+            } else if (viewFlag == 2) {
+                ((HomeActivity)context).showExpiredPopUp();
+                return;
+            }
+
             Intent intent = new Intent(context, WriteMessageActivity.class);
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
                 intent.putExtra(P.profile_id, string);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
-        } else if (v.getId() == R.id.imageView)
-            hitConnectNowApi();
-        else if (v.getId() == R.id.favouriteLinearLayout)
-        {
+        } else if (v.getId() == R.id.imageView) {
+            if (allowConnected.equalsIgnoreCase("0"))
+                ((HomeActivity)context).showNotPurchasedPopUp();
+            else if (allowConnected.equalsIgnoreCase("2"))
+                ((HomeActivity)context).showExpiredPopUp();
+            else
+                hitConnectNowApi();
+        } else if (v.getId() == R.id.favouriteLinearLayout) {
             Object object = v.getTag();
             if (object != null) {
                 String string = object.toString();
                 hitFavouriteApi(string);
             }
         } else if (v.getId() == R.id.likeImageView) {
-            ImageView imageView = (ImageView) v;
-            String string = (String) imageView.getTag();
-            if (string.equals("0")) {
-                imageView.setColorFilter(context.getColor(R.color.green2));
-                imageView.setTag("1");
-            } else if (string.equals("1")) {
-                imageView.setColorFilter(context.getColor(R.color.white));
-                imageView.setTag("0");
-            }
-            hitLikeApi();
+            if (allowLike.equalsIgnoreCase("0"))
+                ((HomeActivity)context).showNotPurchasedPopUp();
+            else if (allowLike.equalsIgnoreCase("2"))
+                ((HomeActivity)context).showExpiredPopUp();
+            else
+                hitLikeApi();
+
+
         } else if (v.getId() == R.id.shareProfileLinearLayout) {
+            if (viewFlag == 0) {
+                ((HomeActivity)context).showNotPurchasedPopUp();
+                return;
+            } else if (viewFlag == 2) {
+                ((HomeActivity)context).showExpiredPopUp();
+                return;
+            }
+
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String string = sharingLink.isEmpty() ? "linkNotFound" : sharingLink;
             intent.putExtra(Intent.EXTRA_TEXT, string + profileId);
             startActivity(Intent.createChooser(intent, "Share Via"));
+        } else if (v.getId() == R.id.button)
+        {
+            hitRequestPhotoApi();
         }
     }
 
@@ -165,18 +172,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                 .onSuccess(new Api.OnSuccessListener() {
                     @Override
                     public void onSuccess(Json json) {
-
-                        String string = json.getString(P.msg);
-                        int i = json.getInt(P.status);
-                        ((ImageView) fragmentView.findViewById(R.id.imageView)).setImageDrawable(null);
-                        TextView textView = fragmentView.findViewById(R.id.connectNow);
-                        if (i == 0) {
-                            textView.setText("Connect Now");
-                            H.showMessage(context, string);
-                        } else if (i == 1) {
-                            textView.setText("Pending Connection");
-                            H.showMessage(context, string);
-                        }
+                        hitProfileDetailsApi("profile_details", profileId);
                     }
                 })
                 .run("hitConnectNowApi");
@@ -200,11 +196,7 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1) {
-                            json = json.getJson(P.data);
-
-                        }/* else
-                            H.showMessage(context, json.getString(P.msg));*/
+                        hitProfileDetailsApi("profile_details", profileId);
                     }
                 })
                 .run("hitLikeApi");
@@ -245,10 +237,12 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
 
     @Override
     public void onLoading(boolean isLoading) {
-        if (isLoading)
-            loadingDialog.show();
-        else
-            loadingDialog.dismiss();
+        if (!((HomeActivity) context).isDestroyed()) {
+            if (isLoading)
+                loadingDialog.show();
+            else
+                loadingDialog.dismiss();
+        }
     }
 
     @Override
@@ -286,6 +280,8 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             int action = profileDetailJson.getInt(P.view);
                             viewFlag = action;
 
+                            allowLike = profileDetailJson.getString(P.allow_like);
+                            allowConnected = profileDetailJson.getString(P.allow_connected);
 
                             sharingLink = profileDetailJson.getString(P.share_profile);
                             setData(profileDetailJson);
@@ -299,15 +295,15 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
                             string = profileDetailJson.getString(P.connected);
                             ImageView imageView = fragmentView.findViewById(R.id.imageView);
                             imageView.setOnClickListener(ProfileDetailsFragments.this);
-                            imageView.setTag(string);
                             changeConnectButtonStatus(string);
 
                             string = profileDetailJson.getString(P.like);
                             imageView = fragmentView.findViewById(R.id.likeImageView);
-                            if (string.equals("1")) {
+                            if (string.equals("1"))
                                 imageView.setColorFilter(Color.parseColor("#00d882"));
-                                imageView.setTag(string);
-                            }
+                            else
+                                imageView.setColorFilter(Color.parseColor("#FFFFFF"));
+
                         } else
 
                             H.showMessage(context, profileDetailJson.getString(P.msg));
@@ -372,16 +368,34 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         ((TextView) fragmentView.findViewById(R.id.roza)).setText(profileDetailJson.getString(P.roza));
         ((TextView) fragmentView.findViewById(R.id.namaz)).setText(profileDetailJson.getString(P.namaz));
 
-        if(App.showName){
-            ((TextView)fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
-            ((TextView)fragmentView.findViewById(R.id.motherName)).setText(profileDetailJson.getString(P.mother_name));
-            ((TextView)fragmentView.findViewById(R.id.fatherOccupation)).setText(profileDetailJson.getString(P.father_occupation));
-            ((TextView)fragmentView.findViewById(R.id.motherOccupation)).setText(profileDetailJson.getString(P.mother_occupation));
-            ((TextView)fragmentView.findViewById(R.id.maritalStatus)).setText(profileDetailJson.getString(P.marital_status));
+        if (App.showName) {
+            ((TextView) fragmentView.findViewById(R.id.fatherName)).setText(profileDetailJson.getString(P.father_name));
+            ((TextView) fragmentView.findViewById(R.id.motherName)).setText(profileDetailJson.getString(P.mother_name));
+            ((TextView) fragmentView.findViewById(R.id.fatherOccupation)).setText(profileDetailJson.getString(P.father_occupation));
+            ((TextView) fragmentView.findViewById(R.id.motherOccupation)).setText(profileDetailJson.getString(P.mother_occupation));
+            ((TextView) fragmentView.findViewById(R.id.maritalStatus)).setText(profileDetailJson.getString(P.marital_status));
         }
 
         ((TextView) fragmentView.findViewById(R.id.occupation)).setText(profileDetailJson.getString(P.education));
-        ((TextView)fragmentView.findViewById(R.id.carrerOccupation)).setText( profileDetailJson.getString(P.occupation_name));
+        ((TextView) fragmentView.findViewById(R.id.carrerOccupation)).setText(profileDetailJson.getString(P.occupation_name));
+
+        LinearLayout linearLayout = fragmentView.findViewById(R.id.noPhotoLinearLayout);
+        String string = profileDetailJson.getString(P.photo_available);
+        Button button = linearLayout.findViewById(R.id.button);
+
+        if (string.equals("0")) {
+            linearLayout.setVisibility(View.VISIBLE);
+            button.setOnClickListener(this);
+        } else if (string.equals("1")) {
+            linearLayout.setVisibility(View.GONE);
+            button.setOnClickListener(null);
+        }
+
+        string = profileDetailJson.getString(P.request_photo);
+        if (string.equals("0"))
+            button.setText("Request Photo");
+        else if (string.equals("1"))
+            button.setText("Photo already requested.");
     }
 
     @Override
@@ -391,5 +405,29 @@ public class ProfileDetailsFragments extends Fragment implements View.OnClickLis
         Object object = fragmentView.getParent();
         if (object instanceof FrameLayout)
             ((FrameLayout) object).removeAllViews();
+    }
+
+    private void hitRequestPhotoApi() {
+        Json json = new Json();
+        json.addString(P.profile_id, profileId);
+
+        String string = new Session(context).getString(P.tokenData);
+        json.addString(P.token_id, string);
+
+        RequestModel requestModel = RequestModel.newRequestModel("request_photo");
+        requestModel.addJSON(P.data, json);
+
+        Api.newApi(context, P.baseUrl).addJson(requestModel).onHeaderRequest(C.getHeaders())
+                .setMethod(Api.POST)
+                .onLoading(this)
+                .onError(this)
+                .onSuccess(new Api.OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Json json)
+                    {
+                        hitProfileDetailsApi("profile_details", profileId);
+                    }
+                })
+                .run("hitRequestPhotoApi");
     }
 }

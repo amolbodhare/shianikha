@@ -2,14 +2,15 @@ package com.nikha.shianikha.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -18,7 +19,8 @@ import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.nikha.shianikha.R;
-import com.nikha.shianikha.WebViewActivity;
+import com.nikha.shianikha.activities.SubscriptionActivity;
+import com.nikha.shianikha.activities.WebViewActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
@@ -27,10 +29,12 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
     private Context context;
     private LayoutInflater layoutInflater;
     private JsonList jsonList;
+    private String currency = "";
 
-    public SubscriptionSliderAdapter(Context context, JsonList jsons) {
+    public SubscriptionSliderAdapter(Context context, JsonList jsons, int i) {
         this.context = context;
         jsonList = jsons;
+        currency = i == 1 ? "\u20B9" : "$";
     }
 
     //public String[] slide_headings={"INTRO HEADING","INTRO HEADING","INTRO HEADING"};
@@ -60,7 +64,7 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
 
         string = " " + json.getString(P.amount);
         textView = v.findViewById(R.id.sub_plan_price_tv);
-        textView.setText('\u20B9' + string);
+        textView.setText(currency + string);
 
         string = json.getString(P.description);
         textView = v.findViewById(R.id.sub_plan_duration_tv);
@@ -100,8 +104,10 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
 
     private void hitPurchasePlanApi(String string) {
         Json json = new Json();
-        json.addString(P.plan,string);
+        json.addString(P.plan, string);
         json.addString(P.token_id, new Session(context).getString(P.tokenData));
+        json.addString(P.currency, currency.equals("$") ? "USD" : "INR");
+        //5XtinfoxR0jl2d4JQGKvzVwNc
 
         RequestModel requestModel = RequestModel.newRequestModel("plan_purchase");
         requestModel.addJSON(P.data, json);
@@ -112,10 +118,12 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!((SubscriptionActivity) context).isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -128,11 +136,11 @@ public class SubscriptionSliderAdapter extends PagerAdapter implements View.OnCl
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             String url = json.getString(P.url);
                             Intent intent = new Intent(context, WebViewActivity.class);
-                            intent.putExtra("url",url);
+                            intent.putExtra("url", url);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent);
                         } else
                             H.showMessage(context, json.getString(P.msg));

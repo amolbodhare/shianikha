@@ -4,15 +4,19 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.adoisstudio.helper.Api;
 import com.adoisstudio.helper.H;
@@ -20,25 +24,20 @@ import com.adoisstudio.helper.Json;
 import com.adoisstudio.helper.JsonList;
 import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.nikha.App;
 import com.nikha.shianikha.R;
 import com.nikha.shianikha.activities.HomeActivity;
-import com.nikha.shianikha.adapters.RecentlyJoinAdapter;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.P;
 import com.nikha.shianikha.commen.RequestModel;
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import static com.nikha.shianikha.commen.P.recently_join;
 import static com.nikha.shianikha.commen.P.recently_visitors;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private ArrayList<String> recently_join_Names = new ArrayList<>();
-    private ArrayList<String> recently_join_ImageUrls = new ArrayList<>();
     private View fragmentView;
     private Context context;
     private LoadingDialog loadingDialog;
@@ -55,10 +54,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (fragmentView == null) {
             context = getContext();
-            LoadingDialog loadingDialog = new LoadingDialog(context);
 
             fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
-            CircularImageView circularImageView = fragmentView.findViewById(R.id.cir_imv);
 
             hitDashboardApi();
 
@@ -72,13 +69,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             fragmentView.findViewById(R.id.help_suport_layout).setOnClickListener(this);
             fragmentView.findViewById(R.id.about_app_layout).setOnClickListener(this);
             fragmentView.findViewById(R.id.contact_us_layout).setOnClickListener(this);
+
+            final SwipeRefreshLayout swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    swipeRefreshLayout.setRefreshing(false);
+                    hitDashboardApi();
+                }
+            });
+
         }
         return fragmentView;
     }
-
     public void hitDashboardApi() {
-        Session session = new Session(context);
-        String string = session.getString(P.tokenData);
+        String string = new Session(context).getString(P.tokenData);
         Json json = new Json();
         json.addString(P.token_id, string);
         RequestModel requestModel = RequestModel.newRequestModel("dashboard");
@@ -105,15 +110,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(Json json) {
 
-                        if (json.getInt(P.status) == 1)
-                        {
+                        if (json.getInt(P.status) == 1) {
                             setProfileData(json);
-                            if (App.i == 0) {//to avoid crash
-                                setRecentlyJoinData(json);
-                                setRecentVisitorsData(json);
-                                App.i = 1;
-                            }
-                            ((HomeActivity)context).setDrawerData(json);
+                            //if (App.i == 0) {//to avoid crash
+                            setRecentlyJoinData(json);
+                            setRecentVisitorsData(json);
+                            //App.i = 1;
+                            // }
+                            ((HomeActivity) context).setDrawerData(json);
 
                         } else
                             H.showMessage(context, json.getString(P.msg));
@@ -122,13 +126,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 .run("hitDashoardApi");
     }
 
-    private void  setProfileData(Json parentJson)
-    {
+    private void setProfileData(Json parentJson) {
         Json json = parentJson.getJson(P.profile_details);
 
-        String  gender = json.getString(P.gender);
+        String gender = json.getString(P.gender);
         gender = gender.toLowerCase();
-        Drawable drawable = gender.equals("male")? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
+        Drawable drawable = gender.equals("male") ? context.getDrawable(R.drawable.male) : context.getDrawable(R.drawable.female);
 
         String string = json.getString(P.profile_pic);
         try {
@@ -153,35 +156,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((TextView) fragmentView.findViewById(R.id.expressInterest)).setText(string);
 
         int i = json.getInt(P.notifacation_count);
-        ((HomeActivity)context).updateNotificationCount(i);
+        ((HomeActivity) context).updateNotificationCount(i);
+
+        i = json.getInt(P.show);
+        new Session(context).addInt(P.showName, i);
+        App.showName = i == 1 ? true : false;
 
         if (App.showName)
-            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Paid");
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(" : Paid");
         else
-            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(": Free");
+            ((TextView) fragmentView.findViewById(R.id.account_type_tv)).setText(" : Free");
     }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onClick(View view) {
         int i = view.getId();
 
         if (i == R.id.partner_preferences_link_layout)
-            ((HomeActivity)context).showPartnerPreferenceActivity();
+            ((HomeActivity) context).showPartnerPreferenceActivity();
         else if (i == R.id.subscription_plan_link_layout)
-            ((HomeActivity)context).showSubscriptionPlanActivity();
+            ((HomeActivity) context).showSubscriptionPlanActivity();
         else if (i == R.id.my_activity_layout)
-            ((HomeActivity)context).showMyActivityFragment();
+            ((HomeActivity) context).showMyActivityFragment();
         else if (i == R.id.account_settings_layout)
-            ((HomeActivity)context).showAccountSettingFragment();
+            ((HomeActivity) context).showAccountSettingFragment();
         else if (i == R.id.notifications_layout)
-            ((HomeActivity)context).showNotificationFragment();
+            ((HomeActivity) context).showNotificationFragment();
         else if (i == R.id.help_suport_layout)
-            ((HomeActivity)context).showHelpAndSupportFrgment();
+            ((HomeActivity) context).showHelpAndSupportFrgment();
         else if (i == R.id.about_app_layout)
-            ((HomeActivity)context).showAboutAppFragment();
+            ((HomeActivity) context).showAboutAppFragment();
         else if (i == R.id.contact_us_layout)
-            ((HomeActivity)context).showContactUsFragment();
+            ((HomeActivity) context).showContactUsFragment();
     }
 
     public interface OnFragmentInteractionListener {
@@ -194,7 +200,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = fragmentView.findViewById(R.id.rec_join_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(jsonList);
         recyclerView.setAdapter(adapter);
     }
 
@@ -203,16 +209,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = fragmentView.findViewById(R.id.recent_visitors_recyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(getActivity(), jsonList);
+        RecentlyJoinAdapter adapter = new RecentlyJoinAdapter(jsonList);
         recyclerView.setAdapter(adapter);
-
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -222,4 +222,64 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ((FrameLayout) object).removeAllViews();
     }
 
+    class RecentlyJoinAdapter extends RecyclerView.Adapter<RecentlyJoinAdapter.ViewHolder> {
+        private static final String TAG = "RecentlyJoinAdapter";
+
+        JsonList jsonList;
+
+        public RecentlyJoinAdapter(JsonList jsonList) {
+            this.jsonList = jsonList;
+        }
+
+        @NonNull
+        @Override
+        public RecentlyJoinAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recently_join, parent, false);
+            return new RecentlyJoinAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecentlyJoinAdapter.ViewHolder viewHolder, final int position) {
+            Log.d(TAG, "onBindViewHolder: called.");
+
+
+            Picasso.get().load(jsonList.get(position).getString(P.profile_pic)).placeholder(R.drawable.user).fit().into(viewHolder.thumbnail);
+
+            if (App.showName)
+                viewHolder.title.setText(jsonList.get(position).getString(P.full_name));
+            else
+                viewHolder.title.setText("");
+
+            viewHolder.thumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // we are passing last parameter user_id but in next profile details api it would be considered as profile_id
+                    ((HomeActivity) context).profileDetailsFragments = ProfileDetailsFragments.newInstance(HomeActivity.currentFragment, HomeActivity.currentFragmentName, jsonList.get(position).getString(P.user_id));
+                    ((HomeActivity) context).fragmentLoader(((HomeActivity) context).profileDetailsFragments, P.profile_details_title);
+                }
+            });
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return jsonList.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            public TextView title;
+            public ImageView thumbnail, overflow;
+
+            public ViewHolder(View view) {
+                super(view);
+                title = (TextView) view.findViewById(R.id.title);
+                thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+                //overflow = (ImageView) view.findViewById(R.id.overflow);
+            }
+
+
+        }
+    }
 }

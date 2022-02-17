@@ -78,10 +78,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -94,15 +96,19 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onSuccess(final Json json)
                     {
-                        if (json.getInt(P.status) == 1) {
+                        ListView listView = findViewById(R.id.listView);
+                        if (json.getInt(P.status) == 1)
+                        {
                             JsonList jsonList = json.getJsonList(P.data);
+
                             if (jsonList == null)
                                 return;
+
+
 
                             if (string.equalsIgnoreCase("sent_message"))
                                 changeColorsOfThreeTab(findViewById(R.id.sent_message));
 
-                            ListView listView = findViewById(R.id.listView);
                             listView.setAdapter(new ListAdapter(jsonList));
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -115,11 +121,14 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                                         String string = object.toString();
                                         Intent intent = new Intent(MessageActivity.this, ReadMessageActivity.class);
                                         intent.putExtra(P.json,string);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                     }
                                 }
                             });
                         }
+                        else
+                            listView.setAdapter(new ListAdapter(new JsonList()));
                     }
                 })
                 .run("hitApiForInboxOrSentMessage");
@@ -242,10 +251,12 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {

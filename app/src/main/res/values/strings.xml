@@ -3,6 +3,7 @@
 
     <string name="MyShia">My Shia</string>
     <string name="MyMatches">My Matches</string>
+    <string name="shiaNikah">shia nikah</string>
     <string name="search">Search</string>
     <string name="Myprofile">My Profile</string>
     <string name="contactUs">Contact Us</string>
@@ -42,6 +43,6 @@ Turned it up should no valley cousin he. Speaking numerous ask did horrible pack
     <string name="termsAndCondition">check this box to attest by the sanctity of the Holy Quran that\n(1) all information that you have provided in this form is true to your best of your knowledge,</string>
     <string name="default_notification_channel_id">Shia Nikah</string>
 
-    <string name="tNc">(2) you agree to our Terms of Use and \n(3) you are at lest 18 years of age.</string>
+    <string name="tNc">(2) you agree to our Terms of Use and \n(3) you are at least 18 years of age.</string>
 
 </resources>

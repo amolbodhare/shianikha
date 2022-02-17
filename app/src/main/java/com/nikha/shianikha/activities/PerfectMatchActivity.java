@@ -34,7 +34,6 @@ import com.adoisstudio.helper.LoadingDialog;
 import com.adoisstudio.helper.Session;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nikha.shianikha.R;
-import com.nikha.shianikha.WebViewActivity;
 import com.nikha.shianikha.commen.C;
 import com.nikha.shianikha.commen.CommonListHolder;
 import com.nikha.shianikha.commen.P;
@@ -78,7 +77,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
     }
 
-    private void handleTermsOfUse() {
+    private void  handleTermsOfUse() {
         TextView textView = findViewById(R.id.termsAndCondition);
         String string = textView.getText().toString();
 
@@ -89,6 +88,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
             {
                 Intent intent = new Intent(PerfectMatchActivity.this, WebViewActivity.class);
                 intent.putExtra("url","https://shianikah.in/privacy-policy.html");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
 
@@ -331,9 +331,15 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
         string = checkBox.isChecked()? "1":"0";
         json.addString(P.request_from_anyone,string);
 
-        checkBox = findViewById(R.id.checkBox2);
-        string = checkBox.isChecked() ? "1" : "0";
+        CheckBox cB = findViewById(R.id.checkBox2);
+        string = cB.isChecked() ? "1" : "0";
         json.addString(P.request_from_preferred_match,string);
+
+        if (!checkBox.isChecked() && !cB.isChecked())
+        {
+            H.showMessage(this,"Please select any of the email option");
+            return;
+        }
 
         checkBox = findViewById(R.id.checkBox3);
         string = checkBox.isChecked() ? "1" : "0";
@@ -421,10 +427,12 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
                 .onLoading(new Api.OnLoadingListener() {
                     @Override
                     public void onLoading(boolean isLoading) {
-                        if (isLoading)
-                            loadingDialog.show("Please wait submitting your data...");
-                        else
-                            loadingDialog.dismiss();
+                        if (!isDestroyed()) {
+                            if (isLoading)
+                                loadingDialog.show("Please wait submitting your data...");
+                            else
+                                loadingDialog.dismiss();
+                        }
                     }
                 })
                 .onError(new Api.OnErrorListener() {
@@ -440,6 +448,7 @@ public class PerfectMatchActivity extends AppCompatActivity implements View.OnCl
                         if (json.getInt(P.status) == 1) {
                             new Session(PerfectMatchActivity.this).addInt(P.full_register, 1);
                             Intent intent = new Intent(PerfectMatchActivity.this, HomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else
                             H.showMessage(PerfectMatchActivity.this, json.getString(P.msg));
