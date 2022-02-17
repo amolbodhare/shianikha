@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Context context;
     private LoadingDialog loadingDialog;
 
+
     private OnFragmentInteractionListener mListener;
 
     public static HomeFragment newInstance() {

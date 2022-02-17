@@ -2,6 +2,7 @@ package com.nikha.shianikha;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,6 +55,8 @@ public class SplashActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
         session = new Session(this);
         generateFcmToken();
         int i = session.getInt(P.showName);

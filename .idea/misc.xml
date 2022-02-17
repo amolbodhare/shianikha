@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/drawable-ldpi/circlenoti.xml" value="0.2169230769230769" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/drawable-ldpi/clickable_trans_bg.xml" value="0.2169230769230769" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/activity_edit_profile.xml" value="0.22" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/activity_home.xml" value="0.16893115942028986" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/activity_read_message.xml" value="0.18206521739130435" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/activity_subscription.xml" value="0.18206521739130435" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/image_slider_layout.xml" value="0.16893115942028986" />
+        <entry key="..\:/RefProjects/shianikha/app/src/main/res/layout/sub_plan_slide_layout.xml" value="0.16304347826086957" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
 </project>

@@ -197,11 +197,14 @@ public class HomeActivity extends AppCompatActivity {
 
         currentFragment = fragment;
         currentFragmentName = title;
-        try {
+        try
+        {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.anim_enter, R.anim.anim_exit)
                     .replace(R.id.frameLayout, fragment).commit();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
